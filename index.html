@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- 引入 Font Awesome 社交媒體圖標庫 (確保包含 X 圖標) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Google Search Console 驗證代碼 -->
     <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c" />
 
     <!-- 針對谷歌搜尋優化的標題與描述 -->
-    <title>滅蟲師傅 HK | 香港專業滅鼠滅蟑螂蚊蟲防治服務</title>
-    <meta name="description" content="滅蟲師傅 HK 為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐，為您排憂解難，迴歸舒心環境。立即免費報價！">
+    <title>滅蟲師傅 | 香港專業滅鼠滅蟑螂蚊蟲防治服務</title>
+    <meta name="description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐，為您排憂解難，迴歸舒心環境。立即免費報價！">
     
     <!-- 告訴谷歌這是一家香港本地商業公司的結構化數據 -->
     <script type="application/ld+json">
@@ -36,8 +39,8 @@
             font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
         }
         :root {
-            --primary-color: #2c5e1a; /* 深綠色，代表環保與專業 */
-            --secondary-color: #f4f9f0; /* 淺綠背景 */
+            --primary-color: #2c5e1a; 
+            --secondary-color: #f4f9f0; 
             --text-dark: #333;
             --text-light: #666;
             --white: #ffffff;
@@ -137,7 +140,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
-            display: block; /* 讓整張卡片可以點擊 */
+            display: block; 
         }
         .service-card:hover { transform: translateY(-10px); }
         .service-icon { font-size: 3rem; margin-bottom: 20px; }
@@ -192,12 +195,32 @@
             cursor: pointer;
         }
 
-        /* ===== 頁腳 ===== */
+        /* ===== 頁腳 (社交圖標樣式) ===== */
         footer {
             background-color: #222;
             color: #aaa;
             padding: 40px 20px;
             text-align: center;
+        }
+        .social-icons {
+            margin-bottom: 15px;
+        }
+        .social-icons a {
+            color: #aaa;
+            font-size: 28px;
+            margin: 0 15px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        .contact-handle {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #ddd;
+            letter-spacing: 1px;
         }
 
         /* ===== 手機版響應式設計 ===== */
@@ -227,7 +250,7 @@
         <div class="nav-container">
             <div class="logo">
                 <img src="https://z-cdn-media.chatglm.cn/files/90b065b9-bd68-4311-a4f6-fac02dca1628.jpg?auth_key=1883568376-f91b6a2cec664aba95e7507888e0d917-0-35592907456248de307360144370a9bf" alt="滅蟲師傅圖標" class="logo-icon">
-                滅蟲師傅 HK
+                滅蟲師傅
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#">首頁</a></li>
@@ -252,7 +275,6 @@
     <section class="services" id="services">
         <div class="section-title">
             <h2>我們的滅虫服務</h2>
-            <!-- 👇 這裡已經改為「香港漁護署登記」 -->
             <p>針對不同害蟲，採用香港漁護署登記且安全藥劑與專業設備</p>
         </div>
         <div class="services-grid">
@@ -262,7 +284,6 @@
                 <p>專業處理家鼠、田鼠問題，採用物理捕捉與安全誘餌，徹底解決鼠患。</p>
             </div>
             
-            <!-- 滅蟑螂連結卡片 -->
             <a href="cockroach.html" class="service-card">
                 <div class="service-icon">🪳</div>
                 <h3>滅蟑螂服務</h3>
@@ -310,8 +331,17 @@
         </form>
     </section>
 
-    <!-- 頁腳 -->
+    <!-- 頁腳：包含三個社交圖標 -->
     <footer>
+        <div class="social-icons">
+            <!-- Instagram 圖標 -->
+            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <!-- X (Twitter) 官方圖標 -->
+            <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <!-- WhatsApp 圖標 -->
+            <a href="#" id="whatsapp-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
         <p>&copy; 2023 滅蟲師傅. 版權所有</p>
     </footer>
 
