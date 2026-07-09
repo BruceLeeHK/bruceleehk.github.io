@@ -22,244 +22,96 @@
       "name": "滅蟲師傅",
       "description": "香港新形勢下興起的智慧滅蟲服務商，提供滅鼠、滅蟑螂、滅蚊、滅蝨等專業服務。",
       "url": "https://bruceleehk.github.io/",
-      "areaServed": {
-        "@type": "City",
-        "name": "Hong Kong"
-      },
+      "areaServed": { "@type": "City", "name": "Hong Kong" },
       "serviceType": ["滅鼠服務", "滅蟑螂服務", "滅蚊服務", "滅蝨服務", "害蟲防治"]
     }
     </script>
 
     <style>
         /* ===== 基礎設定 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
-        }
-        :root {
-            --primary-color: #2c5e1a; 
-            --secondary-color: #f4f9f0; 
-            --text-dark: #333;
-            --text-light: #666;
-            --white: #ffffff;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif; }
+        :root { --primary-color: #2c5e1a; --secondary-color: #f4f9f0; --text-dark: #333; --text-light: #666; --white: #ffffff; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
 
         /* ===== 導航欄 ===== */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        .logo-icon {
-            height: 35px;
-            width: auto;
-            margin-right: 10px;
-        }
-        /* Logo 文字排版容器 */
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            text-align: left; /* 確保左對齊 */
-            line-height: 1.1; /* 縮小行距讓兩行更貼近 */
-        }
-        .logo-main {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        /* 👇 調整了英文樣式：縮小字體並確保對齊 */
-        .logo-sub {
-            font-size: 8px; /* 從 10px 縮小到 8px */
-            letter-spacing: 0.5px; /* 稍微縮小字距 */
-            color: #888; /* 顏色稍微變淺一點，更顯副標題質感 */
-            text-transform: uppercase;
-            margin-left: 1px; /* 微調1像素，視覺上與中文字左邊緣完美對齊 */
-        }
-
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; }
+        .logo-icon { height: 35px; width: auto; margin-right: 10px; }
+        .logo-text { display: flex; flex-direction: column; text-align: left; line-height: 1.1; }
+        .logo-main { font-size: 24px; font-weight: bold; color: var(--primary-color); }
+        .logo-sub { font-size: 8px; letter-spacing: 0.5px; color: #888; text-transform: uppercase; margin-left: 1px; }
         .nav-links { display: flex; gap: 20px; }
-        .nav-links a {
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+        .nav-links a { color: var(--text-dark); font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary-color); }
-        .nav-cta {
-            background-color: var(--primary-color);
-            color: var(--white) !important;
-            padding: 8px 16px;
-            border-radius: 5px;
-        }
+        .nav-cta { background-color: var(--primary-color); color: var(--white) !important; padding: 8px 16px; border-radius: 5px; }
         .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
 
-        /* ===== Hero 區域 (首頁大圖) ===== */
-        .hero {
-            margin-top: 70px;
+        /* ===== 首頁與關於我們 (左右分屏設計) ===== */
+        .hero-split { margin-top: 70px; display: flex; min-height: calc(100vh - 70px); }
+        .hero-left {
+            flex: 1;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://z-cdn-media.chatglm.cn/files/9cf8e402-0080-443c-bb79-d892e000746c.png?auth_key=1883605607-c5c2a869898048369a3807ca27ed0fd2-0-c1de495a771723aab5972de6b6e579f4') center/cover;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); padding: 40px;
         }
-        .hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
-        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; }
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+        .hero-left h1 { font-size: 2.8rem; margin-bottom: 20px; }
+        .hero-left p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; max-width: 400px; }
+        .btn-primary { background-color: var(--primary-color); color: var(--white); padding: 15px 30px; font-size: 1.1rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.2s; }
         .btn-primary:hover { transform: translateY(-3px); }
 
+        .hero-right { flex: 1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; background-color: var(--white); }
+        .hero-right h2 { font-size: 2rem; color: var(--text-dark); margin-bottom: 25px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        .hero-right p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; text-align: justify; font-size: 0.95rem; }
+
         /* ===== 服務區域 ===== */
-        .services {
-            padding: 80px 20px;
-            background-color: var(--secondary-color);
-            text-align: center;
-        }
+        .services { padding: 80px 20px; background-color: var(--secondary-color); text-align: center; }
         .section-title { margin-bottom: 50px; }
         .section-title h2 { font-size: 2rem; color: var(--text-dark); }
         .section-title p { color: var(--text-light); margin-top: 10px; }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .service-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            display: block; 
-        }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--white); padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; display: block; }
         .service-card:hover { transform: translateY(-10px); }
         .service-icon { font-size: 3rem; margin-bottom: 20px; }
         .service-card h3 { margin-bottom: 15px; color: var(--text-dark); }
         .service-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
 
-        /* ===== 關於我們 ===== */
-        .why-us {
-            padding: 80px 20px;
-            max-width: 900px; 
-            margin: 0 auto;
-        }
-        .why-us-content h2 { 
-            font-size: 2rem; 
-            margin-bottom: 30px; 
-            color: var(--text-dark);
-            text-align: center; 
-        }
-        .why-us-content p { 
-            color: var(--text-light); 
-            line-height: 1.8; 
-            margin-bottom: 25px; 
-            text-align: justify; 
-        }
+        /* ===== 聯絡區域 (左右分屏設計) ===== */
+        .contact-split { display: flex; min-height: 600px; }
+        .contact-left { flex: 0 0 40%; background-color: var(--primary-color); color: var(--white); padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; }
+        .contact-left h2 { font-size: 2.2rem; margin-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 15px; display: inline-block; }
+        .contact-left p { font-size: 1.05rem; line-height: 1.8; opacity: 0.9; }
+        
+        .contact-right { flex: 1; background-color: #f9f9f9; padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; }
+        .contact-right h2 { font-size: 1.8rem; color: var(--text-dark); margin-bottom: 5px; }
+        .contact-right > p { color: var(--text-light); margin-bottom: 25px; }
+        .contact-form { display: flex; flex-direction: column; gap: 15px; }
+        .contact-form input, .contact-form textarea { padding: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; background: white; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary-color); }
+        .contact-form button { padding: 15px; background-color: var(--primary-color); color: var(--white); border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        .contact-form button:hover { background-color: #1e4210; }
 
-        /* ===== 聯絡表單 ===== */
-        .contact {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 80px 20px;
-            text-align: center;
-        }
-        .contact h2 { font-size: 2rem; margin-bottom: 10px; }
-        .contact p { margin-bottom: 40px; opacity: 0.9; }
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .contact-form input, .contact-form textarea {
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        .contact-form button {
-            padding: 15px;
-            background-color: #ffc107;
-            color: var(--text-dark);
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* ===== 頁腳 (社交圖標樣式) ===== */
-        footer {
-            background-color: #222;
-            color: #aaa;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .social-icons {
-            margin-bottom: 15px;
-        }
-        .social-icons a {
-            color: #aaa;
-            font-size: 28px;
-            margin: 0 15px;
-            transition: color 0.3s, transform 0.3s;
-            display: inline-block;
-        }
-        .social-icons a:hover {
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-        .contact-handle {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #ddd;
-            letter-spacing: 1px;
-        }
+        /* ===== 頁腳 ===== */
+        footer { background-color: #222; color: #aaa; padding: 40px 20px; text-align: center; }
+        .social-icons { margin-bottom: 15px; }
+        .social-icons a { color: #aaa; font-size: 28px; margin: 0 15px; transition: color 0.3s, transform 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--white); transform: translateY(-3px); }
+        .contact-handle { font-size: 1.1rem; margin-bottom: 20px; color: #ddd; letter-spacing: 1px; }
 
         /* ===== 手機版響應式設計 ===== */
+        @media (max-width: 992px) {
+            .hero-split { flex-direction: column; }
+            .hero-left { min-height: 50vh; }
+            .hero-right { padding: 40px 25px; }
+            .contact-split { flex-direction: column; }
+            .contact-left { flex: none; padding: 40px 25px; }
+            .contact-right { padding: 40px 25px; }
+        }
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
+            .nav-links { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: var(--white); flex-direction: column; padding: 20px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
-            .hero-content h1 { font-size: 2rem; }
+            .hero-left h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -278,19 +130,24 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#">首頁</a></li>
                 <li><a href="#services">服務範圍</a></li>
-                <li><a href="#why-us">關於我們</a></li>
                 <li><a href="#contact" class="nav-cta">免費報價</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">☰</div>
         </div>
     </header>
 
-    <!-- Hero 首頁大圖 -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>香港專業滅蟲滅鼠服務</h1>
+    <!-- 首頁與關於我們 (左右分屏) -->
+    <section class="hero-split">
+        <div class="hero-left">
+            <h1>香港專業<br>滅蟲滅鼠服務</h1>
             <p>提供家居、商舖、工廠一站式害蟲防治解決方案，藥物安全環保，斷絕根源。</p>
             <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
+        </div>
+        <div class="hero-right">
+            <h2>關於我們</h2>
+            <p>我們是香港新形勢下興起的智慧滅蟲服務商，我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。我們堅持不斷學習、博採眾長和實踐出真知的理念，透過智慧和技術相結合的方式「優化環境」使有害生物得到有效控制。</p>
+            <p>我們堅持自主團隊、貼心服務的行事方針——所有同事均須經過系統性實踐訓練，具備現場獨立處理能力及專業技術資質，確保服務質素令客人滿意和支持。</p>
+            <p>現階段，我們在滅蚊、滅鼠、滅蝨和滅蟑螂（包括德國蟑螂）方面累積了豐富的經驗，後期陸續會擴展至滅蟲服務全覆蓋。我們將針對客戶的不同環境需求，度身定製適合的個性化服務。我們注重誠實有信的合約精神，可提供單次、季度和年度等多元化服務套餐，為客戶排憂解難、迴歸舒心環境。</p>
         </div>
     </section>
 
@@ -306,13 +163,11 @@
                 <h3>滅鼠服務</h3>
                 <p>專業處理家鼠、田鼠問題，採用物理捕捉與安全誘餌，徹底解決鼠患。</p>
             </div>
-            
             <a href="cockroach.html" class="service-card">
                 <div class="service-icon">🪳</div>
                 <h3>滅蟑螂服務</h3>
                 <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。</p>
             </a>
-
             <div class="service-card">
                 <div class="service-icon">🐜</div>
                 <h3>滅蟻/白蟻服務</h3>
@@ -326,29 +181,25 @@
         </div>
     </section>
 
-    <!-- 關於我們 -->
-    <section class="why-us" id="why-us">
-        <div class="why-us-content">
-            <h2>關於我們</h2>
-            <p>我們是香港新形勢下興起的智慧滅蟲服務商，我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。我們堅持不斷學習、博採眾長和實踐出真知的理念，透過智慧和技術相結合的方式「優化環境」使有害生物得到有效控制。</p>
-            
-            <p>我們堅持自主團隊、貼心服務的行事方針——所有同事均須經過系統性實踐訓練，具備現場獨立處理能力及專業技術資質，確保服務質素令客人滿意和支持。</p>
-            
-            <p>現階段，我們在滅蚊、滅鼠、滅蝨和滅蟑螂（包括德國蟑螂）方面累積了豐富的經驗，後期陸續會擴展至滅蟲服務全覆蓋。我們將針對客戶的不同環境需求，度身定製適合的個性化服務。我們注重誠實有信的合約精神，可提供單次、季度和年度等多元化服務套餐，為客戶排憂解難、迴歸舒心環境。</p>
+    <!-- 聯絡區域 (左右分屏) -->
+    <section class="contact-split" id="contact">
+        <div class="contact-left">
+            <h2>有蟲有計</h2>
+            <p>蟲蟲無小事，但我們相信有蟲就有計諗。無論是頑強的德國蟑螂，還是悄無聲息的白蟻，滅蟲師傅皆能度身訂製專屬防治方案。</p>
+            <br>
+            <p>憑藉智慧滅蟲方法及專業技術配套設備結合安全施藥，我們堅守獅子山精神，一定會排除萬難，給香港一個乾淨無蟲害的空間。</p>
         </div>
-    </section>
-
-    <!-- 聯絡我們表單 -->
-    <section class="contact" id="contact">
-        <h2>需要滅蟲服務？</h2>
-        <p>填寫以下表格，我們的專員會儘快回覆你</p>
-        <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
-            <input type="text" name="name" placeholder="您的姓名" required>
-            <input type="tel" name="phone" placeholder="聯絡電話 (例如: 9123 4567)" required>
-            <input type="text" name="pest_type" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
-            <textarea rows="4" name="message" placeholder="簡述蟲患情況及地點..."></textarea>
-            <button type="submit">提交免費報價申請</button>
-        </form>
+        <div class="contact-right">
+            <h2>免費報價</h2>
+            <p>填寫以下表格，我們的專員會儘快回覆你</p>
+            <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
+                <input type="text" name="name" placeholder="您的姓名" required>
+                <input type="tel" name="phone" placeholder="聯絡電話 (例如: 9123 4567)" required>
+                <input type="text" name="pest_type" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
+                <textarea rows="4" name="message" placeholder="簡述蟲患情況及地點..."></textarea>
+                <button type="submit">提交免費報價申請</button>
+            </form>
+        </div>
     </section>
 
     <!-- 頁腳 -->
