@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港專業虫害防治公司 | 滅蟲灭鼠服務</title>
+    <style>
+        /* ===== 基礎設定 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+        }
+        :root {
+            --primary-color: #2c5e1a; /* 深綠色，代表環保與專業 */
+            --secondary-color: #f4f9f0; /* 淺綠背景 */
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ===== 導航欄 ===== */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center; /* 讓圖標和文字垂直居中 */
+        }
+        /* 新增：Logo圖標的樣式 */
+        .logo-icon {
+            height: 35px; /* 控制圖標高度，寬度會自動等比例縮放 */
+            width: auto;
+            margin-right: 10px; /* 圖標和文字之間的間距 */
+        }
+
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary-color); }
+        .nav-cta {
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+        .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+        /* ===== Hero 區域 (首頁大圖) ===== */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1585442738766-98a28a0152ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+        .hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-3px); }
+
+        /* ===== 服務區域 ===== */
+        .services {
+            padding: 80px 20px;
+            background-color: var(--secondary-color);
+            text-align: center;
+        }
+        .section-title { margin-bottom: 50px; }
+        .section-title h2 { font-size: 2rem; color: var(--text-dark); }
+        .section-title p { color: var(--text-light); margin-top: 10px; }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .service-card:hover { transform: translateY(-10px); }
+        .service-icon { font-size: 3rem; margin-bottom: 20px; }
+        .service-card h3 { margin-bottom: 15px; color: var(--text-dark); }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+
+        /* ===== 為什麼選擇我們 ===== */
+        .why-us {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .why-us-content { flex: 1; }
+        .why-us-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--text-dark); }
+        .why-us-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+        .why-us-list li { margin-bottom: 10px; color: var(--text-dark); }
+        .why-us-list li::before { content: '✓ '; color: var(--primary-color); font-weight: bold; }
+        .why-us-image { flex: 1; }
+        .why-us-image img { width: 100%; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* ===== 聯絡表單 ===== */
+        .contact {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .contact h2 { font-size: 2rem; margin-bottom: 10px; }
+        .contact p { margin-bottom: 40px; opacity: 0.9; }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .contact-form button {
+            padding: 15px;
+            background-color: #ffc107;
+            color: var(--text-dark);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ===== 頁腳 ===== */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* ===== 手機版響應式設計 ===== */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero-content h1 { font-size: 2rem; }
+            .why-us { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導航欄 -->
+    <header>
+        <div class="nav-container">
+            <!-- 在這裡加入了圖標 <img> 標籤 -->
+            <div class="logo">
+                <img src="https://z-cdn-media.chatglm.cn/files/90b065b9-bd68-4311-a4f6-fac02dca1628.jpg?auth_key=1883568376-f91b6a2cec664aba95e7507888e0d917-0-35592907456248de307360144370a9bf" alt="滅蟲師傅圖標" class="logo-icon">
+                滅蟲師傅 HK
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">首頁</a></li>
+                <li><a href="#services">服務範圍</a></li>
+                <li><a href="#why-us">關於我們</a></li>
+                <li><a href="#contact" class="nav-cta">免費報價</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+        </div>
+    </header>
+
+    <!-- Hero 首頁大圖 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>香港專業滅虫灭鼠服務</h1>
+            <p>提供家居、商舖、工廠一站式害蟲防治解決方案，藥物安全環保，斷絕根源。</p>
+            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
+        </div>
+    </section>
+
+    <!-- 服務範圍 -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2>我們的滅虫服務</h2>
+            <p>針對不同害蟲，採用國際認可安全藥劑與專業設備</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🐭</div>
+                <h3>滅鼠服務</h3>
+                <p>專業處理家鼠、田鼠問題，採用物理捕捉與安全誘餌，徹底解決鼠患。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🪳</div>
+                <h3>滅蟑螂服務</h3>
+                <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺虫劑，破壞蟑螂巢穴。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🐜</div>
+                <h3>滅蟻/白蟻服務</h3>
+                <p>白蟻嚴重破壞木質結構，我們提供精準探測與全面藥物灌注服務。</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🦟</div>
+                <h3>滅蚊服務</h3>
+                <p>清理積水源头，針對花園、後巷進行空間噴灑，減少蚊蟲滋生。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 為什麼選擇我們 -->
+    <section class="why-us" id="why-us">
+        <div class="why-us-content">
+            <h2>為什麼選擇我們？</h2>
+            <p>我們擁有超過10年的香港本土滅虫經驗，深知香港高溫高濕環境下害蟲的習性。</p>
+            <ul class="why-us-list">
+                <li>政府認可持牌滅虫師</li>
+                <li>採用低毒/無毒環保藥劑，對寵物及小童安全</li>
+                <li>提供售後保證，指定期限內復發免費跟進</li>
+                <li>價格透明，上門視察後才報價，無隱藏收費</li>
+            </ul>
+        </div>
+        <div class="why-us-image">
+            <img src="https://images.unsplash.com/photo-1585442738766-98a28a0152ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="專業滅虫人員">
+        </div>
+    </section>
+
+    <!-- 聯絡我們表單 -->
+    <section class="contact" id="contact">
+        <h2>需要滅虫服務？</h2>
+        <p>填寫以下表格，我們的專員會在30分鐘內回覆你</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('已收到你的查詢，我們會盡快聯絡你！');">
+            <input type="text" placeholder="您的姓名" required>
+            <input type="tel" placeholder="聯絡電話 (例如: 9123 4567)" required>
+            <input type="text" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
+            <textarea rows="4" placeholder="簡述蟲患情況及地點..."></textarea>
+            <button type="submit">提交免費報價申請</button>
+        </form>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer>
+        <p>&copy; 2023 滅蟲師傅 HK. 版權所有 | 本網站僅作為代碼演示用途</p>
+    </footer>
+
+    <!-- 手機版選單 JavaScript -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 點擊導航連結後自動收起選單
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
