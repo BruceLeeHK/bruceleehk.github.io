@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 引入 Font Awesome 社交媒體圖標庫 (確保包含 X 圖標) -->
+    <!-- 引入 Font Awesome 社交媒體圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Google Search Console 驗證代碼 -->
     <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c" />
 
-    <!-- 針對谷歌搜尋優化的標題與描述 -->
+    <!-- 針對谷歌搜尋優化的標題與描述 (已全改為繁體) -->
     <title>滅蟲師傅 | 香港專業滅鼠滅蟑螂蚊蟲防治服務</title>
     <meta name="description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐，為您排憂解難，迴歸舒心環境。立即免費報價！">
     
@@ -96,7 +96,7 @@
         /* ===== Hero 區域 (首頁大圖) ===== */
         .hero {
             margin-top: 70px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1585442738766-98a28a0152ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://z-cdn-media.chatglm.cn/files/9cf8e402-0080-443c-bb79-d892e000746c.png?auth_key=1883605607-c5c2a869898048369a3807ca27ed0fd2-0-c1de495a771723aab5972de6b6e579f4') center/cover;
             height: 80vh;
             display: flex;
             align-items: center;
@@ -150,17 +150,21 @@
         /* ===== 關於我們 ===== */
         .why-us {
             padding: 80px 20px;
-            max-width: 1200px;
+            max-width: 900px; 
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 50px;
         }
-        .why-us-content { flex: 1; }
-        .why-us-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--text-dark); }
-        .why-us-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; text-align: justify; }
-        .why-us-image { flex: 1; }
-        .why-us-image img { width: 100%; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .why-us-content h2 { 
+            font-size: 2rem; 
+            margin-bottom: 30px; 
+            color: var(--text-dark);
+            text-align: center; 
+        }
+        .why-us-content p { 
+            color: var(--text-light); 
+            line-height: 1.8; 
+            margin-bottom: 25px; 
+            text-align: justify; 
+        }
 
         /* ===== 聯絡表單 ===== */
         .contact {
@@ -239,7 +243,6 @@
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
             .hero-content h1 { font-size: 2rem; }
-            .why-us { flex-direction: column; }
         }
     </style>
 </head>
@@ -265,7 +268,8 @@
     <!-- Hero 首頁大圖 -->
     <section class="hero">
         <div class="hero-content">
-            <h1>香港專業滅虫灭鼠服務</h1>
+            <!-- 👇 已修正為純繁體：滅蟲滅鼠 -->
+            <h1>香港專業滅蟲滅鼠服務</h1>
             <p>提供家居、商舖、工廠一站式害蟲防治解決方案，藥物安全環保，斷絕根源。</p>
             <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
         </div>
@@ -274,7 +278,8 @@
     <!-- 服務範圍 -->
     <section class="services" id="services">
         <div class="section-title">
-            <h2>我們的滅虫服務</h2>
+            <!-- 👇 已修正：滅蟲 -->
+            <h2>我們的滅蟲服務</h2>
             <p>針對不同害蟲，採用香港漁護署登記且安全藥劑與專業設備</p>
         </div>
         <div class="services-grid">
@@ -287,7 +292,8 @@
             <a href="cockroach.html" class="service-card">
                 <div class="service-icon">🪳</div>
                 <h3>滅蟑螂服務</h3>
-                <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺虫劑，破壞蟑螂巢穴。</p>
+                <!-- 👇 已修正：殺蟲劑 -->
+                <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。</p>
             </a>
 
             <div class="service-card">
@@ -298,7 +304,8 @@
             <div class="service-card">
                 <div class="service-icon">🦟</div>
                 <h3>滅蚊服務</h3>
-                <p>清理積水源头，針對花園、後巷進行空間噴灑，減少蚊蟲滋生。</p>
+                <!-- 👇 已修正：源頭 -->
+                <p>清理積水源頭，針對花園、後巷進行空間噴灑，減少蚊蟲滋生。</p>
             </div>
         </div>
     </section>
@@ -313,14 +320,12 @@
             
             <p>現階段，我們在滅蚊、滅鼠、滅蝨和滅蟑螂（包括德國蟑螂）方面累積了豐富的經驗，後期陸續會擴展至滅蟲服務全覆蓋。我們將針對客戶的不同環境需求，度身定製適合的個性化服務。我們注重誠實有信的合約精神，可提供單次、季度和年度等多元化服務套餐，為客戶排憂解難、迴歸舒心環境。</p>
         </div>
-        <div class="why-us-image">
-            <img src="https://images.unsplash.com/photo-1585442738766-98a28a0152ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="專業滅虫人員">
-        </div>
     </section>
 
-    <!-- 聯絡我們表單 (已接入 Formspree) -->
+    <!-- 聯絡我們表單 -->
     <section class="contact" id="contact">
-        <h2>需要滅虫服務？</h2>
+        <!-- 👇 已修正：滅蟲 -->
+        <h2>需要滅蟲服務？</h2>
         <p>填寫以下表格，我們的專員會儘快回覆你</p>
         <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
             <input type="text" name="name" placeholder="您的姓名" required>
@@ -331,14 +336,11 @@
         </form>
     </section>
 
-    <!-- 頁腳：包含三個社交圖標 -->
+    <!-- 頁腳 -->
     <footer>
         <div class="social-icons">
-            <!-- Instagram 圖標 -->
             <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <!-- X (Twitter) 官方圖標 -->
             <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            <!-- WhatsApp 圖標 -->
             <a href="#" id="whatsapp-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
         <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
