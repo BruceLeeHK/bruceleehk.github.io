@@ -10,7 +10,7 @@
     <!-- Google Search Console 驗證代碼 -->
     <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c" />
 
-    <!-- 針對谷歌搜尋優化的標題與描述 (已全改為繁體) -->
+    <!-- 針對谷歌搜尋優化的標題與描述 -->
     <title>滅蟲師傅 | 香港專業滅鼠滅蟑螂蚊蟲防治服務</title>
     <meta name="description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐，為您排憂解難，迴歸舒心環境。立即免費報價！">
     
@@ -66,9 +66,6 @@
             align-items: center;
         }
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
             display: flex;
             align-items: center;
         }
@@ -76,6 +73,26 @@
             height: 35px;
             width: auto;
             margin-right: 10px;
+        }
+        /* Logo 文字排版容器 */
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left; /* 確保左對齊 */
+            line-height: 1.1; /* 縮小行距讓兩行更貼近 */
+        }
+        .logo-main {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        /* 👇 調整了英文樣式：縮小字體並確保對齊 */
+        .logo-sub {
+            font-size: 8px; /* 從 10px 縮小到 8px */
+            letter-spacing: 0.5px; /* 稍微縮小字距 */
+            color: #888; /* 顏色稍微變淺一點，更顯副標題質感 */
+            text-transform: uppercase;
+            margin-left: 1px; /* 微調1像素，視覺上與中文字左邊緣完美對齊 */
         }
 
         .nav-links { display: flex; gap: 20px; }
@@ -253,7 +270,10 @@
         <div class="nav-container">
             <div class="logo">
                 <img src="https://z-cdn-media.chatglm.cn/files/90b065b9-bd68-4311-a4f6-fac02dca1628.jpg?auth_key=1883568376-f91b6a2cec664aba95e7507888e0d917-0-35592907456248de307360144370a9bf" alt="滅蟲師傅圖標" class="logo-icon">
-                滅蟲師傅
+                <div class="logo-text">
+                    <span class="logo-main">滅蟲師傅</span>
+                    <span class="logo-sub">Pest Control Master</span>
+                </div>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#">首頁</a></li>
@@ -268,7 +288,6 @@
     <!-- Hero 首頁大圖 -->
     <section class="hero">
         <div class="hero-content">
-            <!-- 👇 已修正為純繁體：滅蟲滅鼠 -->
             <h1>香港專業滅蟲滅鼠服務</h1>
             <p>提供家居、商舖、工廠一站式害蟲防治解決方案，藥物安全環保，斷絕根源。</p>
             <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
@@ -278,7 +297,6 @@
     <!-- 服務範圍 -->
     <section class="services" id="services">
         <div class="section-title">
-            <!-- 👇 已修正：滅蟲 -->
             <h2>我們的滅蟲服務</h2>
             <p>針對不同害蟲，採用香港漁護署登記且安全藥劑與專業設備</p>
         </div>
@@ -292,7 +310,6 @@
             <a href="cockroach.html" class="service-card">
                 <div class="service-icon">🪳</div>
                 <h3>滅蟑螂服務</h3>
-                <!-- 👇 已修正：殺蟲劑 -->
                 <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。</p>
             </a>
 
@@ -304,7 +321,6 @@
             <div class="service-card">
                 <div class="service-icon">🦟</div>
                 <h3>滅蚊服務</h3>
-                <!-- 👇 已修正：源頭 -->
                 <p>清理積水源頭，針對花園、後巷進行空間噴灑，減少蚊蟲滋生。</p>
             </div>
         </div>
@@ -324,7 +340,6 @@
 
     <!-- 聯絡我們表單 -->
     <section class="contact" id="contact">
-        <!-- 👇 已修正：滅蟲 -->
         <h2>需要滅蟲服務？</h2>
         <p>填寫以下表格，我們的專員會儘快回覆你</p>
         <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
@@ -344,7 +359,7 @@
             <a href="#" id="whatsapp-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
         <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
-        <p>&copy; 2023 滅蟲師傅. 版權所有</p>
+        <p>&copy; 2023 滅蟲師傅 Pest Control Master. 版權所有</p>
     </footer>
 
     <!-- 手機版選單 JavaScript -->
