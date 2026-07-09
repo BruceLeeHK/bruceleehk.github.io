@@ -44,13 +44,12 @@
             font-weight: bold;
             color: var(--primary-color);
             display: flex;
-            align-items: center; /* 讓圖標和文字垂直居中 */
+            align-items: center;
         }
-        /* 新增：Logo圖標的樣式 */
         .logo-icon {
-            height: 35px; /* 控制圖標高度，寬度會自動等比例縮放 */
+            height: 35px;
             width: auto;
-            margin-right: 10px; /* 圖標和文字之間的間距 */
+            margin-right: 10px;
         }
 
         .nav-links { display: flex; gap: 20px; }
@@ -121,7 +120,7 @@
         .service-card h3 { margin-bottom: 15px; color: var(--text-dark); }
         .service-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
 
-        /* ===== 為什麼選擇我們 ===== */
+        /* ===== 關於我們 ===== */
         .why-us {
             padding: 80px 20px;
             max-width: 1200px;
@@ -132,9 +131,7 @@
         }
         .why-us-content { flex: 1; }
         .why-us-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--text-dark); }
-        .why-us-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
-        .why-us-list li { margin-bottom: 10px; color: var(--text-dark); }
-        .why-us-list li::before { content: '✓ '; color: var(--primary-color); font-weight: bold; }
+        .why-us-content p { color: var(--text-light); line-height: 1.8; margin-bottom: 20px; text-align: justify; }
         .why-us-image { flex: 1; }
         .why-us-image img { width: 100%; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
@@ -204,7 +201,6 @@
     <!-- 導航欄 -->
     <header>
         <div class="nav-container">
-            <!-- 在這裡加入了圖標 <img> 標籤 -->
             <div class="logo">
                 <img src="https://z-cdn-media.chatglm.cn/files/90b065b9-bd68-4311-a4f6-fac02dca1628.jpg?auth_key=1883568376-f91b6a2cec664aba95e7507888e0d917-0-35592907456248de307360144370a9bf" alt="滅蟲師傅圖標" class="logo-icon">
                 滅蟲師傅 HK
@@ -258,32 +254,31 @@
         </div>
     </section>
 
-    <!-- 為什麼選擇我們 -->
+    <!-- 關於我們 -->
     <section class="why-us" id="why-us">
         <div class="why-us-content">
-            <h2>為什麼選擇我們？</h2>
-            <p>我們擁有超過10年的香港本土滅虫經驗，深知香港高溫高濕環境下害蟲的習性。</p>
-            <ul class="why-us-list">
-                <li>政府認可持牌滅虫師</li>
-                <li>採用低毒/無毒環保藥劑，對寵物及小童安全</li>
-                <li>提供售後保證，指定期限內復發免費跟進</li>
-                <li>價格透明，上門視察後才報價，無隱藏收費</li>
-            </ul>
+            <h2>關於我們</h2>
+            <p>我們是香港新形勢下興起的智慧滅蟲服務商，我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。我們堅持不斷學習、博採眾長和實踐出真知的理念，透過智慧和技術相結合的方式「優化環境」使有害生物得到有效控制。</p>
+            
+            <p>我們堅持自主團隊、貼心服務的行事方針——所有同事均須經過系統性實踐訓練，具備現場獨立處理能力及專業技術資質，確保服務質素令客人滿意和支持。</p>
+            
+            <p>現階段，我們在滅蚊、滅鼠、滅蝨和滅蟑螂（包括德國蟑螂）方面累積了豐富的經驗，後期陸續會擴展至滅蟲服務全覆蓋。我們將針對客戶的不同環境需求，度身定製適合的個性化服務。我們注重誠實有信的合約精神，可提供單次、季度和年度等多元化服務套餐，為客戶排憂解難、迴歸舒心環境。</p>
         </div>
         <div class="why-us-image">
             <img src="https://images.unsplash.com/photo-1585442738766-98a28a0152ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="專業滅虫人員">
         </div>
     </section>
 
-    <!-- 聯絡我們表單 -->
+    <!-- 聯絡我們表單 (已接入 Formspree) -->
     <section class="contact" id="contact">
         <h2>需要滅虫服務？</h2>
-        <p>填寫以下表格，我們的專員會在30分鐘內回覆你</p>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('已收到你的查詢，我們會盡快聯絡你！');">
-            <input type="text" placeholder="您的姓名" required>
-            <input type="tel" placeholder="聯絡電話 (例如: 9123 4567)" required>
-            <input type="text" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
-            <textarea rows="4" placeholder="簡述蟲患情況及地點..."></textarea>
+        <!-- 這裡已經改成「會儘快回覆你」 -->
+        <p>填寫以下表格，我們的專員會儘快回覆你</p>
+        <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
+            <input type="text" name="name" placeholder="您的姓名" required>
+            <input type="tel" name="phone" placeholder="聯絡電話 (例如: 9123 4567)" required>
+            <input type="text" name="pest_type" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
+            <textarea rows="4" name="message" placeholder="簡述蟲患情況及地點..."></textarea>
             <button type="submit">提交免費報價申請</button>
         </form>
     </section>
@@ -302,7 +297,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // 點擊導航連結後自動收起選單
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
