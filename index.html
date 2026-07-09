@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 👇 最新的 Google Search Console 驗證代碼 -->
+    <!-- Google Search Console 驗證代碼 -->
     <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c" />
 
     <!-- 針對谷歌搜尋優化的標題與描述 -->
@@ -137,6 +137,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
+            display: block; /* 讓整張卡片可以點擊 */
         }
         .service-card:hover { transform: translateY(-10px); }
         .service-icon { font-size: 3rem; margin-bottom: 20px; }
@@ -259,11 +260,14 @@
                 <h3>滅鼠服務</h3>
                 <p>專業處理家鼠、田鼠問題，採用物理捕捉與安全誘餌，徹底解決鼠患。</p>
             </div>
-            <div class="service-card">
+            
+            <!-- 👇 這裡把滅蟑螂的 div 換成了 a 標籤，變成可點擊的連結卡片 -->
+            <a href="cockroach.html" class="service-card">
                 <div class="service-icon">🪳</div>
                 <h3>滅蟑螂服務</h3>
                 <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺虫劑，破壞蟑螂巢穴。</p>
-            </div>
+            </a>
+
             <div class="service-card">
                 <div class="service-icon">🐜</div>
                 <h3>滅蟻/白蟻服務</h3>
