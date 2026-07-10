@@ -31,7 +31,7 @@
         /* ===== 基礎設定 ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif; }
         :root { --primary-color: #2c5e1a; --secondary-color: #f4f9f0; --text-dark: #333; --text-light: #666; --white: #ffffff; }
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
         ul { list-style: none; }
 
         /* ===== 導航欄 ===== */
@@ -60,8 +60,7 @@
         .btn-primary { background-color: var(--primary-color); color: var(--white); padding: 15px 30px; font-size: 1.1rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.2s; }
         .btn-primary:hover { transform: translateY(-3px); }
 
-        /* 增加錨點定位補償，防止被固定導航欄遮擋 */
-        #about-us, #services, #strategy, #quote { scroll-margin-top: 70px; }
+        #about-us, #services, #quote { scroll-margin-top: 70px; }
 
         .hero-right { flex: 1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; background-color: var(--white); }
         .hero-right h2 { font-size: 2rem; color: var(--text-dark); margin-bottom: 25px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
@@ -101,6 +100,52 @@
         .social-icons a:hover { color: var(--white); transform: translateY(-3px); }
         .contact-handle { font-size: 1.1rem; margin-bottom: 20px; color: #ddd; letter-spacing: 1px; }
 
+        /* ===== 新增：文章彈窗樣式 ===== */
+        .modal-overlay {
+            display: none; /* 預設隱藏 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+            z-index: 2000; /* 確保在最上層 */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; /* 點擊後顯示 */ }
+        
+        .modal-content {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 700px;
+            max-height: 85vh; /* 最大高度不超過螢幕85% */
+            border-radius: 10px;
+            padding: 40px;
+            position: relative;
+            overflow-y: auto; /* 如果文章太長可以滾動 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease; /* 進場動畫 */
+        }
+        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close:hover { color: var(--text-dark); }
+
+        .modal-content h2 { color: var(--primary-color); margin-bottom: 30px; text-align: center; border-bottom: 2px solid var(--secondary-color); padding-bottom: 15px; }
+        
+        /* 文章區塊樣式 */
+        .article-item { margin-bottom: 30px; }
+        .article-item:last-child { margin-bottom: 0; }
+        .article-item h3 { color: var(--text-dark); font-size: 1.2rem; margin-bottom: 10px; display: flex; align-items: center; }
+        .article-item h3::before { content: '✦'; color: var(--primary-color); margin-right: 10px; font-size: 0.9rem; }
+        .article-item p { color: var(--text-light); line-height: 1.8; text-align: justify; font-size: 0.95rem; padding-left: 22px; }
+
         /* ===== 手機版響應式設計 ===== */
         @media (max-width: 992px) {
             .hero-split { flex-direction: column; }
@@ -115,6 +160,7 @@
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
             .hero-left h1 { font-size: 2rem; }
+            .modal-content { padding: 25px; }
         }
     </style>
 </head>
@@ -130,17 +176,43 @@
                     <span class="logo-sub">Pest Control Master</span>
                 </div>
             </div>
-            <!-- 👇 導航欄已按照新順序排列，並精準連接到各個區塊 -->
             <ul class="nav-links" id="navLinks">
                 <li><a href="#">首頁</a></li>
                 <li><a href="#about-us">關於我們</a></li>
                 <li><a href="#services">服務範圍</a></li>
-                <li><a href="#strategy">有蟲就有計</a></li>
+                <!-- 👇 這裡改為點擊觸發彈窗 -->
+                <li><a id="openStrategyModal">有蟲就有計</a></li>
                 <li><a href="#quote" class="nav-cta">如需報價</a></li>
             </ul>
             <div class="menu-toggle" id="menuToggle">☰</div>
         </div>
     </header>
+
+    <!-- 👇 新增：有蟲就有計 文章彈窗 -->
+    <div class="modal-overlay" id="strategyModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeModal">&times;</span>
+            <h2>有蟲就有計：實戰策略分享</h2>
+            
+            <!-- 文章 1 -->
+            <div class="article-item">
+                <h3>德國蟑螂的「連環誘殺計」</h3>
+                <p>德國蟑螂被稱為最難對付的家居害蟲，因為它們繁殖力極強，且對部分化學藥劑產生抗藥性。我們的策略不是盲目噴灑，而是採用「連環誘殺」：利用其群居和食糞的習性，施放專業膠餌。工蟲吃下膠餌後返回巢穴死亡，其他蟑螂再吃掉其屍體或糞便，形成連鎖反應，從而達到「一鍋端」的滅族效果。</p>
+            </div>
+
+            <!-- 文章 2 -->
+            <div class="article-item">
+                <h3>老鼠問題的「釜底抽薪計」</h3>
+                <p>很多客戶發現老鼠後，第一時間購買粘鼠板或老鼠藥。但如果不找出老鼠進入室内的根源（如冷氣管洞、排水渠缺口），殺死一隻，很快會來第二隻。我們的計諗是「釜底抽薪」：首先進行全方位排查，封堵所有直徑大於1.5厘米的孔洞，截斷其進入路線，配合在固定路徑投放安全誘餌，將其徹底拒之門外。</p>
+            </div>
+
+            <!-- 文章 3 -->
+            <div class="article-item">
+                <h3>蚊蟲防治的「空城計」</h3>
+                <p>蚊蟲的滋生離不開「靜止的積水」。無論是花盆底盤、冷氣機接水盤，還是廢棄的容器，只要有一小灘水，就能在幾天內孵化出成群的蚊子。我們為客戶制定的「空城計」，核心在於環境治理：清除所有不必要的積水，對必須保留的水體（如景觀池）引入生物防治劑，讓蚊子失去產卵温床，自然無法成軍。</p>
+            </div>
+        </div>
+    </div>
 
     <!-- 首頁與關於我們 (左右分屏) -->
     <section class="hero-split">
@@ -149,7 +221,6 @@
             <p>提供家居、商舖、工廠一站式害蟲防治解決方案，藥物安全環保，斷絕根源。</p>
             <button class="btn-primary" onclick="document.getElementById('quote').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
         </div>
-        <!-- 👇 加上了 id="about-us" 錨點 -->
         <div class="hero-right" id="about-us">
             <h2>關於我們</h2>
             <p>我們是香港新形勢下興起的智慧滅蟲服務商，我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。我們堅持不斷學習、博採眾長和實踐出真知的理念，透過智慧和技術相結合的方式「優化環境」使有害生物得到有效控制。</p>
@@ -190,14 +261,12 @@
 
     <!-- 聯絡區域 (左右分屏) -->
     <section class="contact-split">
-        <!-- 👇 加上了 id="strategy" 錨點 -->
-        <div class="contact-left" id="strategy">
+        <div class="contact-left">
             <h2>有蟲有計</h2>
             <p>蟲蟲無小事，但我們相信有蟲就有計諗。無論是頑強的德國蟑螂，還是悄無聲息的白蟻，滅蟲師傅皆能度身訂製專屬防治方案。</p>
             <br>
             <p>憑藉智慧滅蟲方法及專業技術配套設備結合安全施藥，我們堅守獅子山精神，一定會排除萬難，給香港一個乾淨無蟲害的空間。</p>
         </div>
-        <!-- 👇 加上了 id="quote" 錨點 -->
         <div class="contact-right" id="quote">
             <h2>如需報價</h2>
             <p>你的私隱是我們的首要考慮。請以簡稱填寫以下表格，也可直接使用XChat留言，我們的服務專員會儘快回覆閣下！</p>
@@ -222,8 +291,9 @@
         <p>&copy; 2023 滅蟲師傅 Pest Control Master. 版權所有</p>
     </footer>
 
-    <!-- 手機版選單 JavaScript -->
+    <!-- 手機版選單 & 彈窗控制 JavaScript -->
     <script>
+        // --- 手機版選單邏輯 ---
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -233,8 +303,31 @@
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+                navLinks.classList.remove('active'); // 點擊選單後自動收起
             });
+        });
+
+        // --- 彈窗邏輯 ---
+        const modal = document.getElementById('strategyModal');
+        const openBtn = document.getElementById('openStrategyModal');
+        const closeBtn = document.getElementById('closeModal');
+
+        // 點擊「有蟲就有計」打開彈窗
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // 阻止預設的跳轉行為
+            modal.classList.add('active');
+        });
+
+        // 點擊 X 號關閉彈窗
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // 點擊彈窗外圍的半透明黑色背景關閉彈窗
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
         });
     </script>
 </body>
