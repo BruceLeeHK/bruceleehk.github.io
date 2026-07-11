@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
+<html lang="zh-Hant"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -8,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Google Search Console 驗證代碼 -->
-    <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c" />
+    <meta name="google-site-verification" content="yt6eaHWa0YwTYwNRvNi6ykCA05erZKs5z7YdG56pl3c">
 
     <!-- 針對谷歌搜尋優化的標題與描述 -->
     <title>滅蟲師傅 | 香港智慧滅鼠滅蟑螂蚊蟲防治服務</title>
@@ -189,7 +187,7 @@
     <!-- 彈窗：有蟲就有計 -->
     <div class="modal-overlay" id="strategyModal">
         <div class="modal-content">
-            <span class="modal-close" id="closeModal">&times;</span>
+            <span class="modal-close" id="closeModal">×</span>
             <h2>有蟲就有計：實戰策略分享</h2>
             
             <div class="article-item">
@@ -266,8 +264,8 @@
             <h2>如需報價</h2>
             <p>你的私隱是我們的首要考慮。請以簡稱填寫以下表格，也可直接使用XChat留言，我們的服務專員會儘快回覆閣下！</p>
             <form class="contact-form" action="https://formspree.io/f/xlgyylke" method="POST">
-                <input type="text" name="name" placeholder="您的姓名" required>
-                <input type="tel" name="phone" placeholder="聯絡電話 (例如: 9123 4567)" required>
+                <input type="text" name="name" placeholder="您的姓名" required="">
+                <input type="tel" name="phone" placeholder="聯絡電話 (例如: 9123 4567)" required="">
                 <input type="text" name="pest_type" placeholder="需要處理的害蟲類型 (例如: 蟑螂、老鼠)">
                 <textarea rows="4" name="message" placeholder="簡述蟲患情況及地點..."></textarea>
                 <button type="submit">提交免費報價申請</button>
@@ -280,12 +278,12 @@
         <div class="social-icons">
             <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" id="whatsapp-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="tel:+85252821552" id="whatsapp-link" title="WhatsApp - 致電 +85252821552"><i class="fab fa-whatsapp"></i></a>
             <!-- 👇 這裡新增了 YouTube 圖標 -->
             <a href="https://www.youtube.com/@CEDARS_LTD" id="youtube-link" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
         <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
-        <p>&copy; 2023 滅蟲師傅 Pest Control Master. 版權所有</p>
+        <p>© 2023 滅蟲師傅 Pest Control Master. 版權所有</p>
     </footer>
 
     <!-- 手機版選單 & 彈窗控制 JavaScript -->
@@ -324,5 +322,26 @@
             }
         });
     </script>
-</body>
-</html>
+
+
+<!-- WhatsApp icon -> dial +852 52821552 (added per request) -->
+<script>
+(function () {
+    var wa = document.getElementById('whatsapp-link');
+    if (!wa) return;
+    wa.setAttribute('href', 'tel:+85252821552');
+    wa.addEventListener('click', function (e) {
+        // Allow the default tel: behaviour; only intercept if the browser
+        // appears to have no tel: handler (desktop without Skype/FaceTime etc.)
+        var ua = navigator.userAgent || '';
+        var isMobile = /Android|iPhone|iPad|iPod|Mobile|Phone/i.test(ua);
+        if (!isMobile) {
+            // On desktop, most browsers will offer to open the link via an
+            // external app. We still let the default action fire so the OS
+            // dialer / tel handler (if any) is invoked.
+            // No preventDefault — let the anchor do its job.
+        }
+    });
+})();
+</script>
+</body></html>
