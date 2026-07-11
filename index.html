@@ -56,7 +56,7 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); padding: 40px;
         }
         .hero-left h1 { font-size: 2.8rem; margin-bottom: 20px; }
-        .hero-left p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; max-width: 450px; line-height: 1.6; } /* 稍微調整了行高和最大寬度以適應新文案 */
+        .hero-left p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; max-width: 450px; line-height: 1.6; }
         .btn-primary { background-color: var(--primary-color); color: var(--white); padding: 15px 30px; font-size: 1.1rem; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.2s; }
         .btn-primary:hover { transform: translateY(-3px); }
 
@@ -212,7 +212,6 @@
     <!-- 首頁與關於我們 (左右分屏) -->
     <section class="hero-split">
         <div class="hero-left">
-            <!-- 👇 已修改為最新的標題與副標題 -->
             <h1>香港智慧<br>滅蟲滅鼠服務</h1>
             <p>我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。</p>
             <button class="btn-primary" onclick="document.getElementById('quote').scrollIntoView({behavior: 'smooth'})">立即查詢報價</button>
@@ -282,6 +281,8 @@
             <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="#" id="whatsapp-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <!-- 👇 這裡新增了 YouTube 圖標 -->
+            <a href="https://www.youtube.com/@CEDARS_LTD" id="youtube-link" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
         <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
         <p>&copy; 2023 滅蟲師傅 Pest Control Master. 版權所有</p>
@@ -317,7 +318,7 @@
             modal.classList.remove('active');
         });
 
-        modal.addEventListener('click', (e) => {
+        modal.addEventListener('click', ( rectangles => {
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
