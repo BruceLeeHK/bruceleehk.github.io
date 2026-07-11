@@ -277,9 +277,9 @@
     <footer>
         <div class="social-icons">
             <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="tel:+85252821552" id="whatsapp-link" title="WhatsApp - 致電 +85252821552"><i class="fab fa-whatsapp"></i></a>
-            <!-- 👇 這裡新增了 YouTube 圖標 -->
+            <a href="https://x.com/CEDARS_LTD" target="__blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://wa.me/CEDARS_LTD" target="_blank" rel="noopener noreferrer" title="WhatsApp - @CEDARS_LTD"><i class="fab fa-whatsapp"></i></a>
+            <!-- YouTube 圖標 -->
             <a href="https://www.youtube.com/@CEDARS_LTD" id="youtube-link" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
         <p class="contact-handle">聯繫我們：@CEDARS_LTD</p>
@@ -316,32 +316,10 @@
             modal.classList.remove('active');
         });
 
-        modal.addEventListener('click', ( rectangles => {
+        modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
         });
     </script>
-
-
-<!-- WhatsApp icon -> dial +852 52821552 (added per request) -->
-<script>
-(function () {
-    var wa = document.getElementById('whatsapp-link');
-    if (!wa) return;
-    wa.setAttribute('href', 'tel:+85252821552');
-    wa.addEventListener('click', function (e) {
-        // Allow the default tel: behaviour; only intercept if the browser
-        // appears to have no tel: handler (desktop without Skype/FaceTime etc.)
-        var ua = navigator.userAgent || '';
-        var isMobile = /Android|iPhone|iPad|iPod|Mobile|Phone/i.test(ua);
-        if (!isMobile) {
-            // On desktop, most browsers will offer to open the link via an
-            // external app. We still let the default action fire so the OS
-            // dialer / tel handler (if any) is invoked.
-            // No preventDefault — let the anchor do its job.
-        }
-    });
-})();
-</script>
 </body></html>
