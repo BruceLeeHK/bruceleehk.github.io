@@ -229,6 +229,36 @@
         .cat-panel { display: none; }
         .cat-panel.active { display: block; }
 
+
+        /* ===== 服務資訊框 ===== */
+        .service-info-box {
+            margin-top: 18px;
+            margin-left: 22px;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #d0d8cc;
+            font-size: 0.92rem;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            color: var(--text-light);
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: right;
+        }
+
         /* ===== 手機版響應式設計 ===== */
         @media (max-width: 992px) {
             .hero-split { flex-direction: column; }
@@ -306,8 +336,14 @@
                     <p>蚊蟲的滋生離不開「靜止的積水」。無論是花盆底盤、冷氣機接水盤，還是廢棄的容器，只要有一小灘水，就能在幾天內孵化出成群的蚊子。我們為客戶制定的「空城計」，核心在於環境治理：清除所有不必要的積水，對必須保留的水體（如景觀池）引入生物防治劑，讓蚊子失去產卵温床，自然無法成軍。</p>
                 </div>
                 <div class="article-item">
-                    <h3>老鼠問題的「釜底抽薪計」</h3>
-                    <p>很多客戶發現老鼠後，第一時間購買粘鼠板或老鼠藥。但如果不找出老鼠進入室内的根源（如冷氣管洞、排水渠缺口），殺死一隻，很快會來第二隻。我們的計諗是「釜底抽薪」：首先進行全方位排查，封堵所有直徑大於1.5厘米的孔洞，截斷其進入路線，配合在固定路徑投放安全誘餌，將其徹底拒之門外。</p>
+                    <h3>鼠患問題嘅「釜底抽薪計」</h3>
+                    <p>一般嚟講，我哋滅鼠主要都係用誘捕嘅方法。滅蟲師傅會先幫客人評估老鼠入屋嘅源頭（有冇老鼠窿），之後師傅會喺現場揾到最高效嘅位置擺放老鼠板。如果環境合適，師傅仲會加放老鼠藥，提升成效。結合智慧嘅獨門秘訣將其徹底拒之門外。</p>
+                    <div class="service-info-box">
+                        <div class="info-row"><span class="info-label">服務類型</span><span class="info-value">商業滅鼠套餐</span></div>
+                        <div class="info-row"><span class="info-label">收費範圍（港元）</span><span class="info-value">HK$3,000 - 6,000 / 年</span></div>
+                        <div class="info-row"><span class="info-label">服務內容</span><span class="info-value">季度巡查 + 全年免費復處理</span></div>
+                        <div class="info-row"><span class="info-label">性價比推薦</span><span class="info-value">大型連鎖機構</span></div>
+                    </div>
                 </div>
                 <div class="article-item">
                     <h3>戶外蚊患的「以逸待勞計」</h3>
@@ -344,8 +380,14 @@
             <!-- 滅鼠 -->
             <div class="cat-panel" id="panel-rat">
                 <div class="article-item">
-                    <h3>老鼠問題的「釜底抽薪計」</h3>
-                    <p>很多客戶發現老鼠後，第一時間購買粘鼠板或老鼠藥。但如果不找出老鼠進入室内的根源（如冷氣管洞、排水渠缺口），殺死一隻，很快會來第二隻。我們的計諗是「釜底抽薪」：首先進行全方位排查，封堵所有直徑大於1.5厘米的孔洞，截斷其進入路線，配合在固定路徑投放安全誘餌，將其徹底拒之門外。</p>
+                    <h3>鼠患問題嘅「釜底抽薪計」</h3>
+                    <p>一般嚟講，我哋滅鼠主要都係用誘捕嘅方法。滅蟲師傅會先幫客人評估老鼠入屋嘅源頭（有冇老鼠窿），之後師傅會喺現場揾到最高效嘅位置擺放老鼠板。如果環境合適，師傅仲會加放老鼠藥，提升成效。結合智慧嘅獨門秘訣將其徹底拒之門外。</p>
+                    <div class="service-info-box">
+                        <div class="info-row"><span class="info-label">服務類型</span><span class="info-value">商業滅鼠套餐</span></div>
+                        <div class="info-row"><span class="info-label">收費範圍（港元）</span><span class="info-value">HK$3,000 - 6,000 / 年</span></div>
+                        <div class="info-row"><span class="info-label">服務內容</span><span class="info-value">季度巡查 + 全年免費復處理</span></div>
+                        <div class="info-row"><span class="info-label">性價比推薦</span><span class="info-value">大型連鎖機構</span></div>
+                    </div>
                 </div>
                 <div class="article-item">
                     <h3>防治鼠患的「天羅地網計」</h3>
