@@ -1,20 +1,6 @@
-<html lang="zh-Hant"><head>
-<!-- ===== XuanZongTi font injection (logo only) ===== -->
-<style id="xuanzongti-injection">
-@font-face {
-    font-family: 'XuanZongTi';
-    src: url('fonts/XuanZongTi.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-/* Apply XuanZongTi ONLY to the top-left logo "滅蟲師傅" */
-.logo-main {
-    font-family: 'XuanZongTi', 'Microsoft JhengHei', 'PingFang TC', sans-serif !important;
-    letter-spacing: 0.05em;
-}
-</style>
-
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -91,7 +77,8 @@
         .hero-split { margin-top: 70px; display: flex; min-height: calc(100vh - 70px); }
         .hero-left {
             flex: 1;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://z-cdn-media.chatglm.cn/files/9cf8e402-0080-443c-bb79-d892e000746c.png?auth_key=1883605607-c5c2a869898048369a3807ca27ed0fd2-0-c1de495a771723aab5972de6b6e579f4') center/cover;
+            /* ✅ 已替換：原本的 CDN 背景圖已改為本地 底部.png */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('底部.png') center/cover;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); padding: 40px;
         }
         .hero-left h1 { font-size: 2.8rem; margin-bottom: 20px; }
@@ -366,4 +353,5 @@
             }
         });
     </script>
-</body></html>
+</body>
+</html>
