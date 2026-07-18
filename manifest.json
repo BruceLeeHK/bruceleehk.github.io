@@ -1,0 +1,17 @@
+{
+  "name": "滅蟲師傅",
+  "short_name": "滅蟲師傅",
+  "description": "香港專業滅蟲滅鼠服務 - 免費上門估價",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c5e1a",
+  "lang": "zh-HK",
+  "icons": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEfUlEQVR42t1XTUhbWRT+3o/GmoT6Q1Cr6EZIJXaniDtJN4ILUUp3rkdcWNAupBQV1y24VKSUIrSTZSSgFjcV8bcpCoIuJBClEaM2oYSkJu/ebxYlbxJNanToyMyBC++9++45537nO+fcq5Ak7lBU3LH8PxwQQkBKeau1yn+WA2m/o9EoRkdH4fP5sr4XKvo/3YGu6+jo6EB1dfVPSBXlxju5laRSKUopOT09zdbWVj5+/JhnZ2fmnGEYlFJeq0e9DfRCCCiKAkVRUFdXh62tLQghUFlZaaKiaVpBaOQkIUmQhKqq5nMa3kylsVgMNpsN29vbuHfvHvb29uB2uzE3N4dYLIaenh5UVVWBZF5ncnIg09BlowcHB1haWsL8/DxCoRA+fPgAj8eD9+/fo6+vD/F4HH19fQCA4+NjjI2N/ZIbWQ5IKaGqKqanp+H1ejExMYFPnz5hc3MTNpsNJycn2NjYwNnZmbnG5/PB4XAgEomgv78fXV1dKCsrw+vXr9HZ2YlkMomSkpLCSJgmzerqKoeGhrizs8Ouri4CyDtqamq4vr7Ozc1NTk5OEgC9Xi99Ph/7/+hnJBKhlDIvIa/NglAoxHfv3vHp06d0Op1saGhgbW0tq6qqWF1dTQAcGxtjIpFgbW0tFUXhq1evODU1xebmZobD4azNXZacJJRSmiTMjD23b9/+GAZIIpVKwWKx4Pnz52hpaUEsFsOLFy+gaRpKS0vh9/tRWVmJ4eFh1NfXY3x83NR5ozogpaRhGBRC5Jz3+XxcXl5mRUVFVmiGh4e5sLBAAGxpaaEQIicKBdUBRVFAEoZh/Gw84u/G43a7EYlEcP/+fbhcLrhcLjx8+BAHBwdobGxEe3s7BgYGzJS+UTNKZ0Uu+fHjB05PT5FMJpFIJCCEMP8lCSklmpqaYLFYbtcL0vEKBoP4+vUrjo6OEAgEcHh4iPBpGEeHP9/j8fgVJ1VVhZQSbW1tmJ2dxYMHDyCEgKZp1/eCzFiNjo7S4XCwqKgobxoqimKOXPPNzc3c3983dedNQyEEU6mUOfHs2bMrBlRVzWso0yFd16lpGnVdJwA2NDRwbW0tpxN6JtyqqiIajeLi4gK7u7tZoUg3GF3XYbfbYbfbYbPZYLVaYbFYYLVaEQqF4Pf7YRiGiXBxcTGCwSC6u7uxvLwMp9OZxS09TRjPnx5AAWZmZlBeXo6XL18iHo/jyZMnaG1tNY0VFxejpKQEFovFHOnYJpNJfPlyBR6PBysrK9jZ2UEymYSu6wiHw/j48SOcTmd2NhiGQZL0er0mjL29vYxGo0zPFSKXob24uODnz585ODhITdMIgDMzMySZpTeLhG/fvjVjlRbDMMxClCbo5ZFZtIQQWYXrzZs3BECXy8Xj4+Mra3C5EWW+F3KiuU5GRkb46NEjBgKBnHZwebf5Su5NQ7G4uMi2tjb6/X5+//49bxpmVRBN0/JWvpuK1WrF+fk5EokE7HY7DMPIqfu33gvC4TCsVitKS0vznoh+mwO/Ogf+K3fDdAe908tpIQj8BV4Ba/LJ6CzUAAAAAElFTkSuQmCC",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
