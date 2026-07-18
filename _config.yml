@@ -1,0 +1,9 @@
+title: 滅蟲師傅 | 香港專業滅蟲滅鼠服務
+description: 滅蟲師傅為香港提供專業滅鼠、滅蟑螂、滅蚊及滅蝨服務
+url: https://www.bruceleehk.com
+lang: zh-HK
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
