@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>免費上門估價 | 滅蟲師傅 — 有蟲話我知</title>
+  <meta name="description" content="滅蟲師傅免費上門估價服務。填寫簡單表格或WhatsApp聯絡我們，服務專員儘快回覆。">
+  <link rel="canonical" href="https://www.bruceleehk.com/quote/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="免費上門估價 | 滅蟲師傅">
+  <meta property="og:description" content="滅蟲師傅免費上門估價服務，填寫簡單表格即可申請。">
+  <meta property="og:url" content="https://www.bruceleehk.com/quote/">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+  <header id="site-header">
+    <div class="nav-container">
+      <div class="logo">
+        <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo">
+        <div class="logo-text"><span class="logo-main">滅蟲師傅</span><span class="logo-sub">Pest Control Master</span></div>
+        <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <nav class="nav-links" id="nav-links">
+        <a href="/">首頁</a>
+        <a href="/services/">蟲類服務</a>
+        <a href="/strategy/">有蟲就有計</a>
+        <a href="/info/">蟲類資訊</a>
+        <a href="/quote/" class="nav-cta active">有蟲話我知</a>
+      </nav>
+      <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+    </div>
+  </header>
+
+  <section class="quote-section">
+    <div class="container">
+      <div class="quote-form">
+        <h2 style="text-align:left">如需報價</h2>
+        <p style="margin-bottom:25px">你的私隱是我們的首要考慮。請以簡稱填寫以下表格，或直接WhatsApp、XChat聯絡，我們嘅服務專員會儘快回覆閣下！</p>
+        <form id="quote-form">
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name" name="name" placeholder="請輸入簡稱" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">聯絡電話</label>
+            <input type="tel" id="phone" name="phone" placeholder="例如：9123 4567" required>
+          </div>
+          <div class="form-group">
+            <label for="service">服務類型</label>
+            <select id="service" name="service" required>
+              <option value="">請選擇服務類型</option>
+              <option value="滅曱甴（蟑螂）">滅曱甴（蟑螂）</option>
+              <option value="滅蚊">滅蚊</option>
+              <option value="滅鼠">滅鼠</option>
+              <option value="床蝨防治">床蝨防治</option>
+              <option value="木蝨防治">木蝨防治</option>
+              <option value="白蟻防治">白蟻防治</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="details">詳細情況</label>
+            <textarea id="details" name="details" placeholder="請簡述您的蟲害問題、地址面積等..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">提交免費估價申請</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-main">滅蟲師傅</span><span class="logo-sub">Pest Control Master</span></div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://wa.me/85252821552" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:Cedars5282@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 滅蟲師傅@CEDARS_LTD. 版權所有</p></div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
