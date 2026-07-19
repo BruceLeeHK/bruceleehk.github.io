@@ -296,18 +296,19 @@ footer p{font-size:.85rem;color:var(--footer-text)}
 
 /* --- Dify Chatbot Customization --- */
 #dify-chatbot-bubble-button{
-  background-color:var(--primary-color)!important;
-  border:3px solid #3a7a22!important;
+  background-color:#2c5e1a!important;
   box-shadow:0 4px 15px rgba(44,94,26,.4)!important;
   bottom:25px!important;right:25px!important
 }
 #dify-chatbot-bubble-button:hover{
-  background-color:#3a7a22!important;
+  background-color:#1e4210!important;
   box-shadow:0 6px 20px rgba(44,94,26,.6)!important
 }
 #dify-chatbot-bubble-window{
   border-radius:12px!important;
-  box-shadow:0 8px 30px rgba(0,0,0,.2)!important
+  box-shadow:0 8px 30px rgba(0,0,0,.2)!important;
+  width:24rem!important;
+  height:40rem!important
 }
 
 /* --- Responsive --- */
