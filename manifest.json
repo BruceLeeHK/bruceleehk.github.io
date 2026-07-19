@@ -1,17 +1,28 @@
 {
-  "name": "滅蟲師傅",
+  "name": "滅蟲師傅 - Pest Control Master",
   "short_name": "滅蟲師傅",
-  "description": "香港專業滅蟲滅鼠服務 - 免費上門估價",
+  "description": "香港專業滅蟲滅鼠服務，提供滅曱甴、滅蚊滅鼠、床蝨木蝨防治、白蟻防治等全面蟲害解決方案。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2c5e1a",
+  "orientation": "portrait-primary",
   "lang": "zh-HK",
   "icons": [
     {
-      "src": "/assets/img/logo.png",
+      "src": "/assets/img/logo-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/img/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": ["business", "lifestyle"],
+  "screenshots": [],
+  "prefer_related_applications": false
 }

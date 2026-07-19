@@ -1,6 +1,6 @@
 /* ============================================
    滅蟲師傅 — Main Stylesheet
-   Hosted on GitHub Pages / www.bruceleehk.com
+   www.bruceleehk.com
    ============================================ */
 
 /* --- Reset & Variables --- */
@@ -294,6 +294,22 @@ footer p{font-size:.85rem;color:var(--footer-text)}
 .not-found h1{font-size:6rem;color:var(--primary-color)}
 .not-found p{font-size:1.2rem;margin-bottom:2rem}
 
+/* --- Dify Chatbot Customization --- */
+#dify-chatbot-bubble-button{
+  background-color:var(--primary-color)!important;
+  border:3px solid #3a7a22!important;
+  box-shadow:0 4px 15px rgba(44,94,26,.4)!important;
+  bottom:25px!important;right:25px!important
+}
+#dify-chatbot-bubble-button:hover{
+  background-color:#3a7a22!important;
+  box-shadow:0 6px 20px rgba(44,94,26,.6)!important
+}
+#dify-chatbot-bubble-window{
+  border-radius:12px!important;
+  box-shadow:0 8px 30px rgba(0,0,0,.2)!important
+}
+
 /* --- Responsive --- */
 @media(max-width:768px){
   .nav-links{
@@ -319,4 +335,6 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   .filter-tabs{gap:6px}
   .filter-btn{padding:6px 14px;font-size:.8rem}
   .social-icons a{font-size:30px;margin:0 10px}
+  .hero-left{padding:40px 25px}
+  .hero-left h1{font-size:1.5rem}
 }
