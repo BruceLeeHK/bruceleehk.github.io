@@ -220,6 +220,108 @@ footer{background-color:var(--footer-bg);padding:30px 0;color:var(--footer-text)
 .gmail-icon{width:38px;height:38px;vertical-align:middle;filter:grayscale(100%) brightness(.7);transition:filter .3s;display:inline}
 footer p{font-size:.85rem;color:var(--footer-text)}
 
+/* --- Sub-Page Hero --- */
+.page-hero{
+  margin-top:75px;
+  padding:50px 0 30px;
+  background:linear-gradient(135deg,var(--primary-color) 0%,#3a7a22 100%);
+  color:var(--white);text-align:center
+}
+.page-hero h1{color:var(--white);font-size:2.2rem;margin-bottom:12px}
+.page-hero p{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}
+.quote-subtitle{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}
+
+/* --- Sub-Page Main --- */
+.page-quote,.page-services,.page-strategy,.page-info,.page-404{
+  min-height:calc(100vh - 70px)
+}
+
+/* --- Strategy Page Sections --- */
+.strategy-section{
+  padding:40px 0;
+  border-bottom:1px solid #eee
+}
+.strategy-section:last-child{border-bottom:none}
+.strategy-section .strategy-card{
+  max-width:800px;margin:0 auto;
+  background:var(--white);border-radius:var(--radius);
+  padding:40px;box-shadow:var(--shadow-md)
+}
+.strategy-number{
+  display:inline-block;
+  background:var(--primary-color);color:var(--white);
+  font-size:1rem;font-weight:700;
+  padding:6px 18px;border-radius:20px;
+  margin-bottom:15px
+}
+.strategy-content p{
+  color:var(--text-light);line-height:1.9;font-size:.98rem;
+  margin-bottom:1rem;text-align:justify
+}
+.strategy-content p:last-child{margin-bottom:0}
+
+/* --- Services Sub-Page --- */
+.services-sub-section{
+  padding:50px 0;
+  border-bottom:1px solid #eee
+}
+.services-sub-section:last-child{border-bottom:none}
+.services-sub-card{
+  max-width:800px;margin:0 auto;
+  background:var(--white);border-radius:var(--radius);
+  padding:40px;box-shadow:var(--shadow-md)
+}
+.service-badge{
+  display:inline-block;
+  background:var(--primary-color);color:var(--white);
+  font-size:1rem;font-weight:700;
+  padding:6px 18px;border-radius:20px;
+  margin-bottom:15px
+}
+
+/* --- Quote Form Section --- */
+.quote-form-section{
+  padding:50px 0 60px;
+  background:var(--secondary-color)
+}
+.quote-form-wrapper{
+  max-width:650px;margin:0 auto
+}
+.quote-form{
+  background:var(--white);
+  border-radius:var(--radius);
+  padding:40px;box-shadow:var(--shadow-md)
+}
+.form-privacy{
+  margin:15px 0 25px;padding:12px 15px;
+  background:var(--secondary-color);border-radius:5px;
+  font-size:.9rem;color:var(--text-light)
+}
+.form-privacy i{color:var(--primary-color);margin-right:6px}
+.btn-submit{
+  width:100%;padding:14px;
+  background-color:var(--primary-color);color:var(--white);
+  border:none;border-radius:5px;
+  font-size:1.1rem;font-weight:600;cursor:pointer;
+  transition:background var(--transition)
+}
+.btn-submit:hover{background-color:var(--primary-hover)}
+.btn-whatsapp{
+  display:inline-flex;align-items:center;gap:8px;
+  background-color:#25D366;color:var(--white)!important;
+  padding:12px 24px;border-radius:5px;
+  font-weight:600;transition:background var(--transition)
+}
+.btn-whatsapp:hover{background-color:#1da851}
+.quote-success{
+  text-align:center;padding:40px;
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:var(--shadow-md)
+}
+.success-icon{font-size:4rem;color:var(--primary-color);margin-bottom:20px}
+.quote-success h3{font-size:1.5rem;color:var(--primary-color);margin-bottom:15px}
+.quote-success p{margin-bottom:12px}
+
 /* --- Strategy Detail Page --- */
 .strategy-detail,.info-detail{
   margin-top:70px;padding:60px 0;min-height:calc(100vh - 70px)
@@ -250,41 +352,6 @@ footer p{font-size:.85rem;color:var(--footer-text)}
 .pricing-label{font-weight:600;color:var(--text-dark)}
 .pricing-value{color:var(--primary-color);font-weight:600}
 .pricing-note{font-size:.85rem;color:var(--text-light);margin-top:10px}
-
-/* --- Quote Form Page --- */
-.quote-section{
-  margin-top:70px;padding:60px 0;min-height:calc(100vh - 70px);
-  background:var(--secondary-color)
-}
-.quote-form{
-  max-width:600px;margin:0 auto;background:var(--white);
-  border-radius:var(--radius);padding:40px;box-shadow:var(--shadow-md)
-}
-.form-group{margin-bottom:20px}
-.form-group label{
-  display:block;margin-bottom:6px;font-weight:600;
-  color:var(--text-dark);font-size:.95rem
-}
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;padding:12px;border:1px solid #ddd;border-radius:5px;
-  font-size:1rem;font-family:inherit;
-  transition:border-color var(--transition)
-}
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus{
-  outline:none;border-color:var(--primary-color)
-}
-.form-group textarea{min-height:120px;resize:vertical}
-.form-submit{
-  width:100%;padding:14px;background-color:var(--primary-color);
-  color:var(--white);border:none;border-radius:5px;
-  font-size:1.1rem;font-weight:600;cursor:pointer;
-  transition:background var(--transition)
-}
-.form-submit:hover{background-color:var(--primary-hover)}
 
 /* --- 404 Page --- */
 .not-found{
@@ -330,6 +397,10 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   .strategy-grid,.info-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr 1fr}
   .strategy-detail-card,.info-detail-card{padding:25px}
+  .page-hero{padding:35px 0 20px;margin-top:70px}
+  .page-hero h1{font-size:1.6rem}
+  .strategy-section .strategy-card{padding:25px}
+  .quote-form{padding:25px}
 }
 @media(max-width:480px){
   .services-grid{grid-template-columns:1fr}
@@ -338,4 +409,8 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   .social-icons a{font-size:30px;margin:0 10px}
   .hero-left{padding:40px 25px}
   .hero-left h1{font-size:1.5rem}
+  .page-hero{padding:30px 0 15px;margin-top:65px}
+  .page-hero h1{font-size:1.4rem}
+  .strategy-section .strategy-card{padding:20px}
+  .quote-form{padding:20px}
 }
