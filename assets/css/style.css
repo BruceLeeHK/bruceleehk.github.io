@@ -323,6 +323,40 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   color:var(--primary-color);font-weight:600;font-size:.9rem
 }
 
+/* --- Video Card --- */
+.video-card{
+  border-left:4px solid #cc0000
+}
+.video-info-card{
+  border-top:4px solid #cc0000
+}
+.video-info-card .info-tag{
+  background:#cc0000!important
+}
+.video-embed-wrapper{
+  position:relative;
+  padding-bottom:56.25%;
+  height:0;
+  overflow:hidden;
+  margin-bottom:18px;
+  border-radius:6px;
+  background:#000
+}
+.video-embed-wrapper iframe{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  border:0
+}
+.video-card .blog-list-link a{
+  color:var(--primary-color);
+  font-weight:600;
+  transition:color var(--transition)
+}
+.video-card .blog-list-link a:hover{
+  color:var(--primary-hover)
+}
+
 /* --- Blog Article Page --- */
 .blog-article-page{
   padding:40px 0 60px;
