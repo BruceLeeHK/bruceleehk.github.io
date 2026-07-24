@@ -333,28 +333,26 @@ footer p{font-size:.85rem;color:var(--footer-text)}
 .video-info-card .info-tag{
   background:#cc0000!important
 }
-.video-embed-wrapper{
-  position:relative;
-  padding-bottom:56.25%;
-  height:0;
-  overflow:hidden;
-  margin-bottom:18px;
-  border-radius:6px;
-  background:#000
+.video-thumbnail{
+  position:relative;border-radius:6px;overflow:hidden;
+  margin-bottom:18px;cursor:pointer
 }
-.video-embed-wrapper iframe{
-  position:absolute;
-  top:0;left:0;
-  width:100%;height:100%;
-  border:0
+.video-thumbnail img{
+  width:100%;display:block;border-radius:6px
 }
-.video-card .blog-list-link a{
-  color:var(--primary-color);
-  font-weight:600;
-  transition:color var(--transition)
+.video-play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:68px;height:48px;
+  background:#cc0000;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;
+  box-shadow:0 4px 15px rgba(204,0,0,.5);
+  transition:all var(--transition)
 }
-.video-card .blog-list-link a:hover{
-  color:var(--primary-hover)
+.video-thumbnail:hover .video-play-btn{
+  background:#ff0000;
+  transform:translate(-50%,-50%) scale(1.1);
+  box-shadow:0 6px 20px rgba(204,0,0,.7)
 }
 
 /* --- Blog Article Page --- */
