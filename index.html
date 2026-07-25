@@ -233,29 +233,96 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "HomeAndConstructionBusiness",
     "name": "滅蟲師傅",
     "alternateName": "Pest Control Master",
     "description": "滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐。",
     "url": "https://www.bruceleehk.com/",
+    "logo": "https://www.bruceleehk.com/assets/img/logo.png",
+    "image": "https://www.bruceleehk.com/assets/img/hero-bg.jpg",
     "telephone": "+85252821552",
     "email": "Cedars5282@gmail.com",
+    "priceRange": "HK$800-HK$4000+",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "荔景邨工場大廈",
       "addressRegion": "新界",
-      "addressLocality": "香港"
+      "addressLocality": "香港",
+      "addressCountry": "HK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "22.35",
+      "longitude": "114.13"
     },
     "areaServed": {
       "@type": "Place",
       "name": "Hong Kong"
     },
-    "openingHours": "Mo-Sa 09:00-18:00",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
     "serviceType": ["Pest Control", "滅蟲", "滅鼠", "滅蟑螂", "滅蚊", "滅蝨", "白蟻防治"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "滅蟲服務套餐",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "滅曱甴（蟑螂）",
+            "description": "針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "滅蚊滅鼠",
+            "description": "重點清除蚊嘅滋生水源，安全使用殺蟲劑處理成蚊。採用物理捕捉與安全誘餌解決鼠患問題。"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "床蝨/木蝨防治",
+            "description": "清理雜物縫隙，針對床架、木製家具進行高溫蒸氣處理，消滅隱蔽處的木蝨。"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "白蟻防治",
+            "description": "白蟻嚴重破壞木質結構，我們提供精準探測與全面藥物灌注服務。"
+          }
+        }
+      ]
+    },
     "sameAs": [
       "https://www.instagram.com/CEDARS_LTD",
       "https://x.com/CEDARS_LTD",
       "https://www.youtube.com/@CEDARS_LTD"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首頁",
+        "item": "https://www.bruceleehk.com/"
+      }
     ]
   }
   </script>
