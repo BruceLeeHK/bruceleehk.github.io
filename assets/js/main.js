@@ -13,7 +13,6 @@
       menuToggle.addEventListener('click', function () {
         navLinks.classList.toggle('active');
       });
-      // Close menu when a link is clicked
       navLinks.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
           navLinks.classList.remove('active');
@@ -27,10 +26,8 @@
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        // Update active button
         filterBtns.forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
-
         var filter = btn.getAttribute('data-filter');
         strategyCards.forEach(function (card) {
           if (filter === 'all' || card.getAttribute('data-category') === filter) {
@@ -88,7 +85,7 @@
 
   }
 
-  /* --- Robust initialization: handles both early and late DOM readiness --- */
+  /* --- Robust initialization --- */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
