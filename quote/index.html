@@ -52,7 +52,6 @@
         <form id="quote-form" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
           <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
           <input type="hidden" name="_captcha" value="true">
-          <input type="hidden" name="_replyto" id="form-replyto">
 
           <div class="form-group">
             <label for="name">姓名</label>
@@ -154,16 +153,10 @@
   var submitBtn = document.getElementById('btn-submit');
   var successBox = document.getElementById('quote-success');
   var errorBox = document.getElementById('form-error');
-  var replytoInput = document.getElementById('form-replyto');
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     errorBox.style.display = 'none';
     errorBox.textContent = '';
-
-    if (replytoInput) {
-      replytoInput.value = form.querySelector('#phone').value || '';
-    }
 
     var originalText = submitBtn.textContent;
     submitBtn.textContent = '提交中...';
