@@ -11,153 +11,6 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-<style>
-/* === Reset & Variables === */
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --primary-color:#2c5e1a;
-  --primary-hover:#1e4210;
-  --secondary-color:#f4f9f0;
-  --text-dark:#333;
-  --text-light:#666;
-  --white:#fff;
-  --footer-bg:#222;
-  --footer-text:#aaa;
-  --shadow-sm:0 2px 10px rgba(0,0,0,.1);
-  --shadow-md:0 5px 15px rgba(0,0,0,.05);
-  --radius:8px;
-  --transition:.3s ease;
-  --max-width:1200px
-}
-a{text-decoration:none;color:inherit;cursor:pointer}
-img{max-width:100%;display:block}
-body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;color:var(--text-dark);line-height:1.7;overflow-x:hidden}
-h1{font-size:2.2rem;line-height:1.3;margin-bottom:1rem}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
-
-/* === Header === */
-header{background-color:var(--white);box-shadow:var(--shadow-sm);position:fixed;width:100%;top:0;z-index:1000}
-.nav-container{max-width:var(--max-width);margin:0 auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
-.logo{display:flex;align-items:center}
-.logo-icon{height:45px;width:auto;margin-right:10px;object-fit:contain}
-.logo-text{display:flex;flex-direction:column;text-align:left;line-height:1.1}
-.logo-main{font-size:24px;font-weight:bold;color:var(--primary-color)}
-.logo-sub{font-size:8px;letter-spacing:.5px;color:#888;text-transform:uppercase;margin-left:1px}
-.logo-whatsapp{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background-color:#25D366;color:#fff!important;border-radius:50%;margin-left:16px;font-size:20px;transition:all var(--transition);box-shadow:0 2px 6px rgba(37,211,102,.35)}
-.nav-links{display:flex;gap:20px;align-items:center}
-.nav-links a{color:var(--text-dark);font-weight:500;transition:color var(--transition)}
-.nav-links a:hover{color:var(--primary-color)}
-.nav-cta{background-color:var(--primary-color);color:var(--white)!important;padding:8px 16px;border-radius:5px}
-.menu-toggle{display:none;font-size:24px;cursor:pointer}
-
-/* === Page Hero === */
-.page-hero{margin-top:75px;padding:50px 0 30px;background:linear-gradient(135deg,var(--primary-color) 0%,#3a7a22 100%);color:var(--white);text-align:center}
-.page-hero h1{color:var(--white);font-size:2.2rem;margin-bottom:12px}
-.page-hero p{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}
-
-/* === Quote Form Section === */
-.quote-form-section{padding:50px 0 60px;background:var(--secondary-color)}
-.quote-form-wrapper{max-width:680px;margin:0 auto}
-.quote-form{background:var(--white);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow-md)}
-
-/* --- Form Fields (Mobile-Friendly Sizing) --- */
-.form-group{margin-bottom:22px}
-.form-group label{display:block;font-size:1.08rem;font-weight:600;color:var(--text-dark);margin-bottom:8px}
-.form-group input,
-.form-group select,
-.form-group textarea{
-  width:100%;
-  font-size:17px;
-  font-family:'Microsoft JhengHei','PingFang TC',sans-serif;
-  padding:15px 18px;
-  border:2px solid #dde5d6;
-  border-radius:8px;
-  background:#fff;
-  color:var(--text-dark);
-  min-height:52px;
-  transition:border-color var(--transition),box-shadow var(--transition);
-  -webkit-appearance:none;
-  appearance:none
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:var(--primary-color);
-  outline:none;
-  box-shadow:0 0 0 3px rgba(44,94,26,.15)
-}
-.form-group input::placeholder,
-.form-group textarea::placeholder{color:#aaa;font-size:.95rem}
-.form-group select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 16px center;
-  background-size:12px;
-  padding-right:40px
-}
-.form-group textarea{min-height:140px;resize:vertical;line-height:1.8}
-
-/* --- Privacy Notice --- */
-.form-privacy{margin:15px 0 25px;padding:12px 15px;background:var(--secondary-color);border-radius:5px;font-size:.9rem;color:var(--text-light)}
-.form-privacy i{color:var(--primary-color);margin-right:6px}
-
-/* --- Submit Button --- */
-.btn-submit{
-  width:100%;padding:16px;
-  background-color:var(--primary-color);color:var(--white);
-  border:none;border-radius:8px;
-  font-size:1.15rem;font-weight:600;cursor:pointer;
-  transition:background var(--transition),transform .15s
-}
-.btn-submit:hover{background-color:var(--primary-hover);transform:translateY(-1px)}
-.btn-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
-
-/* --- Success / Error States --- */
-.quote-success{text-align:center;padding:40px;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow-md)}
-.success-icon{font-size:4rem;color:var(--primary-color);margin-bottom:20px}
-.quote-success h3{font-size:1.5rem;color:var(--primary-color);margin-bottom:15px}
-.quote-success p{margin-bottom:12px}
-.btn-whatsapp{display:inline-flex;align-items:center;gap:8px;background-color:#25D366;color:var(--white)!important;padding:12px 24px;border-radius:5px;font-weight:600;transition:background var(--transition)}
-.btn-whatsapp:hover{background-color:#1da851}
-.form-error{color:#d32f2f;font-size:.95rem;margin-top:8px;display:none}
-
-/* === Footer === */
-footer{background-color:var(--footer-bg);padding:30px 0;color:var(--footer-text);text-align:center}
-.social-icons{margin-bottom:20px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px}
-.social-icons a{color:var(--footer-text);font-size:38px;margin:0 15px;transition:color var(--transition),transform var(--transition);display:inline-flex;align-items:center;justify-content:center}
-.social-icons a:hover{color:var(--white);transform:translateY(-3px)}
-.social-icons a:hover img{filter:grayscale(100%) brightness(1) invert(1)}
-.gmail-icon{width:38px;height:38px;vertical-align:middle;filter:grayscale(100%) brightness(.7);transition:filter .3s;display:inline}
-footer p{font-size:.85rem;color:var(--footer-text)}
-
-/* === Responsive: Tablet === */
-@media(max-width:768px){
-  .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow-sm);gap:15px}
-  .nav-links.active{display:flex}
-  .menu-toggle{display:block}
-  h1{font-size:1.6rem}
-  .page-hero{padding:35px 0 20px;margin-top:70px}
-  .page-hero h1{font-size:1.6rem}
-  .quote-form{padding:28px}
-  .form-group input,.form-group select,.form-group textarea{padding:15px 16px;font-size:17px;min-height:52px}
-  .form-group textarea{min-height:150px}
-  .btn-submit{padding:16px;font-size:1.15rem;border-radius:8px}
-}
-
-/* === Responsive: Mobile === */
-@media(max-width:480px){
-  .page-hero{padding:30px 0 15px;margin-top:65px}
-  .page-hero h1{font-size:1.4rem}
-  .quote-form-wrapper{max-width:100%}
-  .quote-form{padding:22px}
-  .form-group{margin-bottom:20px}
-  .form-group label{font-size:1.02rem;margin-bottom:7px}
-  .form-group input,.form-group select,.form-group textarea{padding:14px 14px;font-size:17px;min-height:52px;border-radius:6px}
-  .form-group textarea{min-height:160px}
-  .btn-submit{padding:16px;font-size:1.15rem;border-radius:6px}
-  .social-icons a{font-size:30px;margin:0 10px}
-}
-</style>
 </head>
 <body>
 
@@ -197,7 +50,6 @@ footer p{font-size:.85rem;color:var(--footer-text)}
     <div class="container">
       <div class="quote-form-wrapper">
         <form id="quote-form" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
-          <!-- Formspree 隱藏欄位 -->
           <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
           <input type="hidden" name="_captcha" value="true">
           <input type="hidden" name="_replyto" id="form-replyto">
@@ -306,22 +158,17 @@ footer p{font-size:.85rem;color:var(--footer-text)}
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-
-    /* 清除舊的錯誤訊息 */
     errorBox.style.display = 'none';
     errorBox.textContent = '';
 
-    /* 將電話欄位同時填入 _replyto（方便 Formspree 回覆） */
     if (replytoInput) {
       replytoInput.value = form.querySelector('#phone').value || '';
     }
 
-    /* 按鈕狀態 */
     var originalText = submitBtn.textContent;
     submitBtn.textContent = '提交中...';
     submitBtn.disabled = true;
 
-    /* 使用 Fetch API 提交到 Formspree */
     fetch(form.action, {
       method: 'POST',
       body: new FormData(form),
@@ -329,11 +176,9 @@ footer p{font-size:.85rem;color:var(--footer-text)}
     })
     .then(function (response) {
       if (response.ok) {
-        /* 提交成功：隱藏表單，顯示成功訊息 */
         form.style.display = 'none';
         successBox.style.display = 'block';
       } else {
-        /* 提交失敗：嘗試讀取 Formspree 回傳的錯誤 */
         return response.json().then(function (data) {
           var msgs = [];
           if (data.errors) {
@@ -344,7 +189,6 @@ footer p{font-size:.85rem;color:var(--footer-text)}
       }
     })
     .catch(function (err) {
-      /* 網絡錯誤或 Formspree 錯誤 */
       errorBox.textContent = err.message || '提交失敗，請檢查網絡連線後重試。';
       errorBox.style.display = 'block';
       submitBtn.textContent = originalText;

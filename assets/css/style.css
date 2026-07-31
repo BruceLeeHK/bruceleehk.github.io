@@ -416,27 +416,64 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   background:var(--secondary-color)
 }
 .quote-form-wrapper{
-  max-width:650px;margin:0 auto
+  max-width:680px;margin:0 auto
 }
 .quote-form{
   background:var(--white);
   border-radius:var(--radius);
   padding:40px;box-shadow:var(--shadow-md)
 }
+.form-group{margin-bottom:22px}
+.form-group label{
+  display:block;font-size:1.08rem;font-weight:600;
+  color:var(--text-dark);margin-bottom:8px
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;font-size:17px;
+  font-family:'Microsoft JhengHei','PingFang TC',sans-serif;
+  padding:15px 18px;
+  border:2px solid #dde5d6;border-radius:8px;
+  background:#fff;color:var(--text-dark);
+  min-height:52px;
+  transition:border-color var(--transition),box-shadow var(--transition);
+  -webkit-appearance:none;appearance:none
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--primary-color);outline:none;
+  box-shadow:0 0 0 3px rgba(44,94,26,.15)
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:#aaa;font-size:.95rem}
+.form-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  background-size:12px;
+  padding-right:40px
+}
+.form-group textarea{min-height:140px;resize:vertical;line-height:1.8}
 .form-privacy{
   margin:15px 0 25px;padding:12px 15px;
   background:var(--secondary-color);border-radius:5px;
   font-size:.9rem;color:var(--text-light)
 }
 .form-privacy i{color:var(--primary-color);margin-right:6px}
-.btn-submit{
-  width:100%;padding:14px;
-  background-color:var(--primary-color);color:var(--white);
-  border:none;border-radius:5px;
-  font-size:1.1rem;font-weight:600;cursor:pointer;
-  transition:background var(--transition)
+.form-error{
+  color:#d32f2f;font-size:.95rem;margin-top:8px;display:none
 }
-.btn-submit:hover{background-color:var(--primary-hover)}
+.btn-submit{
+  width:100%;padding:16px;
+  background-color:var(--primary-color);color:var(--white);
+  border:none;border-radius:8px;
+  font-size:1.15rem;font-weight:600;cursor:pointer;
+  transition:background var(--transition),transform .15s
+}
+.btn-submit:hover{background-color:var(--primary-hover);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
 .btn-whatsapp{
   display:inline-flex;align-items:center;gap:8px;
   background-color:#25D366;color:var(--white)!important;
@@ -531,7 +568,10 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   .page-hero{padding:35px 0 20px;margin-top:70px}
   .page-hero h1{font-size:1.6rem}
   .strategy-section .strategy-card{padding:25px}
-  .quote-form{padding:25px}
+  .quote-form{padding:28px}
+  .form-group input,.form-group select,.form-group textarea{padding:15px 16px;font-size:17px;min-height:52px}
+  .form-group textarea{min-height:150px}
+  .btn-submit{padding:16px;font-size:1.15rem;border-radius:8px}
   .blog-list-card{padding:25px}
   .blog-article-card{padding:25px}
   .blog-list-card h2{font-size:1.2rem}
@@ -547,7 +587,13 @@ footer p{font-size:.85rem;color:var(--footer-text)}
   .page-hero{padding:30px 0 15px;margin-top:65px}
   .page-hero h1{font-size:1.4rem}
   .strategy-section .strategy-card{padding:20px}
-  .quote-form{padding:20px}
+  .quote-form-wrapper{max-width:100%}
+  .quote-form{padding:22px}
+  .form-group{margin-bottom:20px}
+  .form-group label{font-size:1.02rem;margin-bottom:7px}
+  .form-group input,.form-group select,.form-group textarea{padding:14px 14px;font-size:17px;min-height:52px;border-radius:6px}
+  .form-group textarea{min-height:160px}
+  .btn-submit{padding:16px;font-size:1.15rem;border-radius:6px}
   .blog-list-card{padding:20px}
   .blog-article-card{padding:20px}
   .blog-list-card h2{font-size:1.1rem}
