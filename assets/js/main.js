@@ -39,26 +39,7 @@
       });
     });
 
-    /* --- Quote Form Handler --- */
-    var quoteForm = document.getElementById('quote-form');
-    if (quoteForm) {
-      quoteForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var formData = new FormData(quoteForm);
-        var name = formData.get('name');
-        var phone = formData.get('phone');
-        var service = formData.get('service-type');
-        var details = formData.get('details');
-
-        var message = '免費估價申請%0A%0A' +
-          '姓名：' + encodeURIComponent(name) + '%0A' +
-          '電話：' + encodeURIComponent(phone) + '%0A' +
-          '服務：' + encodeURIComponent(service) + '%0A' +
-          '詳情：' + encodeURIComponent(details || '無');
-
-        window.open('https://wa.me/85252821552?text=' + message, '_blank');
-      });
-    }
+    /* --- Quote Form: 由 quote 頁面內嵌 Formspree 腳本處理，此處不重複綁定 --- */
 
     /* --- Header Shadow on Scroll --- */
     var header = document.getElementById('site-header');
