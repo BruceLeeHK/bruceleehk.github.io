@@ -1,3 +1,19 @@
-theme: jekyll-theme-minimal
+# 網站基本設定
 title: 滅蟲師傅
 description: 香港專業滅蟲滅鼠服務
+theme: jekyll-theme-minimal
+
+# 網址設定（將 Sitemap 與網站標準網址統一改為不帶 www 的版本）
+url: "https://bruceleehk.com"
+baseurl: ""
+
+# 啟用外掛（GitHub Pages 預設支援，會自動產生正確的 sitemap.xml）
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# 排除不需要編譯的檔案
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
