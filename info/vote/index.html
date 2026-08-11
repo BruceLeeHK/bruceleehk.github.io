@@ -504,18 +504,27 @@ function submitComment(e){
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中……';
 
-  // 發送到 Formspree
+  // 收集表單數據（含 Turnstile Token），發送到 Cloudflare Worker
+  // Worker 會先向 Cloudflare siteverify 覆核 Token
+  // success=true → 轉發至 Formspree（管理員收到郵件通知）
+  // success=false → 拒絕提交（機器人被攔截）
   var form = document.getElementById('commentForm');
   var formData = new FormData(form);
-  formData.append('_subject', '[滅蟲師傅] 投票頁新留言 — 需審核');
 
-  fetch('https://formspree.io/f/xlgyylke', {
+  // ⚠️ 部署 Worker 後，將下面嘅 URL 替換為你嘅 Worker URL
+  // 例如：https://comment-worker.your-subdomain.workers.dev
+  var WORKER_URL = 'https://comment-worker.bruceleehk.workers.dev';
+
+  fetch(WORKER_URL, {
     method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
+    body: formData
   }).then(function(res){
-    if(res.ok){
-      showToast('留言已提交！首次留言需審核，通過後即可公開顯示。');
+    return res.json().then(function(data){
+      return { ok: res.ok, data: data };
+    });
+  }).then(function(result){
+    if(result.ok && result.data.success){
+      showToast(result.data.message || '留言已提交！首次留言需審核，通過後即可公開顯示。');
       // 即時顯示「待審核」預覽
       var item = document.createElement('div');
       item.className = 'comment-item';
@@ -528,7 +537,12 @@ function submitComment(e){
       // 重置 Turnstile
       if(window.turnstile){ turnstile.reset('.cf-turnstile'); }
     } else {
-      showToast('提交失敗，請稍後再試');
+      // 安全驗證失敗或提交出錯
+      var errMsg = result.data.error || '提交失敗，請稍後再試';
+      if(result.data.code === 'TURNSTILE_FAILED'){
+        errMsg = '安全驗證失敗，請刷新頁面後重新提交';
+      }
+      showToast(errMsg);
     }
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
