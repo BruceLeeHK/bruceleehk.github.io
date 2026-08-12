@@ -1,6 +1,10 @@
 /**
  * Cloudflare Worker — 滅蟲師傅留言系統後端
  * 
+ * ⚠️ 此 Worker 為備用方案（方案 A）。目前主要使用 Web3Forms（方案 B）。
+ *    Web3Forms 免費、內建 Turnstile 驗證、支援圖片上傳，無需部署 Worker。
+ *    如需改用此 Worker，請更新 vote/index.html 嘅提交邏輯。
+ * 
  * 架構：
  *   前端（vote 頁面）→ POST 此 Worker（含 Turnstile Token + 留言數據）
  *   → Worker 向 Cloudflare siteverify API 覆核 Token
