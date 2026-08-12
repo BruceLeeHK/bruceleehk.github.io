@@ -359,7 +359,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
           </div>
           <div class="form-row">
             <label>上傳蟲害照片 <span class="optional">（選填）</span></label>
-            <input type="file" id="commentImage" accept="image/jpeg,image/png,image/webp" style="padding:8px">
+            <input type="file" id="commentImage" name="attachment" accept="image/jpeg,image/png,image/webp" style="padding:8px">
             <div id="imagePreviewWrap" style="display:none;margin-top:8px;position:relative">
               <img id="imagePreview" style="max-height:120px;border-radius:6px;border:1px solid #ddd">
               <button type="button" id="removeImage" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:22px">✕</button>
@@ -553,8 +553,8 @@ function showToast(msg){
  *   無需 Worker、無需 Pro、無需 Secret Key
  */
 
-var WEB3FORMS_API = 'https://api.web3forms.com/submit';
-var IMGBB_API     = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+const WEB3FORMS_API = 'https://api.web3forms.com/submit';
+const IMGBB_API     = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
 
 /* ── Turnstile 回調：驗證完成 → 啓用提交按鈕 ── */
 function onTurnstileReady(token){
@@ -626,28 +626,31 @@ function compressImage(file, maxPx, quality, maxSize){
   });
 }
 
-/* ── 上傳圖片到 imgbb → 返回公開 URL ── */
-function uploadToImgbb(file){
+/* ── 上傳圖片到 imgbb → 返回公開 URL（async/await） ── */
+async function uploadToImgbb(file){
   var fd = new FormData();
   fd.append('image', file);
   fd.append('expiration', '15552000'); /* 6 個月有效期 */
 
-  return fetch(IMGBB_API, { method:'POST', body:fd })
-    .then(function(r){ return r.json(); })
-    .then(function(result){
-      if(result.success && result.data && result.data.url){
-        return result.data.url;
-      }
-      throw new Error(result.error?.message || 'imgbb 上傳失敗');
-    });
+  try {
+    var response = await fetch(IMGBB_API, { method: 'POST', body: fd });
+    var result   = await response.json();
+    if(result.success && result.data && result.data.url){
+      return result.data.url;
+    }
+    throw new Error((result.error && result.error.message) || 'imgbb 上傳失敗');
+  } catch(err) {
+    throw err;
+  }
 }
 
-/* ── 提交留言 ── */
-function submitComment(e){
+/* ── 提交留言（async/await） ── */
+async function submitComment(e){
   e.preventDefault();
+
   var nickname = document.getElementById('nickname').value.trim();
   var text     = document.getElementById('commentText').value.trim();
-  if(!nickname||!text){ showToast('請填寫暱稱同留言內容'); return false; }
+  if(!nickname || !text){ showToast('請填寫暱稱同留言內容'); return false; }
 
   /* Honeypot：被填入 = 機器人，靜默攔截 */
   if(document.getElementById('botcheck').value){
@@ -659,60 +662,56 @@ function submitComment(e){
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中……';
 
+  var imageUrl = '';
   var imageFile = document.getElementById('commentImage').files[0];
 
   /* Step 1：如有圖片 → 壓縮 → 上傳 imgbb → 攞 URL */
-  var imagePromise;
   if(imageFile){
-    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳圖片中……';
-    imagePromise = compressImage(imageFile, 1200, 0.75, 1.5*1024*1024)
-      .then(function(compressed){ return uploadToImgbb(compressed); })
-      .then(function(url){ return url; })
-      .catch(function(){
-        showToast('圖片上傳失敗，請稍後再試或移除圖片後提交');
-        resetBtn(btn);
-        return null; /* null = 繼續提交但冇圖 */
-      });
-  } else {
-    imagePromise = Promise.resolve(null);
+    try {
+      btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳圖片中……';
+      var compressed = await compressImage(imageFile, 1200, 0.75, 1.5*1024*1024);
+      imageUrl = await uploadToImgbb(compressed);
+    } catch(err) {
+      showToast('圖片上傳失敗，請稍後再試或移除圖片後提交');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+      /* 圖片上傳失敗但仍可繼續提交純文字留言，imageUrl 保持空字串 */
+    }
   }
 
   /* Step 2：組裝 FormData → POST Web3Forms */
-  imagePromise.then(function(imageUrl){
-    if(imageUrl === undefined) return; /* resetBtn 已叫，跳過 */
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交留言中……';
 
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交留言中……';
+  var formData = new FormData(document.getElementById('commentForm'));
 
-    /* FormData 收集 <form> 內所有欄位 */
-    var formData = new FormData(document.getElementById('commentForm'));
+  /* 移除檔案欄位（避免觸發 Web3Forms Pro 限制） */
+  formData.delete('attachment');
 
-    /* 移除檔案欄位（如有）→ 唔觸發 Web3Forms Pro 限制 */
-    formData.delete('attachment');
+  /* 如有圖片 URL → 以純文字加入 */
+  if(imageUrl){
+    formData.append('photo_url', imageUrl);
+    /* 將圖片連結附加喺留言內容之後，方便管理員喺郵件直接睇 */
+    var originalMsg = formData.get('comment') || text;
+    formData.set('message', originalMsg + '\n\n📷 蟲害照片：' + imageUrl);
+  }
 
-    /* 如有圖片 URL → 以純文字加入 */
-    if(imageUrl){
-      formData.append('photo_url', imageUrl);
-      /* 將圖片連結附加喺留言內容之後，方便管理員喺郵件直接睇 */
-      var originalMsg = formData.get('comment') || text;
-      formData.set('message', originalMsg + '\n\n📷 蟲害照片：' + imageUrl);
+  /* POST → Web3Forms */
+  try {
+    var response = await fetch(WEB3FORMS_API, { method: 'POST', body: formData });
+    var result   = await response.json();
+
+    if(result.success){
+      onSuccess(nickname, text);
+    } else {
+      showToast('提交失敗：' + (result.message || '請稍後再試'));
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
     }
-
-    /* POST → Web3Forms */
-    fetch(WEB3FORMS_API, { method:'POST', body:formData })
-      .then(function(r){ return r.json(); })
-      .then(function(result){
-        if(result.success){
-          onSuccess(nickname, text);
-        } else {
-          showToast('提交失敗：' + (result.message || '請稍後再試'));
-          resetBtn(btn);
-        }
-      })
-      .catch(function(){
-        showToast('網絡錯誤，請檢查連線後再試');
-        resetBtn(btn);
-      });
-  });
+  } catch(err) {
+    showToast('網絡錯誤，請檢查連線後再試');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+  }
 
   return false;
 }
@@ -738,15 +737,9 @@ function onSuccess(nickname, text){
   if(window.turnstile){ try{ turnstile.reset('.cf-turnstile'); }catch(e){} }
 }
 
-/* ── 重置提交按鈕（提交失敗時用） ── */
-function resetBtn(btn){
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-}
-
 /* ── 綁定表單提交 ── */
 document.getElementById('commentForm').addEventListener('submit', submitComment);
-</script></script>
+</script>
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
 <script type="application/ld+json">
