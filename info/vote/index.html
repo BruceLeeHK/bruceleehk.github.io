@@ -13,7 +13,7 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-  <!-- Turnstile 已由 Cusdis 留言系統取代，無需再載入 -->
+  <!-- 自建原生留言系統：Cloudflare Worker + D1 + ImgBB -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--primary:#2c5e1a;--primary-hover:#1e4210;--primary-light:#f4f9f0;--text-dark:#333;--text-light:#666;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.1);--radius:8px;--transition:.3s ease;--max-width:1200px}
@@ -83,30 +83,58 @@ header{background:var(--white);box-shadow:var(--shadow);position:fixed;width:100
 .pest-detail-panel p{line-height:1.8;margin-bottom:10px}
 .pest-detail-panel .btn-cta{display:inline-block;background:var(--primary);color:#fff!important;padding:10px 24px;border-radius:5px;font-weight:600;font-size:.95rem;transition:transform .2s}
 .pest-detail-panel .btn-cta:hover{transform:translateY(-2px)}
-/* Comment Section — 獨立擴寬卡片 */
+/* Comment Section — 自建原生留言區 */
 .comment-outer-wrap{max-width:1000px;margin:40px auto 20px auto;padding:0 10px}
 .comment-card{background:#ffffff;border-radius:16px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.08);border:1px solid #e2e8f0}
 .comment-card h2{font-size:1.5rem;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:10px}
 .comment-card .sub-desc{color:#64748b;font-size:.95rem;margin-bottom:20px;line-height:1.7}
 .moderation-notice{background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:20px;font-size:.88rem;color:#5d4037;line-height:1.6}
-/* ── ImgBB 上傳元件 ── */
-.upload-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:12px;padding:18px;margin-bottom:20px}
-.upload-box .upload-label{font-weight:bold;color:#334155;margin-bottom:10px;font-size:.95rem;display:flex;align-items:center;gap:8px}
-.upload-box .upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.upload-box input[type="file"]{font-size:.9rem}
-.btn-upload-img{display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff!important;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:.88rem;transition:all .2s;white-space:nowrap}
+/* ── 留言表單 ── */
+.comment-form{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-weight:600;color:#334155;margin-bottom:6px;font-size:.9rem}
+.form-group label .required{color:#d32f2f;margin-left:2px}
+.form-input{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:.95rem;font-family:inherit;transition:border-color .2s,box-shadow .2s;background:#fff;color:#1e293b}
+.form-input:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.15);outline:none}
+.form-input::placeholder{color:#94a3b8}
+textarea.form-input{resize:vertical;min-height:90px}
+.char-counter{text-align:right;font-size:.75rem;color:#94a3b8;margin-top:4px}
+.char-counter.warn{color:#d32f2f}
+/* ── 圖片上傳區 ── */
+.upload-area{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:10px;padding:16px;margin-bottom:14px;transition:border-color .2s}
+.upload-area:hover{border-color:#0284c7}
+.upload-area .upload-hint{font-size:.85rem;color:#64748b;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.upload-area .upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.upload-area input[type="file"]{font-size:.88rem}
+.btn-upload-img{display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff!important;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem;transition:all .2s;white-space:nowrap}
 .btn-upload-img:hover{background:#0369a1}
 .btn-upload-img:disabled{background:#94a3b8;cursor:not-allowed}
-.upload-success{display:none;margin-top:12px;background:#f0fdf4;border:1px solid #bbf7d0;padding:12px;border-radius:8px}
-.upload-success .success-msg{color:#166534;font-size:.88rem;margin-bottom:8px;font-weight:600;display:flex;align-items:center;gap:6px}
-.upload-success .result-row{display:flex;gap:8px;align-items:stretch}
-.upload-success .img-preview{max-height:80px;border-radius:6px;border:1px solid #ddd;object-fit:contain;margin-bottom:8px}
-.img-code-field{flex:1;padding:6px 10px;border:1px solid #cbd5e1;border-radius:4px;background:#fff;font-size:.85rem;font-family:monospace;color:#333}
-.btn-copy-code{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#166534;color:#fff!important;border:none;border-radius:4px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;white-space:nowrap}
-.btn-copy-code:hover{background:#15803d}
-.btn-copy-code.copied{background:#22c55e}
-/* Cusdis iframe 適配 */
-#cusdis_thread iframe{width:100%!important;min-height:500px}
+.img-preview-wrap{margin-top:10px;display:none}
+.img-preview-wrap img{max-height:120px;border-radius:8px;border:1px solid #e2e8f0;object-fit:contain}
+.img-preview-wrap .remove-img{display:inline-flex;align-items:center;gap:4px;margin-left:10px;color:#d32f2f;font-size:.82rem;font-weight:600;cursor:pointer;background:none;border:none;padding:4px 8px;border-radius:4px;transition:background .2s}
+.img-preview-wrap .remove-img:hover{background:#fef2f2}
+/* ── 提交按鈕 ── */
+.btn-submit-comment{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff!important;border:none;padding:12px 28px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;width:100%;justify-content:center}
+.btn-submit-comment:hover{background:var(--primary-hover);transform:translateY(-1px)}
+.btn-submit-comment:disabled{background:#94a3b8;cursor:not-allowed;transform:none}
+/* ── 留言列表 ── */
+.comment-list-header{font-size:1.1rem;font-weight:600;color:#0f172a;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e2e8f0;display:flex;align-items:center;gap:8px}
+.comment-list-header .comment-count{background:var(--primary);color:#fff;font-size:.78rem;padding:2px 8px;border-radius:10px;font-weight:700}
+.comment-item{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:12px;transition:box-shadow .2s}
+.comment-item:hover{box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.comment-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.comment-nickname{font-weight:600;color:var(--primary);font-size:.95rem}
+.comment-time{font-size:.78rem;color:#94a3b8}
+.comment-body{font-size:.92rem;line-height:1.7;color:#334155;white-space:pre-wrap;word-break:break-word}
+.comment-image{margin-top:10px}
+.comment-image img{max-width:100%;max-height:400px;border-radius:8px;border:1px solid #e2e8f0;object-fit:contain;cursor:pointer;transition:transform .2s}
+.comment-image img:hover{transform:scale(1.02)}
+.no-comments{text-align:center;padding:30px;color:#94a3b8;font-size:.92rem}
+.no-comments i{font-size:2rem;display:block;margin-bottom:8px}
+/* 圖片燈箱 */
+.lightbox-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:10000;cursor:pointer;align-items:center;justify-content:center}
+.lightbox-overlay.active{display:flex}
+.lightbox-overlay img{max-width:90%;max-height:90%;border-radius:8px;object-fit:contain}
 /* CTA Box */
 .blog-cta-box{background:linear-gradient(135deg,var(--primary),#3a7a22);color:var(--white);border-radius:var(--radius);padding:28px 32px;margin:32px auto;max-width:900px;text-align:center}
 .blog-cta-box h4{color:var(--white);font-size:1.15rem;margin-bottom:8px}
@@ -125,7 +153,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 /* Responsive */
 @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.#dify-chatbot-bubble-button{display:block}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}.pest-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.pest-card{padding:12px}.vote-intro{padding:20px 16px}}}
 @media(max-width:480px){.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}.pest-grid{grid-template-columns:1fr 1fr;gap:8px}.result-item{flex-wrap:wrap;gap:8px}.result-bar-wrap{order:4;flex-basis:100%}}
-@media(max-width:600px){.upload-box .upload-row{flex-direction:column;align-items:flex-start}.upload-success .result-row{flex-direction:column}.img-code-field{font-size:.75rem}.comment-card{padding:18px 16px}}
+@media(max-width:600px){.upload-area .upload-row{flex-direction:column;align-items:flex-start}.comment-card{padding:18px 16px}.comment-form{padding:14px}.btn-submit-comment{font-size:.9rem}}
 
 </style>
 </head>
@@ -335,57 +363,73 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <a href="https://wa.me/85252821552" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
-      <!-- ========== 苦主經驗分享區（獨立擴寬卡片排版） ========== -->
+      <!-- ========== 苦主經驗分享區（自建原生留言 + ImgBB + Worker） ========== -->
       <div class="comment-outer-wrap">
         <div class="comment-card">
           <h2>
             <i class="fas fa-comments" style="color:#d32f2f;"></i> 苦主經驗分享與討論
           </h2>
-          <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可互相回覆討論。</p>
+          <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。</p>
 
           <div class="moderation-notice">
             <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。
           </div>
 
-          <!-- ── ImgBB 免費上傳按鈕 ── -->
-          <div class="upload-box">
-            <div class="upload-label">
-              <i class="fas fa-camera" style="color:#0284c7;"></i> 上傳蟲害照片（選填）：
-            </div>
-            <div class="upload-row">
-              <input type="file" id="imgbbFileInput" accept="image/jpeg,image/png,image/webp">
-              <button type="button" id="btnUploadImg" class="btn-upload-img" onclick="uploadPhoto()">
-                <i class="fas fa-cloud-upload-alt"></i> 上傳照片
-              </button>
+          <!-- ── 留言表單 ── -->
+          <div class="comment-form" id="commentForm">
+            <div class="form-group">
+              <label for="inputNickname">暱稱 <span class="required">*</span></label>
+              <input type="text" id="inputNickname" class="form-input" placeholder="例如：陳太、九龍城街坊" maxlength="30" autocomplete="off">
             </div>
 
-            <!-- 上傳成功結果 -->
-            <div id="uploadSuccess" class="upload-success">
-              <div class="success-msg">
-                <i class="fas fa-check-circle"></i> 上傳成功！請撳「複製圖片碼」，再貼到下方留言框：
+            <div class="form-group">
+              <label for="inputContent">留言內容 <span class="required">*</span></label>
+              <textarea id="inputContent" class="form-input" placeholder="分享你嘅害蟲遭遇、求助經驗或防蟲心得…" maxlength="2000" rows="4"></textarea>
+              <div class="char-counter" id="charCounter">0 / 2000</div>
+            </div>
+
+            <!-- ── 圖片上傳區（選填） ── -->
+            <div class="upload-area">
+              <div class="upload-hint">
+                <i class="fas fa-camera" style="color:#0284c7;"></i> 上傳蟲害照片（選填，支援 JPG / PNG / WebP，最大 4MB）
               </div>
-              <img id="imgPreview" class="img-preview" alt="預覽" style="display:none;">
-              <div class="result-row">
-                <input type="text" id="imgCodeField" class="img-code-field" readonly>
-                <button type="button" id="btnCopyCode" class="btn-copy-code" onclick="copyPhotoCode()">
-                  <i class="fas fa-copy"></i> 複製圖片碼
+              <div class="upload-row">
+                <input type="file" id="imgbbFileInput" accept="image/jpeg,image/png,image/webp">
+                <button type="button" id="btnUploadImg" class="btn-upload-img" onclick="uploadAndPreview()">
+                  <i class="fas fa-cloud-upload-alt"></i> 上傳照片
+                </button>
+              </div>
+              <div class="img-preview-wrap" id="imgPreviewWrap">
+                <img id="imgPreview" alt="預覽">
+                <button type="button" class="remove-img" onclick="removeImage()">
+                  <i class="fas fa-times"></i> 移除
                 </button>
               </div>
             </div>
+
+            <button type="button" id="btnSubmitComment" class="btn-submit-comment" onclick="submitComment()">
+              <i class="fas fa-paper-plane"></i> 提交留言
+            </button>
           </div>
 
-          <!-- ── Cusdis 留言區（data-lang="zh-tw" 中文化） ── -->
-          <div id="cusdis_thread"
-            data-host="https://cusdis.com"
-            data-app-id="0df347a4-18b9-46c5-a3c3-d8f752a69b63"
-            data-page-id="vote-page-2026"
-            data-page-url="https://bruceleehk.com/info/vote/"
-            data-page-title="2026年港人最厭惡嘅10大害蟲 — 全民票選"
-            data-theme="light"
-            data-lang="zh-tw"
-          ></div>
-          <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+          <!-- ── 留言列表 ── -->
+          <div class="comment-list-header">
+            <i class="fas fa-stream"></i> 留言紀錄
+            <span class="comment-count" id="commentCount">0</span>
+          </div>
+          <div id="commentList">
+            <div class="no-comments" id="noComments">
+              <i class="far fa-comment-dots"></i>
+              暫時未有留言，成為第一個分享經驗嘅人啦！
+            </div>
+          </div>
+
         </div>
+      </div>
+
+      <!-- 圖片燈箱 -->
+      <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" alt="大圖">
       </div>
 
     </div>
@@ -528,16 +572,21 @@ function showToast(msg){
 </script>
 
 
-<!-- ========== ImgBB 上傳元件 JS ========== -->
+<!-- ========== 自建原生留言系統 JS ========== -->
 <script>
-var IMGBB_API = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+/* ===== 設定 ===== */
+var WORKER_API  = 'https://comment-handler.bruceleehk.workers.dev/api/comments';
+var IMGBB_API   = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+var PAGE_ID     = 'vote-page-2026';
 
-/* 上傳照片到 ImgBB */
-async function uploadPhoto() {
+/* 上傳後嘅圖片資料（全頁面共用） */
+var uploadedImage = { url: '', thumb: '' };
+
+/* ===== 圖片上傳 + 預覽 ===== */
+async function uploadAndPreview() {
   var fileInput  = document.getElementById('imgbbFileInput');
   var btn        = document.getElementById('btnUploadImg');
-  var resultBox  = document.getElementById('uploadSuccess');
-  var codeField  = document.getElementById('imgCodeField');
+  var previewWrap= document.getElementById('imgPreviewWrap');
   var preview    = document.getElementById('imgPreview');
 
   if (!fileInput.files || fileInput.files.length === 0) {
@@ -547,7 +596,7 @@ async function uploadPhoto() {
 
   var file = fileInput.files[0];
 
-  /* 安全驗證：格式 + 大小 */
+  /* 格式 + 大小驗證 */
   if (!/^image\/(jpeg|png|webp)$/.test(file.type)) {
     showToast('只支援 JPG、PNG、WebP 格式');
     fileInput.value = '';
@@ -559,10 +608,9 @@ async function uploadPhoto() {
     return;
   }
 
-  /* 顯示上傳中狀態 */
+  /* 顯示上傳中 */
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 上傳中…';
-  resultBox.style.display = 'none';
 
   try {
     /* 壓縮（超過 1.5MB → 縮至 1200px / JPEG 75%） */
@@ -580,24 +628,20 @@ async function uploadPhoto() {
     var result = await res.json();
 
     if (result.success && result.data && result.data.url) {
-      var imageUrl = result.data.url;
-      var thumbUrl = (result.data.thumb && result.data.thumb.url) || imageUrl;
+      uploadedImage.url   = result.data.url;
+      uploadedImage.thumb = (result.data.thumb && result.data.thumb.url) || result.data.url;
 
-      /* 產生 Markdown 圖片碼，Cusdis 可直接顯示 */
-      var mdCode = '![' + file.name.replace(/[^\w\u4e00-\u9fff.\-]/g, '_') + '](' + imageUrl + ')';
-
-      /* 顯示預覽同結果 */
-      preview.src = thumbUrl;
-      preview.style.display = 'block';
-      codeField.value = mdCode;
-      resultBox.style.display = 'block';
-
-      showToast('圖片上傳成功！撳「複製」貼到留言就得');
+      /* 顯示預覽 */
+      preview.src = uploadedImage.thumb;
+      previewWrap.style.display = 'flex';
+      showToast('圖片上傳成功！提交留言時會自動附加照片');
     } else {
       throw new Error((result.error && result.error.message) || '上傳失敗');
     }
   } catch (err) {
     showToast('圖片上傳失敗，請稍後再試');
+    uploadedImage.url = '';
+    uploadedImage.thumb = '';
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳照片';
@@ -605,33 +649,199 @@ async function uploadPhoto() {
   }
 }
 
-/* 一鍵複製圖片碼 */
-function copyPhotoCode() {
-  var codeField = document.getElementById('imgCodeField');
-  var btn       = document.getElementById('btnCopyCode');
-  var text      = codeField.value;
-  if (!text) return;
+/* 移除已上傳圖片 */
+function removeImage() {
+  uploadedImage.url = '';
+  uploadedImage.thumb = '';
+  document.getElementById('imgPreviewWrap').style.display = 'none';
+  document.getElementById('imgPreview').src = '';
+}
 
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function(){ onCopied(); });
-  } else {
-    codeField.select();
-    document.execCommand('copy');
-    onCopied();
+/* ===== 提交留言 ===== */
+async function submitComment() {
+  var nickname   = document.getElementById('inputNickname').value.trim();
+  var content    = document.getElementById('inputContent').value.trim();
+  var btn        = document.getElementById('btnSubmitComment');
+
+  /* 驗證 */
+  if (!nickname) {
+    showToast('請輸入暱稱');
+    document.getElementById('inputNickname').focus();
+    return;
+  }
+  if (nickname.length > 30) {
+    showToast('暱稱最長 30 字');
+    return;
+  }
+  if (!content) {
+    showToast('請輸入留言內容');
+    document.getElementById('inputContent').focus();
+    return;
+  }
+  if (content.length > 2000) {
+    showToast('留言最長 2000 字');
+    return;
   }
 
-  function onCopied() {
-    btn.innerHTML = '<i class="fas fa-check"></i> 已複製';
-    btn.classList.add('copied');
-    showToast('已複製！貼到下方留言框即可附加照片');
-    setTimeout(function(){
-      btn.innerHTML = '<i class="fas fa-copy"></i> 複製圖片碼';
-      btn.classList.remove('copied');
-    }, 3000);
+  /* 禁用按鈕 */
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中…';
+
+  try {
+    var payload = {
+      page_id:   PAGE_ID,
+      nickname:  nickname,
+      content:   content,
+      image_url: uploadedImage.url,
+      thumb_url: uploadedImage.thumb
+    };
+
+    var res  = await fetch(WORKER_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    var data = await res.json();
+
+    if (data.success) {
+      showToast(data.message || '留言已提交！需經審核後公開顯示');
+
+      /* 清空表單 */
+      document.getElementById('inputNickname').value = '';
+      document.getElementById('inputContent').value = '';
+      document.getElementById('charCounter').textContent = '0 / 2000';
+      removeImage();
+
+      /* 重新載入留言列表 */
+      loadComments();
+    } else {
+      showToast(data.error || '提交失敗，請稍後再試');
+    }
+  } catch (err) {
+    showToast('網絡連線失敗，請稍後再試');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
   }
 }
 
-/* 壓縮函數（供 ImgBB 上傳用） */
+/* ===== 載入留言列表 ===== */
+async function loadComments() {
+  var listEl    = document.getElementById('commentList');
+  var countEl   = document.getElementById('commentCount');
+  var noComment = document.getElementById('noComments');
+
+  try {
+    var res  = await fetch(WORKER_API + '?page_id=' + PAGE_ID + '&limit=50');
+    var data = await res.json();
+
+    if (!data.success || !data.comments || data.comments.length === 0) {
+      countEl.textContent = '0';
+      if (noComment) noComment.style.display = 'block';
+      return;
+    }
+
+    var comments = data.comments;
+    countEl.textContent = comments.length;
+    if (noComment) noComment.style.display = 'none';
+
+    /* 構建 HTML */
+    var html = '';
+    for (var i = 0; i < comments.length; i++) {
+      var c = comments[i];
+      var timeStr = formatTime(c.created_at);
+
+      html += '<div class="comment-item">';
+      html += '  <div class="comment-meta">';
+      html += '    <span class="comment-nickname">' + escHtml(c.nickname) + '</span>';
+      html += '    <span class="comment-time">' + timeStr + '</span>';
+      html += '  </div>';
+      html += '  <div class="comment-body">' + escHtml(c.content) + '</div>';
+
+      if (c.image_url) {
+        html += '  <div class="comment-image">';
+        html += '    <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" onclick="openLightbox(\'' + escAttr(c.image_url) + '\')">';
+        html += '  </div>';
+      }
+
+      html += '</div>';
+    }
+
+    listEl.innerHTML = html;
+
+  } catch (err) {
+    /* 靜默失敗，唔影響頁面其他功能 */
+    console.warn('載入留言失敗:', err.message);
+  }
+}
+
+/* ===== 字數統計 ===== */
+document.getElementById('inputContent').addEventListener('input', function() {
+  var len = this.value.length;
+  var counter = document.getElementById('charCounter');
+  counter.textContent = len + ' / 2000';
+  counter.className = 'char-counter' + (len > 1800 ? ' warn' : '');
+});
+
+/* ===== 圖片燈箱 ===== */
+function openLightbox(url) {
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lightboxImg').src = '';
+}
+
+/* 鍵盤關閉 */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+/* ===== 工具函數 ===== */
+
+/** HTML 跳脫 */
+function escHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/** 屬性跳脫 */
+function escAttr(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/** 時間格式化 */
+function formatTime(isoStr) {
+  if (!isoStr) return '';
+  try {
+    var d = new Date(isoStr.replace(' ', 'T'));
+    if (isNaN(d.getTime())) return isoStr;
+    var now = new Date();
+    var diffMs = now - d;
+    var diffMin = Math.floor(diffMs / 60000);
+
+    if (diffMin < 1) return '剛剛';
+    if (diffMin < 60) return diffMin + ' 分鐘前';
+    var diffHr = Math.floor(diffMin / 60);
+    if (diffHr < 24) return diffHr + ' 小時前';
+    var diffDay = Math.floor(diffHr / 24);
+    if (diffDay < 7) return diffDay + ' 日前';
+
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0') + ' ' +
+      String(d.getHours()).padStart(2, '0') + ':' +
+      String(d.getMinutes()).padStart(2, '0');
+  } catch {
+    return isoStr;
+  }
+}
+
+/** 壓縮函數（供 ImgBB 上傳用） */
 function compressForImgbb(file, maxPx, quality) {
   return new Promise(function(resolve) {
     var img = new Image();
@@ -651,6 +861,9 @@ function compressForImgbb(file, maxPx, quality) {
     img.src = URL.createObjectURL(file);
   });
 }
+
+/* ===== 初始化：載入留言 ===== */
+loadComments();
 </script>
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
