@@ -359,7 +359,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
           </div>
           <div class="form-row">
             <label>上傳蟲害照片 <span class="optional">（選填）</span></label>
-            <input type="file" id="commentImage" name="attachment" accept="image/jpeg,image/png,image/webp" style="padding:8px">
+            <input type="file" id="commentImage" accept="image/jpeg,image/png,image/webp" style="padding:8px">
             <div id="imagePreviewWrap" style="display:none;margin-top:8px;position:relative">
               <img id="imagePreview" style="max-height:120px;border-radius:6px;border:1px solid #ddd">
               <button type="button" id="removeImage" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:22px">✕</button>
@@ -629,7 +629,7 @@ function compressImage(file, maxPx, quality, maxSize){
 /* ── 上傳圖片到 imgbb → 返回公開 URL（async/await） ── */
 async function uploadToImgbb(file){
   var fd = new FormData();
-  fd.append('image', file);
+  fd.append('image', file, file.name || 'image.jpg'); /* 附帶檔名確保 imgbb 識別格式 */
   fd.append('expiration', '15552000'); /* 6 個月有效期 */
 
   try {
@@ -684,8 +684,7 @@ async function submitComment(e){
 
   var formData = new FormData(document.getElementById('commentForm'));
 
-  /* 移除檔案欄位（避免觸發 Web3Forms Pro 限制） */
-  formData.delete('attachment');
+  /* file input 無 name 屬性 → FormData 自動不包含檔案，無需 delete */
 
   /* 如有圖片 URL → 以純文字加入 */
   if(imageUrl){
