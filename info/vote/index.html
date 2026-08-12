@@ -13,8 +13,7 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-  <!-- Cloudflare Turnstile 驗證腳本（喺 head 載入，確保表單渲染時已就緒） -->
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <!-- Turnstile 已由 Cusdis 留言系統取代，無需再載入 -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--primary:#2c5e1a;--primary-hover:#1e4210;--primary-light:#f4f9f0;--text-dark:#333;--text-light:#666;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.1);--radius:8px;--transition:.3s ease;--max-width:1200px}
@@ -333,72 +332,13 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <a href="https://wa.me/85252821552" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
-      <!-- ========== 留言區（UGC） ========== -->
+      <!-- ========== 苦主經驗分享留言區（Cusdis） ========== -->
       <div class="comment-section">
         <h3><i class="fas fa-comments"></i> 苦主經驗分享</h3>
 
         <div class="moderation-notice">
-          <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。電郵僅供系統通知回覆之用，不會公開顯示。
+          <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。
         </div>
-
-        <form class="comment-form" id="commentForm">
-          <div class="form-row">
-            <label for="nickname">暱稱 <span style="color:#c62828">*</span></label>
-            <input type="text" id="nickname" name="nickname" placeholder="匿名苦主、滅蟲小專家、或者自訂暱稱" maxlength="30" required>
-            <div class="hint">預設可填「匿名苦主」或任何你鍾意嘅稱呼</div>
-          </div>
-          <div class="form-row">
-            <label for="commentText">留言內容 <span style="color:#c62828">*</span></label>
-            <textarea id="commentText" name="comment" rows="4" placeholder="分享你嘅苦主經歷，例如：屋企有床蝨咬到好癢、白蟻蛀穿地板點算……" maxlength="500" required oninput="updateCharCount()"></textarea>
-            <div class="char-count"><span id="charCount">0</span>/500</div>
-          </div>
-          <div class="form-row">
-            <label for="commentEmail">電郵 <span class="optional">（選填）</span></label>
-            <input type="email" id="commentEmail" name="email" placeholder="your@email.com — 僅供系統通知有專家回覆你">
-            <div class="hint">不會公開顯示，僅供回覆通知</div>
-          </div>
-          <div class="form-row">
-            <label>上傳蟲害照片 <span class="optional">（選填）</span></label>
-            <input type="file" id="commentImage" accept="image/jpeg,image/png,image/webp" style="padding:8px">
-            <div id="imagePreviewWrap" style="display:none;margin-top:8px;position:relative">
-              <img id="imagePreview" style="max-height:120px;border-radius:6px;border:1px solid #ddd">
-              <button type="button" id="removeImage" style="position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:22px">✕</button>
-            </div>
-            <div class="hint">支援 JPG/PNG/WebP，最大 4MB，讓網友直擊你嘅蟲患情況</div>
-          </div>
-          <!-- Web3Forms Access Key -->
-          <input type="hidden" name="access_key" value="82a6d28c-7335-464f-82d3-ccaf99425def">
-          <input type="hidden" name="subject" value="[滅蟲師傅] 投票頁新留言 — 需審核">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <!-- Cloudflare Turnstile（免費前端驗證，完成後啓用提交按鈕） -->
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAENKg40O2PKrvqKN" data-callback="onTurnstileReady" data-action="comment" data-theme="light"></div>
-          <!-- Honeypot 防垃圾（機器人會填入，正常用戶留空） -->
-          <input type="text" name="botcheck" id="botcheck" style="display:none!important" tabindex="-1" autocomplete="off">
-          <button type="submit" class="btn-submit" id="btnSubmitComment" disabled><i class="fas fa-shield-halved"></i> 等待驗證…</button>
-        </form>
-
-        <div class="comment-list" id="commentList">
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-nickname">匿名苦主</span>
-              <span class="comment-time">2026年8月</span>
-            </div>
-            <div class="comment-body">床蝨真係最恐怖！搬入新屋兩個月就中招，每晚被咬到瞓唔到，搵咗好多次滅蟲公司先搞掂，建議大家一發現就即刻搵專業處理，唔好自己噴殺蟲水！</div>
-          </div>
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-nickname">滅蟲小專家</span>
-              <span class="comment-time">2026年8月</span>
-            </div>
-            <div class="comment-body">白蟻係「無聲殺手」，發現嗰陣通常已經蛀穿咗地板或者門框，維修費動輒過萬。大家留意牆身有冇泥路或者脫漆，嗰啲就係白蟻入侵跡象！</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== 苦主經驗分享留言區（Cusdis） ========== -->
-      <section style="margin-top: 40px; padding: 20px; background: #fff; border-radius: 8px;">
-        <h3 style="margin-bottom: 15px;"><i class="fas fa-comments"></i> 苦主經驗分享</h3>
 
         <div id="cusdis_thread"
           data-host="https://cusdis.com"
@@ -410,7 +350,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         ></div>
 
         <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-      </section>
+      </div>
 
     </div>
   </section>
@@ -549,231 +489,6 @@ function showToast(msg){
     renderResults();
   }
 })();
-</script>
-
-<!-- ========== 留言系統 JS ========== -->
-<script>
-/*
- * 留言提交流程（全免費、零後端）：
- *
- *   前端防護（雙重）：
- *     ① Cloudflare Turnstile → 靜默驗證真人，機器人無法通過
- *     ② Honeypot 隱藏欄位 → 攔截殘漏嘅自動填表機器人
- *
- *   圖片處理（Web3Forms 免費版唔支援附件 → 先上傳 imgbb 再傳 URL）：
- *     1. 用戶揀圖 → 壓縮（如超過 1.5MB）
- *     2. POST 圖片到 imgbb.com（免費圖床）→ 攞到公開 URL
- *     3. 移除 FormData 中嘅檔案欄位 → 改加 photo_url 純文字
- *     4. POST 到 Web3Forms → 管理員郵件收到可點擊嘅圖片連結
- *
- *   無需 Worker、無需 Pro、無需 Secret Key
- */
-
-/*
- * 表單提交架構（Spin canonical siteverify）：
- *   前端 → imgbb 上傳圖片 → POST Worker（含 cf-turnstile-response）
- *   → Worker siteverify 驗證 → 轉發 Web3Forms → 管理員收郵件
- *
- * ⚠️ 部署 Worker 後，請將 WORKER_API 改為你嘅 Worker URL
- */
-const WORKER_API = 'https://comment-handler.bruceleehk.workers.dev';
-const IMGBB_API  = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
-
-/* ── Turnstile 回調：驗證完成 → 儲存 widget ID + 啓用提交按鈕 ── */
-var _turnstileWidgetId = null;
-function onTurnstileReady(token, widgetId){
-  _turnstileWidgetId = widgetId;  /* Spin token lifecycle: retain widget ID */
-  var btn = document.getElementById('btnSubmitComment');
-  btn.disabled = false;
-  btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-}
-
-/* ── 字數計 ── */
-function updateCharCount(){
-  document.getElementById('charCount').textContent = document.getElementById('commentText').value.length;
-}
-
-/* ── HTML 轉義（防 XSS） ── */
-function escapeHtml(str){
-  var div=document.createElement('div'); div.textContent=str; return div.innerHTML;
-}
-
-/* ── 圖片預覽 + 驗證 ── */
-(function(){
-  var fileInput  = document.getElementById('commentImage');
-  var previewImg = document.getElementById('imagePreview');
-  var previewWrap= document.getElementById('imagePreviewWrap');
-  var removeBtn  = document.getElementById('removeImage');
-
-  fileInput.addEventListener('change', function(){
-    var file = this.files[0];
-    if(!file){ previewWrap.style.display='none'; return; }
-    if(!/^image\/(jpeg|png|webp)$/.test(file.type)){
-      showToast('只支援 JPG、PNG、WebP 格式');
-      this.value=''; previewWrap.style.display='none'; return;
-    }
-    if(file.size > 4*1024*1024){
-      showToast('圖片太大，請選擇 4MB 以下嘅檔案');
-      this.value=''; previewWrap.style.display='none'; return;
-    }
-    var reader = new FileReader();
-    reader.onload = function(e){
-      previewImg.src = e.target.result;
-      previewWrap.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  });
-
-  removeBtn.addEventListener('click', function(){
-    fileInput.value = '';
-    previewWrap.style.display = 'none';
-  });
-})();
-
-/* ── 壓縮圖片（超過 1.5MB → 縮至 1200px / JPEG 75%） ── */
-function compressImage(file, maxPx, quality, maxSize){
-  return new Promise(function(resolve){
-    if(file.size <= maxSize){ resolve(file); return; }
-    var img = new Image();
-    img.onload = function(){
-      var w = img.width, h = img.height;
-      if(w > maxPx || h > maxPx){
-        var ratio = Math.min(maxPx/w, maxPx/h);
-        w = Math.round(w*ratio); h = Math.round(h*ratio);
-      }
-      var cvs = document.createElement('canvas');
-      cvs.width = w; cvs.height = h;
-      cvs.getContext('2d').drawImage(img, 0, 0, w, h);
-      cvs.toBlob(function(blob){ resolve(blob || file); }, 'image/jpeg', quality);
-    };
-    img.onerror = function(){ resolve(file); };
-    img.src = URL.createObjectURL(file);
-  });
-}
-
-/* ── 上傳圖片到 imgbb → 返回公開 URL（async/await） ── */
-async function uploadToImgbb(file){
-  var fd = new FormData();
-  fd.append('image', file, file.name || 'image.jpg'); /* 附帶檔名確保 imgbb 識別格式 */
-  fd.append('expiration', '15552000'); /* 6 個月有效期 */
-
-  try {
-    var response = await fetch(IMGBB_API, { method: 'POST', body: fd });
-    var result   = await response.json();
-    if(result.success && result.data && result.data.url){
-      return result.data.url;
-    }
-    throw new Error((result.error && result.error.message) || 'imgbb 上傳失敗');
-  } catch(err) {
-    throw err;
-  }
-}
-
-/* ── 提交留言（async/await） ── */
-async function submitComment(e){
-  e.preventDefault();
-
-  var nickname = document.getElementById('nickname').value.trim();
-  var text     = document.getElementById('commentText').value.trim();
-  if(!nickname || !text){ showToast('請填寫暱稱同留言內容'); return false; }
-
-  /* Honeypot：被填入 = 機器人，靜默攔截 */
-  if(document.getElementById('botcheck').value){
-    showToast('留言已提交！首次留言需審核，通過後即可公開顯示。');
-    return false;
-  }
-
-  var btn = document.getElementById('btnSubmitComment');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交中……';
-
-  var imageUrl = '';
-  var imageFile = document.getElementById('commentImage').files[0];
-
-  /* Step 1：如有圖片 → 壓縮 → 上傳 imgbb → 攞 URL */
-  if(imageFile){
-    try {
-      btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳圖片中……';
-      var compressed = await compressImage(imageFile, 1200, 0.75, 1.5*1024*1024);
-      imageUrl = await uploadToImgbb(compressed);
-    } catch(err) {
-      showToast('圖片上傳失敗，請稍後再試或移除圖片後提交');
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-      /* 圖片上傳失敗但仍可繼續提交純文字留言，imageUrl 保持空字串 */
-    }
-  }
-
-  /* Step 2：組裝 FormData → POST Web3Forms */
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交留言中……';
-
-  var formData = new FormData(document.getElementById('commentForm'));
-
-  /*
-   * Spin: gate, don't replace
-   * Worker 會做 server-side siteverify，所以 cf-turnstile-response 必須保留
-   * 只移除 honeypot（已喺 JS 前置檢查，無需發送畀後端）
-   */
-  formData.delete('botcheck');
-
-  /* 如有圖片 URL → 以純文字加入 */
-  if(imageUrl){
-    formData.append('photo_url', imageUrl);
-    /* 將圖片連結附加喺留言內容之後，方便管理員喺郵件直接睇 */
-    var originalMsg = formData.get('comment') || text;
-    formData.set('message', originalMsg + '\n\n📷 蟲害照片：' + imageUrl);
-  }
-
-  /* POST → Cloudflare Worker（siteverify + 轉發 Web3Forms） */
-  try {
-    var response = await fetch(WORKER_API, { method: 'POST', body: formData });
-    var result   = await response.json();
-
-    if(result.success){
-      onSuccess(nickname, text);
-    } else {
-      showToast(result.error || '提交失敗，請稍後再試');
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-    }
-  } catch(err) {
-    showToast('網絡錯誤，請檢查連線後再試');
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-  }
-
-  return false;
-}
-
-/* ── 提交成功 ── */
-function onSuccess(nickname, text){
-  showToast('留言已提交！首次留言需審核，通過後即可公開顯示。');
-  var item = document.createElement('div');
-  item.className = 'comment-item';
-  item.style.opacity = '0.6';
-  item.innerHTML = '<div class="comment-header"><span class="comment-nickname">'+escapeHtml(nickname)+'</span><span class="comment-time">待審核</span></div><div class="comment-body">'+escapeHtml(text)+'</div>';
-  document.getElementById('commentList').prepend(item);
-
-  /* 重置表單 */
-  document.getElementById('commentForm').reset();
-  document.getElementById('charCount').textContent = '0';
-  document.getElementById('imagePreviewWrap').style.display = 'none';
-
-  /* 重置 Turnstile → 按鈕回到「等待驗證」狀態 */
-  /* Spin token lifecycle: tokens are single-use, reset by widget ID */
-  var btn = document.getElementById('btnSubmitComment');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-shield-halved"></i> 等待驗證…';
-  if(window.turnstile){
-    try{
-      if(_turnstileWidgetId){ turnstile.reset(_turnstileWidgetId); }
-      else { turnstile.reset('.cf-turnstile'); }
-    }catch(e){}
-  }
-}
-
-/* ── 綁定表單提交 ── */
-document.getElementById('commentForm').addEventListener('submit', submitComment);
 </script>
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
