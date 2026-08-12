@@ -553,8 +553,15 @@ function showToast(msg){
  *   無需 Worker、無需 Pro、無需 Secret Key
  */
 
-const WEB3FORMS_API = 'https://api.web3forms.com/submit';
-const IMGBB_API     = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+/*
+ * 表單提交架構（Spin canonical siteverify）：
+ *   前端 → imgbb 上傳圖片 → POST Worker（含 cf-turnstile-response）
+ *   → Worker siteverify 驗證 → 轉發 Web3Forms → 管理員收郵件
+ *
+ * ⚠️ 部署 Worker 後，請將 WORKER_API 改為你嘅 Worker URL
+ */
+const WORKER_API = 'https://comment-handler.bruceleehk.workers.dev';
+const IMGBB_API  = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
 
 /* ── Turnstile 回調：驗證完成 → 儲存 widget ID + 啓用提交按鈕 ── */
 var _turnstileWidgetId = null;
@@ -688,12 +695,9 @@ async function submitComment(e){
 
   /*
    * Spin: gate, don't replace
-   * 移除 Turnstile token + Honeypot，避免 Web3Forms 嘗試 server-side 驗證失敗
-   *   - cf-turnstile-response: Web3Forms 免費版無 Secret Key，驗證必敗
-   *   - botcheck: honeypot 已喺 JS 前置檢查，無需發送給 Web3Forms
-   * Turnstile 前端保護仍然有效：widget 阻止機器人觸發提交
+   * Worker 會做 server-side siteverify，所以 cf-turnstile-response 必須保留
+   * 只移除 honeypot（已喺 JS 前置檢查，無需發送畀後端）
    */
-  formData.delete('cf-turnstile-response');
   formData.delete('botcheck');
 
   /* 如有圖片 URL → 以純文字加入 */
@@ -704,15 +708,15 @@ async function submitComment(e){
     formData.set('message', originalMsg + '\n\n📷 蟲害照片：' + imageUrl);
   }
 
-  /* POST → Web3Forms */
+  /* POST → Cloudflare Worker（siteverify + 轉發 Web3Forms） */
   try {
-    var response = await fetch(WEB3FORMS_API, { method: 'POST', body: formData });
+    var response = await fetch(WORKER_API, { method: 'POST', body: formData });
     var result   = await response.json();
 
     if(result.success){
       onSuccess(nickname, text);
     } else {
-      showToast('提交失敗：' + (result.message || '請稍後再試'));
+      showToast(result.error || '提交失敗，請稍後再試');
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
     }

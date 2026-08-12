@@ -1,0 +1,15 @@
+# Cloudflare Worker 配置 — 滅蟲師傅留言系統
+# 部署指令：npx wrangler deploy
+# 設定 Secret：npx wrangler secret put TURNSTILE_SECRET
+
+name = "comment-handler"
+main = "comment-handler.js"
+compatibility_date = "2024-12-01"
+
+# ── 環境變量（非敏感，可提交至 Git）──
+[vars]
+WEB3FORMS_ACCESS_KEY = "82a6d28c-7335-464f-82d3-ccaf99425def"
+TURNSTILE_HOSTNAMES   = "bruceleehk.com,www.bruceleehk.com,bruceleehk.github.io"
+
+# ── 敏感變量（用 wrangler secret put，不要寫喺呢度）──
+# TURNSTILE_SECRET = （用指令設定：npx wrangler secret put TURNSTILE_SECRET）
