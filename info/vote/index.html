@@ -366,9 +366,13 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             </div>
             <div class="hint">支援 JPG/PNG/WebP，最大 4MB，讓網友直擊你嘅蟲患情況</div>
           </div>
-          <!-- Cloudflare Turnstile 小工具（靜默驗證真人） -->
-          <div class="cf-turnstile" data-sitekey="0x4AAAAAAENKg40O2PKrvqKN" data-callback="onTurnstileSuccess" data-theme="light"></div>
-          <input type="hidden" id="cfTurnstileResponse" name="cf-turnstile-response" value="">
+          <!-- Web3Forms Access Key -->
+          <input type="hidden" name="access_key" value="82a6d28c-7335-464f-82d3-ccaf99425def">
+          <input type="hidden" name="subject" value="[滅蟲師傅] 投票頁新留言 — 需審核">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Cloudflare Turnstile 小工具（靜默驗證真人，完成後自動注入 cf-turnstile-response） -->
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAENKg40O2PKrvqKN" data-theme="light"></div>
           <!-- Honeypot 防垃圾（機器人會填入，正常用戶留空） -->
           <input type="text" name="botcheck" id="botcheck" style="display:none!important" tabindex="-1" autocomplete="off">
           <button type="submit" class="btn-submit" id="btnSubmitComment"><i class="fas fa-paper-plane"></i> 提交留言</button>
@@ -534,37 +538,20 @@ function showToast(msg){
 <!-- ========== 留言系統 JS ========== -->
 <script>
 /*
- * 留言提交流程：
- * ┌──────────────────────────────────────────────────────────────┐
- * │ Web3Forms 第三方表單服務（免費、無需後端）                    │
- * │ 前端 → POST Web3Forms API（含 Turnstile Token + 留言數據）   │
- * │ Web3Forms 自動覆核 Turnstile Token → 攔截機器人              │
- * │   驗證通過 → 發送郵件到管理員（支援圖片附件）                │
- * │   驗證失敗 → 拒絕提交                                       │
- * ├──────────────────────────────────────────────────────────────┤
- * │ 優勢：                                                     │
- * │  ✅ 免費 250 次/月  ✅ 內建 Turnstile 驗證  ✅ 支援圖片上傳  │
- * │  ✅ 無需 Cloudflare Worker  ✅ Honeypot 防垃圾  ✅ 零後端代碼│
- * └──────────────────────────────────────────────────────────────┘
- *
- * 設定步驟：
- *   1. 前往 https://web3forms.com 免費註冊，取得 Access Key
- *   2. 將下方 WEB3FORMS_KEY 替換為你嘅 Access Key
- *   3. 於 Web3Forms 控制台 → Settings → Turnstile
- *      加入你嘅 Turnstile Secret Key（配合 Site Key 0x4AAAAAAENKg40O2PKrvqKN）
- *   4. 於 Web3Forms 控制台設定接收郵件地址（cedars5282@gmail.com）
+ * 留言提交流程（最簡架構）：
+ * ┌───────────────────────────────────────────────────────────────┐
+ * │ 前端 HTML <form> 內已包含：                                    │
+ * │   ✅ <input name="access_key">  → Web3Forms 識別你嘅帳戶      │
+ * │   ✅ <div class="cf-turnstile"> → Turnstile 自動注入 Token     │
+ * │   ✅ <input name="botcheck">    → Honeypot 防垃圾              │
+ * │ 提交時 FormData 自動包含以上所有欄位                            │
+ * │ Web3Forms 服務端自動覆核 Turnstile Token → 攔截機器人           │
+ * │   驗證通過 → 發送郵件到管理員（支援圖片附件）                   │
+ * │   驗證失敗 → 拒絕提交                                         │
+ * └───────────────────────────────────────────────────────────────┘
  */
 
-var turnstileReady = false;
-/* ⚠️ 請將下方替換為你嘅 Web3Forms Access Key（到 web3forms.com 免費註冊） */
-var WEB3FORMS_KEY = '82a6d28c-7335-464f-82d3-ccaf99425def';
 var WEB3FORMS_API = 'https://api.web3forms.com/submit';
-
-/* Turnstile 回調：前端靜默驗證完成，取得 Token */
-function onTurnstileSuccess(token){
-  document.getElementById('cfTurnstileResponse').value = token;
-  turnstileReady = true;
-}
 
 /* 字數計 */
 function updateCharCount(){
@@ -576,7 +563,7 @@ function escapeHtml(str){
   var div=document.createElement('div'); div.textContent=str; return div.innerHTML;
 }
 
-/* 圖片預覽 + 壓縮 */
+/* 圖片預覽 + 驗證 */
 (function(){
   var fileInput  = document.getElementById('commentImage');
   var previewImg = document.getElementById('imagePreview');
@@ -586,17 +573,14 @@ function escapeHtml(str){
   fileInput.addEventListener('change', function(){
     var file = this.files[0];
     if(!file){ previewWrap.style.display='none'; return; }
-    /* 檢查檔案類型 */
     if(!/^image\/(jpeg|png|webp)$/.test(file.type)){
       showToast('只支援 JPG、PNG、WebP 格式');
       this.value=''; previewWrap.style.display='none'; return;
     }
-    /* 檢查原始大小 */
     if(file.size > 4*1024*1024){
       showToast('圖片太大，請選擇 4MB 以下嘅檔案');
       this.value=''; previewWrap.style.display='none'; return;
     }
-    /* 顯示預覽 */
     var reader = new FileReader();
     reader.onload = function(e){
       previewImg.src = e.target.result;
@@ -611,7 +595,7 @@ function escapeHtml(str){
   });
 })();
 
-/* 壓縮圖片（如超過 1.5MB 自動縮小）→ 返回 Blob */
+/* 壓縮圖片（超過 1.5MB 自動縮至 1200px、JPEG 75%）→ 返回 Blob */
 function compressImage(file, maxPx, quality, maxSize){
   return new Promise(function(resolve){
     if(file.size <= maxSize){ resolve(file); return; }
@@ -638,11 +622,9 @@ function submitComment(e){
   var nickname = document.getElementById('nickname').value.trim();
   var text     = document.getElementById('commentText').value.trim();
   if(!nickname||!text){ showToast('請填寫暱稱同留言內容'); return false; }
-  if(!turnstileReady){ showToast('請等待安全驗證完成……'); return false; }
 
-  /* Honeypot 檢查（如果被填入 = 機器人） */
+  /* Honeypot 檢查（如果被填入 = 機器人，靜默攔截） */
   if(document.getElementById('botcheck').value){
-    /* 靜默攔截：唔好話機器人知我哋識破咗 */
     showToast('留言已提交！首次留言需審核，通過後即可公開顯示。');
     return false;
   }
@@ -653,47 +635,32 @@ function submitComment(e){
 
   var imageFile = document.getElementById('commentImage').files[0];
 
-  /* 如有圖片，先壓縮再提交；無圖片就直接提交 */
-  var preparePromise;
-  if(imageFile){
-    preparePromise = compressImage(imageFile, 1200, 0.75, 1.5*1024*1024)
-      .then(function(compressed){ return compressed; });
-  } else {
-    preparePromise = Promise.resolve(null);
-  }
+  /* 如有圖片先壓縮，無圖片直接提交 */
+  var prepare = imageFile
+    ? compressImage(imageFile, 1200, 0.75, 1.5*1024*1024)
+    : Promise.resolve(null);
 
-  preparePromise.then(function(finalImage){
-    /* 構建 Web3Forms FormData */
-    var fd = new FormData();
-    fd.append('access_key',  WEB3FORMS_KEY);
-    fd.append('subject',     '[滅蟲師傅] 投票頁新留言 — 需審核');
-    fd.append('from_name',   nickname);
-    fd.append('nickname',    nickname);
-    fd.append('message',     text);
-    fd.append('turnstile',   document.getElementById('cfTurnstileResponse').value);
-    fd.append('attachment',  finalImage || '');
-    fd.append('_template',  'table');
-    fd.append('_captcha',   'false');
+  prepare.then(function(finalImage){
+    /* 從 <form> 建立 FormData（自動包含 access_key、cf-turnstile-response、botcheck 等） */
+    var fd = new FormData(document.getElementById('commentForm'));
 
-    /* 選填欄位 */
-    var email = document.getElementById('commentEmail').value.trim();
-    if(email) fd.append('email', email);
+    /* 如有壓縮後嘅圖片，取代原始檔案 */
+    if(finalImage){
+      fd.set('attachment', finalImage, finalImage.type ? 'photo.jpg' : 'photo.jpg');
+    }
 
     /* 發送到 Web3Forms */
     fetch(WEB3FORMS_API, { method:'POST', body:fd })
       .then(function(res){ return res.json(); })
       .then(function(result){
         if(result.success){
-          onSuccess(nickname, text, '留言已提交！首次留言需審核，通過後即可公開顯示。');
+          onSuccess(nickname, text);
         } else {
-          /* Web3Forms 返回錯誤 */
-          var errMsg = result.message || '提交失敗，請稍後再試';
-          if(errMsg.indexOf('Turnstile') !== -1 || errMsg.indexOf('captcha') !== -1){
+          var msg = result.message || '提交失敗，請稍後再試';
+          if(msg.indexOf('Turnstile') !== -1 || msg.indexOf('captcha') !== -1 || msg.indexOf('turnstile') !== -1){
             showToast('安全驗證失敗，請刷新頁面後重新提交');
-          } else if(errMsg.indexOf('access_key') !== -1){
-            showToast('表單服務尚未設定，請聯絡管理員');
           } else {
-            showToast('提交失敗：' + errMsg);
+            showToast('提交失敗：' + msg);
           }
           resetBtn(btn);
           resetTurnstile();
@@ -710,13 +677,12 @@ function submitComment(e){
 
 /* 重置 Turnstile */
 function resetTurnstile(){
-  turnstileReady = false;
   if(window.turnstile){ try{ turnstile.reset('.cf-turnstile'); }catch(e){} }
 }
 
-/* 提交成功回調 */
-function onSuccess(nickname, text, message){
-  showToast(message);
+/* 提交成功 */
+function onSuccess(nickname, text){
+  showToast('留言已提交！首次留言需審核，通過後即可公開顯示。');
   var item = document.createElement('div');
   item.className = 'comment-item';
   item.style.opacity = '0.6';
