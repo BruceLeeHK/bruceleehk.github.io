@@ -83,29 +83,30 @@ header{background:var(--white);box-shadow:var(--shadow);position:fixed;width:100
 .pest-detail-panel p{line-height:1.8;margin-bottom:10px}
 .pest-detail-panel .btn-cta{display:inline-block;background:var(--primary);color:#fff!important;padding:10px 24px;border-radius:5px;font-weight:600;font-size:.95rem;transition:transform .2s}
 .pest-detail-panel .btn-cta:hover{transform:translateY(-2px)}
-/* Comment Section */
-.comment-section{max-width:900px;margin:0 auto 30px}
-.comment-section h3{font-size:1.3rem;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--primary-light)}
-.comment-form{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:20px}
-.form-row{margin-bottom:14px}
-.form-row label{display:block;font-weight:500;margin-bottom:4px;font-size:.9rem}
-.form-row input,.form-row textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:5px;font-size:.95rem;font-family:inherit;transition:border-color .2s}
-.form-row input:focus,.form-row textarea:focus{border-color:var(--primary);outline:none}
-.form-row .optional{color:var(--text-light);font-size:.78rem;margin-left:6px}
-.form-row .hint{font-size:.78rem;color:var(--text-light);margin-top:3px}
-.char-count{font-size:.75rem;color:var(--text-light);text-align:right;margin-top:2px}
-.cf-turnstile{margin-bottom:14px;min-height:65px}
-.btn-submit{background:var(--primary);color:#fff!important;border:none;padding:12px 32px;border-radius:5px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-submit:hover{background:var(--primary-hover)}
-.btn-submit:disabled{background:#999;cursor:not-allowed}
-.comment-list{margin-top:20px}
-.comment-item{background:var(--white);border-radius:var(--radius);box-shadow:0 1px 4px rgba(0,0,0,.06);padding:16px;margin-bottom:12px}
-.comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.comment-nickname{font-weight:600;color:var(--primary)}
-.comment-time{font-size:.78rem;color:var(--text-light)}
-.comment-body{line-height:1.7;white-space:pre-wrap}
-.comment-body img{max-width:100%;border-radius:4px;margin:8px 0}
-.moderation-notice{background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:20px;font-size:.88rem;color:#5d4037;line-height:1.6}
+/* Comment Section — 獨立擴寬卡片 */
+.comment-outer-wrap{max-width:1000px;margin:40px auto 20px auto;padding:0 10px}
+.comment-card{background:#ffffff;border-radius:16px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.08);border:1px solid #e2e8f0}
+.comment-card h2{font-size:1.5rem;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.comment-card .sub-desc{color:#64748b;font-size:.95rem;margin-bottom:20px;line-height:1.7}
+.moderation-notice{background:#fff8e1;border-left:3px solid #f9a825;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:20px;font-size:.88rem;color:#5d4037;line-height:1.6}
+/* ── ImgBB 上傳元件 ── */
+.upload-box{background:#f8fafc;border:2px dashed #cbd5e1;border-radius:12px;padding:18px;margin-bottom:20px}
+.upload-box .upload-label{font-weight:bold;color:#334155;margin-bottom:10px;font-size:.95rem;display:flex;align-items:center;gap:8px}
+.upload-box .upload-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.upload-box input[type="file"]{font-size:.9rem}
+.btn-upload-img{display:inline-flex;align-items:center;gap:6px;background:#0284c7;color:#fff!important;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:.88rem;transition:all .2s;white-space:nowrap}
+.btn-upload-img:hover{background:#0369a1}
+.btn-upload-img:disabled{background:#94a3b8;cursor:not-allowed}
+.upload-success{display:none;margin-top:12px;background:#f0fdf4;border:1px solid #bbf7d0;padding:12px;border-radius:8px}
+.upload-success .success-msg{color:#166534;font-size:.88rem;margin-bottom:8px;font-weight:600;display:flex;align-items:center;gap:6px}
+.upload-success .result-row{display:flex;gap:8px;align-items:stretch}
+.upload-success .img-preview{max-height:80px;border-radius:6px;border:1px solid #ddd;object-fit:contain;margin-bottom:8px}
+.img-code-field{flex:1;padding:6px 10px;border:1px solid #cbd5e1;border-radius:4px;background:#fff;font-size:.85rem;font-family:monospace;color:#333}
+.btn-copy-code{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#166534;color:#fff!important;border:none;border-radius:4px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-copy-code:hover{background:#15803d}
+.btn-copy-code.copied{background:#22c55e}
+/* Cusdis iframe 適配 */
+#cusdis_thread iframe{width:100%!important;min-height:500px}
 /* CTA Box */
 .blog-cta-box{background:linear-gradient(135deg,var(--primary),#3a7a22);color:var(--white);border-radius:var(--radius);padding:28px 32px;margin:32px auto;max-width:900px;text-align:center}
 .blog-cta-box h4{color:var(--white);font-size:1.15rem;margin-bottom:8px}
@@ -122,22 +123,9 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 .toast{position:fixed;top:90px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;font-size:1rem;font-weight:500;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
 /* Responsive */
-@media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.#dify-chatbot-bubble-button{display:block}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}.pest-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.pest-card{padding:12px}.vote-intro,.comment-form{padding:20px 16px}}
+@media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.#dify-chatbot-bubble-button{display:block}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}.pest-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.pest-card{padding:12px}.vote-intro{padding:20px 16px}}}
 @media(max-width:480px){.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}.pest-grid{grid-template-columns:1fr 1fr;gap:8px}.result-item{flex-wrap:wrap;gap:8px}.result-bar-wrap{order:4;flex-basis:100%}}
-/* ── ImgBB 上傳元件 ── */
-.imgbb-upload-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px;padding:12px 16px;background:#f4f9f0;border-radius:6px;border:1px dashed #b5d6a7}
-.imgbb-upload-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--primary);color:#fff!important;border-radius:5px;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-.imgbb-upload-btn:hover{background:var(--primary-hover)}
-.imgbb-hint{font-size:.8rem;color:var(--text-light)}
-.imgbb-result{width:100%;margin-top:8px;display:flex;flex-direction:column;gap:8px}
-.imgbb-preview{max-height:100px;border-radius:6px;border:1px solid #ddd;object-fit:contain}
-.imgbb-result-actions{display:flex;gap:6px;align-items:stretch}
-.imgbb-url-field{flex:1;padding:6px 10px;border:1px solid #ddd;border-radius:4px;font-size:.8rem;background:#fff;color:#333;font-family:monospace}
-.imgbb-copy-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:var(--primary);color:#fff!important;border:none;border-radius:4px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-.imgbb-copy-btn:hover{background:var(--primary-hover)}
-.imgbb-copy-btn.copied{background:#4caf50}
-.imgbb-progress{font-size:.85rem;color:var(--primary);font-weight:600}
-@media(max-width:600px){.imgbb-hint{display:none}.imgbb-result-actions{flex-direction:column}.imgbb-url-field{font-size:.75rem}}
+@media(max-width:600px){.upload-box .upload-row{flex-direction:column;align-items:flex-start}.upload-success .result-row{flex-direction:column}.img-code-field{font-size:.75rem}.comment-card{padding:18px 16px}}
 
 </style>
 </head>
@@ -347,47 +335,57 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <a href="https://wa.me/85252821552" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
-      <!-- ========== 苦主經驗分享留言區（Cusdis + ImgBB） ========== -->
-      <div class="comment-section">
-        <h3><i class="fas fa-comments"></i> 苦主經驗分享</h3>
+      <!-- ========== 苦主經驗分享區（獨立擴寬卡片排版） ========== -->
+      <div class="comment-outer-wrap">
+        <div class="comment-card">
+          <h2>
+            <i class="fas fa-comments" style="color:#d32f2f;"></i> 苦主經驗分享與討論
+          </h2>
+          <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可互相回覆討論。</p>
 
-        <div class="moderation-notice">
-          <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。
-        </div>
+          <div class="moderation-notice">
+            <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。
+          </div>
 
-        <!-- ── ImgBB 免費上傳按鈕（Cusdis iframe 無法跨域寫入，故喺外層提供上傳元件） ── -->
-        <div class="imgbb-upload-bar">
-          <label for="imgbbFileInput" class="imgbb-upload-btn" id="imgbbUploadLabel">
-            <i class="fas fa-camera"></i> 上傳蟲害照片
-          </label>
-          <input type="file" id="imgbbFileInput" accept="image/jpeg,image/png,image/webp" style="display:none">
-          <span class="imgbb-hint">選取照片 → 自動上傳 ImgBB → 複製連結貼到留言</span>
-          <div id="imgbbResult" class="imgbb-result" style="display:none">
-            <img id="imgbbPreview" class="imgbb-preview" alt="預覽">
-            <div class="imgbb-result-actions">
-              <input type="text" id="imgbbUrlField" class="imgbb-url-field" readonly>
-              <button type="button" id="imgbbCopyBtn" class="imgbb-copy-btn" title="複製 Markdown 圖片碼">
-                <i class="fas fa-copy"></i> 複製
+          <!-- ── ImgBB 免費上傳按鈕 ── -->
+          <div class="upload-box">
+            <div class="upload-label">
+              <i class="fas fa-camera" style="color:#0284c7;"></i> 上傳蟲害照片（選填）：
+            </div>
+            <div class="upload-row">
+              <input type="file" id="imgbbFileInput" accept="image/jpeg,image/png,image/webp">
+              <button type="button" id="btnUploadImg" class="btn-upload-img" onclick="uploadPhoto()">
+                <i class="fas fa-cloud-upload-alt"></i> 上傳照片
               </button>
             </div>
+
+            <!-- 上傳成功結果 -->
+            <div id="uploadSuccess" class="upload-success">
+              <div class="success-msg">
+                <i class="fas fa-check-circle"></i> 上傳成功！請撳「複製圖片碼」，再貼到下方留言框：
+              </div>
+              <img id="imgPreview" class="img-preview" alt="預覽" style="display:none;">
+              <div class="result-row">
+                <input type="text" id="imgCodeField" class="img-code-field" readonly>
+                <button type="button" id="btnCopyCode" class="btn-copy-code" onclick="copyPhotoCode()">
+                  <i class="fas fa-copy"></i> 複製圖片碼
+                </button>
+              </div>
+            </div>
           </div>
-          <div id="imgbbProgress" class="imgbb-progress" style="display:none">
-            <i class="fas fa-cloud-upload-alt fa-spin"></i> 上傳中……
-          </div>
+
+          <!-- ── Cusdis 留言區（data-lang="zh-tw" 中文化） ── -->
+          <div id="cusdis_thread"
+            data-host="https://cusdis.com"
+            data-app-id="0df347a4-18b9-46c5-a3c3-d8f752a69b63"
+            data-page-id="vote-page-2026"
+            data-page-url="https://bruceleehk.com/info/vote/"
+            data-page-title="2026年港人最厭惡嘅10大害蟲 — 全民票選"
+            data-theme="light"
+            data-lang="zh-tw"
+          ></div>
+          <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
         </div>
-
-        <!-- ── Cusdis 留言區（data-lang="zh-tw" 中文化） ── -->
-        <div id="cusdis_thread"
-          data-host="https://cusdis.com"
-          data-app-id="0df347a4-18b9-46c5-a3c3-d8f752a69b63"
-          data-page-id="vote-page-2026"
-          data-page-url="https://bruceleehk.com/info/vote/"
-          data-page-title="2026年港人最厭惡嘅10大害蟲 — 全民票選"
-          data-theme="light"
-          data-lang="zh-tw"
-        ></div>
-
-        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
       </div>
 
     </div>
@@ -532,120 +530,127 @@ function showToast(msg){
 
 <!-- ========== ImgBB 上傳元件 JS ========== -->
 <script>
-(function(){
-  var IMGBB_API = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+var IMGBB_API = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
+
+/* 上傳照片到 ImgBB */
+async function uploadPhoto() {
   var fileInput  = document.getElementById('imgbbFileInput');
-  var uploadLabel= document.getElementById('imgbbUploadLabel');
-  var resultDiv  = document.getElementById('imgbbResult');
-  var preview    = document.getElementById('imgbbPreview');
-  var urlField   = document.getElementById('imgbbUrlField');
-  var copyBtn    = document.getElementById('imgbbCopyBtn');
-  var progress   = document.getElementById('imgbbProgress');
+  var btn        = document.getElementById('btnUploadImg');
+  var resultBox  = document.getElementById('uploadSuccess');
+  var codeField  = document.getElementById('imgCodeField');
+  var preview    = document.getElementById('imgPreview');
 
-  fileInput.addEventListener('change', async function(){
-    var file = this.files[0];
-    if(!file) return;
+  if (!fileInput.files || fileInput.files.length === 0) {
+    showToast('請先選擇一張照片！');
+    return;
+  }
 
-    /* 驗證格式 */
-    if(!/^image\/(jpeg|png|webp)$/.test(file.type)){
-      showToast('只支援 JPG、PNG、WebP 格式');
-      this.value = '';
-      return;
-    }
-    if(file.size > 4*1024*1024){
-      showToast('圖片太大，請選擇 4MB 以下嘅檔案');
-      this.value = '';
-      return;
-    }
+  var file = fileInput.files[0];
 
-    /* 顯示進度 */
-    resultDiv.style.display = 'none';
-    progress.style.display = 'block';
-    uploadLabel.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 上傳中……';
+  /* 安全驗證：格式 + 大小 */
+  if (!/^image\/(jpeg|png|webp)$/.test(file.type)) {
+    showToast('只支援 JPG、PNG、WebP 格式');
+    fileInput.value = '';
+    return;
+  }
+  if (file.size > 4 * 1024 * 1024) {
+    showToast('圖片太大，請選擇 4MB 以下嘅檔案');
+    fileInput.value = '';
+    return;
+  }
 
-    try {
-      /* 壓縮（超過 1.5MB → 縮至 1200px / JPEG 75%） */
-      var processedFile = file;
-      if(file.size > 1.5*1024*1024){
-        processedFile = await compressForImgbb(file, 1200, 0.75);
-      }
+  /* 顯示上傳中狀態 */
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 上傳中…';
+  resultBox.style.display = 'none';
 
-      /* 上傳 ImgBB */
-      var fd = new FormData();
-      fd.append('image', processedFile, processedFile.name || 'image.jpg');
-      fd.append('expiration', '15552000'); /* 6 個月 */
-
-      var res    = await fetch(IMGBB_API, { method: 'POST', body: fd });
-      var result = await res.json();
-
-      if(result.success && result.data && result.data.url){
-        var imageUrl  = result.data.url;
-        var thumbUrl  = (result.data.thumb && result.data.thumb.url) || imageUrl;
-        var mdCode    = '![蟲害照片](' + imageUrl + ')';
-
-        /* 顯示預覽 + 連結 */
-        preview.src     = thumbUrl;
-        urlField.value  = mdCode;
-        resultDiv.style.display = 'flex';
-        progress.style.display  = 'none';
-        uploadLabel.innerHTML   = '<i class="fas fa-camera"></i> 換一張';
-
-        showToast('圖片上傳成功！撳「複製」貼到留言就得');
-      } else {
-        throw new Error((result.error && result.error.message) || '上傳失敗');
-      }
-    } catch(err) {
-      progress.style.display  = 'none';
-      uploadLabel.innerHTML   = '<i class="fas fa-camera"></i> 上傳蟲害照片';
-      showToast('圖片上傳失敗，請稍後再試');
+  try {
+    /* 壓縮（超過 1.5MB → 縮至 1200px / JPEG 75%） */
+    var processedFile = file;
+    if (file.size > 1.5 * 1024 * 1024) {
+      processedFile = await compressForImgbb(file, 1200, 0.75);
     }
 
-    this.value = '';
-  });
+    /* 上傳 ImgBB */
+    var fd = new FormData();
+    fd.append('image', processedFile, processedFile.name || 'image.jpg');
+    fd.append('expiration', '15552000'); /* 6 個月 */
 
-  /* 複製按鈕 */
-  copyBtn.addEventListener('click', function(){
-    var text = urlField.value;
-    if(!text) return;
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){ onCopied(); });
+    var res    = await fetch(IMGBB_API, { method: 'POST', body: fd });
+    var result = await res.json();
+
+    if (result.success && result.data && result.data.url) {
+      var imageUrl = result.data.url;
+      var thumbUrl = (result.data.thumb && result.data.thumb.url) || imageUrl;
+
+      /* 產生 Markdown 圖片碼，Cusdis 可直接顯示 */
+      var mdCode = '![' + file.name.replace(/[^\w\u4e00-\u9fff.\-]/g, '_') + '](' + imageUrl + ')';
+
+      /* 顯示預覽同結果 */
+      preview.src = thumbUrl;
+      preview.style.display = 'block';
+      codeField.value = mdCode;
+      resultBox.style.display = 'block';
+
+      showToast('圖片上傳成功！撳「複製」貼到留言就得');
     } else {
-      urlField.select();
-      document.execCommand('copy');
-      onCopied();
+      throw new Error((result.error && result.error.message) || '上傳失敗');
     }
-  });
+  } catch (err) {
+    showToast('圖片上傳失敗，請稍後再試');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳照片';
+    fileInput.value = '';
+  }
+}
 
-  function onCopied(){
-    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已複製';
-    copyBtn.classList.add('copied');
+/* 一鍵複製圖片碼 */
+function copyPhotoCode() {
+  var codeField = document.getElementById('imgCodeField');
+  var btn       = document.getElementById('btnCopyCode');
+  var text      = codeField.value;
+  if (!text) return;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ onCopied(); });
+  } else {
+    codeField.select();
+    document.execCommand('copy');
+    onCopied();
+  }
+
+  function onCopied() {
+    btn.innerHTML = '<i class="fas fa-check"></i> 已複製';
+    btn.classList.add('copied');
     showToast('已複製！貼到下方留言框即可附加照片');
     setTimeout(function(){
-      copyBtn.innerHTML = '<i class="fas fa-copy"></i> 複製';
-      copyBtn.classList.remove('copied');
+      btn.innerHTML = '<i class="fas fa-copy"></i> 複製圖片碼';
+      btn.classList.remove('copied');
     }, 3000);
   }
+}
 
-  /* 壓縮函數（供 ImgBB 上傳用） */
-  function compressForImgbb(file, maxPx, quality){
-    return new Promise(function(resolve){
-      var img = new Image();
-      img.onload = function(){
-        var w = img.width, h = img.height;
-        if(w > maxPx || h > maxPx){
-          var ratio = Math.min(maxPx/w, maxPx/h);
-          w = Math.round(w*ratio); h = Math.round(h*ratio);
-        }
-        var cvs = document.createElement('canvas');
-        cvs.width = w; cvs.height = h;
-        cvs.getContext('2d').drawImage(img, 0, 0, w, h);
-        cvs.toBlob(function(blob){ resolve(blob || file); }, 'image/jpeg', quality);
-      };
-      img.onerror = function(){ resolve(file); };
-      img.src = URL.createObjectURL(file);
-    });
-  }
-})();
+/* 壓縮函數（供 ImgBB 上傳用） */
+function compressForImgbb(file, maxPx, quality) {
+  return new Promise(function(resolve) {
+    var img = new Image();
+    img.onload = function() {
+      var w = img.width, h = img.height;
+      if (w > maxPx || h > maxPx) {
+        var ratio = Math.min(maxPx / w, maxPx / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+      var cvs = document.createElement('canvas');
+      cvs.width = w; cvs.height = h;
+      cvs.getContext('2d').drawImage(img, 0, 0, w, h);
+      cvs.toBlob(function(blob) { resolve(blob || file); }, 'image/jpeg', quality);
+    };
+    img.onerror = function() { resolve(file); };
+    img.src = URL.createObjectURL(file);
+  });
+}
 </script>
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
