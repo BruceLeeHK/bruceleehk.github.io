@@ -575,12 +575,26 @@ function showToast(msg){
 <!-- ========== 自建原生留言系統 JS ========== -->
 <script>
 /* ===== 設定 ===== */
-var WORKER_API  = 'https://comment-handler.bruceleehk.workers.dev/api/comments';
+var WORKER_BASE = 'https://comment-handler.bruceleehk.workers.dev';
+var WORKER_API  = WORKER_BASE + '/api/comments';
 var IMGBB_API   = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
 var PAGE_ID     = 'vote-page-2026';
+var workerStatus = 'unknown'; /* 'ok' | 'degraded' | 'unknown' */
 
 /* 上傳後嘅圖片資料（全頁面共用） */
 var uploadedImage = { url: '', thumb: '' };
+
+/* ===== Worker 健康檢查 ===== */
+async function checkWorkerHealth() {
+  try {
+    var res  = await fetch(WORKER_BASE + '/api/health', { method: 'GET' });
+    var data = await res.json();
+    workerStatus = data.kv_bound ? 'ok' : 'degraded';
+  } catch (err) {
+    workerStatus = 'offline';
+    console.warn('Worker 健康檢查失敗:', err.message);
+  }
+}
 
 /* ===== 圖片上傳 + 預覽 ===== */
 async function uploadAndPreview() {
@@ -716,10 +730,18 @@ async function submitComment() {
       /* 重新載入留言列表 */
       loadComments();
     } else {
-      showToast(data.error || '提交失敗，請稍後再試');
+      showToast(data.error || '提交失敗（錯誤碼：' + (data.code || res.status) + '）');
     }
   } catch (err) {
-    showToast('網絡連線失敗，請稍後再試');
+    /* 診斷具體原因 */
+    if (workerStatus === 'offline') {
+      showToast('留言後端尚未啟動。請先部署 Cloudflare Worker（見部署指南）');
+    } else if (err.name === 'TypeError' && err.message.indexOf('Failed to fetch') > -1) {
+      showToast('CORS 或網絡錯誤，請確認 Worker 已部署且 KV 已綁定');
+    } else {
+      showToast('提交失敗：' + (err.message || '未知錯誤'));
+    }
+    console.error('提交留言錯誤:', err);
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
@@ -862,7 +884,8 @@ function compressForImgbb(file, maxPx, quality) {
   });
 }
 
-/* ===== 初始化：載入留言 ===== */
+/* ===== 初始化：健康檢查 + 載入留言 ===== */
+checkWorkerHealth();
 loadComments();
 </script>
 

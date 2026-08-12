@@ -1,10 +1,11 @@
 # Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統
 #
-# 部署指令：
-#   1. 建立 D1 資料庫：npx wrangler d1 create comment-db
-#   2. 初始化資料表（見 comment-handler.js 頂部註釋）
-#   3. 將下方 database_id 替換為你嘅實際 D1 資料庫 ID
-#   4. 部署：npx wrangler deploy
+# 部署步驟：
+#   1. 建立 KV Namespace（二選一）：
+#      Dashboard: Workers & Pages → KV → Create namespace → 名稱: COMMENT_KV → 複製 ID
+#      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
+#   2. 將下方 id 替換為你嘅實際 KV Namespace ID
+#   3. 部署：npx wrangler deploy
 #
 # 審核密鑰（用 wrangler secret put 設定）：
 #   npx wrangler secret put ADMIN_SECRET
@@ -13,17 +14,8 @@ name = "comment-handler"
 main = "comment-handler.js"
 compatibility_date = "2024-12-01"
 
-# ── D1 資料庫綁定 ──
-# 建立 D1 後，將 database_id 替換為實際 ID
-# 指令：npx wrangler d1 create comment-db
-[[d1_databases]]
-binding = "DB"
-database_name = "comment-db"
-database_id = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"   # ← 替換為你嘅 D1 資料庫 ID
-
-# ── 環境變量（非敏感，可提交至 Git）──
-[vars]
-TURNSTILE_HOSTNAMES = "bruceleehk.com,www.bruceleehk.com,bruceleehk.github.io"
-
-# ── 敏感變量（用 wrangler secret put，不要寫喺呢度）──
-# ADMIN_SECRET = （管理員審核密鑰）
+# ── KV Namespace 綁定 ──
+# 建立 KV 後，將 id 替換為實際 Namespace ID
+[[kv_namespaces]]
+binding = "COMMENT_KV"
+id = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"   # ← 替換為你嘅 KV Namespace ID
