@@ -544,18 +544,17 @@ function showToast(msg){
  *     ① Cloudflare Turnstile → 靜默驗證真人，機器人無法通過
  *     ② Honeypot 隱藏欄位 → 攔截殘漏嘅自動填表機器人
  *
- *   圖片處理：
- *     用戶揀圖 → 壓縮 → 上傳 imgbb.com（免費圖片託管）
- *     → 攞到圖片嘅公開 URL → 以純文字 image_url 欄位傳畀 Web3Forms
- *     → 管理員郵件收到可點擊嘅圖片連結
- *     （Web3Forms 免費版唔支援附件，所以唔傳檔案，只傳 URL）
+ *   圖片處理（Web3Forms 免費版唔支援附件 → 先上傳 imgbb 再傳 URL）：
+ *     1. 用戶揀圖 → 壓縮（如超過 1.5MB）
+ *     2. POST 圖片到 imgbb.com（免費圖床）→ 攞到公開 URL
+ *     3. 移除 FormData 中嘅檔案欄位 → 改加 photo_url 純文字
+ *     4. POST 到 Web3Forms → 管理員郵件收到可點擊嘅圖片連結
  *
  *   無需 Worker、無需 Pro、無需 Secret Key
  */
 
 var WEB3FORMS_API = 'https://api.web3forms.com/submit';
-/* imgbb 免費圖片託管 — 前往 https://api.imgbb.com/1/ 註冊取得 API Key */
-var IMGBB_KEY = 'YOUR_IMGBB_API_KEY';
+var IMGBB_API     = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
 
 /* ── Turnstile 回調：驗證完成 → 啓用提交按鈕 ── */
 function onTurnstileReady(token){
@@ -627,30 +626,20 @@ function compressImage(file, maxPx, quality, maxSize){
   });
 }
 
-/* ── 上傳圖片到 imgbb（免費圖片託管）→ 返回公開 URL ── */
+/* ── 上傳圖片到 imgbb → 返回公開 URL ── */
 function uploadToImgbb(file){
-  return new Promise(function(resolve, reject){
-    var reader = new FileReader();
-    reader.onload = function(e){
-      var fd = new FormData();
-      fd.append('key', IMGBB_KEY);
-      fd.append('image', e.target.result.split(',')[1]); /* 只取 base64 部分 */
-      fd.append('expiration', '15552000');                /* 6 個月有效期 */
+  var fd = new FormData();
+  fd.append('image', file);
+  fd.append('expiration', '15552000'); /* 6 個月有效期 */
 
-      fetch('https://api.imgbb.com/1/upload', { method:'POST', body:fd })
-        .then(function(r){ return r.json(); })
-        .then(function(result){
-          if(result.success && result.data && result.data.url){
-            resolve(result.data.url);
-          } else {
-            reject(new Error('imgbb 上傳失敗'));
-          }
-        })
-        .catch(reject);
-    };
-    reader.onerror = function(){ reject(new Error('讀取圖片失敗')); };
-    reader.readAsDataURL(file);
-  });
+  return fetch(IMGBB_API, { method:'POST', body:fd })
+    .then(function(r){ return r.json(); })
+    .then(function(result){
+      if(result.success && result.data && result.data.url){
+        return result.data.url;
+      }
+      throw new Error(result.error?.message || 'imgbb 上傳失敗');
+    });
 }
 
 /* ── 提交留言 ── */
@@ -672,36 +661,44 @@ function submitComment(e){
 
   var imageFile = document.getElementById('commentImage').files[0];
 
-  /* Step 1：處理圖片（如有）→ 壓縮 → 上傳 imgbb → 攞 URL */
+  /* Step 1：如有圖片 → 壓縮 → 上傳 imgbb → 攞 URL */
   var imagePromise;
   if(imageFile){
+    btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> 上傳圖片中……';
     imagePromise = compressImage(imageFile, 1200, 0.75, 1.5*1024*1024)
       .then(function(compressed){ return uploadToImgbb(compressed); })
-      .catch(function(err){
-        showToast('圖片上傳失敗，請稍後再試或先移除圖片提交');
+      .then(function(url){ return url; })
+      .catch(function(){
+        showToast('圖片上傳失敗，請稍後再試或移除圖片後提交');
         resetBtn(btn);
-        return null; /* 返回 null = 繼續提交但冇圖 */
+        return null; /* null = 繼續提交但冇圖 */
       });
   } else {
     imagePromise = Promise.resolve(null);
   }
 
-  /* Step 2：提交表單到 Web3Forms */
+  /* Step 2：組裝 FormData → POST Web3Forms */
   imagePromise.then(function(imageUrl){
     if(imageUrl === undefined) return; /* resetBtn 已叫，跳過 */
 
-    /* FormData 收集 <form> 內所有欄位（access_key、cf-turnstile-response、botcheck 等）
-       注意：file input 冇 name 屬性，所以 FormData 唔會包含檔案 → 唔觸發 Pro 限制 */
-    var fd = new FormData(document.getElementById('commentForm'));
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 提交留言中……';
 
-    /* 如有圖片 URL，以純文字加入（唔傳檔案！） */
+    /* FormData 收集 <form> 內所有欄位 */
+    var formData = new FormData(document.getElementById('commentForm'));
+
+    /* 移除檔案欄位（如有）→ 唔觸發 Web3Forms Pro 限制 */
+    formData.delete('attachment');
+
+    /* 如有圖片 URL → 以純文字加入 */
     if(imageUrl){
-      fd.append('image_url', imageUrl);
-      fd.append('message', text + '\n\n📷 蟲害照片：' + imageUrl);
+      formData.append('photo_url', imageUrl);
+      /* 將圖片連結附加喺留言內容之後，方便管理員喺郵件直接睇 */
+      var originalMsg = formData.get('comment') || text;
+      formData.set('message', originalMsg + '\n\n📷 蟲害照片：' + imageUrl);
     }
 
     /* POST → Web3Forms */
-    fetch(WEB3FORMS_API, { method:'POST', body:fd })
+    fetch(WEB3FORMS_API, { method:'POST', body:formData })
       .then(function(r){ return r.json(); })
       .then(function(result){
         if(result.success){
