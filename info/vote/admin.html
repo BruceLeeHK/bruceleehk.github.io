@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言管理後台 — 滅蟲師傅</title>
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary:#2c5e1a;--primary-hover:#1e4210;--primary-light:#f4f9f0;--danger:#d32f2f;--danger-light:#fef2f2;--warning:#f9a825;--warning-light:#fff8e1;--success:#16a34a;--success-light:#dcfce7;--info:#0284c7;--info-light:#e0f2fe;--text-dark:#1e293b;--text-light:#64748b;--border:#e2e8f0;--bg:#f8fafc;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.06);--radius:8px}
+    body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;min-height:100vh}
+    a{text-decoration:none;color:inherit}
+    /* Top Bar */
+    .topbar{background:linear-gradient(135deg,var(--primary),#3a7a22);color:#fff;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+    .topbar-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .topbar h1{font-size:1.3rem;display:flex;align-items:center;gap:8px}
+    .topbar h1 i{font-size:1.5rem}
+    .topbar-meta{display:flex;align-items:center;gap:14px;font-size:.85rem;flex-wrap:wrap}
+    .topbar-meta a{color:rgba(255,255,255,.85);font-size:.82rem}
+    .topbar-meta a:hover{color:#fff;text-decoration:underline}
+    .status-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);padding:4px 10px;border-radius:14px;font-size:.78rem;font-weight:600}
+    .status-pill .dot{width:8px;height:8px;border-radius:50%;background:#fbbf24}
+    .status-pill.ok .dot{background:#4ade80}
+    .status-pill.offline .dot{background:#f87171}
+    /* Login Card */
+    .login-wrap{max-width:420px;margin:60px auto 40px;background:#fff;border-radius:14px;padding:36px 30px;box-shadow:0 10px 40px rgba(0,0,0,.08);border:1px solid var(--border)}
+    .login-wrap h2{text-align:center;font-size:1.4rem;margin-bottom:8px;color:var(--primary)}
+    .login-wrap .login-desc{text-align:center;color:var(--text-light);font-size:.9rem;margin-bottom:24px;line-height:1.7}
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-weight:600;color:var(--text-dark);margin-bottom:6px;font-size:.9rem}
+    .form-input{width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:6px;font-size:.95rem;font-family:inherit;background:#fff;color:var(--text-dark);transition:border-color .2s,box-shadow .2s}
+    .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(44,94,26,.15);outline:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;padding:11px 22px;border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+    .btn-primary{background:var(--primary);color:#fff!important}
+    .btn-primary:hover{background:var(--primary-hover);transform:translateY(-1px)}
+    .btn-primary:disabled{background:#94a3b8;cursor:not-allowed;transform:none}
+    .btn-danger{background:var(--danger);color:#fff!important}
+    .btn-danger:hover{background:#b91c1c}
+    .btn-success{background:var(--success);color:#fff!important}
+    .btn-success:hover{background:#15803d}
+    .btn-info{background:var(--info);color:#fff!important}
+    .btn-info:hover{background:#0369a1}
+    .btn-warning{background:var(--warning);color:#fff!important}
+    .btn-warning:hover{background:#d97706}
+    .btn-ghost{background:#f1f5f9;color:var(--text-dark)!important;border:1px solid #cbd5e1}
+    .btn-ghost:hover{background:#e2e8f0}
+    .btn-sm{padding:6px 12px;font-size:.82rem;border-radius:5px}
+    .btn-block{width:100%}
+    /* Dashboard */
+    .dashboard{display:none;max-width:1200px;margin:24px auto;padding:0 20px}
+    .dashboard.active{display:block}
+    .toolbar{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:var(--shadow);border:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .toolbar .stat{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;color:var(--text-light)}
+    .toolbar .stat strong{color:var(--text-dark);font-size:1rem}
+    .toolbar .stat.pending strong{color:var(--warning)}
+    .toolbar .stat.approved strong{color:var(--success)}
+    .toolbar .stat.replies strong{color:var(--info)}
+    .toolbar .spacer{flex:1}
+    .filter-group{display:flex;gap:6px;flex-wrap:wrap}
+    .filter-btn{background:#f1f5f9;border:1px solid #cbd5e1;color:var(--text-light);padding:6px 14px;border-radius:5px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .filter-btn:hover{background:#e2e8f0;color:var(--text-dark)}
+    .filter-btn.active{background:var(--primary);color:#fff!important;border-color:var(--primary)}
+    /* Comment Cards */
+    .comment-list{display:flex;flex-direction:column;gap:12px}
+    .comment-card{background:#fff;border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);border:1px solid var(--border);transition:all .2s}
+    .comment-card.pending{border-left:4px solid var(--warning);background:linear-gradient(90deg,#fffbeb 0%,#fff 5%)}
+    .comment-card.approved{border-left:4px solid var(--success)}
+    .comment-card.is-official{border-left-color:var(--info);background:linear-gradient(90deg,#eff6ff 0%,#fff 5%)}
+    .comment-card.is-pinned{border-left-color:var(--warning);background:linear-gradient(90deg,#fefce8 0%,#fff 5%)}
+    .comment-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+    .comment-card-author{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .comment-card-author .nickname{font-weight:700;color:var(--primary);font-size:.95rem}
+    .official-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:700}
+    .pinned-badge{display:inline-flex;align-items:center;gap:4px;background:#facc15;color:#713f12;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:700}
+    .reply-badge{display:inline-flex;align-items:center;gap:4px;background:#dbeafe;color:#1e40af;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:600}
+    .pending-badge{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:700}
+    .approved-badge{display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#15803d;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:700}
+    .comment-card-time{font-size:.78rem;color:var(--text-light)}
+    .comment-card-body{font-size:.92rem;line-height:1.7;color:var(--text-dark);white-space:pre-wrap;word-break:break-word;margin-bottom:8px}
+    .comment-card-image{margin-top:8px}
+    .comment-card-image img{max-width:200px;max-height:200px;border-radius:6px;border:1px solid var(--border);cursor:pointer;transition:transform .2s}
+    .comment-card-image img:hover{transform:scale(1.03)}
+    .comment-card-meta{font-size:.78rem;color:var(--text-light);margin-bottom:10px;display:flex;gap:14px;flex-wrap:wrap}
+    .comment-card-meta span i{margin-right:3px}
+    .comment-card-actions{display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:12px;margin-top:8px}
+    /* Modal */
+    .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.active{display:flex}
+    .modal-card{background:#fff;border-radius:12px;padding:24px 28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+    .modal-card h3{font-size:1.1rem;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .modal-card textarea{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:.92rem;font-family:inherit;resize:vertical;min-height:90px;background:#fff;color:var(--text-dark)}
+    .modal-card textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(44,94,26,.15);outline:none}
+    .modal-card .reply-counter{text-align:right;font-size:.75rem;color:var(--text-light);margin-top:4px}
+    .modal-card .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+    .modal-card .hint{font-size:.78rem;color:var(--text-light);margin-top:6px;line-height:1.5}
+    /* Toast */
+    .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;font-size:.92rem;font-weight:500;z-index:10000;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+    .toast.show{opacity:1}
+    .toast.error{background:var(--danger)}
+    .toast.success{background:var(--success)}
+    .toast.warning{background:var(--warning)}
+    /* Lightbox */
+    .lightbox-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:10001;cursor:pointer;align-items:center;justify-content:center}
+    .lightbox-overlay.active{display:flex}
+    .lightbox-overlay img{max-width:90%;max-height:90%;border-radius:8px;object-fit:contain}
+    /* Empty State */
+    .empty-state{text-align:center;padding:60px 20px;color:var(--text-light)}
+    .empty-state i{font-size:3rem;display:block;margin-bottom:12px;color:#cbd5e1}
+    .empty-state p{font-size:.95rem}
+    /* Notice banner */
+    .notice{background:#eff6ff;border-left:3px solid var(--info);padding:10px 14px;border-radius:0 6px 6px 0;font-size:.85rem;color:#1e40af;margin-bottom:14px;line-height:1.6}
+    .notice i{margin-right:4px}
+    /* Responsive */
+    @media (max-width:640px){
+      .topbar h1{font-size:1.05rem}
+      .toolbar{padding:12px}
+      .filter-btn{padding:5px 10px;font-size:.78rem}
+      .comment-card{padding:14px}
+      .comment-card-actions .btn{font-size:.78rem;padding:6px 10px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== 頂部欄 ========== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <h1><i class="fas fa-shield-halved"></i> 留言管理後台</h1>
+    <div class="topbar-meta">
+      <span class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">檢查中…</span></span>
+      <a href="/info/vote/" target="_blank"><i class="fas fa-external-link-alt"></i> 返回投票頁</a>
+      <button type="button" id="btnLogout" class="btn btn-ghost btn-sm" style="display:none;" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> 登出
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 登入卡 ========== -->
+<div class="login-wrap" id="loginCard">
+  <h2><i class="fas fa-lock"></i> 管理員登入</h2>
+  <p class="login-desc">輸入你嘅管理員密鑰（ADMIN_SECRET），即可一鍵審核所有待處理留言。</p>
+  <div class="form-group">
+    <label for="adminSecret"><i class="fas fa-key"></i> 管理密鑰</label>
+    <input type="password" id="adminSecret" class="form-input" placeholder="輸入 ADMIN_SECRET…" autocomplete="off">
+  </div>
+  <button type="button" class="btn btn-primary btn-block" id="btnLogin" onclick="login()">
+    <i class="fas fa-sign-in-alt"></i> 登入
+  </button>
+  <p style="font-size:.78rem;color:var(--text-light);margin-top:14px;line-height:1.6;">
+    <i class="fas fa-info-circle"></i> 密鑰會儲存喺你瀏覽器嘅 sessionStorage，關閉瀏覽器後自動清除。<br>
+    若未設定密鑰，請先喺 Cloudflare Worker 執行：<code style="background:#f1f5f9;padding:2px 6px;border-radius:3px;font-size:.78rem;">npx wrangler secret put ADMIN_SECRET</code>
+  </p>
+</div>
+
+<!-- ========== 控制台 ========== -->
+<div class="dashboard" id="dashboard">
+
+  <div class="notice">
+    <i class="fas fa-lightbulb"></i>
+    <strong>使用提示：</strong>點擊【批准】即時公開留言；點擊【刪除】永久移除（含所有回覆）；點擊【官方回覆】以師傅身份回應；點擊【置頂】將留言釘喺列表最頂。
+  </div>
+
+  <!-- 工具欄 -->
+  <div class="toolbar">
+    <div class="stat pending"><i class="fas fa-hourglass-half"></i> 待審：<strong id="statPending">0</strong></div>
+    <div class="stat approved"><i class="fas fa-check-circle"></i> 已審：<strong id="statApproved">0</strong></div>
+    <div class="stat replies"><i class="fas fa-reply"></i> 回覆：<strong id="statReplies">0</strong></div>
+    <div class="stat"><i class="fas fa-comments"></i> 總數：<strong id="statTotal">0</strong></div>
+    <div class="spacer"></div>
+    <div class="filter-group">
+      <button type="button" class="filter-btn active" data-filter="all" onclick="setFilter('all')">全部</button>
+      <button type="button" class="filter-btn" data-filter="pending" onclick="setFilter('pending')">待審核</button>
+      <button type="button" class="filter-btn" data-filter="approved" onclick="setFilter('approved')">已公開</button>
+      <button type="button" class="filter-btn" data-filter="parents" onclick="setFilter('parents')">僅主留言</button>
+      <button type="button" class="filter-btn" data-filter="replies" onclick="setFilter('replies')">僅回覆</button>
+    </div>
+    <button type="button" class="btn btn-info btn-sm" onclick="loadComments()">
+      <i class="fas fa-rotate"></i> 重新整理
+    </button>
+  </div>
+
+  <!-- 留言列表 -->
+  <div class="comment-list" id="commentList">
+    <div class="empty-state">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>載入中…</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== 官方回覆 Modal ========== -->
+<div class="modal-overlay" id="replyModal">
+  <div class="modal-card">
+    <h3><i class="fas fa-reply"></i> 以官方身份回覆</h3>
+    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:10px;">
+      正回覆 <strong id="replyTargetName" style="color:var(--primary);"></strong> 嘅留言：
+    </p>
+    <textarea id="replyContent" placeholder="輸入官方回覆內容（純文字，1-500 字，URL 會自動遮蔽為 ***）" maxlength="500"></textarea>
+    <div class="reply-counter" id="replyCounter">0 / 500</div>
+    <p class="hint">
+      <i class="fas fa-info-circle"></i> 官方回覆會自動帶有【滅蟲師傅 官方回覆】綠色徽章，並即時公開顯示。
+    </p>
+    <div class="actions">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="closeReplyModal()">取消</button>
+      <button type="button" class="btn btn-success btn-sm" id="btnSubmitReply" onclick="submitOfficialReply()">
+        <i class="fas fa-paper-plane"></i> 發佈回覆
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 圖片燈箱 ========== -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" alt="大圖">
+</div>
+
+<!-- ========== Toast ========== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== 設定 ===== */
+var WORKER_BASE = 'https://comment-handler.bruceleehk.workers.dev';
+var PAGE_ID     = 'vote-page-2026';
+
+var adminSecret = '';
+var allComments = [];
+var currentFilter = 'all';
+var currentReplyTargetId = '';
+
+/* ===== 登入 ===== */
+function login() {
+  var secret = document.getElementById('adminSecret').value.trim();
+  if (!secret) {
+    showToast('請輸入管理密鑰', 'warning');
+    return;
+  }
+  adminSecret = secret;
+  try { sessionStorage.setItem('adminSecret', secret); } catch (e) {}
+  /* 嘗試載入 → 驗證密鑰正確性 */
+  loadComments().then(function (ok) {
+    if (ok) {
+      document.getElementById('loginCard').style.display = 'none';
+      document.getElementById('dashboard').classList.add('active');
+      document.getElementById('btnLogout').style.display = 'inline-flex';
+      showToast('登入成功！', 'success');
+    } else {
+      adminSecret = '';
+      try { sessionStorage.removeItem('adminSecret'); } catch (e) {}
+    }
+  });
+}
+
+function logout() {
+  adminSecret = '';
+  try { sessionStorage.removeItem('adminSecret'); } catch (e) {}
+  document.getElementById('loginCard').style.display = 'block';
+  document.getElementById('dashboard').classList.remove('active');
+  document.getElementById('btnLogout').style.display = 'none';
+  document.getElementById('adminSecret').value = '';
+}
+
+/* ===== 健康檢查 ===== */
+async function checkHealth() {
+  var pill = document.getElementById('statusPill');
+  var text = document.getElementById('statusText');
+  try {
+    var res = await fetch(WORKER_BASE + '/api/health');
+    var data = await res.json();
+    if (data.kv_bound) {
+      pill.className = 'status-pill ok';
+      text.textContent = 'Worker 正常';
+    } else {
+      pill.className = 'status-pill';
+      text.textContent = 'KV 未綁定';
+    }
+  } catch (err) {
+    pill.className = 'status-pill offline';
+    text.textContent = 'Worker 離線';
+  }
+}
+
+/* ===== 載入留言列表 ===== */
+async function loadComments() {
+  if (!adminSecret) return false;
+  var listEl = document.getElementById('commentList');
+  listEl.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>載入中…</p></div>';
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/list?page_id=' + PAGE_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, page_id: PAGE_ID })
+    });
+    if (res.status === 403) {
+      showToast('密鑰錯誤！請檢查 ADMIN_SECRET', 'error');
+      return false;
+    }
+    var data = await res.json();
+    if (!data.success) {
+      showToast(data.error || '載入失敗', 'error');
+      listEl.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>' + escHtml(data.error || '載入失敗') + '</p></div>';
+      return false;
+    }
+    allComments = data.comments || [];
+    updateStats(data);
+    renderList();
+    return true;
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+    listEl.innerHTML = '<div class="empty-state"><i class="fas fa-wifi"></i><p>無法連線至 Worker</p></div>';
+    return false;
+  }
+}
+
+/* ===== 統計更新 ===== */
+function updateStats(data) {
+  var total = allComments.length;
+  var pending = allComments.filter(function (c) { return c.approved === 0; }).length;
+  var approved = total - pending;
+  var replies = allComments.filter(function (c) { return c.parent_id; }).length;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statApproved').textContent = approved;
+  document.getElementById('statReplies').textContent = replies;
+}
+
+/* ===== 過濾 + 渲染 ===== */
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function (b) {
+    b.classList.toggle('active', b.getAttribute('data-filter') === f);
+  });
+  renderList();
+}
+
+function getFiltered() {
+  return allComments.filter(function (c) {
+    if (currentFilter === 'pending') return c.approved === 0;
+    if (currentFilter === 'approved') return c.approved === 1;
+    if (currentFilter === 'parents') return !c.parent_id;
+    if (currentFilter === 'replies') return !!c.parent_id;
+    return true;
+  });
+}
+
+function renderList() {
+  var list = getFiltered();
+  var listEl = document.getElementById('commentList');
+  if (list.length === 0) {
+    listEl.innerHTML = '<div class="empty-state"><i class="far fa-comment-dots"></i><p>沒有符合條件嘅留言</p></div>';
+    return;
+  }
+  /* 排序：未審核排前、最新排前 */
+  list.sort(function (a, b) {
+    if ((a.approved === 0) !== (b.approved === 0)) return a.approved === 0 ? -1 : 1;
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+  var html = '';
+  for (var i = 0; i < list.length; i++) {
+    html += renderCommentCard(list[i]);
+  }
+  listEl.innerHTML = html;
+}
+
+function renderCommentCard(c) {
+  var cls = 'comment-card ' + (c.approved === 0 ? 'pending' : 'approved');
+  if (c.is_official) cls += ' is-official';
+  if (c.is_pinned) cls += ' is-pinned';
+
+  var html = '<div class="' + cls + '" data-id="' + escAttr(c.id) + '">';
+  /* 頭部 */
+  html += '<div class="comment-card-head">';
+  html += '  <div class="comment-card-author">';
+  html += '    <span class="nickname">' + escHtml(c.nickname) + '</span>';
+  if (c.is_official) html += ' <span class="official-badge"><i class="fas fa-check-circle"></i> 官方</span>';
+  if (c.is_pinned) html += ' <span class="pinned-badge"><i class="fas fa-thumbtack"></i> 置頂</span>';
+  if (c.parent_id) html += ' <span class="reply-badge"><i class="fas fa-reply"></i> 回覆</span>';
+  if (c.approved === 0) html += ' <span class="pending-badge"><i class="fas fa-hourglass-half"></i> 待審</span>';
+  else html += ' <span class="approved-badge"><i class="fas fa-check"></i> 已公開</span>';
+  html += '  </div>';
+  html += '  <div class="comment-card-time">' + formatTime(c.created_at) + '</div>';
+  html += '</div>';
+
+  /* 若是回覆，標明父留言 */
+  if (c.parent_id) {
+    var parent = allComments.find(function (p) { return p.id === c.parent_id; });
+    var parentName = parent ? parent.nickname : '（已刪除）';
+    html += '<div style="font-size:.78rem;color:var(--text-light);margin-bottom:6px;">';
+    html += '<i class="fas fa-reply"></i> 回覆 <strong>@' + escHtml(parentName) + '</strong>：';
+    html += '</div>';
+  }
+
+  /* 內容 */
+  html += '<div class="comment-card-body">' + escHtml(c.content) + '</div>';
+
+  /* 圖片 */
+  if (c.image_url) {
+    html += '<div class="comment-card-image">';
+    html += '  <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" onclick="openLightbox(\'' + escAttr(c.image_url) + '\')">';
+    html += '</div>';
+  }
+
+  /* meta */
+  html += '<div class="comment-card-meta">';
+  html += '  <span><i class="fas fa-hashtag"></i> ID: <code>' + escHtml(c.id) + '</code></span>';
+  if (c.client_ip && c.client_ip !== 'admin') {
+    html += '  <span><i class="fas fa-globe"></i> IP: ' + escHtml(c.client_ip) + '</span>';
+  }
+  html += '</div>';
+
+  /* 操作按鈕 */
+  html += '<div class="comment-card-actions">';
+  if (c.approved === 0) {
+    html += '  <button type="button" class="btn btn-success btn-sm" onclick="approveComment(\'' + escAttr(c.id) + '\')">';
+    html += '    <i class="fas fa-check"></i> 一鍵批准</button>';
+  }
+  if (!c.parent_id) {
+    html += '  <button type="button" class="btn btn-info btn-sm" onclick="openReplyModal(\'' + escAttr(c.id) + '\', \'' + escAttr(c.nickname).replace(/'/g, "\\'") + '\')">';
+    html += '    <i class="fas fa-reply"></i> 官方回覆</button>';
+    if (c.is_pinned) {
+      html += '  <button type="button" class="btn btn-warning btn-sm" onclick="togglePin(\'' + escAttr(c.id) + '\', false)">';
+      html += '    <i class="fas fa-thumbtack"></i> 取消置頂</button>';
+    } else {
+      html += '  <button type="button" class="btn btn-ghost btn-sm" onclick="togglePin(\'' + escAttr(c.id) + '\', true)" title="設為置頂">';
+      html += '    <i class="fas fa-thumbtack"></i> 置頂</button>';
+    }
+  }
+  html += '  <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment(\'' + escAttr(c.id) + '\', ' + (c.parent_id ? 'true' : 'false') + ')">';
+  html += '    <i class="fas fa-trash"></i> 刪除</button>';
+  html += '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+/* ===== 一鍵批准 ===== */
+async function approveComment(id) {
+  if (!confirm('確定批准呢條留言？批准後即時公開顯示。')) return;
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/approve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, id: id, page_id: PAGE_ID })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast('已批准留言！', 'success');
+      loadComments();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
+/* ===== 刪除 ===== */
+async function deleteComment(id, isReply) {
+  var msg = isReply ? '確定刪除呢條回覆？' : '確定刪除呢條留言？若佢有回覆，所有回覆都會一齊被刪除！';
+  if (!confirm(msg)) return;
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, id: id, page_id: PAGE_ID })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast(data.message || '已刪除', 'success');
+      loadComments();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
+/* ===== 置頂 / 取消置頂 ===== */
+async function togglePin(id, pin) {
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/pin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, id: id, pin: pin, page_id: PAGE_ID })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast(pin ? '已置頂留言' : '已取消置頂', 'success');
+      loadComments();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
+/* ===== 官方回覆 Modal ===== */
+function openReplyModal(parentId, parentName) {
+  currentReplyTargetId = parentId;
+  document.getElementById('replyTargetName').textContent = '@' + parentName;
+  document.getElementById('replyContent').value = '';
+  document.getElementById('replyCounter').textContent = '0 / 500';
+  document.getElementById('replyModal').classList.add('active');
+  setTimeout(function () { document.getElementById('replyContent').focus(); }, 100);
+}
+
+function closeReplyModal() {
+  document.getElementById('replyModal').classList.remove('active');
+  currentReplyTargetId = '';
+}
+
+document.getElementById('replyContent').addEventListener('input', function () {
+  var len = this.value.length;
+  document.getElementById('replyCounter').textContent = len + ' / 500';
+});
+
+async function submitOfficialReply() {
+  if (!currentReplyTargetId) return;
+  var content = document.getElementById('replyContent').value.trim();
+  if (!content) {
+    showToast('請輸入回覆內容', 'warning');
+    return;
+  }
+  if (content.length > 500) {
+    showToast('回覆最長 500 字', 'warning');
+    return;
+  }
+  var btn = document.getElementById('btnSubmitReply');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 發佈中…';
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/reply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: adminSecret,
+        parent_id: currentReplyTargetId,
+        content: content,
+        page_id: PAGE_ID
+      })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast('官方回覆已發佈！', 'success');
+      closeReplyModal();
+      loadComments();
+    } else {
+      showToast(data.error || '發佈失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 發佈回覆';
+  }
+}
+
+/* ===== 圖片燈箱 ===== */
+function openLightbox(url) {
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lightboxImg').src = '';
+}
+
+/* 鍵盤 */
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeReplyModal();
+  }
+});
+
+/* ===== 工具 ===== */
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (type || '');
+  setTimeout(function () { t.classList.add('show'); }, 50);
+  setTimeout(function () { t.classList.remove('show'); }, 2800);
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function escAttr(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function formatTime(isoStr) {
+  if (!isoStr) return '';
+  try {
+    var d = new Date(isoStr.replace(' ', 'T'));
+    if (isNaN(d.getTime())) return isoStr;
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0') + ' ' +
+      String(d.getHours()).padStart(2, '0') + ':' +
+      String(d.getMinutes()).padStart(2, '0');
+  } catch (e) {
+    return isoStr;
+  }
+}
+
+/* Enter 鍵登入 */
+document.getElementById('adminSecret').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') login();
+});
+
+/* ===== 自動登入（如有 sessionStorage） ===== */
+window.addEventListener('DOMContentLoaded', function () {
+  checkHealth();
+  try {
+    var saved = sessionStorage.getItem('adminSecret');
+    if (saved) {
+      document.getElementById('adminSecret').value = saved;
+      login();
+    }
+  } catch (e) {}
+  /* 每 60 秒自動刷新 */
+  setInterval(function () {
+    if (adminSecret && !document.hidden) loadComments();
+  }, 60000);
+});
+</script>
+
+</body>
+</html>

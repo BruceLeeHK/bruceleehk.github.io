@@ -135,6 +135,71 @@ textarea.form-input{resize:vertical;min-height:90px}
 .lightbox-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:10000;cursor:pointer;align-items:center;justify-content:center}
 .lightbox-overlay.active{display:flex}
 .lightbox-overlay img{max-width:90%;max-height:90%;border-radius:8px;object-fit:contain}
+
+/* ── 優化方案 v2：樹狀回覆 + 官方徽章 + 數學驗證 + 置頂 ── */
+/* 審核中標籤 */
+.pending-tag{display:inline-flex;align-items:center;gap:4px;background:#fef3c7;color:#92400e;font-size:.72rem;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:8px;vertical-align:middle}
+.pending-tag i{font-size:.7rem}
+/* 官方回覆徽章 */
+.official-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;font-size:.72rem;padding:2px 8px;border-radius:10px;font-weight:700;margin-left:8px;vertical-align:middle;box-shadow:0 1px 4px rgba(22,163,74,.3);letter-spacing:.3px}
+.official-badge i{font-size:.7rem}
+/* 置頂留言 */
+.comment-item.is-pinned{background:linear-gradient(135deg,#fef9c3,#fefce8);border-color:#fde047;box-shadow:0 2px 8px rgba(253,224,71,.25)}
+.pinned-tag{display:inline-flex;align-items:center;gap:4px;background:#facc15;color:#713f12;font-size:.72rem;padding:2px 8px;border-radius:10px;font-weight:700;margin-left:8px;vertical-align:middle}
+.pinned-tag i{font-size:.7rem}
+/* 樹狀回覆容器 */
+.reply-thread{margin-top:12px;padding-left:18px;border-left:3px solid #e2e8f0;margin-left:8px}
+.reply-thread .comment-item{background:#f8fafc;border-color:#e2e8f0;padding:12px 14px;margin-bottom:8px}
+.reply-thread .comment-item.is-official{background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-color:#86efac}
+.reply-thread .comment-item.is-official .comment-nickname{color:#15803d}
+/* 回覆按鈕 */
+.btn-reply{display:inline-flex;align-items:center;gap:4px;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:4px 10px;border-radius:5px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:8px}
+.btn-reply:hover{background:#e2e8f0;color:#1e293b;border-color:#94a3b8}
+.btn-reply.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+/* 回覆提示條 */
+.reply-hint{display:flex;align-items:center;gap:8px;background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;padding:8px 12px;border-radius:6px;margin-bottom:10px;font-size:.85rem}
+.reply-hint .cancel-reply{margin-left:auto;color:#dc2626;font-weight:600;cursor:pointer;background:none;border:none;padding:2px 6px}
+.reply-hint .cancel-reply:hover{text-decoration:underline}
+/* 回覆表單（嵌入式） */
+.reply-form-inline{background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:14px;margin:8px 0 12px;display:none}
+.reply-form-inline.active{display:block}
+.reply-form-inline textarea{width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:5px;font-size:.9rem;font-family:inherit;resize:vertical;min-height:70px;background:#fff;color:#1e293b}
+.reply-form-inline textarea:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.15);outline:none}
+.reply-form-inline .reply-counter{text-align:right;font-size:.72rem;color:#94a3b8;margin-top:3px}
+.reply-form-inline .reply-counter.warn{color:#d32f2f}
+.reply-form-inline .reply-actions{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.reply-form-inline .btn-submit-reply{background:var(--primary);color:#fff!important;border:none;padding:7px 18px;border-radius:5px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.reply-form-inline .btn-submit-reply:hover{background:var(--primary-hover);transform:translateY(-1px)}
+.reply-form-inline .btn-submit-reply:disabled{background:#94a3b8;cursor:not-allowed;transform:none}
+.reply-form-inline .reply-captcha{display:flex;align-items:center;gap:6px;font-size:.85rem;color:#475569}
+.reply-form-inline .reply-captcha input{width:60px;padding:4px 6px;border:1px solid #cbd5e1;border-radius:4px;font-size:.85rem;text-align:center;background:#fff;color:#1e293b}
+/* 展開回覆 */
+.toggle-replies{display:inline-flex;align-items:center;gap:4px;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;padding:4px 10px;border-radius:5px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px}
+.toggle-replies:hover{background:#bae6fd}
+.toggle-replies .reply-count{background:#0369a1;color:#fff;padding:1px 6px;border-radius:8px;font-size:.7rem;font-weight:700}
+/* 主留言數學驗證 */
+.captcha-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.captcha-row label{font-weight:600;color:#334155;font-size:.9rem}
+.captcha-row .captcha-q{background:#f1f5f9;border:1px solid #cbd5e1;padding:6px 12px;border-radius:5px;font-size:.95rem;font-weight:600;color:#1e293b}
+.captcha-row input{width:70px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:5px;font-size:.95rem;text-align:center;background:#fff;color:#1e293b}
+.captcha-row input:focus{border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.15);outline:none}
+.captcha-row .captcha-refresh{background:none;border:none;color:#0284c7;cursor:pointer;font-size:1rem;padding:4px}
+.captcha-row .captcha-hint{font-size:.78rem;color:#94a3b8}
+/* 投票→留言彈窗 */
+.vote-comment-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:9998;align-items:center;justify-content:center;padding:20px}
+.vote-comment-modal.active{display:flex}
+.vote-comment-modal .modal-card{background:#fff;border-radius:14px;padding:28px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center}
+.vote-comment-modal h3{font-size:1.3rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.vote-comment-modal p{color:#475569;line-height:1.7;margin-bottom:18px;font-size:.95rem}
+.vote-comment-modal .modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.vote-comment-modal .btn-modal-primary{background:var(--primary);color:#fff!important;border:none;padding:10px 22px;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s}
+.vote-comment-modal .btn-modal-primary:hover{background:var(--primary-hover);transform:translateY(-1px)}
+.vote-comment-modal .btn-modal-secondary{background:#f1f5f9;color:#475569!important;border:1px solid #cbd5e1;padding:10px 22px;border-radius:6px;font-weight:600;cursor:pointer;transition:all .2s}
+.vote-comment-modal .btn-modal-secondary:hover{background:#e2e8f0}
+/* 無回覆圖示提示 */
+.no-url-notice{font-size:.74rem;color:#dc2626;margin-top:4px;display:flex;align-items:center;gap:4px}
+.no-url-notice i{font-size:.7rem}
+
 /* CTA Box */
 .blog-cta-box{background:linear-gradient(135deg,var(--primary),#3a7a22);color:var(--white);border-radius:var(--radius);padding:28px 32px;margin:32px auto;max-width:900px;text-align:center}
 .blog-cta-box h4{color:var(--white);font-size:1.15rem;margin-bottom:8px}
@@ -388,8 +453,8 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
               <div class="char-counter" id="charCounter">0 / 2000</div>
             </div>
 
-            <!-- ── 圖片上傳區（選填） ── -->
-            <div class="upload-area">
+            <!-- ── 圖片上傳區（選填，僅主留言可上傳） ── -->
+            <div class="upload-area" id="uploadArea">
               <div class="upload-hint">
                 <i class="fas fa-camera" style="color:#0284c7;"></i> 上傳蟲害照片（選填，支援 JPG / PNG / WebP，最大 4MB）
               </div>
@@ -407,9 +472,25 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
               </div>
             </div>
 
+            <!-- ── 數學驗證（防 Robot） ── -->
+            <div class="captcha-row" id="captchaRow">
+              <label><i class="fas fa-shield-halved"></i> 數學驗證：</label>
+              <span class="captcha-q" id="captchaQuestion">3 + 5 = ?</span>
+              <input type="number" id="captchaAnswer" placeholder="答案" inputmode="numeric" autocomplete="off">
+              <button type="button" class="captcha-refresh" onclick="refreshCaptcha()" title="換一題"><i class="fas fa-rotate"></i></button>
+              <span class="captcha-hint">（防廣告 Bot）</span>
+            </div>
+
             <button type="button" id="btnSubmitComment" class="btn-submit-comment" onclick="submitComment()">
               <i class="fas fa-paper-plane"></i> 提交留言
             </button>
+          </div>
+
+          <!-- ── 回覆提示條（提交回覆時顯示） ── -->
+          <div class="reply-hint" id="replyHint" style="display:none;">
+            <i class="fas fa-reply"></i>
+            <span id="replyHintText">正回覆 @：</span>
+            <button type="button" class="cancel-reply" onclick="cancelReply()">取消回覆</button>
           </div>
 
           <!-- ── 留言列表 ── -->
@@ -430,6 +511,22 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <!-- 圖片燈箱 -->
       <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
         <img id="lightboxImg" alt="大圖">
+      </div>
+
+      <!-- 投票→留言彈窗 -->
+      <div class="vote-comment-modal" id="voteCommentModal">
+        <div class="modal-card">
+          <h3><i class="fas fa-comments"></i> 投票成功！</h3>
+          <p id="voteModalText">你已經投出你嘅一票！想知道點樣防蟲？睇睇下面其他苦主嘅討論，或者向滅蟲師傅發問啦 👇</p>
+          <div class="modal-actions">
+            <button type="button" class="btn-modal-primary" onclick="scrollToComments()">
+              <i class="fas fa-arrow-down"></i> 睇下苦主討論
+            </button>
+            <button type="button" class="btn-modal-secondary" onclick="closeVoteModal()">
+              稍後再看
+            </button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -532,6 +629,24 @@ function submitVote(){
   document.getElementById('btnVote').textContent='✅ 已投票！多謝參與';
   renderVoteCounts(); renderResults();
   showToast('投票成功！多謝你嘅參與 🗳️');
+  /* 投票→留言彈窗 */
+  var topPest = selectedPests[0];
+  var pestName = (pestDetails[topPest] && pestDetails[topPest].name) || selectedPests.join('、');
+  var modalText = '你投咗【' + pestName + '】一票！想知道點樣防蟲？睇睇下面其他苦主嘅討論，或向師傅發問 👇';
+  document.getElementById('voteModalText').textContent = modalText;
+  document.getElementById('voteCommentModal').classList.add('active');
+}
+
+/* 關閉投票彈窗 */
+function closeVoteModal(){
+  document.getElementById('voteCommentModal').classList.remove('active');
+}
+
+/* 滾動到留言區 */
+function scrollToComments(){
+  closeVoteModal();
+  var target = document.querySelector('.comment-outer-wrap');
+  if(target){ target.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 
 /* 渲染 Top 10 排名 */
@@ -572,17 +687,26 @@ function showToast(msg){
 </script>
 
 
-<!-- ========== 自建原生留言系統 JS ========== -->
+<!-- ========== 自建原生留言系統 JS（優化版 v2） ========== -->
 <script>
 /* ===== 設定 ===== */
-var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
+var WORKER_BASE = 'https://comment-handler.bruceleehk.workers.dev';
 var WORKER_API  = WORKER_BASE + '/api/comments';
+var WORKER_ADMIN_LIST   = WORKER_BASE + '/api/admin/list';
+var WORKER_ADMIN_APPROVE= WORKER_BASE + '/api/admin/approve';
 var IMGBB_API   = 'https://api.imgbb.com/1/upload?key=ce40a78dcffdbc8784afa308b8bd7cbb';
 var PAGE_ID     = 'vote-page-2026';
+var LOCAL_STORAGE_KEY = 'pendingComments:' + PAGE_ID;
 var workerStatus = 'unknown'; /* 'ok' | 'degraded' | 'unknown' */
 
 /* 上傳後嘅圖片資料（全頁面共用） */
 var uploadedImage = { url: '', thumb: '' };
+
+/* 當前回覆目標 */
+var currentReplyTo = null; /* { id, nickname } 或 null */
+
+/* 數學驗證題目 */
+var captcha = { a: 3, b: 5 };
 
 /* ===== Worker 健康檢查 ===== */
 async function checkWorkerHealth() {
@@ -594,6 +718,16 @@ async function checkWorkerHealth() {
     workerStatus = 'offline';
     console.warn('Worker 健康檢查失敗:', err.message);
   }
+}
+
+/* ===== 數學驗證碼 ===== */
+function refreshCaptcha() {
+  captcha.a = Math.floor(Math.random() * 10) + 1; /* 1-10 */
+  captcha.b = Math.floor(Math.random() * 10) + 1; /* 1-10 */
+  var q = document.getElementById('captchaQuestion');
+  if (q) q.textContent = captcha.a + ' + ' + captcha.b + ' = ?';
+  var ans = document.getElementById('captchaAnswer');
+  if (ans) ans.value = '';
 }
 
 /* ===== 圖片上傳 + 預覽 ===== */
@@ -671,11 +805,12 @@ function removeImage() {
   document.getElementById('imgPreview').src = '';
 }
 
-/* ===== 提交留言 ===== */
+/* ===== 提交留言（主留言或回覆） ===== */
 async function submitComment() {
   var nickname   = document.getElementById('inputNickname').value.trim();
   var content    = document.getElementById('inputContent').value.trim();
   var btn        = document.getElementById('btnSubmitComment');
+  var captchaAns = parseInt(document.getElementById('captchaAnswer').value, 10);
 
   /* 驗證 */
   if (!nickname) {
@@ -687,13 +822,45 @@ async function submitComment() {
     showToast('暱稱最長 30 字');
     return;
   }
-  if (!content) {
-    showToast('請輸入留言內容');
-    document.getElementById('inputContent').focus();
+
+  /* 回覆專屬驗證 */
+  if (currentReplyTo) {
+    if (content.length < 10) {
+      showToast('回覆最少 10 字');
+      document.getElementById('inputContent').focus();
+      return;
+    }
+    if (content.length > 300) {
+      showToast('回覆最長 300 字');
+      return;
+    }
+    /* 偵測 URL，前端先擋一次（後端會再擋） */
+    if (/\b(https?:\/\/|ftp:\/\/|www\.)\S+/i.test(content) || /\b[a-z0-9-]+\.(com|net|org|io|hk|tw|cn|info|biz|cc|tv|me|club|xyz|top)\b/i.test(content)) {
+      showToast('回覆嚴禁附加網址（URL）');
+      return;
+    }
+  } else {
+    if (!content) {
+      showToast('請輸入留言內容');
+      document.getElementById('inputContent').focus();
+      return;
+    }
+    if (content.length > 2000) {
+      showToast('留言最長 2000 字');
+      return;
+    }
+  }
+
+  /* 數學驗證 */
+  if (Number.isNaN(captchaAns)) {
+    showToast('請完成數學驗證');
+    document.getElementById('captchaAnswer').focus();
     return;
   }
-  if (content.length > 2000) {
-    showToast('留言最長 2000 字');
+  if (captcha.a + captcha.b !== captchaAns) {
+    showToast('數學驗證答案錯誤，請重新作答');
+    refreshCaptcha();
+    document.getElementById('captchaAnswer').focus();
     return;
   }
 
@@ -703,12 +870,18 @@ async function submitComment() {
 
   try {
     var payload = {
-      page_id:   PAGE_ID,
-      nickname:  nickname,
-      content:   content,
-      image_url: uploadedImage.url,
-      thumb_url: uploadedImage.thumb
+      page_id:        PAGE_ID,
+      nickname:       nickname,
+      content:        content,
+      image_url:      currentReplyTo ? '' : uploadedImage.url,    /* 回覆嚴禁圖片 */
+      thumb_url:      currentReplyTo ? '' : uploadedImage.thumb,
+      captcha_a:      captcha.a,
+      captcha_b:      captcha.b,
+      captcha_answer: captchaAns
     };
+    if (currentReplyTo) {
+      payload.parent_id = currentReplyTo.id;
+    }
 
     var res  = await fetch(WORKER_API, {
       method: 'POST',
@@ -719,18 +892,40 @@ async function submitComment() {
     var data = await res.json();
 
     if (data.success) {
-      showToast(data.message || '留言已提交！需經審核後公開顯示');
+      showToast(data.message || (currentReplyTo ? '回覆已提交！需經審核後公開顯示' : '留言已提交！需經審核後公開顯示'));
+
+      /* ===== localStorage 即時預覽 ===== */
+      var localPending = {
+        id:          data.comment_id || ('local-' + Date.now()),
+        nickname:    nickname,
+        content:     content,
+        image_url:   currentReplyTo ? '' : uploadedImage.url,
+        thumb_url:   currentReplyTo ? '' : uploadedImage.thumb,
+        parent_id:   currentReplyTo ? currentReplyTo.id : '',
+        is_reply:    !!currentReplyTo,
+        created_at:  new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),
+        pending_local: true
+      };
+      savePendingComment(localPending);
 
       /* 清空表單 */
       document.getElementById('inputNickname').value = '';
       document.getElementById('inputContent').value = '';
       document.getElementById('charCounter').textContent = '0 / 2000';
       removeImage();
+      refreshCaptcha();
+
+      /* 取消回覆模式 */
+      if (currentReplyTo) cancelReply();
 
       /* 重新載入留言列表 */
       loadComments();
     } else {
       showToast(data.error || '提交失敗（錯誤碼：' + (data.code || res.status) + '）');
+      /* 數學驗證錯誤時換新題 */
+      if (data.code === 'CAPTCHA_WRONG' || data.code === 'CAPTCHA_MISSING' || data.code === 'CAPTCHA_INVALID') {
+        refreshCaptcha();
+      }
     }
   } catch (err) {
     /* 診斷具體原因 */
@@ -748,7 +943,64 @@ async function submitComment() {
   }
 }
 
-/* ===== 載入留言列表 ===== */
+/* ===== localStorage 暫存（即時預覽） ===== */
+function getPendingComments() {
+  try { return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+function savePendingComment(c) {
+  var list = getPendingComments();
+  list.push(c);
+  try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+}
+function removePendingComment(id) {
+  var list = getPendingComments().filter(function (c) { return c.id !== id; });
+  try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+}
+
+/* ===== 回覆模式 ===== */
+function startReply(parentId, parentNickname) {
+  currentReplyTo = { id: parentId, nickname: parentNickname };
+  /* 顯示回覆提示條 */
+  var hint = document.getElementById('replyHint');
+  document.getElementById('replyHintText').innerHTML = '正回覆 <strong>@' + escHtml(parentNickname) + '</strong>：';
+  hint.style.display = 'flex';
+  /* 隱藏圖片上傳區（回覆嚴禁圖片） */
+  var uploadArea = document.getElementById('uploadArea');
+  if (uploadArea) uploadArea.style.display = 'none';
+  /* 改 placeholder + 上限 */
+  var contentInput = document.getElementById('inputContent');
+  contentInput.setAttribute('maxlength', '300');
+  contentInput.setAttribute('placeholder', '回覆 @' + parentNickname + '（純文字，10-300 字，嚴禁網址）');
+  var counter = document.getElementById('charCounter');
+  counter.textContent = contentInput.value.length + ' / 300';
+  /* 改按鈕文字 */
+  var btn = document.getElementById('btnSubmitComment');
+  btn.innerHTML = '<i class="fas fa-reply"></i> 提交回覆';
+  /* 滾動到表單 */
+  document.getElementById('commentForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  contentInput.focus();
+}
+
+function cancelReply() {
+  currentReplyTo = null;
+  var hint = document.getElementById('replyHint');
+  hint.style.display = 'none';
+  /* 還原圖片上傳區 */
+  var uploadArea = document.getElementById('uploadArea');
+  if (uploadArea) uploadArea.style.display = 'block';
+  /* 還原 placeholder + 上限 */
+  var contentInput = document.getElementById('inputContent');
+  contentInput.setAttribute('maxlength', '2000');
+  contentInput.setAttribute('placeholder', '分享你嘅害蟲遭遇、求助經驗或防蟲心得…');
+  var counter = document.getElementById('charCounter');
+  counter.textContent = contentInput.value.length + ' / 2000';
+  /* 還原按鈕文字 */
+  var btn = document.getElementById('btnSubmitComment');
+  btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+}
+
+/* ===== 載入留言列表（樹狀結構 + 本地暫存混合渲染） ===== */
 async function loadComments() {
   var listEl    = document.getElementById('commentList');
   var countEl   = document.getElementById('commentCount');
@@ -758,36 +1010,69 @@ async function loadComments() {
     var res  = await fetch(WORKER_API + '?page_id=' + PAGE_ID + '&limit=50');
     var data = await res.json();
 
-    if (!data.success || !data.comments || data.comments.length === 0) {
+    /* 後端回傳的已審核留言（樹狀） */
+    var remoteComments = (data.success && Array.isArray(data.comments)) ? data.comments : [];
+
+    /* 本地暫存的待審核留言 */
+    var localPending = getPendingComments();
+
+    /* 清掉後端已收錄的暫存（避免重複顯示） */
+    var remoteIds = new Set();
+    function collectIds(c) {
+      remoteIds.add(c.id);
+      if (Array.isArray(c.replies)) c.replies.forEach(collectIds);
+    }
+    remoteComments.forEach(collectIds);
+
+    var stillLocal = localPending.filter(function (c) { return !remoteIds.has(c.id); });
+    if (stillLocal.length !== localPending.length) {
+      try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stillLocal)); } catch (e) {}
+    }
+
+    /* 把本地暫存嵌入到對應位置 */
+    /* 1) 主留言 → 加到列表頂部 */
+    var localParents = stillLocal.filter(function (c) { return !c.parent_id; });
+    /* 2) 回覆 → 加到對應 parent 的 replies[] */
+    var localReplies = stillLocal.filter(function (c) { return c.parent_id; });
+
+    /* 合併：本地暫存 + 後端 */
+    var merged = remoteComments.slice();
+    localParents.forEach(function (p) { merged.unshift(p); });
+    localReplies.forEach(function (r) {
+      var parent = merged.find(function (p) { return p.id === r.parent_id; });
+      if (parent) {
+        if (!Array.isArray(parent.replies)) parent.replies = [];
+        parent.replies.push(r);
+      } else {
+        /* 父留言不在列表中（可能也被刪除或還沒審核），先隱藏 */
+        /* 或者把它當作孤兒放到列表底部 */
+        merged.push(Object.assign({ orphan: true }, r));
+      }
+    });
+
+    /* 計數（只算主留言） */
+    var total = merged.filter(function (c) { return !c.parent_id; }).length;
+
+    if (total === 0 && localReplies.length === 0) {
       countEl.textContent = '0';
       if (noComment) noComment.style.display = 'block';
+      listEl.innerHTML = '';
+      var noHtml = '<div class="no-comments" id="noComments">' +
+        '<i class="far fa-comment-dots"></i>' +
+        '暫時未有留言，成為第一個分享經驗嘅人啦！</div>';
+      listEl.innerHTML = noHtml;
       return;
     }
 
-    var comments = data.comments;
-    countEl.textContent = comments.length;
+    countEl.textContent = total;
     if (noComment) noComment.style.display = 'none';
 
     /* 構建 HTML */
     var html = '';
-    for (var i = 0; i < comments.length; i++) {
-      var c = comments[i];
-      var timeStr = formatTime(c.created_at);
-
-      html += '<div class="comment-item">';
-      html += '  <div class="comment-meta">';
-      html += '    <span class="comment-nickname">' + escHtml(c.nickname) + '</span>';
-      html += '    <span class="comment-time">' + timeStr + '</span>';
-      html += '  </div>';
-      html += '  <div class="comment-body">' + escHtml(c.content) + '</div>';
-
-      if (c.image_url) {
-        html += '  <div class="comment-image">';
-        html += '    <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" onclick="openLightbox(\'' + escAttr(c.image_url) + '\')">';
-        html += '  </div>';
-      }
-
-      html += '</div>';
+    for (var i = 0; i < merged.length; i++) {
+      var c = merged[i];
+      if (c.parent_id && c.orphan) continue; /* 跳過孤兒回覆 */
+      html += renderCommentHtml(c, false);
     }
 
     listEl.innerHTML = html;
@@ -798,12 +1083,70 @@ async function loadComments() {
   }
 }
 
-/* ===== 字數統計 ===== */
+/* ===== 渲染單條留言 HTML（含樹狀回覆） ===== */
+function renderCommentHtml(c, isReply) {
+  var timeStr = formatTime(c.created_at);
+  var cls = 'comment-item';
+  if (isReply) cls += ' reply-item';
+  if (c.is_official) cls += ' is-official';
+  if (c.is_pinned) cls += ' is-pinned';
+  if (c.pending_local) cls += ' pending-local';
+
+  var html = '<div class="' + cls + '" data-id="' + escAttr(c.id) + '">';
+  html += '  <div class="comment-meta">';
+  html += '    <span class="comment-nickname">' + escHtml(c.nickname);
+  /* 官方徽章 */
+  if (c.is_official) {
+    html += ' <span class="official-badge"><i class="fas fa-check-circle"></i> 滅蟲師傅 官方回覆</span>';
+  }
+  /* 置頂標籤 */
+  if (c.is_pinned) {
+    html += ' <span class="pinned-tag"><i class="fas fa-thumbtack"></i> 置頂</span>';
+  }
+  /* 審核中標籤（僅提交者本人可見） */
+  if (c.pending_local) {
+    html += ' <span class="pending-tag"><i class="fas fa-hourglass-half"></i> 審核中…</span>';
+  }
+  html += '</span>';
+  html += '    <span class="comment-time">' + timeStr + '</span>';
+  html += '  </div>';
+  html += '  <div class="comment-body">' + escHtml(c.content) + '</div>';
+
+  /* 圖片（主留言 + 非本地暫存才有） */
+  if (c.image_url && !c.pending_local) {
+    html += '  <div class="comment-image">';
+    html += '    <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" onclick="openLightbox(\'' + escAttr(c.image_url) + '\')">';
+    html += '  </div>';
+  }
+
+  /* 回覆按回覆按鈕（僅主留言 + 非本地暫存 + 已審核） */
+  if (!isReply && !c.pending_local) {
+    html += '  <button type="button" class="btn-reply" onclick="startReply(\'' + escAttr(c.id) + '\', \'' + escAttr(c.nickname).replace(/'/g, "\\'") + '\')">';
+    html += '    <i class="fas fa-reply"></i> 回覆';
+    html += '  </button>';
+  }
+
+  /* 樹狀回覆 */
+  if (Array.isArray(c.replies) && c.replies.length > 0) {
+    html += '  <div class="reply-thread">';
+    for (var j = 0; j < c.replies.length; j++) {
+      html += renderCommentHtml(c.replies[j], true);
+    }
+    html += '  </div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+/* ===== 字數統計（依主留言/回覆切換上限） ===== */
 document.getElementById('inputContent').addEventListener('input', function() {
   var len = this.value.length;
+  var max = currentReplyTo ? 300 : 2000;
+  var warnLimit = currentReplyTo ? 280 : 1800;
   var counter = document.getElementById('charCounter');
-  counter.textContent = len + ' / 2000';
-  counter.className = 'char-counter' + (len > 1800 ? ' warn' : '');
+  counter.textContent = len + ' / ' + max;
+  counter.className = 'char-counter' + (len > warnLimit ? ' warn' : '');
 });
 
 /* ===== 圖片燈箱 ===== */
@@ -819,7 +1162,10 @@ function closeLightbox() {
 
 /* 鍵盤關閉 */
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeVoteModal();
+  }
 });
 
 /* ===== 工具函數 ===== */
@@ -827,13 +1173,13 @@ document.addEventListener('keydown', function(e) {
 /** HTML 跳脫 */
 function escHtml(str) {
   if (!str) return '';
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 /** 屬性跳脫 */
 function escAttr(str) {
   if (!str) return '';
-  return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 /** 時間格式化 */
@@ -884,10 +1230,17 @@ function compressForImgbb(file, maxPx, quality) {
   });
 }
 
-/* ===== 初始化：健康檢查 + 載入留言 ===== */
+/* ===== 初始化：健康檢查 + 載入留言 + 數學驗證 ===== */
+refreshCaptcha();
 checkWorkerHealth();
 loadComments();
+
+/* 每 60 秒自動刷新留言列表（讓剛批准嘅留言即時顯示） */
+setInterval(function() {
+  if (!document.hidden) loadComments();
+}, 60000);
 </script>
+
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
 <script type="application/ld+json">
@@ -920,7 +1273,7 @@ loadComments();
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "2026年港人最厭惡嘅害蟲係邊隻？", "acceptedAnswer": { "@type": "Answer", "text": "根據滅蟲師傅網站嘅全民投票結果，2026年香港人最厭惡 害蟲排名會由市民投票即時產生。候選名單涵蓋床蝨、白蟻、蟑螂、老鼠等20種常見害蟲，每人可投1至10票。" } },
+    { "@type": "Question", "name": "2026年港人最厭惡嘅害蟲係邊隻？", "acceptedAnswer": { "@type": "Answer", "text": "根據滅蟲師傅網站嘅全民投票結果，2026年香港人最厭惡�害蟲排名會由市民投票即時產生。候選名單涵蓋床蝨、白蟻、蟑螂、老鼠等20種常見害蟲，每人可投1至10票。" } },
     { "@type": "Question", "name": "香港最常見嘅家居害蟲有邊幾種？", "acceptedAnswer": { "@type": "Answer", "text": "香港常見家居害蟲包括四大類：咬人血吸類（床蝨、蚊、蜂、蜈蚣、臭屁蟲）、結構毀滅類（白蟻、老鼠、衣魚、煙甲蟲）、衛生病菌類（蟑螂、蛆蟲、甲蟲）、同潮濕騷擾類（螞蟻、卜泥、飛蟲、蟎蟲、衣蛾、壁虎、蜘蛛）。" } },
     { "@type": "Question", "name": "點樣參與害蟲投票？", "acceptedAnswer": { "@type": "Answer", "text": "喺投票頁面選出你最厭惡嘅1至10種害蟲，然後撳「投出我嘅一票」即可。投票結果會即時更新，每個瀏覽器只可投票一次。" } },
     { "@type": "Question", "name": "床蝨同白蟻邊隻更可怕？", "acceptedAnswer": { "@type": "Answer", "text": "床蝨直接咬人吸血，嚴重影響睡眠同心理健康；白蟻則默默蛀食木材，造成巨大財產損失。兩者危害性質唔同，邊隻更可怕就由你投票決定！" } }
