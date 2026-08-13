@@ -1,47 +1,36 @@
-# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（優化版 v2）
+# Cloudflare Worker ?�置 ??滅蟲師�? ?�建?��??��?系統（優?��? v2�?#
+# ?�署步�?�?#   1. 建�? KV Namespace（�??��?）�?
+#      Dashboard: Workers & Pages ??KV ??Create namespace ???�稱: COMMENT_KV ??複製 ID
+#      CLI:      npx wrangler kv namespace create COMMENT_KV ??複製 id
+#   2. 將�???id ?��??��??�實??KV Namespace ID
+#   3. 設�?管�?密鑰：npx wrangler secret put ADMIN_SECRET
+#   4. ?�署：npx wrangler deploy
 #
-# 部署步驟：
-#   1. 建立 KV Namespace（二選一）：
-#      Dashboard: Workers & Pages → KV → Create namespace → 名稱: COMMENT_KV → 複製 ID
-#      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
-#   2. 將下方 id 替換為你嘅實際 KV Namespace ID
-#   3. 設定管理密鑰：npx wrangler secret put ADMIN_SECRET
-#   4. 部署：npx wrangler deploy
+# ===== ?��??��? v2 ?��??�能 =====
+#   ??樹�?/嵌�??��?（parent_id�?#   ??官方?��?綠色徽�?（is_official，�? ADMIN_SECRET�?#   ??置�?官方?��?（is_pinned�?#   ??一?�批??/ 一?�刪??後台 API
+#   ???��??�廣?��?純�?字、嚴�?URL??0??00 字�?0 秒頻?��???#   ???�學驗�?（防 Robot�?#   ??GET /api/comments ?�傳樹�?結�?
 #
-# ===== 優化方案 v2 新增功能 =====
-#   ✅ 樹狀/嵌套回覆（parent_id）
-#   ✅ 官方回覆綠色徽章（is_official，需 ADMIN_SECRET）
-#   ✅ 置頂官方留言（is_pinned）
-#   ✅ 一鍵批准 / 一鍵刪除 後台 API
-#   ✅ 回覆防廣告：純文字、嚴禁 URL、10–300 字、30 秒頻率限制
-#   ✅ 數學驗證（防 Robot）
-#   ✅ GET /api/comments 回傳樹狀結構
+# ===== API 端�? =====
+#   GET  /api/health                  ???�康檢查
+#   GET  /api/comments?page_id=xxx    ??讀?�已審核?��?（樹?�結�?�?#   POST /api/comments                ???�交?��?言（主?��??��?覆�?
+#   POST /api/admin/list              ???�出?�?��?言（含?�審?��?
+#   POST /api/admin/approve           ??審核?��?
+#   POST /api/admin/delete            ???�除?��?（�?��?��?�?#   POST /api/admin/reply             ??管�??��??��?覆�??��?審核 + is_official�?#   POST /api/admin/pin               ??置�? / ?��?置�?
 #
-# ===== API 端點 =====
-#   GET  /api/health                  → 健康檢查
-#   GET  /api/comments?page_id=xxx    → 讀取已審核留言（樹狀結構）
-#   POST /api/comments                → 提交新留言（主留言或回覆）
-#   POST /api/admin/list              → 列出所有留言（含未審核）
-#   POST /api/admin/approve           → 審核通過
-#   POST /api/admin/delete            → 刪除留言（連帶回覆）
-#   POST /api/admin/reply             → 管理員官方回覆（自動審核 + is_official）
-#   POST /api/admin/pin               → 置頂 / 取消置頂
-#
-# ===== 審核密鑰設定 =====
+# ===== 審核密鑰設�? =====
 #   npx wrangler secret put ADMIN_SECRET
-#   → 輸入一個強壯嘅密鑰（建議 32+ 字元隨機字串）
-#   → 此密鑰用於所有 /api/admin/* 端點
+#   ??輸入一?�強壯�?密鑰（建�?32+ 字�??��?字串�?#   ??此�??�用?��???/api/admin/* 端�?
 
 name = "comment-handler"
 main = "comment-handler.js"
 compatibility_date = "2024-12-01"
 
-# ── KV Namespace 綁定 ──
-# 建立 KV 後，將 id 替換為實際 Namespace ID
+# ?�?� KV Namespace 綁�? ?�?�
+# 建�? KV 後�?�?id ?��??�實??Namespace ID
 [[kv_namespaces]]
 binding = "COMMENT_KV"
-id = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"   # ← 替換為你嘅 KV Namespace ID
+id = "a6c1483100b64d5fb29a3996b935883d"   # ???��??��???KV Namespace ID
 
-# ── 環境變數（使用 wrangler secret 設定，唔好直接寫喺度）──
-# ADMIN_SECRET: 管理員密鑰，用於所有 /api/admin/* 端點驗證
-# 設定方式：npx wrangler secret put ADMIN_SECRET
+# ?�?� ?��?變數（使??wrangler secret 設�?，�?好直?�寫?�度）�??�
+# ADMIN_SECRET: 管�??��??��??�於?�??/api/admin/* 端�?驗�?
+# 設�??��?：npx wrangler secret put ADMIN_SECRET
