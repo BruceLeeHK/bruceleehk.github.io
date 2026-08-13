@@ -107,7 +107,6 @@ header{background:var(--white);box-shadow:var(--shadow);position:fixed;width:100
 .form-input::placeholder{color:#94a3b8}
 textarea.form-input{resize:vertical;min-height:90px}
 .char-counter{text-align:right;font-size:.75rem;color:#94a3b8;margin-top:4px}
-.char-counter.warn{color:#d32f2f}
 
 /* ── 提交與驗證 ── */
 .btn-submit-comment{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff!important;border:none;padding:12px 28px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;width:100%;justify-content:center}
@@ -884,7 +883,7 @@ function formatTime(isoStr) {
 }
 </script>
 
-<!-- ========== JSON-LD 結構化數據 ========== -->
+<!-- ========== JSON-LD 結構化數據 (SEO 優化) ========== -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -896,6 +895,7 @@ function formatTime(isoStr) {
   ]
 }
 </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -908,6 +908,97 @@ function formatTime(isoStr) {
   "datePublished": "2026-08-11",
   "dateModified": "2026-08-13",
   "mainEntityOfPage": "https://bruceleehk.com/info/vote/"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "2026年港人最厭惡嘅害蟲係邊隻？", "acceptedAnswer": { "@type": "Answer", "text": "根據滅蟲師傅網站嘅全民投票結果，2026年香港人最厭惡害蟲排名會由市民投票即時產生。候選名單涵蓋床蝨、白蟻、蟑螂、老鼠等20種常見害蟲，每人可投1至10票。" } },
+    { "@type": "Question", "name": "香港最常見嘅家居害蟲有邊幾種？", "acceptedAnswer": { "@type": "Answer", "text": "香港常見家居害蟲包括四大類：咬人血吸類（床蝨、蚊、蜂、蜈蚣、臭屁蟲）、結構毀滅類（白蟻、老鼠、衣魚、煙甲蟲）、衛生病菌類（蟑螂、蛆蟲、甲蟲）、同潮濕騷擾類（螞蟻、卜泥、飛蟲、蟎蟲、衣蛾、壁虎、蜘蛛）。" } },
+    { "@type": "Question", "name": "點樣參與害蟲投票？", "acceptedAnswer": { "@type": "Answer", "text": "喺投票頁面選出你最厭惡嘅1至10種害蟲，然後撳「投出我嘅一票」即可。投票結果會即時更新，每個瀏覽器只可投票一次。" } },
+    { "@type": "Question", "name": "床蝨同白蟻邊隻更可怕？", "acceptedAnswer": { "@type": "Answer", "text": "床蝨直接咬人吸血，嚴重影響睡眠同心理健康；白蟻則默默蛀食木材，造成巨大財產損失。兩者危害性質唔同，邊隻更可怕就由你投票決定！" } }
+  ]
+}
+</script>
+
+<!-- DiscussionForumPosting 結構化數據 (SEO 論壇/討論區優化) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DiscussionForumPosting",
+  "@id": "https://bruceleehk.com/info/vote/#forum-discussion",
+  "headline": "2026年港人最厭惡嘅10大害蟲 — 苦主討論區",
+  "articleBody": "歡迎分享你嘅害蟲遭遇、求助經驗或防蟲心得！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。",
+  "url": "https://bruceleehk.com/info/vote/",
+  "datePublished": "2026-08-11T00:00:00+08:00",
+  "dateModified": "2026-08-13T17:17:16+08:00",
+  "author": {
+    "@type": "Organization",
+    "name": "滅蟲師傅",
+    "url": "https://bruceleehk.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "滅蟲師傅 CEDARS LTD",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://bruceleehk.com/assets/img/logo.png"
+    }
+  },
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "https://schema.org/CommentAction",
+    "userInteractionCount": 3
+  },
+  "comment": [
+    {
+      "@type": "Comment",
+      "@id": "https://bruceleehk.com/info/vote/#comment-mary",
+      "text": "請問梳化角落底每日都不斷有呢啲白色粉會出現，抹完一陣又有，係咪粉蟎？淨係得嗰個位有一堆。梳化嗰個位入面係一個木櫃桶，定係可能係白蟻蛀咗啲木碎？但係望入去又睇唔到有任何白蟻。試過用酒精噴同埋用熱風筒吹，但係過一陣又出返嚟。",
+      "dateCreated": "2026-08-13T12:46:29+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "Mary"
+      },
+      "comment": [
+        {
+          "@type": "Comment",
+          "@id": "https://bruceleehk.com/info/vote/#comment-jack",
+          "text": "有機會喺白蟻或蛀木蟲，千企唔好胡亂噴藥，最好揾專業嘅滅蟲師傅檢查一下先。",
+          "dateCreated": "2026-08-13T17:38:21+08:00",
+          "author": {
+            "@type": "Person",
+            "name": "Jack"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Comment",
+      "@id": "https://bruceleehk.com/info/vote/#comment-wangtai",
+      "text": "呢D喺咩野來架，搞到成間屋都有，有無辦法搞定呢？",
+      "dateCreated": "2026-08-13T17:07:15+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "汪太"
+      },
+      "comment": [
+        {
+          "@type": "Comment",
+          "@id": "https://bruceleehk.com/info/vote/#comment-official-1",
+          "text": "您好汪太，由相片睇到應該喺叫做衣魚嘅昆蟲。一般來講衣魚對人唔會造成傷害，也唔會成為傳播病毒的媒介，想更安心D嘅話，建議去超市購買水溶性除蟲菊脂成分嘅殺蟲劑，有效之餘對人也安全。",
+          "dateCreated": "2026-08-13T17:17:16+08:00",
+          "author": {
+            "@type": "Organization",
+            "name": "滅蟲師傅"
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 
