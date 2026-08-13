@@ -117,6 +117,17 @@ textarea.form-input{resize:vertical;min-height:90px}
 .btn-submit-comment{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff!important;border:none;padding:12px 28px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;width:100%;justify-content:center}
 .btn-submit-comment:hover{background:var(--primary-hover);transform:translateY(-1px)}
 .btn-submit-comment:disabled{background:#94a3b8;cursor:not-allowed;transform:none}
+/* Rate Lock 狀態：橙黃色背景 + 閃爍動畫提示用戶等待 */
+.btn-submit-comment.rate-locked{background:linear-gradient(135deg,#f59e0b,#d97706);cursor:not-allowed;transform:none;animation:pulse-locked 1.5s ease-in-out infinite}
+@keyframes pulse-locked{0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.5)}50%{box-shadow:0 0 0 8px rgba(245,158,11,0)}}
+/* Toast 類型 */
+.toast.toast-success{background:linear-gradient(135deg,#16a34a,#22c55e)}
+.toast.toast-warning{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
+.toast.toast-error{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+/* 防重複提交提示條 */
+.rate-limit-notice{background:#fffbeb;border-left:3px solid #f59e0b;padding:10px 14px;border-radius:0 6px 6px 0;font-size:.85rem;color:#78350f;line-height:1.6;margin-bottom:14px;display:none}
+.rate-limit-notice.active{display:block}
+.rate-limit-notice i{margin-right:4px}
 /* ── 留言列表 ── */
 .comment-list-header{font-size:1.1rem;font-weight:600;color:#0f172a;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e2e8f0;display:flex;align-items:center;gap:8px}
 .comment-list-header .comment-count{background:var(--primary);color:#fff;font-size:.78rem;padding:2px 8px;border-radius:10px;font-weight:700}
@@ -440,6 +451,12 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             <i class="fas fa-shield-halved"></i> <strong>留言須知：</strong>首次留言需經審核先會公開顯示，通過審核後即可即時發佈。請勿發佈廣告、外鏈垃圾或不當言論。
           </div>
 
+          <!-- ── 防重複提交提示（Rate Limit 觸發時顯示） ── -->
+          <div class="rate-limit-notice" id="rateLimitNotice">
+            <i class="fas fa-clock"></i> <strong>冷卻中：</strong>系統已鎖住提交按鈕 <span id="rateLimitSeconds"></span> 秒。<br>
+            <i class="fas fa-info-circle"></i> 避免重複點擊 — 越撳越延遲，倒數完會自動解鎖。
+          </div>
+
           <!-- ── 留言表單 ── -->
           <div class="comment-form" id="commentForm">
             <div class="form-group">
@@ -665,12 +682,16 @@ function renderResults(){
   document.getElementById('voteResult').style.display='block';
 }
 
-/* Toast 提示 */
-function showToast(msg){
-  var t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+/* Toast 提示（支援 type: success / warning / error） */
+function showToast(msg, type){
+  var t=document.createElement('div');
+  t.className='toast' + (type ? ' toast-' + type : '');
+  t.textContent=msg;
   document.body.appendChild(t);
   setTimeout(function(){ t.classList.add('show'); },50);
-  setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); },300); },2500);
+  /* warning / error 停得耐少少，等用戶睇清楚 */
+  var dur = (type === 'warning' || type === 'error') ? 4000 : 2500;
+  setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); },300); },dur);
 }
 
 /* 初始化 */
@@ -690,7 +711,7 @@ function showToast(msg){
 <!-- ========== 自建原生留言系統 JS（優化版 v2） ========== -->
 <script>
 /* ===== 設定 ===== */
-var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
+var WORKER_BASE = 'https://comment-handler.bruceleehk.workers.dev';
 var WORKER_API  = WORKER_BASE + '/api/comments';
 var WORKER_ADMIN_LIST   = WORKER_BASE + '/api/admin/list';
 var WORKER_ADMIN_APPROVE= WORKER_BASE + '/api/admin/approve';
@@ -805,8 +826,96 @@ function removeImage() {
   document.getElementById('imgPreview').src = '';
 }
 
+/* ===== Rate Lock（前端配合後端 Rate Limit v2） =====
+ * 後端用 KV `rate:{ip}:{type}` + TTL=60/30 秒做冷卻。
+ * 前端將「冷卻到期時間」存喺 localStorage，跨頁面/重整都keep住倒數。
+ * 避免用戶以為「撳得越多越快解鎖」—— 其實越撳越延遲。
+ */
+var RATE_LOCK_KEY_COMMENT = 'rateLock:comment';
+var RATE_LOCK_KEY_REPLY   = 'rateLock:reply';
+var rateLockTimerId = null;
+
+/* 取得目前生效中嘅 rate lock（主留言或回覆，邊個未過期就用邊個） */
+function getActiveRateLock() {
+  var now = Date.now();
+  var cmtUntil = parseInt(localStorage.getItem(RATE_LOCK_KEY_COMMENT) || '0', 10);
+  var rplUntil = parseInt(localStorage.getItem(RATE_LOCK_KEY_REPLY)   || '0', 10);
+  if (currentReplyTo && rplUntil > now) {
+    return { until: rplUntil, type: 'reply', remaining: Math.ceil((rplUntil - now) / 1000) };
+  }
+  if (!currentReplyTo && cmtUntil > now) {
+    return { until: cmtUntil, type: 'comment', remaining: Math.ceil((cmtUntil - now) / 1000) };
+  }
+  /* 跨模式都要檢查（避免切換主/回覆模式時繞過鎖） */
+  if (cmtUntil > now) return { until: cmtUntil, type: 'comment', remaining: Math.ceil((cmtUntil - now) / 1000) };
+  if (rplUntil > now) return { until: rplUntil, type: 'reply', remaining: Math.ceil((rplUntil - now) / 1000) };
+  return null;
+}
+
+/* 設定 rate lock（後端回傳 retry_after 時呼叫） */
+function setRateLock(type, retryAfterSec) {
+  var key = type === 'reply' ? RATE_LOCK_KEY_REPLY : RATE_LOCK_KEY_COMMENT;
+  var until = Date.now() + retryAfterSec * 1000;
+  try { localStorage.setItem(key, until.toString()); } catch (e) {}
+  startRateLockCountdown();
+}
+
+/* 清除已過期嘅 rate lock */
+function clearExpiredRateLocks() {
+  var now = Date.now();
+  var cmt = parseInt(localStorage.getItem(RATE_LOCK_KEY_COMMENT) || '0', 10);
+  var rpl = parseInt(localStorage.getItem(RATE_LOCK_KEY_REPLY)   || '0', 10);
+  if (cmt > 0 && cmt < now) { try { localStorage.removeItem(RATE_LOCK_KEY_COMMENT); } catch (e) {} }
+  if (rpl > 0 && rpl < now) { try { localStorage.removeItem(RATE_LOCK_KEY_REPLY); } catch (e) {} }
+}
+
+/* 啟動按鈕倒數（每秒更新按鈕文字 + 提示條） */
+function startRateLockCountdown() {
+  if (rateLockTimerId) return; /* 已經倒數緊，唔好重複啟動 */
+  var btn = document.getElementById('btnSubmitComment');
+  var notice = document.getElementById('rateLimitNotice');
+  var noticeSec = document.getElementById('rateLimitSeconds');
+  if (!btn) return;
+
+  var tick = function () {
+    clearExpiredRateLocks();
+    var lock = getActiveRateLock();
+    if (!lock) {
+      /* 解鎖 */
+      btn.disabled = false;
+      var isReplyMode = !!currentReplyTo;
+      btn.innerHTML = isReplyMode
+        ? '<i class="fas fa-reply"></i> 提交回覆'
+        : '<i class="fas fa-paper-plane"></i> 提交留言';
+      btn.classList.remove('rate-locked');
+      if (notice) notice.classList.remove('active');
+      rateLockTimerId = null;
+      return;
+    }
+    /* 鎖住 + 顯示剩餘秒數 */
+    btn.disabled = true;
+    btn.classList.add('rate-locked');
+    btn.innerHTML = '<i class="fas fa-hourglass-half"></i> 請等 ' + lock.remaining + ' 秒後再試';
+    if (notice) {
+      notice.classList.add('active');
+      if (noticeSec) noticeSec.textContent = lock.remaining;
+    }
+    rateLockTimerId = setTimeout(tick, 1000);
+  };
+  tick();
+}
+
 /* ===== 提交留言（主留言或回覆） ===== */
 async function submitComment() {
+  /* 0. 前端先檢查 rate lock（唔使打去伺服器，避免無謂請求） */
+  clearExpiredRateLocks();
+  var preLock = getActiveRateLock();
+  if (preLock) {
+    showToast('請等 ' + preLock.remaining + ' 秒後再試，頻繁點擊只會延長冷卻時間。', 'warning');
+    startRateLockCountdown();
+    return;
+  }
+
   var nickname   = document.getElementById('inputNickname').value.trim();
   var content    = document.getElementById('inputContent').value.trim();
   var btn        = document.getElementById('btnSubmitComment');
@@ -892,7 +1001,7 @@ async function submitComment() {
     var data = await res.json();
 
     if (data.success) {
-      showToast(data.message || (currentReplyTo ? '回覆已提交！需經審核後公開顯示' : '留言已提交！需經審核後公開顯示'));
+      showToast(data.message || (currentReplyTo ? '回覆已提交！需經審核後公開顯示' : '留言已提交！需經審核後公開顯示'), 'success');
 
       /* ===== localStorage 即時預覽 ===== */
       var localPending = {
@@ -903,10 +1012,14 @@ async function submitComment() {
         thumb_url:   currentReplyTo ? '' : uploadedImage.thumb,
         parent_id:   currentReplyTo ? currentReplyTo.id : '',
         is_reply:    !!currentReplyTo,
-        created_at:  new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),
+        created_at:  new Date().toISOString(),
+        created_at_hk: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),
         pending_local: true
       };
       savePendingComment(localPending);
+
+      /* 提交成功 — 寫入前端 rate lock（同後端 TTL 一致：主留言 60s / 回覆 30s） */
+      setRateLock(currentReplyTo ? 'reply' : 'comment', currentReplyTo ? 30 : 60);
 
       /* 清空表單 */
       document.getElementById('inputNickname').value = '';
@@ -921,10 +1034,19 @@ async function submitComment() {
       /* 重新載入留言列表 */
       loadComments();
     } else {
-      showToast(data.error || '提交失敗（錯誤碼：' + (data.code || res.status) + '）');
-      /* 數學驗證錯誤時換新題 */
-      if (data.code === 'CAPTCHA_WRONG' || data.code === 'CAPTCHA_MISSING' || data.code === 'CAPTCHA_INVALID') {
-        refreshCaptcha();
+      /* ===== 429 Rate Limit 處理 ===== */
+      if (data.code === 'RATE_LIMITED') {
+        var retryAfter = parseInt(data.retry_after, 10) || 60;
+        var cooldown   = parseInt(data.cooldown, 10)   || (currentReplyTo ? 30 : 60);
+        setRateLock(currentReplyTo ? 'reply' : 'comment', retryAfter);
+        showToast(data.error || ('請等 ' + retryAfter + ' 秒後再試'), 'warning');
+        /* 唔刷新 captcha（用戶保留答案，等倒數完直接撳） */
+      } else {
+        showToast(data.error || '提交失敗（錯誤碼：' + (data.code || res.status) + '）');
+        /* 數學驗證錯誤時換新題 */
+        if (data.code === 'CAPTCHA_WRONG' || data.code === 'CAPTCHA_MISSING' || data.code === 'CAPTCHA_INVALID') {
+          refreshCaptcha();
+        }
       }
     }
   } catch (err) {
@@ -938,8 +1060,14 @@ async function submitComment() {
     }
     console.error('提交留言錯誤:', err);
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+    /* 如果冇 rate lock active，還原按鈕；如果有，startRateLockCountdown 會接管 */
+    var finalLock = getActiveRateLock();
+    if (!finalLock) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+    } else {
+      startRateLockCountdown();
+    }
   }
 }
 
@@ -1085,7 +1213,7 @@ async function loadComments() {
 
 /* ===== 渲染單條留言 HTML（含樹狀回覆） ===== */
 function renderCommentHtml(c, isReply) {
-  var timeStr = formatTime(c.created_at);
+  var timeStr = formatTime(c.created_at, c.created_at_hk);
   var cls = 'comment-item';
   if (isReply) cls += ' reply-item';
   if (c.is_official) cls += ' is-official';
@@ -1183,11 +1311,25 @@ function escAttr(str) {
 }
 
 /** 時間格式化 */
-function formatTime(isoStr) {
+function formatTime(isoStr, hkStr) {
   if (!isoStr) return '';
   try {
-    var d = new Date(isoStr.replace(' ', 'T'));
-    if (isNaN(d.getTime())) return isoStr;
+    /* v2.1 起改用 ISO 8601 (UTC) — new Date() 可正確解析 */
+    /* 舊留言可能係 "2026-08-13 14:30:00" HK 格式，補 T 後再嘗試 */
+    var d;
+    if (typeof hkStr === 'string' && hkStr) {
+      /* 後端提供 created_at_hk 字串，直接用嚟顯示（香港本地時間） */
+      /* 但 for relative time 計算，我哋需要絕對時間 */
+      /* 將 HK 時間字串視為 UTC+8，補 +08:00 後俾 Date 解析 */
+      d = new Date(hkStr.replace(' ', 'T') + '+08:00');
+    } else {
+      d = new Date(isoStr);
+    }
+    if (isNaN(d.getTime())) {
+      /* fallback：舊資料可能係 HK 時間但冇時區 */
+      d = new Date(isoStr.replace(' ', 'T') + '+08:00');
+      if (isNaN(d.getTime())) return isoStr;
+    }
     var now = new Date();
     var diffMs = now - d;
     var diffMin = Math.floor(diffMs / 60000);
@@ -1199,12 +1341,9 @@ function formatTime(isoStr) {
     var diffDay = Math.floor(diffHr / 24);
     if (diffDay < 7) return diffDay + ' 日前';
 
-    return d.getFullYear() + '-' +
-      String(d.getMonth() + 1).padStart(2, '0') + '-' +
-      String(d.getDate()).padStart(2, '0') + ' ' +
-      String(d.getHours()).padStart(2, '0') + ':' +
-      String(d.getMinutes()).padStart(2, '0');
-  } catch {
+    /* 顯示時用香港時間（避免用戶看到 UTC 時間混亂） */
+    return d.toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }).replace(/:\d{2}$/, '');
+  } catch (e) {
     return isoStr;
   }
 }
@@ -1230,10 +1369,16 @@ function compressForImgbb(file, maxPx, quality) {
   });
 }
 
-/* ===== 初始化：健康檢查 + 載入留言 + 數學驗證 ===== */
+/* ===== 初始化：健康檢查 + 載入留言 + 數學驗證 + Rate Lock 還原 ===== */
 refreshCaptcha();
 checkWorkerHealth();
 loadComments();
+
+/* 還原 rate lock（如果用戶剛剛被限制，重新整理後依然要keep住倒數） */
+clearExpiredRateLocks();
+if (getActiveRateLock()) {
+  startRateLockCountdown();
+}
 
 /* 每 60 秒自動刷新留言列表（讓剛批准嘅留言即時顯示） */
 setInterval(function() {

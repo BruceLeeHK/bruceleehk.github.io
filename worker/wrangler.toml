@@ -1,36 +1,63 @@
-# Cloudflare Worker ?�置 ??滅蟲師�? ?�建?��??��?系統（優?��? v2�?#
-# ?�署步�?�?#   1. 建�? KV Namespace（�??��?）�?
-#      Dashboard: Workers & Pages ??KV ??Create namespace ???�稱: COMMENT_KV ??複製 ID
-#      CLI:      npx wrangler kv namespace create COMMENT_KV ??複製 id
-#   2. 將�???id ?��??��??�實??KV Namespace ID
-#   3. 設�?管�?密鑰：npx wrangler secret put ADMIN_SECRET
-#   4. ?�署：npx wrangler deploy
+# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（優化版 v2.1）
 #
-# ===== ?��??��? v2 ?��??�能 =====
-#   ??樹�?/嵌�??��?（parent_id�?#   ??官方?��?綠色徽�?（is_official，�? ADMIN_SECRET�?#   ??置�?官方?��?（is_pinned�?#   ??一?�批??/ 一?�刪??後台 API
-#   ???��??�廣?��?純�?字、嚴�?URL??0??00 字�?0 秒頻?��???#   ???�學驗�?（防 Robot�?#   ??GET /api/comments ?�傳樹�?結�?
+# 部署步驟：
+#   1. 建立 KV Namespace（二選一）：
+#      Dashboard: Workers & Pages → KV → Create namespace → 名稱: COMMENT_KV → 複製 ID
+#      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
+#   2. 將下方 id 替換為你嘅實際 KV Namespace ID
+#   3. 設定管理密鑰：npx wrangler secret put ADMIN_SECRET
+#   4. 部署：npx wrangler deploy
 #
-# ===== API 端�? =====
-#   GET  /api/health                  ???�康檢查
-#   GET  /api/comments?page_id=xxx    ??讀?�已審核?��?（樹?�結�?�?#   POST /api/comments                ???�交?��?言（主?��??��?覆�?
-#   POST /api/admin/list              ???�出?�?��?言（含?�審?��?
-#   POST /api/admin/approve           ??審核?��?
-#   POST /api/admin/delete            ???�除?��?（�?��?��?�?#   POST /api/admin/reply             ??管�??��??��?覆�??��?審核 + is_official�?#   POST /api/admin/pin               ??置�? / ?��?置�?
+# ===== v2.1 修復「越撳越延遲」Bug =====
+#   🔧 Rate Limit 改用獨立 KV key `rate:{ip}:{type}` + TTL 自動過期
+#      （唔再掃描留言陣列搵最近留言 — 之前用 HK 時間字串比對 UTC，
+#       會造成永久鎖死嘅時區 Bug）
+#   🔧 被攔截時直接 return，唔寫入 KV → 唔會重置 60 秒倒數
+#   🔧 管理員（帶正確 secret）100% 豁免 Rate Limit
+#   🔧 回傳 retry_after（剩餘秒數），前端顯示精確倒數
+#   🔧 created_at 改用 ISO 8601 (UTC)，避免時區解析 Bug
 #
-# ===== 審核密鑰設�? =====
+# ===== v2.0 既有功能 =====
+#   ✅ 樹狀/嵌套回覆（parent_id）
+#   ✅ 官方回覆綠色徽章（is_official，需 ADMIN_SECRET）
+#   ✅ 置頂官方留言（is_pinned）
+#   ✅ 一鍵批准 / 一鍵刪除 後台 API
+#   ✅ 回覆防廣告：純文字、嚴禁 URL、10–300 字、30 秒頻率限制
+#   ✅ 數學驗證（防 Robot）
+#   ✅ GET /api/comments 回傳樹狀結構
+#
+# ===== API 端點 =====
+#   GET  /api/health                  → 健康檢查
+#   GET  /api/comments?page_id=xxx    → 讀取已審核留言（樹狀結構）
+#   POST /api/comments                → 提交新留言（主留言或回覆）
+#   POST /api/admin/list              → 列出所有留言（含未審核）
+#   POST /api/admin/approve           → 審核通過
+#   POST /api/admin/delete            → 刪除留言（連帶回覆）
+#   POST /api/admin/reply             → 管理員官方回覆（自動審核 + is_official，豁免 Rate Limit）
+#   POST /api/admin/pin               → 置頂 / 取消置頂
+#
+# ===== Rate Limit 機制（v2.1） =====
+#   - 主留言：每 IP 每 60 秒 1 條（KV key: rate:{ip}:comment, TTL=60）
+#   - 回覆：  每 IP 每 30 秒 1 條（KV key: rate:{ip}:reply,   TTL=30）
+#   - 管理員：100% 豁免（POST /api/comments 帶正確 secret 即跳過）
+#   - 被攔截時唔寫入 KV → 倒數唔會重置（避免「越撳越延遲」）
+#   - 429 回應包含 retry_after（剩餘秒數）+ cooldown（總冷卻秒數）
+#
+# ===== 審核密鑰設定 =====
 #   npx wrangler secret put ADMIN_SECRET
-#   ??輸入一?�強壯�?密鑰（建�?32+ 字�??��?字串�?#   ??此�??�用?��???/api/admin/* 端�?
+#   → 輸入一個強壯嘅密鑰（建議 32+ 字元隨機字串）
+#   → 用於所有 /api/admin/* 端點驗證，亦用於 POST /api/comments 嘅管理員豁免
 
 name = "comment-handler"
 main = "comment-handler.js"
 compatibility_date = "2024-12-01"
 
-# ?�?� KV Namespace 綁�? ?�?�
-# 建�? KV 後�?�?id ?��??�實??Namespace ID
+# ── KV Namespace 綁定 ──
+# 建立 KV 後，將 id 替換為實際 Namespace ID
 [[kv_namespaces]]
 binding = "COMMENT_KV"
-id = "a6c1483100b64d5fb29a3996b935883d"   # ???��??��???KV Namespace ID
+id = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"   # ← 替換為你嘅 KV Namespace ID
 
-# ?�?� ?��?變數（使??wrangler secret 設�?，�?好直?�寫?�度）�??�
-# ADMIN_SECRET: 管�??��??��??�於?�??/api/admin/* 端�?驗�?
-# 設�??��?：npx wrangler secret put ADMIN_SECRET
+# ── 環境變數（使用 wrangler secret 設定，唔好直接寫喺度）──
+# ADMIN_SECRET: 管理員密鑰，用於所有 /api/admin/* 端點驗證 + Rate Limit 豁免
+# 設定方式：npx wrangler secret put ADMIN_SECRET

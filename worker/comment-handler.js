@@ -1,7 +1,17 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（優化版 v2）
+ * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（優化版 v2.1）
  *
- * 新增功能（依優化方案）：
+ * 更新亮點（v2.1）：
+ *   🔧 徹底解決「越撳越延遲」Bug：
+ *      - 改用獨立 KV key `rate:{ip}:{type}` + TTL 自動過期，唔再掃描留言陣列
+ *      - 被攔截時直接 return，唔寫入 KV → 唔會重置 60 秒倒數
+ *      - 管理員（帶正確 secret）100% 豁免 Rate Limit
+ *      - 回傳 retry_after 剩餘秒數，前端顯示精確倒數
+ *   🔧 修正時區解析 Bug：
+ *      - created_at 改用 ISO 8601 (UTC)，避免「HK 時間字串被當 UTC 解析」導致
+ *        rate limit 永久鎖死嘅問題
+ *
+ * 既有功能（v2.0）：
  *   ✅ 樹狀/嵌套回覆（parent_id）
  *   ✅ 官方回覆綠色徽章（is_official + 管理員密鑰驗證）
  *   ✅ 置頂官方留言（is_pinned）
@@ -42,6 +52,7 @@
  * ===== 審核方式 =====
  *   設定 ADMIN_SECRET：npx wrangler secret put ADMIN_SECRET
  *   所有 /api/admin/* 端點都需 body 帶 { secret: "你嘅密鑰" }
+ *   帶有正確 secret 嘅 POST /api/comments 亦會自動豁免 Rate Limit
  */
 
 export default {
@@ -105,7 +116,7 @@ export default {
 
       /* POST /api/comments — 提交新留言（主留言或回覆） */
       if (request.method === 'POST' && url.pathname === '/api/comments') {
-        return await handlePostComment(request, kv, corsHeaders);
+        return await handlePostComment(request, kv, env, corsHeaders);
       }
 
       /* ===== 管理員 API ===== */
@@ -193,8 +204,15 @@ async function handleGetComments(url, kv, corsHeaders) {
 
 /* =========================================================================
  *  POST /api/comments — 提交新留言（主留言或回覆）
+ *
+ *  Rate Limit v2（徹底解決「越撳越延遲」問題）：
+ *    1. 管理員（帶正確 secret）100% 豁免
+ *    2. 一般用戶用獨立 KV key `rate:{ip}:{type}` + TTL 自動過期
+ *    3. 被攔截時直接 return，唔寫入 KV → 唔會重置 60 秒倒數
+ *    4. 通過檢查後先寫入冷卻紀錄，TTL 自動 60/30 秒後失效
+ *    5. 回傳 retry_after（剩餘秒數），前端可顯示精確倒數
  * ========================================================================= */
-async function handlePostComment(request, kv, corsHeaders) {
+async function handlePostComment(request, kv, env, corsHeaders) {
   let body;
   try {
     body = await request.json();
@@ -202,25 +220,76 @@ async function handlePostComment(request, kv, corsHeaders) {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, corsHeaders);
   }
 
-  /* ── 欄位驗證 ── */
+  /* 主留言 vs 回覆：以 parent_id 區分 */
+  const parentId = (body.parent_id || '').trim();
+  const isReply  = !!parentId;
+
+  /* ── 1. 速率限制（KV-based，管理員豁免） ── */
+  /* 先檢查是否為管理員（帶正確 secret 嘅請求完全豁免頻率限制） */
+  const bodySecret = body && body.secret;
+  const isAdmin = !!(bodySecret && env.ADMIN_SECRET && bodySecret === env.ADMIN_SECRET);
+
+  if (!isAdmin) {
+    /* 一般用戶先做基本欄位檢查（page_id、nickname、content）
+       呢啲「明顯錯誤」唔應該觸發冷卻，否則 fat-finger 會鎖死用戶 */
+    const pageId   = (body.page_id  || '').trim();
+    const nickname = (body.nickname || '').trim();
+    const content  = (body.content  || '').trim();
+    if (!pageId || pageId.length > 64) {
+      return jsonResponse({ success: false, error: '無效嘅頁面識別' }, 400, corsHeaders);
+    }
+    if (!nickname || nickname.length < 1 || nickname.length > 30) {
+      return jsonResponse({ success: false, error: '暱稱長度需為 1-30 字' }, 400, corsHeaders);
+    }
+    if (isReply) {
+      if (content.length < 10 || content.length > 300) {
+        return jsonResponse({ success: false, error: '回覆字數需為 10-300 字', code: 'REPLY_LENGTH' }, 400, corsHeaders);
+      }
+    } else {
+      if (content.length < 1 || content.length > 2000) {
+        return jsonResponse({ success: false, error: '留言內容長度需為 1-2000 字' }, 400, corsHeaders);
+      }
+    }
+
+    /* 基本欄位通過 → 檢查 KV 冷卻紀錄 */
+    const clientIp    = request.headers.get('CF-Connecting-IP') || '127.0.0.1';
+    const cooldownSec = isReply ? 30 : 60;
+    const rateKey     = 'rate:' + clientIp + ':' + (isReply ? 'reply' : 'comment');
+
+    const existing = await kv.get(rateKey);
+    if (existing) {
+      /* 【重點】被攔截時直接 return，唔呼叫 .put()，避免刷新 60 秒倒數 */
+      const lastTime  = parseInt(existing, 10) || Date.now();
+      const elapsed   = Math.floor((Date.now() - lastTime) / 1000);
+      const retryAfter = Math.max(1, cooldownSec - elapsed);
+      return jsonResponse({
+        success: false,
+        error: isReply
+          ? '回覆太頻繁，請等 ' + retryAfter + ' 秒後再試'
+          : '提交太頻繁，請等 ' + retryAfter + ' 秒後再試',
+        code: 'RATE_LIMITED',
+        retry_after: retryAfter,
+        cooldown: cooldownSec
+      }, 429, corsHeaders);
+    }
+
+    /* 通過檢查，先寫入冷卻紀錄（TTL = 60 或 30 秒，自動過期） */
+    await kv.put(rateKey, Date.now().toString(), { expirationTtl: cooldownSec });
+  }
+
+  /* ── 2. 完整欄位驗證 ── */
   const pageId    = (body.page_id    || '').trim();
   const nickname  = (body.nickname  || '').trim();
   const content   = (body.content   || '').trim();
   const imageUrl  = (body.image_url || '').trim();
   const thumbUrl  = (body.thumb_url || '').trim();
-  const parentId  = (body.parent_id || '').trim();
   const captchaA  = parseInt(body.captcha_a, 10);
   const captchaB  = parseInt(body.captcha_b, 10);
   const captchaAns = parseInt(body.captcha_answer, 10);
 
-  /* 主留言 vs 回覆：以 parent_id 區分 */
-  const isReply = !!parentId;
-
   if (!pageId || pageId.length > 64) {
     return jsonResponse({ success: false, error: '無效嘅頁面識別' }, 400, corsHeaders);
   }
-
-  /* 暱稱：主留言 1–30 字 */
   if (!nickname || nickname.length < 1 || nickname.length > 30) {
     return jsonResponse({ success: false, error: '暱稱長度需為 1-30 字' }, 400, corsHeaders);
   }
@@ -286,23 +355,6 @@ async function handlePostComment(request, kv, corsHeaders) {
   const raw = await kv.get(key, { type: 'json' });
   const comments = Array.isArray(raw) ? raw : [];
 
-  /* ── 速率限制：主留言 60 秒 1 條；回覆 30 秒 1 條 ── */
-  const clientIp = request.headers.get('CF-Connecting-IP') || '';
-  const rateLimitMs = isReply ? 30000 : 60000;
-  if (clientIp) {
-    const recent = comments.find(c =>
-      c.client_ip === clientIp &&
-      Date.now() - new Date(c.created_at).getTime() < rateLimitMs
-    );
-    if (recent) {
-      return jsonResponse({
-        success: false,
-        error: isReply ? '回覆太頻繁，請等 30 秒後再試' : '提交太頻繁，請等 1 分鐘後再試',
-        code: 'RATE_LIMITED'
-      }, 429, corsHeaders);
-    }
-  }
-
   /* 若係回覆，檢查父留言存在且已審核 */
   if (isReply) {
     const parent = comments.find(c => c.id === parentId && c.approved === 1);
@@ -316,6 +368,7 @@ async function handlePostComment(request, kv, corsHeaders) {
   }
 
   /* ── 新增留言 ── */
+  const clientIp = request.headers.get('CF-Connecting-IP') || '';
   const newComment = {
     id:         Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     nickname:   safeNickname,
@@ -323,7 +376,10 @@ async function handlePostComment(request, kv, corsHeaders) {
     image_url:  safeImageUrl,
     thumb_url:  safeThumbUrl,
     approved:   0,
-    created_at: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),
+    /* 改用 ISO 8601 格式（UTC）避免時區解析 Bug；
+       顯示時由前端負責轉換為香港時間 */
+    created_at: new Date().toISOString(),
+    created_at_hk: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),
     client_ip:  clientIp
   };
 
