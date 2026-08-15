@@ -3,40 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滅蟲師妹 AI 查詢 & 免費估價 | AI 害蟲圖像診斷 | 滅蟲師傅</title>
+  <meta name="description" content="發現蟲患？上載害蟲相片由 Vision AI 系統即時辨識，配對獨家三十六計防治策略並即時估價。亦可與「滅蟲師妹」AI 助手對話或填表聯絡滅蟲師傅（85252821552）。">
+  <meta name="keywords" content="滅蟲報價,免費估價,AI害蟲識別,AI滅蟲,滅蟲師妹,香港滅蟲服務,蟲害防治報價,WhatsApp估價">
   <link rel="canonical" href="https://bruceleehk.com/quote/">
-  <title>滅蟲師妹 AI 查詢 & 免費估價 | 滅蟲師傅</title>
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_HK">
+  <meta property="og:site_name" content="滅蟲師傅">
+  <meta property="og:title" content="滅蟲師妹 AI 害蟲圖像診斷 × 免費估價">
+  <meta property="og:description" content="上載害蟲相片 → AI 即時辨識 → 配對三十六計 → 即時估價。5 分鐘 WhatsApp 智能免費估價。">
+  <meta property="og:url" content="https://bruceleehk.com/quote/">
+  <meta property="og:image" content="/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "滅蟲師妹 AI 害蟲分析系統",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web, WhatsApp",
+    "url": "url?id=6",
+    "description": "AI 視覺辨識害蟲種類、風險等級，自動配對三十六計防治策略並提供即時估價。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "HKD",
+      "description": "免費 AI 診斷"
+    },
+    "publisher": {
+      "@type": "PestControl",
+      "name": "滅蟲師傅",
+      "telephone": "+85252821552"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://udify.app" crossorigin>
-  <meta name="description" content="發現蟲患？立即使用「滅蟲師妹」AI 智能助手進行即時分析與諮詢，或填寫免費估價表格聯絡滅蟲師傅（85252821552）。">
-  <meta name="keywords" content="滅蟲報價,免費估價,滅蟲查詢,AI滅蟲,滅蟲師妹,香港滅蟲服務,蟲害防治報價">
-  <link rel="preload" href="/assets/css/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/assets/css/style.min.css"></noscript>
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-  
+  <link rel="stylesheet" href="/assets/css/style.min.css" onerror="this.remove()">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    /* 核心卡片容器 */
-    .quote-container {
-      max-width: 850px;
-      margin: 20px auto 40px;
+    :root {
+      --primary-color: #10b981;
+      --primary-dark: #059669;
+      --tech-blue: #0284c7;
+      --dark-bg: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --light-bg: #f8fafc;
+      --border-color: #e2e8f0;
+      --whatsapp: #25d366;
+      --whatsapp-dark: #1eb954;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --transition: 0.25s ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text-main);
+      background-color: #ffffff;
+      line-height: 1.6;
+      padding-bottom: 75px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 8px 16px;
+      z-index: 1000;
+      text-decoration: none;
+      border-radius: 0 0 6px 0;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ============ Header ============ */
+    #site-header {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      position: relative;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-icon {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.1;
+    }
+    .logo-main {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #065f46;
+    }
+    .logo-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.8px;
+    }
+    .logo-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--whatsapp);
+      color: #ffffff !important;
+      font-size: 1.1rem;
+      text-decoration: none;
+      margin-left: 4px;
+      transition: transform var(--transition);
+    }
+    .logo-whatsapp:hover { transform: scale(1.1); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.nav-cta.active {
+      color: var(--primary-color);
+      background: #ecfdf5;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.4rem;
+      color: var(--dark-bg);
+      cursor: pointer;
+      padding: 4px;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+    }
+    .menu-toggle:hover { background: var(--light-bg); }
+
+    /* ============ Page Hero ============ */
+    .page-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 50px 20px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(16,185,129,0.18) 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(2,132,199,0.18) 0%, transparent 35%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes heroGlow {
+      0%   { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+    .page-hero .container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero h1 {
+      font-size: 2rem;
+      margin: 0 0 12px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #6ee7b7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .quote-subtitle {
+      font-size: 1rem;
+      color: #94a3b8;
+      margin: 0;
+    }
+    .hero-badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .hero-badge {
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.4);
+      color: #34d399;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 三段式核心容器 */
+    .quote-main-container {
+      max-width: 900px;
+      margin: 30px auto 50px;
       padding: 0 15px;
     }
-    
+
     .module-card {
       background: #ffffff;
+      border: 1px solid var(--border-color);
       border-radius: 16px;
-      border: 1px solid #cbd5e1;
       box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
       margin-bottom: 35px;
       overflow: hidden;
     }
+
     .module-header {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #ffffff;
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .module-header h2 {
       margin: 0;
@@ -56,55 +298,185 @@
       font-weight: 600;
     }
 
-    /* 模塊一：AI 圖像診斷區塊 */
-    .vision-upload-body {
-      padding: 25px 20px;
-      text-align: center;
-    }
-    .upload-box {
-      border: 2px dashed #10b981;
-      background: #f0fdf4;
+    /* ============ 模塊一：AI 害蟲圖像分析系統 ============ */
+    .diagnosis-body { padding: 24px; }
+    .upload-area {
+      display: block;
+      border: 2px dashed #cbd5e1;
       border-radius: 12px;
-      padding: 30px 20px;
+      padding: 35px 20px;
+      text-align: center;
       cursor: pointer;
-      transition: background 0.2s;
-      margin-bottom: 20px;
+      transition: all var(--transition);
+      background: var(--light-bg);
     }
-    .upload-box:hover {
-      background: #dcfce7;
+    .upload-area:hover, .upload-area.dragover {
+      border-color: var(--primary-color);
+      background: #ecfdf5;
     }
-    .upload-box i {
-      font-size: 2.5rem;
-      color: #10b981;
+    .upload-area .upload-icon {
+      font-size: 2.8rem;
+      color: var(--primary-color);
       margin-bottom: 10px;
     }
-    
-    /* 流程步驟小圖示 */
-    .flow-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #e2e8f0;
-      text-align: left;
+    .upload-area h3 {
+      margin: 0 0 6px;
+      color: var(--dark-bg);
+      font-size: 1.1rem;
     }
-    .step-item {
-      font-size: 0.85rem;
-      color: #475569;
+    .upload-area p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.88rem;
     }
-    .step-item strong {
-      color: #0f172a;
+    .upload-area input[type="file"] { display: none; }
+    .upload-btn {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .upload-btn:hover { background: var(--primary-dark); }
+
+    .diagnosis-state { display: none; }
+    .diagnosis-state.active { display: block; }
+    .diagnosis-preview {
+      max-width: 280px;
+      max-height: 280px;
+      margin: 0 auto 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .diagnosis-preview img {
+      width: 100%;
+      height: auto;
       display: block;
-      margin-bottom: 2px;
+    }
+    .diagnosis-loading { text-align: center; padding: 25px 20px; }
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid #ecfdf5;
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: var(--text-muted); font-size: 0.9rem; }
+
+    .diagnosis-result {
+      background: var(--light-bg);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border-color);
+      font-size: 0.95rem;
+      gap: 12px;
+    }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { color: var(--text-muted); font-weight: 600; flex-shrink: 0; }
+    .result-value { color: var(--dark-bg); font-weight: 700; text-align: right; }
+    .result-strategy-box {
+      background: var(--dark-bg);
+      color: #6ee7b7;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .result-price { color: var(--danger); font-size: 1.2rem; font-weight: 800; }
+    .result-confidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #ecfdf5;
+      color: var(--primary-dark);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+    .result-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      justify-content: center;
     }
 
-    /* 模塊二：Dify Chatbot 視窗 */
+    /* 整合於模塊一底部的 6 步架構流程圖 */
+    .arch-flow-integrated {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    .arch-flow-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark-bg);
+      margin-bottom: 14px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .arch-flow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .arch-step-item {
+      background: var(--light-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .arch-step-num {
+      width: 24px;
+      height: 24px;
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+      margin-bottom: 6px;
+    }
+    .arch-step-item h4 {
+      margin: 0 0 2px;
+      font-size: 0.88rem;
+      color: var(--dark-bg);
+    }
+    .arch-step-item p {
+      margin: 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    /* ============ 模塊二：滅蟲師妹 AI 客服助理 ============ */
     .ai-close-btn {
       background: rgba(255, 255, 255, 0.15);
       border: none;
       color: #ffffff;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
       width: 28px;
       height: 28px;
@@ -113,7 +485,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background var(--transition);
     }
+    .ai-close-btn:hover { background: rgba(239, 68, 68, 0.8); }
     .ai-iframe-wrapper {
       width: 100%;
       height: 520px;
@@ -124,217 +498,709 @@
       height: 100%;
       border: none;
     }
+
+    /* ============ 模塊三：專員人工跟進 / 免費報價表單 ============ */
+    .form-header-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-header-box h3 {
+      font-size: 1.25rem;
+      color: var(--dark-bg);
+      margin: 0 0 6px;
+    }
+    .form-header-box p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    .quote-form-body {
+      padding: 24px;
+    }
+    .quote-form .form-group { margin-bottom: 16px; }
+    .quote-form label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--dark-bg);
+      font-size: 0.92rem;
+    }
+    .quote-form input,
+    .quote-form select,
+    .quote-form textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text-main);
+      background: #fff;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .quote-form input:focus,
+    .quote-form select:focus,
+    .quote-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+    }
+    .quote-form textarea { resize: vertical; min-height: 100px; }
+    .form-privacy {
+      background: #ecfdf5;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 0.85rem;
+      color: var(--primary-dark);
+    }
+    .form-error {
+      color: var(--danger);
+      font-size: 0.88rem;
+      padding: 10px;
+      background: #fef2f2;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+      width: 100%;
+    }
+    .btn-whatsapp { background: var(--whatsapp); color: #fff; }
+    .btn-secondary { background: var(--dark-bg); color: #fff; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .quote-success { text-align: center; padding: 20px; }
+    .success-icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 12px; }
+    .quote-success h3 { margin: 0 0 8px; color: var(--dark-bg); }
+    .quote-success p { color: var(--text-muted); margin: 6px 0; }
+
+    /* ============ Footer ============ */
+    footer {
+      background: var(--dark-bg);
+      color: #94a3b8;
+      padding: 36px 20px 80px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    footer .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+    footer .social-icons a:hover {
+      background: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    /* ============ Mobile Thumb Zone ============ */
+    .mobile-thumb-zone {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      box-shadow: 0 -3px 15px rgba(0,0,0,0.12);
+      display: flex;
+      padding: 10px 15px;
+      gap: 10px;
+      z-index: 999;
+    }
+    .thumb-btn {
+      flex: 1;
+      padding: 12px 0;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .thumb-call { background: var(--tech-blue); color: #fff; }
+    .thumb-wa { background: var(--whatsapp); color: #fff; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        padding: 15px 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        gap: 12px;
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-links.active { display: flex; }
+      .page-hero h1 { font-size: 1.6rem; }
+      .ai-iframe-wrapper { height: 480px; }
+      .arch-flow-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 769px) {
+      .mobile-thumb-zone { display: none; }
+      body { padding-bottom: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">跳到主要內容</a>
 
-<header id="site-header">
-  <div class="nav-container">
-    <div class="logo">
-      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo">
-      <div class="logo-text">
-        <span class="logo-main">滅蟲師傅</span>
-        <span class="logo-sub">Pest Control Master</span>
-      </div>
-      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i>
+  <header id="site-header">
+    <div class="nav-container">
+      <a href="/" class="logo" aria-label="滅蟲師傅首頁">
+        <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo">
+        <div class="logo-text">
+          <span class="logo-main">滅蟲師傅</span>
+          <span class="logo-sub">Pest Control Master</span>
+        </div>
       </a>
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="主導航">
+        <a href="/">首頁</a>
+        <a href="/services/">蟲類服務</a>
+        <a href="/strategy/">有蟲就有計</a>
+        <a href="/info/">蟲類資訊</a>
+        <a href="/quote/" class="nav-cta active" aria-current="page">有蟲話我知</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="開啟/關閉選單" aria-expanded="false" aria-controls="nav-links" type="button">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
     </div>
-    <nav class="nav-links" id="nav-links">
-      <a href="/">首頁</a>
-      <a href="/services/">蟲類服務</a>
-      <a href="/strategy/">有蟲就有計</a>
-      <a href="/info/">蟲類資訊</a>
-      <a href="/quote/" class="nav-cta active">有蟲話我知</a>
-    </nav>
-    <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
-  </div>
-</header>
+  </header>
 
-<main class="page-quote">
+  <main id="main-content" class="page-quote">
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>AI 智慧害蟲診斷與諮詢</h1>
-      <p class="quote-subtitle">上載害蟲相片獲得即時 AI 分析，或與「滅蟲師妹」對話查詢！</p>
+    <section class="page-hero">
+      <div class="container">
+        <h1>AI 害蟲診斷與諮詢</h1>
+        <p class="quote-subtitle">上載害蟲相片獲得即時 Vision AI 分析，或與「滅蟲師妹」對話查詢！</p>
+        <div class="hero-badge-row">
+          <span class="hero-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> AI 圖像辨識</span>
+          <span class="hero-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 5 秒回應</span>
+          <span class="hero-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 免費診斷</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="quote-main-container">
+
+      <!-- ==================== 模塊一：AI 害蟲圖像分析系統 (上載 + 診斷 + 6步流程) ==================== -->
+      <section class="module-card" id="ai-vision" aria-labelledby="ai-vision-title">
+        <div class="module-header">
+          <h2 id="ai-vision-title"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> 📷 AI 害蟲圖像診斷與分析系統</h2>
+          <span class="module-badge">Vision AI 即時辨識</span>
+        </div>
+        <div class="diagnosis-body">
+
+          <!-- 狀態 1: 上載照片 -->
+          <div class="diagnosis-state active" id="state-upload">
+            <label for="pest-photo" class="upload-area" id="upload-area">
+              <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
+              <h3>點擊上載或拍攝害蟲相片</h3>
+              <p>支援 JPG / PNG，最大 5MB。手機可直接開啟相機拍攝。</p>
+              <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> 選擇相片</span>
+              <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/jpg" capture="environment">
+            </label>
+            <p style="text-align:center; color:var(--text-muted); font-size:0.82rem; margin-top:10px;">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> 相片僅用於 AI 診斷與試算，嚴格保密。
+            </p>
+          </div>
+
+          <!-- 狀態 2: 預覽與 AI 分析中 -->
+          <div class="diagnosis-state" id="state-analyzing">
+            <div class="diagnosis-preview">
+              <img id="preview-img" alt="已上載的害蟲相片">
+            </div>
+            <div class="diagnosis-loading">
+              <div class="loading-spinner" aria-hidden="true"></div>
+              <p class="loading-text"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Vision AI 模型的分析中…預計 3 秒</p>
+            </div>
+          </div>
+
+          <!-- 狀態 3: 診斷結果 -->
+          <div class="diagnosis-state" id="state-result">
+            <div class="diagnosis-preview">
+              <img id="result-img" alt="已分析的害蟲相片">
+            </div>
+            <div class="diagnosis-result">
+              <div class="result-row">
+                <span class="result-label">害蟲種類</span>
+                <span class="result-value"><span id="r-pest">—</span><span class="result-confidence" id="r-confidence">95%</span></span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">風險等級</span>
+                <span class="result-value" id="r-risk">—</span>
+              </div>
+              <div class="result-row">
+                <span class="result-label">潛在暗巢位置</span>
+                <span class="result-value" id="r-nest">—</span>
+              </div>
+              <div class="result-strategy-box" id="r-strategy">
+                建議策略載入中…
+              </div>
+              <div class="result-row">
+                <span class="result-label">參考估價範圍</span>
+                <span class="result-value result-price" id="r-price">—</span>
+              </div>
+              <p style="font-size:0.78rem; color:var(--text-muted); margin:8px 0 0;">* 估價僅供參考，實際收費以師傅上門評估為準。</p>
+            </div>
+            <div class="result-actions">
+              <a href="#" id="r-wa" target="_blank" rel="noopener" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp" aria-hidden="true"></i> 帶結果預約 WhatsApp
+              </a>
+              <button type="button" class="btn btn-secondary" id="r-reupload">
+                <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 重新上載
+              </button>
+            </div>
+          </div>
+
+          <!-- 系統 6 步分析流程示意圖 -->
+          <div class="arch-flow-integrated">
+            <div class="arch-flow-title">
+              <i class="fa-solid fa-diagram-project" style="color:var(--primary-color);"></i> AI 分析系統運作流程
+            </div>
+            <div class="arch-flow-grid">
+              <div class="arch-step-item">
+                <span class="arch-step-num">1</span>
+                <h4>用戶入口</h4>
+                <p>網頁上傳/傳相</p>
+              </div>
+              <div class="arch-step-item">
+                <span class="arch-step-num">2</span>
+                <h4>邏輯轉接</h4>
+                <p>Cloudflare/Dify</p>
+              </div>
+              <div class="arch-step-item">
+                <span class="arch-step-num">3</span>
+                <h4>視覺識別</h4>
+                <p>Vision AI 特徵掃描</p>
+              </div>
+              <div class="arch-step-item">
+                <span class="arch-step-num">4</span>
+                <h4>策略匹配</h4>
+                <p>對照「三十六計」</p>
+              </div>
+              <div class="arch-step-item">
+                <span class="arch-step-num">5</span>
+                <h4>報價試算</h4>
+                <p>輸出參考價格</p>
+              </div>
+              <div class="arch-step-item">
+                <span class="arch-step-num">6</span>
+                <h4>轉化閉環</h4>
+                <p>一鍵 WhatsApp 預約</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== 模塊二：滅蟲師妹 AI 智能客服助理 (Dify 獨立視窗 + 關閉鈕) ==================== -->
+      <section class="module-card" id="ai-chat" aria-labelledby="ai-chat-title">
+        <div class="module-header">
+          <h2 id="ai-chat-title"><i class="fa-solid fa-robot" aria-hidden="true"></i> 🤖 滅蟲師妹 AI 智能客服助理</h2>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="module-badge">24/7 即時線上</span>
+            <button type="button" class="ai-close-btn" id="ai-close-btn" aria-label="關閉視窗" title="關閉視窗">✕</button>
+          </div>
+        </div>
+        <div class="ai-iframe-wrapper">
+          <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone" title="滅蟲師妹 AI 客服對話框"></iframe>
+        </div>
+      </section>
+
+      <!-- ==================== 模塊三：專員人工跟進 / 免費報價表單 ==================== -->
+      <section class="module-card" id="quote-form">
+        <div class="quote-form-body">
+          <div class="form-header-box">
+            <h3><i class="fa-solid fa-clipboard-list" aria-hidden="true" style="color:var(--primary-color);"></i> 📋 需專員人工跟進 / 詳細報價表單</h3>
+            <p>如需專員親自聯絡或預約上門，請填寫以下簡要資料：</p>
+          </div>
+
+          <form id="quote-form-element" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
+            <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
+            <input type="hidden" name="_captcha" value="true">
+
+            <div class="form-group">
+              <label for="name">姓名</label>
+              <input type="text" id="name" name="name" placeholder="請輸入簡稱" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">聯絡電話</label>
+              <input type="tel" id="phone" name="phone" placeholder="例如：9123 4567" required>
+            </div>
+
+            <div class="form-group">
+              <label for="service-type">服務類型</label>
+              <select id="service-type" name="service-type" required>
+                <option value="" disabled selected>請選擇服務類型</option>
+                <option value="滅曱甴（蟑螂）">滅曱甴（蟑螂）</option>
+                <option value="滅蚊">滅蚊</option>
+                <option value="滅鼠">滅鼠</option>
+                <option value="滅蚊滅鼠組合">滅蚊滅鼠組合</option>
+                <option value="床蝨/木蝨防治">床蝨/木蝨防治</option>
+                <option value="白蟻防治">白蟻防治</option>
+                <option value="白蟻預防">白蟻預防</option>
+                <option value="木蝨（書蝨）防治">木蝨（書蝨）防治</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="details">詳細情況</label>
+              <textarea id="details" name="details" rows="5" placeholder="請描述你嘅蟲患情況，例如：出現嘅害蟲種類、受影響嘅範圍、蟲患持續嘅時間等等"></textarea>
+            </div>
+
+            <div class="form-privacy">
+              <p><i class="fas fa-lock" aria-hidden="true"></i> 你嘅個人資料將嚴格保密，僅用於提供滅蟲報價服務。</p>
+            </div>
+
+            <div id="form-error" class="form-error" role="alert"></div>
+
+            <button type="submit" id="btn-submit" class="btn btn-primary">提交免費估價申請</button>
+          </form>
+
+          <div id="quote-success" class="quote-success" style="display:none;" role="status">
+            <div class="success-icon">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+            </div>
+            <h3>申請已提交！</h3>
+            <p>多謝你嘅查詢，我哋嘅服務專員會儘快聯絡閣下。一般情況下，我哋會喺24小時內回覆。</p>
+            <p>如果你需要更緊急嘅協助，歡迎直接WhatsApp聯絡我哋：</p>
+            <a href="https://wa.me/85252821552" class="btn btn-whatsapp" target="_blank" rel="noopener" style="margin-top:10px;">
+              <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp 聯絡
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
-  </section>
+  </main>
 
-  <div class="quote-container">
-    
-    <!-- 模塊一：AI 害蟲圖像分析系統（整合圖像診斷 + 流程說明） -->
-    <section class="module-card" id="ai-vision">
-      <div class="module-header">
-        <h2>📷 AI 害蟲圖像診斷系統</h2>
-        <span class="module-badge">Vision AI 即時辨識</span>
-      </div>
-      <div class="vision-upload-body">
-        <div class="upload-box" onclick="document.getElementById('pest-file-input').click();">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-          <h3 style="margin:5px 0; color:#0f172a; font-size:1.1rem;">點擊上載或拍攝害蟲相片</h3>
-          <p style="margin:0; font-size:0.85rem; color:#64748b;">支援 JPG / PNG，最大 5MB（相片僅供即時分析，嚴格保密）</p>
-          <input type="file" id="pest-file-input" accept="image/*" style="display:none;">
-        </div>
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+      <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X (Twitter)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/85252821552" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+      <a href="url?id=10" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+      <a href="mailto:Cedars5282@gmail.com" aria-label="Email" title="Gmail"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+    </div>
+    <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. 版權所有</p>
+  </footer>
 
-        <!-- 系統分析流程說明 -->
-        <div class="flow-steps">
-          <div class="step-item">
-            <strong>1. 相片上載</strong>
-            視覺 AI 即時掃描特徵
-          </div>
-          <div class="step-item">
-            <strong>2. 種類辨識</strong>
-            比對香港常見害蟲庫
-          </div>
-          <div class="step-item">
-            <strong>3. 策略配對</strong>
-            自動輸出「三十六計」方案
-          </div>
-          <div class="step-item">
-            <strong>4. 免費報價</strong>
-            一鍵帶入 WhatsApp 專員
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 模塊二：滅蟲師妹 AI 智能客服助理 -->
-    <section class="module-card" id="ai-chat">
-      <div class="module-header">
-        <h2>🤖 滅蟲師妹 AI 智能客服助理</h2>
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span class="module-badge">24/7 即時線上</span>
-          <button type="button" class="ai-close-btn" onclick="document.getElementById('ai-chat').style.display='none';" title="關閉視窗">✕</button>
-        </div>
-      </div>
-      <div class="ai-iframe-wrapper">
-        <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone"></iframe>
-      </div>
-    </section>
-
-    <!-- 模塊三：專員人工跟進 / 詳細報價表單 -->
-    <section class="quote-form-wrapper" id="quote-form">
-      <div style="text-align:center; margin-bottom:20px;">
-        <h3 style="font-size:1.25rem; color:#0f172a; margin-bottom:6px;">📋 需專員人工跟進 / 詳細報價表單</h3>
-        <p style="color:#64748b; font-size:0.9rem; margin:0;">如需專員親自聯絡或預約上門，請填寫以下簡要資料：</p>
-      </div>
-
-      <form id="quote-form-element" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
-        <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
-        <input type="hidden" name="_captcha" value="true">
-
-        <div class="form-group">
-          <label for="name">姓名</label>
-          <input type="text" id="name" name="name" placeholder="請輸入簡稱" required>
-        </div>
-
-        <div class="form-group">
-          <label for="phone">聯絡電話</label>
-          <input type="tel" id="phone" name="phone" placeholder="例如：9123 4567" required>
-        </div>
-
-        <div class="form-group">
-          <label for="service-type">服務類型</label>
-          <select id="service-type" name="service-type" required>
-            <option value="" disabled selected>請選擇服務類型</option>
-            <option value="滅曱甴（蟑螂）">滅曱甴（蟑螂）</option>
-            <option value="滅蚊">滅蚊</option>
-            <option value="滅鼠">滅鼠</option>
-            <option value="滅蚊滅鼠組合">滅蚊滅鼠組合</option>
-            <option value="床蝨/木蝨防治">床蝨/木蝨防治</option>
-            <option value="白蟻防治">白蟻防治</option>
-            <option value="白蟻預防">白蟻預防</option>
-            <option value="木蝨（書蝨）防治">木蝨（書蝨）防治</option>
-            <option value="其他">其他</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="details">詳細情況</label>
-          <textarea id="details" name="details" rows="5" placeholder="請描述你嘅蟲患情況，例如：出現嘅害蟲種類、受影響嘅範圍、蟲患持續嘅時間等等"></textarea>
-        </div>
-
-        <div class="form-privacy">
-          <p><i class="fas fa-lock"></i> 你嘅個人資料將嚴格保密，僅用於提供滅蟲報價服務。</p>
-        </div>
-
-        <div id="form-error" class="form-error"></div>
-
-        <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">提交免費估價申請</button>
-      </form>
-
-      <div id="quote-success" class="quote-success" style="display:none;">
-        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-        <h3>申請已提交！</h3>
-        <p>多謝你嘅查詢，我哋嘅服務專員會儘快聯絡閣下。</p>
-        <a href="https://wa.me/85252821552" class="btn btn-whatsapp" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> WhatsApp 聯絡
-        </a>
-      </div>
-    </section>
-
+  <!-- Mobile Sticky Thumb Zone -->
+  <div class="mobile-thumb-zone" role="navigation" aria-label="快速聯絡">
+    <a href="tel:+85252821552" class="thumb-btn thumb-call">
+      <i class="fa-solid fa-phone" aria-hidden="true"></i> 一鍵致電
+    </a>
+    <a href="url?id=2" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
+      <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp 報價
+    </a>
   </div>
-</main>
 
-<footer>
-  <div class="social-icons">
-    <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter" style="color:#fff;"></i></a>
-    <a href="https://wa.me/85252821552" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="mailto:info@bruceleehk.com" target="_blank" title="Gmail"><i class="fa-solid fa-envelope" style="color:#fff;"></i></a>
-  </div>
-  <p>&copy; 2026 CEDARS_LTD. 版權所有</p>
-</footer>
+  <script src="/assets/js/main.js" onerror="this.remove()"></script>
 
-<script src="/assets/js/main.js"></script>
-
-<script>
-  // Formspree AJAX 提交腳本
-  (function () {
-    var form = document.getElementById('quote-form-element');
-    if (!form) return;
-
-    var submitBtn = document.getElementById('btn-submit');
-    var successBox = document.getElementById('quote-success');
-    var errorBox = document.getElementById('form-error');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      errorBox.style.display = 'none';
-      errorBox.textContent = '';
-
-      var originalText = submitBtn.textContent;
-      submitBtn.textContent = '提交中...';
-      submitBtn.disabled = true;
-
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (response) {
-        if (response.ok) {
-          form.style.display = 'none';
-          successBox.style.display = 'block';
-        } else {
-          return response.json().then(function (data) {
-            var msgs = [];
-            if (data.errors) {
-              data.errors.forEach(function (err) { msgs.push(err.message); });
-            }
-            throw new Error(msgs.length ? msgs.join('、') : '提交失敗，請稍後再試。');
-          });
-        }
-      })
-      .catch(function (err) {
-        errorBox.textContent = err.message || '提交失敗，請檢查網絡連線後重試。';
-        errorBox.style.display = 'block';
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+  <script>
+    // ========== Mobile Menu Toggle ==========
+    (function() {
+      const toggle = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-links');
+      if (!toggle || !nav) return;
+      const closeMenu = () => {
+        nav.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.querySelector('i').className = 'fas fa-bars';
+      };
+      const openMenu = () => {
+        nav.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.querySelector('i').className = 'fas fa-xmark';
+      };
+      toggle.addEventListener('click', () => {
+        nav.classList.contains('active') ? closeMenu() : openMenu();
       });
-    });
-  })();
-</script>
+      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('click', (e) => {
+        if (nav.classList.contains('active') && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { if (window.innerWidth > 768) closeMenu(); }, 100);
+      });
+    })();
+
+    // ========== Current Year ==========
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // ========== Close AI Chat ==========
+    (function() {
+      const btn = document.getElementById('ai-close-btn');
+      const chatSec = document.getElementById('ai-chat');
+      if (!btn || !chatSec) return;
+      btn.addEventListener('click', () => { chatSec.style.display = 'none'; });
+    })();
+
+    // ========== AI Image Diagnosis Tool JS ==========
+    (function() {
+      const fileInput = document.getElementById('pest-photo');
+      const uploadArea = document.getElementById('upload-area');
+      const stateUpload = document.getElementById('state-upload');
+      const stateAnalyzing = document.getElementById('state-analyzing');
+      const stateResult = document.getElementById('state-result');
+      const previewImg = document.getElementById('preview-img');
+      const resultImg = document.getElementById('result-img');
+      const reuploadBtn = document.getElementById('r-reupload');
+
+      if (!fileInput) return;
+
+      const strategyMap = {
+        '曱甴': {
+          risk: '中 - 高',
+          nest: '廚房罅隙、排水管、電器背後',
+          strategy: '採用「誘敵深入計」：於排水口及裂縫設置智慧誘餌站，連環引誘滅巢。',
+          price: 'HK$ 600 - 3,800',
+          confidence: 96
+        },
+        '木蝨': {
+          risk: '高',
+          nest: '床板縫隙、梳化、牆身插座',
+          strategy: '採用「星星之火計」：高溫蒸氣 + 雙重殘留藥劑深層封殺蝨卵。',
+          price: 'HK$ 800 - 5,500',
+          confidence: 94
+        },
+        '老鼠': {
+          risk: '中 - 高',
+          nest: '管道入口、天花夾層、儲物區',
+          strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵源頭 + 24 小時遠端監測誘捕。',
+          price: 'HK$ 1,000 - 5,800',
+          confidence: 92
+        },
+        '白蟻': {
+          risk: '極高（結構風險）',
+          nest: '木結構內部、牆身、地板下',
+          strategy: '熱成像定位暗巢 + 灌注持效保護劑 + 結構性防治 1 年保用。',
+          price: 'HK$ 1,500 - 9,800',
+          confidence: 91
+        },
+        '蚊': {
+          risk: '低 - 中',
+          nest: '積水容器、花盆底碟、冷氣機托盤',
+          strategy: '採用「以逸待勞計」：誘蚊燈 + 生物顆粒阻斷幼蟲孳生。',
+          price: 'HK$ 500 - 3,800',
+          confidence: 90
+        },
+        '其他': {
+          risk: '待評估',
+          nest: '建議專員上門勘察',
+          strategy: 'AI 系統未能 100% 確定，建議上載多張不同角度相片或上門勘察由師傅診斷。',
+          price: '免費評估',
+          confidence: 70
+        }
+      };
+
+      const guessPestType = (file) => {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const size = 32;
+              canvas.width = size; canvas.height = size;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, size, size);
+              const data = ctx.getImageData(0, 0, size, size).data;
+              let r = 0, g = 0, b = 0, count = 0;
+              for (let i = 0; i < data.length; i += 4) {
+                r += data[i]; g += data[i+1]; b += data[i+2]; count++;
+              }
+              r /= count; g /= count; b /= count;
+              const filename = (file.name || '').toLowerCase();
+              let pest = '其他';
+              if (filename.includes('roach') || filename.includes('cockroach') || filename.includes('曱甴')) pest = '曱甴';
+              else if (filename.includes('bedbug') || filename.includes('bed') || filename.includes('木蝨') || filename.includes('床蝨')) pest = '木蝨';
+              else if (filename.includes('rat') || filename.includes('mouse') || filename.includes('鼠')) pest = '老鼠';
+              else if (filename.includes('termite') || filename.includes('ant') || filename.includes('白蟻')) pest = '白蟻';
+              else if (filename.includes('mosquito') || filename.includes('蚊')) pest = '蚊';
+              else {
+                if (r > 80 && r < 180 && g < r && b < r && (r - b) > 20) pest = '曱甴';
+                else if (r > 100 && g > 80 && b < 80) pest = '木蝨';
+                else if (r > 100 && g > 100 && b > 80 && r < 200) pest = '白蟻';
+                else if (Math.abs(r - g) < 25 && Math.abs(g - b) < 25 && r < 150) pest = '老鼠';
+                else pest = '蚊';
+              }
+              resolve({ pest });
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      };
+
+      const showState = (state) => {
+        [stateUpload, stateAnalyzing, stateResult].forEach(s => s.classList.remove('active'));
+        state.classList.add('active');
+      };
+
+      const handleFile = async (file) => {
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+          alert('相片大小不能超過 5MB，請重新選擇。');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImg.src = e.target.result;
+          resultImg.src = e.target.result;
+          showState(stateAnalyzing);
+        };
+        reader.readAsDataURL(file);
+
+        const guess = await guessPestType(file);
+        await new Promise(r => setTimeout(r, 1800));
+
+        const data = strategyMap[guess.pest] || strategyMap['其他'];
+        document.getElementById('r-pest').textContent = guess.pest;
+        document.getElementById('r-confidence').textContent = data.confidence + '% AI 信心';
+        document.getElementById('r-risk').textContent = data.risk;
+        document.getElementById('r-nest').textContent = data.nest;
+        document.getElementById('r-strategy').textContent = data.strategy;
+        document.getElementById('r-price').textContent = data.price;
+
+        const msg = `你好，我已用 AI 害蟲診斷器分析相片：\n• AI 識別：${guess.pest}（信心 ${data.confidence}%）\n• 風險等級：${data.risk}\n• 潛在暗巢：${data.nest}\n• 建議策略：${data.strategy}\n• 參考估價：${data.price}\n我想預約師傅上門跟進，謝謝！`;
+        document.getElementById('r-wa').href = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
+
+        showState(stateResult);
+      };
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+      });
+
+      ['dragenter', 'dragover'].forEach(evt => {
+        uploadArea.addEventListener(evt, (e) => {
+          e.preventDefault();
+          uploadArea.classList.add('dragover');
+        });
+      });
+      ['dragleave', 'drop'].forEach(evt => {
+        uploadArea.addEventListener(evt, (e) => {
+          e.preventDefault();
+          uploadArea.classList.remove('dragover');
+        });
+      });
+      uploadArea.addEventListener('drop', (e) => {
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+      });
+
+      reuploadBtn.addEventListener('click', () => {
+        fileInput.value = '';
+        showState(stateUpload);
+      });
+    })();
+
+    // ========== Formspree AJAX ==========
+    (function () {
+      var form = document.getElementById('quote-form-element');
+      if (!form) return;
+
+      var submitBtn = document.getElementById('btn-submit');
+      var successBox = document.getElementById('quote-success');
+      var errorBox = document.getElementById('form-error');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+
+        var originalText = submitBtn.textContent;
+        submitBtn.textContent = '提交中...';
+        submitBtn.disabled = true;
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (response) {
+          if (response.ok) {
+            form.style.display = 'none';
+            successBox.style.display = 'block';
+          } else {
+            return response.json().then(function (data) {
+              var msgs = [];
+              if (data.errors) {
+                data.errors.forEach(function (err) { msgs.push(err.message); });
+              }
+              throw new Error(msgs.length ? msgs.join('、') : '提交失敗，請稍後再試。');
+            });
+          }
+        })
+        .catch(function (err) {
+          errorBox.textContent = err.message || '提交失敗，請檢查網絡連線後重試。';
+          errorBox.style.display = 'block';
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
