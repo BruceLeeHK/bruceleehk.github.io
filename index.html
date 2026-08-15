@@ -5,49 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>滅蟲師傅 | 香港首創 AI 智慧滅蟲 • 獨家三十六計精準防治</title>
     <meta name="description" content="滅蟲師傅結合 AI 害蟲圖像識別、IoT 智慧監測與獨家三十六計防治策略，提供全港即日上門滅曱甴、滅鼠、滅木蝨及白蟻服務。5分鐘 WhatsApp 智能免費估價。">
-    <meta name="keywords" content="香港滅蟲,滅曱甴,滅鼠,滅木蝨,白蟻防治,AI害蟲識別,IoT智慧監測,三十六計,即日上門,WhatsApp估價">
-    <link rel="canonical" href="https://bruceleehk.com/">
-    <link rel="icon" type="image/png" href="assets/img/logo.png">
-
-    <!-- Open Graph / Social Sharing -->
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="zh_HK">
-    <meta property="og:site_name" content="滅蟲師傅">
-    <meta property="og:title" content="滅蟲師傅 | 香港首創 AI 智慧滅蟲">
-    <meta property="og:description" content="AI 害蟲圖像識別 × IoT 智慧監測 × 獨家三十六計。最快即日上門，WhatsApp 5分鐘智能估價。">
-    <meta property="og:url" content="https://bruceleehk.com/">
-    <meta property="og:image" content="assets/img/og-cover.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="stylesheet" href="assets/css/style.css" onerror="this.remove()">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Structured Data: LocalBusiness -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "PestControl",
-        "name": "滅蟲師傅 PEST CONTROL MASTER",
-        "image": "assets/img/logo.png",
-        "url": "https://bruceleehk.com/",
-        "telephone": "+85252821552",
-        "priceRange": "$$",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "香港",
-            "addressRegion": "新界",
-            "streetAddress": "荔景邨工場大廈"
-        },
-        "areaServed": "香港",
-        "openingHours": "Mo-Su 09:00-18:00",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "10000"
-        }
-    }
-    </script>
-
     <style>
         :root {
             --primary-color: #10b981;
@@ -56,20 +15,8 @@
             --dark-bg: #0f172a;
             --card-bg: #1e293b;
             --text-main: #334155;
-            --text-muted: #64748b;
             --light-bg: #f8fafc;
-            --border-color: #e2e8f0;
-            --whatsapp: #25d366;
-            --whatsapp-dark: #1eb954;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
-            --shadow-md: 0 8px 20px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.10);
-            --transition: 0.25s ease;
         }
-
-        * { box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -78,29 +25,14 @@
             color: var(--text-main);
             background-color: #ffffff;
             padding-bottom: 75px;
-            line-height: 1.6;
         }
 
-        /* Skip to content for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 8px 16px;
-            z-index: 1000;
-            text-decoration: none;
-            border-radius: 0 0 6px 0;
-        }
-        .skip-link:focus { top: 0; }
-
-        /* ============ Header ============ */
+        /* Nav Header */
         .site-header {
             position: sticky;
             top: 0;
             background: #ffffff;
-            box-shadow: var(--shadow-sm);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 100;
         }
         .nav-container {
@@ -112,6 +44,8 @@
             padding: 10px 20px;
             position: relative;
         }
+
+        /* 左側 Logo 與 WhatsApp 圖標組合 */
         .logo-group {
             display: flex;
             align-items: center;
@@ -145,12 +79,14 @@
         }
         .logo-subtitle {
             font-size: 0.65rem;
-            color: var(--text-muted);
+            color: #64748b;
             font-weight: 600;
             letter-spacing: 0.8px;
             margin-top: 2px;
             text-align: left;
         }
+
+        /* 左側 WhatsApp 按鈕 */
         .header-wa-left {
             display: inline-flex;
             align-items: center;
@@ -158,17 +94,19 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: var(--whatsapp);
+            background: #25d366;
             color: #ffffff !important;
             font-size: 1.1rem;
             text-decoration: none;
-            transition: transform var(--transition), background-color var(--transition);
+            transition: transform 0.2s, background-color 0.2s;
             margin-left: 4px;
         }
         .header-wa-left:hover {
             transform: scale(1.1);
-            background: var(--whatsapp-dark);
+            background: #1eb954;
         }
+
+        /* 導航連結 */
         .nav-links {
             display: flex;
             align-items: center;
@@ -179,79 +117,38 @@
         }
         .nav-links a {
             text-decoration: none;
-            color: var(--text-main);
+            color: #334155;
             font-weight: 600;
-            transition: color var(--transition);
+            transition: color 0.2s;
         }
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary-color);
         }
+
+        /* 手機版三橫槓 Menu Toggle */
         .menu-toggle {
             display: none;
             font-size: 1.4rem;
-            color: var(--dark-bg);
+            color: #0f172a;
             cursor: pointer;
             padding: 4px;
             align-items: center;
             justify-content: center;
             line-height: 1;
             height: 38px;
-            width: 38px;
-            background: transparent;
-            border: none;
-            border-radius: 6px;
-        }
-        .menu-toggle:hover { background: var(--light-bg); }
-        .menu-toggle:focus-visible {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
         }
 
-        /* ============ Hero ============ */
+        /* Hero Section */
         .hero {
-            background:
-                linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
-                url('assets/img/hero-tech.jpg') center/cover no-repeat;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #ffffff;
-            padding: 55px 20px 50px;
+            padding: 55px 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        /* 動態科技感背景：流動光點 */
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(16,185,129,0.22) 0%, transparent 35%),
-                radial-gradient(circle at 80% 70%, rgba(2,132,199,0.22) 0%, transparent 35%),
-                radial-gradient(circle at 50% 50%, rgba(110,231,183,0.10) 0%, transparent 50%);
-            animation: heroGlow 8s ease-in-out infinite alternate;
-            pointer-events: none;
-        }
-        @keyframes heroGlow {
-            0%   { transform: scale(1) translateX(0); opacity: 0.8; }
-            100% { transform: scale(1.1) translateX(-10px); opacity: 1; }
-        }
-        /* 網格線裝飾 */
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 70%);
-            pointer-events: none;
         }
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
         .hero-badge-group {
             display: flex;
@@ -275,24 +172,22 @@
         .hero h1 {
             font-size: 1.95rem;
             line-height: 1.35;
-            margin: 0 0 15px;
+            margin-bottom: 15px;
             font-weight: 800;
             background: linear-gradient(90deg, #ffffff, #6ee7b7);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero p {
             font-size: 1.05rem;
             color: #94a3b8;
-            margin: 0 0 28px;
+            margin-bottom: 28px;
         }
         .hero-cta {
             display: flex;
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 28px;
         }
         .btn {
             padding: 12px 22px;
@@ -302,12 +197,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: transform var(--transition), box-shadow var(--transition);
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .btn:hover { transform: translateY(-2px); }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
         .btn-primary {
             background: var(--primary-color);
             color: #ffffff;
@@ -319,75 +213,28 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* ============ Hero 簡易報價表單 ============ */
-        .hero-form {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
-            padding: 18px;
-            max-width: 640px;
-            margin: 0 auto;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        .hero-form-title {
-            font-size: 0.95rem;
-            color: #6ee7b7;
-            margin: 0 0 12px;
-            font-weight: 700;
-        }
-        .hero-form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 10px;
-        }
-        .hero-form select,
-        .hero-form input {
-            padding: 11px 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.95);
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-family: inherit;
-            min-width: 0;
-        }
-        .hero-form select:focus,
-        .hero-form input:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 1px;
-        }
-        .hero-form .btn-submit {
-            background: var(--whatsapp);
-            color: #fff;
-            padding: 11px 18px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-        .hero-form .btn-submit:hover { background: var(--whatsapp-dark); }
-
-        /* ============ Layout Container ============ */
+        /* Layout Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         .section-title {
             text-align: center;
             margin: 45px 0 25px;
         }
         .section-title h2 {
             font-size: 1.7rem;
-            color: var(--dark-bg);
-            margin: 0 0 8px;
+            color: #0f172a;
+            margin-bottom: 8px;
         }
         .section-title p {
-            color: var(--text-muted);
+            color: #64748b;
             font-size: 0.95rem;
-            margin: 0;
         }
 
-        /* ============ Smart Pest Cards ============ */
+        /* Smart Pest Cards */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -395,39 +242,16 @@
         }
         .smart-card {
             background: #ffffff;
-            border: 1px solid var(--border-color);
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 0 0 24px;
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        .smart-card-image {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            display: block;
-            background: var(--light-bg);
-        }
-        .smart-card-body {
-            padding: 18px 20px 0;
-        }
-        .smart-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--tech-blue));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition);
+            padding: 24px 20px;
+            transition: all 0.3s ease;
         }
         .smart-card:hover {
             border-color: var(--primary-color);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
             transform: translateY(-3px);
         }
-        .smart-card:hover::before { transform: scaleX(1); }
         .smart-icon {
             width: 48px;
             height: 48px;
@@ -442,20 +266,17 @@
         }
         .smart-card h3 {
             font-size: 1.15rem;
-            margin: 0 0 8px;
+            margin-bottom: 8px;
             color: #1e293b;
         }
         .smart-card p {
-            color: var(--text-muted);
+            color: #64748b;
             font-size: 0.92rem;
             line-height: 1.6;
             margin: 0;
         }
 
-        /* ============ Stratagem Carousel ============ */
-        .stratagem-wrapper {
-            position: relative;
-        }
+        /* Stratagem Carousel */
         .stratagem-scroll {
             display: flex;
             gap: 16px;
@@ -463,13 +284,6 @@
             padding: 10px 5px 20px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) transparent;
-        }
-        .stratagem-scroll::-webkit-scrollbar { height: 6px; }
-        .stratagem-scroll::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 3px;
         }
         .stratagem-card {
             flex: 0 0 280px;
@@ -483,11 +297,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: border-color var(--transition), transform var(--transition);
+            transition: border-color 0.2s;
         }
         .stratagem-card:hover {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
         }
         .stratagem-tag {
             font-size: 0.75rem;
@@ -502,354 +315,64 @@
         .stratagem-title {
             font-size: 1.05rem;
             font-weight: 700;
-            color: var(--dark-bg);
+            color: #0f172a;
             margin-bottom: 8px;
         }
         .stratagem-desc {
             font-size: 0.88rem;
-            color: var(--text-muted);
+            color: #64748b;
             line-height: 1.5;
             margin: 0;
         }
-        .stratagem-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #fff;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-main);
-            z-index: 2;
-            transition: background var(--transition);
-        }
-        .stratagem-nav:hover { background: var(--light-bg); }
-        .stratagem-nav.prev { left: -10px; }
-        .stratagem-nav.next { right: -10px; }
-        @media (min-width: 769px) {
-            .stratagem-nav.displayed { display: flex; }
-        }
 
-        /* ============ 互動式害蟲快速診斷器 ============ */
-        .diagnostic-box {
-            background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
-            border: 1px solid #d1fae5;
-            border-radius: 16px;
-            padding: 32px 24px;
-            margin: 30px 0;
-        }
-        .diagnostic-progress {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-        .progress-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            transition: background var(--transition);
-        }
-        .progress-dot.active { background: var(--primary-color); }
-        .progress-dot.done { background: var(--primary-dark); }
-        .diagnostic-step {
-            display: none;
-            text-align: center;
-            animation: fadeIn 0.4s ease;
-        }
-        .diagnostic-step.active { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .diagnostic-step h3 {
-            font-size: 1.3rem;
-            color: var(--dark-bg);
-            margin: 0 0 6px;
-        }
-        .diagnostic-step p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            margin: 0 0 22px;
-        }
-        .diagnostic-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            max-width: 640px;
-            margin: 0 auto;
-        }
-        .diagnostic-opt {
-            background: #fff;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 18px 12px;
-            cursor: pointer;
-            transition: all var(--transition);
-            text-align: center;
-            font-family: inherit;
-        }
-        .diagnostic-opt:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        .diagnostic-opt.selected {
-            border-color: var(--primary-color);
-            background: #ecfdf5;
-        }
-        .diagnostic-opt .opt-icon {
-            font-size: 2rem;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .diagnostic-opt .opt-label {
-            font-weight: 700;
-            color: var(--dark-bg);
-            font-size: 0.95rem;
-        }
-        .diagnostic-result {
-            background: #fff;
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 540px;
-            margin: 0 auto;
-            box-shadow: var(--shadow-md);
-            text-align: left;
-        }
-        .diagnostic-result .result-strategy {
-            background: var(--dark-bg);
-            color: #6ee7b7;
-            padding: 14px 16px;
-            border-radius: 8px;
-            margin: 14px 0;
-            font-size: 0.95rem;
-        }
-        .diagnostic-result .result-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-top: 1px dashed var(--border-color);
-            margin-top: 10px;
-        }
-        .diagnostic-result .result-price .price-label {
-            color: var(--text-muted);
-            font-size: 0.88rem;
-        }
-        .diagnostic-result .result-price .price-value {
-            color: var(--danger);
-            font-weight: 800;
-            font-size: 1.2rem;
-        }
-        .diagnostic-btns {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            transition: all var(--transition);
-        }
-        .btn-ghost:hover {
-            background: var(--light-bg);
-            color: var(--text-main);
-        }
-
-        /* ============ 短影音案例區 (9:16) ============ */
-        .video-section {
-            background: var(--dark-bg);
-            color: #fff;
-            border-radius: 16px;
-            padding: 36px 24px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        .video-section h3 {
-            font-size: 1.4rem;
-            margin: 0 0 6px;
-            color: #fff;
-        }
-        .video-section p {
-            color: #94a3b8;
-            margin: 0 0 24px;
-            font-size: 0.92rem;
-        }
-        .video-grid {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .video-card {
-            width: 200px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: transform var(--transition);
-        }
-        .video-card:hover { transform: translateY(-4px); }
-        .video-thumb {
-            position: relative;
-            aspect-ratio: 9 / 16;
-            background: var(--dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .video-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .video-thumb::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(180deg, rgba(15,23,42,0) 50%, rgba(15,23,42,0.6) 100%),
-                radial-gradient(circle at 30% 20%, rgba(16,185,129,0.15), transparent 50%);
-            z-index: 1;
-            pointer-events: none;
-        }
-        .video-play {
-            position: relative;
-            z-index: 2;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.92);
-            color: var(--dark-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            transition: transform var(--transition);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        .video-card:hover .video-play { transform: scale(1.1); }
-        .video-duration {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            font-size: 0.72rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            z-index: 1;
-        }
-        .video-info {
-            padding: 12px;
-            text-align: left;
-        }
-        .video-info .video-title {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: #fff;
-            margin: 0 0 4px;
-            line-height: 1.4;
-        }
-        .video-info .video-meta {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin: 0;
-        }
-
-        /* ============ AI Widget CTA ============ */
+        /* AI Interactive CTA Section */
         .ai-widget-box {
-            background: var(--dark-bg);
+            background: #0f172a;
             color: #ffffff;
             border-radius: 16px;
             padding: 35px 25px;
             text-align: center;
             margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .ai-widget-box::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(16,185,129,0.15), transparent 60%);
-            pointer-events: none;
         }
         .ai-widget-box h3 {
             font-size: 1.45rem;
-            margin: 0 0 10px;
+            margin-bottom: 10px;
             color: #34d399;
-            position: relative;
         }
         .ai-widget-box p {
             color: #cbd5e1;
             max-width: 600px;
             margin: 0 auto 25px;
             font-size: 0.95rem;
-            position: relative;
         }
-        .ai-widget-box .btn { position: relative; }
 
-        /* ============ Services Grid ============ */
+        /* Services Grid */
         .service-card {
-            border: 1px solid var(--border-color);
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
             padding: 22px;
             background: #ffffff;
             text-decoration: none;
             color: inherit;
-            transition: transform var(--transition), box-shadow var(--transition);
+            transition: transform 0.2s, box-shadow 0.2s;
             display: block;
             position: relative;
         }
         .service-card:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        .service-card:hover .service-arrow {
-            transform: translateX(4px);
-            color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
         .service-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 4px;
-        }
-        .service-badge.hot {
             background: #fef2f2;
-            color: var(--danger);
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
             border: 1px solid #fca5a5;
-        }
-        .service-badge.urgent {
-            background: #fffbeb;
-            color: var(--warning);
-            border: 1px solid #fcd34d;
-        }
-        .service-badge.new {
-            background: #ecfdf5;
-            color: var(--primary-dark);
-            border: 1px solid #6ee7b7;
         }
         .service-title {
             display: flex;
@@ -857,105 +380,40 @@
             gap: 10px;
             font-size: 1.15rem;
             font-weight: 700;
-            color: var(--dark-bg);
+            color: #0f172a;
             margin-bottom: 10px;
         }
-        .service-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-        .service-arrow {
-            display: inline-block;
-            margin-top: 12px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: transform var(--transition), color var(--transition);
-        }
 
-        /* ============ Estate Case Wall ============ */
+        /* Local Estates Case Wall */
         .estate-wall {
             background: var(--light-bg);
             border-radius: 16px;
-            padding: 30px 24px;
+            padding: 25px 20px;
             margin: 30px 0;
-            border: 1px solid var(--border-color);
-        }
-        .estate-header {
-            text-align: center;
-            margin-bottom: 18px;
-        }
-        .estate-header h3 {
-            margin: 0 0 6px;
-            font-size: 1.25rem;
-            color: var(--dark-bg);
-        }
-        .estate-header p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-        .rating-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin: 10px 0 18px;
-        }
-        .rating-stars {
-            color: #fbbf24;
-            font-size: 1rem;
-            letter-spacing: 2px;
-        }
-        .rating-text {
-            color: var(--text-main);
-            font-weight: 700;
-            font-size: 0.92rem;
-        }
-        .rating-count {
-            color: var(--text-muted);
-            font-size: 0.82rem;
+            border: 1px solid #e2e8f0;
         }
         .estate-tags {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
         }
         .estate-tag {
             background: #ffffff;
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            padding: 12px 14px;
-            font-size: 0.88rem;
-            color: var(--text-main);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            color: #334155;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all var(--transition);
-        }
-        .estate-tag:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-        .estate-tag .case-icon {
-            color: var(--primary-color);
-            font-size: 1rem;
-        }
-        .estate-tag .case-estate {
-            font-weight: 700;
-            color: var(--dark-bg);
-        }
-        .estate-tag .case-type {
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            margin-left: auto;
+            gap: 6px;
         }
 
-        /* ============ Footer ============ */
+        /* Footer */
         footer {
-            background: var(--dark-bg);
+            background: #0f172a;
             color: #94a3b8;
             padding: 40px 20px 80px;
             text-align: center;
@@ -965,6 +423,7 @@
             color: #34d399;
             text-decoration: none;
         }
+
         .footer-social-links {
             display: flex;
             justify-content: center;
@@ -982,14 +441,15 @@
             background: rgba(255, 255, 255, 0.12);
             color: #ffffff !important;
             font-size: 1.25rem;
-            transition: all var(--transition);
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
         .footer-social-links a:hover {
             transform: translateY(-3px);
             background: var(--primary-color);
         }
 
-        /* ============ Mobile Sticky Thumb Zone ============ */
+        /* Mobile Bottom Sticky Thumb-Zone */
         .mobile-thumb-zone {
             position: fixed;
             bottom: 0;
@@ -1014,18 +474,16 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            min-width: 0;
         }
         .thumb-call {
-            background: var(--tech-blue);
+            background: #0284c7;
             color: #ffffff;
         }
         .thumb-wa {
-            background: var(--whatsapp);
+            background: #25d366;
             color: #ffffff;
         }
 
-        /* ============ Responsive ============ */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
             .nav-links {
@@ -1037,17 +495,10 @@
                 background: #ffffff;
                 flex-direction: column;
                 padding: 15px 20px;
-                box-shadow: var(--shadow-lg);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 gap: 15px;
-                border-top: 1px solid var(--border-color);
             }
             .nav-links.active { display: flex; }
-            .hero-form-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero h1 { font-size: 1.7rem; }
-            .video-card { width: 170px; }
-            .diagnostic-options { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (min-width: 769px) {
@@ -1055,669 +506,212 @@
             .mobile-thumb-zone { display: none; }
             body { padding-bottom: 0; }
         }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            .hero::before { animation: none; }
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳到主要內容</a>
 
     <!-- Header Navigation -->
     <header class="site-header">
         <div class="nav-container">
             <div class="logo-group">
-                <a href="/" class="logo" aria-label="滅蟲師傅首頁">
+                <a href="/" class="logo">
                     <img src="assets/img/logo.png" alt="滅蟲師傅 Logo">
                     <div class="logo-text">
                         <span class="logo-title">滅蟲師傅</span>
                         <span class="logo-subtitle">PEST CONTROL MASTER</span>
                     </div>
                 </a>
-                <a href="https://wa.me/85252821552" target="_blank" rel="noopener" class="header-wa-left" aria-label="WhatsApp 諮詢">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                <a href="https://wa.me/85252821552" target="_blank" class="header-wa-left" title="WhatsApp 諮詢">
+                    <i class="fa-brands fa-whatsapp"></i>
                 </a>
             </div>
 
-            <nav aria-label="主導航">
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="/" class="active" aria-current="page">首頁</a></li>
-                    <li><a href="/services/">蟲類服務</a></li>
-                    <li><a href="/strategy/">有蟲就有計</a></li>
-                    <li><a href="/info/">蟲類資訊</a></li>
-                    <li><a href="/quote/">有蟲話我知</a></li>
-                </ul>
-            </nav>
+            <!-- 右側導航列 -->
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/" class="active">首頁</a></li>
+                <li><a href="/services/">蟲類服務</a></li>
+                <li><a href="/strategy/">有蟲就有計</a></li>
+                <li><a href="/info/">蟲類資訊</a></li>
+                <li><a href="/quote/">有蟲話我知</a></li>
+            </ul>
 
-            <button class="menu-toggle" id="menu-toggle" aria-label="開啟/關閉選單" aria-expanded="false" aria-controls="nav-links">
-                <i class="fa-solid fa-bars" aria-hidden="true"></i>
-            </button>
+            <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
     </header>
 
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="hero-content">
-                <div class="hero-badge-group">
-                    <span class="tech-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> AI 害蟲圖像識別</span>
-                    <span class="tech-badge"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> IoT 智慧監測追蹤</span>
-                    <span class="tech-badge"><i class="fa-solid fa-chess-knight" aria-hidden="true"></i> 獨家三十六計精準防治</span>
-                </div>
-                <h1 id="hero-title">香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
-                <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
-                <div class="hero-cta">
-                    <a href="/quote/#ai-chat" class="btn btn-primary">
-                        <i class="fa-solid fa-robot" aria-hidden="true"></i> 滅蟲師妹 AI 查詢
-                    </a>
-                    <a href="https://wa.me/85252821552" target="_blank" rel="noopener" class="btn btn-secondary">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 諮詢
-                    </a>
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge-group">
+                <span class="tech-badge"><i class="fa-solid fa-robot"></i> AI 害蟲圖像識別</span>
+                <span class="tech-badge"><i class="fa-solid fa-network-wired"></i> IoT 智慧監測追蹤</span>
+                <span class="tech-badge"><i class="fa-solid fa-chess-knight"></i> 獨家三十六計精準防治</span>
+            </div>
+            <h1>香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
+            <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
+            <div class="hero-cta">
+                <a href="/quote/#ai-chat" class="btn btn-primary">🤖 滅蟲師妹 AI 查詢</a>
+                <a href="https://wa.me/85252821552" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> WhatsApp 諮詢</a>
+            </div>
+        </div>
+    </section>
 
-                <!-- 簡易報價表單 -->
-                <form class="hero-form" id="hero-quick-quote" aria-label="快速報價">
-                    <p class="hero-form-title"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 30 秒快速估價 — 即時 WhatsApp 送出</p>
-                    <div class="hero-form-grid">
-                        <select id="q-pest" required aria-label="害蟲類型">
-                            <option value="">害蟲類型…</option>
-                            <option value="曱甴">🪳 曱甴</option>
-                            <option value="木蝨">🕷️ 木蝨 / 床蝨</option>
-                            <option value="老鼠">🐭 老鼠</option>
-                            <option value="白蟻">🐜 白蟻</option>
-                            <option value="蚊">🦟 蚊</option>
-                            <option value="其他">❓ 其他</option>
-                        </select>
-                        <select id="q-premise" required aria-label="屋苑類型">
-                            <option value="">屋苑類型…</option>
-                            <option value="公屋">公屋</option>
-                            <option value="私人住宅">私人住宅</option>
-                            <option value="村屋">村屋</option>
-                            <option value="商舖/餐廳">商舖 / 餐廳</option>
-                            <option value="寫字樓">寫字樓</option>
-                            <option value="工廈">工廈</option>
-                        </select>
-                        <button type="submit" class="btn btn-submit">
-                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 即時估價
-                        </button>
-                    </div>
-                </form>
+    <!-- Section 1: 智慧滅蟲 -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-microchip" style="color: var(--primary-color);"></i> 智慧滅蟲專區</h2>
+            <p>打破傳統經驗主義，結合最新科技全面鎖定害蟲暗巢</p>
+        </div>
+        <div class="grid-3">
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                <h3>AI 害蟲分析系統</h3>
+                <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
             </div>
-        </section>
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-wifi"></i></div>
+                <h3>IoT 智慧鼠盒監測</h3>
+                <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
+            </div>
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3>熱成像暗巢掃描</h3>
+                <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- Section 1: 智慧滅蟲 -->
-        <section class="container" aria-labelledby="smart-title">
-            <div class="section-title">
-                <h2 id="smart-title"><i class="fa-solid fa-microchip" aria-hidden="true" style="color: var(--primary-color);"></i> 智慧滅蟲專區</h2>
-                <p>打破傳統經驗主義，結合最新科技全面鎖定害蟲暗巢</p>
-            </div>
-            <div class="grid-3">
-                <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy">
-                    <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
-                        <h3>AI 害蟲分析系統</h3>
-                        <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
-                    </div>
-                </article>
-                <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統 - 遠端紅外線感知裝置" loading="lazy">
-                    <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
-                        <h3>IoT 智慧鼠盒監測</h3>
-                        <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
-                    </div>
-                </article>
-                <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描 - 無損探測牆身內部害蟲巢穴" loading="lazy">
-                    <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
-                        <h3>熱成像暗巢掃描</h3>
-                        <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+    <!-- Section 2: 服務分類 -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-shield-halved" style="color: var(--primary-color);"></i> 專業蟲類防治服務</h2>
+            <p>漁護署註冊藥劑 • 0隱藏收費 • 100%專業持牌師傅</p>
+        </div>
+        <div class="grid-3">
+            <a href="/services/#cockroach" class="service-card">
+                <span class="service-badge">🔥 熱門急件</span>
+                <div class="service-title">🪳 滅曱甴（蟑螂）</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">針對德國與美國曱甴，施放智慧誘餌連環滅巢。</p>
+            </a>
+            <a href="/services/#mosquito-rat" class="service-card">
+                <div class="service-title">🦟🐭 滅蚊滅鼠</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">生物劑阻斷幼蟲孳生，配合物理與智慧鼠盒清剿。</p>
+            </a>
+            <a href="/services/#bedbug" class="service-card">
+                <span class="service-badge">⚡ 急診推薦</span>
+                <div class="service-title">🕷️ 床/木蝨防治</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">高溫蒸氣及專用殘留藥劑深層封殺，徹底消滅蝨卵。</p>
+            </a>
+            <a href="/services/#termite" class="service-card">
+                <div class="service-title">🐜 白蟻防治</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">熱成像精準定位暗巢，灌注持效保護劑，防止結構倒塌。</p>
+            </a>
+        </div>
+    </section>
 
-        <!-- Section 2: 服務分類 -->
-        <section class="container" aria-labelledby="svc-title">
-            <div class="section-title">
-                <h2 id="svc-title"><i class="fa-solid fa-shield-halved" aria-hidden="true" style="color: var(--primary-color);"></i> 專業蟲類防治服務</h2>
-                <p>漁護署註冊藥劑 • 0隱藏收費 • 100%專業持牌師傅</p>
-            </div>
-            <div class="grid-3">
-                <a href="/services/#cockroach" class="service-card">
-                    <span class="service-badge hot">🔥 熱門急件</span>
-                    <div class="service-title"><span aria-hidden="true">🪳</span> 滅曱甴（蟑螂）</div>
-                    <p class="service-desc">針對德國與美國曱甴，施放智慧誘餌連環滅巢。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#mosquito-rat" class="service-card">
-                    <span class="service-badge new">全年保用</span>
-                    <div class="service-title"><span aria-hidden="true">🦟🐭</span> 滅蚊滅鼠</div>
-                    <p class="service-desc">生物劑阻斷幼蟲孳生，配合物理與智慧鼠盒清剿。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#bedbug" class="service-card">
-                    <span class="service-badge urgent">⚡ 急診推薦</span>
-                    <div class="service-title"><span aria-hidden="true">🕷️</span> 床/木蝨防治</div>
-                    <p class="service-desc">高溫蒸氣及專用殘留藥劑深層封殺，徹底消滅蝨卵。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#termite" class="service-card">
-                    <span class="service-badge hot">🔥 結構風險</span>
-                    <div class="service-title"><span aria-hidden="true">🐜</span> 白蟻防治</div>
-                    <p class="service-desc">熱成像精準定位暗巢，灌注持效保護劑，防止結構倒塌。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Section 3: 三十六計 (Stratagem Carousel) -->
-        <section class="container" aria-labelledby="strat-title">
-            <div class="section-title">
-                <h2 id="strat-title"><i class="fa-solid fa-scroll" aria-hidden="true" style="color: var(--primary-color);"></i> 有蟲就有計：三十六計實戰策略</h2>
-                <p>左右滑動查看師傅如何靈活運用策略擊退各類害蟲</p>
-            </div>
-            <div class="stratagem-wrapper">
-                <button class="stratagem-nav prev" id="strat-prev" aria-label="上一張" type="button">
-                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <div class="stratagem-scroll" id="strat-scroll">
-                    <a href="/strategy/#strat-1" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅曱甴策略</span>
-                            <div class="stratagem-title">美國曱甴「誘敵深入計」</div>
-                            <p class="stratagem-desc">排水口與裂縫設置誘餌站，將經管道進出的大型曱甴一網打盡。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-2" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅蚊策略</span>
-                            <div class="stratagem-title">戶外蚊患「以逸待勞計」</div>
-                            <p class="stratagem-desc">定時紫外線誘蚊燈配合生物顆粒，免除頻繁噴藥，長效控蚊。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-3" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅鼠策略</span>
-                            <div class="stratagem-title">鼠患問題「釜底抽薪計」</div>
-                            <p class="stratagem-desc">評估入屋源頭並精準封堵老鼠窿，配合誘捕技術徹底絕路。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-4" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">木蝨策略</span>
-                            <div class="stratagem-title">床蝨防治「星星之火計」</div>
-                            <p class="stratagem-desc">針對極高繁衍力的床蝨，實施全方位高溫及藥劑雙重封殺。</p>
-                        </div>
-                    </a>
+    <!-- Section 3: 三十六計 -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-scroll" style="color: var(--primary-color);"></i> 有蟲就有計：三十六計實戰策略</h2>
+            <p>左右滑動查看師傅如何靈活運用策略擊退各類害蟲</p>
+        </div>
+        <div class="stratagem-scroll">
+            <a href="/strategy/#strat-1" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅曱甴策略</span>
+                    <div class="stratagem-title">美國曱甴「誘敵深入計」</div>
+                    <p class="stratagem-desc">排水口與裂縫設置誘餌站，將經管道進出的大型曱甴一網打盡。</p>
                 </div>
-                <button class="stratagem-nav next" id="strat-next" aria-label="下一張" type="button">
-                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div style="text-align: center; margin-top: 10px;">
-                <a href="/strategy/" style="color: var(--primary-color); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
-            </div>
-        </section>
+            </a>
+            <a href="/strategy/#strat-2" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅蚊策略</span>
+                    <div class="stratagem-title">戶外蚊患「以逸待勞計」</div>
+                    <p class="stratagem-desc">定時紫外線誘蚊燈配合生物顆粒，免除頻繁噴藥，長效控蚊。</p>
+                </div>
+            </a>
+            <a href="/strategy/#strat-3" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅鼠策略</span>
+                    <div class="stratagem-title">鼠患問題「釜底抽薪計」</div>
+                    <p class="stratagem-desc">評估入屋源頭並精準封堵老鼠窿，配合誘捕技術徹底絕路。</p>
+                </div>
+            </a>
+            <a href="/strategy/#strat-4" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">木蝨策略</span>
+                    <div class="stratagem-title">床蝨防治「星星之火計」</div>
+                    <p class="stratagem-desc">針對極高繁衍力的床蝨，實施全方位高溫及藥劑雙重封殺。</p>
+                </div>
+            </a>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="/strategy/" style="color: var(--primary-color); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
+        </div>
+    </section>
 
-        <!-- Section 4: 互動式害蟲快速診斷器 (NEW) -->
-        <section class="container" aria-labelledby="diag-title">
-            <div class="section-title">
-                <h2 id="diag-title"><i class="fa-solid fa-stethoscope" aria-hidden="true" style="color: var(--primary-color);"></i> 害蟲快速診斷器</h2>
-                <p>3 個步驟即時獲取專屬防治策略與估價範圍</p>
-            </div>
-            <div class="diagnostic-box">
-                <div class="diagnostic-progress" aria-hidden="true">
-                    <span class="progress-dot active" data-step="1"></span>
-                    <span class="progress-dot" data-step="2"></span>
-                    <span class="progress-dot" data-step="3"></span>
-                </div>
+    <!-- Section 4: AI Widget CTA -->
+    <section class="container">
+        <div class="ai-widget-box">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> 遇到害蟲疑難？體驗 AI 智能診斷</h3>
+            <p>拍下害蟲照片並傳送至 WhatsApp，系統即時比對資料庫並為你給出預估處理方案與免費估價！</p>
+            <a href="https://wa.me/85252821552?text=我想進行AI害蟲診斷估價" target="_blank" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> 立即上載圖片診斷</a>
+        </div>
+    </section>
 
-                <!-- Step 1: 害蟲類型 -->
-                <div class="diagnostic-step active" data-step="1">
-                    <h3>你遇到甚麼害蟲？</h3>
-                    <p>選擇最接近你情況的害蟲類型</p>
-                    <div class="diagnostic-options" role="radiogroup" aria-label="害蟲類型">
-                        <button class="diagnostic-opt" data-value="曱甴" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">🪳</span>
-                            <span class="opt-label">曱甴</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="木蝨" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">🕷️</span>
-                            <span class="opt-label">木蝨 / 床蝨</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="老鼠" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">🐭</span>
-                            <span class="opt-label">老鼠</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="白蟻" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">🐜</span>
-                            <span class="opt-label">白蟻</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="蚊" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">🦟</span>
-                            <span class="opt-label">蚊</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="其他" data-step="1" type="button">
-                            <span class="opt-icon" aria-hidden="true">❓</span>
-                            <span class="opt-label">不確定</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Step 2: 嚴重程度 -->
-                <div class="diagnostic-step" data-step="2">
-                    <h3>問題嚴重程度？</h3>
-                    <p>選擇最符合你目前狀況的描述</p>
-                    <div class="diagnostic-options" role="radiogroup" aria-label="嚴重程度">
-                        <button class="diagnostic-opt" data-value="偶爾發現" data-step="2" type="button">
-                            <span class="opt-icon" aria-hidden="true">🟢</span>
-                            <span class="opt-label">偶爾發現 1-2 隻</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="經常出沒" data-step="2" type="button">
-                            <span class="opt-icon" aria-hidden="true">🟡</span>
-                            <span class="opt-label">每週多次出沒</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="嚴重滋生" data-step="2" type="button">
-                            <span class="opt-icon" aria-hidden="true">🔴</span>
-                            <span class="opt-label">嚴重滋生 / 已見巢</span>
-                        </button>
-                        <button class="diagnostic-opt" data-value="緊急情況" data-step="2" type="button">
-                            <span class="opt-icon" aria-hidden="true">🚨</span>
-                            <span class="opt-label">緊急 / 影響營業</span>
-                        </button>
-                    </div>
-                    <div class="diagnostic-btns">
-                        <button class="btn-ghost" id="diag-back-2" type="button">← 上一步</button>
-                    </div>
-                </div>
-
-                <!-- Step 3: 結果 -->
-                <div class="diagnostic-step" data-step="3">
-                    <h3><i class="fa-solid fa-circle-check" aria-hidden="true" style="color: var(--primary-color);"></i> 你的專屬防治建議</h3>
-                    <p>基於你的情況，師傅建議如下：</p>
-                    <div class="diagnostic-result">
-                        <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom:1px solid var(--border-color);">
-                            <strong style="color: var(--dark-bg);" id="result-pest">曱甴</strong>
-                            <span style="color: var(--text-muted); font-size:0.85rem;" id="result-level">偶爾發現</span>
-                        </div>
-                        <div class="result-strategy" id="result-strategy">
-                            採用「誘敵深入計」：於排水口及裂縫設置智慧誘餌站，連環滅巢。
-                        </div>
-                        <div class="result-price">
-                            <span class="price-label">預估處理費用範圍</span>
-                            <span class="price-value" id="result-price">HK$ 600 - 1,200</span>
-                        </div>
-                        <p style="font-size:0.78rem; color:var(--text-muted); margin:8px 0 0;">* 估價僅供參考，實際收費以師傅上門評估為準。</p>
-                    </div>
-                    <div class="diagnostic-btns">
-                        <a href="#" id="result-wa" target="_blank" rel="noopener" class="btn btn-primary">
-                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 立即預約
-                        </a>
-                        <button class="btn-ghost" id="diag-restart" type="button">重新診斷</button>
-                    </div>
-                </div>
+    <!-- Section 5: 本地屋苑案例牆 -->
+    <section class="container">
+        <div class="estate-wall">
+            <div style="text-align:center;">
+                <h3 style="margin:0 0 5px; font-size:1.2rem; color:#0f172a;"><i class="fa-solid fa-location-dot" style="color:#ef4444;"></i> 本地屋苑與商戶實證案例</h3>
+                <p style="margin:0; font-size:0.88rem; color:#64748b;">全港過萬戶家庭及餐廳信賴之選（Google 4.9 星口碑推薦）</p>
             </div>
-        </section>
-
-        <!-- Section 5: 短影音案例區 (NEW 9:16) -->
-        <section class="container" aria-labelledby="video-title">
-            <div class="section-title">
-                <h2 id="video-title"><i class="fa-solid fa-film" aria-hidden="true" style="color: var(--primary-color);"></i> 實戰案例短片</h2>
-                <p>直擊師傅真實施工過程，前後對比一目了然</p>
+            <div class="estate-tags">
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 日出康城木蝨根治案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 美孚新邨管道滅鼠案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 太古城蟑螂連環滅巢案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 中環餐飲業持效滅蟲方案</span>
             </div>
-            <div class="video-section">
-                <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> 榮仔智鬥過萬隻曱甴</h3>
-                <p>真實個案：餐廳廚房嚴重曱甴滋生，師傅即場示範智慧誘餌連環滅巢全過程</p>
-                <div class="video-grid">
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：曱甴連環滅巢實戰">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-cockroach.jpg" alt="曱甴連環滅巢實戰案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:45</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">曱甴連環滅巢實戰</p>
-                            <p class="video-meta">📍 中環餐飲業 • Before & After</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣封殺">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣封殺案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:58</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">木蝨高溫蒸氣封殺</p>
-                            <p class="video-meta">📍 日出康城 • 床蝨根治</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">1:12</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">IoT 智慧鼠盒監測</p>
-                            <p class="video-meta">📍 美孚新邨 • 滅鼠實錄</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:52</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">熱成像白蟻暗巢掃描</p>
-                            <p class="video-meta">📍 太古城 • 結構保護</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 6: AI Widget CTA -->
-        <section class="container" aria-labelledby="ai-cta-title">
-            <div class="ai-widget-box">
-                <h3 id="ai-cta-title"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> 遇到害蟲疑難？體驗 AI 智能診斷</h3>
-                <p>拍下害蟲照片並傳送至 WhatsApp，系統即時比對資料庫並為你給出預估處理方案與免費估價！</p>
-                <a href="https://wa.me/85252821552?text=我想進行AI害蟲診斷估價" target="_blank" rel="noopener" class="btn btn-primary">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即上載圖片診斷
-                </a>
-            </div>
-        </section>
-
-        <!-- Section 7: 本地屋苑案例牆 (Enhanced with Ratings) -->
-        <section class="container" aria-labelledby="estate-title">
-            <div class="estate-wall">
-                <div class="estate-header">
-                    <h3 id="estate-title"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: var(--danger);"></i> 本地屋苑與商戶實證案例</h3>
-                    <p>全港過萬戶家庭及餐廳信賴之選</p>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-stars" aria-hidden="true">★★★★★</span>
-                    <span class="rating-text">4.9 / 5.0</span>
-                    <span class="rating-count">• Google 真實評分 • 10,000+ 戶服務</span>
-                </div>
-                <div class="estate-tags">
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">日出康城</span>
-                        <span class="case-type">木蝨根治</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">美孚新邨</span>
-                        <span class="case-type">管道滅鼠</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">太古城</span>
-                        <span class="case-type">曱甴連環滅巢</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">中環餐飲業</span>
-                        <span class="case-type">持效滅蟲方案</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">沙田第一城</span>
-                        <span class="case-type">白蟻防治</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">將軍澳中心</span>
-                        <span class="case-type">床蝨高溫處理</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
-
+        
+        <!-- Social Icons Footer Section -->
         <div class="footer-social-links">
-            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="Instagram">
-                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-            </a>
-            <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
+            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+            <a href="https://x.com/CEDARS_LTD" target="_blank" aria-label="X (Twitter)" title="X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="display:inline-block; vertical-align:middle;">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
             </a>
-            <a href="https://wa.me/85252821552" target="_blank" rel="noopener" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            </a>
-            <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" aria-label="YouTube">
-                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-            </a>
+            <a href="https://wa.me/85252821552" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i></a>
+            <a href="mailto:info@bruceleehk.com" aria-label="Gmail"><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></a>
+            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
         </div>
 
-        <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
+        <p>© 2026 CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
     <!-- Mobile Sticky Navigation (Thumb Zone) -->
-    <div class="mobile-thumb-zone" role="navigation" aria-label="快速聯絡">
+    <div class="mobile-thumb-zone">
         <a href="tel:+85252821552" class="thumb-btn thumb-call">
-            <i class="fa-solid fa-phone" aria-hidden="true"></i> 一鍵致電
+            <i class="fa-solid fa-phone"></i> 📞 一鍵致電
         </a>
-        <a href="https://wa.me/85252821552" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 報價
+        <a href="https://wa.me/85252821552" target="_blank" class="thumb-btn thumb-wa">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp 報價
         </a>
     </div>
 
     <script>
-        // ========== Mobile Menu Toggle with Outside Click / Resize / Link Click Close ==========
-        (function() {
-            const toggle = document.getElementById('menu-toggle');
-            const nav = document.getElementById('nav-links');
-            if (!toggle || !nav) return;
-
-            const closeMenu = () => {
-                nav.classList.remove('active');
-                toggle.setAttribute('aria-expanded', 'false');
-                toggle.querySelector('i').className = 'fa-solid fa-bars';
-            };
-            const openMenu = () => {
-                nav.classList.add('active');
-                toggle.setAttribute('aria-expanded', 'true');
-                toggle.querySelector('i').className = 'fa-solid fa-xmark';
-            };
-
-            toggle.addEventListener('click', () => {
-                nav.classList.contains('active') ? closeMenu() : openMenu();
-            });
-
-            // Close on nav link click (mobile)
-            nav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
-            // Close on outside click
-            document.addEventListener('click', (e) => {
-                if (nav.classList.contains('active') &&
-                    !nav.contains(e.target) &&
-                    !toggle.contains(e.target)) {
-                    closeMenu();
-                }
-            });
-
-            // Close on Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeMenu();
-            });
-
-            // Close on resize to desktop
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    if (window.innerWidth > 768) closeMenu();
-                }, 100);
-            });
-        })();
-
-        // ========== Current Year ==========
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // ========== Hero Quick Quote → WhatsApp ==========
-        (function() {
-            const form = document.getElementById('hero-quick-quote');
-            if (!form) return;
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const pest = document.getElementById('q-pest').value;
-                const premise = document.getElementById('q-premise').value;
-                if (!pest || !premise) return;
-                const msg = `你好，我想查詢滅蟲服務：\n• 害蟲類型：${pest}\n• 屋苑類型：${premise}\n請師傅提供估價，謝謝！`;
-                const url = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
-                window.open(url, '_blank', 'noopener');
-            });
-        })();
-
-        // ========== Stratagem Carousel Nav ==========
-        (function() {
-            const scroll = document.getElementById('strat-scroll');
-            const prev = document.getElementById('strat-prev');
-            const next = document.getElementById('strat-next');
-            if (!scroll || !prev || !next) return;
-
-            // Show nav buttons only on desktop and when scrollable
-            const updateNavVisibility = () => {
-                const isDesktop = window.innerWidth > 768;
-                const isScrollable = scroll.scrollWidth > scroll.clientWidth + 5;
-                if (isDesktop && isScrollable) {
-                    prev.classList.add('displayed');
-                    next.classList.add('displayed');
-                } else {
-                    prev.classList.remove('displayed');
-                    next.classList.remove('displayed');
-                }
-            };
-            updateNavVisibility();
-            window.addEventListener('resize', updateNavVisibility);
-
-            const scrollBy = (dir) => {
-                scroll.scrollBy({ left: dir * 296, behavior: 'smooth' });
-            };
-            prev.addEventListener('click', () => scrollBy(-1));
-            next.addEventListener('click', () => scrollBy(1));
-        })();
-
-        // ========== Interactive Pest Diagnostic Tool ==========
-        (function() {
-            const steps = document.querySelectorAll('.diagnostic-step');
-            const dots = document.querySelectorAll('.progress-dot');
-            const opts = document.querySelectorAll('.diagnostic-opt');
-            if (!steps.length) return;
-
-            const state = { pest: '', level: '', pestLabel: '', levelLabel: '' };
-
-            // Strategy & price lookup table
-            const strategyMap = {
-                '曱甴': {
-                    '偶爾發現':    { strategy: '採用「誘敵深入計」：於排水口及裂縫設置智慧誘餌站，連環引誘滅巢。', price: 'HK$ 600 - 1,200' },
-                    '經常出沒':    { strategy: '採用「連環計」：雙重誘餌 + 殘留藥劑，阻斷繁殖鏈。', price: 'HK$ 1,200 - 2,200' },
-                    '嚴重滋生':    { strategy: '採用「釜底抽薪計」：找出巢穴源頭 + 全面施藥 + 7天跟進。', price: 'HK$ 2,200 - 3,800' },
-                    '緊急情況':    { strategy: '即日上門緊急處理：全面封鎖 + 重點滅巢 + 持效保護。', price: 'HK$ 2,800 起' }
-                },
-                '木蝨': {
-                    '偶爾發現':    { strategy: '採用「星星之火計」：高溫蒸氣處理 + 局部殘留藥劑。', price: 'HK$ 800 - 1,500' },
-                    '經常出沒':    { strategy: '採用「十面埋伏計」：全屋高溫 + 雙重藥劑 + 蝨卵封殺。', price: 'HK$ 1,800 - 3,200' },
-                    '嚴重滋生':    { strategy: '採用「全方位圍剿計」：床架梳化深層處理 + 牆身裂縫灌注。', price: 'HK$ 3,200 - 5,500' },
-                    '緊急情況':    { strategy: '即日緊急高溫封殺 + 持效藥劑保護，14天保用。', price: 'HK$ 3,500 起' }
-                },
-                '老鼠': {
-                    '偶爾發現':    { strategy: '採用「釜底抽薪計」：評估入屋源頭 + 封堵老鼠窿 + 誘捕。', price: 'HK$ 1,000 - 1,800' },
-                    '經常出沒':    { strategy: '採用「IoT 智慧監測計」：智慧鼠盒 24 小時追蹤 + 精準誘捕。', price: 'HK$ 1,800 - 3,200' },
-                    '嚴重滋生':    { strategy: '全面封堵 + 多點誘捕 + 智慧監測 + 持效保護 30 天。', price: 'HK$ 3,200 - 5,800' },
-                    '緊急情況':    { strategy: '即日上門 + IoT 智慧鼠盒部署 + 源頭封堵。', price: 'HK$ 3,500 起' }
-                },
-                '白蟻': {
-                    '偶爾發現':    { strategy: '熱成像掃描定位 + 局部灌注持效保護劑。', price: 'HK$ 1,500 - 2,800' },
-                    '經常出沒':    { strategy: '熱成像全面掃描 + 暗巢灌注 + 結構保護。', price: 'HK$ 2,800 - 5,000' },
-                    '嚴重滋生':    { strategy: '全屋結構性防治 + 暗巢清除 + 持效保護劑 + 1 年保用。', price: 'HK$ 5,000 - 9,800' },
-                    '緊急情況':    { strategy: '即日熱成像定位 + 結構風險評估 + 緊急灌注。', price: 'HK$ 5,500 起' }
-                },
-                '蚊': {
-                    '偶爾發現':    { strategy: '採用「以逸待勞計」：誘蚊燈 + 生物顆粒阻斷幼蟲孳生。', price: 'HK$ 500 - 1,200' },
-                    '經常出沒':    { strategy: '戶外噴灑 + 誘蚊燈 + 孳生源清除。', price: 'HK$ 1,200 - 2,200' },
-                    '嚴重滋生':    { strategy: '全面環境處理 + 誘蚊燈網絡 + 持效 30 天保護。', price: 'HK$ 2,200 - 3,800' },
-                    '緊急情況':    { strategy: '即日全面噴灑 + 誘蚊燈部署 + 孳生源清除。', price: 'HK$ 2,500 起' }
-                },
-                '其他': {
-                    '偶爾發現':    { strategy: '建議上載害蟲相片至 WhatsApp，由 AI 系統辨識後提供專屬建議。', price: '免費評估' },
-                    '經常出沒':    { strategy: '建議上載害蟲相片 + 上門勘察，提供客製化方案。', price: '免費評估' },
-                    '嚴重滋生':    { strategy: '建議即時上門勘察 + AI 識別 + 客製化策略。', price: '免費評估' },
-                    '緊急情況':    { strategy: '即日上門勘察 + AI 識別 + 緊急處理方案。', price: '免費評估' }
-                }
-            };
-
-            const goToStep = (n) => {
-                steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === n));
-                dots.forEach(d => {
-                    const ds = parseInt(d.dataset.step);
-                    d.classList.toggle('active', ds === n);
-                    d.classList.toggle('done', ds < n);
-                });
-            };
-
-            opts.forEach(opt => {
-                opt.addEventListener('click', () => {
-                    const step = parseInt(opt.dataset.step);
-                    const value = opt.dataset.value;
-                    const label = opt.querySelector('.opt-label').textContent;
-
-                    // Mark selected
-                    opt.parentElement.querySelectorAll('.diagnostic-opt').forEach(o => o.classList.remove('selected'));
-                    opt.classList.add('selected');
-
-                    if (step === 1) {
-                        state.pest = value;
-                        state.pestLabel = label;
-                        setTimeout(() => goToStep(2), 250);
-                    } else if (step === 2) {
-                        state.level = value;
-                        state.levelLabel = label;
-                        renderResult();
-                        setTimeout(() => goToStep(3), 250);
-                    }
-                });
-            });
-
-            const renderResult = () => {
-                document.getElementById('result-pest').textContent = state.pestLabel;
-                document.getElementById('result-level').textContent = state.levelLabel;
-                const data = (strategyMap[state.pest] && strategyMap[state.pest][state.level]) || strategyMap['其他']['偶爾發現'];
-                document.getElementById('result-strategy').textContent = data.strategy;
-                document.getElementById('result-price').textContent = data.price;
-                const msg = `你好，我已完成網站害蟲診斷：\n• 害蟲類型：${state.pestLabel}\n• 嚴重程度：${state.levelLabel}\n• 建議策略：${data.strategy}\n• 預估費用：${data.price}\n我想預約師傅上門，謝謝！`;
-                document.getElementById('result-wa').href = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
-            };
-
-            document.getElementById('diag-back-2').addEventListener('click', () => goToStep(1));
-            document.getElementById('diag-restart').addEventListener('click', () => {
-                state.pest = ''; state.level = ''; state.pestLabel = ''; state.levelLabel = '';
-                document.querySelectorAll('.diagnostic-opt').forEach(o => o.classList.remove('selected'));
-                goToStep(1);
-            });
-        })();
+        function toggleMenu() {
+            var nav = document.getElementById('nav-links');
+            nav.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
