@@ -40,8 +40,16 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
+            align-items: center; /* 確保所有元素垂直居中對齊 */
+            padding: 10px 20px;
+            position: relative;
+        }
+
+        /* 左側 Logo 與 WhatsApp 圖標組合 */
+        .logo-group {
+            display: flex;
             align-items: center;
-            padding: 12px 20px;
+            gap: 10px;
         }
         .logo {
             text-decoration: none;
@@ -77,6 +85,28 @@
             margin-top: 2px;
             text-align: left;
         }
+
+        /* 左側 WhatsApp 按鈕 */
+        .header-wa-left {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #25d366;
+            color: #ffffff !important;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-left: 4px;
+        }
+        .header-wa-left:hover {
+            transform: scale(1.1);
+            background: #1eb954;
+        }
+
+        /* 導航連結 */
         .nav-links {
             display: flex;
             align-items: center;
@@ -94,17 +124,18 @@
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary-color);
         }
-        .header-wa-icon {
-            display: inline-flex;
+
+        /* 手機版三橫槓 Menu Toggle 修復下垂問題 */
+        .menu-toggle {
+            display: none;
+            font-size: 1.4rem;
+            color: #0f172a;
+            cursor: pointer;
+            padding: 4px;
             align-items: center;
             justify-content: center;
-            padding: 4px 8px;
-            border-radius: 6px;
-            background: #ecfdf5;
-            transition: background 0.2s;
-        }
-        .header-wa-icon:hover {
-            background: #d1fae5;
+            line-height: 1;
+            height: 38px; /* 固定高度保持垂直中軸線對齊 */
         }
 
         /* Hero Section */
@@ -453,7 +484,25 @@
             color: #ffffff;
         }
 
-        @media (min-width: 768px) {
+        /* 手機版響應式優化 */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                flex-direction: column;
+                padding: 15px 20px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                gap: 15px;
+            }
+            .nav-links.active { display: flex; }
+        }
+
+        @media (min-width: 769px) {
             .hero h1 { font-size: 2.5rem; }
             .mobile-thumb-zone { display: none; }
             body { padding-bottom: 0; }
@@ -465,25 +514,34 @@
     <!-- Header Navigation -->
     <header class="site-header">
         <div class="nav-container">
-            <a href="/" class="logo">
-                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo">
-                <div class="logo-text">
-                    <span class="logo-title">滅蟲師傅</span>
-                    <span class="logo-subtitle">PEST CONTROL MASTER</span>
-                </div>
-            </a>
-            <ul class="nav-links">
+            <div class="logo-group">
+                <a href="/" class="logo">
+                    <img src="assets/img/logo.png" alt="滅蟲師傅 Logo">
+                    <div class="logo-text">
+                        <span class="logo-title">滅蟲師傅</span>
+                        <span class="logo-subtitle">PEST CONTROL MASTER</span>
+                    </div>
+                </a>
+                <!-- WhatsApp 圖標已移至左側滅蟲師傅旁邊 -->
+                <a href="https://wa.me/85252821552" target="_blank" class="header-wa-left" title="WhatsApp 諮詢">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+
+            <!-- 右側選單 -->
+            <ul class="nav-links" id="nav-links">
                 <li><a href="/" class="active">首頁</a></li>
                 <li><a href="/services/">蟲類服務</a></li>
                 <li><a href="/strategy/">有蟲就有計</a></li>
                 <li><a href="/info/">蟲類資訊</a></li>
-                <li><a href="/quote/">有蟲話我知</a></li>
-                <li>
-                    <a href="https://wa.me/85252821552" target="_blank" class="header-wa-icon" title="WhatsApp 諮詢">
-                        <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.25rem;"></i>
-                    </a>
-                </li>
+                <li><a href="/quote/#ai-chat">🤖 滅蟲師妹 AI 查詢</a></li>
+                <li><a href="/quote/#quote-form">有蟲話我知</a></li>
             </ul>
+
+            <!-- 手機版三橫槓 Menu Toggle (水平與垂直精準居中) -->
+            <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
     </header>
 
@@ -498,7 +556,8 @@
             <h1>香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
             <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
             <div class="hero-cta">
-                <a href="/quote/" class="btn btn-primary">🤖 滅蟲師妹 AI 查詢</a>
+                <!-- 直達滅蟲師妹 AI 專屬對話區塊 -->
+                <a href="/quote/#ai-chat" class="btn btn-primary">🤖 滅蟲師妹 AI 查詢</a>
                 <a href="https://wa.me/85252821552" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 諮詢</a>
             </div>
         </div>
@@ -623,9 +682,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (已將抬頭修改為 CEDARS_LTD) -->
     <footer>
-        <p><strong>滅蟲師傅 Pest Control Master</strong></p>
+        <p><strong>CEDARS_LTD</strong></p>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
         
         <!-- Social Icons Footer Section -->
@@ -637,11 +696,11 @@
                 </svg>
             </a>
             <a href="https://wa.me/85252821552" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i></a>
-            <a href="mailto:info@bruceleehk.com" aria-label="Gmail"><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></a>
+            <a href="mailto:Cedars5282@gmail.com" aria-label="Gmail"><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></a>
             <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
         </div>
 
-        <p>© 2026 滅蟲師傅. All Rights Reserved. 保留所有權利。</p>
+        <p>© 2026 CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
     <!-- Mobile Sticky Navigation (Thumb Zone) -->
@@ -654,5 +713,11 @@
         </a>
     </div>
 
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('nav-links');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
