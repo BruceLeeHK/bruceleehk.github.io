@@ -19,7 +19,7 @@
     <meta property="og:image" content="assets/img/og-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" onerror="this.remove()">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Structured Data: LocalBusiness -->
@@ -209,7 +209,9 @@
 
         /* ============ Hero ============ */
         .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background:
+                linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
+                url('assets/img/hero-tech.jpg') center/cover no-repeat;
             color: #ffffff;
             padding: 55px 20px 50px;
             text-align: center;
@@ -222,9 +224,9 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 20% 30%, rgba(16,185,129,0.18) 0%, transparent 35%),
-                radial-gradient(circle at 80% 70%, rgba(2,132,199,0.18) 0%, transparent 35%),
-                radial-gradient(circle at 50% 50%, rgba(110,231,183,0.08) 0%, transparent 50%);
+                radial-gradient(circle at 20% 30%, rgba(16,185,129,0.22) 0%, transparent 35%),
+                radial-gradient(circle at 80% 70%, rgba(2,132,199,0.22) 0%, transparent 35%),
+                radial-gradient(circle at 50% 50%, rgba(110,231,183,0.10) 0%, transparent 50%);
             animation: heroGlow 8s ease-in-out infinite alternate;
             pointer-events: none;
         }
@@ -395,10 +397,20 @@
             background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 24px 20px;
+            padding: 0 0 24px;
             transition: all var(--transition);
             position: relative;
             overflow: hidden;
+        }
+        .smart-card-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: var(--light-bg);
+        }
+        .smart-card-body {
+            padding: 18px 20px 0;
         }
         .smart-card::before {
             content: "";
@@ -696,33 +708,42 @@
         .video-thumb {
             position: relative;
             aspect-ratio: 9 / 16;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: var(--dark-bg);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .video-thumb::before {
             content: "";
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 30% 20%, rgba(16,185,129,0.25), transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(239,68,68,0.2), transparent 50%);
+                linear-gradient(180deg, rgba(15,23,42,0) 50%, rgba(15,23,42,0.6) 100%),
+                radial-gradient(circle at 30% 20%, rgba(16,185,129,0.15), transparent 50%);
+            z-index: 1;
+            pointer-events: none;
         }
         .video-play {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.92);
             color: var(--dark-bg);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.4rem;
             transition: transform var(--transition);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .video-card:hover .video-play { transform: scale(1.1); }
         .video-duration {
@@ -1138,19 +1159,28 @@
             </div>
             <div class="grid-3">
                 <article class="smart-card">
-                    <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
-                    <h3>AI 害蟲分析系統</h3>
-                    <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
+                    <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy">
+                    <div class="smart-card-body">
+                        <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
+                        <h3>AI 害蟲分析系統</h3>
+                        <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
+                    </div>
                 </article>
                 <article class="smart-card">
-                    <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
-                    <h3>IoT 智慧鼠盒監測</h3>
-                    <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
+                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統 - 遠端紅外線感知裝置" loading="lazy">
+                    <div class="smart-card-body">
+                        <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
+                        <h3>IoT 智慧鼠盒監測</h3>
+                        <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
+                    </div>
                 </article>
                 <article class="smart-card">
-                    <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
-                    <h3>熱成像暗巢掃描</h3>
-                    <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
+                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描 - 無損探測牆身內部害蟲巢穴" loading="lazy">
+                    <div class="smart-card-body">
+                        <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
+                        <h3>熱成像暗巢掃描</h3>
+                        <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
+                    </div>
                 </article>
             </div>
         </section>
@@ -1350,6 +1380,7 @@
                 <div class="video-grid">
                     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：曱甴連環滅巢實戰">
                         <div class="video-thumb">
+                            <img src="assets/img/video-cockroach.jpg" alt="曱甴連環滅巢實戰案例" loading="lazy">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:45</span>
                         </div>
@@ -1360,6 +1391,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣封殺">
                         <div class="video-thumb">
+                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣封殺案例" loading="lazy">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:58</span>
                         </div>
@@ -1370,6 +1402,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
                         <div class="video-thumb">
+                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">1:12</span>
                         </div>
@@ -1380,6 +1413,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
                         <div class="video-thumb">
+                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:52</span>
                         </div>
