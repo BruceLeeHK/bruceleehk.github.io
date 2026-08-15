@@ -1,369 +1,572 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://bruceleehk.com/">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>滅蟲師傅 | 香港專業滅蟲滅鼠服務 - 免費上門估價</title>
-  <meta name="description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐，為您排憂解難，迴歸舒心環境。立即免費報價！">
-  <meta name="keywords" content="滅蟲,滅鼠,滅蟑螂,滅蚊,滅蝨,床蝨,木蝨,白蟻,香港滅蟲,滅蟲公司,滅蟲師傅">
-  <meta name="author" content="滅蟲師傅 CEDARS LTD">
-  <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滅蟲師傅 | 香港首創 AI 智慧滅蟲 • 獨家三十六計精準防治</title>
+    <meta name="description" content="滅蟲師傅結合 AI 害蟲圖像識別、IoT 智慧監測與獨家三十六計防治策略，提供全港即日上門滅曱甴、滅鼠、滅木蝨及白蟻服務。5分鐘 WhatsApp 智能免費估價。">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #10b981;
+            --primary-dark: #059669;
+            --tech-blue: #0284c7;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #334155;
+            --light-bg: #f8fafc;
+        }
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="滅蟲師傅 | 香港專業滅蟲滅鼠服務">
-  <meta property="og:description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，立即免費報價！">
-  <meta property="og:url" content="https://bruceleehk.com/">
-  <meta property="og:site_name" content="滅蟲師傅">
-  <meta property="og:locale" content="zh_HK">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            background-color: #ffffff;
+            padding-bottom: 75px;
+        }
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="滅蟲師傅 | 香港專業滅蟲滅鼠服務">
-  <meta name="twitter:description" content="滅蟲師傅為香港提供專業滅鼠、滅蟑螂、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，立即免費報價！">
+        /* Nav Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #065f46;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
 
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-  <link rel="apple-touch-icon" href="/assets/img/favicon.png">
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 55px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tech-badge {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero h1 {
+            font-size: 1.95rem;
+            line-height: 1.35;
+            margin-bottom: 15px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #6ee7b7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#2c5e1a">
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://udify.app" crossorigin>
+        .section-title {
+            text-align: center;
+            margin: 45px 0 25px;
+        }
+        .section-title h2 {
+            font-size: 1.7rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .section-title p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
 
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+        /* Smart Pest Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .smart-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px 20px;
+            transition: all 0.3s ease;
+        }
+        .smart-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            transform: translateY(-3px);
+        }
+        .smart-icon {
+            width: 48px;
+            height: 48px;
+            background: #ecfdf5;
+            color: var(--primary-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+        }
+        .smart-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        .smart-card p {
+            color: #64748b;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0;
+        }
 
-  <link rel="preload" href="/assets/css/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/assets/css/style.min.css"></noscript>
-<style>*{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#2c5e1a;--primary-hover:#1e4210;--secondary-color:#f4f9f0;--text-dark:#333;--text-light:#666;--white:#fff;--footer-bg:#222;--footer-text:#aaa;--shadow-sm:0 2px 10px rgba(0,0,0,.1);--radius:8px;--transition:.3s ease;--max-width:1200px}a{text-decoration:none;color:inherit;cursor:pointer}img{max-width:100%;display:block}body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;color:var(--text-dark);line-height:1.7;overflow-x:hidden}h1{font-size:2.2rem;line-height:1.3;margin-bottom:1rem}.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}header{background-color:var(--white);box-shadow:var(--shadow-sm);position:fixed;width:100%;top:0;z-index:1000}.nav-container{max-width:var(--max-width);margin:0 auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo-icon{height:45px;width:auto;margin-right:10px;object-fit:contain}.logo-text{display:flex;flex-direction:column;text-align:left;line-height:1.1}.logo-main{font-size:24px;font-weight:bold;color:var(--primary-color)}.logo-sub{font-size:8px;letter-spacing:.5px;color:#888;text-transform:uppercase;margin-left:1px}.logo-whatsapp{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background-color:#25D366;color:#fff!important;border-radius:50%;margin-left:16px;font-size:20px;transition:all var(--transition);box-shadow:0 2px 6px rgba(37,211,102,.35)}.nav-links{display:flex;gap:20px;align-items:center}.nav-links a{color:var(--text-dark);font-weight:500;transition:color var(--transition)}.nav-links a:hover{color:var(--primary-color)}.nav-cta{background-color:var(--primary-color);color:var(--white)!important;padding:8px 16px;border-radius:5px}.menu-toggle{display:none;font-size:24px;cursor:pointer}.hero-split{margin-top:70px;display:flex;min-height:calc(100vh - 70px)}.hero-left{flex:1;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('../img/hero-bg.jpg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;color:var(--white);padding:60px}.hero-left h1{font-size:2.8rem;margin-bottom:20px;color:var(--white)}.hero-left p{font-size:1.1rem;margin-bottom:30px;font-weight:300;max-width:480px;line-height:1.8;color:rgba(255,255,255,.95)}.btn-primary{display:inline-block;background-color:var(--primary-color);color:var(--white)!important;padding:15px 30px;border:none;border-radius:5px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .2s}.hero-left .btn-primary{background-color:var(--white);color:var(--primary-color)!important}.about-details{margin-top:15px;padding:15px 20px;background:var(--secondary-color);border-radius:var(--radius)}.about-details p{margin-bottom:8px;font-size:.92rem;color:var(--text-dark);line-height:1.6}.about-details p:last-child{margin-bottom:0}.about-details strong{color:var(--primary-color);font-weight:600}.page-hero{margin-top:75px;padding:50px 0 30px;background:linear-gradient(135deg,var(--primary-color) 0%,#3a7a22 100%);color:var(--white);text-align:center}.page-hero h1{color:var(--white);font-size:2.2rem;margin-bottom:12px}.page-hero p{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}@media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow-sm);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.hero-split{flex-direction:column}.hero-left{min-height:300px}.hero-left h1{font-size:1.8rem}h1{font-size:1.6rem}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}}@media(max-width:480px){.hero-left{padding:40px 25px}.hero-left h1{font-size:1.5rem}.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}}</style>
+        /* Stratagem Carousel */
+        .stratagem-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 10px 5px 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .stratagem-card {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s;
+        }
+        .stratagem-card:hover {
+            border-color: var(--primary-color);
+        }
+        .stratagem-tag {
+            font-size: 0.75rem;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            align-self: flex-start;
+            margin-bottom: 10px;
+        }
+        .stratagem-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .stratagem-desc {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* AI Interactive CTA Section */
+        .ai-widget-box {
+            background: #0f172a;
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .ai-widget-box h3 {
+            font-size: 1.45rem;
+            margin-bottom: 10px;
+            color: #34d399;
+        }
+        .ai-widget-box p {
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            font-size: 0.95rem;
+        }
+
+        /* Services Grid */
+        .service-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+            background: #ffffff;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            position: relative;
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #fef2f2;
+            color: #ef4444;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #fca5a5;
+        }
+        .service-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        /* Local Estates Case Wall */
+        .estate-wall {
+            background: var(--light-bg);
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin: 30px 0;
+            border: 1px solid #e2e8f0;
+        }
+        .estate-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .estate-tag {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 40px 20px 80px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #34d399;
+            text-decoration: none;
+        }
+
+        /* Mobile Bottom Sticky Thumb-Zone */
+        .mobile-thumb-zone {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.12);
+            display: flex;
+            padding: 10px 15px;
+            gap: 10px;
+            z-index: 999;
+        }
+        .thumb-btn {
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .thumb-call {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .thumb-wa {
+            background: #25d366;
+            color: #ffffff;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .mobile-thumb-zone { display: none; }
+            body { padding-bottom: 0; }
+        }
+    </style>
 </head>
 <body>
 
-  <header id="site-header">
-    <div class="nav-container">
-      <div class="logo">
-        <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo">
-        <div class="logo-text">
-          <span class="logo-main">滅蟲師傅</span>
-          <span class="logo-sub">Pest Control Master</span>
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <i class="fa-solid fa-bug-slash"></i> 滅蟲師傅
+            </a>
+            <ul class="nav-links">
+                <li><a href="/" class="active">首頁</a></li>
+                <li><a href="services/">蟲類服務</a></li>
+                <li><a href="strategy/">有蟲就有計</a></li>
+                <li><a href="info/">蟲類資訊</a></li>
+                <li><a href="info/vote/">有蟲話我知</a></li>
+            </ul>
         </div>
-        <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge-group">
+                <span class="tech-badge"><i class="fa-solid fa-robot"></i> AI 害蟲圖像識別</span>
+                <span class="tech-badge"><i class="fa-solid fa-network-wired"></i> IoT 智慧監測追蹤</span>
+                <span class="tech-badge"><i class="fa-solid fa-chess-knight"></i> 獨家三十六計精準防治</span>
+            </div>
+            <h1>香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
+            <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
+            <div class="hero-cta">
+                <a href="quote/" class="btn btn-primary"><i class="fa-solid fa-bolt"></i> ⚡ 智能 AI 報價</a>
+                <a href="https://wa.me/85252822292" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 諮詢</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: 智慧滅蟲 -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-microchip" style="color: var(--primary-color);"></i> 智慧滅蟲專區</h2>
+            <p>打破傳統經驗主義，結合最新科技全面鎖定害蟲暗巢</p>
+        </div>
+        <div class="grid-3">
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-camera-retro"></i></div>
+                <h3>AI 害蟲分析系統</h3>
+                <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
+            </div>
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-wifi"></i></div>
+                <h3>IoT 智慧鼠盒監測</h3>
+                <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
+            </div>
+            <div class="smart-card">
+                <div class="smart-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3>熱成像暗巢掃描</h3>
+                <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: 服務分類（卡片化與熱門標籤） -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-shield-halved" style="color: var(--primary-color);"></i> 專業蟲類防治服務</h2>
+            <p>漁護署註冊藥劑 • 0隱藏收費 • 100%專業持牌師傅</p>
+        </div>
+        <div class="grid-3">
+            <a href="services/#cockroach" class="service-card">
+                <span class="service-badge">🔥 熱門急件</span>
+                <div class="service-title">🪳 滅曱甴（蟑螂）</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">針對德國與美國曱甴，施放智慧誘餌連環滅巢。</p>
+            </a>
+            <a href="services/#mosquito-rat" class="service-card">
+                <div class="service-title">🦟🐭 滅蚊滅鼠</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">生物劑阻斷幼蟲孳生，配合物理與智慧鼠盒清剿。</p>
+            </a>
+            <a href="services/#bedbug" class="service-card">
+                <span class="service-badge">⚡ 急診推薦</span>
+                <div class="service-title">🕷️ 床/木蝨防治</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">高溫蒸氣及專用殘留藥劑深層封殺，徹底消滅蝨卵。</p>
+            </a>
+            <a href="services/#termite" class="service-card">
+                <div class="service-title">🐜 白蟻防治</div>
+                <p style="color:#64748b; font-size:0.9rem; margin:0;">熱成像精準定位暗巢，灌注持效保護劑，防止結構倒塌。</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Section 3: 有蟲就有計 (三十六計互動陣法卡片) -->
+    <section class="container">
+        <div class="section-title">
+            <h2><i class="fa-solid fa-scroll" style="color: var(--primary-color);"></i> 有蟲就有計：三十六計實戰策略</h2>
+            <p>左右滑動查看師傅如何靈活運用策略擊退各類害蟲</p>
+        </div>
+        <div class="stratagem-scroll">
+            <a href="strategy/#strat-1" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅曱甴策略</span>
+                    <div class="stratagem-title">美國曱甴「誘敵深入計」</div>
+                    <p class="stratagem-desc">排水口與裂縫設置誘餌站，將經管道進出的大型曱甴一網打盡。</p>
+                </div>
+            </a>
+            <a href="strategy/#strat-2" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅蚊策略</span>
+                    <div class="stratagem-title">戶外蚊患「以逸待勞計」</div>
+                    <p class="stratagem-desc">定時紫外線誘蚊燈配合生物顆粒，免除頻繁噴藥，長效控蚊。</p>
+                </div>
+            </a>
+            <a href="strategy/#strat-3" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">滅鼠策略</span>
+                    <div class="stratagem-title">鼠患問題「釜底抽薪計」</div>
+                    <p class="stratagem-desc">評估入屋源頭並精準封堵老鼠窿，配合誘捕技術徹底絕路。</p>
+                </div>
+            </a>
+            <a href="strategy/#strat-4" class="stratagem-card">
+                <div>
+                    <span class="stratagem-tag">木蝨策略</span>
+                    <div class="stratagem-title">床蝨防治「星星之火計」</div>
+                    <p class="stratagem-desc">針對極高繁衍力的床蝨，實施全方位高溫及藥劑雙重封殺。</p>
+                </div>
+            </a>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="strategy/" style="color: var(--primary-color); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
+        </div>
+    </section>
+
+    <!-- Section 4: 互動式 AI 害蟲診斷器 CTA -->
+    <section class="container">
+        <div class="ai-widget-box">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> 遇到害蟲疑難？體驗 AI 智能診斷</h3>
+            <p>拍下害蟲照片並傳送至 WhatsApp，系統即時比對資料庫並為你給出預估處理方案與免費估價！</p>
+            <a href="https://wa.me/85252822292?text=我想進行AI害蟲診斷估價" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> 立即上載圖片診斷</a>
+        </div>
+    </section>
+
+    <!-- Section 5: 本地屋苑案例牆 -->
+    <section class="container">
+        <div class="estate-wall">
+            <div style="text-align:center;">
+                <h3 style="margin:0 0 5px; font-size:1.2rem; color:#0f172a;"><i class="fa-solid fa-location-dot" style="color:#ef4444;"></i> 本地屋苑與商戶實證案例</h3>
+                <p style="margin:0; font-size:0.88rem; color:#64748b;">全港過萬戶家庭及餐廳信賴之選（Google 4.9 星口碑推薦）</p>
+            </div>
+            <div class="estate-tags">
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 日出康城木蝨根治案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 美孚新邨管道滅鼠案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 太古城蟑螂連環滅巢案例</span>
+                <span class="estate-tag"><i class="fa-solid fa-check" style="color:var(--primary-color);"></i> 中環餐飲業持效滅蟲方案</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>滅蟲師傅 Pest Control Master</strong></p>
+        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
+        <p>© 2026 滅蟲師傅. All Rights Reserved. 保留所有權利。</p>
+    </footer>
+
+    <!-- Mobile Sticky Navigation (Thumb Zone) -->
+    <div class="mobile-thumb-zone">
+        <a href="tel:85252822292" class="thumb-btn thumb-call">
+            <i class="fa-solid fa-phone"></i> 📞 一鍵致電
         </a>
-      </div>
-      <nav class="nav-links" id="nav-links">
-        <a href="/">首頁</a>
-        <a href="/services/">蟲類服務</a>
-        <a href="/strategy/">有蟲就有計</a>
-        <a href="/info/">蟲類資訊</a>
-        <a href="/quote/" class="nav-cta">有蟲話我知</a>
-      </nav>
-      <div class="menu-toggle" id="menu-toggle" aria-label="開啟選單">
-        <i class="fas fa-bars"></i>
-      </div>
+        <a href="https://wa.me/85252822292" class="thumb-btn thumb-wa">
+            <i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 報價
+        </a>
     </div>
-  </header>
-
-  <section class="hero-split">
-    <div class="hero-left">
-      <h1>香港滅蟲服務 • 免費上門估價！</h1>
-      <p>我們將秉持「正義、環保、高效、謙遜」的服務準則，為美麗香港貢獻智慧和力量。</p>
-      <a href="/quote/" class="btn-primary">立即查詢報價</a>
-    </div>
-    <div class="hero-right" id="about-us">
-      <h2>關於我們</h2>
-      <p>我們是香港新形勢下興起的智慧滅蟲服務商，我們將秉持「正義、環保、高效、謙遜」的服務準則，為建設美麗香港貢獻一份智慧和力量。我們堅持不斷學習、博採眾長和實踐出真知的理念，透過智慧和技術相結合的方式「優化環境」使有害生物得到有效控制。</p>
-      <p>我們堅持自主團隊、貼心服務的行事方針——所有同事均須經過系統性實踐訓練，具備現場獨立處理能力及專業技術資質，確保服務質素令客人滿意和支持。</p>
-      <p>現階段，我們在滅蚊、滅鼠、滅蝨和滅蟑螂（包括德國蟑螂）方面累積了豐富的經驗，後期陸續會擴展至滅蟲服務全覆蓋。我們將針對客戶的不同環境需求，度身定製適合的個性化服務。我們注重誠實有信的合約精神，可提供單次、季度和年度等多元化服務套餐，為客戶排憂解難、迴歸舒心環境。</p>
-      <div class="about-details">
-        <p><strong>地址：</strong>新界荔景邨工場大廈</p>
-        <p><strong>服務區域：</strong>全香港</p>
-        <p><strong>營業時間：</strong>9:00-18:00</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-services" id="services">
-    <div class="container">
-      <h2>滅蟲服務 &amp; 蟲類資訊</h2>
-      <p class="section-subtitle">針對不同害蟲，採用香港漁護署登記且安全藥劑與專業設備</p>
-      <div class="services-grid">
-        <a href="/services/#cockroach" class="service-card">
-          <div class="service-icon">🪳</div>
-          <h3>滅曱甴（蟑螂）</h3>
-          <p>針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。</p>
-        </a>
-        <a href="/services/#mosquito-mouse" class="service-card">
-          <div class="service-icon">🦟🐭</div>
-          <h3>滅蚊滅鼠</h3>
-          <p>重點清除蚊嘅滋生水源，安全使用殺蟲劑精准處理成蚊。採用物理捕捉與安全誘餌解決家鼠、田鼠等鼠患問題。</p>
-        </a>
-        <a href="/services/#bedbug" class="service-card">
-          <div class="service-icon">🕷️</div>
-          <h3>床/木蝨防治</h3>
-          <p>清理雜物縫隙，針對床架、木製家具進行高溫蒸氣處理，消滅隱蔽處的木蝨。</p>
-        </a>
-        <a href="/services/#termite" class="service-card">
-          <div class="service-icon">🐜</div>
-          <h3>白蟻防治</h3>
-          <p>白蟻嚴重破壞木質結構，我們提供精準探測與全面藥物灌注服務。</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-strategy" id="strategy-preview">
-    <div class="container">
-      <h2>有蟲就有計：實戰策略分享</h2>
-      <p class="section-subtitle">蟲蟲無小事，有蟲就有計諗。針對不同害蟲，我們度身訂製專屬防治方案。</p>
-      <div class="filter-tabs">
-        <button class="filter-btn active" data-filter="all">全部</button>
-        <button class="filter-btn" data-filter="cockroach">滅曱甴（蟑螂）</button>
-        <button class="filter-btn" data-filter="mosquito-mouse">滅蚊滅鼠</button>
-        <button class="filter-btn" data-filter="bedbug">床蝨-木蝨防治</button>
-        <button class="filter-btn" data-filter="termite">白蟻防治</button>
-      </div>
-      <div class="strategy-grid">
-        <a href="/strategy/#strategy-1" class="strategy-card" data-category="cockroach">
-          <span class="strategy-tag">🪳 滅曱甴（蟑螂）</span>
-          <h3>美國曱甴（蟑螂）的「誘敵深入計」</h3>
-          <p>美國曱甴（蟑螂）體型較大，多出現在下水道、排水渠等潮濕環境，夜間經由管道進入室內。我們採用「誘敵深入」策略：在曱甴（蟑螂）必經的排水口及牆角裂縫放置大型誘餌站，...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-2" class="strategy-card" data-category="mosquito-mouse">
-          <span class="strategy-tag">🦟🐭 滅蚊滅鼠</span>
-          <h3>戶外蚊患的「以逸待勞計」</h3>
-          <p>對於花園、後巷等戶外空間的蚊患，持續噴灑並非長久之計。我們採用「以逸待勞」策略：在蚊蟲活躍的黃昏時段安裝紫外線誘蚊燈，配合定期投放對人畜安全的生物防治顆粒劑於下...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-3" class="strategy-card" data-category="mosquito-mouse">
-          <span class="strategy-tag">🦟🐭 滅蚊滅鼠</span>
-          <h3>蚊蟲防治的「空城計」</h3>
-          <p>蚊蟲的滋生離不開「靜止的積水」。無論是花盆底盤、冷氣機接水盤，還是廢棄的容器，只要有一小灘水，就能在幾天內孵化出成群的蚊子。我們為客戶制定的「空城計」，核心在於...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-4" class="strategy-card" data-category="mosquito-mouse">
-          <span class="strategy-tag">🦟🐭 滅蚊滅鼠</span>
-          <h3>鼠患問題嘅「釜底抽薪計」</h3>
-          <p>一般嚟講，我哋滅鼠主要都係用誘捕嘅方法。滅蟲師傅會先幫客人評估老鼠入屋嘅源頭（有冇老鼠窿），之後師傅會喺現場揾到最高效嘅位置擺放老鼠板。如果環境合適，師傅仲會加...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-5" class="strategy-card" data-category="bedbug">
-          <span class="strategy-tag">🕷️ 床蝨-木蝨防治</span>
-          <h3>床蝨防治的「星星之火計」</h3>
-          <p>床蝨被稱為「星星之火，可以燎原」——一隻受孕的雌蟲足以在數月內繁衍出數百隻後代。牠們白天藏匿於床板縫隙、牆紙背後及傢俱接合處，夜間才出來吸血。我們的策略是「全方...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-6" class="strategy-card" data-category="bedbug">
-          <span class="strategy-tag">🕷️ 床蝨-木蝨防治</span>
-          <h3>木蝨防治的「斬草除根計」</h3>
-          <p>木蝨（書蝨）常出現在潮濕、發霉的環境中，如牆壁紙背後、舊書籍堆及儲物室。雖然木蝨不直接危害人體，但大量出現會引發過敏及不適。我們的「斬草除根」策略分兩步：第一步...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-7" class="strategy-card" data-category="termite">
-          <span class="strategy-tag">🐜 白蟻防治</span>
-          <h3>白蟻防治的「聲東擊西計」</h3>
-          <p>白蟻被稱為「無聲的破壞者」，牠們能在毫無察覺的情況下蛀空木質結構、牆身甚至地板。我們採用「聲東擊西」策略：在發現白蟻活動跡象後，不在肉眼可見的位置直接施藥，而是...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-        <a href="/strategy/#strategy-8" class="strategy-card" data-category="termite">
-          <span class="strategy-tag">🐜 白蟻防治</span>
-          <h3>白蟻預防的「固若金湯計」</h3>
-          <p>對於新建或裝修中的物業，我們提供「固若金湯」的預防性白蟻處理：在地基、牆身及木質結構施工期間，全面噴灑持效性白蟻防治藥劑，形成一道地下及牆身的化學屏障。這道屏障...</p>
-          <span class="strategy-link">閱讀詳情 →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-info" id="info">
-    <div class="container">
-      <h2>蟲類資訊</h2>
-      <div class="info-grid">
-        <a href="/info/blog-1/" class="info-card">
-          <span class="info-tag">📝 蟲類資訊</span>
-          <h3>香港滅鼠從業員要咩資格？</h3>
-          <p>深入探討香港滅鼠行業的基本情況、公司資質要求、從業員資格、技術發展及如何揀選正規滅鼠公司。</p>
-          <span class="info-link">閱讀全文 →</span>
-        </a>
-        <a href="/info/blog-2/" class="info-card">
-          <span class="info-tag">📝 蟲類資訊</span>
-          <h3>2026年，「滅蟲師傅」的專業新視角</h3>
-          <p>探討2026年滅蟲師傅稱呼的演變、技術與知識升級、環保與安全並重及一站式蟲害解決方案。</p>
-          <span class="info-link">閱讀全文 →</span>
-        </a>
-        <a href="/info/blog-3/" class="info-card">
-          <span class="info-tag">📝 蟲類資訊</span>
-          <h3>2026滅蟲公司邊間好？</h3>
-          <p>分析香港蟲害問題、揀選可靠滅蟲公司的方法，以及滅蟲師傅如何提供專業可靠的蟲害解決方案。</p>
-          <span class="info-link">閱讀全文 →</span>
-        </a>
-        <a href="https://www.youtube.com/watch?v=izf89rADQrQ" class="info-card video-info-card" target="_blank" rel="noopener">
-          <span class="info-tag">🎬 影片分享</span>
-          <h3>慎入！榮仔智斗過萬隻曱甴</h3>
-          <div class="video-thumbnail">
-            <img src="/assets/img/video-thumbnail.webp" alt="香港滅蟲師傅服務影片" loading="lazy">
-            <div class="video-play-btn"><i class="fab fa-youtube"></i></div>
-          </div>
-          <p>一個平凡嘅香港仔，點樣運用最新AI技術，喺粵語嘅世界入面，同過萬隻曱甴展開一場驚心動魄嘅鬥智鬥勇？</p>
-          <span class="info-link">前往 YouTube 上觀看 →</span>
-        </a>
-        <a href="https://www.youtube.com/watch?v=L5UWS0ap40w" class="info-card video-info-card" target="_blank" rel="noopener">
-          <span class="info-tag">🎬 影片分享</span>
-          <h3>【蟲害管理】「平頭哥」蜜獾 VS 蜱蟲</h3>
-          <div class="video-thumbnail">
-            <img src="https://img.youtube.com/vi/L5UWS0ap40w/maxresdefault.jpg" alt="蜜獾平頭哥自然防治蜱蟲影片" loading="lazy">
-            <div class="video-play-btn"><i class="fab fa-youtube"></i></div>
-          </div>
-          <p>蜜獾被譽為自我蟲害管理大師！佢點樣搞定身上嘅蜱蟲？連滅蟲公司都驚嘆嘅自然防治技巧！</p>
-          <span class="info-link">前往 YouTube 上觀看 →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-cta">
-    <div class="container">
-      <h2>有蟲就有計</h2>
-      <p>蟲蟲無小事，但我們相信有蟲就有計諗。無論是頑強的德國蟑螂，還是悄無聲息的白蟻，滅蟲師傅皆能度身訂製專屬防治方案。</p>
-      <p>憑藉智慧滅蟲方法及專業技術配套設備結合安全施藥，我們堅守獅子山精神，一定會排除萬難，給香港一個乾淨無蟲害的空間。</p>
-      <a href="/quote/" class="btn-primary">如需報價</a>
-    </div>
-  </section>
-
-  <footer>
-    <div class="social-icons">
-      <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://wa.me/85252821552" target="_blank" rel="noopener noreferrer" title="WhatsApp - @CEDARS_LTD"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="mailto:Cedars5282@gmail.com" target="_blank" title="Gmail"><img loading="lazy" src="/assets/img/gmail-icon.png" alt="Gmail" class="gmail-icon"></a>
-    </div>
-    <p>&copy; 2023 滅蟲師傅 CEDARS LTD. 版權所有</p>
-  </footer>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "滅蟲師傅",
-    "alternateName": "Pest Control Master",
-    "description": "滅蟲師傅為香港提供專業滅鼠、滅蟑螂（德國蟑螂）、滅蚊及滅蝨服務。採用環保藥劑，自主團隊上門，提供單次/季度/年度套餐。",
-    "url": "https://bruceleehk.com/",
-    "logo": "https://bruceleehk.com/assets/img/logo.png",
-    "image": "https://bruceleehk.com/assets/img/hero-bg.jpg",
-    "telephone": "+85252821552",
-    "email": "Cedars5282@gmail.com",
-    "priceRange": "HK$800-HK$4000+",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "荔景邨工場大廈",
-      "addressRegion": "新界",
-      "addressLocality": "香港",
-      "addressCountry": "HK"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "22.35",
-      "longitude": "114.13"
-    },
-    "areaServed": [
-      {"@type": "City", "name": "香港島"},
-      {"@type": "City", "name": "九龍"},
-      {"@type": "City", "name": "新界"},
-      {"@type": "AdministrativeArea", "name": "離島區"}
-    ],
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "serviceType": ["Pest Control", "滅蟲", "滅鼠", "滅蟑螂", "滅蚊", "滅蝨", "白蟻防治"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "滅蟲服務套餐",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "滅曱甴（蟑螂）",
-            "description": "針對德國蟑螂及美國蟑螂，施放膠餌及噴灑殺蟲劑，破壞蟑螂巢穴。"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "滅蚊滅鼠",
-            "description": "重點清除蚊嘅滋生水源，安全使用殺蟲劑處理成蚊。採用物理捕捉與安全誘餌解決鼠患問題。"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "床蝨/木蝨防治",
-            "description": "清理雜物縫隙，針對床架、木製家具進行高溫蒸氣處理，消滅隱蔽處的木蝨。"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "白蟻防治",
-            "description": "白蟻嚴重破壞木質結構，我們提供精準探測與全面藥物灌注服務。"
-          }
-        }
-      ]
-    },
-    "sameAs": [
-      "https://www.instagram.com/CEDARS_LTD",
-      "https://x.com/CEDARS_LTD",
-      "https://www.youtube.com/@CEDARS_LTD",
-      "https://wa.me/85252821552"
-    ]
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "首頁",
-        "item": "https://bruceleehk.com/"
-      }
-    ]
-  }
-  </script>
-
-  <script src="/assets/js/main.js"></script>
-
-  <script>
-   window.difyChatbotConfig = {
-    token: 'C3DvioLaCmagSaUc',
-    inputs: {},
-    systemVariables: {},
-    userVariables: {}
-   }
-  </script>
-  <script
-   src="https://udify.app/embed.min.js"
-   id="C3DvioLaCmagSaUc"
-   defer>
-  </script>
-  <style>
-   #dify-chatbot-bubble-button {
-    background-color: #2c5e1a !important;
-   }
-   #dify-chatbot-bubble-window {
-    width: 24rem !important;
-    height: 40rem !important;
-   }
-  </style>
 
 </body>
 </html>
