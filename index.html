@@ -40,7 +40,7 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: center; /* 確保所有元素垂直居中對齊 */
+            align-items: center;
             padding: 10px 20px;
             position: relative;
         }
@@ -106,7 +106,7 @@
             background: #1eb954;
         }
 
-        /* 導航連結 */
+        /* 導航連結 (已移除 AI 查詢欄) */
         .nav-links {
             display: flex;
             align-items: center;
@@ -125,7 +125,7 @@
             color: var(--primary-color);
         }
 
-        /* 手機版三橫槓 Menu Toggle 修復下垂問題 */
+        /* 手機版三橫槓 Menu Toggle */
         .menu-toggle {
             display: none;
             font-size: 1.4rem;
@@ -135,7 +135,7 @@
             align-items: center;
             justify-content: center;
             line-height: 1;
-            height: 38px; /* 固定高度保持垂直中軸線對齊 */
+            height: 38px;
         }
 
         /* Hero Section */
@@ -484,7 +484,6 @@
             color: #ffffff;
         }
 
-        /* 手機版響應式優化 */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
             .nav-links {
@@ -522,23 +521,20 @@
                         <span class="logo-subtitle">PEST CONTROL MASTER</span>
                     </div>
                 </a>
-                <!-- WhatsApp 圖標已移至左側滅蟲師傅旁邊 -->
                 <a href="https://wa.me/85252821552" target="_blank" class="header-wa-left" title="WhatsApp 諮詢">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
             </div>
 
-            <!-- 右側選單 -->
+            <!-- 右側導航列（已移除 AI 查詢選項） -->
             <ul class="nav-links" id="nav-links">
                 <li><a href="/" class="active">首頁</a></li>
                 <li><a href="/services/">蟲類服務</a></li>
                 <li><a href="/strategy/">有蟲就有計</a></li>
                 <li><a href="/info/">蟲類資訊</a></li>
-                <li><a href="/quote/#ai-chat">🤖 滅蟲師妹 AI 查詢</a></li>
-                <li><a href="/quote/#quote-form">有蟲話我知</a></li>
+                <li><a href="/quote/">有蟲話我知</a></li>
             </ul>
 
-            <!-- 手機版三橫槓 Menu Toggle (水平與垂直精準居中) -->
             <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -556,9 +552,9 @@
             <h1>香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
             <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
             <div class="hero-cta">
-                <!-- 直達滅蟲師妹 AI 專屬對話區塊 -->
                 <a href="/quote/#ai-chat" class="btn btn-primary">🤖 滅蟲師妹 AI 查詢</a>
-                <a href="https://wa.me/85252821552" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 諮詢</a>
+                <!-- 已刪除 💬 標誌 -->
+                <a href="https://wa.me/85252821552" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> WhatsApp 諮詢</a>
             </div>
         </div>
     </section>
@@ -682,9 +678,8 @@
         </div>
     </section>
 
-    <!-- Footer (已將抬頭修改為 CEDARS_LTD) -->
+    <!-- Footer (已刪除地址上方的 CEDARS_LTD，僅保留底部的版權標記) -->
     <footer>
-        <p><strong>CEDARS_LTD</strong></p>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
         
         <!-- Social Icons Footer Section -->
@@ -708,8 +703,9 @@
         <a href="tel:+85252821552" class="thumb-btn thumb-call">
             <i class="fa-solid fa-phone"></i> 📞 一鍵致電
         </a>
+        <!-- 已刪除 💬 標誌 -->
         <a href="https://wa.me/85252821552" target="_blank" class="thumb-btn thumb-wa">
-            <i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 報價
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp 報價
         </a>
     </div>
 

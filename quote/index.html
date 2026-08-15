@@ -45,6 +45,11 @@
       align-items: center;
       gap: 8px;
     }
+    .ai-header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
     .ai-chat-badge {
       font-size: 0.75rem;
       background: rgba(16, 185, 129, 0.2);
@@ -54,6 +59,27 @@
       border: 1px solid rgba(16, 185, 129, 0.4);
       font-weight: 600;
     }
+
+    /* 關閉按鈕樣式 */
+    .ai-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .ai-close-btn:hover {
+      background: rgba(239, 68, 68, 0.8);
+    }
+
     .ai-iframe-wrapper {
       width: 100%;
       height: 580px;
@@ -95,13 +121,13 @@
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
+    <!-- 右側導航列（已移除 AI 查詢選項） -->
     <nav class="nav-links" id="nav-links">
       <a href="/">首頁</a>
       <a href="/services/">蟲類服務</a>
       <a href="/strategy/">有蟲就有計</a>
       <a href="/info/">蟲類資訊</a>
-      <a href="/quote/#ai-chat">🤖 滅蟲師妹 AI 查詢</a>
-      <a href="/quote/#quote-form">有蟲話我知</a>
+      <a href="/quote/" class="nav-cta active">有蟲話我知</a>
     </nav>
     <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
   </div>
@@ -116,12 +142,16 @@
     </div>
   </section>
 
-  <!-- 精準定位：Dify 滅蟲師妹 AI 對話框 (錨點 ai-chat) -->
+  <!-- 精準定位：Dify 滅蟲師妹 AI 對話框 (含關閉按鈕) -->
   <section class="ai-chat-section" id="ai-chat">
     <div class="ai-chat-card">
       <div class="ai-chat-header">
         <h2>🤖 滅蟲師妹 AI 智能客服助理</h2>
-        <span class="ai-chat-badge">24/7 即時線上</span>
+        <div class="ai-header-controls">
+          <span class="ai-chat-badge">24/7 即時線上</span>
+          <!-- 可關閉按鈕 -->
+          <button type="button" class="ai-close-btn" onclick="closeAiChat()" title="關閉視窗">✕</button>
+        </div>
       </div>
       <div class="ai-iframe-wrapper">
         <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone"></iframe>
@@ -211,51 +241,59 @@
 
 <script src="/assets/js/main.js"></script>
 
-<!-- Formspree AJAX 腳本 -->
 <script>
-(function () {
-  var form = document.getElementById('quote-form-element');
-  if (!form) return;
+  // 關閉 AI 視窗腳本
+  function closeAiChat() {
+    var chatSec = document.getElementById('ai-chat');
+    if (chatSec) {
+      chatSec.style.display = 'none';
+    }
+  }
 
-  var submitBtn = document.getElementById('btn-submit');
-  var successBox = document.getElementById('quote-success');
-  var errorBox = document.getElementById('form-error');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    errorBox.style.display = 'none';
-    errorBox.textContent = '';
+  // Formspree AJAX 腳本
+  (function () {
+    var form = document.getElementById('quote-form-element');
+    if (!form) return;
 
-    var originalText = submitBtn.textContent;
-    submitBtn.textContent = '提交中...';
-    submitBtn.disabled = true;
+    var submitBtn = document.getElementById('btn-submit');
+    var successBox = document.getElementById('quote-success');
+    var errorBox = document.getElementById('form-error');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorBox.style.display = 'none';
+      errorBox.textContent = '';
 
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function (response) {
-      if (response.ok) {
-        form.style.display = 'none';
-        successBox.style.display = 'block';
-      } else {
-        return response.json().then(function (data) {
-          var msgs = [];
-          if (data.errors) {
-            data.errors.forEach(function (err) { msgs.push(err.message); });
-          }
-          throw new Error(msgs.length ? msgs.join('、') : '提交失敗，請稍後再試。');
-        });
-      }
-    })
-    .catch(function (err) {
-      errorBox.textContent = err.message || '提交失敗，請檢查網絡連線後重試。';
-      errorBox.style.display = 'block';
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = '提交中...';
+      submitBtn.disabled = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function (response) {
+        if (response.ok) {
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+        } else {
+          return response.json().then(function (data) {
+            var msgs = [];
+            if (data.errors) {
+              data.errors.forEach(function (err) { msgs.push(err.message); });
+            }
+            throw new Error(msgs.length ? msgs.join('、') : '提交失敗，請稍後再試。');
+          });
+        }
+      })
+      .catch(function (err) {
+        errorBox.textContent = err.message || '提交失敗，請檢查網絡連線後重試。';
+        errorBox.style.display = 'block';
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      });
     });
-  });
-})();
+  })();
 </script>
 
 </body>
