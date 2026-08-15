@@ -79,6 +79,7 @@
         }
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 20px;
             list-style: none;
             margin: 0;
@@ -92,6 +93,18 @@
         }
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary-color);
+        }
+        .header-wa-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: #ecfdf5;
+            transition: background 0.2s;
+        }
+        .header-wa-icon:hover {
+            background: #d1fae5;
         }
 
         /* Hero Section */
@@ -400,13 +413,9 @@
             transition: all 0.2s ease;
             text-decoration: none;
         }
-        .footer-social-links a i {
-            color: #ffffff !important;
-        }
         .footer-social-links a:hover {
             transform: translateY(-3px);
             background: var(--primary-color);
-            color: #ffffff !important;
         }
 
         /* Mobile Bottom Sticky Thumb-Zone */
@@ -465,10 +474,15 @@
             </a>
             <ul class="nav-links">
                 <li><a href="/" class="active">首頁</a></li>
-                <li><a href="services/">蟲類服務</a></li>
-                <li><a href="strategy/">有蟲就有計</a></li>
-                <li><a href="info/">蟲類資訊</a></li>
-                <li><a href="info/vote/">有蟲話我知</a></li>
+                <li><a href="/services/">蟲類服務</a></li>
+                <li><a href="/strategy/">有蟲就有計</a></li>
+                <li><a href="/info/">蟲類資訊</a></li>
+                <li><a href="/info/vote/">有蟲話我知</a></li>
+                <li>
+                    <a href="https://wa.me/85252821552" target="_blank" class="header-wa-icon" title="WhatsApp 諮詢">
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.25rem;"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </header>
@@ -484,7 +498,7 @@
             <h1>香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
             <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
             <div class="hero-cta">
-                <a href="quote/" class="btn btn-primary"><i class="fa-solid fa-robot"></i> 🤖 滅蟲師妹 AI 查詢</a>
+                <a href="/quote/" class="btn btn-primary">🤖 滅蟲師妹 AI 查詢</a>
                 <a href="https://wa.me/85252821552" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> 💬 WhatsApp 諮詢</a>
             </div>
         </div>
@@ -522,21 +536,21 @@
             <p>漁護署註冊藥劑 • 0隱藏收費 • 100%專業持牌師傅</p>
         </div>
         <div class="grid-3">
-            <a href="services/#cockroach" class="service-card">
+            <a href="/services/#cockroach" class="service-card">
                 <span class="service-badge">🔥 熱門急件</span>
                 <div class="service-title">🪳 滅曱甴（蟑螂）</div>
                 <p style="color:#64748b; font-size:0.9rem; margin:0;">針對德國與美國曱甴，施放智慧誘餌連環滅巢。</p>
             </a>
-            <a href="services/#mosquito-rat" class="service-card">
+            <a href="/services/#mosquito-rat" class="service-card">
                 <div class="service-title">🦟🐭 滅蚊滅鼠</div>
                 <p style="color:#64748b; font-size:0.9rem; margin:0;">生物劑阻斷幼蟲孳生，配合物理與智慧鼠盒清剿。</p>
             </a>
-            <a href="services/#bedbug" class="service-card">
+            <a href="/services/#bedbug" class="service-card">
                 <span class="service-badge">⚡ 急診推薦</span>
                 <div class="service-title">🕷️ 床/木蝨防治</div>
                 <p style="color:#64748b; font-size:0.9rem; margin:0;">高溫蒸氣及專用殘留藥劑深層封殺，徹底消滅蝨卵。</p>
             </a>
-            <a href="services/#termite" class="service-card">
+            <a href="/services/#termite" class="service-card">
                 <div class="service-title">🐜 白蟻防治</div>
                 <p style="color:#64748b; font-size:0.9rem; margin:0;">熱成像精準定位暗巢，灌注持效保護劑，防止結構倒塌。</p>
             </a>
@@ -550,28 +564,28 @@
             <p>左右滑動查看師傅如何靈活運用策略擊退各類害蟲</p>
         </div>
         <div class="stratagem-scroll">
-            <a href="strategy/#strat-1" class="stratagem-card">
+            <a href="/strategy/#strat-1" class="stratagem-card">
                 <div>
                     <span class="stratagem-tag">滅曱甴策略</span>
                     <div class="stratagem-title">美國曱甴「誘敵深入計」</div>
                     <p class="stratagem-desc">排水口與裂縫設置誘餌站，將經管道進出的大型曱甴一網打盡。</p>
                 </div>
             </a>
-            <a href="strategy/#strat-2" class="stratagem-card">
+            <a href="/strategy/#strat-2" class="stratagem-card">
                 <div>
                     <span class="stratagem-tag">滅蚊策略</span>
                     <div class="stratagem-title">戶外蚊患「以逸待勞計」</div>
                     <p class="stratagem-desc">定時紫外線誘蚊燈配合生物顆粒，免除頻繁噴藥，長效控蚊。</p>
                 </div>
             </a>
-            <a href="strategy/#strat-3" class="stratagem-card">
+            <a href="/strategy/#strat-3" class="stratagem-card">
                 <div>
                     <span class="stratagem-tag">滅鼠策略</span>
                     <div class="stratagem-title">鼠患問題「釜底抽薪計」</div>
                     <p class="stratagem-desc">評估入屋源頭並精準封堵老鼠窿，配合誘捕技術徹底絕路。</p>
                 </div>
             </a>
-            <a href="strategy/#strat-4" class="stratagem-card">
+            <a href="/strategy/#strat-4" class="stratagem-card">
                 <div>
                     <span class="stratagem-tag">木蝨策略</span>
                     <div class="stratagem-title">床蝨防治「星星之火計」</div>
@@ -580,7 +594,7 @@
             </a>
         </div>
         <div style="text-align: center; margin-top: 10px;">
-            <a href="strategy/" style="color: var(--primary-color); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
+            <a href="/strategy/" style="color: var(--primary-color); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
         </div>
     </section>
 
@@ -616,11 +630,16 @@
         
         <!-- Social Icons Footer Section -->
         <div class="footer-social-links">
-            <a href="https://www.instagram.com/bruceleehk" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://x.com/bruceleehk" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i></a>
-            <a href="https://wa.me/85252821552" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="mailto:contact@bruceleehk.com" aria-label="Gmail"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://www.youtube.com/@bruceleehk" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+            <!-- Pure White SVG for X (Twitter) -->
+            <a href="https://x.com/" target="_blank" aria-label="X (Twitter)" title="X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="display:inline-block; vertical-align:middle;">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/85252821552" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i></a>
+            <a href="mailto:info@bruceleehk.com" aria-label="Gmail"><i class="fa-solid fa-envelope" style="color: #ffffff;"></i></a>
+            <a href="https://www.youtube.com/" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color: #ffffff;"></i></a>
         </div>
 
         <p>© 2026 滅蟲師傅. All Rights Reserved. 保留所有權利。</p>
