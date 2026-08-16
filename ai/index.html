@@ -6,7 +6,7 @@
     <title>AI 害蟲分析系統 | 香港首創 7×24 AI 智能診斷估價 | 滅蟲師傅</title>
     <meta name="description" content="香港首創 AI 害蟲分析系統 — 上載害蟲相片，AI 即時辨識種類、風險等級、暗巢位置，自動配對獨家三十六計防治策略並提供即時估價。7×24 全天候智能估價服務。">
     <meta name="keywords" content="AI害蟲分析,AI害蟲識別,AI滅蟲,智能滅蟲,害蟲診斷,AI估價,7x24滅蟲估價,香港AI滅蟲">
-    <link rel="canonical" href="https://bruceleehk.com/ai/">
+    <link rel="canonical" href="url?id=8">
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
 
     <!-- Open Graph -->
@@ -721,12 +721,12 @@
                     <div class="arch-step">
                         <span class="step-num">2</span>
                         <h4>邏輯轉接</h4>
-                        <p>Cloudflare Worker / Dify 接收並轉發 Base64 圖像</p>
+                        <p>Cloudflare Worker 接收並轉發 Base64 圖像</p>
                     </div>
                     <div class="arch-step">
                         <span class="step-num">3</span>
                         <h4>視覺識別</h4>
-                        <p>GPT-4o-mini / Gemini 1.5 Flash 辨識害蟲種類</p>
+                        <p>Llama-3.2 Vision 模型辨識害蟲特徵</p>
                     </div>
                     <div class="arch-step">
                         <span class="step-num">4</span>
@@ -818,7 +818,6 @@
 
     <script src="/assets/js/bruceleehk.js"></script>
     <script>
-        // ===== /ai/ page-specific logic: AI diagnosis with multi-step loading animation =====
         document.addEventListener('DOMContentLoaded', () => {
             const steps = [
                 document.getElementById('step-1'),
@@ -827,50 +826,29 @@
                 document.getElementById('step-4')
             ];
 
-            // Override default initAIDiagnosis to add step animation
             const input = document.getElementById('pest-photo');
-            const area = document.getElementById('upload-area');
             const states = {
                 upload: document.getElementById('ai-upload'),
                 analyzing: document.getElementById('ai-analyzing'),
                 result: document.getElementById('ai-result')
             };
-            const resultImg = document.getElementById('result-img');
-            const reuploadBtn = document.getElementById('r-reupload');
 
-            const showState = (s) => {
-                Object.values(states).forEach(el => el && el.classList.remove('active'));
-                if (states[s]) states[s].classList.add('active');
-            };
-
-            // Animate loading steps
             function animateSteps() {
                 steps.forEach(s => s && s.classList.remove('active'));
                 if (steps[0]) steps[0].classList.add('active');
-                setTimeout(() => { if (steps[1]) steps[1].classList.add('active'); }, 500);
-                setTimeout(() => { if (steps[2]) steps[2].classList.add('active'); }, 1000);
-                setTimeout(() => { if (steps[3]) steps[3].classList.add('active'); }, 1500);
+                setTimeout(() => { if (steps[1]) steps[1].classList.add('active'); }, 600);
+                setTimeout(() => { if (steps[2]) steps[2].classList.add('active'); }, 1200);
+                setTimeout(() => { if (steps[3]) steps[3].classList.add('active'); }, 1800);
             }
 
-            // Use shared initAIDiagnosis, but intercept the file handler to add step animation
-            const originalHandler = input.onchange;
-            input.addEventListener('change', async (e) => {
-                const file = e.target.files && e.target.files[0];
-                if (!file) return;
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('相片大小不能超過 5MB，請重新選擇。');
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    resultImg.src = ev.target.result;
-                    showState('analyzing');
-                    animateSteps();
-                };
-                reader.readAsDataURL(file);
-            });
+            if (input) {
+                input.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        animateSteps();
+                    }
+                });
+            }
 
-            // Use shared diagnosis logic with element IDs
             window.initAIDiagnosis({
                 input: 'pest-photo',
                 area: 'upload-area',
@@ -888,9 +866,6 @@
                 wa: 'r-wa',
                 reupload: 'r-reupload'
             });
-
-            // Re-attach our custom change handler after initAIDiagnosis (which adds its own)
-            // Note: initAIDiagnosis adds its own change handler, so our animation handler runs in parallel
         });
     </script>
 </body>
