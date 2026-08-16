@@ -84,7 +84,20 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+        .hero-slogan-tag {
+            display: inline-block;
+            background: rgba(16,185,129,0.18);
+            border: 1px solid rgba(110,231,183,0.4);
+            color: #6ee7b7;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            box-shadow: 0 0 15px rgba(16,185,129,0.2);
         }
         .hero h1 {
             font-size: 1.95rem;
@@ -230,7 +243,7 @@
         }
         .smart-card-link:hover { gap: 8px; }
 
-        /* ===== AI Diagnosis Embedded Card (inside AI 害蟲分析系統 card) ===== */
+        /* ===== AI Diagnosis Embedded Card ===== */
         .ai-embedded {
             margin-top: 16px;
             background: var(--light-bg);
@@ -706,9 +719,6 @@
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
                 </div>
             </a>
-            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="header-wa" aria-label="WhatsApp 諮詢">
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            </a>
             <nav aria-label="主導航">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/" class="active" aria-current="page">首頁</a></li>
@@ -733,6 +743,12 @@
                     <span class="tech-badge"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> IoT 智慧監測追蹤</span>
                     <span class="tech-badge"><i class="fa-solid fa-chess-knight" aria-hidden="true"></i> 獨家三十六計精準防治</span>
                 </div>
+                
+                <!-- 廣告詞標籤 -->
+                <div class="hero-slogan-tag">
+                    ✨ 智慧滅蟲梗喺滅蟲師傅啦
+                </div>
+
                 <h1 id="hero-title">香港首創 AI 智慧滅蟲<br>獨家三十六計精準防治</h1>
                 <p>最快即日上門 × 專人 WhatsApp 5分鐘智能估價</p>
                 <div class="hero-cta">
@@ -774,14 +790,14 @@
             </div>
         </section>
 
-        <!-- Smart Pest Section (AI 害蟲分析系統 card has embedded diagnosis) -->
+        <!-- Smart Pest Section -->
         <section class="container" id="smart-section" aria-labelledby="smart-title">
             <div class="section-title">
                 <h2 id="smart-title"><i class="fa-solid fa-microchip" aria-hidden="true" style="color: var(--primary);"></i> 智慧滅蟲專區</h2>
                 <p>打破傳統經驗主義，結合最新科技全面鎖定害蟲暗巢</p>
             </div>
             <div class="grid-3">
-                <!-- AI 害蟲分析系統 card WITH embedded AI diagnosis -->
+                <!-- AI 害蟲分析系統卡片 -->
                 <article class="smart-card">
                     <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy">
                     <div class="smart-card-body">
@@ -790,11 +806,11 @@
                         <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
                         <a href="/ai/" class="smart-card-link">查看完整版系統 →</a>
 
-                        <!-- ===== Embedded AI Diagnosis (7×24 pricing) ===== -->
+                        <!-- ===== 嵌入式 Cloudflare Workers AI 即時診斷 ===== -->
                         <div class="ai-embedded">
                             <p class="ai-embedded-title">
                                 <span class="live-dot" aria-hidden="true"></span>
-                                7×24 AI 即時診斷估價
+                                7×24 Workers Vision AI 即時診斷估價
                             </p>
                             <div class="ai-states">
                                 <!-- State 1: Upload -->
@@ -811,7 +827,7 @@
                                 <div id="home-ai-analyzing">
                                     <div class="ai-loading">
                                         <div class="ai-spinner" aria-hidden="true"></div>
-                                        <p class="ai-loading-text"><i class="fa-solid fa-microchip" aria-hidden="true"></i> AI 視覺模型分析中…</p>
+                                        <p class="ai-loading-text"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Cloudflare Vision AI 模型分析中…</p>
                                     </div>
                                 </div>
                                 <!-- State 3: Result -->
@@ -838,7 +854,7 @@
                                             <span class="ai-result-value ai-result-price" id="home-r-price">—</span>
                                         </div>
                                         <p style="font-size: 0.72rem; color: var(--text-muted); margin: 8px 0 0; line-height: 1.5;">
-                                            * AI 診斷結果僅供參考，實際處理方案與收費以現場師傅最終評估為準。
+                                            * AI 診斷結果僅供初步參考，實際處理方案與收費以現場師傅最終評估為準。
                                         </p>
                                     </div>
                                     <div class="ai-result-actions">
@@ -1097,7 +1113,7 @@
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
         <div class="footer-social">
-            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="Instagram">
+            <a href="url?id=19" target="_blank" rel="noopener" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
             <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
@@ -1111,7 +1127,7 @@
             <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
-            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" aria-label="YouTube">
+            <a href="url?id=17" target="_blank" rel="noopener" aria-label="YouTube">
                 <i class="fa-brands fa-youtube" aria-hidden="true"></i>
             </a>
         </div>
@@ -1152,8 +1168,6 @@
 
     <script src="assets/js/bruceleehk.js"></script>
     <script>
-        // ===== Homepage-specific logic =====
-
         // Hero Quick Quote → WhatsApp
         (function() {
             const form = document.getElementById('hero-quick-quote');
@@ -1193,7 +1207,7 @@
                 upload: 'home-ai-upload',
                 analyzing: 'home-ai-analyzing',
                 result: 'home-ai-result',
-                preview: null,  // homepage card has no preview image (compact)
+                preview: null,
                 resultImg: 'home-result-img',
                 pest: 'home-r-pest',
                 confidence: 'home-r-confidence',
