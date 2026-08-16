@@ -112,6 +112,18 @@
             0%, 100% { opacity: 1; }
             50%      { opacity: 0.3; }
         }
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
 
         /* ============ Service Options (3 channels) ============ */
         .channels-section {
@@ -363,149 +375,66 @@
             .form-wrapper { padding: 24px 18px; }
         }
 
-        /* ============ WhatsApp Welcome Message Section ============ */
-        .welcome-section {
+        /* ============ Disclaimer Section ============ */
+        .disclaimer-section {
             max-width: 800px;
             margin: 40px auto;
             padding: 0 15px;
         }
-        .welcome-card {
+        .disclaimer-card {
             background: #fff;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-md);
         }
-        .welcome-header {
-            background: linear-gradient(135deg, var(--whatsapp) 0%, #128c7e 100%);
+        .disclaimer-header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--card-bg) 100%);
             color: #fff;
             padding: 24px;
             text-align: center;
         }
-        .welcome-header h2 {
+        .disclaimer-header h2 {
             margin: 0 0 6px;
             font-size: 1.3rem;
             color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .welcome-header p {
+        .disclaimer-header p {
             margin: 0;
             color: rgba(255,255,255,0.9);
             font-size: 0.88rem;
         }
-        .welcome-message {
-            background: #e5ddd5;
-            padding: 20px;
-            margin: 0;
-        }
-        .welcome-message-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-        }
-        .welcome-bot-avatar {
-            width: 44px;
-            height: 44px;
-            background: var(--whatsapp);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-        .welcome-message-header strong {
-            display: block;
-            color: var(--dark-bg);
-            font-size: 0.95rem;
-        }
-        .welcome-message-header small {
-            color: var(--text-muted);
-            font-size: 0.78rem;
-        }
-        .welcome-message-body {
+        .disclaimer-body {
             background: #fff;
-            border-radius: 0 12px 12px 12px;
-            padding: 16px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            position: relative;
+            padding: 24px;
         }
-        .welcome-message-body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -8px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 8px 8px 0;
-            border-color: transparent #fff transparent transparent;
-        }
-        .welcome-message-body p {
-            margin: 0 0 10px;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-        .welcome-message-body p:last-child { margin-bottom: 0; }
-        .welcome-option {
-            display: flex;
-            gap: 10px;
-            padding: 12px;
-            background: var(--light-bg);
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: var(--text-main);
-        }
-        .welcome-option-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-        .welcome-option strong {
-            color: var(--dark-bg);
-            display: block;
-            margin-bottom: 2px;
-        }
-        .welcome-link {
-            color: var(--tech-blue);
-            text-decoration: underline;
-            font-weight: 600;
-            word-break: break-all;
-        }
-        .welcome-disclaimer {
-            background: #fff7ed;
-            border-top: 3px solid var(--warning);
-            padding: 20px 24px;
-        }
-        .welcome-disclaimer h4 {
-            margin: 0 0 12px;
-            color: var(--dark-bg);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .welcome-disclaimer h4 i { color: var(--warning); }
-        .welcome-disclaimer ul {
+        .disclaimer-body ul {
             margin: 0;
             padding-left: 20px;
             list-style: disc;
         }
-        .welcome-disclaimer li {
-            font-size: 0.82rem;
+        .disclaimer-body li {
+            font-size: 0.9rem;
             color: var(--text-main);
             line-height: 1.7;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
-        .welcome-disclaimer li:last-child { margin-bottom: 0; }
-        .welcome-disclaimer li strong {
+        .disclaimer-body li:last-child {
+            margin-bottom: 0;
+        }
+        .disclaimer-body li strong {
             color: var(--dark-bg);
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .disclaimer-body li i {
+            color: var(--primary);
+            margin-right: 6px;
         }
     </style>
 </head>
@@ -710,66 +639,31 @@
             </div>
         </section>
 
-        <!-- WhatsApp Business 歡迎訊息選單（方案 A） -->
-        <section class="welcome-section" aria-labelledby="welcome-title">
-            <div class="welcome-card">
-                <div class="welcome-header">
-                    <h2 id="welcome-title"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 歡迎訊息選單</h2>
-                    <p>首次發訊息至我們的 WhatsApp，系統將自動發送以下分流選單，協助你快速獲得服務</p>
+        <!-- 服務條款與免責聲明 (僅保留此區塊) -->
+        <section class="disclaimer-section" aria-labelledby="disclaimer-title">
+            <div class="disclaimer-card">
+                <div class="disclaimer-header">
+                    <h2 id="disclaimer-title">
+                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                        服務條款與免責聲明
+                    </h2>
+                    <p>請仔細閱讀以下內容，以保障雙方權益</p>
                 </div>
-                <div class="welcome-message">
-                    <div class="welcome-message-header">
-                        <span class="welcome-bot-avatar"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
-                        <div>
-                            <strong>滅蟲師傅 Pest Control Master</strong>
-                            <small>自動回覆 • 剛剛</small>
-                        </div>
-                    </div>
-                    <div class="welcome-message-body">
-                        <p>你好！歡迎聯絡【滅蟲師傅 Pest Control Master】🤖</p>
-                        <p>為提供最快服務，請根據你的情況選擇：</p>
-
-                        <div class="welcome-option">
-                            <span class="welcome-option-icon" style="color: var(--danger);">🚨</span>
-                            <div>
-                                <strong>【緊急急件 / 即日上門】</strong>
-                                請直接致電急件專線 📞 <a href="tel:+85252821552">52821552</a>，或回覆「1」，專員會優先跟進。
-                            </div>
-                        </div>
-
-                        <div class="welcome-option">
-                            <span class="welcome-option-icon" style="color: var(--primary);">🤖</span>
-                            <div>
-                                <strong>【AI 害蟲相片診斷 & 免費估價】</strong>
-                                如有害蟲照片或想先了解處理方案，請點擊連結由「滅蟲師妹」即時為你診斷：
-                                <br><a href="/ai/" class="welcome-link">👉 https://bruceleehk.com/ai/</a>
-                            </div>
-                        </div>
-
-                        <div class="welcome-option">
-                            <span class="welcome-option-icon" style="color: var(--tech-blue);">💬</span>
-                            <div>
-                                <strong>【人工查詢】</strong>
-                                請留下你的屋苑名稱與蟲患情況，專員會於辦公時間內盡快回覆！
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="welcome-disclaimer">
-                    <h4><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 服務條款與免責聲明</h4>
+                <div class="disclaimer-body">
                     <ul>
-                        <li><strong>嚴禁 AI 承諾時間與價格</strong>：所有涉及價格與上門時間的決定，必須聲明「以現場師傅最終評估為準」。</li>
-                        <li><strong>AI 診斷免責聲明</strong>：AI 診斷結果僅供參考，實際處理方案以現場師傅評估為準。</li>
-                        <li><strong>人工覆蓋機制（Human Handoff）</strong>：只要真人專員於 WhatsApp 回覆訊息，系統將自動暫停該對話的 AI 功能 24 小時。</li>
-                        <li><strong>綜合防治理念（IPM）</strong>：本平臺以 IPM 為核心理念，IPM 需要長期持續執行，短期見效不明顯但效果持久。本平臺不作「包斷尾」等絕對保證。</li>
+                        <li>
+                            <strong><i class="fa-solid fa-robot" aria-hidden="true"></i>AI 診斷與報價說明</strong>
+                            AI 系統之害蟲辨識與預估費用僅供初步參考。實際蟲患程度、暗巢位置及最終服務報價，均以專業師傅上門現場勘察評估為準。
+                        </li>
+                        <li>
+                            <strong><i class="fa-solid fa-user-check" aria-hidden="true"></i>專員服務優先機制</strong>
+                            當真人專員或師傅於 WhatsApp / 電話接入對話時，系統將自動轉為人工跟進，確保溝通精準無誤。
+                        </li>
+                        <li>
+                            <strong><i class="fa-solid fa-seedling" aria-hidden="true"></i>科學綜合防治 (IPM) 理念</strong>
+                            我們採用國際認可的「綜合害蟲管理 (IPM)」科學防治法，著重源頭封堵與環境管理，提供長遠持久的防護，非傳統一次性化學噴藥。
+                        </li>
                     </ul>
-                </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="btn btn-whatsapp">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即發訊息體驗
-                    </a>
                 </div>
             </div>
         </section>
@@ -854,9 +748,3 @@
                     errorBox.style.display = 'block';
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
-                });
-            });
-        })();
-    </script>
-</body>
-</html>
