@@ -77,28 +77,28 @@
         '曱甴': {
             risk: '中 - 高',
             nest: '廚房罅隙、排水管、電器背後',
-            strategy: '採用「誘敵深入計」：於排水口及裂縫設置智慧誘餌站，連環引誘滅巢。',
+            strategy: '採用「誘敵深入計」：於排水口及裂縫設置智慧誘餌站，系統性引誘處理。',
             price: 'HK$ 600 - 3,800',
             confidence: 96
         },
         '木蝨': {
             risk: '高',
             nest: '床板縫隙、梳化、牆身插座',
-            strategy: '採用「星星之火計」：高溫蒸氣 + 雙重殘留藥劑深層封殺蝨卵。',
+            strategy: '採用「星星之火計」：高溫蒸氣 + 雙重殘留藥劑深層處理蝨卵。',
             price: 'HK$ 800 - 5,500',
             confidence: 94
         },
         '老鼠': {
             risk: '中 - 高',
             nest: '管道入口、天花夾層、儲物區',
-            strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵源頭 + 24 小時遠端監測誘捕。',
+            strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵源頭 + 遠端監測誘捕。',
             price: 'HK$ 1,000 - 5,800',
             confidence: 92
         },
         '白蟻': {
             risk: '極高（結構風險）',
             nest: '木結構內部、牆身、地板下',
-            strategy: '熱成像定位暗巢 + 灌注持效保護劑 + 結構性防治 1 年保用。',
+            strategy: '熱成像定位暗巢 + 灌注持效保護劑 + 結構性防治方案。',
             price: 'HK$ 1,500 - 9,800',
             confidence: 91
         },
@@ -112,7 +112,7 @@
         '其他': {
             risk: '待評估',
             nest: '建議專員上門勘察',
-            strategy: 'AI 系統未能 100% 確定，建議上載多張不同角度相片或上門勘察由師傅診斷。',
+            strategy: 'AI 系統未能完全確定，建議上載多張不同角度相片或上門勘察由師傅診斷。',
             price: '免費評估',
             confidence: 70
         }
@@ -215,7 +215,7 @@
 
             const wa = $(opts.wa);
             if (wa) {
-                const msg = `你好，我已用 AI 害蟲診斷器分析相片：\n• AI 識別：${guess.pest}（信心 ${data.confidence}%）\n• 風險等級：${data.risk}\n• 潛在暗巢：${data.nest}\n• 建議策略：${data.strategy}\n• 參考估價：${data.price}\n我想預約師傅上門跟進，謝謝！`;
+                const msg = `你好，我已用 AI 害蟲診斷器分析相片：\n• AI 識別：${guess.pest}（信心 ${data.confidence}%）\n• 風險等級：${data.risk}\n• 潛在暗巢：${data.nest}\n• 建議策略：${data.strategy}\n• 參考估價：${data.price}\n\n（我理解 AI 診斷結果僅供參考，實際方案以現場師傅評估為準）\n我想預約師傅上門跟進，謝謝！`;
                 wa.href = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
             }
             showState('result');

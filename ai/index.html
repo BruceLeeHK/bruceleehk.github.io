@@ -533,7 +533,7 @@
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
                 </div>
             </a>
-            <a href="https://wa.me/85252821552" target="_blank" rel="noopener" class="header-wa" aria-label="WhatsApp 諮詢">
+            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="header-wa" aria-label="WhatsApp 諮詢">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
             </a>
             <nav aria-label="主導航">
@@ -582,9 +582,9 @@
                             <label for="pest-photo" class="upload-area" id="upload-area">
                                 <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
                                 <h3>上載或拍攝害蟲相片</h3>
-                                <p>支援 JPG / PNG，最大 5MB。手機可直接開啟相機拍攝。</p>
+                                <p>支援 JPG / PNG，最大 5MB。可拍照或從相簿選擇。</p>
                                 <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> 選擇相片</span>
-                                <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/jpg" capture="environment">
+                                <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/jpg">
                             </label>
                             <div class="upload-features">
                                 <div class="upload-feature">
@@ -593,7 +593,7 @@
                                 </div>
                                 <div class="upload-feature">
                                     <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-                                    <span>支援手機直拍</span>
+                                    <span>可拍照或從相簿選擇</span>
                                 </div>
                                 <div class="upload-feature">
                                     <i class="fa-solid fa-brain" aria-hidden="true"></i>
@@ -655,7 +655,7 @@
                                         <span class="result-label">參考估價範圍</span>
                                         <span class="result-value result-price" id="r-price">—</span>
                                     </div>
-                                    <p class="result-disclaimer">* 估價僅供參考，實際收費以師傅上門評估為準。</p>
+                                    <p class="result-disclaimer">* AI 診斷結果僅供參考，實際處理方案與收費以現場師傅最終評估為準。本平臺不作「包斷尾」等絕對保證。</p>
                                 </div>
                             </div>
                             <div class="result-actions">
@@ -747,12 +747,34 @@
             </div>
         </section>
 
+        <!-- IPM 綜合防治理念 -->
+        <section class="features-section" aria-labelledby="ipm-title">
+            <div style="background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%); border: 1px solid #6ee7b7; border-radius: var(--radius); padding: 28px 24px; margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <h3 id="ipm-title" style="margin: 0 0 6px; font-size: 1.25rem; color: var(--dark-bg);">
+                        <i class="fa-solid fa-leaf" aria-hidden="true" style="color: var(--primary);"></i> 綜合防治理念（IPM）
+                    </h3>
+                    <p style="margin: 0; font-size: 0.92rem; color: var(--text-muted);">Integrated Pest Management — 專業、安全、可持續</p>
+                </div>
+                <p style="text-align: center; color: var(--text-main); font-size: 0.95rem; line-height: 1.8; margin: 0 0 14px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    本平臺以<b style="color: var(--primary-dark);">綜合防治（IPM）</b>為核心理念，結合 AI 智慧診斷、IoT 監測、物理防治與專業藥劑，制定長期防治方案。
+                    <b style="color: var(--warning);">IPM 需要長期持續執行，短期見效不明顯但效果持久。</b>
+                </p>
+                <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+                    * 所有處理方案及收費均以現場師傅最終評估為準。本平臺不作「包斷尾」等絕對保證。
+                </p>
+            </div>
+        </section>
+
         <!-- WhatsApp AI Bot CTA -->
         <section class="wa-bot-section" aria-labelledby="wa-bot-title">
             <div class="wa-bot-card">
                 <h3 id="wa-bot-title"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp AI 自動辨識 Bot</h3>
                 <p>港人最習慣的渠道 — 直接在 WhatsApp 發送害蟲照片，AI 系統 5 秒內自動回覆辨識結果、建議策略與預估報價，無需打開網頁。</p>
-                <a href="https://wa.me/85252821552?text=我想使用WhatsApp_AI害蟲診斷" target="_blank" rel="noopener" class="btn">
+                <p style="font-size: 0.8rem; color: rgba(255,255,255,0.85); margin-bottom: 16px;">
+                    * AI 診斷結果僅供參考，實際方案以現場師傅評估為準。真人專員介入後將自動暫停 AI 功能 24 小時（Human Handoff 機制）。
+                </p>
+                <a href="https://wa.me/85252821552?text=你好，我想使用WhatsApp_AI害蟲診斷" target="_blank" rel="noopener" class="btn">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即傳送相片至 WhatsApp
                 </a>
             </div>
@@ -771,7 +793,7 @@
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
             </a>
-            <a href="https://wa.me/85252821552" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" aria-label="WhatsApp">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
             </a>
             <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
@@ -789,7 +811,7 @@
         <a href="tel:+85252821552" class="thumb-btn thumb-call">
             <i class="fa-solid fa-phone" aria-hidden="true"></i> 一鍵致電
         </a>
-        <a href="https://wa.me/85252821552" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
+        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 報價
         </a>
     </div>
