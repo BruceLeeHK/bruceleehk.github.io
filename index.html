@@ -691,6 +691,44 @@
         @media (min-width: 769px) {
             .hero h1 { font-size: 2.5rem; }
         }
+
+        /* 新增：header 中心對齊與 WhatsApp 移除 */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 垂直居中 */
+            justify-content: center;
+            line-height: 1.2;
+        }
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--dark-bg);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .logo-subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-align: center;
+            font-weight: 600;
+        }
+        .header-slogan {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            margin-left: 12px;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
@@ -705,10 +743,10 @@
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
                 </div>
+                <!-- 新增智慧滅蟲標語 -->
+                <span class="header-slogan">智慧滅蟲梗喺滅蟲師傅啦</span>
             </a>
-            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="header-wa" aria-label="WhatsApp 諮詢">
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            </a>
+            <!-- 原本的 WhatsApp 圖示已刪除 -->
             <nav aria-label="主導航">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/" class="active" aria-current="page">首頁</a></li>
@@ -832,382 +870,4 @@
                                             <span class="ai-result-label">暗巢位置</span>
                                             <span class="ai-result-value" id="home-r-nest">—</span>
                                         </div>
-                                        <div class="ai-result-strategy" id="home-r-strategy">建議策略載入中…</div>
-                                        <div class="ai-result-row">
-                                            <span class="ai-result-label">參考估價</span>
-                                            <span class="ai-result-value ai-result-price" id="home-r-price">—</span>
-                                        </div>
-                                        <p style="font-size: 0.72rem; color: var(--text-muted); margin: 8px 0 0; line-height: 1.5;">
-                                            * AI 診斷結果僅供參考，實際處理方案與收費以現場師傅最終評估為準。
-                                        </p>
-                                    </div>
-                                    <div class="ai-result-actions">
-                                        <a href="#" id="home-r-wa" target="_blank" rel="noopener" class="btn btn-whatsapp">
-                                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 預約
-                                        </a>
-                                        <button type="button" class="btn btn-ghost" id="home-r-reupload">
-                                            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 重試
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統" loading="lazy">
-                    <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
-                        <h3>IoT 智慧鼠盒監測</h3>
-                        <p>24小時遠端紅外線感知，即時分析老鼠活動時間與路徑，實施精準誘捕。</p>
-                    </div>
-                </article>
-                <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描" loading="lazy">
-                    <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
-                        <h3>熱成像暗巢掃描</h3>
-                        <p>無損探測牆身與木傢俬內部縫隙，準確定位木蝨與白蟻巢穴，避免破壞裝修。</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Services -->
-        <section class="container" aria-labelledby="svc-title">
-            <div class="section-title">
-                <h2 id="svc-title"><i class="fa-solid fa-shield-halved" aria-hidden="true" style="color: var(--primary);"></i> 專業蟲類防治服務</h2>
-                <p>漁護署註冊藥劑 • 0隱藏收費 • 100%專業持牌師傅</p>
-            </div>
-            <div class="grid-3">
-                <a href="/services/#cockroach" class="service-card">
-                    <span class="service-badge hot">🔥 熱門急件</span>
-                    <div class="service-title"><span aria-hidden="true">🪳</span> 滅曱甴（蟑螂）</div>
-                    <p class="service-desc">針對德國與美國曱甴，施放智慧誘餌系統性防治。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#mosquito-rat" class="service-card">
-                    <span class="service-badge new">全年保用</span>
-                    <div class="service-title"><span aria-hidden="true">🦟🐭</span> 滅蚊滅鼠</div>
-                    <p class="service-desc">生物劑阻斷幼蟲孳生，配合物理與智慧鼠盒處理。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#bedbug" class="service-card">
-                    <span class="service-badge urgent">⚡ 急診推薦</span>
-                    <div class="service-title"><span aria-hidden="true">🕷️</span> 床/木蝨防治</div>
-                    <p class="service-desc">高溫蒸氣及專用殘留藥劑深層處理，針對蝨卵。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-                <a href="/services/#termite" class="service-card">
-                    <span class="service-badge hot">🔥 結構風險</span>
-                    <div class="service-title"><span aria-hidden="true">🐜</span> 白蟻防治</div>
-                    <p class="service-desc">熱成像精準定位暗巢，灌注持效保護劑，防止結構損害。</p>
-                    <span class="service-arrow">查看詳情 →</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Stratagem Carousel -->
-        <section class="container" aria-labelledby="strat-title">
-            <div class="section-title">
-                <h2 id="strat-title"><i class="fa-solid fa-scroll" aria-hidden="true" style="color: var(--primary);"></i> 有蟲就有計：三十六計實戰策略</h2>
-                <p>左右滑動查看師傅如何靈活運用策略擊退各類害蟲</p>
-            </div>
-            <div class="stratagem-wrapper">
-                <button class="stratagem-nav prev" id="strat-prev" aria-label="上一張" type="button">
-                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <div class="stratagem-scroll" id="strat-scroll">
-                    <a href="/strategy/#strat-1" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅曱甴策略</span>
-                            <div class="stratagem-title">美國曱甴「誘敵深入計」</div>
-                            <p class="stratagem-desc">排水口與裂縫設置誘餌站，系統性處理經管道進出的大型曱甴。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-2" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅蚊策略</span>
-                            <div class="stratagem-title">戶外蚊患「以逸待勞計」</div>
-                            <p class="stratagem-desc">定時紫外線誘蚊燈配合生物顆粒，免除頻繁噴藥，長效控蚊。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-3" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">滅鼠策略</span>
-                            <div class="stratagem-title">鼠患問題「釜底抽薪計」</div>
-                            <p class="stratagem-desc">評估入屋源頭並精準封堵老鼠窿，配合誘捕技術有效阻斷。</p>
-                        </div>
-                    </a>
-                    <a href="/strategy/#strat-4" class="stratagem-card">
-                        <div>
-                            <span class="stratagem-tag">木蝨策略</span>
-                            <div class="stratagem-title">床蝨防治「星星之火計」</div>
-                            <p class="stratagem-desc">針對極高繁衍力的床蝨，實施全方位高溫及藥劑雙重處理。</p>
-                        </div>
-                    </a>
-                </div>
-                <button class="stratagem-nav next" id="strat-next" aria-label="下一張" type="button">
-                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div style="text-align: center; margin-top: 10px;">
-                <a href="/strategy/" style="color: var(--primary); font-weight:700; text-decoration:none;">查看全部 36 計防治策略 →</a>
-            </div>
-        </section>
-
-        <!-- Video Cases -->
-        <section class="container" aria-labelledby="video-title">
-            <div class="section-title">
-                <h2 id="video-title"><i class="fa-solid fa-film" aria-hidden="true" style="color: var(--primary);"></i> 實戰案例短片</h2>
-                <p>直擊師傅真實施工過程，前後對比一目了然</p>
-            </div>
-            <div class="video-section">
-                <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> 榮仔智鬥過萬隻曱甴</h3>
-                <p>真實個案：餐廳廚房嚴重曱甴滋生，師傅即場示範智慧誘餌系統性防治全過程</p>
-                <div class="video-grid">
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：曱甴系統防治實戰">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:45</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">曱甴系統防治實戰</p>
-                            <p class="video-meta">📍 中環餐飲業 • Before & After</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣處理">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣處理案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:58</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">木蝨高溫蒸氣處理</p>
-                            <p class="video-meta">📍 日出康城 • 床蝨防治</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">1:12</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">IoT 智慧鼠盒監測</p>
-                            <p class="video-meta">📍 美孚新邨 • 滅鼠實錄</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
-                        <div class="video-thumb">
-                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy">
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:52</span>
-                        </div>
-                        <div class="video-info">
-                            <p class="video-title">熱成像白蟻暗巢掃描</p>
-                            <p class="video-meta">📍 太古城 • 結構保護</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Widget CTA -->
-        <section class="container" aria-labelledby="ai-cta-title">
-            <div class="ai-widget-box">
-                <h3 id="ai-cta-title"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> 遇到害蟲疑難？體驗 AI 智能診斷</h3>
-                <p>拍下害蟲照片並傳送至 WhatsApp，系統即時比對資料庫並為你給出預估處理方案與免費估價！</p>
-                <a href="https://wa.me/85252821552?text=我想進行AI害蟲診斷估價" target="_blank" rel="noopener" class="btn btn-primary">
-                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即上載圖片診斷
-                </a>
-            </div>
-        </section>
-
-        <!-- Estate Wall -->
-        <section class="container" aria-labelledby="estate-title">
-            <div class="estate-wall">
-                <div class="estate-header">
-                    <h3 id="estate-title"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: var(--danger);"></i> 本地屋苑與商戶實證案例</h3>
-                    <p>全港過萬戶家庭及餐廳信賴之選</p>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-stars" aria-hidden="true">★★★★★</span>
-                    <span class="rating-text">4.9 / 5.0</span>
-                    <span class="rating-count">• Google 真實評分 • 10,000+ 戶服務</span>
-                </div>
-                <div class="estate-tags">
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">日出康城</span>
-                        <span class="case-type">木蝨防治</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">美孚新邨</span>
-                        <span class="case-type">管道滅鼠</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">太古城</span>
-                        <span class="case-type">曱甴系統防治</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">中環餐飲業</span>
-                        <span class="case-type">持效滅蟲方案</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">沙田第一城</span>
-                        <span class="case-type">白蟻防治</span>
-                    </div>
-                    <div class="estate-tag">
-                        <i class="fa-solid fa-check case-icon" aria-hidden="true"></i>
-                        <span class="case-estate">將軍澳中心</span>
-                        <span class="case-type">床蝨高溫處理</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- IPM 綜合防治理念 -->
-        <section class="container" aria-labelledby="ipm-title">
-            <div style="background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%); border: 1px solid #6ee7b7; border-radius: var(--radius); padding: 28px 24px; margin: 30px 0;">
-                <div style="text-align: center; margin-bottom: 16px;">
-                    <h3 id="ipm-title" style="margin: 0 0 6px; font-size: 1.25rem; color: var(--dark-bg);">
-                        <i class="fa-solid fa-leaf" aria-hidden="true" style="color: var(--primary);"></i> 綜合防治理念（IPM）
-                    </h3>
-                    <p style="margin: 0; font-size: 0.92rem; color: var(--text-muted);">Integrated Pest Management — 專業、安全、可持續</p>
-                </div>
-                <p style="text-align: center; color: var(--text-main); font-size: 0.95rem; line-height: 1.8; margin: 0 0 14px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    本平臺以<b style="color: var(--primary-dark);">綜合防治（IPM）</b>為核心理念，結合 AI 智慧診斷、IoT 監測、物理防治與專業藥劑，制定長期防治方案。
-                    <b style="color: var(--warning);">IPM 需要長期持續執行，短期見效不明顯但效果持久。</b>
-                </p>
-                <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0;">
-                    * 所有處理方案及收費均以現場師傅最終評估為準。本平臺不作「包斷尾」等絕對保證。
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
-        <div class="footer-social">
-            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="Instagram">
-                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-            </a>
-            <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-            </a>
-            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" aria-label="WhatsApp">
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-            </a>
-            <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" aria-label="YouTube">
-                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-            </a>
-        </div>
-        <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
-    </footer>
-
-    <!-- Floating AI Assistant (7×24 tech support) -->
-    <div class="floating-ai">
-        <button class="floating-ai-btn" id="floating-ai-btn" aria-label="開啟滅蟲師妹 AI 助手" aria-expanded="false" aria-controls="ai-popup" type="button">
-            <i class="fa-solid fa-robot" aria-hidden="true"></i>
-        </button>
-        <span class="floating-ai-tooltip">滅蟲師妹 AI • 7×24 技術支援</span>
-    </div>
-
-    <!-- AI Chat Popup -->
-    <div class="ai-popup" id="ai-popup" role="dialog" aria-label="滅蟲師妹 AI 助手對話窗">
-        <div class="ai-popup-header">
-            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> 滅蟲師妹 AI 助手</h3>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <span class="ai-popup-badge">7×24 線上</span>
-                <button class="ai-popup-close" id="ai-popup-close" aria-label="關閉" type="button">✕</button>
-            </div>
-        </div>
-        <div class="ai-popup-body">
-            <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone" title="滅蟲師妹 AI 助手對話框"></iframe>
-        </div>
-    </div>
-
-    <!-- Mobile Sticky Thumb Zone -->
-    <div class="mobile-thumb-zone" role="navigation" aria-label="快速聯絡">
-        <a href="tel:+85252821552" class="thumb-btn thumb-call">
-            <i class="fa-solid fa-phone" aria-hidden="true"></i> 一鍵致電
-        </a>
-        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 報價
-        </a>
-    </div>
-
-    <script src="assets/js/bruceleehk.js"></script>
-    <script>
-        // ===== Homepage-specific logic =====
-
-        // Hero Quick Quote → WhatsApp
-        (function() {
-            const form = document.getElementById('hero-quick-quote');
-            if (!form) return;
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const pest = document.getElementById('q-pest').value;
-                const premise = document.getElementById('q-premise').value;
-                if (!pest || !premise) return;
-                const msg = `你好，我想查詢滅蟲服務：\n• 害蟲類型：${pest}\n• 屋苑類型：${premise}\n請師傅提供估價，謝謝！`;
-                window.open(`https://wa.me/85252821552?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
-            });
-        })();
-
-        // Stratagem Carousel Nav
-        (function() {
-            const scroll = document.getElementById('strat-scroll');
-            const prev = document.getElementById('strat-prev');
-            const next = document.getElementById('strat-next');
-            if (!scroll || !prev || !next) return;
-            const updateNav = () => {
-                const isDesktop = window.innerWidth > 768;
-                const isScrollable = scroll.scrollWidth > scroll.clientWidth + 5;
-                [prev, next].forEach(b => b.classList.toggle('displayed', isDesktop && isScrollable));
-            };
-            updateNav();
-            window.addEventListener('resize', updateNav);
-            prev.addEventListener('click', () => scroll.scrollBy({ left: -296, behavior: 'smooth' }));
-            next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
-        })();
-
-        // Initialize embedded AI diagnosis (inside AI 害蟲分析系統 card)
-        document.addEventListener('DOMContentLoaded', () => {
-            window.initAIDiagnosis({
-                input: 'home-pest-photo',
-                area: 'home-ai-area',
-                upload: 'home-ai-upload',
-                analyzing: 'home-ai-analyzing',
-                result: 'home-ai-result',
-                preview: null,  // homepage card has no preview image (compact)
-                resultImg: 'home-result-img',
-                pest: 'home-r-pest',
-                confidence: 'home-r-confidence',
-                risk: 'home-r-risk',
-                nest: 'home-r-nest',
-                strategy: 'home-r-strategy',
-                price: 'home-r-price',
-                wa: 'home-r-wa',
-                reupload: 'home-r-reupload'
-            });
-            // Hide preview on homepage (compact mode)
-            const preview = document.querySelector('#home-ai-result .ai-preview');
-            if (preview) preview.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+                                        <div class="ai-result-strategy" id
