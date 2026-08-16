@@ -1,0 +1,32 @@
+# GitHub Desktop sync exclusions
+# These files are project-local and should not be committed to the live site repo.
+
+# Deployment docs (keep in package, but optional in repo)
+DEPLOY.md
+VERIFY.md
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Local env
+.env
+.env.local
+
+# Build artifacts (if any future build process)
+node_modules/
+dist/
+build/
+
+# Note: CHANGELOG.md SHOULD be committed (useful for repo history)
