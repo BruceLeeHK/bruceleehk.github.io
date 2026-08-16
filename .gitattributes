@@ -1,0 +1,33 @@
+# .gitattributes — 統一行尾格式
+# 解決 GitHub Desktop 提示「LF vs CRLF」警告
+# 加入此檔案後，Git 會自動統一所有文字檔的行尾格式
+
+# 預設所有文字檔使用 LF 行尾（跨平台一致）
+* text=auto eol=lf
+
+# HTML / CSS / JS / Markdown 統一 LF
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.svg   text eol=lf
+*.xml   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# 二進位檔案（圖片、字型、影片）不轉換
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.mp4   binary
+*.webm  binary
+*.pdf   binary
+*.zip   binary
