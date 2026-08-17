@@ -83,28 +83,26 @@
 
     /**
      * Real AI Vision Call: Cloudflare Worker (Llama-3.2 Vision)
-     * Endpoint: https://pest-vision-worker.cedars5282.workers.dev/
-     * 自動 Canvas 圖片壓縮，預防 500 內部錯誤
+     * 優化：極限壓縮 (500px) + 放寬推論時間 (35秒) 預防 Worker CPU 超時或截斷
      */
     async function callCloudflareWorkerAI(file) {
-        // 1. 利用 Canvas 壓縮圖片體積（長邊最大 800px, JPEG 品質 0.7）
+        // 1. 利用 Canvas 極限壓縮圖片，減輕 Worker 陣列轉換的 CPU 負擔
         const compressedBase64 = await new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = new Image();
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    const maxDim = 800;
-                    let width = img.width;
-                    let height = img.height;
+                    const maxDim = 500; // 降至 500px，保留足夠 AI 辨識特徵即可
+                    let width = img.width, height = img.height;
 
                     if (width > maxDim || height > maxDim) {
-                        if (width > height) {
-                            height = Math.round((height * maxDim) / width);
-                            width = maxDim;
-                        } else {
-                            width = Math.round((width * maxDim) / height);
-                            height = maxDim;
+                        if (width > height) { 
+                            height = Math.round((height * maxDim) / width); 
+                            width = maxDim; 
+                        } else { 
+                            width = Math.round((width * maxDim) / height); 
+                            height = maxDim; 
                         }
                     }
 
@@ -114,8 +112,7 @@
                     ctx.drawImage(img, 0, 0, width, height);
 
                     // 輸出為 JPEG 壓縮 Base64 字串並去除 Header 前綴
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-                    resolve(dataUrl.split(',')[1]);
+                    resolve(canvas.toDataURL('image/jpeg', 0.6).split(',')[1]);
                 };
                 img.onerror = reject;
                 img.src = e.target.result;
@@ -124,9 +121,9 @@
             reader.readAsDataURL(file);
         });
 
-        // 2. 呼叫 Cloudflare Worker (設置 15 秒逾時保護)
+        // 2. 放寬 Fetch 超時保護至 35 秒 (給予 Vision 模型足夠運算時間)
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        const timeoutId = setTimeout(() => controller.abort(), 35000);
 
         let response;
         try {
@@ -136,28 +133,31 @@
                 body: JSON.stringify({ imageBase64: compressedBase64 }),
                 signal: controller.signal
             });
+        } catch (err) {
+            if (err.name === 'AbortError') {
+                throw new Error('AI 模型推論超時 (已等待35秒)');
+            }
+            throw new Error('網絡連線異常，請檢查網路狀態');
         } finally {
             clearTimeout(timeoutId);
         }
 
         if (!response.ok) {
             const errJson = await response.json().catch(() => ({}));
-            throw new Error(`Worker 響應異常 [${response.status}]: ${errJson.error || '後端系統錯誤'}`);
+            throw new Error(`Worker 響應異常 [${response.status}]: ${errJson.error || '後端錯誤'}`);
         }
 
         const resData = await response.json();
         
-        // 3. 解析 Workers AI 輸出內容 (含有 JSON 格式文字)
+        // 3. 解析輸出
         let rawText = typeof resData === 'string' ? resData : (resData.response || JSON.stringify(resData));
         let aiResult = {};
         
         try {
             const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-                aiResult = JSON.parse(jsonMatch[0]);
-            }
+            if (jsonMatch) aiResult = JSON.parse(jsonMatch[0]);
         } catch (e) {
-            console.warn('AI 回傳 JSON 解析不完整，進入降級備用模式', e);
+            console.warn('AI 解析降級備用模式');
         }
 
         // 4. 補充預設值

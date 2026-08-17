@@ -1,27 +1,16 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（修正版 v3.0）
+ * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（修正版 v3.1）
  *
+ * v3.1 登入修復升級：
+ *   🔒 修復 CORS 攔截：預檢請求放行 Authorization 等必要標頭，解決 admin.html 無法通訊的問題
+ *   🔒 密碼防空白處理：針對 env.ADMIN_SECRET 強制執行 .trim()，防止 Cloudflare 後台填寫時混入隱藏空格
+ * 
  * v3.0 安全升級亮點：
- *   🔒 修正 CORS 反射弱點：不再為未知 origin fall-back 至生產域名，直接拒絕
- *   🔒 加入安全標頭：X-Content-Type-Options, X-Frame-Options, Referrer-Policy
- *   🔒 加入請求大小限制：JSON body 上限 5.5MB（容納 5MB 圖片 + 中繼資料）
- *   🔒 加入更嚴格的速率限制：5 分鐘內同一 IP 最多 5 條主留言 / 10 條回覆
- *   🔒 修正巢狀回覆刪除 Bug：原代碼只刪 1 層；現改為遞迴刪除所有後代
- *   🔒 移除管理員 nickname 覆寫漏洞：官方回覆強制使用「滅蟲師傅」名稱
- *   🔒 提高圖片 URL 長度上限至 5,500,000（容納 5MB base64 + prefix）
- *   🔒 圖片 URL 驗證：必須為 data:image/* URL 或 https:// 開頭
- *   🔒 加入時序安全的密鑰比較函數（防 side-channel attack）
- *   🔒 加入更嚴格的輸入驗證（page_id 字符白名單）
- *
- * API 端點總覽：
- *   GET  /api/health                  → 健康檢查
- *   GET  /api/comments?page_id=xxx     → 讀取已審核留言（含樹狀回覆）
- *   POST /api/comments                 → 提交新留言（主留言 / 回覆）
- *   POST /api/admin/list               → 列出所有留言（含未審核）
- *   POST /api/admin/approve            → 審核通過單條留言
- *   POST /api/admin/delete             → 遞迴刪除留言（含所有後代回覆）
- *   POST /api/admin/reply              → 管理員以官方身份回覆（強制「滅蟲師傅」暱稱）
- *   POST /api/admin/pin                → 置頂 / 取消置頂留言
+ *   🔒 修正 CORS 反射弱點、加入安全標頭
+ *   🔒 JSON body 上限 5.5MB、更嚴格的速率限制
+ *   🔒 修正巢狀回覆刪除 Bug（遞迴刪除所有後代）
+ *   🔒 移除管理員 nickname 覆寫漏洞（強制使用「滅蟲師傅」）
+ *   🔒 圖片 URL 驗證與長度限制
  */
 
 const MAX_REQUEST_BYTES = 5_500_000; // 5.5 MB hard cap on request body
@@ -48,8 +37,7 @@ export default {
     ]);
 
     const origin = request.headers.get('Origin') || '';
-    /* 🔒 v3.0 fix: REJECT unknown origins instead of fall-back to production origin
-       (prevents credentialed cross-origin requests from malicious sites) */
+    /* 🔒 v3.0 fix: REJECT unknown origins instead of fall-back to production origin */
     const corsOrigin = allowedOrigins.has(origin) ? origin : '';
 
     const corsHeaders = buildCorsHeaders(corsOrigin);
@@ -87,8 +75,8 @@ export default {
         return jsonResponse({
           status: kvOk ? 'ok' : 'degraded',
           kv_bound: kvOk,
-          version: '3.0',
-          features: ['nested_reply', 'official_badge', 'pin', 'captcha', 'admin_delete', 'recursive_delete', 'rate_limit', 'honeypot'],
+          version: '3.1',
+          features: ['nested_reply', 'official_badge', 'pin', 'captcha', 'admin_delete', 'recursive_delete', 'rate_limit', 'honeypot', 'trim_secret'],
           time: new Date().toISOString()
         }, 200, securityHeaders);
       }
@@ -132,7 +120,6 @@ export default {
 
     } catch (err) {
       console.error('Worker 錯誤:', err.message, err.stack);
-      /* 🔒 Don't leak internal error details to client */
       return jsonResponse({
         success: false,
         error: '伺服器內部錯誤',
@@ -148,7 +135,6 @@ export default {
  * ========================================================================= */
 async function handleGetComments(url, kv, headers) {
   const pageId = url.searchParams.get('page_id') || 'vote-page-2026';
-  /* 🔒 v3.0: Validate page_id strictly */
   if (!PAGE_ID_PATTERN.test(pageId)) {
     return jsonResponse({ success: false, error: '無效嘅頁面識別' }, 400, headers);
   }
@@ -173,7 +159,6 @@ async function handleGetComments(url, kv, headers) {
 
   const tree = parents.map(p => ({
     ...p,
-    /* 🔒 Strip internal-only fields from public response */
     client_ip: undefined,
     replies: replies.filter(r => r.parent_id === p.id).map(r => ({ ...r, client_ip: undefined }))
   }));
@@ -190,12 +175,10 @@ async function handleGetComments(url, kv, headers) {
  *  POST /api/comments — 提交新留言（主留言或回覆）
  * ========================================================================= */
 async function handlePostComment(request, kv, env, headers) {
-  /* 🔒 v3.0: Clone the request body so we can measure its actual byte length */
   let body;
   try {
     const cloned = request.clone();
     body = await request.json();
-    /* Verify actual body length */
     const text = await cloned.text();
     if (text.length > MAX_REQUEST_BYTES) {
       return jsonResponse({
@@ -208,7 +191,6 @@ async function handlePostComment(request, kv, env, headers) {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, headers);
   }
 
-  /* Honeypot detection: if `website_url` field is non-empty, silently accept and drop */
   if (body.website_url && String(body.website_url).trim()) {
     return jsonResponse({
       success: true,
@@ -252,7 +234,6 @@ async function handlePostComment(request, kv, env, headers) {
     }
   }
 
-  /* Captcha validation (kept loose — honeypot + rate limit provide real anti-spam) */
   if (Number.isNaN(captchaA) || Number.isNaN(captchaB) || Number.isNaN(captchaAns)) {
     return jsonResponse({ success: false, error: '請完成數學驗證', code: 'CAPTCHA_MISSING' }, 400, headers);
   }
@@ -263,20 +244,14 @@ async function handlePostComment(request, kv, env, headers) {
     return jsonResponse({ success: false, error: '數學驗證答案錯誤', code: 'CAPTCHA_WRONG' }, 400, headers);
   }
 
-  /* Image URL validation */
   if (isReply) {
     if (imageUrl || thumbUrl) {
-      return jsonResponse({
-        success: false,
-        error: '回覆嚴禁附加圖片',
-        code: 'REPLY_NO_IMAGE'
-      }, 400, headers);
+      return jsonResponse({ success: false, error: '回覆嚴禁附加圖片', code: 'REPLY_NO_IMAGE' }, 400, headers);
     }
   } else {
     if (imageUrl.length > MAX_IMAGE_URL_LEN || thumbUrl.length > MAX_IMAGE_URL_LEN) {
       return jsonResponse({ success: false, error: '圖片檔案過大（上限 5MB）' }, 400, headers);
     }
-    /* 🔒 v3.0: Validate image URL — must be data: URI with image MIME, or https:// URL */
     if (imageUrl && !isValidImageUrl(imageUrl)) {
       return jsonResponse({ success: false, error: '圖片格式無效' }, 400, headers);
     }
@@ -285,9 +260,10 @@ async function handlePostComment(request, kv, env, headers) {
     }
   }
 
-  /* ===== Rate limiting (admin exempt) ===== */
-  const bodySecret = body && body.secret;
-  const isAdmin = !!(bodySecret && env.ADMIN_SECRET && safeCompare(bodySecret, env.ADMIN_SECRET));
+  /* 🔒 密碼驗證前徹底去空白 */
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  const bodySecret = body && body.secret ? String(body.secret).trim() : '';
+  const isAdmin = !!(bodySecret && actualSecret && safeCompare(bodySecret, actualSecret));
 
   if (!isAdmin) {
     const clientIp = request.headers.get('CF-Connecting-IP') || '127.0.0.1';
@@ -304,23 +280,19 @@ async function handlePostComment(request, kv, env, headers) {
     }
   }
 
-  /* ===== Sanitize inputs (defense-in-depth, even though client escapes) ===== */
   const safeNickname = sanitize(nickname);
   let safeContent    = sanitize(content);
   const safeImageUrl = isValidImageUrl(imageUrl) ? imageUrl : '';
   const safeThumbUrl = isValidImageUrl(thumbUrl) ? thumbUrl : '';
 
-  /* 回覆防廣告：遮蔽 URL */
   if (isReply) {
     safeContent = maskUrls(safeContent);
   }
 
-  /* ===== Read existing comments ===== */
   const key = 'comments:' + pageId;
   const raw = await kv.get(key, { type: 'json' });
   const comments = Array.isArray(raw) ? raw : [];
 
-  /* 若係回覆，檢查父留言存在且已審核 */
   if (isReply) {
     const parent = comments.find(c => c.id === parentId && c.approved === 1);
     if (!parent) {
@@ -332,7 +304,6 @@ async function handlePostComment(request, kv, env, headers) {
     }
   }
 
-  /* ===== Create new comment ===== */
   const clientIp = request.headers.get('CF-Connecting-IP') || '';
   const newComment = {
     id:         Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
@@ -355,8 +326,6 @@ async function handlePostComment(request, kv, env, headers) {
   }
 
   comments.push(newComment);
-
-  /* Write to KV with TTL */
   await kv.put(key, JSON.stringify(comments), { expirationTtl: COMMENT_TTL_SEC });
 
   return jsonResponse({
@@ -373,18 +342,16 @@ async function handlePostComment(request, kv, env, headers) {
  *  POST /api/admin/list — 列出所有留言
  * ========================================================================= */
 async function handleAdminList(url, request, kv, env, headers) {
-  if (!env.ADMIN_SECRET) {
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  if (!actualSecret) {
     return jsonResponse({ success: false, error: '未設定管理員密鑰' }, 403, headers);
   }
 
   let body;
-  try {
-    body = await request.json();
-  } catch {
-    body = {};
-  }
+  try { body = await request.json(); } catch { body = {}; }
 
-  if (!body.secret || !safeCompare(body.secret, env.ADMIN_SECRET)) {
+  const bodySecret = body.secret ? String(body.secret).trim() : '';
+  if (!bodySecret || !safeCompare(bodySecret, actualSecret)) {
     return jsonResponse({ success: false, error: '密鑰錯誤' }, 403, headers);
   }
 
@@ -415,18 +382,18 @@ async function handleAdminList(url, request, kv, env, headers) {
  *  POST /api/admin/approve — 審核通過
  * ========================================================================= */
 async function handleAdminApprove(request, kv, env, headers) {
-  if (!env.ADMIN_SECRET) {
-    return jsonResponse({ success: false, error: '未設定管理員密鑰（ADMIN_SECRET）' }, 403, headers);
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  if (!actualSecret) {
+    return jsonResponse({ success: false, error: '未設定管理員密鑰' }, 403, headers);
   }
 
   let body;
-  try {
-    body = await request.json();
-  } catch {
+  try { body = await request.json(); } catch {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, headers);
   }
 
-  if (!body.secret || !safeCompare(body.secret, env.ADMIN_SECRET)) {
+  const bodySecret = body.secret ? String(body.secret).trim() : '';
+  if (!bodySecret || !safeCompare(bodySecret, actualSecret)) {
     return jsonResponse({ success: false, error: '密鑰錯誤' }, 403, headers);
   }
 
@@ -460,21 +427,21 @@ async function handleAdminApprove(request, kv, env, headers) {
 }
 
 /* =========================================================================
- *  POST /api/admin/delete — 遞迴刪除留言（含所有後代回覆）
+ *  POST /api/admin/delete — 遞迴刪除留言
  * ========================================================================= */
 async function handleAdminDelete(request, kv, env, headers) {
-  if (!env.ADMIN_SECRET) {
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  if (!actualSecret) {
     return jsonResponse({ success: false, error: '未設定管理員密鑰' }, 403, headers);
   }
 
   let body;
-  try {
-    body = await request.json();
-  } catch {
+  try { body = await request.json(); } catch {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, headers);
   }
 
-  if (!body.secret || !safeCompare(body.secret, env.ADMIN_SECRET)) {
+  const bodySecret = body.secret ? String(body.secret).trim() : '';
+  if (!bodySecret || !safeCompare(bodySecret, actualSecret)) {
     return jsonResponse({ success: false, error: '密鑰錯誤' }, 403, headers);
   }
 
@@ -492,7 +459,6 @@ async function handleAdminDelete(request, kv, env, headers) {
   const raw = await kv.get(key, { type: 'json' });
   const comments = Array.isArray(raw) ? raw : [];
 
-  /* 🔒 v3.0 fix: Recursive deletion — collect all descendant IDs */
   const toDelete = new Set([targetId]);
   let changed = true;
   while (changed) {
@@ -506,7 +472,6 @@ async function handleAdminDelete(request, kv, env, headers) {
   }
 
   const remaining = comments.filter(c => !toDelete.has(c.id));
-
   await kv.put(key, JSON.stringify(remaining), { expirationTtl: COMMENT_TTL_SEC });
 
   return jsonResponse({
@@ -520,18 +485,18 @@ async function handleAdminDelete(request, kv, env, headers) {
  *  POST /api/admin/reply — 管理員以官方身份回覆
  * ========================================================================= */
 async function handleAdminReply(request, kv, env, headers) {
-  if (!env.ADMIN_SECRET) {
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  if (!actualSecret) {
     return jsonResponse({ success: false, error: '未設定管理員密鑰' }, 403, headers);
   }
 
   let body;
-  try {
-    body = await request.json();
-  } catch {
+  try { body = await request.json(); } catch {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, headers);
   }
 
-  if (!body.secret || !safeCompare(body.secret, env.ADMIN_SECRET)) {
+  const bodySecret = body.secret ? String(body.secret).trim() : '';
+  if (!bodySecret || !safeCompare(bodySecret, actualSecret)) {
     return jsonResponse({ success: false, error: '密鑰錯誤' }, 403, headers);
   }
 
@@ -558,7 +523,6 @@ async function handleAdminReply(request, kv, env, headers) {
     return jsonResponse({ success: false, error: '父留言不存在' }, 404, headers);
   }
 
-  /* 🔒 v3.0 fix: Force official nickname — admin can no longer override */
   const safeContent = maskUrls(sanitize(content));
   const safeNickname = '滅蟲師傅';
 
@@ -591,18 +555,18 @@ async function handleAdminReply(request, kv, env, headers) {
  *  POST /api/admin/pin — 置頂 / 取消置頂留言
  * ========================================================================= */
 async function handleAdminPin(request, kv, env, headers) {
-  if (!env.ADMIN_SECRET) {
+  const actualSecret = (env.ADMIN_SECRET || '').trim();
+  if (!actualSecret) {
     return jsonResponse({ success: false, error: '未設定管理員密鑰' }, 403, headers);
   }
 
   let body;
-  try {
-    body = await request.json();
-  } catch {
+  try { body = await request.json(); } catch {
     return jsonResponse({ success: false, error: '無效嘅請求格式' }, 400, headers);
   }
 
-  if (!body.secret || !safeCompare(body.secret, env.ADMIN_SECRET)) {
+  const bodySecret = body.secret ? String(body.secret).trim() : '';
+  if (!bodySecret || !safeCompare(bodySecret, actualSecret)) {
     return jsonResponse({ success: false, error: '密鑰錯誤' }, 403, headers);
   }
 
@@ -627,7 +591,6 @@ async function handleAdminPin(request, kv, env, headers) {
   }
 
   if (pin) {
-    /* Only one pinned comment per page */
     comments.forEach(c => { if (c.is_pinned) delete c.is_pinned; });
     target.is_pinned = true;
   } else {
@@ -658,9 +621,7 @@ function sanitize(str) {
 
 function isValidImageUrl(str) {
   if (!str) return false;
-  /* Allow data: URLs with image MIME type (base64-encoded uploads) */
   if (/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/i.test(str)) return true;
-  /* Allow https:// URLs (for externally-hosted images) */
   try {
     const u = new URL(str);
     return u.protocol === 'https:';
@@ -675,9 +636,6 @@ function maskUrls(text) {
   return text;
 }
 
-/**
- * 🔒 v3.0: Timing-safe string comparison to prevent side-channel attacks
- */
 function safeCompare(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string') return false;
   if (a.length !== b.length) return false;
@@ -688,12 +646,7 @@ function safeCompare(a, b) {
   return result === 0;
 }
 
-/**
- * 🔒 v3.0: Counter-based rate limiting using KV
- * Allows up to RATE_MAX_COMMENT main comments or RATE_MAX_REPLY replies per 5-minute window per IP.
- */
 async function checkRateLimit(kv, ip, type) {
-  /* Single 60-second hard cooldown (kept for backwards compat) */
   const hardCooldownKey = 'rate:' + ip + ':' + type;
   const existing = await kv.get(hardCooldownKey);
   if (existing) {
@@ -705,7 +658,6 @@ async function checkRateLimit(kv, ip, type) {
   }
   await kv.put(hardCooldownKey, Date.now().toString(), { expirationTtl: 60 });
 
-  /* 5-minute window counter (separate KV key) */
   const counterKey = 'ratelim:' + ip + ':' + type;
   const maxCount = type === 'reply' ? RATE_MAX_REPLY : RATE_MAX_COMMENT;
   const current = parseInt(await kv.get(counterKey) || '0', 10);
@@ -717,13 +669,12 @@ async function checkRateLimit(kv, ip, type) {
 }
 
 function buildCorsHeaders(allowOrigin) {
-  /* If allowOrigin is empty (unknown origin), do not send ACAO header at all —
-     this prevents credentialed cross-origin requests from untrusted sites. */
   const h = {
     'Access-Control-Allow-Methods':     'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers':     'Content-Type',
+    // 🔒 修正：將 Authorization 與自定義標頭加入放行列表，徹底解決管理員登入攔截問題
+    'Access-Control-Allow-Headers':     'Content-Type, Authorization, X-Admin-Secret',
     'Access-Control-Max-Age':           '86400',
-    'Vary':                              'Origin',
+    'Vary':                             'Origin',
   };
   if (allowOrigin) {
     h['Access-Control-Allow-Origin'] = allowOrigin;
