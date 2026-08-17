@@ -433,7 +433,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             <div class="form-group">
               <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最高 10MB）：</label>
               <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
-              <p class="notice">💡 上傳相片後，系統會自動等比例壓縮至最佳高清體驗。點擊圖片可放大並長按儲存照片。</p>
+              <p class="notice">💡 上傳相片後，系統會自動動態極限壓縮至安全規範，並提供全螢幕放大預覽體驗。</p>
             </div>
 
             <div class="captcha-row">
@@ -648,7 +648,7 @@ function showToast(msg, type){
 })();
 </script>
 
-<!-- ========== 自建原生留言系統 JS (v2.4 體積精準壓縮版) ========== -->
+<!-- ========== 自建原生留言系統 JS (v2.5 動態雙重極限壓縮版) ========== -->
 <script>
 var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
 var PAGE_ID     = 'vote-page-2026';
@@ -680,8 +680,8 @@ function initCaptcha() {
 }
 
 /**
- * Canvas 圖片自適應等比例壓縮
- * 限制長邊最高 500px，並自動將 Base64 字串控制在 35,000 字元以內，徹底解決「圖片網址過長」報錯
+ * Canvas 圖片雙重極限壓縮（嚴格控制 Base64 長度 ≤ 18,000 字元）
+ * 徹底防止 Cloudflare Worker / D1 資料庫因 Payload 過大而退件拒收
  */
 function compressImage(file) {
   return new Promise(function(resolve, reject) {
@@ -690,7 +690,7 @@ function compressImage(file) {
       var img = new Image();
       img.onload = function() {
         var canvas = document.createElement('canvas');
-        var maxDim = 500;
+        var maxDim = 450;
         var width = img.width;
         var height = img.height;
 
@@ -709,9 +709,21 @@ function compressImage(file) {
         var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        var dataUrl = canvas.toDataURL('image/jpeg', 0.5);
-        if (dataUrl.length > 35000) {
-          dataUrl = canvas.toDataURL('image/jpeg', 0.3);
+        var quality = 0.5;
+        var dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+        while (dataUrl.length > 18000 && quality > 0.15) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL('image/jpeg', quality);
+        }
+
+        if (dataUrl.length > 18000) {
+          var subCanvas = document.createElement('canvas');
+          subCanvas.width = Math.round(width * 0.7);
+          subCanvas.height = Math.round(height * 0.7);
+          var subCtx = subCanvas.getContext('2d');
+          subCtx.drawImage(canvas, 0, 0, subCanvas.width, subCanvas.height);
+          dataUrl = subCanvas.toDataURL('image/jpeg', 0.25);
         }
 
         resolve(dataUrl);
@@ -726,28 +738,42 @@ function compressImage(file) {
 
 async function handleImageSelect(e) {
   const file = e.target.files[0];
+  const btn = document.getElementById('btnSubmitComment');
+  
   if (!file) { uploadedImgUrl = ''; return; }
   
   if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type)) {
     showToast('只支援 JPG、PNG、WebP、GIF 圖片格式！', 'warning');
     e.target.value = '';
+    uploadedImgUrl = '';
     return;
   }
   
   if (file.size > 10 * 1024 * 1024) {
     showToast('圖片檔案不能超過 10MB！', 'warning');
     e.target.value = '';
+    uploadedImgUrl = '';
     return;
   }
 
   try {
-    showToast('相片處理中...', 'info');
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在壓縮處理相片...';
+    }
+    showToast('相片壓縮處理中，請稍候...', 'info');
     uploadedImgUrl = await compressImage(file);
+    showToast('相片處理完成，可以提交留言！', 'success');
   } catch (err) {
     console.error('圖片處理失敗:', err);
     showToast('圖片處理失敗，請重新選擇。', 'error');
     uploadedImgUrl = '';
     e.target.value = '';
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
+    }
   }
 }
 
