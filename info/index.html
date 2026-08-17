@@ -559,72 +559,113 @@ footer {
             max-width: 980px;
         }
 
-        /* Featured Vote Card (large CTA card) */
+        /* Featured Vote Card (large CTA card) — v3.2 fix */
         .featured-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--tech-blue) 100%);
+            display: block;  /* 🔧 Critical fix: <a> needs display:block to apply padding properly */
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c4a6e 100%);
             border-radius: var(--radius);
-            padding: 36px;
-            margin-bottom: 36px;
+            padding: 40px 44px;
+            margin: 0 0 40px;
             color: #fff;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 12px 32px rgba(15,23,42,0.25);
+            text-decoration: none;
+            transition: transform var(--transition), box-shadow var(--transition);
         }
         .featured-card::before {
             content: "";
             position: absolute;
-            top: -50px; right: -50px;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            top: -80px; right: -80px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(16,185,129,0.35) 0%, transparent 70%);
             pointer-events: none;
+        }
+        .featured-card::after {
+            content: "";
+            position: absolute;
+            bottom: -100px; left: -60px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(2,132,199,0.25) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .featured-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.35);
         }
         .featured-card .featured-tag {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.4);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #fff;
-            padding: 5px 14px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.82rem;
             font-weight: 700;
-            margin-bottom: 14px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 12px rgba(245,158,11,0.4);
+            position: relative;
+            z-index: 1;
         }
         .featured-card h2 {
             color: #fff;
-            font-size: 1.7rem;
-            margin: 0 0 10px;
-            line-height: 1.4;
+            font-size: 1.85rem;
+            margin: 0 0 14px;
+            line-height: 1.35;
+            font-weight: 800;
+            letter-spacing: 0.5px;
             position: relative;
             z-index: 1;
         }
         .featured-card p {
-            color: rgba(255,255,255,0.92);
-            margin: 0 0 22px;
-            line-height: 1.7;
-            font-size: 1rem;
+            color: #cbd5e1;
+            margin: 0 0 26px;
+            line-height: 1.75;
+            font-size: 1.02rem;
+            max-width: 640px;
             position: relative;
             z-index: 1;
         }
         .featured-card .btn-white {
-            background: #fff;
-            color: var(--primary-dark);
-            padding: 12px 26px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 13px 28px;
             border-radius: var(--radius-sm);
             font-weight: 700;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.02rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: transform var(--transition), box-shadow var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
             position: relative;
             z-index: 1;
+            box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+            border: none;
         }
-        .featured-card .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        .featured-card:hover .btn-white {
+            transform: translateX(4px);
+            box-shadow: 0 8px 22px rgba(16,185,129,0.5);
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+        /* Decorative emoji / icon on the right side for desktop */
+        .featured-card .featured-deco {
+            position: absolute;
+            top: 50%;
+            right: 36px;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 0;
+            line-height: 1;
+        }
+        @media (max-width: 768px) {
+            .featured-card { padding: 28px 22px; }
+            .featured-card h2 { font-size: 1.45rem; }
+            .featured-card p { font-size: 0.92rem; margin-bottom: 22px; }
+            .featured-card .featured-deco { display: none; }
         }
 
         /* Blog Card Grid */
@@ -856,12 +897,13 @@ footer {
             <div class="container">
 
                 <!-- Featured: Vote Card -->
-                <a href="/info/vote/" class="featured-card" style="text-decoration:none;">
+                <a href="/info/vote/" class="featured-card" aria-label="前往 2026 全港害蟲苦主討論區 + 投票">
+                    <span class="featured-deco" aria-hidden="true">🗳️</span>
                     <span class="featured-tag"><i class="fa-solid fa-fire" aria-hidden="true"></i> 熱門推薦</span>
                     <h2>2026 全港害蟲苦主討論區 + 投票</h2>
                     <p>遇到床蝨、曱甴、白蟻點搞？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答！</p>
                     <span class="btn-white">
-                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i> 立即參與討論
+                        立即參與討論 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </span>
                 </a>
 
