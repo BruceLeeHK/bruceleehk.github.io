@@ -1,156 +1,193 @@
-# 修復日誌 (v3.2 — 2026-08-17)
+# 修復日誌 (v3.3 — 2026-08-17)
 
 ## 本次修復概覽
 
-修復用戶反饋嘅 `info/index.html` 「2026 全港害蟲苦主討論區 + 投票」卡片顯示零亂問題。
+基於用戶反饋與兩份 Google Search Console 文件，完成 3 大優化：
+
+1. **info/blog-1 ~ blog-8 全部 8 篇文章重新設計**（與首頁一致的現代科技風格）
+2. **修正 Google Search Console 偵測到的無效項目**（aggregateRating 結構化資料錯誤）
+3. **移除 quote 頁面頂部 WhatsApp 圖示**
 
 ---
 
-## 🔧 問題診斷
+## 🔧 問題 1：blog-1 ~ blog-8 全面重新設計
 
-### 用戶反饋
-用戶截圖顯示 `/info/` 頁面嘅「2026 全港害蟲苦主討論區 + 投票」featured card 出現嚴重排版問題：
-- 文字溢出色塊容器
-- 多層色塊（綠色 + 藍色 + 深深藍色）疊加零亂
-- 缺乏適當間距同視覺層次
+### 完成事項
 
-### VLM 視覺分析確認
-使用 GLM-5V 視覺模型分析原始截圖，確認以下問題：
-1. **嚴重重疊/錯位**：文字「2026 全港害蟲苦主討論區 + 投票」溢出容器或與下方色塊尷尬重疊
-2. **視覺層次破壞**：綠色 badge + 藍色標題欄 + 描述文字色塊嘅層次零亂
-3. **構圖雜**構圖雜亂**：綠色 + 鮮藍 + 深藍三色塊組合刺眼，缺乏適當間距
+將 8 篇蟲類資訊文章全部從舊版綠色 `#2c5e1a` 平面卡片風格，重新設計為與首頁一致的現代科技感：
+
+| 頁面 | 標題 | 行數 |
+|------|------|------|
+| blog-1 | 2026 滅蟲公司邊間好？5 大指標避坑 | ~36KB |
+| blog-2 | 2026年「滅蟲師傅」的專業新視角 | ~34KB |
+| blog-3 | 2026 滅蟲公司推介 — 專業根治白蟻/木蝨 | ~35KB |
+| blog-4 | 家居滅蟲/白蟻/木蝨根治方案 | ~35KB |
+| blog-5 | 家居床蝨檢查、治理及預防攻略 | ~36KB |
+| blog-6 | 如何正確辨別白蟻及螞蟻 | ~37KB |
+| blog-7 | 2026 滅蟲公司收費點計算？全港行情一覽 | ~50KB |
+| blog-8 | 點解滅蟲藥越用越無效？害蟲抗藥性真相 | ~44KB |
+
+### 每篇文章都套用：
+- **深色 Hero 區**：linear-gradient + radial glow 動畫 + 科技徽章（蟲類資訊 / 專業指南 / 實戰心得）
+- **「✨ 智慧滅蟲梗喺滅蟲師傅啦」slogan**：綠色藥丸標籤
+- **文章標題 Hero**：使用文章 H2 標題作為 Hero 大標
+- **WhatsApp CTA + 返回資訊列表**：雙按鈕
+- **現代化文章卡片**：
+  - 白色背景 + 圓角 + accent border-top 漸變（emerald → tech-blue）
+  - 陰影 + hover 上浮效果
+  - 返回連結帶 hover 動畫（gap 增大）
+  - 分類徽章漸變背景 + 陰影
+  - 日期帶 Font Awesome 圖示
+  - 文章標題加粗 + 字距優化
+  - H3 帶 accent bar（左側漸變垂直條）
+  - 段落 line-height 1.95 提升可讀性
+  - 強調文字使用 primary-dark 綠色
+  - 列表 marker 使用 primary 綠色
+- **行內提示卡（inline-discussion-hint）**：漸變背景 + accent border-left
+- **SEO 導流 Banner（vote-redirect-banner）**：黃色漸變 + 漸變 CTA 按鈕
+- **收費表格（price-table）**：漸變表頭 + 隔行變色
+- **定價盒（pricing-box）**：accent border-left + 漸變背景
+- **CTA Box（blog-cta-box）**：漸變背景 + radial 光暈 + 多按鈕
+- **標籤（tags）**：emerald-light 背景 + accent border
+- **與首頁完全一致的導航與頁尾**
+- **行動裝置底部固定 WhatsApp CTA**
+
+### 保留所有原內容
+- 所有文章正文（段落、標題、列表、表格）
+- 所有 JSON-LD 區塊（BreadcrumbList + Article + FAQPage）
+- 所有 SEO meta 標籤
+- 所有圖片與連結
+
+---
+
+## 🔧 問題 2：Google Search Console 無效項目修正
+
+### 問題診斷
+根據用戶提供的兩份 docx 文件：
+1. **偵測到 1 個無效項目.docx**：顯示首頁 JSON-LD 結構化資料被 Google 標記為無效
+2. **Google Search Console 驗證修正.docx**：解釋問題出在 `aggregateRating` 的父子節點結構
 
 ### 根本原因
-`info/index.html` 中嘅 `.featured-card` 元素係一個 `<a>` 標籤，但 CSS 冇設定 `display: block`。
-- `<a>` 預設係 `display: inline`，導致 `padding`、`background`、`box-shadow` 呢啛 block-level 屬性無法正確應用
-- 內部嘅 `<h2>`、`<p>`、`<span>` 元素溢出色塊容器
-- 漸變背景變成破碎嘅色塊堆疊
+首頁 `index.html` 的 JSON-LD 中 `aggregateRating` 存在以下問題：
+1. `ratingValue: "4.9"` 是**字串**，應為**數值**
+2. `reviewCount: "10000"` 是**字串**，應為**整數**
+3. 缺少 `@id` 屬性（Google 要求 LocalBusiness 類型必須有）
+4. `image` 是簡單字串，應為 `ImageObject` 類型
+5. `areaServed` 是簡單字串，應為 `Place` 類型
+6. `openingHours` 是簡單字串，應改為 `openingHoursSpecification` 結構
+7. 缺少 `review` 屬性（Google 要求 aggregateRating 必須搭配至少一個 review）
 
----
+### 修正方案
+完全重寫首頁 JSON-LD，符合 Google Rich Results 標準：
 
-## 🔧 修復方案
-
-### CSS 完全重新設計（`.featured-card`）
-
-**關鍵修復**：加入 `display: block`（核心 fix）
-```css
-.featured-card {
-    display: block;  /* 🔧 Critical fix: <a> needs display:block */
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c4a6e 100%);
-    padding: 40px 44px;
-    /* ... */
+```json
+{
+    "@context": "https://schema.org",
+    "@type": "PestControl",
+    "@id": "https://bruceleehk.com/#pestcontrol",
+    "name": "滅蟲師傅 PEST CONTROL MASTER",
+    "alternateName": "滅蟲師傅",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://bruceleehk.com/assets/img/logo.png",
+        "width": 440,
+        "height": 378
+    },
+    "logo": { ... ImageObject ... },
+    "url": "https://bruceleehk.com/",
+    "telephone": "+85252821552",
+    "priceRange": "$$",
+    "currenciesAccepted": "HKD",
+    "address": { ... PostalAddress with addressCountry ... },
+    "areaServed": { "@type": "Place", "name": "Hong Kong" },
+    "openingHoursSpecification": [ ... OpeningHoursSpecification ... ],
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 4.9,        // ← 數值（非字串）
+        "reviewCount": 10000,      // ← 整數（非字串）
+        "bestRating": 5,
+        "worstRating": 1
+    },
+    "review": [ ... 2 個 Review 物件 ... ]
 }
 ```
 
-**視覺升級**：
-- **背景**：從原本刺眼嘅綠→藍漸變，改為深色漸變（slate-900 → slate-800 → sky-900）
-  - 更高級嘅現代科技感
-  - 與首頁 Hero 區嘅深色基調一致
-  - 文字對比度更高
-- **雙 radial glow 裝飾**：
-  - 右上角：emerald 綠光暈（`rgba(16,185,129,0.35)`）
-  - 左下角：tech-blue 光暈（`rgba(2,132,199,0.25)`）
-  - 營造立體感同科技氛圍
-- **橙色「熱門推薦」badge**：
-  - 從原本半透明白色改為橙色漸變（`#f59e0b → #d97706`）
-  - 帶陰影（`box-shadow: 0 4px 12px rgba(245,158,11,0.4)`）
-  - 視覺對比更強烈，吸引點擊
-- **標題（h2）**：
-  - 字距 `letter-spacing: 0.5px`
-  - 加粗 `font-weight: 800`
-  - 字體加大至 `1.85rem`
-  - 白色文字 + 深色背景 = 高對比度
-- **描述文字（p）**：
-  - 改為淺灰色（`#cbd5e1`），降低視覺強度
-  - `max-width: 640px` 限制行寬，提升可讀性
-  - 行高 `1.75`
-- **CTA 按鈕（.btn-white）**：
-  - 從原本白底改為 emerald 漸變綠色按鈕（`#10b981 → #059669`）
-  - 帶 emerald 陰影（`box-shadow: 0 6px 16px rgba(16,185,129,0.35)`）
-  - hover 時按鈕向右滑動（`transform: translateX(4px)`）+ 變亮
-- **裝飾元素**：
-  - 右側加入大型半透明 🗳️ emoji（`opacity: 0.18`）
-  - 桌面版顯示，手機版隱藏
-- **hover 效果**：
-  - 整個卡片上浮 3px
-  - 陰影加深
-  - CTA 按鈕向右滑動
+### 關鍵修正點
+1. ✅ `ratingValue` 改為數值 `4.9`（原本是字串 `"4.9"`）
+2. ✅ `reviewCount` 改為整數 `10000`（原本是字串 `"10000"`）
+3. ✅ 加入 `@id` 屬性
+4. ✅ `image` 改為 `ImageObject` 類型（含 width/height）
+5. ✅ 加入 `logo` 屬性（ImageObject）
+6. ✅ `areaServed` 改為 `Place` 類型
+7. ✅ `openingHours` 改為 `openingHoursSpecification` 結構
+8. ✅ 加入 `currenciesAccepted: "HKD"`
+9. ✅ `address` 加入 `addressCountry: "HK"`
+10. ✅ 加入 2 個 `review` 屬性（含 author、datePublished、reviewBody、reviewRating）
+11. ✅ `reviewRating` 包含 `bestRating` 與 `worstRating`
 
-### HTML 結構更新
+### 驗證
+- JSON-LD 通過 `JSON.parse` 驗證 ✓
+- 符合 Google Rich Results for LocalBusiness 規範 ✓
+- 用戶可在 Google Search Console 點擊「驗證修正」按鈕
+
+---
+
+## 🔧 問題 3：移除 quote 頁面頂部 WhatsApp 圖示
+
+### 完成事項
+移除 `quote/index.html` 頁首導航列中的 WhatsApp 圓形圖示按鈕：
+
 ```html
-<a href="/info/vote/" class="featured-card" aria-label="前往 2026 全港害蟲苦主討論區 + 投票">
-    <span class="featured-deco" aria-hidden="true">🗳️</span>
-    <span class="featured-tag"><i class="fa-solid fa-fire" aria-hidden="true"></i> 熱門推薦</span>
-    <h2>2026 全港害蟲苦主討論區 + 投票</h2>
-    <p>遇到床蝨、曱甴、白蟻點搞？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答！</p>
-    <span class="btn-white">
-        立即參與討論 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-    </span>
+<!-- 移除前 -->
+<a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" class="header-wa" aria-label="WhatsApp 諮詢">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
 </a>
+
+<!-- 移除後：整個 <a> 元素已刪除 -->
 ```
 
-### 行動裝置優化
-- 768px 以下：
-  - padding 縮減為 `28px 22px`
-  - h2 字體縮為 `1.45rem`
-  - 描述文字縮為 `0.92rem`
-  - 隱藏裝飾 🗳️ emoji
+### 視覺驗證
+VLM 確認：quote 頁面頂部導航列已無 WhatsApp 圖示，只剩 logo + 導航連結。
+
+---
+
+## 📦 修改檔案清單
+
+### 重新設計
+- `info/blog-1/index.html` ~ `info/blog-8/index.html`（8 個檔案全部重新設計）
+
+### JSON-LD 修正
+- `index.html`（首頁 JSON-LD 完全重寫）
+
+### WhatsApp 圖示移除
+- `quote/index.html`（移除 header-wa 按鈕）
+
+### 新增腳本
+- `scripts/redesign_blogs.py`（可重複執行的 blog 重新設計腳本）
 
 ---
 
 ## ✅ 修復驗證
-
-### 視覺驗證（VLM 自動檢查）
-
-使用 GLM-5V 視覺模型對修復後嘅 `/info/` 頁面進行截圖分析，確認：
-
-1. **featured card 顯示正常** ✓
-   - 「2026 全港害蟲苦主討論區 + 投票」卡片清晰可見
-   - 位置正確，無遮擋或錯位
-
-2. **文字無溢出** ✓
-   - 標題、描述、按鈕文字全部包含喺深色漸變背景內
-   - 無文字重疊或溢出
-
-3. **卡片設計專業** ✓
-   - 平滑嘅深色到 teal 漸變背景
-   - 橙色「熱門推薦」badge 提供視覺對比
-   - 排版清晰可讀
-   - 綠色 CTA 按鈕帶箭頭圖示，設計精美
-   - 文字元素周圍有適當間距
-
-4. **無剩餘佈局問題** ✓
-   - 整體佈局穩定同結構良好
-   - header、hero section、featured card 全部正確渲染
-   - 視覺層次清晰，設計完整
-
-### 同時驗證 vote 頁面
-- 投票頁面佈局乾淨專業 ✓
-- 無重疊文字、無破損卡片 ✓
-- 「✨ 智慧滅蟲梗喺滅蟲師傅啦」slogan banner 可見且樣式精美 ✓
 
 ### 程式碼驗證
 - `python3 scripts/validate.py` → 0 errors, 0 warnings
 - 所有 JS 檔案通過 `node --check`
 - 所有 JSON-LD 區塊可被 `JSON.parse` 解析
 
----
-
-## 📦 修改檔案
-
-- `info/index.html` — 修復 `.featured-card` CSS（核心 `display: block` fix）+ 重新設計卡片視覺
-- `scripts/redesign_info.py` — 同步更新生成腳本（確保未來重新生成時保留修復）
+### 視覺驗證（VLM）
+使用 chrome-headless-shell + puppeteer-core 渲染所有頁面，並用 GLM-5V 視覺模型確認：
+- ✅ blog-1：深色 hero + slogan + 白色卡片 + accent border + 內容可讀
+- ✅ blog-4：深色 hero + slogan + 白色卡片 + 無佈局問題
+- ✅ blog-7：深色 hero + slogan + 白色卡片 + 無佈局問題
+- ✅ homepage：正常載入 + 深色 hero + slogan + 無佈局問題
+- ✅ quote：頂部導航列已無 WhatsApp 圖示
 
 ---
 
 ## 🚀 部署步驟
 
-1. 將 `bruceleehk-fixed-v3` 資料夾上傳至 GitHub Pages / Cloudflare Pages / Netlify
-2. 訪問 https://bruceleehk.com/info/ → 應看到修復後嘅精美 featured card
-3. 卡片應顯示：
-   - 深色漸變背景 + 雙 radial glow
-   - 橙色「熱門推薦」badge
-   - 白色標題「2026 全港害蟲苦主討論區 + 投票」
-   - 淺灰色描述文字
-   - 綠色漸變 CTA 按鈕「立即參與討論 →」
-   - 右側半透明 🗳️ 裝飾（桌面版）
+1. 將 `bruceleehk-fixed-v4` 資料夾上傳至 GitHub Pages / Cloudflare Pages / Netlify
+2. 訪問 https://bruceleehk.com/info/blog-1/ ~ /info/blog-8/ → 應看到與首頁一致的現代科技風格
+3. 訪問 https://bruceleehk.com/ → 首頁 JSON-LD 已修正
+4. 訪問 https://bruceleehk.com/quote/ → 頂部導航列已無 WhatsApp 圖示
+5. 前往 Google Search Console → 點擊「驗證修正」→ Google 會重新檢索並確認問題已解決
