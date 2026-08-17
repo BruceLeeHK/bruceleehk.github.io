@@ -452,6 +452,21 @@ footer {
     gap: 6px;
 }
 
+/* ---------- Hero Slogan Tag (廣告詞標籤) ---------- */
+.hero-slogan-tag {
+    display: inline-block;
+    background: rgba(16,185,129,0.18);
+    border: 1px solid rgba(110,231,183,0.4);
+    color: #6ee7b7;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px rgba(16,185,129,0.2);
+}
+
 /* ---------- Service Badge ---------- */
 .service-badge {
     position: absolute;

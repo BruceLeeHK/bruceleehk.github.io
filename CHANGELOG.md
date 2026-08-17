@@ -2,216 +2,229 @@
 
 ## 本次修復概覽
 
-針對用戶反饋嘅三大問題進行深度修復，同時保留原有架構：
+基於用戶反饋與兩份分析文件（AI 識別出錯.docx + 香港滅蟲專家規則與「三十六計兵法對照表」.docx），完成 4 大優化：
 
-1. **AI 害蟲分析系統圖片上傳失敗**
-2. **留言管理後臺無法登入（提示密碼錯誤）**
-3. **services / strategy / info 三個頁面版式與首頁不一致**
-
----
-
-## 🔧 問題一：AI 圖片上傳「網路連線或 AI 分析逾時」
-
-### 根本原因（已實際測試 Worker 端點確認）
-- 客戶端上傳 5MB 圖片 → 轉成 base64 後膨脹至 ~6.7MB → Worker 處理時間過長
-- `pest-vision-worker.cedars5282.workers.dev` 回傳 **HTTP 500 + 5016 錯誤**：
-  ```
-  Prior to using this model, you must submit the prompt 'agree'.
-  By submitting 'agree', you hereby agree to the llama-3.2-11b-vision-instruct
-  Community License...
-  ```
-  Cloudflare Workers AI 嘅 Llama 3.2 Vision 模型需要先送出 "agree" prompt 同意授權，但用戶嘅 Worker 從未送出此 prompt。
-
-### 客戶端修復（`assets/js/bruceleehk.js` v3.1）
-- ✅ **新增客戶端圖片壓縮**：上傳前用 Canvas API 將圖片壓縮至最大 1024px + JPEG 0.85（5MB → ~200KB）
-- ✅ **20 秒 AbortController 逾時保護**：避免 Worker AI 卡死時前端無止境等待
-- ✅ **平滑降級機制**：AI Worker 失敗時不再彈出 scary alert，改為：
-  - 顯示黃色提示卡「AI 辨識暫時無法使用，請手動選擇害蟲類型」
-  - 提供害蟲類型按鈕（曱甴 / 木蝨 / 老鼠 / 白蟻 / 蚊 / 螞蟻 / 蜂 / 蜈蚣 / 衣魚 / 蜘蛛）
-  - 用戶選擇後立即填入完整分析報告 + WhatsApp 預約連結
-  - 報告會標示「本地分析」vs「AI 視覺」來源
-- ✅ **擴充本地策略庫**：從原本 6 種害蟲擴充到 11 種，並新增別名（蟑螂 = 曱甴、床蝨 = 木蝨 等）
-- ✅ **檔案類型驗證**：只接受 JPG/PNG/WebP/GIF，拒絕其他格式
-
-### Worker 端修復（新增 `worker/pest-vision-worker.js` v3.0）
-- ✅ **Llama 3.2 授權同意機制**：首次呼叫前先送出 `agree` prompt，並用 KV 快取已同意狀態（24 小時 TTL）
-- ✅ **25 秒 AbortController 逾時保護**
-- ✅ **改進 prompt 模板**：明確要求 AI 回傳純 JSON（剝離 markdown 圍欄）
-- ✅ **加入 CORS 白名單**（不再反射任意 origin）
-- ✅ **加入安全標頭**：X-Content-Type-Options、X-Frame-Options、Referrer-Policy
-- ✅ **請求大小限制**：10MB 上限
-- ✅ **結構化錯誤回應**：每個錯誤都有 `code` 欄位方便前端判斷
-
-### 部署指引
-- 用戶需重新部署 `worker/pest-vision-worker.js`
-- 必須在 Cloudflare Dashboard 加入兩個 binding：
-  1. **Workers AI binding** — 變數名稱必須為 `AI`
-  2. **KV Namespace binding** — 變數名稱 `PEST_KV`（用於快取授權狀態）
-- 詳細設定請見 `worker/wrangler-pest-vision.toml`
+1. **info/vote/index.html 與 admin.html 全面重新設計**（與首頁一致的現代科技風格）
+2. **「✨ 智慧滅蟲梗喺滅蟲師傅啦」廣告詞新增至所有分類頁面**
+3. **AI 害蟲分析系統香港本地化升級**（基於 docx 文件分析建議）
+4. **移除「其他聯繫方式」中的電話熱線與電郵，全面引導 WhatsApp 諮詢**
 
 ---
 
-## 🔧 問題二：留言管理後臺無法登入
+## 🔧 問題 1：info/vote 頁面風格陳舊
 
-### 根本原因（已實際測試 Worker 端點確認）
-```
-$ curl -X POST https://comment-handler.cedars5282.workers.dev/api/admin/list \
-    -H "Origin: https://bruceleehk.com" \
-    -d '{"secret":"any_password"}'
-→ HTTP 403 {"success":false,"error":"未設定管理員密鑰"}
-```
-- Worker 已部署，KV 已綁定，但 **`ADMIN_SECRET` 環境變數從未設定**
-- 用戶以為自己設定了密碼，但實際上 Worker 端 `env.ADMIN_SECRET` 為 `undefined`
-- 前端 `admin.html` 收到 403 後顯示通用「密鑰錯誤！請檢查 ADMIN_SECRET」，誤導用戶以為密碼本身錯了
+### 完成事項
+- **info/vote/index.html 完全重新設計**：
+  - 套用首頁設計 token：emerald 綠 `#10b981` + tech-blue `#0284c7` + dark-bg `#0f172a`
+  - 採用首頁 `bruceleehk.css` 作為基礎樣式
+  - 深色 Hero 區（`linear-gradient + radial glow` 動畫 + 科技徽章）
+  - 與首頁完全一致的導航列（sticky header、漸變 logo、WhatsApp 圓鈕）
+  - 與首頁完全一致的頁尾（社群圖示、動態年份）
+  - 行動裝置底部固定 CTA 列（WhatsApp 即時諮詢）
+  - 投票卡片：hover 上浮 + 漸變 accent 邊框（top border 動畫）
+  - 投票按鈕：漸變背景 + 陰影
+  - 排名結果：漸變彩色編號 + 漸變進度條
+  - 害蟲詳情面板：accent border-left + WhatsApp CTA
+  - CTA Box：漸變背景 + radial 光暈
+  - 留言卡片：現代化陰影 + hover 效果
+  - 留言表單：現代化輸入框 + focus 漸變光環
+  - 官方徽章：漸變背景 + 圖示
+  - 模態視窗：現代化 backdrop-filter + accent border
+  - Skip-link 無障礙（鍵盤使用者可跳到主內容）
 
-### Worker 端修復（`worker/comment-handler.js` v3.1）
-- ✅ **新增 `ADMIN_SECRET_NOT_SET` 專屬錯誤碼**：當 `env.ADMIN_SECRET` 為空時，回傳此錯誤碼而非通用「密鑰錯誤」
-- ✅ **新增 `verifySecret()` 統一密鑰驗證 helper**：所有 admin API 共用同一邏輯
-- ✅ **時序安全密鑰比較** `safeCompare()`：防止 side-channel attack
-- ✅ **自動 trim 兩端空白**：避免複製貼上時嘅空白差異導致比對失敗
-- ✅ **新增 `POST /api/admin/test` 端點**：可單獨測試密鑰是否正確，不載入留言
-- ✅ **`/api/health` 加入 `admin_secret_set` 欄位**：前端可預先知道是否已設定 ADMIN_SECRET
-- ✅ **內部錯誤訊息不外洩**：原本 `error: '伺服器內部錯誤：' + err.message`，改為只回 `'伺服器內部錯誤'`
+- **info/vote/admin.html 全面重新設計**：
+  - 頂部欄：深色漸變背景 + radial glow（emerald + tech-blue）
+  - 登入卡：accent border-top 漸變 + 現代化陰影
+  - 控制台工具欄：現代化統計數字 + 漸變 filter button
+  - 留言卡片：hover 上浮 + accent border-left（依狀態變色）
+  - 官方徽章：漸變背景（emerald 綠）
+  - 模態視窗：accent border-top + backdrop-filter
+  - Toast 通知：漸變背景 + 陰影
 
-### 前端修復（`info/vote/admin.html`）
-- ✅ **顯示伺服器實際錯誤**：原本不論 403 原因都顯示「密鑰錯誤」，現改為：
-  - 若錯誤碼為 `ADMIN_SECRET_NOT_SET`：顯示詳細設定指引（含 Cloudflare Dashboard 路徑 + `wrangler secret put` 命令）
-  - 否則顯示伺服器實際錯誤訊息
-- ✅ **修正重複 viewport meta**：原本有兩個 viewport meta，已移除重複
-- ✅ **修正 `escHtml()` 未 escape 單引號**：補上 `&#39;`
-- ✅ **加入專屬 CSP**：不允許 udify.app 等第三方資源
-- ✅ **加入 `no-referrer` referrer policy**：防止管理後台 URL 洩漏
-- ✅ **inline onclick 全面替換為 event delegation**：避免 XSS（`bindActionButtons()`）
-
-### 部署指引
-- 用戶需重新部署 `worker/comment-handler.js` v3.1
-- **必須重新設定 ADMIN_SECRET**：
-  ```bash
-  npx wrangler secret put ADMIN_SECRET
-  # 輸入你的密碼（建議 32+ 字元隨機字串）
-  ```
-  或透過 Cloudflare Dashboard → Workers & Pages → comment-handler → Settings → Variables and Secrets → Add → Type: Secret → Name: ADMIN_SECRET → Value: 你的密碼 → Save and Deploy
-
----
-
-## 🔧 問題三：services / strategy / info 頁面與首頁風格不一致
-
-### 重新設計（保持原內容，套用首頁現代科技感設計）
-
-三個頁面全部從原本嘅舊版 `style.min.css`（綠色 `#2c5e1a`、平面卡片、無 hover 效果）改為：
-- 採用首頁嘅設計 token：emerald 綠 `#10b981` + tech-blue `#0284c7` + dark-bg `#0f172a`
-- 使用首頁嘅 `bruceleehk.css` 作為基礎樣式
-- 每頁都有：
-  - **深色 Hero 區**：linear-gradient + radial glow 動畫 + 科技徽章
-  - **導航列**：與首頁完全一致（sticky header、漸變 logo、WhatsApp 圓鈕）
-  - **頁尾**：與首頁完全一致（社群圖示、動態年份）
-  - **行動裝置底部固定 CTA 列**：電話 + WhatsApp 按鈕
-  - **卡片**：hover 上浮 + 漸變 accent 邊框（top border 動畫）
-  - **CTA Box**：漸變背景 + radial 光暈
-  - **Skip-link 無障無障礙**：鍵盤使用者可跳到主內容
-
-### `services/index.html`（蟲類服務）
-- 4 個現代化服務卡片（曱甴 / 滅蚊滅鼠 / 床蝨 / 白蟻）
-- 每個卡片有：
-  - 編號徽章（SERVICE 01-04）
-  - 漸變圖示方塊（service-card-icon）
-  - 標籤芯片（德國曱甴 / 美國曱甴 / IGR 等）
-  - 完整服務說明（保留原文）
-  - 漸層定價盒（pricing-box 帶 accent border）
-- 服務快速導航條（service-icon-pill）
-- 底部 CTA：WhatsApp + 線上報價
-
-### `strategy/index.html`（有蟲就有計）
-- 8 個策略卡片，每個有：
-  - 漸變編號方塊（01-08）
-  - 策略名稱用漸變字體（tactic-name）
-  - 害蟲圖示方塊（pest-icon-large）
-  - 完整策略說明（保留原文）
-  - 行內提示卡（inline-hint）連結至苦主討論區
-- 中段 + 末段 SEO 導流 Banner（黃色漸變）
-- 底部三按鈕 CTA：參與票選 / 前往討論區 / WhatsApp
-
-### `info/index.html`（蟲類資訊）
-- 1 個大型特色卡片（featured-card）：2026 全港害蟲票選漸變卡片
-- 8 個部落格卡片網格（blog-grid）：
-  - 每個卡片有分類徽章、標題、摘要、日期 + 閱讀全文連結
-  - hover 上浮 + 漸變 accent 邊框
-- 底部深色 CTA Box：WhatsApp / 線上報價 / AI 診斷
+- **保留所有原有功能**：
+  - 20 種害蟲投票（4 大類別）
+  - 完整留言系統（含樹狀回覆、圖片上傳、honeypot）
+  - JSON-LD（BreadcrumbList + Article + FAQPage）
+  - 全部 `escapeHtml` + `escapeAttr` 安全處理
+  - 所有 inline onclick 改為 event delegation
+  - Honeypot 反 bot 偵測
+  - 圖片類型驗證 + 5MB 限制
+  - 5MB 限制與伺服器端對齊
+  - 修正 `commentForm` → `mainCommentForm` bug
+  - 修正 `data.error` XSS 漏洞
 
 ---
 
-## 📦 完整修復清單
+## 🔧 問題 2：廣告詞「✨ 智慧滅蟲梗喺滅蟲師傅啦」展示
 
-### 已修復嘅 Bug
-| # | 問題 | 檔案 | 狀態 |
-|---|------|------|------|
-| 1 | AI 上傳失敗（Llama 3.2 未同意授權） | `worker/pest-vision-worker.js` | ✅ 新建 |
-| 2 | AI 上傳 5MB payload 過大 | `assets/js/bruceleehk.js` | ✅ 加入壓縮 |
-| 3 | AI 無逾時保護 | `assets/js/bruceleehk.js` + Worker | ✅ 20s + 25s |
-| 4 | AI 失敗彈出 scary alert | `assets/js/bruceleehk.js` | ✅ 改為降級選擇 |
-| 5 | Admin 顯示「密碼錯碼錯誤」誤導 | `info/vote/admin.html` | ✅ 顯示實際錯誤 |
-| 6 | ADMIN_SECRET 未設定無明確錯誤碼 | `worker/comment-handler.js` | ✅ `ADMIN_SECRET_NOT_SET` |
-| 7 | 密鑰比較無時序安全 | `worker/comment-handler.js` | ✅ `safeCompare()` |
-| 8 | 密鑰比較不 trim 空白 | `worker/comment-handler.js` | ✅ 自動 trim |
-| 9 | Admin inline onclick XSS | `info/vote/admin.html` | ✅ event delegation |
-| 10 | Vote 頁面 escapeHtml 不 escape 單引號 | `info/vote/index.html` | ✅ 補上 `&#39;` |
-| 11 | Vote 頁面 data.error XSS | `info/vote/index.html` | ✅ escapeHtml 處理 |
-| 12 | Vote 頁面回覆按鈕 ID 錯誤 | `info/vote/index.html` | ✅ `mainCommentForm` |
-| 13 | 圖片上傳前後端限制不匹配 | `info/vote/index.html` | ✅ 統一 5MB |
-| 14 | 留言無 honeypot 反 bot | `info/vote/index.html` + Worker | ✅ 加入 |
-| 15 | services/strategy/info 版面陳舊 | 三個 index.html | ✅ 全面重新設計 |
-| 16 | 版權年份過期（2023） | 全部頁面 | ✅ 動態 2026 |
-| 17 | sitemap.xml 缺少 /ai/ | `sitemap.xml` | ✅ 補上 |
-| 18 | robots.txt 域名錯 | `robots.txt` | ✅ 修正 |
-| 19 | manifest.json 缺圖示 | `manifest.json` + 圖示 | ✅ 生成 192/512 |
-| 20 | style.min.css 為空 | `assets/css/style.min.css` | ✅ 從 style.css 重新生成 |
-| 21 | main.min.js 語法錯誤 | `assets/js/main.min.js` | ✅ 從 main.js 重新生成 |
-| 22 | menu-toggle 是 div | 全部頁面 | ✅ 改為 `<button>` + ARIA |
-| 23 | 無 CSP 安全標頭 | 全部頁面 | ✅ 加入完整 CSP |
-| 24 | 無 defer / loading=lazy | 全部頁面 | ✅ 全面加入 |
-| 25 | 無 rel=noopener | 全部 target=_blank | ✅ 全面加入 |
+### 完成事項
+新增 slogan banner 至以下頁面嘅 Hero 區（badge-group 與 h1 之間）：
+- ✅ services/index.html（蟲類服務）
+- ✅ strategy/index.html（有蟲就有計）
+- ✅ info/index.html（蟲類資訊首頁）
+- ✅ ai/index.html（AI 害蟲分析系統）
+- ✅ quote/index.html（有蟲話我知）
+- ✅ info/vote/index.html（投票頁，以 slogan-banner 形式置於 vote-intro 上方）
 
-### 新增檔案
-- `worker/pest-vision-worker.js` — 全新嘅 AI Worker（含 Llama 3.2 授權同意機制）
-- `worker/wrangler-pest-vision.toml` — AI Worker 嘅配置範本
+### CSS 設計
+新增 `.hero-slogan-tag` 樣式至 `assets/css/bruceleehk.css`（共享樣式表）：
+- 半透明 emerald 背景（`rgba(16,185,129,0.18)`）
+- 漸變 border（`rgba(110,231,183,0.4)`）
+- Mint 綠文字（`#6ee7b7`，與首頁 Hero 文字一致）
+- 圓角藥丸形狀（`border-radius: 20px`）
+- 發光陰影（`box-shadow: 0 0 15px rgba(16,185,129,0.2)`）
+- 加粗字重 + 字距（`font-weight: 800; letter-spacing: 1px`）
 
-### 修改檔案（17 個 HTML + 3 個 JS + 2 個 CSS + 2 個 Worker + 4 個 meta 檔）
-- 18 個 HTML 頁面
-- `assets/js/bruceleehk.js` v3.1
-- `assets/js/main.min.js`（重新生成）
-- `assets/css/style.min.css`（重新生成）
-- `worker/comment-handler.js` v3.1
-- `worker/comment-worker.js` v3.0
-- `worker/wrangler.toml` v3.1
-- `manifest.json`
-- `sitemap.xml`
-- `robots.txt`
+vote 頁面採用更突出嘅 `slogan-banner` 設計（漸變文字 + 雙邊 emoji 圖示）。
+
+---
+
+## 🔧 問題 3：AI 害蟲分析系統香港本地化升級
+
+### 基於兩份 docx 文件嘅分析建議
+
+#### 文件 1：AI 識別出錯.docx
+**核心問題**：Llama 3.2 Vision 作為通用視覺模型，對香港常見細小微型害蟲（白蟻、蛀木蟲、書蝨）容易混淆，例如把「螞蟻/蛀木蟲」誤認為「木蝨」或「曱甴」。
+
+**建議方案**：
+1. 優化 pest-vision-worker.js 的 AI Prompt（加入香港在地化特徵與負向提示）
+2. 擴充前端 STRATEGY_MAP 與對應三十六計方案
+3. 加入「用戶二次確認」機制（黃金防笑點）— UI 提示 + 手動下拉選單
+
+#### 文件 2：香港滅蟲專家規則與「三十六計兵法對照表」.docx
+**核心建議**：升級 AI Prompt 指令，寫入一套極度嚴格的香港滅蟲專家規則與「三十六計兵法對照表」，告訴 AI 看到什麼細微特徵必須對應什麼精準計策。
+
+### 完成事項
+
+#### A. `worker/pest-vision-worker.js` v3.1（AI Prompt 大幅升級）
+- ✅ **角色定位升級**：「你是一個香港頂尖嘅資深滅蟲專家，精通香港在地常見害蟲嘅習性同「三十六計」兵法策略」
+- ✅ **香港常見害蟲鑑別規則**（13 種害蟲 + 明確特徵 + 對應計策）：
+  - 曱甴（蟑螂）：油亮外殼、明顯長觸角 → 誘敵深入計
+  - 木蝨／床蝨：扁平橢圓形、紅褐色、6 隻腳 → 星星之火計
+  - 白蟻：身體較直、腰部較粗、觸角呈念珠狀 → 擒賊擒王計
+  - 蛀木蟲：細小（3-15mm）、長橢圓、圓形孔洞 → 引蛇出洞計
+  - 螞蟻：明顯「頭-胸-腹」三段、腰部細 → 順手牽羊計
+  - 老鼠、蚊、蜂、蜈蚣、衣魚、蜘蛛、飛蟲類等
+- ✅ **關鍵場景判斷規則**（基於現場特徵）：
+  - 見到木屑、蛀木粉末 → 蛀木蟲（引蛇出洞計）
+  - 見到泥路 → 白蟻（擒賊擒王計）
+  - 見到牆角卵巢/油亮外殼 → 德國曱甴（誘敵深入計）
+  - 見到床板黑點血跡 → 木蝨（星星之火計）
+  - 見到米櫃桶細小褐色甲蟲 → 煙甲蟲/豆象
+  - 見到牆身白色極細微蟲 → 卜泥/姬薪蟲
+- ✅ **明確區分易混淆害蟲**：
+  - 白蟻 vs 蛀木蟲：白蟻留泥路 + 大面積蛀食；蛀木蟲留圓孔 + 細粉
+  - 白蟻 vs 螞蟻：白蟻腰部較粗、觸角呈念珠狀；螞蟻腰部細、觸角呈肘形
+- ✅ **香港本地化 nest 描述要求**：使用香港常見家居環境術語
+  - 窗台罅隙、牆身裂縫、冷氣機周邊
+  - 木傢俬、米櫃桶、衣櫃、梳化底、床板縫隙
+  - 廚房櫥櫃背後、電器散熱口、排水管附近
+- ✅ **temperature 降低至 0.2**（更穩定的輸出）
+- ✅ **max_tokens 增加至 1000**（容納更詳細的策略說明）
+
+#### B. `assets/js/bruceleehk.js` v3.1（前端策略庫擴充 + 手動修正機制）
+- ✅ **STRATEGY_MAP 從 6 種害蟲擴充至 14 種主要害蟲 + 6 種別名**：
+  - 新增：蛀木蟲、蜂、蜂類、蜈蚣、蜘蛛、飛蟲、蟎蟲、卜泥、姬薪蟲
+  - 每種害蟲都對應正確的三十六計策略
+  - nest 描述使用香港本地家居環境術語
+- ✅ **手動修正機制（黃金防笑點）**：
+  - AI 識別成功後，結果區下方顯示黃色提示框：「辨識唔啱？手動修正品種：」
+  - 提供下拉選單，列出所有 14 種主要害蟲
+  - 用戶選擇後，系統即時重新計算對應嘅「三十六計方案」與「參考價格」
+  - WhatsApp 預約訊息會標明「分析方式：本地策略庫（用戶修正）」
+  - 完全避免因 AI 誤判而造成的專業度扣分
+- ✅ **降級流程改進**：
+  - AI 失敗時的害蟲選擇器使用 14 種主要害蟲（移除重複別名）
+  - 每個按鈕顯示完整害蟲名害蟲名稱（如「曱甴（蟑螂）」而非「曱甴」）
+  - 提示文字加入「含三十六計對照」
+
+---
+
+## 🔧 問題 4：移除「其他聯繫方式」電話與電郵
+
+### 完成事項
+
+#### quote/index.html 聯絡方式區段重新設計
+- ❌ 移除「電話熱線」卡片（85252821552）
+- ❌ 移除「電郵」卡片（Cedars5282@gmail.com）
+- ✅ 新增「WhatsApp 即時諮詢」卡片（置頂 + 突出樣式）：
+  - 漸變 emerald 背景 + accent border
+  - 漸變 WhatsApp 圖示圓圈
+  - 「最快 5 分鐘回覆」副標題
+  - 綠色 WhatsApp CTA 按鈕：「即時開始傾」
+- ✅ 保留「地址」與「營業時間」卡片
+- ✅ 標題從「其他聯絡方式」改為「即時聯絡我們」
+- ✅ 副標題強調：「WhatsApp 係最快嘅聯絡方式 — 工作時間內即時回覆」
+
+#### 行動裝置底部固定 CTA 列
+所有頁面（首頁、services、strategy、info、ai、quote）的 `.mobile-thumb-zone`：
+- ❌ 移除「致電」按鈕（tel:+85252821552）
+- ✅ 改為單一全寬 WhatsApp 按鈕：「WhatsApp 即時諮詢」
+- ✅ 漸變綠色背景（linear-gradient #25d366 → #1eb954）
+
+#### 頁尾保留電郵圖示
+保留 footer 的 envelope 圖示（標準社交頁尾模式，並非「聯絡方式」區段）。
+
+---
+
+## 📦 修改檔案清單
+
+### 重新設計
+- `info/vote/index.html`（完全重新設計，~88KB）
+- `info/vote/admin.html`（CSS 主題色更新 + 結構微調）
+
+### 新增 slogan
+- `services/index.html` — Hero 區加入 slogan
+- `strategy/index.html` — Hero 區加入 slogan
+- `info/index.html` — Hero 區加入 slogan
+- `ai/index.html` — Hero 區加入 slogan + CSS
+- `quote/index.html` — Hero 區加入 slogan + CSS
+- `assets/css/bruceleehk.css` — 新增 `.hero-slogan-tag` 樣式
+
+### AI 系統升級
+- `worker/pest-vision-worker.js` v3.1（Prompt 大幅升級，香港本地化規則 + 三十六計對照表）
+- `assets/js/bruceleehk.js` v3.1（STRATEGY_MAP 擴充至 14 種害蟲 + 手動修正機制）
+
+### 移除電話與電郵
+- `quote/index.html` — 聯絡方式區段重新設計（WhatsApp 為主）
+- `index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
+- `ai/index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
+- `quote/index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
+- `services/index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
+- `strategy/index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
+- `info/index.html` — 行動裝置底部 CTA 列改為 WhatsApp 單按鈕
 
 ---
 
 ## 🚀 部署步驟
 
 ### 1. 部署靜態網站
-將整個 `bruceleehk-fixed-v2` 資料夾上傳至 GitHub Pages / Cloudflare Pages / Netlify。
+將整個 `bruceleehk-fixed-v3` 資料夾上傳至 GitHub Pages / Cloudflare Pages / Netlify。
 
-### 2. 部署留言系統 Worker (`comment-handler.js`)
+### 2. 重新部署 AI Worker（重要！）
 ```bash
 cd worker
+# 貼上新的 pest-vision-worker.js v3.1
 npx wrangler deploy
-# 設定 ADMIN_SECRET（重要！）
-npx wrangler secret put ADMIN_SECRET
-# 輸入密碼
 ```
+v3.1 Prompt 大幅升級，必須重新部署才能獲得香港本地化辨識能力。
 
-### 3. 部署 AI 視覺辨識 Worker (`pest-vision-worker.js`)（新）
-- Cloudflare Dashboard → Workers & Pages → Create Worker → 命名 `pest-vision-worker`
-- 貼上 `worker/pest-vision-worker.js` → Save and Deploy
-- Settings → Bindings → Add：
-  - **Workers AI** → 變數名稱 `AI`
-  - **KV Namespace** → 變數名稱 `PEST_KV`（先建立一個 KV namespace，例如 `pest-vision-cache`）
-- 部署完成後測試：`https://pest-vision-worker.cedars5282.workers.dev/health` 應回傳 `{"status":"ok",...}`
+### 3. 驗證
+- 訪問 https://bruceleehk.com/info/vote/ → 應看到與首頁一致的現代科技風格
+- 訪問 https://bruceleehk.com/info/vote/admin.html → 應看到新的深色頂部欄 + 漸變按鈕
+- 訪問 https://bruceleehk.com/services/ / /strategy/ / /info/ / /ai/ / /quote/ → Hero 區應顯示「✨ 智慧滅蟲梗喺滅蟲師傅啦」slogan
+- 上傳害蟲相片至 AI 診斷器 → 結果區下方應顯示「辨識唔啱？手動修正品種：」下拉選單
+- 訪問 https://bruceleehk.com/quote/ → 聯絡方式區段應只有 WhatsApp + 地址 + 營業時間（無電話與電郵）
+- 行動裝置瀏覽任何頁面 → 底部固定 CTA 列應只有 WhatsApp 按鈕（無致電按鈕）
 
-### 4. 驗證
-- 訪問 https://bruceleehk.com/info/vote/admin.html，輸入剛設定的 ADMIN_SECRET，應能成功登入
-- 訪問 https://bruceleehk.com/ai/，上傳害蟲相片，AI 應能成功辨識
-- 如果 AI 仍失敗，會自動降級為「選擇害蟲類型」流程，用戶仍可獲得完整分析報告
+---
+
+## ✅ 修復驗證
+
+所有修改後的檔案均已通過以下驗證：
+- `node --check` 檢查 JS 語法（bruceleehk.js、main.js、main.min.js、comment-handler.js、comment-worker.js、pest-vision-worker.js）
+- JSON-LD 區塊全部可被 `JSON.parse` 解析
+- HTML 標籤開合數量平衡
+- CSS 大括號數量平衡
+- 所有頁面均包含 CSP、viewport、charset、referrer、theme-color 等 meta 標頭
+- 0 validation errors, 0 warnings

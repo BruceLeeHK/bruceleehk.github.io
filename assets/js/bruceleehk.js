@@ -83,22 +83,30 @@
         });
     }
 
-    /* ---------- Strategy & Price Fallback Table ---------- */
+    /* ---------- Strategy & Price Fallback Table (v3.1 — expanded) ----------
+       Based on pest-vision-worker.js prompt + user docx analysis.
+       Includes 36 stratagems mapping + Hong Kong localization. */
     const STRATEGY_MAP = {
-        '曱甴': { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後', strategy: '採用「誘敵深入計」：設置智慧誘餌站，系統性引誘處理。', price: 'HK$ 600 - 3,800', confidence: 95 },
-        '蟑螂': { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後', strategy: '採用「誘敵深入計」：設置智慧誘餌站，系統性引誘處理。', price: 'HK$ 600 - 3,800', confidence: 95 },
-        '木蝨': { pest: '木蝨（床蝨）', risk: '高', nest: '床板縫隙、梳化、牆身插座', strategy: '採用「星星之火計」：高溫蒸氣 + 雙重殘留藥劑深層處理。', price: 'HK$ 800 - 5,500', confidence: 93 },
-        '床蝨': { pest: '木蝨（床蝨）', risk: '高', nest: '床板縫隙、梳化、牆身插座', strategy: '採用「星星之火計」：高溫蒸氣 + 雙重殘留藥劑深層處理。', price: 'HK$ 800 - 5,500', confidence: 93 },
-        '老鼠': { pest: '老鼠', risk: '中 - 高', nest: '管道入口、天花夾層、儲物區', strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵源頭 + 遠端監測誘捕。', price: 'HK$ 1,000 - 5,800', confidence: 92 },
-        '鼠': { pest: '老鼠', risk: '中 - 高', nest: '管道入口、天花夾層、儲物區', strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵源頭 + 遠端監測誘捕。', price: 'HK$ 1,000 - 5,800', confidence: 92 },
-        '白蟻': { pest: '白蟻', risk: '極高（結構風險）', nest: '木結構內部、牆身、地板下', strategy: '熱成像定位暗巢 + 灌注持效保護劑 + 結構性防治方案。', price: 'HK$ 1,500 - 9,800', confidence: 91 },
-        '蚊': { pest: '蚊', risk: '低 - 中', nest: '積水容器、花盆底碟、冷氣機托盤', strategy: '採用「以逸待勞計」：誘蚊燈 + 生物顆粒阻斷幼蟲孳生。', price: 'HK$ 500 - 3,800', confidence: 90 },
-        '螞蟻': { pest: '螞蟻', risk: '低', nest: '牆身罅隙、廚房、糖類食物附近', strategy: '採用「追本溯源計」：找出蟻巢 + 慢效藥餌連鎖滅巢。', price: 'HK$ 500 - 2,500', confidence: 88 },
-        '蜂': { pest: '蜂類', risk: '中 - 高（過敏者可致命）', nest: '屋簷、露台、樹上、牆身洞穴', strategy: '專業安全移除蜂巢 + 預防再築巢處理。', price: 'HK$ 800 - 3,500', confidence: 87 },
-        '蜈蚣': { pest: '蜈蚣', risk: '中（毒咬劇痛）', nest: '潮濕陰暗處、排水管、牆隙', strategy: '封堵入侵路徑 + 殘留噴劑 + 環境乾燥處理。', price: 'HK$ 600 - 2,800', confidence: 86 },
-        '衣魚': { pest: '衣魚', risk: '低（紙張衣物損害）', nest: '潮濕書櫃、衣櫃、牆紙後', strategy: '降低濕度 + 殘留噴劑 + 物理捕捉。', price: 'HK$ 500 - 2,200', confidence: 85 },
-        '蜘蛛': { pest: '蜘蛛', risk: '低（多數無害）', nest: '牆角、陰暗處、天花板', strategy: '移除蛛網 + 封堵入侵路徑 + 殘留噴劑。', price: 'HK$ 400 - 1,800', confidence: 84 },
-        '其他': { pest: '待 AI 進一步分析', risk: '待評估', nest: '建議專員現場勘察', strategy: '已安排專業師傅親自對照相片，為你提供精準處方。', price: '免費估價', confidence: 80 }
+        '曱甴':   { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後、櫥櫃縫隙', strategy: '採用「誘敵深入計」：設置智慧誘餌站，配合連環殺蟑膠餌，由工蟻帶回巢穴連鎖滅殺。', price: 'HK$ 600 - 3,800', confidence: 95 },
+        '蟑螂':   { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後、櫥櫃縫隙', strategy: '採用「誘敵深入計」：設置智慧誘餌站，配合連環殺蟑膠餌，由工蟻帶回巢穴連鎖滅殺。', price: 'HK$ 600 - 3,800', confidence: 95 },
+        '木蝨':   { pest: '木蝨（床蝨）', risk: '高', nest: '床板縫隙、梳化、牆身插座、床頭櫃罅隙', strategy: '採用「星星之火計」：180°C 高溫蒸氣穿透床褥木縫，配合雙重殘留藥劑深層處理，破壞蟲卵蛋白質結構。', price: 'HK$ 800 - 5,500', confidence: 93 },
+        '床蝨':   { pest: '木蝨（床蝨）', risk: '高', nest: '床板縫隙、梳化、牆身插座、床頭櫃罅隙', strategy: '採用「星星之火計」：180°C 高溫蒸氣穿透床褥木縫，配合雙重殘留藥劑深層處理，破壞蟲卵蛋白質結構。', price: 'HK$ 800 - 5,500', confidence: 93 },
+        '老鼠':   { pest: '老鼠', risk: '中 - 高', nest: '管道入口、天花夾層、儲物區、冷氣機管道', strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵冷氣孔、管道隙縫，配合遠端監測誘捕，雙管齊下徹底清除。', price: 'HK$ 1,000 - 5,800', confidence: 92 },
+        '鼠':     { pest: '老鼠', risk: '中 - 高', nest: '管道入口、天花夾層、儲物區、冷氣機管道', strategy: '採用「釜底抽薪計」+ IoT 智慧鼠盒：封堵冷氣孔、管道隙縫，配合遠端監測誘捕，雙管齊下徹底清除。', price: 'HK$ 1,000 - 5,800', confidence: 92 },
+        '白蟻':   { pest: '白蟻', risk: '極高（結構風險）', nest: '木結構內部、牆身、地板下、門框', strategy: '採用「擒賊擒王計」：透過白蟻餌站系統，由工蟻將慢效昆蟲生長調節劑帶回巢穴餵食蟻后，達致全巢滅殺。配合熱成像定位暗巢。', price: 'HK$ 1,500 - 9,800', confidence: 91 },
+        '蛀木蟲': { pest: '蛀木蟲', risk: '中 - 高', nest: '木傢俬、木地板、門框、木裝飾', strategy: '採用「引蛇出洞計」：以特製引誘劑或深層藥劑注射，誘出隱藏喺木材內部之害蟲。配合微波處理封堵木質孔洞。', price: 'HK$ 1,000 - 4,500', confidence: 90 },
+        '蚊':     { pest: '蚊', risk: '低 - 中', nest: '積水容器、花盆底碟、冷氣機托盤、天台去水位', strategy: '採用「以逸待勞計」：超低容量噴霧（ULV）+ 昆蟲生長調節劑（IGR），從源頭阻斷幼蟲孳生。配合誘蚊燈物理防治。', price: 'HK$ 500 - 3,800', confidence: 90 },
+        '螞蟻':   { pest: '螞蟻', risk: '低 - 中', nest: '牆身罅隙、地腳線、磁磚縫隙、花盆', strategy: '採用「順手牽羊計」：使用連鎖殺蟲餌劑，由工蟻帶回蟻巢餵食蟻后，徹底殲滅整個蟻巢。', price: 'HK$ 500 - 2,500', confidence: 88 },
+        '蜂':     { pest: '蜂類', risk: '中 - 高（過敏者可致命）', nest: '屋簷、露台、樹上、牆身洞穴', strategy: '採用「釜底抽薪計」：專業安全移除蜂巢 + 預防再築巢處理，建議夜晚處理（蜂類歸巢）。', price: 'HK$ 800 - 3,500', confidence: 87 },
+        '蜂類':   { pest: '蜂類', risk: '中 - 高（過敏者可致命）', nest: '屋簷、露台、樹上、牆身洞穴', strategy: '採用「釜底抽薪計」：專業安全移除蜂巢 + 預防再築巢處理，建議夜晚處理（蜂類歸巢）。', price: 'HK$ 800 - 3,500', confidence: 87 },
+        '蜈蚣':   { pest: '蜈蚣', risk: '中（毒咬劇痛）', nest: '潮濕陰暗處、排水管、牆隙、地腳線', strategy: '採用「圍魏救趙計」：封堵入侵路徑（排水管、牆隙），配合殘留噴劑 + 環境乾燥處理，斷絕入侵源頭。', price: 'HK$ 600 - 2,800', confidence: 86 },
+        '衣魚':   { pest: '衣魚', risk: '低（紙張衣物損害）', nest: '潮濕書櫃、衣櫃、牆紙後、儲物箱', strategy: '採用「抽絲剝繭計」：降低環境濕度 + 殘留噴劑 + 物理捕捉，從根本切斷蟲類食物源（霉菌）。', price: 'HK$ 500 - 2,200', confidence: 85 },
+        '蜘蛛':   { pest: '蜘蛛', risk: '低（多數無害）', nest: '牆角、陰暗處、天花板、儲物區', strategy: '採用「借刀殺人計」：移除蛛網 + 封堵入侵路徑 + 殘留噴劑。香港極少有毒蜘蛛品種，多數益蟲（捕食蚊蠅）。', price: 'HK$ 400 - 1,800', confidence: 84 },
+        '飛蟲':   { pest: '飛蟲（蠓/蛾/蠅）', risk: '低 - 中', nest: '積水、有機物、植物附近', strategy: '採用「聲東擊西計」：物理光源誘捕燈 + ULV 霧化噴灑，從源頭管理清除積水同有機物。', price: 'HK$ 500 - 2,500', confidence: 83 },
+        '蟎蟲':   { pest: '蟎蟲（禽蟎/粉蟎）', risk: '中（過敏源）', nest: '潮濕儲物角落、梳化底、冷氣機內部', strategy: '採用「斬草除根計」：極低容量（ULV）霧化噴灑，將除害劑均勻覆蓋至房間每個角落，達到深層除蟎與消毒效果。', price: 'HK$ 800 - 3,200', confidence: 86 },
+        '卜泥':   { pest: '卜泥／姬薪蟲', risk: '低', nest: '潮濕牆身、書籍、壁紙後、窗台', strategy: '採用「抽絲剝繭計」：空間防霉殺菌處理 + 抽濕建言，從根本切斷蟲類食物源（牆身霉菌）。', price: 'HK$ 500 - 2,200', confidence: 85 },
+        '姬薪蟲': { pest: '卜泥／姬薪蟲', risk: '低', nest: '潮濕牆身、書籍、壁紙後、窗台', strategy: '採用「抽絲剝繭計」：空間防霉殺菌處理 + 抽濕建言，從根本切斷蟲類食物源（牆身霉菌）。', price: 'HK$ 500 - 2,200', confidence: 85 },
+        '其他':   { pest: '待專員進一步分析', risk: '待評估', nest: '建議專員現場勘察', strategy: '已安排專業師傅親自對照相片，為你提供精準處方。', price: '免費估價', confidence: 80 }
     };
 
     /* ============================================================
@@ -218,29 +226,36 @@
 
     /* ============================================================
        降級流程：用戶選擇害蟲類型 → 本地策略庫分析
+       v3.1: Uses expanded STRATEGY_MAP (with 蛀木蟲 etc)
        ============================================================ */
     function showPestSelector(opts, file, onPestSelected) {
         const $ = (id) => document.getElementById(id);
         const result = $(opts.result);
         if (!result) return;
 
-        // 建立害蟲選擇 UI（注入到結果區上方）
-        let selectorDiv = $(opts.result + '-selector');
-        if (!selectorDiv) {
-            selectorDiv = document.createElement('div');
-            selectorDiv.id = opts.result + '-selector';
-            selectorDiv.style.cssText = 'background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:16px;margin:10px 0;';
-            result.parentNode.insertBefore(selectorDiv, result);
-        }
-        const pestOptions = Object.keys(STRATEGY_MAP).filter(k => k !== '其他');
+        /* Remove existing selector if present */
+        const existingSel = $(opts.result + '-selector');
+        if (existingSel) existingSel.remove();
+
+        const selectorDiv = document.createElement('div');
+        selectorDiv.id = opts.result + '-selector';
+        selectorDiv.style.cssText = 'background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:16px;margin:10px 0;';
+        result.parentNode.insertBefore(selectorDiv, result);
+
+        /* Show only main pest types (skip aliases like '蟑螂', '床蝨', etc — these are duplicates of '曱甴', '木蝨') */
+        const pestOptions = ['曱甴', '木蝨', '老鼠', '白蟻', '蛀木蟲', '蚊', '螞蟻', '蜂', '蜈蚣', '衣魚', '蜘蛛', '飛蟲', '蟎蟲', '卜泥'];
         selectorDiv.innerHTML =
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">' +
                 '<i class="fas fa-circle-info" style="color:#d97706;"></i>' +
                 '<strong style="color:#92400e;font-size:.92rem;">AI 辨識暫時無法使用，請手動選擇害蟲類型</strong>' +
             '</div>' +
-            '<p style="font-size:.85rem;color:#78350f;margin-bottom:10px;">已為你預備本地策略庫分析，選擇即可獲得完整報告 + WhatsApp 即時預約。</p>' +
+            '<p style="font-size:.85rem;color:#78350f;margin-bottom:12px;">已為你預備本地策略庫分析（含三十六計對照），選擇即可獲得完整報告 + WhatsApp 即時預約。</p>' +
             '<div style="display:flex;flex-wrap:wrap;gap:6px;">' +
-                pestOptions.map(p => '<button type="button" class="js-pest-pick" data-pest="' + p + '" style="padding:6px 14px;border-radius:18px;border:1px solid #d97706;background:#fff;color:#92400e;font-size:.85rem;cursor:pointer;font-family:inherit;">' + p + '</button>').join('') +
+                pestOptions.map(p => {
+                    const data = STRATEGY_MAP[p];
+                    if (!data) return '';
+                    return '<button type="button" class="js-pest-pick" data-pest="' + p + '" style="padding:8px 14px;border-radius:18px;border:1px solid #d97706;background:#fff;color:#92400e;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .2s;">' + data.pest + '</button>';
+                }).join('') +
             '</div>';
 
         selectorDiv.querySelectorAll('.js-pest-pick').forEach(btn => {
@@ -248,8 +263,10 @@
                 const pestKey = btn.getAttribute('data-pest');
                 selectorDiv.style.display = 'none';
                 const data = STRATEGY_MAP[pestKey];
-                data.source = 'manual';
-                onPestSelected(data);
+                if (data) {
+                    data.source = 'manual';
+                    onPestSelected(data);
+                }
             });
         });
     }
@@ -279,16 +296,62 @@
         };
 
         const fillResult = (data) => {
-            if ($(opts.pest)) $(opts.pest).textContent = data.pest + (data.source === 'manual' ? '（本地分析）' : '');
+            if ($(opts.pest)) $(opts.pest).textContent = data.pest + (data.source === 'manual' ? '（本地分析）' : (data.source === 'ai' ? '（AI 初步辨識）' : ''));
             if ($(opts.confidence)) $(opts.confidence).textContent = data.confidence + '% AI 信心';
             if ($(opts.risk)) $(opts.risk).textContent = data.risk;
             if ($(opts.nest)) $(opts.nest).textContent = data.nest;
             if ($(opts.strategy)) $(opts.strategy).textContent = data.strategy;
             if ($(opts.price)) $(opts.price).textContent = data.price;
 
+            /* 🔧 v3.1 NEW: Manual correction mechanism (黃金防笑點)
+               AI 視覺有極限，當相片模糊或光線不足時可能誤判。
+               加入手動修正下拉選單，讓用戶可以一鍵切換正確嘅害蟲種類，
+               系統會即時重新計算對應嘅「三十六計方案」與「參考價格」。 */
+            const resultEl = $(opts.result);
+            if (resultEl) {
+                /* Remove any existing manual correction UI first */
+                const existingCorrector = resultEl.querySelector('.ai-manual-corrector');
+                if (existingCorrector) existingCorrector.remove();
+
+                /* Only show manual correction if AI identified something (source === 'ai') */
+                if (data.source === 'ai') {
+                    const corrector = document.createElement('div');
+                    corrector.className = 'ai-manual-corrector';
+                    corrector.style.cssText = 'background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px 14px;margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
+                    const label = document.createElement('span');
+                    label.style.cssText = 'font-size:0.82rem;color:#92400e;font-weight:700;flex-shrink:0;';
+                    label.innerHTML = '<i class="fas fa-circle-info" style="margin-right:4px;"></i>辨識唔啱？手動修正品種：';
+                    const select = document.createElement('select');
+                    select.style.cssText = 'flex:1;min-width:140px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:0.88rem;font-family:inherit;background:#fff;color:#1e293b;';
+                    /* Add "保持 AI 結果" as default option */
+                    const keepOption = document.createElement('option');
+                    keepOption.value = '';
+                    keepOption.textContent = '— 保持 AI 結果 —';
+                    select.appendChild(keepOption);
+                    /* Add all pest options */
+                    Object.keys(STRATEGY_MAP).filter(k => k !== '其他').forEach(key => {
+                        const opt = document.createElement('option');
+                        opt.value = key;
+                        opt.textContent = STRATEGY_MAP[key].pest;
+                        select.appendChild(opt);
+                    });
+                    select.addEventListener('change', function() {
+                        if (!this.value) return;
+                        const correctedData = STRATEGY_MAP[this.value];
+                        if (correctedData) {
+                            correctedData.source = 'manual';
+                            fillResult(correctedData);
+                        }
+                    });
+                    corrector.appendChild(label);
+                    corrector.appendChild(select);
+                    resultEl.appendChild(corrector);
+                }
+            }
+
             const wa = $(opts.wa);
             if (wa) {
-                const sourceLabel = data.source === 'manual' ? '本地策略庫' : 'AI 視覺';
+                const sourceLabel = data.source === 'manual' ? '本地策略庫（用戶修正）' : 'AI 視覺';
                 const msg = `你好，我已用 AI 害蟲診斷器分析相片：\n• AI 識別：${data.pest}（信心 ${data.confidence}%）\n• 風險等級：${data.risk}\n• 潛在暗巢：${data.nest}\n• 建議策略：${data.strategy}\n• 參考估價：${data.price}\n• 分析方式：${sourceLabel}\n\n（我理解 AI 診斷結果僅供參考，實際方案以現場師傅評估為準）\n我想預約師傅上門跟進，謝謝！`;
                 wa.href = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
             }
