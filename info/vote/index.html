@@ -210,7 +210,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <span class="logo-main">滅蟲師傅</span>
         <span class="logo-sub">Pest Control Master</span>
       </div>
-      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅"  rel="noopener">
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅" rel="noopener">
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
@@ -395,14 +395,14 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <div class="pest-detail-panel" id="pestDetail">
         <h4 id="pestDetailName"></h4>
         <p id="pestDetailDesc"></p>
-        <a id="pestDetailCta" href="#" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
+        <a id="pestDetailCta" href="#" class="btn-cta" rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
       </div>
 
       <!-- ========== 商業 CTA ========== -->
       <div class="blog-cta-box">
         <h4>有蟲患唔使自己搞！搵滅蟲師傅幫你手</h4>
         <p>無論係邊種害蟲，我哋都有專業方案幫你斷尾。免費上門估價，持牌除害劑，安全有保障。</p>
-        <a href="https://wa.me/85252821552" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
+        <a href="https://wa.me/85252821552" class="btn-cta" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
       <!-- ========== 苦主經驗分享區（自建原生留言） ========== -->
@@ -475,7 +475,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <div id="imageModal" class="img-modal-overlay" onclick="closeImgModal(event)">
         <img id="modalImg" class="img-modal-content" src="" alt="香港苦主上傳之害蟲放大相片" title="香港苦主上傳之害蟲相片預覽" loading="lazy" decoding="async">
         <div class="img-modal-actions" onclick="event.stopPropagation()">
-          <a id="downloadImgBtn" class="img-modal-btn" href=""  rel="noopener">
+          <a id="downloadImgBtn" class="img-modal-btn" href="" rel="noopener">
             📥 開啟原圖 / 下載照片
           </a>
           <button type="button" class="img-modal-btn close-btn" onclick="closeImgModal(null, true)">
@@ -509,7 +509,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
   <div class="social-icons">
     <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
     <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://wa.me/85252821552"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/85252821552" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
     <a href="mailto:Cedars5282@gmail.com" target="_blank" title="Gmail" rel="noopener noreferrer">
       <img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 電子郵件聯絡圖示" class="gmail-icon" decoding="async">
@@ -648,7 +648,7 @@ function showToast(msg, type){
 })();
 </script>
 
-<!-- ========== 自建原生留言系統 JS (v2.3 圖片等比例壓縮版) ========== -->
+<!-- ========== 自建原生留言系統 JS (v2.4 體積精準壓縮版) ========== -->
 <script>
 var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
 var PAGE_ID     = 'vote-page-2026';
@@ -680,18 +680,17 @@ function initCaptcha() {
 }
 
 /**
- * Canvas 圖片自動等比例壓縮輔助函數
- * 長邊限制為 800px，品質設為 0.7 JPEG，徹底解決「圖片太長」與 Base64 體積過大問題
+ * Canvas 圖片自適應等比例壓縮
+ * 限制長邊最高 500px，並自動將 Base64 字串控制在 35,000 字元以內，徹底解決「圖片網址過長」報錯
  */
-function compressImage(file, maxDim, quality) {
-  maxDim = maxDim || 800;
-  quality = quality || 0.7;
+function compressImage(file) {
   return new Promise(function(resolve, reject) {
     var reader = new FileReader();
     reader.onload = function(evt) {
       var img = new Image();
       img.onload = function() {
         var canvas = document.createElement('canvas');
+        var maxDim = 500;
         var width = img.width;
         var height = img.height;
 
@@ -710,8 +709,12 @@ function compressImage(file, maxDim, quality) {
         var ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        // 轉為輕量 JPEG Base64
-        resolve(canvas.toDataURL('image/jpeg', quality));
+        var dataUrl = canvas.toDataURL('image/jpeg', 0.5);
+        if (dataUrl.length > 35000) {
+          dataUrl = canvas.toDataURL('image/jpeg', 0.3);
+        }
+
+        resolve(dataUrl);
       };
       img.onerror = function() { reject(new Error('圖片載入失敗')); };
       img.src = evt.target.result;
@@ -725,14 +728,12 @@ async function handleImageSelect(e) {
   const file = e.target.files[0];
   if (!file) { uploadedImgUrl = ''; return; }
   
-  // 檢查檔案格式
   if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type)) {
     showToast('只支援 JPG、PNG、WebP、GIF 圖片格式！', 'warning');
     e.target.value = '';
     return;
   }
   
-  // 限制原始檔案小於 10MB，上傳後會自動等比例壓縮
   if (file.size > 10 * 1024 * 1024) {
     showToast('圖片檔案不能超過 10MB！', 'warning');
     e.target.value = '';
@@ -741,7 +742,7 @@ async function handleImageSelect(e) {
 
   try {
     showToast('相片處理中...', 'info');
-    uploadedImgUrl = await compressImage(file, 800, 0.7);
+    uploadedImgUrl = await compressImage(file);
   } catch (err) {
     console.error('圖片處理失敗:', err);
     showToast('圖片處理失敗，請重新選擇。', 'error');
