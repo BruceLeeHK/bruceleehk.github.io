@@ -19,9 +19,7 @@
     <meta property="og:image" content="assets/img/og-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Structured Data — v3.3 fix: compliant with Google Rich Results requirements
-         (aggregateRating requires numeric ratingValue & integer reviewCount;
-          PestControl needs @id, image as ImageObject; added review property) -->
+    <!-- Structured Data — v3.4 fix: removed review & aggregateRating to clear Google Search Console errors -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -64,45 +62,6 @@
                 ],
                 "opens": "09:00",
                 "closes": "18:00"
-            }
-        ],
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.9,
-            "reviewCount": 10000,
-            "bestRating": 5,
-            "worstRating": 1
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": "日出康城住戶"
-                },
-                "datePublished": "2026-07-15",
-                "reviewBody": "師傅上門好準時，木蝨問題一次搞掂，專業可靠。",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": 5,
-                    "bestRating": 5,
-                    "worstRating": 1
-                }
-            },
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": "美孚新邨陳太"
-                },
-                "datePublished": "2026-06-22",
-                "reviewBody": "滅鼠服務徹底，跟進及時，推薦。",
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": 5,
-                    "bestRating": 5,
-                    "worstRating": 1
-                }
             }
         ]
     }
@@ -722,16 +681,6 @@
             font-size: 0.9rem;
             color: var(--text-muted);
         }
-        .rating-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin: 10px 0 18px;
-        }
-        .rating-stars { color: #fbbf24; font-size: 1rem; letter-spacing: 2px; }
-        .rating-text { color: var(--text-main); font-weight: 700; font-size: 0.92rem; }
-        .rating-count { color: var(--text-muted); font-size: 0.82rem; }
         .estate-tags {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1127,11 +1076,6 @@
                 <div class="estate-header">
                     <h3 id="estate-title"><i class="fa-solid fa-location-dot" aria-hidden="true" style="color: var(--danger);"></i> 本地屋苑與商戶實證案例</h3>
                     <p>全港過萬戶家庭及餐廳信賴之選</p>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-stars" aria-hidden="true">★★★★★</span>
-                    <span class="rating-text">4.9 / 5.0</span>
-                    <span class="rating-count">• Google 真實評分 • 10,000+ 戶服務</span>
                 </div>
                 <div class="estate-tags">
                     <div class="estate-tag">
