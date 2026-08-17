@@ -84,28 +84,70 @@
     /**
      * Real AI Vision Call: Cloudflare Worker (Llama-3.2 Vision)
      * Endpoint: https://pest-vision-worker.cedars5282.workers.dev/
+     * 自動 Canvas 圖片壓縮，預防 500 內部錯誤
      */
     async function callCloudflareWorkerAI(file) {
-        // 1. 轉為 Base64 (去除 data:image/jpeg;base64, 前綴)
-        const base64String = await new Promise((resolve, reject) => {
+        // 1. 利用 Canvas 壓縮圖片體積（長邊最大 800px, JPEG 品質 0.7）
+        const compressedBase64 = await new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxDim || height > maxDim) {
+                        if (width > height) {
+                            height = Math.round((height * maxDim) / width);
+                            width = maxDim;
+                        } else {
+                            width = Math.round((width * maxDim) / height);
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // 輸出為 JPEG 壓縮 Base64 字串並去除 Header 前綴
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    resolve(dataUrl.split(',')[1]);
+                };
+                img.onerror = reject;
+                img.src = e.target.result;
+            };
             reader.onerror = reject;
             reader.readAsDataURL(file);
         });
 
-        // 2. 呼叫 Cloudflare Worker
-        const response = await fetch('https://pest-vision-worker.cedars5282.workers.dev/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ imageBase64: base64String })
-        });
+        // 2. 呼叫 Cloudflare Worker (設置 15 秒逾時保護)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-        if (!response.ok) throw new Error('Worker API 響應異常: ' + response.status);
+        let response;
+        try {
+            response = await fetch('https://pest-vision-worker.cedars5282.workers.dev/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ imageBase64: compressedBase64 }),
+                signal: controller.signal
+            });
+        } finally {
+            clearTimeout(timeoutId);
+        }
+
+        if (!response.ok) {
+            const errJson = await response.json().catch(() => ({}));
+            throw new Error(`Worker 響應異常 [${response.status}]: ${errJson.error || '後端系統錯誤'}`);
+        }
 
         const resData = await response.json();
         
-        // 3. 解析 Workers AI 的文字輸出 (含有 JSON 內容)
+        // 3. 解析 Workers AI 輸出內容 (含有 JSON 格式文字)
         let rawText = typeof resData === 'string' ? resData : (resData.response || JSON.stringify(resData));
         let aiResult = {};
         
@@ -157,8 +199,8 @@
 
         const handleFile = async (file) => {
             if (!file) return;
-            if (file.size > 5 * 1024 * 1024) {
-                alert('相片大小不能超過 5MB，請重新選擇。');
+            if (file.size > 10 * 1024 * 1024) {
+                alert('相片大小不能超過 10MB，請重新選擇。');
                 return;
             }
 
@@ -172,7 +214,7 @@
             reader.readAsDataURL(file);
 
             try {
-                // 真正呼叫 Cloudflare Worker Vision API
+                // 真正呼叫 Cloudflare Worker Vision API (含自動壓縮與優化)
                 const data = await callCloudflareWorkerAI(file);
 
                 // 填入分析結果 DOM
