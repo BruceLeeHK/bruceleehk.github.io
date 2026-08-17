@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bruceleehk.com/sitemap.xml
+# Admin backend should not be indexed
+Disallow: /info/vote/admin.html
+
+Sitemap: https://bruceleehk.com/sitemap.xml

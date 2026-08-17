@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
   <title>留言管理後台 — 滅蟲師傅</title>
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="all">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{--primary:#2c5e1a;--primary-hover:#1e4210;--primary-light:#f4f9f0;--danger:#d32f2f;--danger-light:#fef2f2;--warning:#f9a825;--warning-light:#fff8e1;--success:#16a34a;--success-light:#dcfce7;--info:#0284c7;--info-light:#e0f2fe;--text-dark:#1e293b;--text-light:#64748b;--border:#e2e8f0;--bg:#f8fafc;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.06);--radius:8px}
-    body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;min-height:100vh}
+    html{-webkit-tap-highlight-color:transparent;}
+    body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.6;min-height:100vh;-webkit-tap-highlight-color:transparent;}
     a{text-decoration:none;color:inherit}
     /* Top Bar */
     .topbar{background:linear-gradient(135deg,var(--primary),#3a7a22);color:#fff;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.1)}
@@ -122,8 +124,13 @@
       .comment-card-actions .btn{font-size:.78rem;padding:6px 10px}
     }
   </style>
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#10b981;color:#fff;padding:8px 16px;z-index:1000;text-decoration:none;border-radius:0 0 6px 0;">跳到主內容</a>
+
 
 <!-- ========== 頂部欄 ========== -->
 <div class="topbar">
@@ -131,7 +138,7 @@
     <h1><i class="fas fa-shield-halved"></i> 留言管理後台</h1>
     <div class="topbar-meta">
       <span class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">檢查中…</span></span>
-      <a href="/info/vote/" target="_blank"><i class="fas fa-external-link-alt"></i> 返回投票頁</a>
+      <a href="/info/vote/" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> 返回投票頁</a>
       <button type="button" id="btnLogout" class="btn btn-ghost btn-sm" style="display:none;" onclick="logout()">
         <i class="fas fa-sign-out-alt"></i> 登出
       </button>
@@ -216,7 +223,7 @@
 
 <!-- ========== 圖片燈箱 ========== -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
-  <img id="lightboxImg" alt="大圖">
+  <img id="lightboxImg" alt="大圖" loading="lazy" decoding="async">
 </div>
 
 <!-- ========== Toast ========== -->
@@ -364,6 +371,8 @@ function renderList() {
     html += renderCommentCard(list[i]);
   }
   listEl.innerHTML = html;
+  /* Wire up delegated event handlers (avoid inline onclick XSS) */
+  bindActionButtons();
 }
 
 function renderCommentCard(c) {
@@ -397,10 +406,10 @@ function renderCommentCard(c) {
   /* 內容 */
   html += '<div class="comment-card-body">' + escHtml(c.content) + '</div>';
 
-  /* 圖片 */
+  /* 圖片 — use data-full attribute + event delegation to avoid inline onclick XSS */
   if (c.image_url) {
     html += '<div class="comment-card-image">';
-    html += '  <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" onclick="openLightbox(\'' + escAttr(c.image_url) + '\')">';
+    html += '  <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" decoding="async" class="js-lightbox-img" data-full="' + escAttr(c.image_url) + '" style="cursor:zoom-in">';
     html += '</div>';
   }
 
@@ -412,29 +421,59 @@ function renderCommentCard(c) {
   }
   html += '</div>';
 
-  /* 操作按鈕 */
+  /* 操作按鈕 — use data-action + data-id attributes for safe event delegation */
   html += '<div class="comment-card-actions">';
   if (c.approved === 0) {
-    html += '  <button type="button" class="btn btn-success btn-sm" onclick="approveComment(\'' + escAttr(c.id) + '\')">';
+    html += '  <button type="button" class="btn btn-success btn-sm js-action-btn" data-action="approve" data-id="' + escAttr(c.id) + '">';
     html += '    <i class="fas fa-check"></i> 一鍵批准</button>';
   }
   if (!c.parent_id) {
-    html += '  <button type="button" class="btn btn-info btn-sm" onclick="openReplyModal(\'' + escAttr(c.id) + '\', \'' + escAttr(c.nickname).replace(/'/g, "\\'") + '\')">';
+    html += '  <button type="button" class="btn btn-info btn-sm js-action-btn" data-action="reply" data-id="' + escAttr(c.id) + '" data-name="' + escAttr(c.nickname) + '">';
     html += '    <i class="fas fa-reply"></i> 官方回覆</button>';
     if (c.is_pinned) {
-      html += '  <button type="button" class="btn btn-warning btn-sm" onclick="togglePin(\'' + escAttr(c.id) + '\', false)">';
+      html += '  <button type="button" class="btn btn-warning btn-sm js-action-btn" data-action="unpin" data-id="' + escAttr(c.id) + '">';
       html += '    <i class="fas fa-thumbtack"></i> 取消置頂</button>';
     } else {
-      html += '  <button type="button" class="btn btn-ghost btn-sm" onclick="togglePin(\'' + escAttr(c.id) + '\', true)" title="設為置頂">';
+      html += '  <button type="button" class="btn btn-ghost btn-sm js-action-btn" data-action="pin" data-id="' + escAttr(c.id) + '" title="設為置頂">';
       html += '    <i class="fas fa-thumbtack"></i> 置頂</button>';
     }
   }
-  html += '  <button type="button" class="btn btn-danger btn-sm" onclick="deleteComment(\'' + escAttr(c.id) + '\', ' + (c.parent_id ? 'true' : 'false') + ')">';
+  html += '  <button type="button" class="btn btn-danger btn-sm js-action-btn" data-action="delete" data-id="' + escAttr(c.id) + '" data-is-reply="' + (c.parent_id ? 'true' : 'false') + '">';
   html += '    <i class="fas fa-trash"></i> 刪除</button>';
   html += '</div>';
 
   html += '</div>';
   return html;
+}
+
+/* ===== Event delegation for action buttons (avoid inline onclick XSS) ===== */
+function bindActionButtons() {
+  var listEl = document.getElementById('commentList');
+  if (!listEl) return;
+
+  listEl.querySelectorAll('.js-action-btn').forEach(function (btn) {
+    /* Unbind previous (re-render safety) by cloning */
+    var cloned = btn.cloneNode(true);
+    btn.parentNode.replaceChild(cloned, btn);
+  });
+
+  listEl.querySelectorAll('.js-action-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var action = this.getAttribute('data-action');
+      var id = this.getAttribute('data-id');
+      if (action === 'approve') approveComment(id);
+      else if (action === 'reply') openReplyModal(id, this.getAttribute('data-name'));
+      else if (action === 'pin') togglePin(id, true);
+      else if (action === 'unpin') togglePin(id, false);
+      else if (action === 'delete') deleteComment(id, this.getAttribute('data-is-reply') === 'true');
+    });
+  });
+
+  listEl.querySelectorAll('.js-lightbox-img').forEach(function (img) {
+    img.addEventListener('click', function () {
+      openLightbox(this.getAttribute('data-full'));
+    });
+  });
 }
 
 /* ===== 一鍵批准 ===== */
@@ -590,7 +629,7 @@ function showToast(msg, type) {
 
 function escHtml(str) {
   if (!str) return '';
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 function escAttr(str) {
   if (!str) return '';

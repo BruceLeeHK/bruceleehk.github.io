@@ -180,19 +180,37 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}.pest-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.pest-card{padding:12px}.vote-intro{padding:20px 16px}}
 @media(max-width:480px){.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}.pest-grid{grid-template-columns:1fr 1fr;gap:8px}.result-item{flex-wrap:wrap;gap:8px}.result-bar-wrap{order:4;flex-basis:100%}}
 </style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
+      frame-src https://udify.app;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+      frame-ancestors 'none';
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#10b981;color:#fff;padding:8px 16px;z-index:1000;text-decoration:none;border-radius:0 0 6px 0;">跳到主內容</a>
+
 
 <!-- ========== 頁首 ========== -->
 <header id="site-header">
   <div class="nav-container">
     <div class="logo">
-      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Pest Control Master - 香港家居害蟲防治專家的標誌" loading="eager">
+      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Pest Control Master - 香港家居害蟲防治專家的標誌" loading="eager" decoding="async">
       <div class="logo-text">
         <span class="logo-main">滅蟲師傅</span>
         <span class="logo-sub">Pest Control Master</span>
       </div>
-      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅" target="_blank" rel="noopener">
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅"  rel="noopener">
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
@@ -203,11 +221,11 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <a href="/info/" class="nav-cta active">蟲類資訊</a>
       <a href="/quote/" class="nav-cta">有蟲話我知</a>
     </nav>
-    <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" type="button"><i class="fas fa-bars"></i></button>
   </div>
 </header>
 
-<main class="page-info">
+<main id="main-content" class="page-info">
 
   <!-- ========== Hero ========== -->
   <section class="page-hero">
@@ -377,14 +395,14 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <div class="pest-detail-panel" id="pestDetail">
         <h4 id="pestDetailName"></h4>
         <p id="pestDetailDesc"></p>
-        <a id="pestDetailCta" href="#" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
+        <a id="pestDetailCta" href="#" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
       </div>
 
       <!-- ========== 商業 CTA ========== -->
       <div class="blog-cta-box">
         <h4>有蟲患唔使自己搞！搵滅蟲師傅幫你手</h4>
         <p>無論係邊種害蟲，我哋都有專業方案幫你斷尾。免費上門估價，持牌除害劑，安全有保障。</p>
-        <a href="url?id=0" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
+        <a href="https://wa.me/85252821552" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
       <!-- ========== 苦主經驗分享區（自建原生留言） ========== -->
@@ -413,16 +431,21 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             </div>
 
             <div class="form-group">
-              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP，最大 4MB）：</label>
-              <input type="file" id="imageFile" class="form-input" accept="image/*">
+              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最大 5MB）：</label>
+              <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
               <p class="notice">💡 上傳相片後，其他用戶點擊圖片可放大並長按儲存照片。</p>
             </div>
 
             <div class="captcha-row">
               <label><i class="fas fa-shield-halved"></i> 數學驗證：</label>
               <span id="captchaQuestion">? + ? =</span>
-              <input type="number" id="captchaAnswer" required>
+              <input type="number" id="captchaAnswer" required autocomplete="off">
               <button type="button" class="btn-reply" onclick="initCaptcha()">↻ 換題</button>
+            </div>
+
+            <!-- Honeypot field: hidden from humans, bots fill it. CSS-hidden, aria-hidden, tabindex=-1, autocomplete=off -->
+            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+              <label>不要填寫此欄位 <input type="text" name="website_url" tabindex="-1" autocomplete="off"></label>
             </div>
 
             <button type="submit" id="btnSubmitComment" class="btn-submit-comment">
@@ -450,9 +473,9 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 
       <!-- 圖片全螢幕放大預覽 Lightbox Modal -->
       <div id="imageModal" class="img-modal-overlay" onclick="closeImgModal(event)">
-        <img id="modalImg" class="img-modal-content" src="" alt="香港苦主上傳之害蟲放大相片" title="香港苦主上傳之害蟲相片預覽">
+        <img id="modalImg" class="img-modal-content" src="" alt="香港苦主上傳之害蟲放大相片" title="香港苦主上傳之害蟲相片預覽" loading="lazy" decoding="async">
         <div class="img-modal-actions" onclick="event.stopPropagation()">
-          <a id="downloadImgBtn" class="img-modal-btn" href="" target="_blank" rel="noopener">
+          <a id="downloadImgBtn" class="img-modal-btn" href=""  rel="noopener">
             📥 開啟原圖 / 下載照片
           </a>
           <button type="button" class="img-modal-btn close-btn" onclick="closeImgModal(null, true)">
@@ -484,18 +507,18 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 <!-- ========== 頁腳 ========== -->
 <footer>
   <div class="social-icons">
-    <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://wa.me/85252821552" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="mailto:Cedars5282@gmail.com" target="_blank" title="Gmail">
-      <img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 電子郵件聯絡圖示" class="gmail-icon">
+    <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://wa.me/85252821552"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+    <a href="mailto:Cedars5282@gmail.com" target="_blank" title="Gmail" rel="noopener noreferrer">
+      <img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 電子郵件聯絡圖示" class="gmail-icon" decoding="async">
     </a>
   </div>
-  <p>&copy; 2023 滅蟲師傅 CEDARS LTD. 版權所有</p>
+  <p>&copy; <span id="current-year">2026</span> 滅蟲師傅 CEDARS LTD. 版權所有</p>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js" defer></script>
 
 <!-- ========== 投票系統 JS ========== -->
 <script>
@@ -659,14 +682,25 @@ function initCaptcha() {
 function handleImageSelect(e) {
   const file = e.target.files[0];
   if (!file) { uploadedImgUrl = ''; return; }
-  if (file.size > 4 * 1024 * 1024) {
-    showToast('圖片檔案不能超過 4MB！', 'warning');
+  // Validate file type (defend against non-image uploads)
+  if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type)) {
+    showToast('只支援 JPG、PNG、WebP、GIF 圖片格式！', 'warning');
+    e.target.value = '';
+    return;
+  }
+  // Match server-side limit (raised from 4MB to 5MB to align with comment-handler.js limit of 5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('圖片檔案不能超過 5MB！', 'warning');
     e.target.value = '';
     return;
   }
   const reader = new FileReader();
   reader.onload = function(evt) {
     uploadedImgUrl = evt.target.result;
+  };
+  reader.onerror = function() {
+    showToast('圖片讀取失敗，請重新選擇。', 'error');
+    uploadedImgUrl = '';
   };
   reader.readAsDataURL(file);
 }
@@ -675,17 +709,18 @@ async function loadComments() {
   const listEl = document.getElementById('commentList');
   const countEl = document.getElementById('commentCount');
   try {
-    const res = await fetch(`${WORKER_BASE}/api/comments?page_id=${PAGE_ID}`);
+    const res = await fetch(`${WORKER_BASE}/api/comments?page_id=${encodeURIComponent(PAGE_ID)}`);
     const data = await res.json();
 
     if (!data.success) {
-      listEl.innerHTML = `<p style="color: red; text-align:center;">載入留言失敗：${data.error}</p>`;
+      // escapeHtml on server error to prevent XSS via injected error message
+      listEl.innerHTML = '<p style="color: red; text-align:center;">載入留言失敗：' + escapeHtml(String(data.error || '未知錯誤')) + '</p>';
       return;
     }
 
     const pendingLocal = getLocalPendingComments();
     renderTree(data.comments || [], pendingLocal);
-    
+
     const totalCount = (data.total || 0) + pendingLocal.length;
     countEl.textContent = totalCount;
 
@@ -711,8 +746,9 @@ function renderTree(serverComments, pendingComments) {
     const pinnedBadge = item.is_pinned ? '<span class="pinned-tag"><i class="fas fa-thumbtack"></i> 置頂</span>' : '';
     const pendingBadge = isPending ? '<span class="pending-tag"><i class="fas fa-hourglass-half"></i> 審核中...</span>' : '';
     
-    const imageAltText = item.image_url ? `${escapeHtml(item.nickname)} 上傳之香港家居害蟲照片求助 - 滅蟲師傅討論區` : '';
-    const imgHtml = item.image_url ? `<img src="${item.image_url}" class="comment-img-thumb" onclick="openImgModal('${item.image_url}')" alt="${imageAltText}" title="${imageAltText} (點擊全螢幕放大)" loading="lazy">` : '';
+    const imageAltText = item.image_url ? (escapeHtml(item.nickname) + ' 上傳之香港家居害蟲照片求助 - 滅蟲師傅討論區') : '';
+    // Use addEventListener via data-attribute instead of inline onclick to avoid XSS via image_url
+    const imgHtml = item.image_url ? ('<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb js-img-thumb" data-full="' + escapeAttr(item.image_url) + '" alt="' + imageAltText + '" title="' + imageAltText + ' (點擊全螢幕放大)" loading="lazy" decoding="async">') : '';
 
     let repliesHtml = '';
     if (item.replies && item.replies.length > 0) {
@@ -740,14 +776,27 @@ function renderTree(serverComments, pendingComments) {
         </div>
         <div class="comment-body">${escapeHtml(item.content)}</div>
         ${imgHtml}
-        
-        ${!isPending ? `<button type="button" class="btn-reply" onclick="startReply('${item.id}', '${escapeHtml(item.nickname)}')"><i class="fas fa-reply"></i> 回覆</button>` : ''}
+
+        ${!isPending ? `<button type="button" class="btn-reply js-reply-btn" data-reply-id="${escapeAttr(item.id)}" data-reply-name="${escapeAttr(item.nickname)}"><i class="fas fa-reply"></i> 回覆</button>` : ''}
         ${repliesHtml}
       </div>
     `;
   });
 
   listEl.innerHTML = html;
+
+  // Wire up image-click handlers (event delegation, avoids inline onclick XSS)
+  listEl.querySelectorAll('.js-img-thumb').forEach(function(img) {
+    img.addEventListener('click', function() {
+      openImgModal(this.getAttribute('data-full'));
+    });
+  });
+  // Wire up reply buttons
+  listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
+    });
+  });
 }
 
 async function handleMainSubmit(e) {
@@ -760,6 +809,32 @@ async function handleMainSubmit(e) {
   if (answer !== (captchaNumA + captchaNumB)) {
     showToast('數學驗證答案不正確！', 'warning');
     return;
+  }
+
+  // Honeypot: if filled, silently succeed without actually submitting (bot trap)
+  const honeypotInput = document.querySelector('input[name="website_url"]');
+  if (honeypotInput && honeypotInput.value) {
+    showToast('留言已成功提交！將會在審核後正式公開。', 'success');
+    document.getElementById('mainCommentForm').reset();
+    initCaptcha();
+    return; // silently drop
+  }
+
+  // Basic client-side validation: nickname + content
+  if (!nickname || nickname.length > 30) {
+    showToast('暱稱長度需為 1-30 字', 'warning');
+    return;
+  }
+  if (currentReplyTo) {
+    if (content.length < 10 || content.length > 300) {
+      showToast('回覆字數需為 10-300 字', 'warning');
+      return;
+    }
+  } else {
+    if (content.length < 1 || content.length > 2000) {
+      showToast('留言內容長度需為 1-2000 字', 'warning');
+      return;
+    }
   }
 
   btn.disabled = true;
@@ -788,7 +863,7 @@ async function handleMainSubmit(e) {
     const data = await res.json();
 
     if (!data.success) {
-      showToast(`提交失敗：${data.error}`, 'warning');
+      showToast('提交失敗：' + (data.error || '未知錯誤'), 'warning');
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
       return;
@@ -823,14 +898,16 @@ async function handleMainSubmit(e) {
 function startReply(parentId, parentNickname) {
   currentReplyTo = { id: parentId, nickname: parentNickname };
   const hint = document.getElementById('replyHint');
-  document.getElementById('replyHintText').innerHTML = `正回覆 @<strong>${parentNickname}</strong>：`;
+  // Escape nickname before injecting into HTML (avoid XSS via nickname)
+  document.getElementById('replyHintText').innerHTML = '正回覆 @<strong>' + escapeHtml(parentNickname) + '</strong>：';
   hint.style.display = 'block';
 
   const contentInput = document.getElementById('inputContent');
   contentInput.setAttribute('maxlength', '300');
-  contentInput.setAttribute('placeholder', `回覆 @${parentNickname}（10-300字，嚴禁網址）`);
+  contentInput.setAttribute('placeholder', '回覆 @' + parentNickname + '（10-300字，嚴禁網址）');
 
-  document.getElementById('commentForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Bug fix: previously referenced non-existent 'commentForm' id (actual id is 'mainCommentForm')
+  document.getElementById('mainCommentForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
   contentInput.focus();
 }
 
@@ -879,7 +956,12 @@ function closeImgModal(e, force) {
 }
 
 function escapeHtml(str) {
-  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function escapeAttr(str) {
+  // Same as escapeHtml — escapes both single and double quotes for safe attribute embedding
+  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 function formatTime(isoStr) {
@@ -937,7 +1019,7 @@ function formatTime(isoStr) {
   "@id": "https://bruceleehk.com/info/vote/#forum-discussion",
   "headline": "2026年港人最厭惡嘅10大害蟲 — 苦主討論區",
   "articleBody": "歡迎分享你嘅害蟲遭遇、求助經驗或防蟲心得！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。",
-  "url": "url?id=4vote/",
+  "url": "https://bruceleehk.com/info/vote/",
   "datePublished": "2026-08-11T00:00:00+08:00",
   "dateModified": "2026-08-13T17:17:16+08:00",
   "author": {

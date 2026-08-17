@@ -7,7 +7,8 @@
     <meta name="description" content="滅蟲師傅結合 AI 害蟲圖像識別、IoT 智慧監測與獨家三十六計防治策略，提供全港即日上門滅曱甴、滅鼠、滅木蝨及白蟻服務。5分鐘 WhatsApp 智能免費估價。">
     <meta name="keywords" content="香港滅蟲,滅曱甴,滅鼠,滅木蝨,白蟻防治,AI害蟲識別,IoT智慧監測,三十六計,即日上門,WhatsApp估價">
     <link rel="canonical" href="https://bruceleehk.com/">
-    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -16,8 +17,9 @@
     <meta property="og:title" content="滅蟲師傅 | 香港首創 AI 智慧滅蟲">
     <meta property="og:description" content="AI 害蟲圖像識別 × IoT 智慧監測 × 獨家三十六計。最快即日上門，WhatsApp 5分鐘智能估價。">
     <meta property="og:url" content="https://bruceleehk.com/">
-    <meta property="og:image" content="assets/img/og-cover.jpg">
+    <meta property="og:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -25,7 +27,7 @@
         "@context": "https://schema.org",
         "@type": "PestControl",
         "name": "滅蟲師傅 PEST CONTROL MASTER",
-        "image": "assets/img/logo.png",
+        "image": "https://bruceleehk.com/assets/img/logo.png",
         "url": "https://bruceleehk.com/",
         "telephone": "+85252821552",
         "priceRange": "$$",
@@ -705,6 +707,22 @@
             .hero h1 { font-size: 2.5rem; }
         }
     </style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
+      frame-src https://udify.app;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+      frame-ancestors 'none';
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主要內容</a>
@@ -713,7 +731,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁">
-                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo">
+                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
@@ -755,7 +773,7 @@
                     <a href="#smart-section" class="btn btn-primary">
                         <i class="fa-solid fa-camera-retro" aria-hidden="true"></i> 即時 AI 診斷害蟲
                     </a>
-                    <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務"  rel="noopener" class="btn btn-secondary">
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 諮詢
                     </a>
                 </div>
@@ -799,7 +817,7 @@
             <div class="grid-3">
                 <!-- AI 害蟲分析系統卡片 -->
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy">
+                    <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy" decoding="async">
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
                         <h3>AI 害蟲分析系統</h3>
@@ -833,7 +851,7 @@
                                 <!-- State 3: Result -->
                                 <div id="home-ai-result">
                                     <div class="ai-preview">
-                                        <img id="home-result-img" alt="已分析的害蟲相片">
+                                        <img id="home-result-img" alt="已分析的害蟲相片" loading="lazy" decoding="async">
                                     </div>
                                     <div class="ai-result">
                                         <div class="ai-result-row">
@@ -858,7 +876,7 @@
                                         </p>
                                     </div>
                                     <div class="ai-result-actions">
-                                        <a href="#" id="home-r-wa" target="_blank" rel="noopener" class="btn btn-whatsapp">
+                                        <a href="#" id="home-r-wa"  rel="noopener" class="btn btn-whatsapp">
                                             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 預約
                                         </a>
                                         <button type="button" class="btn btn-ghost" id="home-r-reupload">
@@ -872,7 +890,7 @@
                 </article>
 
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統" loading="lazy">
+                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統" loading="lazy" decoding="async">
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
                         <h3>IoT 智慧鼠盒監測</h3>
@@ -880,7 +898,7 @@
                     </div>
                 </article>
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描" loading="lazy">
+                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描" loading="lazy" decoding="async">
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
                         <h3>熱成像暗巢掃描</h3>
@@ -983,9 +1001,9 @@
                 <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> 榮仔智鬥過萬隻曱甴</h3>
                 <p>真實個案：餐廳廚房嚴重曱甴滋生，師傅即場示範智慧誘餌系統性防治全過程</p>
                 <div class="video-grid">
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：曱甴系統防治實戰">
+                    <a href="https://www.youtube.com/@CEDARS_LTD"  rel="noopener" class="video-card" aria-label="觀看短片：曱甴系統防治實戰">
                         <div class="video-thumb">
-                            <img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy">
+                            <img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy" decoding="async">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:45</span>
                         </div>
@@ -994,9 +1012,9 @@
                             <p class="video-meta">📍 中環餐飲業 • Before & After</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣處理">
+                    <a href="https://www.youtube.com/@CEDARS_LTD"  rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣處理">
                         <div class="video-thumb">
-                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣處理案例" loading="lazy">
+                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣處理案例" loading="lazy" decoding="async">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:58</span>
                         </div>
@@ -1005,9 +1023,9 @@
                             <p class="video-meta">📍 日出康城 • 床蝨防治</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
+                    <a href="https://www.youtube.com/@CEDARS_LTD"  rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
                         <div class="video-thumb">
-                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy">
+                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy" decoding="async">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">1:12</span>
                         </div>
@@ -1016,9 +1034,9 @@
                             <p class="video-meta">📍 美孚新邨 • 滅鼠實錄</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
+                    <a href="https://www.youtube.com/@CEDARS_LTD"  rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
                         <div class="video-thumb">
-                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy">
+                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy" decoding="async">
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:52</span>
                         </div>
@@ -1036,7 +1054,7 @@
             <div class="ai-widget-box">
                 <h3 id="ai-cta-title"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> 遇到害蟲疑難？體驗 AI 智能診斷</h3>
                 <p>拍下害蟲照片並傳送至 WhatsApp，系統即時比對資料庫並為你給出預估處理方案與免費估價！</p>
-                <a href="https://wa.me/85252821552?text=我想進行AI害蟲診斷估價" target="_blank" rel="noopener" class="btn btn-primary">
+                <a href="https://wa.me/85252821552?text=我想進行AI害蟲診斷估價"  rel="noopener" class="btn btn-primary">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即上載圖片診斷
                 </a>
             </div>
@@ -1113,21 +1131,21 @@
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港 | 營業時間：9:00 - 18:00</p>
         <div class="footer-social">
-            <a href="url?id=19" target="_blank" rel="noopener" aria-label="Instagram">
+            <a href="https://www.instagram.com/CEDARS_LTD"  rel="noopener" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
-            <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X">
+            <a href="https://x.com/CEDARS_LTD"  rel="noopener" aria-label="X (Twitter)" title="X">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
             </a>
-            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務"  rel="noopener" aria-label="WhatsApp">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
             </a>
             <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
-            <a href="url?id=17" target="_blank" rel="noopener" aria-label="YouTube">
+            <a href="https://www.youtube.com/@CEDARS_LTD"  rel="noopener" aria-label="YouTube">
                 <i class="fa-brands fa-youtube" aria-hidden="true"></i>
             </a>
         </div>
@@ -1161,12 +1179,12 @@
         <a href="tel:+85252821552" class="thumb-btn thumb-call">
             <i class="fa-solid fa-phone" aria-hidden="true"></i> 一鍵致電
         </a>
-        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" target="_blank" rel="noopener" class="thumb-btn thumb-wa">
+        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務"  rel="noopener" class="thumb-btn thumb-wa">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 報價
         </a>
     </div>
 
-    <script src="assets/js/bruceleehk.js"></script>
+    <script src="assets/js/bruceleehk.js" defer></script>
     <script>
         // Hero Quick Quote → WhatsApp
         (function() {

@@ -1,47 +1,54 @@
-# Cloudflare Worker ?�置 ??滅蟲師�? ?�建?��??��?系統（優?��? v2.1�?#
-# ?�署步�?�?#   1. 建�? KV Namespace（�??��?）�?
-#      Dashboard: Workers & Pages ??KV ??Create namespace ???�稱: COMMENT_KV ??複製 ID
-#      CLI:      npx wrangler kv namespace create COMMENT_KV ??複製 id
-#   2. 將�???id ?��??��??�實??KV Namespace ID
-#   3. 設�?管�?密鑰：npx wrangler secret put ADMIN_SECRET
-#   4. ?�署：npx wrangler deploy
+# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（安全升級版 v3.0）
 #
-# ===== v2.1 修復?��??��?延遲?�Bug =====
-#   ?�� Rate Limit ?�用?��? KV key `rate:{ip}:{type}` + TTL ?��??��?
-#      （�??��??��?言????��?近�?言 ??之�???HK ?��?字串比�? UTC�?#       ?�造�?永�??�死?��??� Bug�?#   ?�� 被�??��??�接 return，�?寫入 KV ???��??�置 60 秒倒數
-#   ?�� 管�??��?帶正�?secret�?00% 豁�? Rate Limit
-#   ?�� ?�傳 retry_after（剩餘�??��?，�?端顯示精確倒數
-#   ?�� created_at ?�用 ISO 8601 (UTC)，避?��??��?? Bug
+# 部署步驟：
+#   1. 建立 KV Namespace（二選一）：
+#      Dashboard: Workers & Pages → KV → Create namespace → 名稱: COMMENT_KV → 複製 ID
+#      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
+#   2. 將下方 id 替換為你嘅實際 KV Namespace ID
+#   3. 設定管理密鑰：npx wrangler secret put ADMIN_SECRET
+#   4. 部署：npx wrangler deploy
 #
-# ===== v2.0 ?��??�能 =====
-#   ??樹�?/嵌�??��?（parent_id�?#   ??官方?��?綠色徽�?（is_official，�? ADMIN_SECRET�?#   ??置�?官方?��?（is_pinned�?#   ??一?�批??/ 一?�刪??後台 API
-#   ???��??�廣?��?純�?字、嚴�?URL??0??00 字�?0 秒頻?��???#   ???�學驗�?（防 Robot�?#   ??GET /api/comments ?�傳樹�?結�?
+# ===== v3.0 安全升級亮點 =====
+#   🔒 修正 CORS 反射弱點：未知 origin 不再 fall-back 至生產域名
+#   🔒 加入安全標頭：X-Content-Type-Options, X-Frame-Options, Referrer-Policy
+#   🔒 加入請求大小限制（5.5MB）
+#   🔒 加入 5 分鐘視窗速率限制（5 主留言 / 10 回覆 per IP）
+#   🔒 遞迴刪除所有後代回覆（修正原 1 層刪除 Bug）
+#   🔒 強制官方回覆使用「滅蟲師傅」暱稱（移除 admin 覆寫漏洞）
+#   🔒 時序安全嘅密鑰比較函數（防 side-channel attack）
+#   🔒 嚴格驗證 page_id 字符白名單
+#   🔒 圖片 URL 限制為 data:image/* 或 https://
+#   🔒 公開 API 回應隱藏 client_ip
 #
-# ===== API 端�? =====
-#   GET  /api/health                  ???�康檢查
-#   GET  /api/comments?page_id=xxx    ??讀?�已審核?��?（樹?�結�?�?#   POST /api/comments                ???�交?��?言（主?��??��?覆�?
-#   POST /api/admin/list              ???�出?�?��?言（含?�審?��?
-#   POST /api/admin/approve           ??審核?��?
-#   POST /api/admin/delete            ???�除?��?（�?��?��?�?#   POST /api/admin/reply             ??管�??��??��?覆�??��?審核 + is_official，�???Rate Limit�?#   POST /api/admin/pin               ??置�? / ?��?置�?
+# ===== API 端點 =====
+#   GET  /api/health                  → 健康檢查
+#   GET  /api/comments?page_id=xxx    → 讀取已審核留言（樹狀結構）
+#   POST /api/comments                → 提交新留言（主留言或回覆，支援 honeypot）
+#   POST /api/admin/list              → 列出所有留言（含未審核）
+#   POST /api/admin/approve           → 審核通過
+#   POST /api/admin/delete            → 遞迴刪除留言（含所有後代回覆）
+#   POST /api/admin/reply             → 管理員官方回覆（強制「滅蟲師傅」暱稱）
+#   POST /api/admin/pin               → 置頂 / 取消置頂
 #
-# ===== Rate Limit 機制（v2.1�?=====
-#   - 主�?言：�? IP �?60 �?1 條�?KV key: rate:{ip}:comment, TTL=60�?#   - ?��?�? �?IP �?30 �?1 條�?KV key: rate:{ip}:reply,   TTL=30�?#   - 管�??��?100% 豁�?（POST /api/comments 帶正�?secret ?�跳?��?
-#   - 被�??��??�寫??KV ???�數?��??�置（避?�「�??��?延遲?��?
-#   - 429 ?��??�含 retry_after（剩餘�??��?+ cooldown（總?�卻秒數�?#
-# ===== 審核密鑰設�? =====
+# ===== 審核密鑰設定 =====
 #   npx wrangler secret put ADMIN_SECRET
-#   ??輸入一?�強壯�?密鑰（建�?32+ 字�??��?字串�?#   ???�於?�??/api/admin/* 端�?驗�?，亦?�於 POST /api/comments ?�管?�員豁�?
+#   → 輸入一個強壯嘅密鑰（建議 32+ 字元隨機字串）
+#   → 此密鑰用於所有 /api/admin/* 端點
+#
+# ===== 可選：DEBUG 模式 =====
+#   npx wrangler secret put DEBUG
+#   → 設為 "true" 可在錯誤回應中顯示詳細訊息（僅開發環境使用）
 
 name = "comment-handler"
 main = "comment-handler.js"
 compatibility_date = "2024-12-01"
 
-# ?�?� KV Namespace 綁�? ?�?�
-# 建�? KV 後�?�?id ?��??�實??Namespace ID
+# ── KV Namespace 綁定 ──
+# 建立 KV 後，將 id 替換為實際 Namespace ID
 [[kv_namespaces]]
 binding = "COMMENT_KV"
-id = "a6c1483100b64d5fb29a3996b935883d"   # ???��??��???KV Namespace ID
+id = "a6c1483100b64d5fb29a3996b935883d"   # ← 替換為你嘅 KV Namespace ID
 
-# ?�?� ?��?變數（使??wrangler secret 設�?，�?好直?�寫?�度）�??�
-# ADMIN_SECRET: 管�??��??��??�於?�??/api/admin/* 端�?驗�? + Rate Limit 豁�?
-# 設�??��?：npx wrangler secret put ADMIN_SECRET
+# ── 環境變數（使用 wrangler secret 設定，唔好直接寫喺度）──
+# ADMIN_SECRET: 管理員密鑰，用於所有 /api/admin/* 端點驗證
+# 設定方式：npx wrangler secret put ADMIN_SECRET

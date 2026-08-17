@@ -80,19 +80,37 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 
 @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}.strategy-card{padding:20px}}
 </style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
+      frame-src https://udify.app;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+      frame-ancestors 'none';
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
 </head>
 <body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#10b981;color:#fff;padding:8px 16px;z-index:1000;text-decoration:none;border-radius:0 0 6px 0;">跳到主內容</a>
+
 
 <!-- ========== 頁首 ========== -->
 <header id="site-header">
   <div class="nav-container">
     <div class="logo">
-      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Pest Control Master - 香港專業滅蟲團隊" loading="eager">
+      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Pest Control Master - 香港專業滅蟲團隊" loading="eager" decoding="async">
       <div class="logo-text">
         <span class="logo-main">滅蟲師傅</span>
         <span class="logo-sub">Pest Control Master</span>
       </div>
-      <a href="https://bruceleehk.com/quote/" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅" target="_blank" rel="noopener">
+      <a href="https://bruceleehk.com/quote/" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅"  rel="noopener">
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
@@ -103,11 +121,11 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <a href="/info/">蟲類資訊</a>
       <a href="/quote/" class="nav-cta">有蟲話我知</a>
     </nav>
-    <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" type="button"><i class="fas fa-bars"></i></button>
   </div>
 </header>
 
-<main class="page-info">
+<main id="main-content" class="page-info">
 
   <!-- ========== Hero ========== -->
   <section class="page-hero">
@@ -202,7 +220,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <p>你嘅屋企都遭受緊害蟲困擾？即刻參與 2026 年全民害蟲票選，或者喺苦主討論區上傳相片，讓師傅免費為你提供防治建議！</p>
         <a href="/info/vote/" class="btn-cta"><i class="fas fa-poll"></i> 參與全港害蟲票選</a>
         <a href="/info/vote/" class="btn-cta" style="background:#fef3c7; color:#92400e;"><i class="fas fa-comments"></i> 前往香港害蟲苦主討論區</a>
-        <a href="https://bruceleehk.com/quote/" class="btn-cta" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 直聯師傅</a>
+        <a href="https://bruceleehk.com/quote/" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 直聯師傅</a>
       </div>
 
     </div>
@@ -212,16 +230,16 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
 <!-- ========== 頁腳 ========== -->
 <footer>
   <div class="social-icons">
-    <a href="https://www.instagram.com/p/DFzL1A8T6v1/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://x.com/PestMasterHK" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://bruceleehk.com/quote/" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.youtube me.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-    <a href="mailto:cedars5282@gmail.com" target="_blank" title="Gmail"><img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 聯絡" class="gmail-icon"></a>
+    <a href="https://www.instagram.com/p/DFzL1A8T6v1/" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/PestMasterHK" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://bruceleehk.com/quote/"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+    <a href="mailto:cedars5282@gmail.com" target="_blank" title="Gmail" rel="noopener noreferrer"><img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 聯絡" class="gmail-icon" decoding="async"></a>
   </div>
-  <p>&copy; 2023 滅蟲師傅 CEDARS LTD. 版權所有</p>
+  <p>&copy; <span id="current-year">2026</span> 滅蟲師傅 CEDARS LTD. 版權所有</p>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js" defer></script>
 
 <!-- ========== JSON-LD 結構化數據 ========== -->
 <script type="application/ld+json">
