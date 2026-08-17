@@ -1,0 +1,41 @@
+# Cloudflare Worker 配置 — 滅蟲師傅 AI 害蟲視覺辨識後端 v3.0
+#
+# 部署步驟：
+#   1. Cloudflare Dashboard → Workers & Pages → Create Worker → 命名 pest-vision-worker
+#   2. 貼上 pest-vision-worker.js → Save and Deploy
+#   3. Settings → Bindings → Add binding：
+#      a) Workers AI → 變數名稱: AI
+#      b) KV Namespace → 變數名稱: PEST_KV
+#         （需先建立 KV namespace，例如 pest-vision-cache）
+#   4. Worker URL = https://pest-vision-worker.cedars5282.workers.dev
+#
+# ===== v3.0 修復亮點 =====
+#   🔧 修正 Llama 3.2 Vision 模型需先送出 "agree" 授權 prompt 之問題
+#      （舊版直接送出圖片，會收到 5016 錯誤：需先同意授權）
+#   🔧 新增「首次同意授權」快取機制（KV 儲存 agreed=true），避免每次請求都重送
+#   🔧 加入 25 秒 AbortController 逾時保護（避免 Worker AI 卡死）
+#   🔧 改進 prompt 模板，引導 AI 回傳更穩定嘅 JSON 結構
+#   🔒 加入 CORS 白名單（不再反射任意 origin）
+#   🔒 加入安全標頭
+#   🔒 加入請求大小限制（10MB 上限）
+#
+# ===== 端點 =====
+#   POST /          → 提交圖片進行 AI 辨識
+#   GET  /health    → 健康檢查
+
+name = "pest-vision-worker"
+main = "pest-vision-worker.js"
+compatibility_date = "2024-12-01"
+
+# ── Workers AI 綁定 ──
+# Cloudflare Dashboard → Worker → Settings → Bindings → Add → Workers AI
+# 變數名稱必須為 AI
+[ai]
+binding = "AI"
+
+# ── KV Namespace 綁定（用於快取 Llama 授權同意狀態）──
+# 建立 KV namespace：npx wrangler kv namespace create PEST_VISION_CACHE
+# 然後將下方 id 替換為實際 namespace ID
+[[kv_namespaces]]
+binding = "PEST_KV"
+id = "a6c1483100b64d5fb29a3996b935883d"   # ← 替換為你嘅 KV Namespace ID

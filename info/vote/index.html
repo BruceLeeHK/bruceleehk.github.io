@@ -210,7 +210,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
         <span class="logo-main">滅蟲師傅</span>
         <span class="logo-sub">Pest Control Master</span>
       </div>
-      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅" rel="noopener">
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡滅蟲師傅"  rel="noopener">
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
@@ -395,14 +395,14 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <div class="pest-detail-panel" id="pestDetail">
         <h4 id="pestDetailName"></h4>
         <p id="pestDetailDesc"></p>
-        <a id="pestDetailCta" href="#" class="btn-cta" rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
+        <a id="pestDetailCta" href="#" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> 遭受困擾？即刻免費查詢</a>
       </div>
 
       <!-- ========== 商業 CTA ========== -->
       <div class="blog-cta-box">
         <h4>有蟲患唔使自己搞！搵滅蟲師傅幫你手</h4>
         <p>無論係邊種害蟲，我哋都有專業方案幫你斷尾。免費上門估價，持牌除害劑，安全有保障。</p>
-        <a href="https://wa.me/85252821552" class="btn-cta" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
+        <a href="https://wa.me/85252821552" class="btn-cta"  rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp 免費查詢</a>
       </div>
 
       <!-- ========== 苦主經驗分享區（自建原生留言） ========== -->
@@ -431,9 +431,9 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             </div>
 
             <div class="form-group">
-              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最高 10MB）：</label>
+              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最大 5MB）：</label>
               <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
-              <p class="notice">💡 上傳相片後，系統會自動動態極限壓縮至安全規範，並提供全螢幕放大預覽體驗。</p>
+              <p class="notice">💡 上傳相片後，其他用戶點擊圖片可放大並長按儲存照片。</p>
             </div>
 
             <div class="captcha-row">
@@ -443,8 +443,8 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
               <button type="button" class="btn-reply" onclick="initCaptcha()">↻ 換題</button>
             </div>
 
-            <!-- Honeypot field: hidden from humans, bots fill it. CSS-hidden, aria-hidden, tabindex=-1, autocomplete=off -->
-            <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+            <!-- 🔧 v3.1: Honeypot field — hidden from humans, bots fill it. Server silently drops. -->
+            <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
               <label>不要填寫此欄位 <input type="text" name="website_url" tabindex="-1" autocomplete="off"></label>
             </div>
 
@@ -475,7 +475,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
       <div id="imageModal" class="img-modal-overlay" onclick="closeImgModal(event)">
         <img id="modalImg" class="img-modal-content" src="" alt="香港苦主上傳之害蟲放大相片" title="香港苦主上傳之害蟲相片預覽" loading="lazy" decoding="async">
         <div class="img-modal-actions" onclick="event.stopPropagation()">
-          <a id="downloadImgBtn" class="img-modal-btn" href="" rel="noopener">
+          <a id="downloadImgBtn" class="img-modal-btn" href=""  rel="noopener">
             📥 開啟原圖 / 下載照片
           </a>
           <button type="button" class="img-modal-btn close-btn" onclick="closeImgModal(null, true)">
@@ -509,7 +509,7 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
   <div class="social-icons">
     <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
     <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://wa.me/85252821552" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/85252821552"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
     <a href="mailto:Cedars5282@gmail.com" target="_blank" title="Gmail" rel="noopener noreferrer">
       <img loading="lazy" src="/assets/img/gmail-icon.png" alt="滅蟲師傅 Gmail 電子郵件聯絡圖示" class="gmail-icon" decoding="async">
@@ -648,7 +648,7 @@ function showToast(msg, type){
 })();
 </script>
 
-<!-- ========== 自建原生留言系統 JS (v2.5 動態雙重極限壓縮版) ========== -->
+<!-- ========== 自建原生留言系統 JS (v2.2 完美版) ========== -->
 <script>
 var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
 var PAGE_ID     = 'vote-page-2026';
@@ -679,102 +679,30 @@ function initCaptcha() {
   document.getElementById('captchaAnswer').value = '';
 }
 
-/**
- * Canvas 圖片雙重極限壓縮（嚴格控制 Base64 長度 ≤ 18,000 字元）
- * 徹底防止 Cloudflare Worker / D1 資料庫因 Payload 過大而退件拒收
- */
-function compressImage(file) {
-  return new Promise(function(resolve, reject) {
-    var reader = new FileReader();
-    reader.onload = function(evt) {
-      var img = new Image();
-      img.onload = function() {
-        var canvas = document.createElement('canvas');
-        var maxDim = 450;
-        var width = img.width;
-        var height = img.height;
-
-        if (width > maxDim || height > maxDim) {
-          if (width > height) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-
-        var quality = 0.5;
-        var dataUrl = canvas.toDataURL('image/jpeg', quality);
-
-        while (dataUrl.length > 18000 && quality > 0.15) {
-          quality -= 0.1;
-          dataUrl = canvas.toDataURL('image/jpeg', quality);
-        }
-
-        if (dataUrl.length > 18000) {
-          var subCanvas = document.createElement('canvas');
-          subCanvas.width = Math.round(width * 0.7);
-          subCanvas.height = Math.round(height * 0.7);
-          var subCtx = subCanvas.getContext('2d');
-          subCtx.drawImage(canvas, 0, 0, subCanvas.width, subCanvas.height);
-          dataUrl = subCanvas.toDataURL('image/jpeg', 0.25);
-        }
-
-        resolve(dataUrl);
-      };
-      img.onerror = function() { reject(new Error('圖片載入失敗')); };
-      img.src = evt.target.result;
-    };
-    reader.onerror = function() { reject(new Error('檔案讀取失敗')); };
-    reader.readAsDataURL(file);
-  });
-}
-
-async function handleImageSelect(e) {
+function handleImageSelect(e) {
   const file = e.target.files[0];
-  const btn = document.getElementById('btnSubmitComment');
-  
   if (!file) { uploadedImgUrl = ''; return; }
-  
+  /* 🔧 v3.1 fix: validate file type (defend against non-image uploads) */
   if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type)) {
     showToast('只支援 JPG、PNG、WebP、GIF 圖片格式！', 'warning');
     e.target.value = '';
-    uploadedImgUrl = '';
     return;
   }
-  
-  if (file.size > 10 * 1024 * 1024) {
-    showToast('圖片檔案不能超過 10MB！', 'warning');
+  /* 🔧 v3.1 fix: align client limit with server (5MB) */
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('圖片檔案不能超過 5MB！', 'warning');
     e.target.value = '';
-    uploadedImgUrl = '';
     return;
   }
-
-  try {
-    if (btn) {
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在壓縮處理相片...';
-    }
-    showToast('相片壓縮處理中，請稍候...', 'info');
-    uploadedImgUrl = await compressImage(file);
-    showToast('相片處理完成，可以提交留言！', 'success');
-  } catch (err) {
-    console.error('圖片處理失敗:', err);
-    showToast('圖片處理失敗，請重新選擇。', 'error');
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    uploadedImgUrl = evt.target.result;
+  };
+  reader.onerror = function() {
+    showToast('圖片讀取失敗，請重新選擇。', 'error');
     uploadedImgUrl = '';
-    e.target.value = '';
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> 提交留言';
-    }
-  }
+  };
+  reader.readAsDataURL(file);
 }
 
 async function loadComments() {
@@ -785,6 +713,7 @@ async function loadComments() {
     const data = await res.json();
 
     if (!data.success) {
+      /* 🔧 v3.1 fix: escape server error to prevent XSS */
       listEl.innerHTML = '<p style="color: red; text-align:center;">載入留言失敗：' + escapeHtml(String(data.error || '未知錯誤')) + '</p>';
       return;
     }
@@ -816,8 +745,9 @@ function renderTree(serverComments, pendingComments) {
     const officialBadge = item.is_official ? '<span class="official-badge"><i class="fas fa-check-circle"></i> 滅蟲師傅 官方</span>' : '';
     const pinnedBadge = item.is_pinned ? '<span class="pinned-tag"><i class="fas fa-thumbtack"></i> 置頂</span>' : '';
     const pendingBadge = isPending ? '<span class="pending-tag"><i class="fas fa-hourglass-half"></i> 審核中...</span>' : '';
-    
+
     const imageAltText = item.image_url ? (escapeHtml(item.nickname) + ' 上傳之香港家居害蟲照片求助 - 滅蟲師傅討論區') : '';
+    /* 🔧 v3.1 fix: use event delegation + data attributes instead of inline onclick (XSS prevention) */
     const imgHtml = item.image_url ? ('<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb js-img-thumb" data-full="' + escapeAttr(item.image_url) + '" alt="' + imageAltText + '" title="' + imageAltText + ' (點擊全螢幕放大)" loading="lazy" decoding="async">') : '';
 
     let repliesHtml = '';
@@ -825,42 +755,42 @@ function renderTree(serverComments, pendingComments) {
       repliesHtml = '<div class="reply-thread">';
       item.replies.forEach(r => {
         const rBadge = r.is_official ? '<span class="official-badge"><i class="fas fa-check-circle"></i> 滅蟲師傅 官方</span>' : '';
-        repliesHtml += `
-          <div class="reply-item">
-            <div class="comment-meta">
-              <span class="comment-nickname">${escapeHtml(r.nickname)} ${rBadge}</span>
-              <span class="comment-time">${formatTime(r.created_at)}</span>
-            </div>
-            <div class="comment-body">${escapeHtml(r.content)}</div>
-          </div>
-        `;
+        repliesHtml += (
+          '<div class="reply-item">' +
+            '<div class="comment-meta">' +
+              '<span class="comment-nickname">' + escapeHtml(r.nickname) + ' ' + rBadge + '</span>' +
+              '<span class="comment-time">' + formatTime(r.created_at) + '</span>' +
+            '</div>' +
+            '<div class="comment-body">' + escapeHtml(r.content) + '</div>' +
+          '</div>'
+        );
       });
       repliesHtml += '</div>';
     }
 
-    html += `
-      <div class="comment-item ${isPending ? 'pending-local' : ''}">
-        <div class="comment-meta">
-          <span class="comment-nickname">${escapeHtml(item.nickname)} ${officialBadge} ${pinnedBadge} ${pendingBadge}</span>
-          <span class="comment-time">${formatTime(item.created_at)}</span>
-        </div>
-        <div class="comment-body">${escapeHtml(item.content)}</div>
-        ${imgHtml}
-
-        ${!isPending ? `<button type="button" class="btn-reply js-reply-btn" data-reply-id="${escapeAttr(item.id)}" data-reply-name="${escapeAttr(item.nickname)}"><i class="fas fa-reply"></i> 回覆</button>` : ''}
-        ${repliesHtml}
-      </div>
-    `;
+    html += (
+      '<div class="comment-item ' + (isPending ? 'pending-local' : '') + '">' +
+        '<div class="comment-meta">' +
+          '<span class="comment-nickname">' + escapeHtml(item.nickname) + ' ' + officialBadge + ' ' + pinnedBadge + ' ' + pendingBadge + '</span>' +
+          '<span class="comment-time">' + formatTime(item.created_at) + '</span>' +
+        '</div>' +
+        '<div class="comment-body">' + escapeHtml(item.content) + '</div>' +
+        imgHtml +
+        (isPending ? '' : ('<button type="button" class="btn-reply js-reply-btn" data-reply-id="' + escapeAttr(item.id) + '" data-reply-name="' + escapeAttr(item.nickname) + '"><i class="fas fa-reply"></i> 回覆</button>')) +
+        repliesHtml +
+      '</div>'
+    );
   });
 
   listEl.innerHTML = html;
 
+  /* 🔧 v3.1: Wire up image-click handlers via event delegation (XSS-safe) */
   listEl.querySelectorAll('.js-img-thumb').forEach(function(img) {
     img.addEventListener('click', function() {
       openImgModal(this.getAttribute('data-full'));
     });
   });
-  
+  /* 🔧 v3.1: Wire up reply buttons via event delegation */
   listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
@@ -880,14 +810,16 @@ async function handleMainSubmit(e) {
     return;
   }
 
+  /* 🔧 v3.1 fix: Honeypot detection — bots fill hidden field, humans don't */
   const honeypotInput = document.querySelector('input[name="website_url"]');
   if (honeypotInput && honeypotInput.value) {
     showToast('留言已成功提交！將會在審核後正式公開。', 'success');
     document.getElementById('mainCommentForm').reset();
     initCaptcha();
-    return;
+    return; /* silently drop */
   }
 
+  /* 🔧 v3.1 fix: client-side validation */
   if (!nickname || nickname.length > 30) {
     showToast('暱稱長度需為 1-30 字', 'warning');
     return;
@@ -965,6 +897,7 @@ async function handleMainSubmit(e) {
 function startReply(parentId, parentNickname) {
   currentReplyTo = { id: parentId, nickname: parentNickname };
   const hint = document.getElementById('replyHint');
+  /* 🔧 v3.1 fix: escape nickname before injecting into HTML */
   document.getElementById('replyHintText').innerHTML = '正回覆 @<strong>' + escapeHtml(parentNickname) + '</strong>：';
   hint.style.display = 'block';
 
@@ -972,6 +905,7 @@ function startReply(parentId, parentNickname) {
   contentInput.setAttribute('maxlength', '300');
   contentInput.setAttribute('placeholder', '回覆 @' + parentNickname + '（10-300字，嚴禁網址）');
 
+  /* 🔧 v3.1 fix: was 'commentForm' (non-existent), should be 'mainCommentForm' */
   document.getElementById('mainCommentForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
   contentInput.focus();
 }

@@ -1,4 +1,4 @@
-# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（安全升級版 v3.0）
+# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（安全升級版 v3.1）
 #
 # 部署步驟：
 #   1. 建立 KV Namespace（二選一）：
@@ -6,34 +6,46 @@
 #      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
 #   2. 將下方 id 替換為你嘅實際 KV Namespace ID
 #   3. 設定管理密鑰：npx wrangler secret put ADMIN_SECRET
+#      （重要：必須使用 wrangler secret 設定，唔好直接寫喺呢個 toml 檔入面）
 #   4. 部署：npx wrangler deploy
 #
-# ===== v3.0 安全升級亮點 =====
+# ===== v3.1 安全升級亮點 =====
+#   🔧 修正「密碼錯誤」誤判問題：
+#      - ADMIN_SECRET 未設定時，回傳專屬錯誤碼 ADMIN_SECRET_NOT_SET
+#      - 密鑰比較使用時序安全函數 safeCompare（防 side-channel attack）
+#      - 自動 trim 兩端空白，避免空白差異導致比對失敗
+#   🔧 新增 POST /api/admin/test 端點（測試密鑰是否正確）
+#   🔧 /api/health 加入 admin_secret_set 欄位
 #   🔒 修正 CORS 反射弱點：未知 origin 不再 fall-back 至生產域名
 #   🔒 加入安全標頭：X-Content-Type-Options, X-Frame-Options, Referrer-Policy
 #   🔒 加入請求大小限制（5.5MB）
 #   🔒 加入 5 分鐘視窗速率限制（5 主留言 / 10 回覆 per IP）
 #   🔒 遞迴刪除所有後代回覆（修正原 1 層刪除 Bug）
-#   🔒 強制官方回覆使用「滅蟲師傅」暱稱（移除 admin 覆寫漏洞）
-#   🔒 時序安全嘅密鑰比較函數（防 side-channel attack）
+#   🔒 強制官方回覆使用「滅使用「滅蟲師傅」暱稱
 #   🔒 嚴格驗證 page_id 字符白名單
 #   🔒 圖片 URL 限制為 data:image/* 或 https://
 #   🔒 公開 API 回應隱藏 client_ip
 #
 # ===== API 端點 =====
-#   GET  /api/health                  → 健康檢查
-#   GET  /api/comments?page_id=xxx    → 讀取已審核留言（樹狀結構）
-#   POST /api/comments                → 提交新留言（主留言或回覆，支援 honeypot）
+#   GET  /api/health                  → 健康檢查（含 admin_secret_set 欄位）
+#   GET  /api/comments?page_id=xxx     → 讀取已審核留言（樹狀結構）
+#   POST /api/comments                 → 提交新留言（主留言 / 回覆，支援 honeypot）
+#   POST /api/admin/test               → 測試管理密鑰是否正確
 #   POST /api/admin/list              → 列出所有留言（含未審核）
 #   POST /api/admin/approve           → 審核通過
 #   POST /api/admin/delete            → 遞迴刪除留言（含所有後代回覆）
 #   POST /api/admin/reply             → 管理員官方回覆（強制「滅蟲師傅」暱稱）
 #   POST /api/admin/pin               → 置頂 / 取消置頂
 #
-# ===== 審核密鑰設定 =====
+# ===== 審核密鑰設定（重要！）=====
 #   npx wrangler secret put ADMIN_SECRET
 #   → 輸入一個強壯嘅密鑰（建議 32+ 字元隨機字串）
 #   → 此密鑰用於所有 /api/admin/* 端點
+#
+#   ⚠️ 重新部署 Worker 後，secret 變數會保留。如果你刪除並重建 Worker，
+#      必須重新執行 `wrangler secret put ADMIN_SECRET` 設定密鑰。
+#
+#   ⚠️ 唔好將 ADMIN_SECRET 直接寫喺呢個 toml 檔入面！必須用 wrangler secret。
 #
 # ===== 可選：DEBUG 模式 =====
 #   npx wrangler secret put DEBUG

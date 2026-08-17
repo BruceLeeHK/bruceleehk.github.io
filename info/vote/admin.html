@@ -124,7 +124,6 @@
       .comment-card-actions .btn{font-size:.78rem;padding:6px 10px}
     }
   </style>
-    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#2c5e1a">
 <style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
 </head>
@@ -303,7 +302,41 @@ async function loadComments() {
       body: JSON.stringify({ secret: adminSecret, page_id: PAGE_ID })
     });
     if (res.status === 403) {
-      showToast('密鑰錯誤！請檢查 ADMIN_SECRET', 'error');
+      /* 🔧 v3.1 fix: Show actual server error message instead of generic "密鑰錯誤" */
+      var errData = {};
+      try { errData = await res.json(); } catch (e) {}
+      var errMsg = errData.error || '密鑰錯誤';
+      var errCode = errData.code || '';
+
+      if (errCode === 'ADMIN_SECRET_NOT_SET' || errMsg.indexOf('未設定') !== -1) {
+        /* Worker 沒有設定 ADMIN_SECRET 環境變數 — 提供詳細設定指引 */
+        showToast('Worker 未設定 ADMIN_SECRET 環境變數！', 'error');
+        listEl.innerHTML =
+          '<div class="empty-state" style="text-align:left;padding:24px;">' +
+            '<i class="fas fa-triangle-exclamation" style="color:#d32f2f;font-size:2rem;"></i>' +
+            '<h3 style="margin:12px 0;color:#d32f2f;">Worker 未設定 ADMIN_SECRET</h3>' +
+            '<p style="color:#5d4037;line-height:1.8;margin-bottom:14px;">' +
+              '你的密碼本身沒有問題，但 Worker 後端沒有收到 <code>ADMIN_SECRET</code> 環境變數。這通常發生於你重新部署 Worker 後忘記重新設定 Secret。' +
+            '</p>' +
+            '<p style="color:#5d4037;line-height:1.8;margin-bottom:14px;"><strong>修復步驟：</strong></p>' +
+            '<ol style="color:#5d4037;line-height:1.9;padding-left:20px;margin-bottom:14px;">' +
+              '<li>登入 <a href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare Dashboard</a></li>' +
+              '<li>進入 <strong>Workers & Pages</strong> → 選擇 <code>comment-handler</code></li>' +
+              '<li>進入 <strong>Settings</strong> → <strong>Variables and Secrets</strong></li>' +
+              '<li>點擊 <strong>Add</strong>，Type 選擇 <strong>Secret</strong></li>' +
+              '<li>名稱：<code>ADMIN_SECRET</code>，值：你的管理密碼</li>' +
+              '<li>點擊 <strong>Save and Deploy</strong>（重要：必須重新部署）</li>' +
+            '</ol>' +
+            '<p style="color:#5d4037;line-height:1.8;">' +
+              '或使用命令列：' +
+              '<code style="display:block;background:#1e293b;color:#10b981;padding:12px;border-radius:6px;margin-top:8px;font-family:monospace;">' +
+                'npx wrangler secret put ADMIN_SECRET' +
+              '</code>' +
+            '</p>' +
+          '</div>';
+      } else {
+        showToast('密鑰錯誤！伺服器訊息：' + errMsg, 'error');
+      }
       return false;
     }
     var data = await res.json();
@@ -371,7 +404,7 @@ function renderList() {
     html += renderCommentCard(list[i]);
   }
   listEl.innerHTML = html;
-  /* Wire up delegated event handlers (avoid inline onclick XSS) */
+  /* 🔧 v3.1: Wire up delegated event handlers (avoid inline onclick XSS) */
   bindActionButtons();
 }
 
@@ -406,10 +439,10 @@ function renderCommentCard(c) {
   /* 內容 */
   html += '<div class="comment-card-body">' + escHtml(c.content) + '</div>';
 
-  /* 圖片 — use data-full attribute + event delegation to avoid inline onclick XSS */
+  /* 圖片 — 🔧 v3.1 fix: use data-full + event delegation to avoid inline onclick XSS */
   if (c.image_url) {
     html += '<div class="comment-card-image">';
-    html += '  <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" decoding="async" class="js-lightbox-img" data-full="' + escAttr(c.image_url) + '" style="cursor:zoom-in">';
+    html += '  <img src="' + escAttr(c.thumb_url || c.image_url) + '" alt="蟲害照片" loading="lazy" decoding="async" class="js-lightbox-img" data-full="' + escAttr(c.image_url) + '" style="cursor:zoom-in;">';
     html += '</div>';
   }
 
@@ -421,7 +454,7 @@ function renderCommentCard(c) {
   }
   html += '</div>';
 
-  /* 操作按鈕 — use data-action + data-id attributes for safe event delegation */
+  /* 操作按鈕 — 🔧 v3.1 fix: use data-action + data-id attributes for safe event delegation */
   html += '<div class="comment-card-actions">';
   if (c.approved === 0) {
     html += '  <button type="button" class="btn btn-success btn-sm js-action-btn" data-action="approve" data-id="' + escAttr(c.id) + '">';
@@ -446,13 +479,13 @@ function renderCommentCard(c) {
   return html;
 }
 
-/* ===== Event delegation for action buttons (avoid inline onclick XSS) ===== */
+/* 🔧 v3.1 NEW: Event delegation for action buttons (avoid inline onclick XSS) */
 function bindActionButtons() {
   var listEl = document.getElementById('commentList');
   if (!listEl) return;
 
+  /* Unbind previous handlers by cloning nodes (re-render safety) */
   listEl.querySelectorAll('.js-action-btn').forEach(function (btn) {
-    /* Unbind previous (re-render safety) by cloning */
     var cloned = btn.cloneNode(true);
     btn.parentNode.replaceChild(cloned, btn);
   });

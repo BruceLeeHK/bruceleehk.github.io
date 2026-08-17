@@ -96,7 +96,7 @@ header{
 .hero-left{
   flex:1;
   background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-    url('../img/hero-bg.jpg')
+    url('/assets/img/hero-bg.jpg')
     center/cover no-repeat;
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
   text-align:left;color:var(--white);padding:60px
