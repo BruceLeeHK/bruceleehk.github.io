@@ -431,9 +431,9 @@ footer{background:#222;color:#aaa;text-align:center;padding:30px 20px}
             </div>
 
             <div class="form-group">
-              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最大 5MB）：</label>
+              <label for="imageFile">上傳蟲害照片（選填，支援 JPG/PNG/WebP/GIF，最高 10MB）：</label>
               <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
-              <p class="notice">💡 上傳相片後，其他用戶點擊圖片可放大並長按儲存照片。</p>
+              <p class="notice">💡 上傳相片後，系統會自動等比例壓縮至最佳高清體驗。點擊圖片可放大並長按儲存照片。</p>
             </div>
 
             <div class="captcha-row">
@@ -648,7 +648,7 @@ function showToast(msg, type){
 })();
 </script>
 
-<!-- ========== 自建原生留言系統 JS (v2.2 完美版) ========== -->
+<!-- ========== 自建原生留言系統 JS (v2.3 圖片等比例壓縮版) ========== -->
 <script>
 var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
 var PAGE_ID     = 'vote-page-2026';
@@ -679,30 +679,75 @@ function initCaptcha() {
   document.getElementById('captchaAnswer').value = '';
 }
 
-function handleImageSelect(e) {
+/**
+ * Canvas 圖片自動等比例壓縮輔助函數
+ * 長邊限制為 800px，品質設為 0.7 JPEG，徹底解決「圖片太長」與 Base64 體積過大問題
+ */
+function compressImage(file, maxDim, quality) {
+  maxDim = maxDim || 800;
+  quality = quality || 0.7;
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var width = img.width;
+        var height = img.height;
+
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // 轉為輕量 JPEG Base64
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = function() { reject(new Error('圖片載入失敗')); };
+      img.src = evt.target.result;
+    };
+    reader.onerror = function() { reject(new Error('檔案讀取失敗')); };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleImageSelect(e) {
   const file = e.target.files[0];
   if (!file) { uploadedImgUrl = ''; return; }
-  // Validate file type (defend against non-image uploads)
+  
+  // 檢查檔案格式
   if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type)) {
     showToast('只支援 JPG、PNG、WebP、GIF 圖片格式！', 'warning');
     e.target.value = '';
     return;
   }
-  // Match server-side limit (raised from 4MB to 5MB to align with comment-handler.js limit of 5MB)
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('圖片檔案不能超過 5MB！', 'warning');
+  
+  // 限制原始檔案小於 10MB，上傳後會自動等比例壓縮
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('圖片檔案不能超過 10MB！', 'warning');
     e.target.value = '';
     return;
   }
-  const reader = new FileReader();
-  reader.onload = function(evt) {
-    uploadedImgUrl = evt.target.result;
-  };
-  reader.onerror = function() {
-    showToast('圖片讀取失敗，請重新選擇。', 'error');
+
+  try {
+    showToast('相片處理中...', 'info');
+    uploadedImgUrl = await compressImage(file, 800, 0.7);
+  } catch (err) {
+    console.error('圖片處理失敗:', err);
+    showToast('圖片處理失敗，請重新選擇。', 'error');
     uploadedImgUrl = '';
-  };
-  reader.readAsDataURL(file);
+    e.target.value = '';
+  }
 }
 
 async function loadComments() {
@@ -713,7 +758,6 @@ async function loadComments() {
     const data = await res.json();
 
     if (!data.success) {
-      // escapeHtml on server error to prevent XSS via injected error message
       listEl.innerHTML = '<p style="color: red; text-align:center;">載入留言失敗：' + escapeHtml(String(data.error || '未知錯誤')) + '</p>';
       return;
     }
@@ -747,7 +791,6 @@ function renderTree(serverComments, pendingComments) {
     const pendingBadge = isPending ? '<span class="pending-tag"><i class="fas fa-hourglass-half"></i> 審核中...</span>' : '';
     
     const imageAltText = item.image_url ? (escapeHtml(item.nickname) + ' 上傳之香港家居害蟲照片求助 - 滅蟲師傅討論區') : '';
-    // Use addEventListener via data-attribute instead of inline onclick to avoid XSS via image_url
     const imgHtml = item.image_url ? ('<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb js-img-thumb" data-full="' + escapeAttr(item.image_url) + '" alt="' + imageAltText + '" title="' + imageAltText + ' (點擊全螢幕放大)" loading="lazy" decoding="async">') : '';
 
     let repliesHtml = '';
@@ -785,13 +828,12 @@ function renderTree(serverComments, pendingComments) {
 
   listEl.innerHTML = html;
 
-  // Wire up image-click handlers (event delegation, avoids inline onclick XSS)
   listEl.querySelectorAll('.js-img-thumb').forEach(function(img) {
     img.addEventListener('click', function() {
       openImgModal(this.getAttribute('data-full'));
     });
   });
-  // Wire up reply buttons
+  
   listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
@@ -811,16 +853,14 @@ async function handleMainSubmit(e) {
     return;
   }
 
-  // Honeypot: if filled, silently succeed without actually submitting (bot trap)
   const honeypotInput = document.querySelector('input[name="website_url"]');
   if (honeypotInput && honeypotInput.value) {
     showToast('留言已成功提交！將會在審核後正式公開。', 'success');
     document.getElementById('mainCommentForm').reset();
     initCaptcha();
-    return; // silently drop
+    return;
   }
 
-  // Basic client-side validation: nickname + content
   if (!nickname || nickname.length > 30) {
     showToast('暱稱長度需為 1-30 字', 'warning');
     return;
@@ -898,7 +938,6 @@ async function handleMainSubmit(e) {
 function startReply(parentId, parentNickname) {
   currentReplyTo = { id: parentId, nickname: parentNickname };
   const hint = document.getElementById('replyHint');
-  // Escape nickname before injecting into HTML (avoid XSS via nickname)
   document.getElementById('replyHintText').innerHTML = '正回覆 @<strong>' + escapeHtml(parentNickname) + '</strong>：';
   hint.style.display = 'block';
 
@@ -906,7 +945,6 @@ function startReply(parentId, parentNickname) {
   contentInput.setAttribute('maxlength', '300');
   contentInput.setAttribute('placeholder', '回覆 @' + parentNickname + '（10-300字，嚴禁網址）');
 
-  // Bug fix: previously referenced non-existent 'commentForm' id (actual id is 'mainCommentForm')
   document.getElementById('mainCommentForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
   contentInput.focus();
 }
@@ -960,7 +998,6 @@ function escapeHtml(str) {
 }
 
 function escapeAttr(str) {
-  // Same as escapeHtml — escapes both single and double quotes for safe attribute embedding
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
