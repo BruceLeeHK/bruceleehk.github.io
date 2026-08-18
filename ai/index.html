@@ -19,113 +19,28 @@
     <meta property="og:image" content="/assets/img/quote-hero-ai.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Structured Data — v3.3 fix: WebApplication + PestControl Array
-         (連結首頁的本地商家資料，避免引發結構化資料警告) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
-    [
-        {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "@id": "https://bruceleehk.com/ai/#webapp",
-            "name": "滅蟲師傅 AI 害蟲分析系統",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Web, WhatsApp",
-            "url": "https://bruceleehk.com/ai/",
-            "description": "AI 視覺辨識害蟲種類、風險等級，自動配對三十六計防治策略並提供即時估價。7×24 全天候服務。",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "HKD",
-                "description": "免費 AI 診斷"
-            },
-            "publisher": {
-                "@id": "https://bruceleehk.com/#pestcontrol"
-            }
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "滅蟲師傅 AI 害蟲分析系統",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, WhatsApp",
+        "url": "https://bruceleehk.com/ai/",
+        "description": "AI 視覺辨識害蟲種類、風險等級，自動配對三十六計防治策略並提供即時估價。7×24 全天候服務。",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "HKD",
+            "description": "免費 AI 診斷"
         },
-        {
-            "@context": "https://schema.org",
+        "publisher": {
             "@type": "PestControl",
-            "@id": "https://bruceleehk.com/#pestcontrol",
-            "name": "滅蟲師傅 PEST CONTROL MASTER",
-            "alternateName": "滅蟲師傅",
-            "image": {
-                "@type": "ImageObject",
-                "url": "https://bruceleehk.com/assets/img/logo.png",
-                "width": 440,
-                "height": 378
-            },
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://bruceleehk.com/assets/img/logo.png",
-                "width": 440,
-                "height": 378
-            },
-            "url": "https://bruceleehk.com/",
-            "telephone": "+85252821552",
-            "priceRange": "$$",
-            "currenciesAccepted": "HKD",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "香港",
-                "addressRegion": "新界",
-                "streetAddress": "荔景邨工場大廈",
-                "addressCountry": "HK"
-            },
-            "areaServed": {
-                "@type": "Place",
-                "name": "Hong Kong"
-            },
-            "openingHoursSpecification": [
-                {
-                    "@type": "OpeningHoursSpecification",
-                    "dayOfWeek": [
-                        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-                    ],
-                    "opens": "09:00",
-                    "closes": "18:00"
-                }
-            ],
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": 4.9,
-                "reviewCount": 10000,
-                "bestRating": 5,
-                "worstRating": 1
-            },
-            "review": [
-                {
-                    "@type": "Review",
-                    "author": {
-                        "@type": "Person",
-                        "name": "日出康城住戶"
-                    },
-                    "datePublished": "2026-07-15",
-                    "reviewBody": "師傅上門好準時，木蝨問題一次搞掂，專業可靠。",
-                    "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5,
-                        "worstRating": 1
-                    }
-                },
-                {
-                    "@type": "Review",
-                    "author": {
-                        "@type": "Person",
-                        "name": "美孚新邨陳太"
-                    },
-                    "datePublished": "2026-06-22",
-                    "reviewBody": "滅鼠服務徹底，跟進及時，推薦。",
-                    "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": 5,
-                        "bestRating": 5,
-                        "worstRating": 1
-                    }
-                }
-            ]
+            "name": "滅蟲師傅",
+            "telephone": "+85252821552"
         }
-    ]
+    }
     </script>
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
@@ -832,32 +747,10 @@
                     <div class="arch-step">
                         <span class="step-num">1</span>
                         <h4>用戶入口</h4>
-                        <p>網頁 H5 上傳 or WhatsApp 直接傳相片</p>
-                    </div>
-                    <div class="arch-step">
-                        <span class="step-num">2</span>
-                        <h4>邏輯轉接</h4>
-                        <p>Cloudflare Worker 接收並轉發 Base64 圖像</p>
-                    </div>
-                    <div class="arch-step">
-                        <span class="step-num">3</span>
-                        <h4>視覺識別</h4>
-                        <p>Llama-3.2 Vision 模型辨識害蟲特徵</p>
-                    </div>
-                    <div class="arch-step">
-                        <span class="step-num">4</span>
-                        <h4>策略匹配</h4>
-                        <p>自動配對獨家「三十六計」對照表</p>
-                    </div>
-                    <div class="arch-step">
-                        <span class="step-num">5</span>
-                        <h4>報價試算</h4>
-                        <p>依害蟲類型 + 嚴重程度輸出參考價格</p>
                     </div>
                     <div class="arch-step">
                         <span class="step-num">6</span>
                         <h4>轉化閉環</h4>
-                        <p>一鍵帶入 WhatsApp 預約專員上門</p>
                     </div>
                 </div>
             </div>
