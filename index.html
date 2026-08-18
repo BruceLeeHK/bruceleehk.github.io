@@ -19,9 +19,7 @@
     <meta property="og:image" content="assets/img/og-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Structured Data — v3.3 fix: compliant with Google Rich Results requirements
-         (aggregateRating requires numeric ratingValue & integer reviewCount;
-          PestControl needs @id, image as ImageObject; added review property) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -823,7 +821,6 @@
                     <span class="tech-badge"><i class="fa-solid fa-chess-knight" aria-hidden="true"></i> 獨家三十六計精準防治</span>
                 </div>
                 
-                <!-- 廣告詞標籤 -->
                 <div class="hero-slogan-tag">
                     ✨ 智慧滅蟲梗喺滅蟲師傅啦
                 </div>
@@ -876,7 +873,6 @@
                 <p>打破傳統經驗主義，結合最新科技全面鎖定害蟲暗巢</p>
             </div>
             <div class="grid-3">
-                <!-- AI 害蟲分析系統卡片 -->
                 <article class="smart-card">
                     <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy" decoding="async">
                     <div class="smart-card-body">
@@ -885,14 +881,13 @@
                         <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
                         <a href="/ai/" class="smart-card-link">查看完整版系統 →</a>
 
-                        <!-- ===== 嵌入式 Cloudflare Workers AI 即時診斷 ===== -->
+                        <!-- Embedded AI Diagnosis -->
                         <div class="ai-embedded">
                             <p class="ai-embedded-title">
                                 <span class="live-dot" aria-hidden="true"></span>
                                 7×24 Workers Vision AI 即時診斷估價
                             </p>
                             <div class="ai-states">
-                                <!-- State 1: Upload -->
                                 <div class="active" id="home-ai-upload">
                                     <label for="home-pest-photo" class="ai-upload-area" id="home-ai-area">
                                         <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
@@ -902,14 +897,12 @@
                                         <input type="file" id="home-pest-photo" accept="image/jpeg,image/png,image/jpg">
                                     </label>
                                 </div>
-                                <!-- State 2: Analyzing -->
                                 <div id="home-ai-analyzing">
                                     <div class="ai-loading">
                                         <div class="ai-spinner" aria-hidden="true"></div>
                                         <p class="ai-loading-text"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Cloudflare Vision AI 模型分析中…</p>
                                     </div>
                                 </div>
-                                <!-- State 3: Result -->
                                 <div id="home-ai-result">
                                     <div class="ai-preview">
                                         <img id="home-result-img" alt="已分析的害蟲相片" loading="lazy" decoding="async">
@@ -1175,7 +1168,7 @@
                     <h3 id="ipm-title" style="margin: 0 0 6px; font-size: 1.25rem; color: var(--dark-bg);">
                         <i class="fa-solid fa-leaf" aria-hidden="true" style="color: var(--primary);"></i> 綜合防治理念（IPM）
                     </h3>
-                    <p style="margin: 0; font-size: 0.92rem; color: var(--text-muted);">Integrated Pest Management — 專業、安全、可持續</p>
+                    <p style="margin: 0; font-size: 0.92rem; color: var(--text-muted);">Integrated Pest Management — 專業, 安全, 可持續</p>
                 </div>
                 <p style="text-align: center; color: var(--text-main); font-size: 0.95rem; line-height: 1.8; margin: 0 0 14px; max-width: 800px; margin-left: auto; margin-right: auto;">
                     本平臺以<b style="color: var(--primary-dark);">綜合防治（IPM）</b>為核心理念，結合 AI 智慧診斷、IoT 監測、物理防治與專業藥劑，制定長期防治方案。
@@ -1213,7 +1206,7 @@
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
-    <!-- Floating AI Assistant (7×24 tech support) -->
+    <!-- Floating AI Assistant -->
     <div class="floating-ai">
         <button class="floating-ai-btn" id="floating-ai-btn" aria-label="開啟滅蟲師妹 AI 助手" aria-expanded="false" aria-controls="ai-popup" type="button">
             <i class="fa-solid fa-robot" aria-hidden="true"></i>
@@ -1294,7 +1287,6 @@
                 wa: 'home-r-wa',
                 reupload: 'home-r-reupload'
             });
-            // Hide preview on homepage (compact mode)
             const preview = document.querySelector('#home-ai-result .ai-preview');
             if (preview) preview.style.display = 'none';
         });
