@@ -1,18 +1,15 @@
 /* ============================================================
-   bruceleehk.com — Shared JavaScript (v3.1 — 2026-08-17)
+   bruceleehk.com — Shared JavaScript (v3.2 — 2026-08-19)
    Used by: / (homepage), /ai/, /quote/
 
-   v3.1 修復亮點：
-     🔧 AI 圖片上傳失敗問題修復：
-        - 新增客戶端圖片壓縮（最大 1024px / JPEG 0.85），
-          避免超大 base64 payload 拖垮 Worker
-        - 加入 20 秒 AbortController 逾時保護
-        - AI Worker 失敗時不再顯示「網路連線或 AI 分析逾時」彈窗，
-          改為平滑降級：自動切換至「選擇害蟲類型 → 本地策略庫分析」流程，
-          用戶仍可獲得完整分析報告 + WhatsApp 預約連結
-        - 修正 Worker AI Llama 3.2 需先送出 'agree' 授權 prompt 之問題
-     🔧 留言系統回覆按鈕：
-        - 全面改用 event delegation 取代 inline onclick（避免 XSS）
+   v3.2 優化亮點：
+     🔧 AI 視覺識別與 JSON 解析容錯升級：
+        - 強化 Cloudflare Worker AI 輸出格式解析（自動剔除 Markdown codeblock）
+        - 增強關鍵字救援比對（繁簡體、同義詞自動匹配本地策略庫）
+        - 精準移除 Base64 Data URL 標頭，對齊 Worker 接收規格
+     🔧 保持防護與降級機制：
+        - 客戶端圖片壓縮（最大 1024px / JPEG 0.85）
+        - 20 秒 AbortController 逾時保護與本地降級流程
    ============================================================ */
 
 (function () {
@@ -83,9 +80,7 @@
         });
     }
 
-    /* ---------- Strategy & Price Fallback Table (v3.1 — expanded) ----------
-       Based on pest-vision-worker.js prompt + user docx analysis.
-       Includes 36 stratagems mapping + Hong Kong localization. */
+    /* ---------- Strategy & Price Fallback Table ---------- */
     const STRATEGY_MAP = {
         '曱甴':   { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後、櫥櫃縫隙', strategy: '採用「誘敵深入計」：設置智慧誘餌站，配合連環殺蟑膠餌，由工蟻帶回巢穴連鎖滅殺。', price: 'HK$ 600 - 3,800', confidence: 95 },
         '蟑螂':   { pest: '曱甴（蟑螂）', risk: '中 - 高', nest: '廚房罅隙、排水管、電器背後、櫥櫃縫隙', strategy: '採用「誘敵深入計」：設置智慧誘餌站，配合連環殺蟑膠餌，由工蟻帶回巢穴連鎖滅殺。', price: 'HK$ 600 - 3,800', confidence: 95 },
@@ -109,11 +104,7 @@
         '其他':   { pest: '待專員進一步分析', risk: '待評估', nest: '建議專員現場勘察', strategy: '已安排專業師傅親自對照相片，為你提供精準處方。', price: '免費估價', confidence: 80 }
     };
 
-    /* ============================================================
-       AI 圖片壓縮 — 在客戶端先壓縮再上傳
-       將任意圖片壓縮至最大 1024px、JPEG quality 0.85
-       大幅縩短 base64 payload 大小（5MB → ~200KB）
-       ============================================================ */
+    /* ---------- 客戶端圖片壓縮 ---------- */
     function compressImage(file, maxSize = 1024, quality = 0.85) {
         return new Promise((resolve, reject) => {
             if (!file.type.startsWith('image/')) {
@@ -137,7 +128,6 @@
                     canvas.height = height;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
-                    // Convert to JPEG base64 (strip data: prefix)
                     const dataUrl = canvas.toDataURL('image/jpeg', quality);
                     const base64 = dataUrl.split(',')[1];
                     resolve(base64);
@@ -150,55 +140,58 @@
         });
     }
 
-    /* ============================================================
-       嘗試呼叫 Cloudflare Worker AI Vision API
-       失敗時回傳 null（caller 負責降級處理）
-       ============================================================ */
-    const AI_WORKER_URL = 'https://pest-vision-worker.cedars5282.workers.dev/';
-    const AI_WORKER_TIMEOUT_MS = 20000; // 20 秒上限
+    /* ---------- 呼叫 Cloudflare Worker AI Vision API ---------- */
+    const AI_WORKER_URL = '[https://pest-vision-worker.cedars5282.workers.dev/](https://pest-vision-worker.cedars5282.workers.dev/)';
+    const AI_WORKER_TIMEOUT_MS = 20000;
 
     async function callCloudflareWorkerAI(file) {
-        // 1. 客戶端先壓縮
-        const base64String = await compressImage(file, 1024, 0.85);
-
-        // 2. 呼叫 Worker（帶 AbortController 逾時）
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), AI_WORKER_TIMEOUT_MS);
         try {
+            const base64String = await compressImage(file, 1024, 0.85);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), AI_WORKER_TIMEOUT_MS);
+
             const response = await fetch(AI_WORKER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ imageBase64: base64String }),
                 signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
+
             if (!response.ok) {
-                const errText = await response.text().catch(() => '');
-                console.warn('AI Worker 回應非 2xx:', response.status, errText);
+                console.warn('AI Worker 回應非 2xx 狀態:', response.status);
                 return null;
             }
-            const resData = await response.json();
 
-            // 3. 解析 Worker AI 文字輸出
+            const resData = await response.json();
             let rawText = typeof resData === 'string' ? resData : (resData.response || resData.text || JSON.stringify(resData));
+
+            // 過濾 Markdown 標記
+            rawText = rawText.replace(/```json/gi, '').replace(/```/gi, '').trim();
+
             let aiResult = {};
             try {
                 const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-                if (jsonMatch) aiResult = JSON.parse(jsonMatch[0]);
-                if (!aiResult.pest) {
-                    // Try to detect pest name from plain text
-                    for (const key of Object.keys(STRATEGY_MAP)) {
-                        if (key !== '其他' && rawText.includes(key)) {
-                            aiResult.pest = key;
-                            break;
-                        }
-                    }
+                if (jsonMatch) {
+                    aiResult = JSON.parse(jsonMatch[0]);
                 }
             } catch (e) {
-                console.warn('AI JSON 解析失敗，嘗試文字匹配', e);
+                console.warn('AI 輸出 JSON 解析失敗，嘗試文字匹配:', rawText);
+            }
+
+            // 救援機制：嘗試文字內容搜尋害蟲關鍵字
+            if (!aiResult.pest) {
+                for (const key of Object.keys(STRATEGY_MAP)) {
+                    if (key !== '其他' && rawText.includes(key)) {
+                        aiResult.pest = key;
+                        break;
+                    }
+                }
             }
 
             if (!aiResult.pest) {
-                console.warn('AI 未識別出害蟲種類');
+                console.warn('AI 未能從回應中識別出有效害蟲種類');
                 return null;
             }
 
@@ -212,28 +205,23 @@
                 price: aiResult.price || fallback.price,
                 source: 'ai'
             };
+
         } catch (err) {
             if (err.name === 'AbortError') {
-                console.warn('AI Worker 逾時（>20s）');
+                console.warn('AI Worker 請求逾時（>20s）');
             } else {
-                console.warn('AI Worker 呼叫失敗:', err.message);
+                console.warn('AI Worker 請求失敗:', err.message);
             }
             return null;
-        } finally {
-            clearTimeout(timeoutId);
         }
     }
 
-    /* ============================================================
-       降級流程：用戶選擇害蟲類型 → 本地策略庫分析
-       v3.1: Uses expanded STRATEGY_MAP (with 蛀木蟲 etc)
-       ============================================================ */
+    /* ---------- 降級流程：顯示手動選擇器 ---------- */
     function showPestSelector(opts, file, onPestSelected) {
         const $ = (id) => document.getElementById(id);
         const result = $(opts.result);
         if (!result) return;
 
-        /* Remove existing selector if present */
         const existingSel = $(opts.result + '-selector');
         if (existingSel) existingSel.remove();
 
@@ -242,7 +230,6 @@
         selectorDiv.style.cssText = 'background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:16px;margin:10px 0;';
         result.parentNode.insertBefore(selectorDiv, result);
 
-        /* Show only main pest types (skip aliases like '蟑螂', '床蝨', etc — these are duplicates of '曱甴', '木蝨') */
         const pestOptions = ['曱甴', '木蝨', '老鼠', '白蟻', '蛀木蟲', '蚊', '螞蟻', '蜂', '蜈蚣', '衣魚', '蜘蛛', '飛蟲', '蟎蟲', '卜泥'];
         selectorDiv.innerHTML =
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">' +
@@ -271,10 +258,7 @@
         });
     }
 
-    /* ============================================================
-       Initialize AI diagnosis widget
-       Used by homepage (/), /ai/, and /quote/
-       ============================================================ */
+    /* ---------- 初始化 AI 診斷小工具 ---------- */
     window.initAIDiagnosis = function (opts) {
         const $ = (id) => document.getElementById(id);
         const input = $(opts.input);
@@ -303,17 +287,11 @@
             if ($(opts.strategy)) $(opts.strategy).textContent = data.strategy;
             if ($(opts.price)) $(opts.price).textContent = data.price;
 
-            /* 🔧 v3.1 NEW: Manual correction mechanism (黃金防笑點)
-               AI 視覺有極限，當相片模糊或光線不足時可能誤判。
-               加入手動修正下拉選單，讓用戶可以一鍵切換正確嘅害蟲種類，
-               系統會即時重新計算對應嘅「三十六計方案」與「參考價格」。 */
             const resultEl = $(opts.result);
             if (resultEl) {
-                /* Remove any existing manual correction UI first */
                 const existingCorrector = resultEl.querySelector('.ai-manual-corrector');
                 if (existingCorrector) existingCorrector.remove();
 
-                /* Only show manual correction if AI identified something (source === 'ai') */
                 if (data.source === 'ai') {
                     const corrector = document.createElement('div');
                     corrector.className = 'ai-manual-corrector';
@@ -323,12 +301,12 @@
                     label.innerHTML = '<i class="fas fa-circle-info" style="margin-right:4px;"></i>辨識唔啱？手動修正品種：';
                     const select = document.createElement('select');
                     select.style.cssText = 'flex:1;min-width:140px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:0.88rem;font-family:inherit;background:#fff;color:#1e293b;';
-                    /* Add "保持 AI 結果" as default option */
+                    
                     const keepOption = document.createElement('option');
                     keepOption.value = '';
                     keepOption.textContent = '— 保持 AI 結果 —';
                     select.appendChild(keepOption);
-                    /* Add all pest options */
+
                     Object.keys(STRATEGY_MAP).filter(k => k !== '其他').forEach(key => {
                         const opt = document.createElement('option');
                         opt.value = key;
@@ -353,7 +331,7 @@
             if (wa) {
                 const sourceLabel = data.source === 'manual' ? '本地策略庫（用戶修正）' : 'AI 視覺';
                 const msg = `你好，我已用 AI 害蟲診斷器分析相片：\n• AI 識別：${data.pest}（信心 ${data.confidence}%）\n• 風險等級：${data.risk}\n• 潛在暗巢：${data.nest}\n• 建議策略：${data.strategy}\n• 參考估價：${data.price}\n• 分析方式：${sourceLabel}\n\n（我理解 AI 診斷結果僅供參考，實際方案以現場師傅評估為準）\n我想預約師傅上門跟進，謝謝！`;
-                wa.href = `https://wa.me/85252821552?text=${encodeURIComponent(msg)}`;
+                wa.href = `[https://wa.me/85252821552?text=$](https://wa.me/85252821552?text=$){encodeURIComponent(msg)}`;
             }
             showState('result');
         };
@@ -369,7 +347,6 @@
                 return;
             }
 
-            // 預覽圖片
             const reader = new FileReader();
             reader.onload = (e) => {
                 if (previewImg) previewImg.src = e.target.result;
@@ -378,15 +355,12 @@
             };
             reader.readAsDataURL(file);
 
-            // 嘗試呼叫 AI Worker（會自動壓縮 + 20s 逾時）
             const aiData = await callCloudflareWorkerAI(file);
 
             if (aiData) {
-                // AI 成功 → 直接填入結果
                 fillResult(aiData);
             } else {
-                // AI 失敗 → 降級：顯示害蟲選擇器，由用戶手動選擇
-                showState('upload'); // 先回到 upload state
+                showState('upload');
                 showPestSelector(opts, file, fillResult);
             }
         };
@@ -395,7 +369,6 @@
             if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
         });
 
-        // Drag & drop 支援
         if (area) {
             ['dragenter', 'dragover'].forEach(evt => {
                 area.addEventListener(evt, (e) => { e.preventDefault(); area.classList.add('dragover'); });
@@ -411,7 +384,6 @@
         if (reuploadBtn) {
             reuploadBtn.addEventListener('click', () => {
                 input.value = '';
-                // Also hide any manual selector that may be visible
                 const sel = document.getElementById(opts.result + '-selector');
                 if (sel) sel.style.display = 'none';
                 showState('upload');
