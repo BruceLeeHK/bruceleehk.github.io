@@ -729,16 +729,15 @@
     </style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
-      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://cloudflareinsights.com;
       frame-src https://udify.app;
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
-      frame-ancestors 'none';
     ">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#2c5e1a">
