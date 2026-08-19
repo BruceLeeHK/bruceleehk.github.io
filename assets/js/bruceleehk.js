@@ -1,5 +1,5 @@
 /* ============================================================
-   bruceleehk.com — Shared JavaScript (v3.4 — 2026-08-19)
+   bruceleehk.com — Shared JavaScript (v3.5 — 2026-08-19)
    Used by: / (homepage), /ai/, /quote/
    ============================================================ */
 
@@ -175,7 +175,7 @@
 
     /* ---------- 初始化 AI 診斷模組 ---------- */
     window.initAIDiagnosis = function (opts) {
-        const $ = (id) => document.getElementById(id);
+        const $ = (id) => id ? document.getElementById(id) : null;
         const input = $(opts.input);
         if (!input) return;
 
@@ -224,8 +224,7 @@
                 fillResult(aiData);
             } else {
                 // 降級處理：若 AI 服務無回應，預設提供通用分析
-                const fallbackData = STRATEGY_MAP['曱甴'];
-                fallbackData.source = 'fallback';
+                const fallbackData = Object.assign({}, STRATEGY_MAP['曱甴'], { source: 'fallback' });
                 fillResult(fallbackData);
             }
         };
