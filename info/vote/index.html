@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" defer>
 
     <style>
-
 :root {
   --primary: #10b981;
   --primary-dark: #059669;
@@ -68,7 +67,6 @@ body {
 a { color: inherit; }
 img { max-width: 100%; display: block; }
 
-/* Skip Link (a11y) */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -82,14 +80,12 @@ img { max-width: 100%; display: block; }
 }
 .skip-link:focus { top: 0; }
 
-/* Container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Header */
 .site-header {
   position: sticky;
   top: 0;
@@ -193,7 +189,6 @@ img { max-width: 100%; display: block; }
   outline-offset: 2px;
 }
 
-/* Section Title */
 .section-title {
   text-align: center;
   margin: 45px 0 25px;
@@ -209,7 +204,6 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
-/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -258,7 +252,6 @@ img { max-width: 100%; display: block; }
   transform: none;
 }
 
-/* Hero (modern dark gradient with radial glow) */
 .hero {
   background:
     linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
@@ -317,7 +310,6 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
 }
 
-/* Tech Badge */
 .tech-badge {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.4);
@@ -331,7 +323,6 @@ img { max-width: 100%; display: block; }
   gap: 6px;
 }
 
-/* Modern Card (shared) */
 .modern-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -388,7 +379,6 @@ img { max-width: 100%; display: block; }
   margin-bottom: 6px;
 }
 
-/* Service / Strategy Number Badge */
 .number-badge {
   display: inline-block;
   background: linear-gradient(135deg, var(--primary), var(--tech-blue));
@@ -401,7 +391,6 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.5px;
 }
 
-/* Pricing Box */
 .pricing-box {
   background: var(--light-bg);
   border-radius: var(--radius-sm);
@@ -433,7 +422,6 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0;
 }
 
-/* Grid layouts */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -445,7 +433,6 @@ img { max-width: 100%; display: block; }
   gap: 20px;
 }
 
-/* Footer */
 footer {
   background: var(--dark-bg);
   color: #94a3b8;
@@ -484,7 +471,6 @@ footer {
   filter: brightness(0) invert(1);
 }
 
-/* Mobile Sticky Thumb Zone */
 .mobile-thumb-zone {
   position: fixed;
   bottom: 0;
@@ -514,7 +500,6 @@ footer {
 .thumb-call { background: var(--tech-blue); color: #fff; }
 .thumb-wa { background: var(--whatsapp); color: #fff; }
 
-/* Responsive */
 @media (max-width: 768px) {
   .menu-toggle { display: flex; }
   .nav-links {
@@ -559,7 +544,6 @@ footer {
             max-width: 980px;
         }
 
-        /* Slogan Banner */
         .slogan-banner {
             display: flex;
             align-items: center;
@@ -587,7 +571,6 @@ footer {
             color: var(--warning);
         }
 
-        /* Vote Intro Card */
         .vote-intro {
             background: #fff;
             border: 1px solid var(--border);
@@ -634,7 +617,6 @@ footer {
             font-weight: 700;
         }
 
-        /* Vote Section */
         .vote-section { margin: 0 auto 28px; }
         .vote-section h3 {
             font-size: 1.3rem;
@@ -726,7 +708,6 @@ footer {
             transition: width .6s ease;
         }
 
-        /* Vote Actions */
         .vote-actions {
             text-align: center;
             padding: 22px 0;
@@ -768,7 +749,6 @@ footer {
             box-shadow: none;
         }
 
-        /* Results */
         .vote-result-section {
             margin: 0 auto 28px;
             display: none;
@@ -844,7 +824,6 @@ footer {
             border-bottom: 1px dashed var(--tech-blue);
         }
 
-        /* Pest Detail Panel */
         .pest-detail-panel {
             margin: 0 auto 28px;
             background: #fff;
@@ -884,7 +863,6 @@ footer {
             transform: translateY(-2px);
         }
 
-        /* CTA Box */
         .blog-cta-box {
             background: linear-gradient(135deg, var(--primary), var(--tech-blue));
             color: #fff;
@@ -940,7 +918,6 @@ footer {
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        /* Comment Section */
         .comment-outer-wrap {
             max-width: 1000px;
             margin: 50px auto 30px;
@@ -989,7 +966,6 @@ footer {
             margin-top: 2px;
         }
 
-        /* Comment Form */
         .comment-form {
             background: var(--light-bg);
             border: 1px solid var(--border);
@@ -1038,7 +1014,6 @@ footer {
             margin-top: 5px;
         }
 
-        /* Submit Button */
         .btn-submit-comment {
             display: inline-flex;
             align-items: center;
@@ -1067,7 +1042,6 @@ footer {
             box-shadow: none;
         }
 
-        /* Comment List */
         .comment-list-header {
             font-size: 1.15rem;
             font-weight: 700;
@@ -1131,7 +1105,6 @@ footer {
             word-break: break-word;
         }
 
-        /* Image thumbnail */
         .comment-img-thumb {
             max-width: 220px;
             max-height: 180px;
@@ -1148,7 +1121,6 @@ footer {
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
 
-        /* Reply thread */
         .reply-thread {
             margin-top: 14px;
             padding-left: 18px;
@@ -1183,7 +1155,6 @@ footer {
             border-color: var(--primary);
         }
 
-        /* Badges */
         .official-badge {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #fff;
@@ -1213,7 +1184,6 @@ footer {
             border: 1px solid #fde68a;
         }
 
-        /* Lightbox Modal */
         .img-modal-overlay {
             display: none;
             position: fixed;
@@ -1261,7 +1231,6 @@ footer {
             border-color: var(--danger);
         }
 
-        /* Captcha row */
         .captcha-row {
             display: flex;
             align-items: center;
@@ -1298,7 +1267,6 @@ footer {
             margin-top: 8px;
         }
 
-        /* Toast */
         .toast {
             position: fixed;
             top: 90px;
@@ -1320,7 +1288,6 @@ footer {
         .toast.toast-warning { background: linear-gradient(135deg, var(--warning), #d97706); }
         .toast.toast-error { background: linear-gradient(135deg, var(--danger), #b91c1c); }
 
-        /* Vote success Modal */
         .vote-comment-modal {
             display: none;
             position: fixed;
@@ -1388,7 +1355,7 @@ footer {
     </style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
@@ -1397,7 +1364,6 @@ footer {
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
-      frame-ancestors 'none';
     ">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#10b981">
@@ -1465,8 +1431,8 @@ footer {
                 <!-- Vote Intro -->
                 <div class="vote-intro">
                     <h2><i class="fa-solid fa-bullhorn" aria-hidden="true"></i> 害蟲排名由你決定！</h2>
-                    <p>香港地小人多，氣候又暖又濕，令到各種害蟲特別活躍。由咬人到毀屋、由傳菌到嚇人，唔同害蟲帶嚟嘅困擾各有唔同——但有一樣嘢係一樣嘅：人人都想佢哋消失！</p>
-                    <p>我哋精選咗<strong>20種常見害蟲</strong>作為候選，分為四大威分為四大威脅類別，俾你投出最厭惡嘅10大害蟲。投票結果會即時更新，等你睇下全港市民最憎邊隻蟲！</p>
+                    <p>香港地小人多，氣候又暖又濕，令到各種害蟲特別活躍。由咬人到毀屋、由傳菌到嚇人，唔同害蟲帶嚟嘅困擾各有唔同——但有一樣嘢係一樣嘅：人人人都想佢哋消失！</p>
+                    <p>我哋精選咗<strong>20種常見害蟲</strong>作為候選，分為四大威脅類別，俾你投出最厭惡嘅10大害蟲。投票結果會即時更新，等你睇下全港市民最憎邊隻蟲！</p>
                     <ul>
                         <li>每人最多可選 <strong>1 至 10 項</strong>（選越多，你嘅聲音越大）</li>
                         <li>投票後可即時睇到最新排名同比例</li>
@@ -1671,7 +1637,7 @@ footer {
                                 <button type="button" class="btn-reply" id="btnRefreshCaptcha"><i class="fa-solid fa-rotate" aria-hidden="true"></i> 換題</button>
                             </div>
 
-                            <!-- Honeypot field (hidden from humans, bots fill it. Server silently drops.) -->
+                            <!-- Honeypot field -->
                             <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
                                 <label>不要填寫此欄位 <input type="text" name="website_url" tabindex="-1" autocomplete="off"></label>
                             </div>
@@ -1716,7 +1682,7 @@ footer {
                     </div>
                 </div>
 
-                <!-- Vote → Comment Modal -->
+                <!-- Vote success Modal -->
                 <div class="vote-comment-modal" id="voteCommentModal">
                     <div class="modal-card">
                         <h3><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 投票成功！</h3>
@@ -1764,8 +1730,9 @@ footer {
     <!-- Mobile Sticky Thumb Zone -->
     <div class="mobile-thumb-zone">
         <a href="tel:+85252821552" class="thumb-btn thumb-call"><i class="fa-solid fa-phone" aria-hidden="true"></i> 致電</a>
-        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務"  rel="noopener" class="thumb-btn thumb-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務" rel="noopener" class="thumb-btn thumb-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
     </div>
+
     <!-- Vote System Scripts -->
     <script src="/assets/js/main.js" defer></script>
     <script>
@@ -1811,7 +1778,6 @@ footer {
             });
         }
 
-        /* Pest card click handler (event delegation) */
         document.querySelectorAll('.pest-card').forEach(function(card){
             card.addEventListener('click', function(){
                 if(hasVoted) return;
@@ -1859,10 +1825,8 @@ footer {
             document.getElementById('voteCommentModal').classList.add('active');
         }
 
-        /* Vote button click handler */
         document.getElementById('btnVote').addEventListener('click', submitVote);
 
-        /* Modal close button */
         document.getElementById('btnCloseVoteModal').addEventListener('click', function(){
             document.getElementById('voteCommentModal').classList.remove('active');
         });
@@ -1913,7 +1877,6 @@ footer {
             return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
         }
 
-        /* Init: render vote counts if already voted */
         renderVoteCounts();
         if(getUserVoted()){
             hasVoted=true;
@@ -1940,7 +1903,6 @@ footer {
         initCaptcha();
 
         document.getElementById('btnRefreshCaptcha').addEventListener('click', initCaptcha);
-
         document.getElementById('imageFile').addEventListener('change', handleImageSelect);
         document.getElementById('mainCommentForm').addEventListener('submit', handleMainSubmit);
         document.getElementById('btnCancelReply').addEventListener('click', cancelReply);
@@ -1972,6 +1934,7 @@ footer {
             reader.readAsDataURL(file);
         }
 
+        /* 修復版 loadComments：比對後台資料，自動清除 LocalStorage 中的審核中/已處理解答 */
         function loadComments() {
             var listEl = document.getElementById('commentList');
             var countEl = document.getElementById('commentCount');
@@ -1982,8 +1945,31 @@ footer {
                         listEl.innerHTML = '<p style="color: red; text-align:center;">載入留言失敗：' + escapeHtml(String(data.error || '未知錯誤')) + '</p>';
                         return;
                     }
+                    
+                    var serverComments = data.comments || [];
                     var pendingLocal = getLocalPendingComments();
-                    renderTree(data.comments || [], pendingLocal);
+
+                    // 比對伺服器資料，自動清理已在伺服器上公開的暫存
+                    if (pendingLocal.length > 0 && serverComments.length > 0) {
+                        var serverIds = new Set();
+                        serverComments.forEach(function(c) {
+                            serverIds.add(c.id);
+                            if (c.replies) c.replies.forEach(function(r) { serverIds.add(r.id); });
+                        });
+
+                        var cleanPending = pendingLocal.filter(function(item) {
+                            return !serverIds.has(item.id);
+                        });
+
+                        if (cleanPending.length !== pendingLocal.length) {
+                            pendingLocal = cleanPending;
+                            try { 
+                                localStorage.setItem('pending_comments', JSON.stringify(pendingLocal)); 
+                            } catch(e) {}
+                        }
+                    }
+
+                    renderTree(serverComments, pendingLocal);
                     var totalCount = (data.total || 0) + pendingLocal.length;
                     countEl.textContent = totalCount;
                 })
@@ -2184,7 +2170,6 @@ footer {
             return d.toLocaleString('zh-HK', { hour12: false });
         }
 
-        /* Load comments on page load */
         loadComments();
     });
     </script>
@@ -2211,7 +2196,7 @@ footer {
       "author": { "@type": "Organization", "name": "滅蟲師傅" },
       "publisher": { "@type": "Organization", "name": "滅蟲師傅 CEDARS LTD", "logo": { "@type": "ImageObject", "url": "https://bruceleehk.com/assets/img/logo.png" } },
       "datePublished": "2026-08-11",
-      "dateModified": "2026-08-17",
+      "dateModified": "2026-08-21",
       "mainEntityOfPage": "https://bruceleehk.com/info/vote/"
     }
     </script>
