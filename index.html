@@ -1182,7 +1182,7 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // 🚀 全新真實版 AI 診斷 API 串接邏輯
+        // 🚀 全新真實版 AI 診斷 API 串接邏輯 (加入強效防錯機制)
         document.addEventListener('DOMContentLoaded', function() {
             const pestImageInput = document.getElementById('pestImageInput');
             const uploadBox = document.getElementById('uploadBox');
@@ -1241,7 +1241,8 @@
 
                         const data = await response.json();
 
-                        if (data.success) {
+                        // ⚠️ 檢查 Dify 是否真的有傳回診斷內容 (防錯核心)
+                        if (data.success && data.diagnosis) {
                             let formattedHtml = data.diagnosis;
                             
                             // 將 Dify 產生的 Markdown 連結，轉換為華麗的綠色 WhatsApp 按鈕
@@ -1260,11 +1261,14 @@
                             loadingArea.style.display = 'none';
                             resultArea.style.display = 'block';
                         } else {
-                            throw new Error(data.error || '分析失敗');
+                            // 如果 Cloudflare 有回傳錯誤，或者 Dify 沒有答案
+                            console.error("API 回傳異常資料:", data);
+                            throw new Error(data.error || 'Dify AI 無法產生診斷內容，請檢查 API 金鑰或配額。');
                         }
                     } catch (error) {
-                        console.error(error);
-                        alert('系統繁忙或網絡不穩，請稍後再試！');
+                        console.error("前端攔截到錯誤:", error);
+                        // 💡 直接在畫面上彈出具體錯誤，方便除錯！
+                        alert('⚠️ 系統提示：\n' + error.message + '\n\n(可能原因：網絡不穩 或 Dify 設定未發佈)');
                         loadingArea.style.display = 'none';
                         uploadBox.style.display = 'block';
                     }
