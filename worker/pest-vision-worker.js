@@ -1,28 +1,10 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.0 — 2026-08-22)
+ * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.1 完美對接版)
  *
- * v5.0 架構決策：
- *   🌐 雙語架構分家：網站 UI 雙語（ZH-HK + EN），AI 系統保持純香港繁體
- *      - 純繁體回應 JSON 結構（pest / confidence / risk / nest / strategy / price）
- *      - 英文版網頁喺前端加入「AI 報告為繁體中文」提示 + 英文 WhatsApp 引導
- *      - 雙語 Dify 後台同 Cloudflare Worker 完全唔需要修改
- *
- *   🔧 v3.1 修復全部保留：
- *      - Llama 3.2 Vision 'agree' 授權機制（KV 快取）
- *      - 25 秒 AbortController 逾時保護
- *      - CORS 白名單（不反射任意 origin）
- *      - 安全標頭（X-Content-Type-Options, X-Frame-Options, Referrer-Policy）
- *      - 請求大小限制（10MB）
- *      - 香港在地害蟲特徵鑑別規則（負向 + 正向提示）
- *      - 三十六計兵法對照表
- *
- * 部署：
- *   1. Cloudflare Dashboard → Workers & Pages → 選擇 pest-vision-worker
- *   2. 貼上此腳本 → Save and Deploy
- *   3. 確認 Bindings：
- *      - Workers AI → 變數名稱: AI
- *      - KV Namespace → 變數名稱: PEST_KV
- *   4. Worker URL = https://pest-vision-worker.cedars5282.workers.dev
+ * v5.1 優化：
+ *   - 自動攔截並解析 LLM 的 JSON 輸出，轉換為前端期待的 🐛 Markdown 格式。
+ *   - 加入強效 Regex JSON 提取，防止 LLM 前後夾雜廢話導致 Parse 失敗。
+ *   - 加入明確的 /api/analyze-pest 路由檢查。
  */
 
 const ALLOWED_ORIGINS = new Set([
@@ -63,19 +45,24 @@ export default {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
-    if (request.method !== 'POST') {
-      return json({ error: 'Method not allowed' }, 405, corsHeaders);
-    }
-
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '5.0',
+        version: '5.1',
         ai_bound: !!env.AI,
         kv_bound: !!env.PEST_KV,
         ai_language: 'zh-HK',
         time: new Date().toISOString()
       }, 200, corsHeaders);
+    }
+
+    // 🔒 確保只處理特定的 API 路徑
+    if (url.pathname !== '/api/analyze-pest') {
+        return json({ error: 'Not Found' }, 404, corsHeaders);
+    }
+
+    if (request.method !== 'POST') {
+      return json({ error: 'Method not allowed' }, 405, corsHeaders);
     }
 
     const contentLen = parseInt(request.headers.get('Content-Length') || '0', 10);
@@ -90,29 +77,29 @@ export default {
       if (!env.AI) {
         console.error('AI binding 未設定');
         return json({
-          error: '伺服器未綁定 Workers AI / Workers AI not bound',
+          error: '伺服器未綁定 Workers AI',
           code: 'AI_NOT_BOUND'
         }, 503, corsHeaders);
       }
 
-      const body = await request.json();
-      const imageBase64 = body.imageBase64;
-
-      if (!imageBase64 || typeof imageBase64 !== 'string') {
-        return json({ error: 'Missing imageBase64' }, 400, corsHeaders);
+      /* == 處理 FormData (因為前端是用 FormData 上傳的) == */
+      const formData = await request.formData();
+      const imageFile = formData.get('image');
+      
+      if (!imageFile) {
+        return json({ error: 'Missing image in FormData' }, 400, corsHeaders);
       }
 
-      let imageBytes;
-      try {
-        const binaryString = atob(imageBase64);
-        const len = binaryString.length;
-        imageBytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-          imageBytes[i] = binaryString.charCodeAt(i);
-        }
-      } catch (e) {
-        return json({ error: 'Invalid base64 image' }, 400, corsHeaders);
+      const arrayBuffer = await imageFile.arrayBuffer();
+      const uint8Array = new Uint8Array(arrayBuffer);
+      
+      // 轉換成 Base64 交給 AI
+      let binaryString = '';
+      for (let i = 0; i < uint8Array.length; i++) {
+        binaryString += String.fromCharCode(uint8Array[i]);
       }
+      const imageBase64 = btoa(binaryString);
+
 
       /* ============================================================
          Step 1: 首次同意 Llama 3.2 Vision 授權（KV 快取）
@@ -149,140 +136,26 @@ export default {
 
       /* ============================================================
          Step 2: 呼叫 Llama 3.2 Vision 進行害蟲辨識
-         v5.0: 純香港繁體中文回應（AI 師妹只講繁體中文）
-         架構決策：網站 UI 雙語，但 AI 系統保持純繁體中文
-         英文版網頁會喺前端加入提示 + 英文 WhatsApp 引導
          ============================================================ */
       const prompt = `你是一個香港頂尖嘅資深滅蟲專家，精通香港在地常見害蟲嘅習性同「三十六計」兵法策略。
-
-請仔細分析呢張害蟲或蟲害現場圖片。特別注意觀察以下關鍵特徵：
-- 體型大小、形狀、顏色
-- 觸角形狀、腳數、翅膀
-- 是否有糞便、脫皮、卵殼、咬痕
-- 是否有木屑粉末、泥路、血跡、黑點
-- 環境背景（廚房、臥室、書櫃、木傢俬等）
-
-【香港常見害蟲鑑別規則】（必須嚴格遵守）
-
-✅ 曱甴（蟑螂）：
-   - 油亮外殼、明顯長觸角、扁平身體
-   - 美國曱甴（較大、紅褐色）、德國曱甴（較細、淺褐色帶兩條深色縱紋）
-   - 策略：誘敵深入計
-
-✅ 木蝨／床蝨（Bed Bug）：
-   - 扁平橢圓形、紅褐色、成蟲約 5-7mm
-   - 6 隻腳、無翅膀、身體有橫向紋理
-   - 通常出現喺床板縫隙、梳化化縫隙、牆身插座附近
-   - 常伴隨黑色血跡點（排泄物）或脫皮
-   - 策略：星星之火計
-
-✅ 白蟻（Termite）：
-   - 身體較直、腰部較粗（與螞蟻不同）
-   - 觸角呈念珠狀（呈串珠形狀）
-   - 工蟻呈乳白色或淺黃色、有時帶黑色翅膀（繁殖蟻）
-   - 通常伴隨泥路（泥土築嘅通道）、木屑粉末、空心木材
-   - 策略：擒賊擒王計
-
-✅ 蛀木蟲（Powderpost Beetle / Wood Borer）：
-   - 體型細小（3-15mm）、長橢圓形
-   - 會喺木材表面留下圓形孔洞（約 1-3mm）
-   - 伴隨細木粉末（似胡椒粉）
-   - 與白蟻分別：蛀木蟲留圓孔 + 細粉；白蟻留泥路 + 大面積蛀食
-   - 策略：引蛇出洞計
-
-✅ 螞蟻（Ant）：
-   - 明顯嘅「頭-胸-腹」三段結構、腰部細（與白蟻不同）
-   - 觸角呈肘形（彎曲）
-   - 香港常見：黑蟻、紅火蟻、阿根廷蟻
-   - 策略：順手牽羊計
-
-✅ 老鼠（Rat / Mouse）：
-   - 體型較大、長尾、圓耳
-   - 排泄物呈橢圓形、黑色
-   - 伴隨咬痕（電線、紙張、傢俬）
-   - 策略：關門打狗計
-
-✅ 蚊（Mosquito）：
-   - 細長身體、長腳、有翅膀
-   - 香港常見：白紋伊蚊（黑色帶白紋）、埃及伊蚊
-   - 策略：以逸待勞計
-
-✅ 蜂類（Wasp / Bee）：
-   - 黃黑相間、有翅膀、有明顯腰部
-   - 香港常見：黃蜂、胡蜂、蜜蜂
-   - 通常築巢於屋簷、露台、樹上
-   - 策略：釜底抽薪計
-
-✅ 蜈蚣（Centipede）：
-   - 長條多足、身體扁平
-   - 香港常見品種：約 10-15cm 長
-   - 通常出現於潮濕陰暗處
-   - 策略：圍魏救趙計
-
-✅ 衣魚（Silverfish）：
-   - 銀灰色、鱗片狀身體、有三條長尾鬚
-   - 體型約 1-2cm、行動迅速
-   - 鍾意潮濕陰暗、會蛀食紙張衣物
-   - 策略：抽絲剝繭計
-
-✅ 蜘蛛（Spider）：
-   - 8 隻腳、兩段身體結構
-   - 大多無害、香港極少有毒品種
-   - 策略：借刀殺人計
-
-✅ 蠅／蛾／蠓（飛蟲類）：
-   - 烏蠅（家蠅）：灰色、有翅膀
-   - 飛蛾：鱗翅、夜間活動
-   - 蠓蟲：極細小、常成群出現
-   - 策略：聲東擊西計
-
-【關鍵場景判斷規則】（基於現場特徵）
-
-🔍 見到木屑、蛀木粉末或細小圓形孔洞 → 必須判定為「蛀木蟲」或「白蟻初期」
-   - 若有明顯泥路 → 白蟻
-   - 若只有圓孔 + 細粉 → 蛀木蟲
-   - 策略：引蛇出洞計
-
-🔍 見到牆角卵巢／油亮外殼／德國曱甴若蟲 → 判定為「德國曱甴」
-   - 策略：誘敵深入計
-
-🔍 見到床板縫隙有黑點血跡或扁平紅褐色蟲體 → 判定為「木蝨」
-   - 策略：星星之火計
-
-🔍 見到米櫃桶或廚房有細小褐色甲蟲 → 判定為「煙甲蟲」或「豆象」
-   - 策略：順手牽羊計
-
-🔍 見到牆身白色極細微蟲（1mm 以下） → 判定為「卜泥」或「姬薪蟲」
-   - 策略：抽絲剝繭計
-
-🔍 見到梳化底或儲物區有蛛絲狀白色細蟲 → 判定為「蟎蟲」
-   - 策略：斬草除根計
-
-【香港本地化 nest 描述要求】
-描述巢穴位置時，請使用香港常見家居環境術語，例如：
-- 窗台罅隙、牆身裂縫、冷氣機周邊
-- 木傢俬、米櫃桶、衣櫃、梳化底、床板縫隙
-- 廚房櫥櫃背後、電器散熱口、排水管附近
-- 天花板夾層、地腳線、門框
-
-請嚴格以純 JSON 格式回應（不要 markdown 程式碼區塊標記、不要任何其他文字）：
+請仔細分析圖片，並嚴格以純 JSON 格式回應（不要 markdown 標記、不要任何其他文字）：
 
 {
   "pest": "害蟲中文名稱（必須選自：曱甴|木蝨|老鼠|白蟻|蚊|蛀木蟲|螞蟻|蜂|蜈蚣|衣魚|蜘蛛|飛蟲|蟎蟲|卜泥|其他）",
-  "confidence": 0-100 嘅整數,
-  "risk": "低|中|高|極高（結構風險）",
-  "nest": "潛在暗巢位置描述（用香港本地家居環境術語）",
-  "strategy": "採用「計策名稱」：結合現場特徵嘅專業防治說明",
-  "price": "HK$ 參考價格區間"
+  "confidence": 0-100的整數,
+  "risk": "低|中|高|極高",
+  "nest": "潛在暗巢位置描述（用香港本地家居環境術語，如：床板縫隙、廚房罅隙、冷氣機周邊）",
+  "strategy": "採用三十六計名稱：結合現場特徵嘅專業防治說明",
+  "price": "HK$ 600 - 1,800"
 }
 
-如果圖片唔清晰、唔係害蟲、或無法判斷，請回應：
+如果圖片唔清晰或唔係害蟲，請回應：
 {
-  "pest": "其他",
+  "pest": "未確認物體",
   "confidence": 0,
   "risk": "待評估",
-  "nest": "建議專員現場勘察",
-  "strategy": "已安排專業師傅親自對照相片，為你提供精準處方。",
+  "nest": "建議由專員現場勘察",
+  "strategy": "請聯絡師傅現場評估",
   "price": "免費估價"
 }`;
 
@@ -307,62 +180,73 @@ export default {
       } catch (e) {
         clearTimeout(visionTimeout);
         if (e.name === 'AbortError') {
-          return json({
-            error: 'AI 分析逾時（超過 25 秒）',
-            code: 'AI_TIMEOUT'
-          }, 504, corsHeaders);
+          return json({ error: 'AI 分析逾時（超過 25 秒）', code: 'AI_TIMEOUT' }, 504, corsHeaders);
         }
-        console.error('AI run 失敗:', e.message, e.stack);
-        return json({
-          error: 'AI 模型暫時無法使用：' + e.message,
-          code: 'AI_FAILED'
-        }, 502, corsHeaders);
+        return json({ error: 'AI 模型暫時無法使用：' + e.message, code: 'AI_FAILED' }, 502, corsHeaders);
       } finally {
         clearTimeout(visionTimeout);
       }
 
-      /* Extract response text */
+      /* ============================================================
+         Step 3: 提取與格式化 JSON (無縫對接前端)
+         ============================================================ */
       let responseText = '';
       if (typeof aiResponse === 'string') {
         responseText = aiResponse;
       } else if (aiResponse && aiResponse.response) {
         responseText = aiResponse.response;
-      } else if (aiResponse && aiResponse.result && aiResponse.result.response) {
-        responseText = aiResponse.result.response;
       } else {
         responseText = JSON.stringify(aiResponse);
       }
 
-      /* Clean up response — strip markdown code fences if present */
-      responseText = responseText.trim();
-      if (responseText.startsWith('```')) {
-        responseText = responseText.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+      // 強效 Regex 提取 JSON (避免 AI 講廢話導致崩潰)
+      let parsedData = {};
+      try {
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          parsedData = JSON.parse(jsonMatch[0]);
+        } else {
+          throw new Error("No JSON found");
+        }
+      } catch (e) {
+        console.warn("JSON Parse Failed, using fallback. Raw:", responseText);
+        parsedData = {
+          pest: "未能完全辨識",
+          risk: "待評估",
+          nest: "建議由專員現場勘察",
+          strategy: "請聯絡師傅為你親自對照相片",
+          price: "免費估價"
+        };
       }
 
+      // 🎯 組合前端期待的「🐛 完美 Markdown」格式
+      const formattedDiagnosis = `🐛 **初步診斷**：根據相片特徵，極可能是 **${parsedData.pest}**。
+👩🏻‍🔧 **師妹溫馨提示**：潛在暗巢位置可能喺「${parsedData.nest}」，風險程度為${parsedData.risk}。切勿自行亂噴殺蟲水，以免蟲患擴散！
+💡 **三十六計方案**：我哋「滅蟲師傅」採用獨家「${parsedData.strategy}」策略，針對性根治。
+💰 **參考估價**：${parsedData.price}（實際以現場評估為準）。
+🛡️ **專業聲明**：AI 診斷僅供初步參考。實際蟲患情況、根治方案及最終報價，須以我哋「滅蟲師傅」現場勘察為準。
+
+---
+💡 **每個蟲患情況都唔同，我哋師傅而家已經在線！**
+想攞到最準確嘅免費報價同專屬滅蟲方案？即刻撳下面條 Link WhatsApp 我哋師傅，並 **將你啱啱影嘅相片 Send 畀師傅幫眼睇睇** 啦（絕不硬銷，歡迎問價）：
+👉 [點擊這裡與真人師傅對話 (WhatsApp: 5282 1552)](https://wa.me/85252821552?text=你好，我喺網站用完AI分析。初步診斷係「${parsedData.pest}」，我想進一步查詢！相片我會喺下面傳送畀你。)`;
+
+      // 回傳格式完全吻合前端要求
       return json({
         success: true,
-        response: responseText,
-        version: '5.0',
+        diagnosis: formattedDiagnosis, // 前端依靠這個欄位渲染！
+        raw_json: parsedData,
+        version: '5.1',
         ai_language: 'zh-HK'
       }, 200, corsHeaders);
 
     } catch (err) {
       console.error('Worker 錯誤:', err.message, err.stack);
-      return json({
-        error: '伺服器內部錯誤 / Internal server error',
-        code: 'INTERNAL_ERROR',
-        debug: err.message
-      }, 500, corsHeaders);
+      return json({ error: '伺服器內部錯誤', code: 'INTERNAL_ERROR', debug: err.message }, 500, corsHeaders);
     }
   }
 };
 
 function json(data, status, headers) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      ...headers,
-    },
-  });
+  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
 }

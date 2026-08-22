@@ -14,7 +14,9 @@
     <!-- hreflang alternates for SEO (HK Trad + Simplified Chinese + English) -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/">
     <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/">
-    <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/"><!-- Additional SEO meta -->
+    <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/">
+    
+    <!-- Additional SEO meta -->
     <meta name="author" content="CEDARS Ltd.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="language" content="zh-HK, en-HK, zh-CN">
@@ -1226,7 +1228,7 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // 🚀 全新真實版 AI 診斷 API 串接邏輯 (加入強效防錯機制)
+        // 🚀 全新真實版 AI 診斷 API 串接邏輯 (加入強效防錯機制與過濾)
         document.addEventListener('DOMContentLoaded', function() {
             const pestImageInput = document.getElementById('pestImageInput');
             const uploadBox = document.getElementById('uploadBox');
@@ -1284,8 +1286,7 @@
                     };
                     reader.readAsDataURL(file);
                 });
-            }
-            }
+            } // <--- 🐛 就是這裡原本多了一個 } 導致崩潰！已經幫你拿走了！
 
             // 2. 點擊開始分析，傳送圖片給 Cloudflare API
             if (btnAnalyze) {
@@ -1307,10 +1308,16 @@
 
                         const data = await response.json();
 
-                        // ⚠️ 檢查 Dify 是否真的有傳回診斷內容 (防錯核心)
+                        // ⚠️ 檢查 Dify 是否真的有傳回診斷內容
                         if (data.success && data.diagnosis) {
                             let formattedHtml = data.diagnosis;
                             
+                            // ✂️ 【前端雙重保險】：尋找第一個「🐛」符號，將前面的簡體字內心戲全部剪走！
+                            const bugEmojiIndex = formattedHtml.indexOf('🐛');
+                            if (bugEmojiIndex !== -1) {
+                                formattedHtml = formattedHtml.substring(bugEmojiIndex);
+                            }
+
                             // 將 Dify 產生的 Markdown 連結，轉換為華麗的綠色 WhatsApp 按鈕
                             formattedHtml = formattedHtml.replace(
                                 /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g, 
@@ -1329,14 +1336,15 @@
                         } else {
                             // 如果 Cloudflare 有回傳錯誤，或者 Dify 沒有答案
                             console.error("API 回傳異常資料:", data);
-                            throw new Error(data.error || 'Dify AI 無法產生診斷內容，請檢查 API 金鑰或配額。');
+                            throw new Error(data.error || 'Dify AI 系統繁忙，無法產生診斷內容。');
                         }
                     } catch (error) {
                         console.error("前端攔截到錯誤:", error);
-                        // 💡 直接在畫面上彈出具體錯誤，方便除錯！
-                        alert('⚠️ 系統提示：\n' + error.message + '\n\n(可能原因：網絡不穩 或 Dify 設定未發佈)');
+                        // 💡 完善報錯機制：如果失敗，彈出提示，並回到預覽畫面，等客人可以再撳
+                        alert('⚠️ 系統提示：\n網絡連線超時或出現異常，請稍後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。\n\n(錯誤細節: ' + error.message + ')');
+                        
                         loadingArea.style.display = 'none';
-                        uploadBox.style.display = 'block';
+                        previewArea.style.display = 'block'; // 回到預覽畫面
                     }
                 });
             }
