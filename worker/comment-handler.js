@@ -1,36 +1,34 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（安全升級版 v3.1 — 2026-08-17）
+ * Cloudflare Worker — 滅蟲師傅 自建原生留言系統後端（安全升級版 v4.0 — 2026-08-22）
  *
- * v3.1 修復亮點：
- *   🔧 修正「密碼錯碼錯誤」誤判問題：
- *      - 當 ADMIN_SECRET 環境變數未設定時，回傳專屬錯誤碼 ADMIN_SECRET_NOT_SET
- *        而非通用「密鑰錯誤」，前端可據此顯示詳細設定指引
- *      - 修正管理員密鑰比較使用時序安全函數 safeCompare（防 side-channel attack）
- *      - 自動 trim 兩端空白，避免空白差異導致比對失敗
- *   🔧 新增 POST /api/admin/test 端點：
- *      - 提供前端驗證密鑰是否正確的獨立 API
- *      - 同時回報 ADMIN_SECRET 是否已設定、KV 是否綁定
- *   🔧 /api/health 加入 admin_secret_set 欄位（不洩漏實際值）
- *   🔧 修正 CORS 反射弱點：未知 origin 不再 fall-back 至生產域名
- *   🔧 加入安全標頭：X-Content-Type-Options, X-Frame-Options, Referrer-Policy
- *   🔧 加入請求大小限制（5.5MB）
- *   🔧 加入 5 分鐘視窗速率限制（5 主留言 / 10 回覆 per IP）
- *   🔧 遞迴刪除所有後代回覆（修正原 1 層刪除 Bug）
- *   🔧 強制官方回覆使用「滅蟲師傅」暱稱（移除 admin 覆寫漏洞）
- *   🔧 嚴格驗證 page_id 字符白名單
- *   🔧 圖片 URL 限制為 data:image/* 或 https://
- *   🔧 公開 API 回應隱藏 client_ip
+ * v4.0 升級亮點：
+ *   🚀 新增投票系統（Pest Vote System）：
+ *      - GET  /api/votes                    → 讀取全部害蟲投票數
+ *      - POST /api/vote                     → 提交一票（pest_id 必填）
+ *      - 以獨立 KV key 儲存票數（vote:{pest_id}），IP 防刷 24h TTL
+ *      - 支援 12 種香港常見害蟲
+ *   🌐 雙語化：錯誤訊息支援 HK 中文 + English
+ *   🔧 v3.1 修復全部保留：
+ *      - safeCompare 防側信道攻擊
+ *      - ADMIN_SECRET_NOT_SET 專屬錯誤碼
+ *      - 遞迴刪除所有後代回覆
+ *      - CORS 嚴格白名單
+ *      - 5 分鐘視窗速率限制
+ *      - 圖片 URL 限制 data:image/* 或 https://
+ *      - 公開 API 隱藏 client_ip
  *
  * API 端點總覽：
- *   GET  /api/health                  → 健康檢查（含 admin_secret_set 欄位）
- *   GET  /api/comments?page_id=xxx     → 讀取已審核留言（含樹狀回覆）
- *   POST /api/comments                 → 提交新留言（主留言 / 回覆，支援 honeypot）
- *   POST /api/admin/test               → 測試管理密鑰是否正確
- *   POST /api/admin/list               → 列出所有留言（含未審核）
- *   POST /api/admin/approve            → 審核通過單條留言
- *   POST /api/admin/delete             → 遞迴刪除留言（含所有後代回覆）
- *   POST /api/admin/reply              → 管理員以官方身份回覆
- *   POST /api/admin/pin                → 置頂 / 取消置頂留言
+ *   GET  /api/health                  → 健康檢查
+ *   GET  /api/comments?page_id=xxx     → 讀取已審核留言（樹狀回覆）
+ *   POST /api/comments                 → 提交新留言
+ *   POST /api/admin/test               → 測試管理密鑰
+ *   POST /api/admin/list               → 列出所有留言
+ *   POST /api/admin/approve            → 審核通過
+ *   POST /api/admin/delete             → 遞迴刪除
+ *   POST /api/admin/reply              → 管理員官方回覆
+ *   POST /api/admin/pin                → 置頂/取消置頂
+ *   GET  /api/votes                    → 讀取全部害蟲投票數 (v4.0 NEW)
+ *   POST /api/vote                     → 提交一票 (v4.0 NEW)
  */
 
 const MAX_REQUEST_BYTES = 5_500_000;
@@ -40,6 +38,16 @@ const COMMENT_TTL_SEC   = 15_552_000;
 const RATE_LIMIT_TTL    = 300;
 const RATE_MAX_COMMENT  = 5;
 const RATE_MAX_REPLY    = 10;
+
+/* ===== v4.0: 投票系統設定 ===== */
+const VOTE_TTL_SEC      = 15_552_000; // 票數保留 6 個月
+const VOTE_COOLDOWN_TTL = 86400;      // IP 防刷：24 小時內同 IP 不能投同一害蟲兩次
+const PEST_ID_PATTERN   = /^[a-z0-9_]{1,32}$/;
+const VALID_PEST_IDS    = new Set([
+  'cockroach_german', 'cockroach_american', 'bedbug', 'termite',
+  'rat', 'mosquito', 'ant', 'wasp', 'flea', 'silverfish',
+  'powderpost_beetle', 'psocid'
+]);
 
 export default {
   async fetch(request, env) {
@@ -95,9 +103,9 @@ export default {
         return jsonResponse({
           status: kvOk ? 'ok' : 'degraded',
           kv_bound: kvOk,
-          admin_secret_set: !!env.ADMIN_SECRET,  /* 🔧 v3.1: report ADMIN_SECRET status (without leaking value) */
-          version: '3.1',
-          features: ['nested_reply', 'official_badge', 'pin', 'captcha', 'admin_delete', 'recursive_delete', 'rate_limit', 'honeypot', 'admin_test'],
+          admin_secret_set: !!env.ADMIN_SECRET,
+          version: '4.0',
+          features: ['nested_reply', 'official_badge', 'pin', 'captcha', 'admin_delete', 'recursive_delete', 'rate_limit', 'honeypot', 'admin_test', 'vote_system', 'bilingual_errors'],
           time: new Date().toISOString()
         }, 200, securityHeaders);
       }
@@ -105,7 +113,9 @@ export default {
       if (!kv) {
         return jsonResponse({
           success: false,
-          error: 'KV 資料庫未綁定，請先建立 KV Namespace 並更新 wrangler.toml',
+          error: 'KV 資料庫未綁定 / KV namespace not bound',
+          error_zh: 'KV 資料庫未綁定，請先建立 KV Namespace 並更新 wrangler.toml',
+          error_en: 'KV namespace not bound. Please create a KV Namespace and update wrangler.toml.',
           code: 'KV_NOT_BOUND'
         }, 503, securityHeaders);
       }
@@ -118,6 +128,17 @@ export default {
       /* POST /api/comments — 提交新留言（主留言或回覆） */
       if (request.method === 'POST' && url.pathname === '/api/comments') {
         return await handlePostComment(request, kv, env, securityHeaders);
+      }
+
+      /* ===== v4.0 NEW: 投票系統 ===== */
+      /* GET /api/votes — 讀取全部害蟲投票數 */
+      if (request.method === 'GET' && url.pathname === '/api/votes') {
+        return await handleGetVotes(kv, securityHeaders);
+      }
+
+      /* POST /api/vote — 提交一票 */
+      if (request.method === 'POST' && url.pathname === '/api/vote') {
+        return await handlePostVote(request, kv, env, securityHeaders);
       }
 
       /* 🔧 v3.1: POST /api/admin/test — 測試管理密鑰是否正確（不載入留言） */
@@ -770,6 +791,142 @@ function jsonResponse(data, status, headers) {
       ...headers,
     },
   });
+}
+
+/* =========================================================================
+ *  v4.0 NEW: 投票系統 — Vote System
+ *  - GET  /api/votes  → 讀取全部害蟲投票數
+ *  - POST /api/vote   → 提交一票（pest_id 必填，IP 防刷 24h）
+ *
+ *  KV 結構：
+ *    - vote:{pest_id}         → 票數 (integer string)
+ *    - voted:{ip}:{pest_id}   → 防刷紀錄 (TTL 24h)
+ * ========================================================================= */
+
+/* GET /api/votes — 讀取全部害蟲投票數 */
+async function handleGetVotes(kv, headers) {
+  const pestIds = Array.from(VALID_PEST_IDS);
+  const results = await Promise.all(
+    pestIds.map(async (id) => {
+      const count = parseInt((await kv.get('vote:' + id)) || '0', 10);
+      return { pest_id: id, votes: count };
+    })
+  );
+
+  // 按票數降序排列
+  results.sort((a, b) => b.votes - a.votes);
+
+  const totalVotes = results.reduce((sum, r) => sum + r.votes, 0);
+
+  return jsonResponse({
+    success: true,
+    total_votes: totalVotes,
+    pest_count: results.length,
+    votes: results,
+    time: new Date().toISOString()
+  }, 200, headers);
+}
+
+/* POST /api/vote — 提交一票 */
+async function handlePostVote(request, kv, env, headers) {
+  // 解析 body
+  let body = {};
+  try {
+    body = await request.json();
+  } catch {
+    return jsonResponse({
+      success: false,
+      error: '無效嘅請求格式 / Invalid request format',
+      code: 'INVALID_JSON'
+    }, 400, headers);
+  }
+
+  const pestId = String(body.pest_id || '').toLowerCase().trim();
+
+  // 驗證 pest_id
+  if (!pestId || !PEST_ID_PATTERN.test(pestId)) {
+    return jsonResponse({
+      success: false,
+      error: '無效嘅害蟲識別 / Invalid pest_id',
+      error_zh: '無效嘅害蟲識別（pest_id）',
+      error_en: 'Invalid pest_id (must be lowercase alphanumeric + underscore, ≤32 chars)',
+      code: 'INVALID_PEST_ID'
+    }, 400, headers);
+  }
+
+  if (!VALID_PEST_IDS.has(pestId)) {
+    return jsonResponse({
+      success: false,
+      error: '未知嘅害蟲類型 / Unknown pest type',
+      error_zh: '未知嘅害蟲類型：' + pestId,
+      error_en: 'Unknown pest type: ' + pestId + '. Valid types: ' + Array.from(VALID_PEST_IDS).join(', '),
+      code: 'UNKNOWN_PEST_ID',
+      valid_pest_ids: Array.from(VALID_PEST_IDS)
+    }, 400, headers);
+  }
+
+  // 取 client IP（防刷）
+  const clientIp =
+    request.headers.get('cf-connecting-ip') ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    request.headers.get('x-real-ip') ||
+    'unknown';
+
+  // 防刷：檢查 24h 內同 IP 是否已投過此害蟲
+  const voteLockKey = 'voted:' + clientIp + ':' + pestId;
+  const alreadyVoted = await kv.get(voteLockKey);
+
+  if (alreadyVoted) {
+    return jsonResponse({
+      success: false,
+      error: '24 小時內已投過呢個害蟲 / Already voted for this pest within 24h',
+      error_zh: '同一天內已經投過呢個害蟲啦，請 24 小時後再試',
+      error_en: 'You have already voted for this pest within the last 24 hours. Please try again later.',
+      code: 'ALREADY_VOTED',
+      pest_id: pestId,
+      cooldown_seconds: VOTE_COOLDOWN_TTL
+    }, 429, headers);
+  }
+
+  // 讀取現有票數
+  const voteKey = 'vote:' + pestId;
+  const currentCount = parseInt((await kv.get(voteKey)) || '0', 10);
+  const newCount = currentCount + 1;
+
+  // 寫入新票數（TTL 6 個月）
+  await kv.put(voteKey, newCount.toString(), { expirationTtl: VOTE_TTL_SEC });
+
+  // 寫入 IP 防刷紀錄（TTL 24h）
+  try {
+    await kv.put(voteLockKey, '1', { expirationTtl: VOTE_COOLDOWN_TTL });
+  } catch (e) {
+    // 防刷紀錄寫入失敗不影響投票結果（已 +1），只記錄警告
+    console.warn('Failed to write vote lock:', e.message);
+  }
+
+  // 同時讀取最新全部投票數，方便前端更新畫面
+  const pestIds = Array.from(VALID_PEST_IDS);
+  const allVotes = await Promise.all(
+    pestIds.map(async (id) => {
+      const count = parseInt((await kv.get('vote:' + id)) || '0', 10);
+      return { pest_id: id, votes: count };
+    })
+  );
+  allVotes.sort((a, b) => b.votes - a.votes);
+  const totalVotes = allVotes.reduce((sum, r) => sum + r.votes, 0);
+
+  return jsonResponse({
+    success: true,
+    message: '投票成功 / Vote recorded',
+    message_zh: '多謝你嘅一票！投票已記錄。',
+    message_en: 'Thanks for your vote! It has been recorded.',
+    pest_id: pestId,
+    new_count: newCount,
+    total_votes: totalVotes,
+    votes: allVotes,
+    cooldown_seconds: VOTE_COOLDOWN_TTL,
+    time: new Date().toISOString()
+  }, 200, headers);
 }
 
 

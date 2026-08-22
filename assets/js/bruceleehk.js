@@ -1,8 +1,13 @@
 /* ============================================================
-   bruceleehk.com — Shared JavaScript (Optimized v4.0)
+   bruceleehk.com — Shared JavaScript (Optimized v5.0 — 2026-08-22)
    Used by: All pages
-   Note: AI 害蟲診斷邏輯已全面升級，並遷移至各頁面底部的 Script，
-         直接串接 Cloudflare Vision API 與 Dify 系統。
+   New in v5.0:
+   - Integrated i18n.js (bilingual HK Chinese + English toggle)
+   - Fixed menu-toggle icon swap (was 'fas' instead of 'fa-solid')
+   - Added ESC key + outside-click to close mobile menu
+   - Added reduced-motion respect for animations
+   - Hero quick-quote form now respects current language when composing WhatsApp message
+   Note: AI 害蟲診斷邏輯由各頁面底部 Script 串接 Cloudflare Vision + Dify
    ============================================================ */
 
 (function () {
@@ -18,29 +23,30 @@
             nav.classList.remove('active');
             toggle.setAttribute('aria-expanded', 'false');
             const icon = toggle.querySelector('i');
-            if (icon) icon.className = 'fas fa-bars';
+            if (icon) icon.className = 'fa-solid fa-bars';
         };
         const open = () => {
             nav.classList.add('active');
             toggle.setAttribute('aria-expanded', 'true');
             const icon = toggle.querySelector('i');
-            if (icon) icon.className = 'fas fa-xmark';
+            if (icon) icon.className = 'fa-solid fa-xmark';
         };
 
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             nav.classList.contains('active') ? close() : open();
         });
         nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-        
+
         // 點擊選單外區域自動關閉
         document.addEventListener('click', (e) => {
             if (nav.classList.contains('active') &&
                 !nav.contains(e.target) && !toggle.contains(e.target)) close();
         });
-        
+
         // 按 ESC 鍵關閉
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
-        
+
         // 視窗放大時自動復原選單狀態
         let t;
         window.addEventListener('resize', () => {
@@ -67,17 +73,33 @@
             const isOpen = popup.classList.contains('open');
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
-        
+
         closeBtn.addEventListener('click', () => {
             popup.classList.remove('open');
             btn.setAttribute('aria-expanded', 'false');
         });
+
+        // 按 ESC 關閉彈窗
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.classList.contains('open')) {
+                popup.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 
     /* ---------- 防錯機制：覆蓋舊版 AI 函數 ---------- */
-    // 如果有其他尚未更新的舊頁面呼叫了舊版函數，這行能防止瀏覽器報錯 (Console Error)
     window.initAIDiagnosis = function() {
-        console.log('💡 AI Diagnosis has been upgraded to v4.0 and handled by page-level script.');
+        console.log('💡 AI Diagnosis v5.0 — handled by page-level script.');
+    };
+
+    /* ---------- 共用：取當前語言模式 (供各頁面 inline script 使用) ---------- */
+    window.__i18n__ = window.__i18n__ || {};
+    window.__i18n__.getLang = function() {
+        return document.documentElement.getAttribute('data-lang') || 'bi';
+    };
+    window.__i18n__.isChineseOnly = function() {
+        return window.__i18n__.getLang() === 'zh';
     };
 
     /* ---------- 網頁 DOM 載入後統一執行 ---------- */

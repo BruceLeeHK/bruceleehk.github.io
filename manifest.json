@@ -1,7 +1,7 @@
 {
-  "name": "滅蟲師傅 - Pest Control Master",
+  "name": "滅蟲師傅 Pest Control Master",
   "short_name": "滅蟲師傅",
-  "description": "香港專業滅蟲滅鼠服務，提供滅曱甴、滅蚊滅鼠、床蝨木蝨防治、白蟻防治等全面蟲害解決方案。",
+  "description": "香港專業滅蟲滅鼠服務 — Hong Kong Professional Pest Control. 提供滅曱甴、滅鼠、床蝨木蝨防治、白蟻防治等全面蟲害解決方案。Cockroach, Rodent, Bed Bug & Termite Control.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -38,5 +38,8 @@
   ],
   "categories": ["business", "lifestyle"],
   "screenshots": [],
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "i18n": {
+    "locales": ["zh-HK", "zh-CN", "en-HK"]
+  }
 }

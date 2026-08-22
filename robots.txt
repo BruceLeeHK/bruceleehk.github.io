@@ -1,7 +1,46 @@
+# robots.txt — bruceleehk.com
+# Hong Kong Pest Control Service (Bilingual: 繁體中文 + English)
+
+# ============ Global rules ============
 User-agent: *
 Allow: /
+Disallow: /info/vote/admin.html
+Disallow: /googlecd9c620d39174267.html
 
-# Admin backend should not be indexed
+# ============ Baidu spider (簡體中文搜尋器) ============
+# Allow Baidu full access to public content (for mainland new immigrants)
+User-agent: Baiduspider
+Allow: /
+Disallow: /info/vote/admin.html
+Crawl-delay: 1
+
+# ============ Googlebot ============
+User-agent: Googlebot
+Allow: /
 Disallow: /info/vote/admin.html
 
+# ============ Bingbot ============
+User-agent: Bingbot
+Allow: /
+Disallow: /info/vote/admin.html
+
+# ============ Sogou (Chinese SE) ============
+User-agent: Sogou
+Allow: /
+Disallow: /info/vote/admin.html
+Crawl-delay: 2
+
+# ============ 360Spider (Chinese SE) ============
+User-agent: 360Spider
+Allow: /
+Disallow: /info/vote/admin.html
+Crawl-delay: 2
+
+# ============ Yandex (Russian SE) ============
+User-agent: Yandex
+Allow: /
+Disallow: /info/vote/admin.html
+Crawl-delay: 2
+
+# ============ Sitemaps ============
 Sitemap: https://bruceleehk.com/sitemap.xml

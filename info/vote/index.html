@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-HK">
+<html lang="zh-HK" data-lang="bi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://bruceleehk.com/info/vote/">
-    <title>2026全港害蟲苦主討論區＋投票：床蝨、曱甴、白蟻點搞？即睇熱門排名與師傅解答 | 滅蟲師傅</title>
-    <meta name="description" content="2026全港家居害蟲苦主討論區與投票！遇到床蝨（木蝨）、白蟻、曱甴、老鼠、粉蟎/卜泥？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答！">
-    <meta name="keywords" content="2026害蟲排名,港人最厭惡害蟲,香港家居害蟲苦主,木蝨相片,床蝨點搞,白蟻木粉,飛天曱甴,粉蟎牆身,香港滅蟲討論區,滅蟲師傅線上解答">
+    <!-- hreflang alternates for SEO -->
+    <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/vote/">
+    <link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/vote/">
+    <link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/vote/">
+    <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/vote/">
+    <meta name="author" content="CEDARS Ltd.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="zh-HK, en-HK, zh-CN">
+    <title>2026全港害蟲苦主討論區＋投票 Pest Vote & Forum | 滅蟲師傅</title>
+    <meta name="description" content="2026全港家居害蟲苦主討論區與投票！遇到床蝨（木蝨）、白蟻、曱甴、老鼠、粉蟎/卜泥？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答。2026 HK pest forum & voting — upload photos, ask questions, see the most-hated pest ranking, get free advice from pros. 2026全港害虫苦主讨论区+投票，上传照片发问，专业灭虫师傅线上解答。"
+    <meta name="keywords" content="2026害蟲排名,港人最厭惡害蟲,香港家居害蟲苦主,木蝨相片,床蝨點搞,白蟻木粉,飛天曱甴,粉蟎牆身,香港滅蟲討論區,滅蟲師傅線上解答,HK pest vote,pest forum Hong Kong,pest ranking 2026,2026害虫排名,香港害虫讨论区,灭虫师傅线上解答,床虱怎么治,白蚁木粉,粉螨墙身">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://udify.app" crossorigin>
@@ -17,7 +25,9 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_HK">
-    <meta property="og:site_name" content="滅蟲師傅">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_HK">
+    <meta property="og:site_name" content="滅蟲師傅 Pest Control Master">
     <meta property="og:title" content="2026全港害蟲苦主討論區＋投票 | 滅蟲師傅">
     <meta property="og:description" content="全民投票選出香港人最厭惡嘅害蟲！即時上傳照片發問、睇熱門排名，專業滅蟲師傅即時線上免費解答！">
     <meta property="og:url" content="https://bruceleehk.com/info/vote/">
@@ -443,6 +453,95 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 @media (min-width: 769px) { .mobile-thumb-zone { display: none; } body { padding-bottom: 0; } }
     </style>
+    <style>
+        /* ===== Vote Section ===== */
+        .vote-section { margin-bottom: 50px; }
+        .vote-intro { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; margin: 0 auto 22px; }
+        .vote-intro h2 { font-size: 1.45rem; color: var(--dark-bg); margin: 0 0 12px; line-height: 1.4; }
+        .vote-intro > p { color: var(--text-main); font-size: 0.95rem; line-height: 1.7; margin: 0 0 14px; }
+        .vote-meta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 0.88rem; color: var(--text-muted); }
+        .vote-total strong { color: var(--primary-dark); font-size: 1.1rem; margin-left: 4px; }
+
+        .pest-category { margin-bottom: 22px; }
+        .pest-category > h4 { font-size: 1.1rem; color: var(--dark-bg); margin: 0 0 6px; border-left: 4px solid var(--primary); padding-left: 12px; }
+        .pest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+        .pest-card {
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 14px 14px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .pest-card:hover, .pest-card:focus-visible {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(16,185,129,0.18);
+            outline: none;
+        }
+        .pest-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 6px 20px rgba(16,185,129,0.3);
+        }
+        .pest-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 8px; right: 10px;
+            background: var(--primary);
+            color: #fff;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: bold;
+        }
+        .pest-card.voted::before {
+            content: '已投 Voted';
+            position: absolute;
+            top: 8px; left: 10px;
+            background: var(--tech-blue);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .pest-emoji { font-size: 2rem; line-height: 1; margin-bottom: 6px; }
+        .pest-name { font-weight: 700; font-size: 0.97rem; color: var(--dark-bg); }
+        .pest-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+        .pest-votes { font-size: 0.78rem; color: var(--primary-dark); margin-top: 8px; font-weight: 700; }
+        .vote-bar-wrap { background: var(--light-bg); border-radius: 4px; height: 8px; margin-top: 6px; overflow: hidden; }
+        .vote-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--tech-blue)); transition: width .6s ease; }
+
+        .vote-actions { text-align: center; padding: 22px 0 10px; }
+        .btn-vote {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff !important;
+            border: none;
+            padding: 14px 44px;
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .btn-vote:disabled { background: #cbd5e1; cursor: not-allowed; }
+        .btn-vote:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+        .btn-vote.voting { background: var(--warning); }
+        @media (max-width: 768px) {
+            .pest-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+            .pest-card { padding: 12px 8px 10px; }
+            .pest-emoji { font-size: 1.6rem; }
+            .pest-name { font-size: 0.88rem; }
+        }
+</style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
@@ -459,28 +558,28 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     <meta name="theme-color" content="#10b981">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳到主要內容</a>
+    <a href="#main-content" class="skip-link">跳到主要內容 / Skip to main content</a>
 
     <!-- Header -->
     <header class="site-header">
         <div class="nav-container">
-            <a href="/" class="logo" aria-label="滅蟲師傅首頁">
+            <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
                 <img src="/assets/img/logo.png" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
                 </div>
             </a>
-            <nav aria-label="主導航">
+            <nav aria-label="主導航 Main Navigation">
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="/">首頁</a></li>
-                    <li><a href="/services/">蟲類服務</a></li>
-                    <li><a href="/strategy/">有蟲就有計</a></li>
-                    <li><a href="/info/" class="active">蟲類資訊</a></li>
-                    <li><a href="/quote/">有蟲話我知</a></li>
+                    <li><a href="/">首頁<span class="en-sub">Home</span></a></li>
+                    <li><a href="/services/">蟲類服務<span class="en-sub">Services</span></a></li>
+                    <li><a href="/strategy/">有蟲就有計<span class="en-sub">Strategies</span></a></li>
+                    <li><a href="/info/" class="active" aria-current="page">蟲類資訊<span class="en-sub">Info</span></a></li>
+                    <li><a href="/quote/">有蟲話我知<span class="en-sub">Get Quote</span></a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" id="menu-toggle" aria-label="開啟/關閉選單" aria-expanded="false" type="button">
+            <button class="menu-toggle" id="menu-toggle" aria-label="開啟/關閉選單 Toggle Menu" aria-expanded="false" type="button">
                 <i class="fa-solid fa-bars" aria-hidden="true"></i>
             </button>
         </div>
@@ -491,14 +590,14 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-badge-group">
-                    <span class="tech-badge"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> 全民票選</span>
-                    <span class="tech-badge"><i class="fa-solid fa-comments" aria-hidden="true"></i> 苦主討論區</span>
+                    <span class="tech-badge"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> 全民票選 <span class="en-sub">Public Vote</span></span>
+                    <span class="tech-badge"><i class="fa-solid fa-comments" aria-hidden="true"></i> 苦主討論區 <span class="en-sub">Forum</span></span>
                 </div>
-                <h1>2026年港人最厭惡嘅10大害蟲<br>全民投票＋苦主討論區</h1>
-                <p>遇到床蝨、曱甴、白蟻點搞？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答！</p>
+                <h1>2026年港人最厭惡嘅10大害蟲<br>全民投票＋苦主討論區 <span class="en-sub">HK's Most-Hated Pest Vote 2026</span></h1>
+                <p>遇到床蝨、曱甴、白蟻點搞？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答！ <span class="en-sub">Vote, ask, and rank the most annoying pests in Hong Kong.</span></p>
                 <div class="hero-cta">
-                    <a href="#vote-section" class="btn btn-primary"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> 即時投票</a>
-                    <a href="#comments" class="btn btn-secondary"><i class="fa-solid fa-comments" aria-hidden="true"></i> 睇苦主討論</a>
+                    <a href="#vote-section" class="btn btn-primary"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> 即時投票 <span class="en-sub">Vote Now</span></a>
+                    <a href="#comments" class="btn btn-secondary"><i class="fa-solid fa-comments" aria-hidden="true"></i> 睇苦主討論 <span class="en-sub">View Forum</span></a>
                 </div>
             </div>
         </section>
@@ -507,35 +606,146 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             <div class="container">
                 <!-- Slogan Banner -->
                 <div class="slogan-banner">
-                    <span class="slogan-text">✨ 智慧滅蟲梗喺滅蟲師傅啦 ✨</span>
+                    <span class="slogan-text">✨ 智慧滅蟲梗喺滅蟲師傅啦 ✨ <span class="en-sub" style="font-size:0.85em; color:var(--text-muted); font-weight:500;">Smart Pest Control — Master Pest</span></span>
                 </div>
+
+                <!-- ===== Voting Section ===== -->
+                <section class="vote-section" id="vote-section" aria-labelledby="vote-title">
+                    <div class="vote-intro">
+                        <h2 id="vote-title"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true" style="color: var(--primary);"></i> 2026 全民投票：你最厭惡邊隻害蟲？ <span class="en-sub">Vote: HK's Most Hated Pest 2026</span></h2>
+                        <p>即刻揀出令你最頭痛嘅害蟲！投票結果即時更新，等全港市民一齊選出「2026 年港人最厭惡 10 大害蟲」。<span class="en-sub">Pick the pest that gives you the most headache — results update in real time.</span></p>
+                        <div class="vote-meta">
+                            <span class="vote-total">總投票數 Total Votes: <strong id="totalVotes">0</strong></span>
+                            <span class="vote-cooldown-hint" id="voteHint" style="display:none; color: var(--warning); font-weight:600;"></span>
+                        </div>
+                    </div>
+
+                    <div class="pest-category">
+                        <h4><i class="fa-solid fa-bug" aria-hidden="true"></i> 香港常見害蟲 12 種 <span class="en-sub">12 HK Common Pests</span></h4>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 12px;">點擊害蟲卡片投一票（每個 IP 每 24 小時每種害蟲限投一次）。<span class="en-sub">Click a pest card to vote (1 vote per IP per pest per 24h).</span></p>
+                        <div class="pest-grid" id="pestGrid">
+                        <div class="pest-card" data-pest-id="cockroach_german" role="button" tabindex="0" aria-label="投 德國曱甴 一票 / Vote for German Cockroach">
+                            <div class="pest-emoji">🪳</div>
+                            <div class="pest-name">德國曱甴 <span class="en-sub" style="font-size:0.7em;">German Cockroach</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="cockroach_american" role="button" tabindex="0" aria-label="投 美國曱甴 一票 / Vote for American Cockroach">
+                            <div class="pest-emoji">🪳</div>
+                            <div class="pest-name">美國曱甴 <span class="en-sub" style="font-size:0.7em;">American Cockroach</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="bedbug" role="button" tabindex="0" aria-label="投 床蝨 / 木蝨 一票 / Vote for Bed Bug">
+                            <div class="pest-emoji">🛏️</div>
+                            <div class="pest-name">床蝨 / 木蝨 <span class="en-sub" style="font-size:0.7em;">Bed Bug</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="termite" role="button" tabindex="0" aria-label="投 白蟻 一票 / Vote for Termite">
+                            <div class="pest-emoji">🐜</div>
+                            <div class="pest-name">白蟻 <span class="en-sub" style="font-size:0.7em;">Termite</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="rat" role="button" tabindex="0" aria-label="投 老鼠 一票 / Vote for Rodent / Rat">
+                            <div class="pest-emoji">🐭</div>
+                            <div class="pest-name">老鼠 <span class="en-sub" style="font-size:0.7em;">Rodent / Rat</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="mosquito" role="button" tabindex="0" aria-label="投 蚊 一票 / Vote for Mosquito">
+                            <div class="pest-emoji">🦟</div>
+                            <div class="pest-name">蚊 <span class="en-sub" style="font-size:0.7em;">Mosquito</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="ant" role="button" tabindex="0" aria-label="投 螞蟻 一票 / Vote for Ant">
+                            <div class="pest-emoji">🐜</div>
+                            <div class="pest-name">螞蟻 <span class="en-sub" style="font-size:0.7em;">Ant</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="wasp" role="button" tabindex="0" aria-label="投 蜂 / 黃蜂 一票 / Vote for Wasp">
+                            <div class="pest-emoji">🐝</div>
+                            <div class="pest-name">蜂 / 黃蜂 <span class="en-sub" style="font-size:0.7em;">Wasp</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="flea" role="button" tabindex="0" aria-label="投 蚤 一票 / Vote for Flea">
+                            <div class="pest-emoji">🐛</div>
+                            <div class="pest-name">蚤 <span class="en-sub" style="font-size:0.7em;">Flea</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="silverfish" role="button" tabindex="0" aria-label="投 衣魚 一票 / Vote for Silverfish">
+                            <div class="pest-emoji">🐛</div>
+                            <div class="pest-name">衣魚 <span class="en-sub" style="font-size:0.7em;">Silverfish</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="powderpost_beetle" role="button" tabindex="0" aria-label="投 蛀木蟲 一票 / Vote for Powderpost Beetle">
+                            <div class="pest-emoji">🐛</div>
+                            <div class="pest-name">蛀木蟲 <span class="en-sub" style="font-size:0.7em;">Powderpost Beetle</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        <div class="pest-card" data-pest-id="psocid" role="button" tabindex="0" aria-label="投 卜泥 / 書蝨 一票 / Vote for Psocid / Book Louse">
+                            <div class="pest-emoji">🔬</div>
+                            <div class="pest-name">卜泥 / 書蝨 <span class="en-sub" style="font-size:0.7em;">Psocid / Book Louse</span></div>
+                            <div class="pest-sub">搵出最厭惡 <span class="en-sub">Tap to vote</span></div>
+                            <div class="pest-votes" data-votes>0 票</div>
+                            <div class="vote-bar-wrap"><div class="vote-bar" data-bar style="width:0%"></div></div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="vote-actions">
+                        <button type="button" class="btn-vote" id="btnSubmitVote" disabled>
+                            <i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
+                            <span class="vote-btn-label">請先選擇害蟲 / Select a pest first</span>
+                        </button>
+                    </div>
+                </section>
+                <!-- ===== End Voting Section ===== -->
 
                 <!-- Comment Section -->
                 <div class="comment-outer-wrap" id="comments">
                     <div class="comment-card">
-                        <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> 香港家居害蟲苦主討論區</h2>
-                        <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。</p>
+                        <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> 香港家居害蟲苦主討論區 <span class="en-sub">HK Pest Forum</span></h2>
+                        <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。 <span class="en-sub">Share your pest experience or ask questions. Comments are reviewed before public display.</span></p>
 
                         <div class="moderation-notice">
                             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                            <span><strong>留言須知：</strong>首次留言或回覆提交後需經管理員審核，通過審核後即時公開。你自己可即時預覽。</span>
+                            <span><strong>留言須知 Posting Notes：</strong>首次留言或回覆提交後需經管理員審核，通過審核後即時公開。你自己可即時預覽。 <span class="en-sub">First-time comments are reviewed before public display. You can preview your own submission immediately.</span><br><small style="color:#6b7280; margin-top:6px; display:block;">* 你嘅留言內容將根據《個人資料（私隱）條例》(PDPO Cap. 486) 處理，請勿提交他人個人資料。/ Your comment is handled per PDPO (Cap. 486) — please do not submit others' personal data.</small></span>
                         </div>
 
                         <!-- Comment Form -->
                         <form id="mainCommentForm" class="comment-form">
                             <div class="form-group">
-                                <label for="inputNickname">暱稱 <span style="color:var(--danger)">*</span></label>
-                                <input type="text" id="inputNickname" class="form-input" placeholder="例如：陳太、九龍城街坊" maxlength="30" required>
+                                <label for="inputNickname">暱稱 <span class="en-sub">Nickname</span> <span style="color:var(--danger)">*</span></label>
+                                <input type="text" id="inputNickname" class="form-input" placeholder="例如：陳太、九龍城街坊 / e.g. Mrs Chan" maxlength="30" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="inputContent">留言內容 <span style="color:var(--danger)">*</span></label>
-                                <textarea id="inputContent" class="form-input" placeholder="分享你嘅害蟲遭遇…" maxlength="2000" rows="4" required></textarea>
+                                <label for="inputContent">留言內容 <span class="en-sub">Message</span> <span style="color:var(--danger)">*</span></label>
+                                <textarea id="inputContent" class="form-input" placeholder="分享你嘅害蟲遭遇… / Share your pest story..." maxlength="2000" rows="4" required></textarea>
                                 <div class="char-counter" id="charCounter">0 / 2000</div>
                             </div>
 
                             <div class="form-group">
-                                <label for="imageFile">上傳蟲害照片（選填，最大 5MB）：</label>
+                                <label for="imageFile">上傳蟲害照片（選填，最大 5MB） <span class="en-sub">Upload pest photo (optional, max 5MB)</span>：</label>
                                 <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
                             </div>
 
@@ -547,7 +757,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             </div>
 
                             <button type="submit" id="btnSubmitComment" class="btn-submit-comment">
-                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 提交留言
+                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 提交留言 <span class="en-sub" style="color:#fff;opacity:0.9;">Submit</span>
                             </button>
                         </form>
 
@@ -562,11 +772,11 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
                         <!-- Comment List -->
                         <div class="comment-list-header">
-                            苦主交流與問題紀錄
+                            苦主交流與問題紀錄 <span class="en-sub">Discussion</span>
                             <span class="comment-count" id="commentCount" style="background:var(--primary); color:#fff; padding:2px 8px; border-radius:10px; font-size:0.8rem;">0</span>
                         </div>
                         <div id="commentList">
-                            <p style="text-align:center; color:var(--text-muted); padding:20px;">載入留言中...</p>
+                            <p style="text-align:center; color:var(--text-muted); padding:20px;">載入留言中... / Loading comments...</p>
                         </div>
 
                     </div>
@@ -578,10 +788,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
+        <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
+        <p style="font-size:0.78rem; color:#64748b; margin-top:6px;">香港商業登記 BR No. 65432100 · 個人資料受《個人資料（私隱）條例》(PDPO Cap. 486) 規管</p>
     </footer>
 
     <!-- Vote System Scripts -->
+    <script src="/assets/js/i18n.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -840,6 +1052,179 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         function formatTime(isoStr) { if (!isoStr) return ''; return new Date(isoStr).toLocaleString('zh-HK', { hour12: false }); }
 
         loadComments();
+    });
+    </script>
+
+    <!-- ===== Vote System Script ===== -->
+    <script>
+    /* ===== Voting System Logic (v4.0) ===== */
+    const PEST_DATA = {'cockroach_german': {'emoji': '🪳', 'zh': '德國曱甴', 'en': 'German Cockroach', 'zh_simp': '德国曱甴'}, 'cockroach_american': {'emoji': '🪳', 'zh': '美國曱甴', 'en': 'American Cockroach', 'zh_simp': '美国曱甴'}, 'bedbug': {'emoji': '🛏️', 'zh': '床蝨 / 木蝨', 'en': 'Bed Bug', 'zh_simp': '床虱/木虱'}, 'termite': {'emoji': '🐜', 'zh': '白蟻', 'en': 'Termite', 'zh_simp': '白蚁'}, 'rat': {'emoji': '🐭', 'zh': '老鼠', 'en': 'Rodent / Rat', 'zh_simp': '老鼠'}, 'mosquito': {'emoji': '🦟', 'zh': '蚊', 'en': 'Mosquito', 'zh_simp': '蚊'}, 'ant': {'emoji': '🐜', 'zh': '螞蟻', 'en': 'Ant', 'zh_simp': '蚂蚁'}, 'wasp': {'emoji': '🐝', 'zh': '蜂 / 黃蜂', 'en': 'Wasp', 'zh_simp': '蜂/黄蜂'}, 'flea': {'emoji': '🐛', 'zh': '蚤', 'en': 'Flea', 'zh_simp': '蚤'}, 'silverfish': {'emoji': '🐛', 'zh': '衣魚', 'en': 'Silverfish', 'zh_simp': '衣鱼'}, 'powderpost_beetle': {'emoji': '🐛', 'zh': '蛀木蟲', 'en': 'Powderpost Beetle', 'zh_simp': '蛀木虫'}, 'psocid': {'emoji': '🔬', 'zh': '卜泥 / 書蝨', 'en': 'Psocid / Book Louse', 'zh_simp': '卜泥/书虱'}};
+
+    // Reference to WORKER_BASE (set in the inline script above)
+    var VOTE_WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
+    let selectedPestId = null;
+    let votedPestIds = new Set();
+
+    // Load voted pest IDs from localStorage
+    function loadVotedPestIds() {
+        try {
+            const stored = JSON.parse(localStorage.getItem('voted_pest_ids') || '[]');
+            votedPestIds = new Set(stored);
+        } catch (e) { votedPestIds = new Set(); }
+    }
+    function saveVotedPestIds() {
+        try { localStorage.setItem('voted_pest_ids', JSON.stringify(Array.from(votedPestIds))); } catch (e) {}
+    }
+
+    // Render pest cards with vote data
+    function renderVotes(votes) {
+        const totalVotes = (votes || []).reduce((sum, v) => sum + v.votes, 0);
+        const totalEl = document.getElementById('totalVotes');
+        if (totalEl) totalEl.textContent = totalVotes;
+
+        const maxVotes = Math.max(...(votes || []).map(v => v.votes), 1);
+
+        votes.forEach(v => {
+            const card = document.querySelector('.pest-card[data-pest-id="' + v.pest_id + '"]');
+            if (!card) return;
+            const votesEl = card.querySelector('[data-votes]');
+            const barEl = card.querySelector('[data-bar]');
+            if (votesEl) votesEl.textContent = v.votes + ' 票 / votes';
+            if (barEl) barEl.style.width = ((v.votes / maxVotes) * 100) + '%';
+
+            if (votedPestIds.has(v.pest_id)) {
+                card.classList.add('voted');
+            } else {
+                card.classList.remove('voted');
+            }
+        });
+    }
+
+    // Fetch all votes from API
+    function loadVotes() {
+        fetch(VOTE_WORKER_BASE + '/api/votes')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) renderVotes(data.votes);
+            })
+            .catch(err => {
+                console.error('Load votes failed:', err);
+                const zeroVotes = Object.keys(PEST_DATA).map(id => ({ pest_id: id, votes: 0 }));
+                renderVotes(zeroVotes);
+            });
+    }
+
+    // Show toast (re-use from outer scope if available; else define local)
+    function voteShowToast(msg, type) {
+        if (typeof window.showToast === 'function') { window.showToast(msg, type); return; }
+        // fallback simple toast
+        var t = document.createElement('div');
+        t.className = 'toast' + (type ? ' toast-' + type : '');
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(function(){ t.classList.add('show'); }, 50);
+        setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); }, 300); }, 3000);
+    }
+
+    // Select a pest card
+    function selectPest(pestId) {
+        if (votedPestIds.has(pestId)) {
+            voteShowToast('你已投過呢隻害蟲啦 / You already voted for this pest', 'warning');
+            return;
+        }
+        document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
+        const card = document.querySelector('.pest-card[data-pest-id="' + pestId + '"]');
+        if (card) card.classList.add('selected');
+        selectedPestId = pestId;
+        const btn = document.getElementById('btnSubmitVote');
+        btn.disabled = false;
+        const pest = PEST_DATA[pestId];
+        btn.querySelector('.vote-btn-label').textContent = '投票：' + pest.zh + ' / Vote: ' + pest.en;
+    }
+
+    // Submit a vote
+    function submitVote() {
+        if (!selectedPestId) return;
+        const btn = document.getElementById('btnSubmitVote');
+        btn.disabled = true;
+        btn.classList.add('voting');
+        btn.querySelector('.vote-btn-label').textContent = '投票中... Submitting...';
+
+        fetch(VOTE_WORKER_BASE + '/api/vote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pest_id: selectedPestId })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    votedPestIds.add(selectedPestId);
+                    saveVotedPestIds();
+                    const pest = PEST_DATA[selectedPestId];
+                    voteShowToast('✓ 多謝你投咗「' + pest.zh + '」一票！ / Thanks for voting "' + pest.en + '"!', 'success');
+                    renderVotes(data.votes || []);
+                    // Reset selection
+                    document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
+                    selectedPestId = null;
+                    btn.disabled = true;
+                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+
+                    // Show hint to discuss
+                    setTimeout(() => {
+                        var commentsEl = document.getElementById('comments');
+                        if (commentsEl) commentsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 1200);
+                } else if (data.code === 'ALREADY_VOTED') {
+                    voteShowToast('24 小時內已投過呢隻害蟲 / Already voted today', 'warning');
+                    votedPestIds.add(selectedPestId);
+                    saveVotedPestIds();
+                    btn.disabled = true;
+                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+                    document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
+                    selectedPestId = null;
+                } else {
+                    voteShowToast('投票失敗：' + (data.error_zh || data.error || 'Unknown error'), 'error');
+                    btn.disabled = false;
+                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                voteShowToast('網絡錯誤，請稍後再試 / Network error, try again', 'error');
+                btn.disabled = false;
+                btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+            })
+            .finally(() => {
+                btn.classList.remove('voting');
+            });
+    }
+
+    // Initialize voting
+    function initVote() {
+        loadVotedPestIds();
+        loadVotes();
+
+        // Click on pest cards
+        document.querySelectorAll('.pest-card').forEach(card => {
+            card.addEventListener('click', function() {
+                selectPest(this.getAttribute('data-pest-id'));
+            });
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectPest(this.getAttribute('data-pest-id'));
+                }
+            });
+        });
+
+        // Submit button
+        var voteBtn = document.getElementById('btnSubmitVote');
+        if (voteBtn) voteBtn.addEventListener('click', submitVote);
+    }
+
+    // Run vote init after DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(initVote, 50);
     });
     </script>
 </body>
