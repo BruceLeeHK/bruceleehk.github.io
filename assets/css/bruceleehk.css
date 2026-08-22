@@ -511,147 +511,91 @@ footer {
 }
 
 /* ============================================================
-   Bilingual i18n System (v1.0)
-   - .en-sub   : inline English subtitle (always visible in 'bi' mode)
-   - .en-only  : English-only block (hidden in 'zh' mode)
-   - .lang-toggle-btn : language toggle button in header
+   Language Switcher (v2.0 — 2026-08-22)
+   Dual-site architecture: ZH-HK at root, EN at /en/
+   Per reference screenshot:
+   - Active language = dark filled button (white text)
+   - Inactive = plain text link (no background)
    ============================================================ */
 
-/* English subtitle (inline) */
-.en-sub {
-    color: var(--text-muted);
-    font-size: 0.78em;
-    font-weight: 500;
-    margin-left: 6px;
-    letter-spacing: 0.3px;
-    opacity: 0.85;
-}
-h1 .en-sub, h2 .en-sub, h3 .en-sub {
-    display: inline-block;
-    color: inherit;
-    opacity: 0.75;
-    font-weight: 500;
-}
-.hero h1 .en-sub,
-.page-hero h1 .en-sub,
-.video-section h3 .en-sub {
-    color: #6ee7b7;
-    opacity: 0.85;
-}
-
-/* English-only block (e.g., English translation paragraph) */
-.en-block {
-    color: var(--text-muted);
-    font-size: 0.88em;
-    line-height: 1.65;
-    margin-top: 6px;
-    font-style: italic;
-    border-left: 2px solid var(--border);
-    padding-left: 12px;
-}
-
-/* Chinese-only mode: hide English subtitles / English-only blocks */
-html[data-lang="zh"] .en-sub,
-html[data-lang="zh"] .en-only,
-html[data-lang="zh"] .en-block {
-    display: none !important;
-}
-
-/* Language toggle button */
-.lang-toggle-btn {
+.lang-switch-wrap {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
+    margin-right: 10px;
+    padding: 4px 8px;
     background: var(--light-bg);
-    color: var(--text-main);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all var(--transition);
-    margin-right: 8px;
+    border-radius: 6px;
     height: 36px;
     line-height: 1;
+    font-size: 0.85rem;
+    font-weight: 700;
 }
-.lang-toggle-btn:hover {
+.lang-switch-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 26px;
+    padding: 0 10px;
+    background: var(--dark-bg);
+    color: #fff !important;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+.lang-switch-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 26px;
+    padding: 0 10px;
+    background: transparent;
+    color: var(--text-main) !important;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    transition: all var(--transition);
+}
+.lang-switch-link:hover {
     background: var(--primary-light);
-    border-color: var(--primary);
-    color: var(--primary-dark);
+    color: var(--primary-dark) !important;
 }
-.lang-toggle-btn:focus-visible {
+.lang-switch-link:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
-.lang-toggle-btn .lang-icon {
-    font-size: 0.95rem;
-}
-.lang-toggle-btn .lang-label {
-    font-size: 0.78rem;
-    letter-spacing: 0.5px;
-}
-
-/* On mobile: keep the toggle compact */
+/* Mobile: smaller compact */
 @media (max-width: 768px) {
-    .lang-toggle-btn {
-        padding: 5px 10px;
+    .lang-switch-wrap {
         margin-right: 6px;
+        padding: 3px 6px;
+        font-size: 0.78rem;
+    }
+    .lang-switch-current, .lang-switch-link {
+        min-width: 28px;
+        height: 22px;
+        padding: 0 8px;
+        font-size: 0.75rem;
     }
 }
 
-/* Nav link bilingual labels */
-.nav-links a .en-sub {
-    display: block;
-    font-size: 0.62rem;
-    margin-left: 0;
-    margin-top: 1px;
-    color: var(--text-muted);
-    text-align: center;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-}
-.nav-links a:hover .en-sub,
-.nav-links a.active .en-sub {
-    color: var(--primary);
-    opacity: 0.9;
+/* Remove old inline bilingual styles (kept for backward compat — now empty) */
+.en-sub, .en-block, .en-only {
+    display: none !important;
 }
 
-/* Logo subtitle already exists; ensure bilingual is fine */
-.logo-subtitle {
-    font-size: 0.62rem;
+/* Old language toggle button style (no longer used, but kept for safety) */
+.lang-toggle-btn {
+    display: none !important;
 }
 
-/* Footer bilingual */
-footer .en-sub {
-    color: #94a3b8;
-    font-size: 0.78em;
-    opacity: 0.75;
-}
-
-/* Card / badge bilingual tweaks */
-.smart-card h3 .en-sub,
-.feature-card h3 .en-sub,
-.service-title .en-sub,
-.arch-step h4 .en-sub {
-    display: block;
-    margin-left: 0;
-    margin-top: 2px;
-    font-size: 0.72em;
-    color: var(--text-muted);
-}
-
-/* Quote form labels (allow both langs) */
-.form-group label .en-sub {
-    font-size: 0.82em;
-    margin-left: 4px;
-}
-
-/* Print: always show bilingual */
+/* Print: keep clean */
 @media print {
-    .en-sub, .en-only, .en-block {
-        display: inline !important;
-        opacity: 1 !important;
-    }
+    .lang-switch-wrap { display: none !important; }
 }
+

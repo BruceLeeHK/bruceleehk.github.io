@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Pest Control Master</title>
+  <meta name="description" content="Sorry, the page you requested does not exist. Return to Pest Control Master homepage for more pest control services.">
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--primary:#10b981;--primary-dark:#059669;--text:#334155;--text-light:#64748b;--border:#e2e8f0;--bg:#f8fafc;--white:#fff;--shadow:0 2px 10px rgba(0,0,0,.06);--radius:12px;--transition:.25s ease}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+    a{text-decoration:none;color:inherit}
+    .site-header{background:#fff;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}
+    .nav-container{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo img{height:38px;width:auto}
+    .logo-title{font-size:1.2rem;font-weight:800;color:#065f46}
+    .logo-subtitle{font-size:0.62rem;color:var(--text-light);font-weight:600;letter-spacing:0.8px}
+    .nav-links{display:flex;gap:18px;align-items:center;list-style:none}
+    .nav-links a{font-weight:600;font-size:0.95rem;transition:color var(--transition)}
+    .nav-links a:hover{color:var(--primary)}
+    .menu-toggle{display:none;font-size:1.4rem;background:none;border:none;cursor:pointer;color:var(--text)}
+    @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#fff;padding:15px 20px;box-shadow:var(--shadow);gap:12px}.nav-links.active{display:flex}.menu-toggle{display:block}}
+    main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 20px;text-align:center}
+    .error-code{font-size:7rem;font-weight:800;background:linear-gradient(90deg,var(--primary),var(--primary-dark));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:12px}
+    h1{font-size:1.8rem;color:var(--text);margin-bottom:12px}
+    p{color:var(--text-light);font-size:1rem;margin-bottom:10px;max-width:480px;margin-left:auto;margin-right:auto}
+    .error-actions{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-block;padding:12px 28px;border-radius:8px;font-weight:700;text-decoration:none;transition:transform var(--transition)}
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+    .btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-2px)}
+    footer{background:#0f172a;color:#94a3b8;padding:24px 20px;text-align:center;font-size:0.88rem}
+    .footer-social{display:flex;justify-content:center;gap:14px;margin-bottom:14px}
+    .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);color:#fff;font-size:1rem;transition:background var(--transition)}
+    .footer-social a:hover{background:var(--primary)}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="/en/" class="logo">
+        <img src="/assets/img/logo.png" alt="Pest Control Master Logo" loading="lazy">
+        <div>
+          <span class="logo-title">Pest Control Master</span>
+          <span class="logo-subtitle">滅蟲師傅</span>
+        </div>
+      </a>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="/en/">Home</a></li>
+          <li><a href="/en/services/">Services</a></li>
+          <li><a href="/en/strategy/">Strategies</a></li>
+          <li><a href="/en/info/">Info</a></li>
+          <li><a href="/en/quote/">Get Quote</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" type="button">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <div>
+      <div class="error-code">404</div>
+      <h1>Oops! Page Not Found</h1>
+      <p>Sorry, the page you requested may have been removed, renamed, or is temporarily unavailable.</p>
+      <p>You may return to the homepage or browse our services.</p>
+      <div class="error-actions">
+        <a href="/en/" class="btn btn-primary">Back to Home</a>
+        <a href="/en/services/" class="btn btn-outline">Browse Services</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/85252821552?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20pest%20control%20service" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:Cedars5282@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved.</p>
+  </footer>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/assets/js/i18n.js" defer></script>
+  <script>
+    document.getElementById('menu-toggle')?.addEventListener('click', function() {
+      document.getElementById('nav-links').classList.toggle('active');
+    });
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

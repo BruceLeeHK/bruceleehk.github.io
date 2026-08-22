@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- ===== Chinese (HK Traditional) — Primary ===== -->
   <url>
     <loc>https://bruceleehk.com/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/"/>
   </url>
   <url>
@@ -17,8 +17,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/services/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/services/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/services/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/services/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/services/"/>
   </url>
   <url>
@@ -27,8 +26,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/strategy/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/strategy/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/strategy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/strategy/"/>
   </url>
   <url>
@@ -37,8 +35,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/ai/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/ai/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/ai/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/ai/"/>
   </url>
   <url>
@@ -47,8 +44,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/quote/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/quote/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/quote/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/quote/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/quote/"/>
   </url>
   <url>
@@ -57,9 +53,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/info/vote/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/vote/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/vote/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/vote/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/info/blog-1/</loc>
@@ -67,8 +71,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-1/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-1/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-1/"/>
   </url>
   <url>
@@ -77,8 +79,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-2/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-2/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-2/"/>
   </url>
   <url>
@@ -87,8 +87,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-3/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-3/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-3/"/>
   </url>
   <url>
@@ -97,8 +95,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-4/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-4/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-4/"/>
   </url>
   <url>
@@ -107,8 +103,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-5/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-5/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-5/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-5/"/>
   </url>
   <url>
@@ -117,8 +111,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-6/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-6/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-6/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-6/"/>
   </url>
   <url>
@@ -127,8 +119,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-7/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-7/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-7/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-7/"/>
   </url>
   <url>
@@ -137,18 +127,71 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-8/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/blog-8/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/blog-8/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-8/"/>
   </url>
+
+  <!-- ===== English Versions ===== -->
   <url>
-    <loc>https://bruceleehk.com/info/vote/</loc>
+    <loc>https://bruceleehk.com/en/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/services/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/services/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/services/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/strategy/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/strategy/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/ai/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/ai/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/quote/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/quote/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/quote/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/quote/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/vote/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/vote/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://bruceleehk.com/info/vote/"/>
-    <xhtml:link rel="alternate" hreflang="en-HK" href="https://bruceleehk.com/info/vote/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/vote/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/vote/"/>
   </url>
 </urlset>

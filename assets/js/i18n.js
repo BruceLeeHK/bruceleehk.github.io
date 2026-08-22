@@ -1,108 +1,110 @@
 /* ============================================================
-   bruceleehk.com — Bilingual i18n Module (v1.0 — 2026-08-22)
-   Hong Kong Traditional Chinese (primary) + English (supplementary)
-
-   Features:
-   1. Inline bilingual subtitles — both languages visible by default
-   2. Language toggle button — switch between:
-      - "bi"  : Bilingual mode (Chinese + English subtitles shown)
-      - "zh"  : Chinese-only mode (English subtitles hidden)
-   3. Preference persisted in localStorage (key: site_lang)
-   4. Updates <html lang="..."> for accessibility & SEO
-   5. Zero external dependencies, pure vanilla JS
-
-   Usage:
-   - Add class="en-sub" to any inline English subtitle (always visible in 'bi' mode)
-   - Add class="en-only" to any English-only element (hidden in 'zh' mode)
-   - Add the toggle button (see initLanguageToggle below) — usually injected by bruceleehk.js
+   bruceleehk.com — Language Switcher Module (v2.0 — 2026-08-22)
+   Architecture: Dual-site (Pure ZH-HK + Pure EN)
+   - Chinese site at root / (default)
+   - English site at /en/
+   - Header toggle button: "繁 | EN" (per reference screenshot)
+   - Active language = dark filled button; inactive = plain text link
+   - AI 師妹 / pest-vision-worker remain pure Traditional Chinese
+     (English site shows notice + English WhatsApp link)
    ============================================================ */
 
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'bruceleehk_lang';
-  const DEFAULT_LANG = 'bi'; // 'bi' = bilingual, 'zh' = Chinese-only
-
-  function applyLang(mode) {
-    const html = document.documentElement;
-    if (mode === 'zh') {
-      html.setAttribute('lang', 'zh-HK');
-      html.setAttribute('data-lang', 'zh');
-    } else {
-      // bilingual: keep primary lang as zh-HK so search engines see the primary language
-      html.setAttribute('lang', 'zh-HK');
-      html.setAttribute('data-lang', 'bi');
+  /* Detect current language from URL path */
+  function getCurrentLang() {
+    const path = window.location.pathname;
+    // English pages live under /en/...
+    if (path === '/en/' || path.startsWith('/en/') || path === '/en' || path === '/en.html') {
+      return 'en';
     }
-    try { localStorage.setItem(STORAGE_KEY, mode); } catch (e) {}
+    return 'zh';  // default = Traditional Chinese (root)
+  }
 
-    // Update toggle button label
-    const toggleBtn = document.getElementById('lang-toggle');
-    if (toggleBtn) {
-      const label = toggleBtn.querySelector('.lang-label');
-      const icon = toggleBtn.querySelector('.lang-icon');
-      if (mode === 'zh') {
-        if (label) label.textContent = 'EN';
-        if (icon) icon.className = 'lang-icon fa-solid fa-globe';
-        toggleBtn.setAttribute('aria-pressed', 'false');
-        toggleBtn.setAttribute('title', 'Switch to Bilingual Mode / 切換至雙語模式');
-      } else {
-        if (label) label.textContent = '中';
-        if (icon) icon.className = 'lang-icon fa-solid fa-language';
-        toggleBtn.setAttribute('aria-pressed', 'true');
-        toggleBtn.setAttribute('title', '切換至純中文模式 / Switch to Chinese-only Mode');
+  /* Compute the counterpart URL on the other site */
+  function getCounterpartURL(currentLang) {
+    const path = window.location.pathname;
+    const fileName = path.split('/').pop() || 'index.html';
+
+    if (currentLang === 'zh') {
+      // From Chinese → English: prefix /en/
+      // Examples: /services/ → /en/services/, /info/blog-3/ → /en/info/blog-3/, / → /en/
+      let cleanPath = path.replace(/\/+$/, '');
+      if (cleanPath === '') {
+        return '/en/';
       }
+      // If ends with index.html, strip it for cleaner URL
+      if (cleanPath.endsWith('/index.html')) {
+        cleanPath = cleanPath.replace('/index.html', '');
+      } else if (cleanPath.endsWith('index.html')) {
+        cleanPath = cleanPath.replace('index.html', '');
+      }
+      return '/en' + (cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath) + (cleanPath.endsWith('/') ? '' : '/');
+    } else {
+      // From English → Chinese: strip /en prefix
+      let cleanPath = path.replace(/^\/en\/?/, '/');
+      if (cleanPath === '/') return '/';
+      // Ensure trailing slash for consistent routing
+      if (!cleanPath.endsWith('/')) cleanPath = cleanPath + '/';
+      return cleanPath;
     }
   }
 
-  function toggleLang() {
-    const current = document.documentElement.getAttribute('data-lang') || DEFAULT_LANG;
-    applyLang(current === 'zh' ? 'bi' : 'zh');
+  /* Build the toggle button HTML — per screenshot reference */
+  function buildToggle(currentLang) {
+    const counterpart = getCounterpartURL(currentLang);
+
+    if (currentLang === 'zh') {
+      // On Chinese page: 繁 is active, EN links to /en/
+      return `
+        <div class="lang-switch-wrap" role="group" aria-label="語言切換 Language Switch">
+          <span class="lang-switch-current" aria-current="true" title="目前顯示：繁體中文">繁</span>
+          <a class="lang-switch-link" href="${counterpart}" hreflang="en" lang="en" title="Switch to English">EN</a>
+        </div>
+      `.trim();
+    } else {
+      // On English page: EN is active, 繁 links to root
+      return `
+        <div class="lang-switch-wrap" role="group" aria-label="Language Switch 語言切換">
+          <a class="lang-switch-link" href="${counterpart}" hreflang="zh-HK" lang="zh-HK" title="切換至繁體中文">繁</a>
+          <span class="lang-switch-current" aria-current="true" title="Currently: English">EN</span>
+        </div>
+      `.trim();
+    }
   }
 
-  function getInitialLang() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'zh' || saved === 'bi') return saved;
-    } catch (e) {}
-    return DEFAULT_LANG;
-  }
+  /* Inject the toggle button into the header (right side, before menu-toggle) */
+  function injectToggle() {
+    if (document.getElementById('lang-switch-container')) return; // already injected
 
-  // Inject language toggle button into header (after nav)
-  function injectToggleButton() {
-    if (document.getElementById('lang-toggle')) return;
-    const header = document.querySelector('.site-header .nav-container');
+    const header = document.querySelector('.site-header .nav-container') || document.querySelector('header .nav-container');
     if (!header) return;
 
-    const btn = document.createElement('button');
-    btn.id = 'lang-toggle';
-    btn.type = 'button';
-    btn.className = 'lang-toggle-btn';
-    btn.setAttribute('aria-label', '切換語言 / Switch Language');
-    btn.setAttribute('aria-pressed', 'true');
-    btn.innerHTML = '<i class="lang-icon fa-solid fa-language" aria-hidden="true"></i><span class="lang-label">中</span>';
+    const currentLang = getCurrentLang();
+    const toggleHTML = buildToggle(currentLang);
 
-    btn.addEventListener('click', toggleLang);
-    // Insert before menu toggle (or at end if no menu toggle)
+    const container = document.createElement('div');
+    container.id = 'lang-switch-container';
+    container.innerHTML = toggleHTML;
+
+    // Insert before the mobile menu toggle button (if present), else at end
     const menuToggle = header.querySelector('.menu-toggle');
     if (menuToggle) {
-      header.insertBefore(btn, menuToggle);
+      header.insertBefore(container, menuToggle);
     } else {
-      header.appendChild(btn);
+      header.appendChild(container);
     }
   }
 
+  /* Init */
   function init() {
-    injectToggleButton();
-    applyLang(getInitialLang());
+    injectToggle();
   }
 
-  // Run as soon as DOM is ready (or now if already loaded)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-
-  // Expose for debugging
-  window.__i18n__ = { applyLang, toggleLang, getInitialLang };
 })();

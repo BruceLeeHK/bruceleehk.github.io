@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Pest Analysis System | HK's First 24/7 AI Diagnosis & Quote | Pest Control Master</title>
+    <meta name="description" content="Hong Kong's first AI pest analysis — upload photo, get instant species ID, risk level, nest location, 36-stratagem strategy & free quote. 7×24 service. Note: AI report is in Traditional Chinese; English WhatsApp support available.">
+    <meta name="keywords" content="AI pest analysis,AI pest identification,pest diagnosis AI,AI pest control Hong Kong,AI识虫,AI灭虫,智能灭虫,害虫诊断,bruceleehk,pest control AI HK,smart pest control">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://bruceleehk.com/en/ai/">
+    <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/ai/">
+    <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/ai/">
+    <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/ai/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_HK">
+    <meta property="og:locale:alternate" content="zh_HK">
+    <meta property="og:site_name" content="Pest Control Master 滅蟲師傅">
+    <meta property="og:title" content="AI Pest Analysis System | HK 24/7 Smart Diagnosis">
+    <meta property="og:description" content="Upload photo → AI ID → 36-stratagem strategy → instant quote. 7×24 service.">
+    <meta property="og:url" content="https://bruceleehk.com/en/ai/">
+    <meta property="og:image" content="https://bruceleehk.com/assets/img/quote-hero-ai.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Pest Analysis System | Pest Control Master">
+    <meta name="twitter:description" content="HK's first AI pest diagnosis — 24/7 service. Note: Report in Traditional Chinese.">
+    <link rel="stylesheet" href="/assets/css/bruceleehk.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com; frame-src https://udify.app; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#10b981">
+    <style>
+        html{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}
+        .page-hero { background: linear-gradient(135deg,rgba(15,23,42,.92),rgba(30,41,59,.88)),url('/assets/img/quote-hero-ai.jpg') center/cover no-repeat; color:#fff; padding:50px 20px 40px; text-align:center; position:relative; overflow:hidden; }
+        .page-hero::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 20% 30%,rgba(16,185,129,.22) 0%,transparent 35%),radial-gradient(circle at 80% 70%,rgba(2,132,199,.22) 0%,transparent 35%); animation: heroGlow 8s ease-in-out infinite alternate; pointer-events:none; }
+        @keyframes heroGlow { 0% { transform: scale(1); opacity:0.8; } 100% { transform: scale(1.1); opacity:1; } }
+        .page-hero .container { max-width:800px; margin:0 auto; position:relative; z-index:1; }
+        .page-hero h1 { font-size:2rem; margin:0 0 12px; font-weight:800; background:linear-gradient(90deg,#fff,#6ee7b7); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .page-hero .subtitle { font-size:1rem; color:#94a3b8; margin:0; }
+        .hero-slogan-tag { display:inline-block; background:rgba(16,185,129,0.18); border:1px solid rgba(110,231,183,0.4); color:#6ee7b7; padding:6px 18px; border-radius:20px; font-size:1.05rem; font-weight:800; letter-spacing:1px; margin-top:16px; box-shadow:0 0 15px rgba(16,185,129,0.2); }
+        .service-247 { display:inline-flex; align-items:center; gap:6px; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.5); color:#fca5a5; padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:700; }
+        .service-247 .dot { width:8px; height:8px; background:#ef4444; border-radius:50%; animation: blink 1.5s ease-in-out infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .ai-tool-section { max-width: 900px; margin: 36px auto; padding: 0 15px; }
+        .ai-tool-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-lg); }
+        .ai-tool-header { background: linear-gradient(135deg,var(--dark-bg) 0%,var(--card-bg) 100%); color:#fff; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+        .ai-tool-header h2 { margin:0; font-size:1.3rem; color:#34d399; display:flex; align-items:center; gap:8px; }
+        .ai-tool-badge { font-size:0.78rem; background:rgba(16,185,129,0.2); color:#34d399; padding:4px 10px; border-radius:20px; border:1px solid rgba(16,185,129,0.4); font-weight:600; display:inline-flex; align-items:center; gap:6px; }
+        .ai-tool-body { padding: 28px 24px; }
+        .ai-states > div { display: none; }
+        .ai-states > div.active { display: block; }
+        .upload-area { display:block; border:2px dashed #cbd5e1; border-radius:var(--radius); padding:50px 20px; text-align:center; cursor:pointer; transition:all var(--transition); background:var(--light-bg); }
+        .upload-area:hover, .upload-area.dragover { border-color:var(--primary); background:var(--primary-light); }
+        .upload-area .upload-icon { font-size:3rem; color:var(--primary); margin-bottom:10px; }
+        .upload-area h3 { font-size:1.15rem; color:var(--dark-bg); margin:0 0 8px; }
+        .upload-area p { color:var(--text-muted); font-size:0.92rem; margin:0 0 16px; }
+        .upload-area input[type="file"] { display:none; }
+        .upload-area .upload-btn { display:inline-block; background:var(--primary); color:#fff !important; padding:10px 24px; border-radius:var(--radius-sm); font-weight:700; font-size:0.95rem; }
+        .upload-features { display:flex; flex-wrap:wrap; gap:14px; margin-top:18px; justify-content:center; }
+        .upload-feature { display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--text-muted); }
+        .upload-feature i { color:var(--primary); }
+
+        .ai-lang-notice { background:#fef3c7; border:1px solid #fde68a; color:#92400e; padding:14px 18px; border-radius:var(--radius-sm); margin:20px 0; font-size:0.9rem; line-height:1.6; }
+        .ai-lang-notice i { color:#d97706; margin-right:6px; }
+        .ai-lang-notice strong { color:#78350f; }
+        .privacy-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); color: var(--primary-dark); padding:10px 14px; border-radius:6px; font-size:0.82rem; margin-top:14px; line-height:1.6; }
+        .privacy-note i { margin-right:5px; }
+        .ai-wa-link { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:var(--whatsapp); color:#fff !important; padding:12px 20px; border-radius:8px; font-weight:bold; text-decoration:none; margin-top:15px; width:100%; box-sizing:border-box; box-shadow:0 4px 12px rgba(37,211,102,0.3); transition: transform 0.2s, background 0.2s; }
+        .ai-wa-link:hover { transform:translateY(-2px); background:var(--whatsapp-dark); }
+        .ai-wa-link.en-fallback { background: var(--tech-blue); box-shadow: 0 4px 12px rgba(2,132,199,0.3); }
+
+        .ai-loading { text-align:center; padding:30px; }
+        .ai-loading-spinner { width:48px; height:48px; border:4px solid var(--primary-light); border-top-color:var(--primary); border-radius:50%; margin:0 auto 16px; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .ai-loading h3 { color:var(--dark-bg); margin:0 0 6px; font-size:1.1rem; }
+        .ai-loading p { color:var(--text-muted); font-size:0.92rem; margin:0 0 18px; }
+        .ai-loading-steps { display:flex; flex-direction:column; gap:10px; max-width:400px; margin:0 auto; }
+        .ai-loading-step { display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius:8px; background:var(--light-bg); color:var(--text-muted); font-size:0.88rem; transition: all 0.3s; }
+        .ai-loading-step.active { background: var(--primary-light); color: var(--primary-dark); font-weight:600; }
+        .ai-loading-step i { color: var(--primary); }
+
+        .ai-result-grid { display:grid; grid-template-columns: 1fr 1.5fr; gap:20px; align-items:start; }
+        @media (max-width: 768px) { .ai-result-grid { grid-template-columns: 1fr; } }
+        .result-preview img { width:100%; border-radius:8px; box-shadow:var(--shadow-sm); }
+        .result-card { background: var(--light-bg); padding:20px; border-radius:8px; border-left:4px solid var(--primary); }
+        .result-card h4 { color: var(--primary-dark); margin:0 0 14px; font-size:1.1rem; }
+        .result-actions { margin-top:20px; text-align:center; }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/en/" class="logo" aria-label="Pest Control Master Home">
+                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" width="38" height="38" loading="eager" decoding="async">
+                <div class="logo-text"><span class="logo-title">Pest Control Master</span><span class="logo-subtitle">滅蟲師傅</span></div>
+            </a>
+            <nav aria-label="Main Navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="/en/">Home</a></li>
+                    <li><a href="/en/services/">Services</a></li>
+                    <li><a href="/en/strategy/">Strategies</a></li>
+                    <li><a href="/en/info/">Info</a></li>
+                    <li><a href="/en/quote/" class="active" aria-current="page">Get Quote</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-links" type="button"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero">
+            <div class="container">
+                <h1>AI Pest Analysis System</h1>
+                <p class="subtitle">HK's first — upload photo → AI instant ID → 36-stratagem strategy → instant quote</p>
+                <div class="hero-slogan-tag">✨ Smart Pest Control — Master Pest</div>
+                <div class="hero-badge-row" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:18px;">
+                    <span class="tech-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> AI Vision Recognition</span>
+                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 10-sec Response</span>
+                    <span class="tech-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Free Diagnosis</span>
+                    <span class="service-247"><span class="dot" aria-hidden="true"></span> 7×24 Always-on</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-tool-section">
+            <div class="ai-tool-card">
+                <div class="ai-tool-header">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Try AI Diagnosis</h2>
+                    <span class="ai-tool-badge"><span class="live-dot" style="width:8px;height:8px;background:var(--primary);border-radius:50%;display:inline-block;"></span> Online</span>
+                </div>
+                <div class="ai-tool-body">
+                    <div class="ai-states">
+                        <!-- State 1: Upload -->
+                        <div id="ai-upload" class="active">
+                            <label class="upload-area" for="pest-photo">
+                                <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
+                                <h3>Upload or take a pest photo</h3>
+                                <p>JPG / PNG / WebP — Max 5MB</p>
+                                <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> Select Photo</span>
+                                <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/webp">
+                            </label>
+                            <div class="upload-features">
+                                <div class="upload-feature"><i class="fa-solid fa-camera" aria-hidden="true"></i> Photo or Camera</div>
+                                <div class="upload-feature"><i class="fa-solid fa-brain" aria-hidden="true"></i> Llama 3.2 Vision</div>
+                                <div class="upload-feature"><i class="fa-solid fa-coins" aria-hidden="true"></i> Free Instant Quote</div>
+                            </div>
+
+                            <!-- AI Language Notice -->
+                            <div class="ai-lang-notice" role="note">
+                                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                <strong>Note:</strong> Our AI diagnosis report is currently generated in Traditional Chinese. Don't worry — just click the WhatsApp button below the report, and our English-speaking specialists will assist you directly!
+                            </div>
+
+                            <!-- Privacy notice -->
+                            <div class="privacy-note">
+                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                                <strong>Safe Upload Guarantee:</strong> Photos are used only for instant AI recognition. The system auto-strips GPS/EXIF metadata before upload (via HTML5 canvas) and destroys images immediately after analysis — never stored, 100% protecting your home privacy.
+                            </div>
+                        </div>
+
+                        <!-- State 2: Analyzing -->
+                        <div id="ai-analyzing">
+                            <div class="ai-loading">
+                                <div class="ai-loading-spinner" aria-hidden="true"></div>
+                                <h3>AI Vision Model Analyzing…</h3>
+                                <p>Combining database — about 10 seconds</p>
+                                <div class="ai-loading-steps">
+                                    <div class="ai-loading-step active" id="step-1"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Cloudflare image preprocessing</div>
+                                    <div class="ai-loading-step" id="step-2"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Identifying pest features</div>
+                                    <div class="ai-loading-step" id="step-3"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Dify logic brain deep thinking</div>
+                                    <div class="ai-loading-step" id="step-4"><i class="fa-solid fa-flag" aria-hidden="true"></i> Generating 36-stratagem report</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- State 3: Result -->
+                        <div id="ai-result">
+                            <div class="ai-result-grid">
+                                <div class="result-preview">
+                                    <img id="result-img" alt="Analyzed pest photo" loading="lazy" decoding="async">
+                                </div>
+                                <div class="result-card">
+                                    <h4><i class="fa-solid fa-clipboard-check"></i> AI Diagnosis Report (Traditional Chinese)</h4>
+                                    <div id="diagnosisText" style="line-height: 1.8; color: var(--text-main); font-size: 0.95rem;"></div>
+                                </div>
+                            </div>
+                            <div class="result-actions">
+                                <button type="button" class="btn btn-dark" id="r-reupload"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Upload new photo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Terms & Privacy Section -->
+        <section class="container" style="padding:30px 20px;">
+            <div style="background:linear-gradient(135deg,var(--primary-light) 0%,#f0f9ff 100%);border:1px solid #6ee7b7;border-radius:var(--radius);padding:28px 24px;">
+                <h3 style="margin:0 0 14px;color:var(--dark-bg);"><i class="fa-solid fa-shield-halved" aria-hidden="true" style="color:var(--primary);"></i> Service Terms & Privacy Protection</h3>
+                <ul style="list-style:none;padding:0;margin:0;line-height:1.7;font-size:0.92rem;color:var(--text-main);">
+                    <li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🔒 100% Privacy Protection</strong> — Photos used only for instant AI recognition; auto-strips GPS/EXIF before upload; destroyed immediately after analysis; never stored.</li>
+                    <li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🤖 AI Diagnosis Disclaimer</strong> — Results are preliminary; final service quote subject to on-site inspection.</li>
+                    <li style="padding:8px 0;"><strong>👨🏻‍🔧 English Support</strong> — Click the WhatsApp button for English-speaking specialist assistance.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Address: Lai King Estate Factory Building, N.T. | Service Area: All Hong Kong | Hours: 9:00 - 18:00</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://wa.me/85252821552?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20pest%20control%20service" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="mailto:Cedars5282@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+        </div>
+        <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved.</p>
+    </footer>
+
+    <div class="mobile-thumb-zone" role="navigation" aria-label="Quick Contact">
+        <a href="https://wa.me/85252821552?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20pest%20control%20service" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Instant</a>
+    </div>
+
+    <script src="/assets/js/i18n.js" defer></script>
+    <script src="/assets/js/bruceleehk.js" defer></script>
+    <script>
+        // Latest AI Diagnosis API logic — Cloudflare Vision + Dify
+        // v5.0: Pure HK Traditional AI response + English WhatsApp fallback + EXIF stripping
+        document.addEventListener('DOMContentLoaded', () => {
+            const pestPhotoInput = document.getElementById('pest-photo');
+            const uploadState = document.getElementById('ai-upload');
+            const analyzingState = document.getElementById('ai-analyzing');
+            const resultState = document.getElementById('ai-result');
+            const resultImg = document.getElementById('result-img');
+            const diagnosisText = document.getElementById('diagnosisText');
+            const btnReupload = document.getElementById('r-reupload');
+            const steps = [
+                document.getElementById('step-1'),
+                document.getElementById('step-2'),
+                document.getElementById('step-3'),
+                document.getElementById('step-4')
+            ];
+
+            let selectedFile = null;
+
+            // EXIF stripping helper — uses canvas to redraw image, eliminating ALL metadata (GPS, camera, timestamp)
+            function stripExifAndCompress(file, maxWidth, callback) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        // Drawing onto canvas strips ALL EXIF/GPS metadata
+                        ctx.drawImage(img, 0, 0, width, height);
+                        canvas.toBlob(function(blob) {
+                            const cleanFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
+                            callback(cleanFile, URL.createObjectURL(blob));
+                        }, 'image/jpeg', 0.85);
+                    };
+                    img.src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function animateSteps() {
+                steps.forEach(s => s && s.classList.remove('active'));
+                if (steps[0]) steps[0].classList.add('active');
+                setTimeout(() => { if (steps[1]) steps[1].classList.add('active'); }, 1000);
+                setTimeout(() => { if (steps[2]) steps[2].classList.add('active'); }, 2500);
+                setTimeout(() => { if (steps[3]) steps[3].classList.add('active'); }, 5000);
+            }
+
+            if (pestPhotoInput) {
+                pestPhotoInput.addEventListener('change', async function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Photo larger than 5MB — please choose a smaller photo!');
+                        this.value = '';
+                        return;
+                    }
+
+                    // Strip EXIF + compress before processing
+                    stripExifAndCompress(file, 1200, function(cleanFile, previewUrl) {
+                        selectedFile = cleanFile;
+                        resultImg.src = previewUrl;
+
+                        uploadState.classList.remove('active');
+                        analyzingState.classList.add('active');
+                        resultState.classList.remove('active');
+                        animateSteps();
+
+                        // Send API request with clean (EXIF-stripped) file
+                        const formData = new FormData();
+                        formData.append('image', selectedFile);
+
+                        fetch('https://whatsapp-bot.cedars5282.workers.dev/api/analyze-pest', {
+                            method: 'POST',
+                            body: formData
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    let formattedHtml = data.diagnosis;
+                                    // Convert Markdown WhatsApp links to buttons
+                                    formattedHtml = formattedHtml.replace(
+                                        /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
+                                        '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
+                                    );
+                                    formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                                    formattedHtml = formattedHtml.replace(/\n/g, '<br>');
+
+                                    diagnosisText.innerHTML = formattedHtml;
+
+                                    // Add English WhatsApp fallback button (since report is in Chinese)
+                                    const enFallback = document.createElement('div');
+                                    enFallback.style.marginTop = '12px';
+                                    enFallback.innerHTML = `
+                                        <a href="https://wa.me/85252821552?text=${encodeURIComponent('Hi, I used the AI diagnosis on your website. The report is in Chinese, could you help me check my pest issue in English? I will send the photo below.')}"
+                                           target="_blank" rel="noopener" class="ai-wa-link en-fallback">
+                                            <i class="fa-solid fa-headset"></i> Chat with English-Speaking Master
+                                        </a>
+                                        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:8px; text-align:center;">
+                                            Report is in Traditional Chinese. Click above for English assistance.
+                                        </p>
+                                    `;
+                                    diagnosisText.appendChild(enFallback);
+
+                                    analyzingState.classList.remove('active');
+                                    resultState.classList.add('active');
+                                } else {
+                                    throw new Error(data.error || 'Analysis failed');
+                                }
+                            })
+                            .catch(error => {
+                                console.error(error);
+                                alert('System busy or network unstable — please try again later!');
+                                analyzingState.classList.remove('active');
+                                uploadState.classList.add('active');
+                            });
+                    });
+                });
+            }
+
+            if (btnReupload) {
+                btnReupload.addEventListener('click', function() {
+                    selectedFile = null;
+                    pestPhotoInput.value = '';
+                    resultState.classList.remove('active');
+                    uploadState.classList.add('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
