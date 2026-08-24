@@ -8,11 +8,11 @@
     <meta name="keywords" content="香港滅蟲,滅曱甴,滅鼠,滅木蝨,白蟻防治,AI害蟲識別,IoT智慧監測,三十六計,即日上門,WhatsApp估價,香港滅蟲公司,床蝨防治,木蝨,曱甴,老鼠,白蟻,Hong Kong pest control,pest control HK,cockroach control HK,bed bug Hong Kong,termite HK,rodent control HK,AI pest identification,香港灭虫,灭蟑螂,灭鼠,灭木虱,白蚁防治,床虱,蟑螂,老鼠,香港杀虫公司,即日上门灭虫,AI识虫,灭虫师傅,bruceleehk,害虫防治,曱甴點樣滅,bed bug treatment,exterminator Hong Kong">
     <link rel="canonical" href="https://bruceleehk.com/">
     
-    <!-- ⚡ 修正：替換為專屬優化版的 Logo 檔案 -->
-    <link rel="icon" type="image/png" href="assets/img/滅蟲師傅PEST CONTROL MASTER.png">
-    <link rel="apple-touch-icon" href="assets/img/滅蟲師傅PEST CONTROL MASTER.png">
+    <!-- ⚡ 恢復安全英文檔名 -->
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" href="assets/img/logo-192.png">
     
-    <!-- ⚡ 修正：移除多餘的斜線，確保與 CSS 背景圖路徑完全一致，避免重複下載 -->
+    <!-- ⚡ 修正：預載入正確的 Hero 背景圖 -->
     <link rel="preload" as="image" href="assets/img/hero-tech.webp" fetchpriority="high">
     
     <link rel="manifest" href="manifest.json">
@@ -61,13 +61,13 @@
         "inLanguage": ["zh-HK", "en-HK", "zh-CN"],
         "image": {
             "@type": "ImageObject",
-            "url": "https://bruceleehk.com/assets/img/滅蟲師傅PEST CONTROL MASTER.png",
+            "url": "https://bruceleehk.com/assets/img/logo.png",
             "width": 77,
             "height": 66
         },
         "logo": {
             "@type": "ImageObject",
-            "url": "https://bruceleehk.com/assets/img/滅蟲師傅PEST CONTROL MASTER.png",
+            "url": "https://bruceleehk.com/assets/img/logo.png",
             "width": 77,
             "height": 66
         },
@@ -114,10 +114,10 @@
     }
     </script>
 
-    <!-- ⚡ 修正：將主 CSS 改為預載入以消除 170ms 渲染阻塞 -->
+    <!-- ⚡ 修正：主 CSS 恢復為同步載入，徹底消除桌面版 CLS (版面閃爍) 的 80 分問題 -->
     <link rel="stylesheet" href="assets/css/bruceleehk.css">
     
-    <!-- ⚡ Font Awesome 非阻塞異步加載優化 -->
+    <!-- Font Awesome 非阻塞異步加載優化 -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
@@ -760,8 +760,8 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <!-- ⚡ 修正：套用指定的最新 Logo，並綁定精準縮放尺寸 77x66 以消除 CLS 與檔案過大警告 -->
-                <img src="assets/img/滅蟲師傅PEST CONTROL MASTER.png" alt="滅蟲師傅 Logo" width="77" height="66" fetchpriority="high" decoding="async">
+                <!-- ⚡ 修正：檔名改回安全的 logo.png，並保留 width/height 消除 CLS -->
+                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" width="77" height="66" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
