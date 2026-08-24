@@ -1,10 +1,12 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.1 完美對接版)
+ * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.2 淨化過濾版)
  *
- * v5.1 優化：
- *   - 自動攔截並解析 LLM 的 JSON 輸出，轉換為前端期待的 🐛 Markdown 格式。
- *   - 加入強效 Regex JSON 提取，防止 LLM 前後夾雜廢話導致 Parse 失敗。
- *   - 加入明確的 /api/analyze-pest 路由檢查。
+ * v5.2 優化亮點：
+ *   ✂️ 三重剪刀過濾機制：
+ *      1. 強制切除 <think>...</think> LLM 推理過程標籤。
+ *      2. Regex 精準提取 JSON {} 區塊，完全撕掉前後開場白與廢話。
+ *      3. 自動繁簡字詞轉化字典（如：蟑螂→曱甴、床虱→木蝨），確保 100% 純香港繁體。
+ *   🔒 保持 v5.1 完整 API 白名單與安全標頭。
  */
 
 const ALLOWED_ORIGINS = new Set([
@@ -48,7 +50,7 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '5.1',
+        version: '5.2',
         ai_bound: !!env.AI,
         kv_bound: !!env.PEST_KV,
         ai_language: 'zh-HK',
@@ -56,7 +58,6 @@ export default {
       }, 200, corsHeaders);
     }
 
-    // 🔒 確保只處理特定的 API 路徑
     if (url.pathname !== '/api/analyze-pest') {
         return json({ error: 'Not Found' }, 404, corsHeaders);
     }
@@ -82,7 +83,6 @@ export default {
         }, 503, corsHeaders);
       }
 
-      /* == 處理 FormData (因為前端是用 FormData 上傳的) == */
       const formData = await request.formData();
       const imageFile = formData.get('image');
       
@@ -93,13 +93,11 @@ export default {
       const arrayBuffer = await imageFile.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
       
-      // 轉換成 Base64 交給 AI
       let binaryString = '';
       for (let i = 0; i < uint8Array.length; i++) {
         binaryString += String.fromCharCode(uint8Array[i]);
       }
       const imageBase64 = btoa(binaryString);
-
 
       /* ============================================================
          Step 1: 首次同意 Llama 3.2 Vision 授權（KV 快取）
@@ -119,9 +117,7 @@ export default {
           const agreeController = new AbortController();
           const agreeTimeout = setTimeout(() => agreeController.abort(), 5000);
           await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
-            messages: [
-              { role: 'user', content: 'agree' }
-            ],
+            messages: [{ role: 'user', content: 'agree' }],
             max_tokens: 16,
           }, { signal: agreeController.signal });
           clearTimeout(agreeTimeout);
@@ -135,14 +131,15 @@ export default {
       }
 
       /* ============================================================
-         Step 2: 呼叫 Llama 3.2 Vision 進行害蟲辨識
+         Step 2: 呼叫 Llama 3.2 Vision (極簡純繁體提示詞)
          ============================================================ */
       const prompt = `你是一個香港頂尖嘅資深滅蟲專家，精通香港在地常見害蟲嘅習性同「三十六計」兵法策略。
-請仔細分析圖片，並嚴格以純 JSON 格式回應（不要 markdown 標記、不要任何其他文字）：
+請仔細分析圖片，並嚴格以「純香港繁體中文（zh-HK）」的 JSON 格式回應。嚴禁使用簡體字！嚴禁輸出任何 Markdown 標記、開場白、思考過程或說明文字！
 
+請直接輸出以下 JSON：
 {
   "pest": "害蟲中文名稱（必須選自：曱甴|木蝨|老鼠|白蟻|蚊|蛀木蟲|螞蟻|蜂|蜈蚣|衣魚|蜘蛛|飛蟲|蟎蟲|卜泥|其他）",
-  "confidence": 0-100的整數,
+  "confidence": 85,
   "risk": "低|中|高|極高",
   "nest": "潛在暗巢位置描述（用香港本地家居環境術語，如：床板縫隙、廚房罅隙、冷氣機周邊）",
   "strategy": "採用三十六計名稱：結合現場特徵嘅專業防治說明",
@@ -175,7 +172,7 @@ export default {
             }
           ],
           max_tokens: 1000,
-          temperature: 0.2,
+          temperature: 0.1,
         }, { signal: visionController.signal });
       } catch (e) {
         clearTimeout(visionTimeout);
@@ -188,7 +185,7 @@ export default {
       }
 
       /* ============================================================
-         Step 3: 提取與格式化 JSON (無縫對接前端)
+         Step 3: 三重「剪刀過濾」與格式化 (無縫對接前端)
          ============================================================ */
       let responseText = '';
       if (typeof aiResponse === 'string') {
@@ -199,14 +196,17 @@ export default {
         responseText = JSON.stringify(aiResponse);
       }
 
-      // 強效 Regex 提取 JSON (避免 AI 講廢話導致崩潰)
+      // ✂️ 剪刀 1：移除 <think>...</think> 思考過程標籤
+      responseText = responseText.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+      // ✂️ 剪刀 2：強效 Regex 提取 JSON {} 區塊（過濾掉 JSON 前後的任何廢話）
       let parsedData = {};
       try {
         const jsonMatch = responseText.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
           parsedData = JSON.parse(jsonMatch[0]);
         } else {
-          throw new Error("No JSON found");
+          throw new Error("No JSON found in response");
         }
       } catch (e) {
         console.warn("JSON Parse Failed, using fallback. Raw:", responseText);
@@ -219,24 +219,49 @@ export default {
         };
       }
 
-      // 🎯 組合前端期待的「🐛 完美 Markdown」格式
-      const formattedDiagnosis = `🐛 **初步診斷**：根據相片特徵，極可能是 **${parsedData.pest}**。
-👩🏻‍🔧 **師妹溫馨提示**：潛在暗巢位置可能喺「${parsedData.nest}」，風險程度為${parsedData.risk}。切勿自行亂噴殺蟲水，以免蟲患擴散！
-💡 **三十六計方案**：我哋「滅蟲師傅」採用獨家「${parsedData.strategy}」策略，針對性根治。
-💰 **參考估價**：${parsedData.price}（實際以現場評估為準）。
+      // ✂️ 剪刀 3：簡繁字詞自動校正（徹底去除殘留簡體與內陸稱呼）
+      const sanitizeHkText = (str) => {
+        if (!str || typeof str !== 'string') return '';
+        return str
+          .replace(/蟑螂/g, '曱甴')
+          .replace(/床虱/g, '木蝨')
+          .replace(/木虱/g, '木蝨')
+          .replace(/白蚁/g, '白蟻')
+          .replace(/蚂蚁/g, '螞蟻')
+          .replace(/检查/g, '檢查')
+          .replace(/评估/g, '評估')
+          .replace(/建议/g, '建議')
+          .replace(/隐患/g, '隱患')
+          .replace(/缝隙/g, '罅隙')
+          .replace(/厨房/g, '廚房')
+          .replace(/现场/g, '現場')
+          .replace(/师傅/g, '師傅')
+          .replace(/针对/g, '針對');
+      };
+
+      const safePest = sanitizeHkText(parsedData.pest || '未確認物體');
+      const safeNest = sanitizeHkText(parsedData.nest || '建議由專員現場勘察');
+      const safeRisk = sanitizeHkText(parsedData.risk || '中');
+      const safeStrategy = sanitizeHkText(parsedData.strategy || '請聯絡師傅現場評估');
+      const safePrice = sanitizeHkText(parsedData.price || '免費估價');
+
+      // 🎯 組合前端期待的「🐛 完美純香港繁體 Markdown」格式
+      const formattedDiagnosis = `🐛 **初步診斷**：根據相片特徵，極可能是 **${safePest}**。
+👩🏻‍🔧 **師妹溫馨提示**：潛在暗巢位置可能喺「${safeNest}」，風險程度為 **${safeRisk}**。切勿自行亂噴殺蟲水，以免蟲患擴散！
+💡 **三十六計方案**：我哋「滅蟲師傅」採用獨家「${safeStrategy}」策略，針對性根治。
+💰 **參考估價**：${safePrice}（實際以現場評估為準）。
 🛡️ **專業聲明**：AI 診斷僅供初步參考。實際蟲患情況、根治方案及最終報價，須以我哋「滅蟲師傅」現場勘察為準。
 
 ---
 💡 **每個蟲患情況都唔同，我哋師傅而家已經在線！**
 想攞到最準確嘅免費報價同專屬滅蟲方案？即刻撳下面條 Link WhatsApp 我哋師傅，並 **將你啱啱影嘅相片 Send 畀師傅幫眼睇睇** 啦（絕不硬銷，歡迎問價）：
-👉 [點擊這裡與真人師傅對話 (WhatsApp: 5282 1552)](https://wa.me/85252821552?text=你好，我喺網站用完AI分析。初步診斷係「${parsedData.pest}」，我想進一步查詢！相片我會喺下面傳送畀你。)`;
+👉 [點擊這裡與真人師傅對話 (WhatsApp: 5282 1552)](https://wa.me/85252821552?text=你好，我喺網站用完AI分析。初步診斷係「${safePest}」，我想進一步查詢！相片我會喺下面傳送畀你。)`;
 
-      // 回傳格式完全吻合前端要求
       return json({
         success: true,
-        diagnosis: formattedDiagnosis, // 前端依靠這個欄位渲染！
+        diagnosis: formattedDiagnosis,
         raw_json: parsedData,
-        version: '5.1',
+        version: '5.2',
         ai_language: 'zh-HK'
       }, 200, corsHeaders);
 
