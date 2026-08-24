@@ -1,6 +1,7 @@
 /* ============================================================
-   bruceleehk.com — Shared Stylesheet
+   bruceleehk.com — Shared Stylesheet (v5.1 — Performance Optimized)
    Used by: / (homepage), /ai/, /quote/
+   - 2026-08-22: font-display swap, content-visibility for cards
    ============================================================ */
 
 /* ---------- Design Tokens ---------- */
@@ -597,5 +598,98 @@ footer {
 /* Print: keep clean */
 @media print {
     .lang-switch-wrap { display: none !important; }
+}
+
+/* ============================================================
+   v5.1 Performance Optimizations
+   - content-visibility: skip rendering off-screen cards
+   - contain: layout isolation
+   - font-display: swap (in @font-face if any)
+   ============================================================ */
+
+/* Skip rendering of below-the-fold content until scrolled into view */
+.smart-card,
+.service-card,
+.estate-tag,
+.video-card,
+.stratagem-card,
+.feature-card,
+.arch-step,
+.comment-item,
+.pest-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
+}
+
+/* Hover effects only on devices that support hover (skip touch devices) */
+@media (hover: hover) {
+    .smart-card:hover,
+    .service-card:hover,
+    .video-card:hover,
+    .stratagem-card:hover,
+    .estate-tag:hover {
+        transform: translateY(-3px);
+    }
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Lazy-load Dify bubble button (Chinese site) */
+#lazy-dify-bubble {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    z-index: 998;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+#lazy-dify-bubble:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+}
+#lazy-dify-bubble::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    opacity: 0.5;
+    animation: pulse 2s ease-in-out infinite;
+}
+@media (min-width: 769px) {
+    #lazy-dify-bubble { bottom: 24px; }
+}
+@media (max-width: 768px) {
+    #lazy-dify-bubble {
+        bottom: 80px; /* above thumb zone */
+    }
+}
+
+/* Picture element: ensure no layout shift */
+picture {
+    display: block;
+}
+picture img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 

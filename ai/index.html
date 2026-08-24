@@ -14,6 +14,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="language" content="zh-HK, en-HK, zh-CN">
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/quote-hero-ai.webp" fetchpriority="high">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -24,7 +25,7 @@
     <meta property="og:title" content="AI 害蟲分析系統 | 香港首創 7×24 AI 智能診斷估價">
     <meta property="og:description" content="上載害蟲相片 → AI 即時辨識 → 配對三十六計 → 即時估價。7×24 全天候智能估價服務。">
     <meta property="og:url" content="https://bruceleehk.com/ai/#main-content">
-    <meta property="og:image" content="../assets/img/quote-hero-ai.jpg">
+    <meta property="og:image" content="../assets/img/quote-hero-ai.webp">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Structured Data -->
@@ -52,14 +53,15 @@
     </script>
 
     <link rel="stylesheet" href="../assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
         /* ============ Page Hero ============ */
         .page-hero {
             background:
                 linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
-                url('../assets/img/quote-hero-ai.jpg') center/cover no-repeat;
+                url('../assets/img/quote-hero-ai.webp') center/cover no-repeat;
             color: #fff;
             padding: 50px 20px 40px;
             text-align: center;
@@ -536,7 +538,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" loading="lazy" decoding="async">
+                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>

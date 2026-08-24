@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://udify.app" crossorigin>
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
     <link rel="manifest" href="/manifest.json">
 
@@ -34,7 +35,9 @@
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" defer>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
 
     <style>
 :root {
@@ -181,7 +184,7 @@ img { max-width: 100%; display: block; }
 .hero {
   background:
     linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
-    url('/assets/img/hero-tech.jpg') center/cover no-repeat;
+    url('/assets/img/hero-tech.webp') center/cover no-repeat;
   color: #fff;
   padding: 80px 20px 70px;
   text-align: center;
@@ -562,7 +565,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
+                <img src="/assets/img/logo.png" fetchpriority="high" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>

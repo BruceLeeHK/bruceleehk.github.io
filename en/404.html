@@ -42,7 +42,7 @@
   <header class="site-header">
     <div class="nav-container">
       <a href="/en/" class="logo">
-        <img src="/assets/img/logo.png" alt="Pest Control Master Logo" loading="lazy">
+        <img src="/assets/img/logo.png" alt="Pest Control Master Logo" fetchpriority="high">
         <div>
           <span class="logo-title">Pest Control Master</span>
           <span class="logo-subtitle">滅蟲師傅</span>
@@ -84,7 +84,8 @@
     <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved.</p>
   </footer>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   <script src="/assets/js/i18n.js" defer></script>
   <script>
     document.getElementById('menu-toggle')?.addEventListener('click', function() {

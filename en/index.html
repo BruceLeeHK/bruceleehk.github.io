@@ -11,8 +11,11 @@
     <meta name="language" content="en-HK, zh-HK, zh-CN">
     <link rel="canonical" href="https://bruceleehk.com/en/">
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <!-- hreflang alternates -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/">
@@ -102,7 +105,8 @@
     </script>
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
         /* ============ Hero ============ */
@@ -505,12 +509,12 @@
     <!-- CSP -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
-      frame-src https://udify.app;
+      frame-src;
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
@@ -526,7 +530,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/en/" class="logo" aria-label="Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" loading="lazy" decoding="async">
+                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">Pest Control Master</span>
                     <span class="logo-subtitle">滅蟲師傅</span>
@@ -610,79 +614,35 @@
             </div>
             <div class="grid-3">
                 <article class="smart-card">
-                    <img class="smart-card-image" src="/assets/img/smart-ai-recognition.jpg" alt="AI Pest Analysis System — photo recognition" loading="lazy" decoding="async">
+                    <picture><source srcset="/assets/img/smart-ai-recognition.webp" type="image/webp"><img src="/assets/img/smart-ai-recognition.jpg" alt="AI Pest Analysis System — photo recognition" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
                         <h3>AI Pest Analysis System</h3>
-                        <p>Upload a pest photo — our AI auto-identifies the species, analyzes breeding paths, and matches an exclusive "36 Stratagems" counter-strategy.</p>
+                        <p>Take a clear photo of the pest or its nest, send it to us via WhatsApp, and get a precise quote within 5 minutes — our English-speaking specialists are ready to assist you.</p>
 
-                        <!-- AI Language Note (English version specific) -->
-                        <div class="ai-lang-note" role="note">
-                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-                            <strong>Note:</strong> Our AI diagnosis report is currently generated in Traditional Chinese. Don't worry — just click the WhatsApp button below the report, and our English-speaking specialists will assist you directly!
-                        </div>
-
-                        <!-- 🚀 Real AI Diagnosis Embedded Card -->
-                        <div class="ai-embedded">
-                            <p class="ai-embedded-title">
-                                <span class="live-dot" aria-hidden="true"></span>
-                                24/7 AI Instant Diagnosis & Quote
+                        <!-- WhatsApp Quick Contact (replaces AI diagnosis on English site) -->
+                        <div class="ai-embedded" style="text-align: center; padding: 25px 15px;">
+                            <div class="upload-icon" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">
+                                <i class="fa-solid fa-camera-retro" aria-hidden="true"></i>
+                            </div>
+                            <h4 style="color: var(--dark-bg); font-size: 1.1rem; margin: 0 0 10px;">Found a Pest? Let Our Masters Check It!</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 20px; line-height: 1.6;">
+                                Take a clear photo of the pest or its nest, send it to us via WhatsApp, and get a precise quote within 5 minutes.
                             </p>
-                            <div class="ai-states">
-
-                                <!-- 1. Upload area -->
-                                <div id="uploadBox" style="display: block;">
-                                    <label class="ai-upload-area" for="pestImageInput">
-                                        <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
-                                        <h4>Upload or take a pest photo</h4>
-                                        <p>JPG / PNG ≤ 5MB • Take photo or pick from album</p>
-                                        <span class="ai-upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> Select Photo</span>
-                                        <input type="file" id="pestImageInput" accept="image/jpeg,image/png,image/webp">
-                                    </label>
-                                    <div class="privacy-note">
-                                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                                        <strong>Safe Upload Guarantee:</strong> Photos are used only for instant AI recognition. The system auto-strips GPS/EXIF metadata before upload and destroys images immediately after analysis — never stored, 100% protecting your home privacy.
-                                    </div>
-                                </div>
-
-                                <!-- 2. Preview & confirm (hidden) -->
-                                <div id="previewArea" style="display: none; text-align: center; padding: 10px 0;">
-                                    <img id="imagePreview" src="" alt="Preview photo" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); margin-bottom: 15px;">
-                                    <br>
-                                    <button class="btn btn-primary" id="btnAnalyze" type="button" style="width: 100%;">
-                                        <i class="fa-solid fa-wand-magic-sparkles"></i> Start AI Diagnosis
-                                    </button>
-                                </div>
-
-                                <!-- 3. Loading (hidden) -->
-                                <div id="loadingArea" style="display: none;">
-                                    <div class="ai-loading">
-                                        <div class="ai-spinner" aria-hidden="true"></div>
-                                        <p class="ai-loading-text" style="color: var(--primary-dark); font-weight: bold;">
-                                            <i class="fa-solid fa-microchip"></i> AI Sister is analyzing with AI vision — about 10 seconds...
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- 4. Result (hidden) -->
-                                <div id="resultArea" style="display: none; text-align: left; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 10px; box-shadow: var(--shadow-sm);">
-                                    <h4 style="color: var(--primary-dark); margin: 0 0 10px 0;"><i class="fa-solid fa-clipboard-check"></i> AI Diagnosis Report (Traditional Chinese)</h4>
-                                    <div id="diagnosisText" style="line-height: 1.7; color: var(--text-main); font-size: 0.92rem;"></div>
-
-                                    <button type="button" class="btn btn-ghost" id="btnReupload" style="margin-top: 15px; width: 100%;">
-                                        <i class="fa-solid fa-rotate-right"></i> Upload another photo
-                                    </button>
-                                </div>
-
+                            <a href="https://wa.me/85252821552?text=Hi%2C%20I%20found%20a%20pest%20and%20would%20like%20to%20get%20a%20free%20quote.%20I%27ll%20send%20the%20photo%20below." target="_blank" rel="noopener" class="ai-wa-link" style="display: inline-flex; width: auto; padding: 12px 25px;">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Send Photo via WhatsApp
+                            </a>
+                            <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px;border-radius:6px;font-size:0.75rem;margin-top:20px;line-height:1.6;">
+                                <i class="fa-solid fa-bolt" aria-hidden="true"></i> <strong>Fast Response:</strong> Our English-speaking specialists are ready to assist you.
                             </div>
                         </div>
-                        <!-- End AI section -->
+                        <!-- End WhatsApp CTA section -->
 
                     </div>
                 </article>
 
                 <article class="smart-card">
-                    <img class="smart-card-image" src="/assets/img/smart-iot-rat.jpg" alt="IoT Smart Rodent Monitor" loading="lazy" decoding="async">
+                    <picture><source srcset="/assets/img/smart-iot-rat.webp" type="image/webp"><img src="/assets/img/smart-iot-rat.jpg" alt="IoT Smart Rodent Monitor" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
                         <h3>IoT Smart Rodent Monitor</h3>
@@ -690,7 +650,7 @@
                     </div>
                 </article>
                 <article class="smart-card">
-                    <img class="smart-card-image" src="/assets/img/smart-thermal.jpg" alt="Thermal Imaging Nest Scan" loading="lazy" decoding="async">
+                    <picture><source srcset="/assets/img/smart-thermal.webp" type="image/webp"><img src="/assets/img/smart-thermal.jpg" alt="Thermal Imaging Nest Scan" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
                         <h3>Thermal Imaging Nest Scan</h3>
@@ -795,7 +755,7 @@
                 <div class="video-grid">
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Cockroach Systemic Control">
                         <div class="video-thumb">
-                            <img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async">
+                            <picture><source srcset="/assets/img/video-cockroach.webp" type="image/webp"><img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:45</span>
                         </div>
@@ -806,7 +766,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Bed Bug High-Temp Steam">
                         <div class="video-thumb">
-                            <img src="/assets/img/video-bedbug.jpg" alt="Bed bug high-temp steam case" loading="lazy" decoding="async">
+                            <picture><source srcset="/assets/img/video-bedbug.webp" type="image/webp"><img src="/assets/img/video-bedbug.jpg" alt="Bed bug high-temp steam case" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:58</span>
                         </div>
@@ -817,7 +777,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: IoT Smart Rodent Monitoring">
                         <div class="video-thumb">
-                            <img src="/assets/img/video-iot-rat.jpg" alt="IoT smart rodent monitoring case" loading="lazy" decoding="async">
+                            <picture><source srcset="/assets/img/video-iot-rat.webp" type="image/webp"><img src="/assets/img/video-iot-rat.jpg" alt="IoT smart rodent monitoring case" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">1:12</span>
                         </div>
@@ -828,7 +788,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Termite Thermal Imaging">
                         <div class="video-thumb">
-                            <img src="/assets/img/video-termite.jpg" alt="Thermal imaging termite nest scan case" loading="lazy" decoding="async">
+                            <picture><source srcset="/assets/img/video-termite.webp" type="image/webp"><img src="/assets/img/video-termite.jpg" alt="Thermal imaging termite nest scan case" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:52</span>
                         </div>
@@ -938,28 +898,6 @@
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved.</p>
     </footer>
 
-    <!-- Floating AI Assistant (EN) -->
-    <div class="floating-ai">
-        <button class="floating-ai-btn" id="floating-ai-btn" aria-label="Open AI Assistant" aria-expanded="false" aria-controls="ai-popup" type="button">
-            <i class="fa-solid fa-robot" aria-hidden="true"></i>
-        </button>
-        <span class="floating-ai-tooltip">AI Sister • 24/7 Support</span>
-    </div>
-
-    <!-- AI Chat Popup (Chinese — Dify chatbot is Chinese only) -->
-    <div class="ai-popup" id="ai-popup" role="dialog" aria-label="AI Assistant Dialog (Traditional Chinese)">
-        <div class="ai-popup-header">
-            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI Sister Assistant <span style="color:#fbbf24; font-size:0.72rem; font-weight:600; margin-left:6px;">(中文)</span></h3>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <span class="ai-popup-badge">24/7 Online</span>
-                <button class="ai-popup-close" id="ai-popup-close" aria-label="Close" type="button">✕</button>
-            </div>
-        </div>
-        <div class="ai-popup-body">
-            <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone" title="AI Assistant Dialog (Traditional Chinese)"></iframe>
-        </div>
-    </div>
-
     <!-- Mobile Sticky Thumb Zone -->
     <div class="mobile-thumb-zone" role="navigation" aria-label="Quick Contact">
         <a href="https://wa.me/85252821552?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20pest%20control%20service" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);">
@@ -1000,147 +938,6 @@
             prev.addEventListener('click', () => scroll.scrollBy({ left: -296, behavior: 'smooth' }));
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
-
-        // 🚀 Real AI Diagnosis — with EXIF stripping + English WhatsApp fallback
-        document.addEventListener('DOMContentLoaded', function() {
-            const pestImageInput = document.getElementById('pestImageInput');
-            const uploadBox = document.getElementById('uploadBox');
-            const previewArea = document.getElementById('previewArea');
-            const imagePreview = document.getElementById('imagePreview');
-            const btnAnalyze = document.getElementById('btnAnalyze');
-            const loadingArea = document.getElementById('loadingArea');
-            const resultArea = document.getElementById('resultArea');
-            const diagnosisText = document.getElementById('diagnosisText');
-            const btnReupload = document.getElementById('btnReupload');
-
-            let selectedFile = null;
-
-            // EXIF stripping helper — uses canvas to redraw image, eliminating all metadata
-            function stripExifAndCompress(file, maxWidth, callback) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const img = new Image();
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        let width = img.width;
-                        let height = img.height;
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-                        canvas.width = width;
-                        canvas.height = height;
-                        // Drawing onto canvas strips ALL EXIF/GPS metadata
-                        ctx.drawImage(img, 0, 0, width, height);
-                        canvas.toBlob(function(blob) {
-                            const cleanFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
-                            callback(cleanFile, URL.createObjectURL(blob));
-                        }, 'image/jpeg', 0.85);
-                    };
-                    img.src = evt.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-
-            if (pestImageInput) {
-                pestImageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (!file) return;
-
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Photo larger than 5MB — please choose a smaller photo!');
-                        this.value = '';
-                        return;
-                    }
-
-                    // Strip EXIF + compress before storing
-                    stripExifAndCompress(file, 1200, function(cleanFile, previewUrl) {
-                        selectedFile = cleanFile;
-                        imagePreview.src = previewUrl;
-                        uploadBox.style.display = 'none';
-                        previewArea.style.display = 'block';
-                        resultArea.style.display = 'none';
-                    });
-                });
-            }
-
-            if (btnAnalyze) {
-                btnAnalyze.addEventListener('click', async function() {
-                    if (!selectedFile) return;
-
-                    previewArea.style.display = 'none';
-                    loadingArea.style.display = 'block';
-
-                    const formData = new FormData();
-                    formData.append('image', selectedFile);
-
-                    try {
-                        const response = await fetch('https://whatsapp-bot.cedars5282.workers.dev/api/analyze-pest', {
-                            method: 'POST',
-                            body: formData
-                        });
-
-                        const data = await response.json();
-
-                        if (data.success && data.diagnosis) {
-                            let formattedHtml = data.diagnosis;
-
-                            // Convert Markdown WhatsApp links to buttons
-                            formattedHtml = formattedHtml.replace(
-                                /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
-                                '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
-                            );
-
-                            // Bold
-                            formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                            // Newlines
-                            formattedHtml = formattedHtml.replace(/\n/g, '<br>');
-
-                            diagnosisText.innerHTML = formattedHtml;
-
-                            // Add English WhatsApp fallback button (since report is in Chinese)
-                            const enFallback = document.createElement('div');
-                            enFallback.style.marginTop = '12px';
-                            enFallback.innerHTML = `
-                                <a href="https://wa.me/85252821552?text=${encodeURIComponent('Hi, I used the AI diagnosis on your website. The report is in Chinese, could you help me check my pest issue in English? I will send the photo below.')}"
-                                   target="_blank" rel="noopener" class="ai-wa-link" style="background: var(--tech-blue); box-shadow: 0 4px 12px rgba(2,132,199,0.3);">
-                                    <i class="fa-solid fa-headset"></i> Chat with English-Speaking Master
-                                </a>
-                                <p style="font-size:0.78rem; color:var(--text-muted); margin-top:8px; text-align:center;">
-                                    Report is in Traditional Chinese. Click above for English assistance.
-                                </p>
-                            `;
-                            diagnosisText.appendChild(enFallback);
-
-                            loadingArea.style.display = 'none';
-                            resultArea.style.display = 'block';
-                        } else {
-                            console.error("API returned abnormal data:", data);
-                            throw new Error(data.error || 'AI cannot produce diagnosis. Check API key or quota.');
-                        }
-                    } catch (error) {
-                        console.error("Frontend caught error:", error);
-                        alert('⚠️ System notice:\n' + error.message + '\n\n(Possible cause: unstable network or Dify config not published)');
-                        loadingArea.style.display = 'none';
-                        uploadBox.style.display = 'block';
-                    }
-                });
-            }
-
-            if (btnReupload) {
-                btnReupload.addEventListener('click', function() {
-                    selectedFile = null;
-                    pestImageInput.value = '';
-                    resultArea.style.display = 'none';
-                    uploadBox.style.display = 'block';
-                });
-            }
-
-            if (window.initAIDiagnosis) {
-                window.initAIDiagnosis = function() {};
-            }
-        });
     </script>
 </body>
 </html>

@@ -8,8 +8,12 @@
     <meta name="keywords" content="香港滅蟲,滅曱甴,滅鼠,滅木蝨,白蟻防治,AI害蟲識別,IoT智慧監測,三十六計,即日上門,WhatsApp估價,香港滅蟲公司,床蝨防治,木蝨,曱甴,老鼠,白蟻,Hong Kong pest control,pest control HK,cockroach control HK,bed bug Hong Kong,termite HK,rodent control HK,AI pest identification,香港灭虫,灭蟑螂,灭鼠,灭木虱,白蚁防治,床虱,蟑螂,老鼠,香港杀虫公司,即日上门灭虫,AI识虫,灭虫师傅,bruceleehk,害虫防治,曱甴點樣滅,bed bug treatment,exterminator Hong Kong">
     <link rel="canonical" href="https://bruceleehk.com/">
     <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="apple-touch-icon" href="assets/img/logo-192.png">
     <link rel="manifest" href="manifest.json">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://comment-handler.cedars5282.workers.dev">
 
     <!-- hreflang alternates for SEO (HK Trad + Simplified Chinese + English) -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/">
@@ -106,14 +110,15 @@
     </script>
 
     <link rel="stylesheet" href="assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
         /* ============ Hero ============ */
         .hero {
             background:
                 linear-gradient(135deg, rgba(15,23,42,0.92) 0%, rgba(30,41,59,0.88) 100%),
-                url('assets/img/hero-tech.jpg') center/cover no-repeat;
+                url('assets/img/hero-tech.webp') center/cover no-repeat;
             color: #fff;
             padding: 55px 20px 50px;
             text-align: center;
@@ -748,7 +753,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" loading="lazy" decoding="async">
+                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
@@ -832,7 +837,7 @@
             </div>
             <div class="grid-3">
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy" decoding="async">
+                    <picture><source srcset="assets/img/smart-ai-recognition.webp" type="image/webp"><img src="assets/img/smart-ai-recognition.jpg" alt="AI 害蟲分析系統 - 手機拍攝害蟲並進行 AI 辨識" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
                         <h3>AI 害蟲分析系統</h3>
@@ -900,7 +905,7 @@
                 </article>
 
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統" loading="lazy" decoding="async">
+                    <picture><source srcset="assets/img/smart-iot-rat.webp" type="image/webp"><img src="assets/img/smart-iot-rat.jpg" alt="IoT 智慧鼠盒監測系統" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
                         <h3>IoT 智慧鼠盒監測</h3>
@@ -908,7 +913,7 @@
                     </div>
                 </article>
                 <article class="smart-card">
-                    <img class="smart-card-image" src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描" loading="lazy" decoding="async">
+                    <picture><source srcset="assets/img/smart-thermal.webp" type="image/webp"><img src="assets/img/smart-thermal.jpg" alt="熱成像暗巢掃描" loading="lazy" decoding="async" class="smart-card-image"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
                         <h3>熱成像暗巢掃描</h3>
@@ -1013,7 +1018,7 @@
                 <div class="video-grid">
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="觀看短片：曱甴系統防治實戰">
                         <div class="video-thumb">
-                            <img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy" decoding="async">
+                            <picture><source srcset="assets/img/video-cockroach.webp" type="image/webp"><img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:45</span>
                         </div>
@@ -1024,7 +1029,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="觀看短片：木蝨高溫蒸氣處理">
                         <div class="video-thumb">
-                            <img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣處理案例" loading="lazy" decoding="async">
+                            <picture><source srcset="assets/img/video-bedbug.webp" type="image/webp"><img src="assets/img/video-bedbug.jpg" alt="木蝨高溫蒸氣處理案例" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:58</span>
                         </div>
@@ -1035,7 +1040,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="觀看短片：智慧鼠盒即時監測">
                         <div class="video-thumb">
-                            <img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy" decoding="async">
+                            <picture><source srcset="assets/img/video-iot-rat.webp" type="image/webp"><img src="assets/img/video-iot-rat.jpg" alt="IoT 智慧鼠盒即時監測案例" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">1:12</span>
                         </div>
@@ -1046,7 +1051,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="觀看短片：白蟻熱成像定位">
                         <div class="video-thumb">
-                            <img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy" decoding="async">
+                            <picture><source srcset="assets/img/video-termite.webp" type="image/webp"><img src="assets/img/video-termite.jpg" alt="熱成像白蟻暗巢掃描案例" loading="lazy" decoding="async"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:52</span>
                         </div>
@@ -1180,7 +1185,7 @@
             </div>
         </div>
         <div class="ai-popup-body">
-            <iframe src="https://udify.app/chatbot/C3DvioLaCmagSaUc" allow="microphone" title="滅蟲師妹 AI 助手對話框"></iframe>
+            <iframe id="ai-chatbot-iframe" data-src="https://udify.app/chatbot/C3DvioLaCmagSaUc" src="about:blank" allow="microphone" title="滅蟲師妹 AI 助手對話框"></iframe>
         </div>
     </div>
 

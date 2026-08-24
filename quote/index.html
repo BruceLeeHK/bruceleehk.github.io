@@ -45,7 +45,8 @@
     </script>
 
     <link rel="stylesheet" href="../assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
         /* ============ Page Hero ============ */
@@ -446,7 +447,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" loading="lazy" decoding="async">
+                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>

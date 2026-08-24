@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://udify.app" crossorigin>
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
     <link rel="manifest" href="/manifest.json">
 
@@ -32,7 +33,9 @@
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" defer>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
 
     <style>
 
@@ -952,7 +955,7 @@ footer {
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
+                <img src="/assets/img/logo.png" fetchpriority="high" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
@@ -1184,13 +1187,36 @@ footer {
 </script>
 
     <!-- Dify Chatbot -->
+    <!-- Lazy-load Dify Chatbot (v5.1 性能優化) -->
+    <div id="lazy-dify-bubble" style="position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.5);z-index:998;border:none;transition:transform 0.2s;" role="button" tabindex="0" aria-label="開啟滅蟲師妹 AI 助手">
+        <i class="fa-solid fa-robot" aria-hidden="true"></i>
+    </div>
     <script>
-     window.difyChatbotConfig = { token: 'C3DvioLaCmagSaUc', inputs: {}, systemVariables: {}, userVariables: {} }
+    (function() {
+        var bubble = document.getElementById('lazy-dify-bubble');
+        if (!bubble) return;
+        var difyLoaded = false;
+        function loadDify() {
+            if (difyLoaded) return;
+            difyLoaded = true;
+            window.difyChatbotConfig = window.difyChatbotConfig || {
+                token: 'C3DvioLaCmagSaUc', inputs: {}, systemVariables: {}, userVariables: {}
+            };
+            var s = document.createElement('script');
+            s.src = 'https://udify.app/embed.min.js';
+            s.id = 'C3DvioLaCmagSaUc';
+            s.defer = true;
+            document.head.appendChild(s);
+            // Hide the manual bubble once Dify loads its own
+            setTimeout(function() {
+                bubble.style.display = 'none';
+            }, 1500);
+        }
+        bubble.addEventListener('click', loadDify);
+        bubble.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadDify(); }
+        });
+    })();
     </script>
-    <script src="https://udify.app/embed.min.js" id="C3DvioLaCmagSaUc" defer></script>
-    <style>
-     #dify-chatbot-bubble-button { background-color: #10b981 !important; box-shadow: 0 4px 15px rgba(16,185,129,.4) !important; }
-     #dify-chatbot-bubble-window { width: 24rem !important; height: 40rem !important; }
-    </style>
 </body>
 </html>

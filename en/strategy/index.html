@@ -9,6 +9,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://bruceleehk.com/en/strategy/">
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/strategy/">
     <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/strategy/">
     <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/strategy/">
@@ -21,7 +22,8 @@
     <meta property="og:url" content="https://bruceleehk.com/en/strategy/">
     <meta property="og:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; object-src 'none'; base-uri 'self';">
     <meta name="theme-color" content="#10b981">
     <style>html{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}</style>
@@ -31,7 +33,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/en/" class="logo" aria-label="Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" width="38" height="38" loading="eager" decoding="async">
+                <img src="/assets/img/logo.png" fetchpriority="high" alt="Pest Control Master Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text"><span class="logo-title">Pest Control Master</span><span class="logo-subtitle">滅蟲師傅</span></div>
             </a>
             <nav aria-label="Main Navigation">

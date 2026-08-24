@@ -1,0 +1,39 @@
+# Cloudflare Pages / GitHub Pages _headers file
+# Long-term caching for static assets (PageSpeed optimization)
+# 2026-08-22 v5.1
+
+# Static assets: cache for 1 year (immutable)
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# WebP images: extra long cache
+*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML pages: short cache (re-validate every visit for fresh content)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Manifest: short cache
+/manifest.json
+  Cache-Control: public, max-age=3600
+
+# Sitemap & robots: short cache
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# Security headers for all pages
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

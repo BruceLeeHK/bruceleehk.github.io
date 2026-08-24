@@ -9,6 +9,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://bruceleehk.com/en/ai/">
     <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/quote-hero-ai.webp" fetchpriority="high">
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/ai/">
     <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/ai/">
     <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/ai/">
@@ -24,8 +25,9 @@
     <meta name="twitter:title" content="AI Pest Analysis System | Pest Control Master">
     <meta name="twitter:description" content="HK's first AI pest diagnosis — 24/7 service. Note: Report in Traditional Chinese.">
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com; frame-src https://udify.app; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com; frame-src; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#10b981">
     <style>
@@ -93,7 +95,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/en/" class="logo" aria-label="Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" width="38" height="38" loading="eager" decoding="async">
+                <img src="/assets/img/logo.png" fetchpriority="high" alt="Pest Control Master Logo" width="38" height="38" loading="eager" decoding="async">
                 <div class="logo-text"><span class="logo-title">Pest Control Master</span><span class="logo-subtitle">滅蟲師傅</span></div>
             </a>
             <nav aria-label="Main Navigation">
@@ -132,48 +134,22 @@
                 </div>
                 <div class="ai-tool-body">
                     <div class="ai-states">
-                        <!-- State 1: Upload -->
-                        <div id="ai-upload" class="active">
-                            <label class="upload-area" for="pest-photo">
-                                <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
-                                <h3>Upload or take a pest photo</h3>
-                                <p>JPG / PNG / WebP — Max 5MB</p>
-                                <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> Select Photo</span>
-                                <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/webp">
-                            </label>
-                            <div class="upload-features">
-                                <div class="upload-feature"><i class="fa-solid fa-camera" aria-hidden="true"></i> Photo or Camera</div>
-                                <div class="upload-feature"><i class="fa-solid fa-brain" aria-hidden="true"></i> Llama 3.2 Vision</div>
-                                <div class="upload-feature"><i class="fa-solid fa-coins" aria-hidden="true"></i> Free Instant Quote</div>
+                        <div class="active" style="text-align: center; padding: 25px 15px;">
+                            <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;">
+                                <i class="fa-solid fa-camera-retro" aria-hidden="true"></i>
                             </div>
-
-                            <!-- AI Language Notice -->
-                            <div class="ai-lang-notice" role="note">
-                                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-                                <strong>Note:</strong> Our AI diagnosis report is currently generated in Traditional Chinese. Don't worry — just click the WhatsApp button below the report, and our English-speaking specialists will assist you directly!
-                            </div>
-
-                            <!-- Privacy notice -->
-                            <div class="privacy-note">
-                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                                <strong>Safe Upload Guarantee:</strong> Photos are used only for instant AI recognition. The system auto-strips GPS/EXIF metadata before upload (via HTML5 canvas) and destroys images immediately after analysis — never stored, 100% protecting your home privacy.
+                            <h4 style="color: var(--dark-bg); font-size: 1.1rem; margin: 0 0 10px;">Found a Pest? Let Our Masters Check It!</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 20px; line-height: 1.6;">
+                                Take a clear photo of the pest or its nest, send it to us via WhatsApp, and get a precise quote within 5 minutes.
+                            </p>
+                            <a href="https://wa.me/85252821552?text=Hi%2C%20I%20found%20a%20pest%20and%20would%20like%20to%20get%20a%20free%20quote.%20I%27ll%20send%20the%20photo%20below." target="_blank" rel="noopener" class="ai-wa-link" style="display: inline-flex; width: auto; padding: 12px 25px;">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Send Photo via WhatsApp
+                            </a>
+                            <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px;border-radius:6px;font-size:0.75rem;margin-top:20px;line-height:1.6;">
+                                <i class="fa-solid fa-bolt" aria-hidden="true"></i> <strong>Fast Response:</strong> Our English-speaking specialists are ready to assist you.
                             </div>
                         </div>
-
-                        <!-- State 2: Analyzing -->
-                        <div id="ai-analyzing">
-                            <div class="ai-loading">
-                                <div class="ai-loading-spinner" aria-hidden="true"></div>
-                                <h3>AI Vision Model Analyzing…</h3>
-                                <p>Combining database — about 10 seconds</p>
-                                <div class="ai-loading-steps">
-                                    <div class="ai-loading-step active" id="step-1"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Cloudflare image preprocessing</div>
-                                    <div class="ai-loading-step" id="step-2"><i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Identifying pest features</div>
-                                    <div class="ai-loading-step" id="step-3"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Dify logic brain deep thinking</div>
-                                    <div class="ai-loading-step" id="step-4"><i class="fa-solid fa-flag" aria-hidden="true"></i> Generating 36-stratagem report</div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
 
                         <!-- State 3: Result -->
                         <div id="ai-result">
@@ -226,142 +202,5 @@
     <script src="/assets/js/i18n.js" defer></script>
     <script src="/assets/js/bruceleehk.js" defer></script>
     <script>
-        // Latest AI Diagnosis API logic — Cloudflare Vision + Dify
-        // v5.0: Pure HK Traditional AI response + English WhatsApp fallback + EXIF stripping
-        document.addEventListener('DOMContentLoaded', () => {
-            const pestPhotoInput = document.getElementById('pest-photo');
-            const uploadState = document.getElementById('ai-upload');
-            const analyzingState = document.getElementById('ai-analyzing');
-            const resultState = document.getElementById('ai-result');
-            const resultImg = document.getElementById('result-img');
-            const diagnosisText = document.getElementById('diagnosisText');
-            const btnReupload = document.getElementById('r-reupload');
-            const steps = [
-                document.getElementById('step-1'),
-                document.getElementById('step-2'),
-                document.getElementById('step-3'),
-                document.getElementById('step-4')
-            ];
-
-            let selectedFile = null;
-
-            // EXIF stripping helper — uses canvas to redraw image, eliminating ALL metadata (GPS, camera, timestamp)
-            function stripExifAndCompress(file, maxWidth, callback) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const img = new Image();
-                    img.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        let width = img.width;
-                        let height = img.height;
-                        if (width > maxWidth) {
-                            height = Math.round((height * maxWidth) / width);
-                            width = maxWidth;
-                        }
-                        canvas.width = width;
-                        canvas.height = height;
-                        // Drawing onto canvas strips ALL EXIF/GPS metadata
-                        ctx.drawImage(img, 0, 0, width, height);
-                        canvas.toBlob(function(blob) {
-                            const cleanFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
-                            callback(cleanFile, URL.createObjectURL(blob));
-                        }, 'image/jpeg', 0.85);
-                    };
-                    img.src = evt.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-
-            function animateSteps() {
-                steps.forEach(s => s && s.classList.remove('active'));
-                if (steps[0]) steps[0].classList.add('active');
-                setTimeout(() => { if (steps[1]) steps[1].classList.add('active'); }, 1000);
-                setTimeout(() => { if (steps[2]) steps[2].classList.add('active'); }, 2500);
-                setTimeout(() => { if (steps[3]) steps[3].classList.add('active'); }, 5000);
-            }
-
-            if (pestPhotoInput) {
-                pestPhotoInput.addEventListener('change', async function(e) {
-                    const file = e.target.files[0];
-                    if (!file) return;
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Photo larger than 5MB — please choose a smaller photo!');
-                        this.value = '';
-                        return;
-                    }
-
-                    // Strip EXIF + compress before processing
-                    stripExifAndCompress(file, 1200, function(cleanFile, previewUrl) {
-                        selectedFile = cleanFile;
-                        resultImg.src = previewUrl;
-
-                        uploadState.classList.remove('active');
-                        analyzingState.classList.add('active');
-                        resultState.classList.remove('active');
-                        animateSteps();
-
-                        // Send API request with clean (EXIF-stripped) file
-                        const formData = new FormData();
-                        formData.append('image', selectedFile);
-
-                        fetch('https://whatsapp-bot.cedars5282.workers.dev/api/analyze-pest', {
-                            method: 'POST',
-                            body: formData
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.success) {
-                                    let formattedHtml = data.diagnosis;
-                                    // Convert Markdown WhatsApp links to buttons
-                                    formattedHtml = formattedHtml.replace(
-                                        /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
-                                        '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
-                                    );
-                                    formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                                    formattedHtml = formattedHtml.replace(/\n/g, '<br>');
-
-                                    diagnosisText.innerHTML = formattedHtml;
-
-                                    // Add English WhatsApp fallback button (since report is in Chinese)
-                                    const enFallback = document.createElement('div');
-                                    enFallback.style.marginTop = '12px';
-                                    enFallback.innerHTML = `
-                                        <a href="https://wa.me/85252821552?text=${encodeURIComponent('Hi, I used the AI diagnosis on your website. The report is in Chinese, could you help me check my pest issue in English? I will send the photo below.')}"
-                                           target="_blank" rel="noopener" class="ai-wa-link en-fallback">
-                                            <i class="fa-solid fa-headset"></i> Chat with English-Speaking Master
-                                        </a>
-                                        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:8px; text-align:center;">
-                                            Report is in Traditional Chinese. Click above for English assistance.
-                                        </p>
-                                    `;
-                                    diagnosisText.appendChild(enFallback);
-
-                                    analyzingState.classList.remove('active');
-                                    resultState.classList.add('active');
-                                } else {
-                                    throw new Error(data.error || 'Analysis failed');
-                                }
-                            })
-                            .catch(error => {
-                                console.error(error);
-                                alert('System busy or network unstable — please try again later!');
-                                analyzingState.classList.remove('active');
-                                uploadState.classList.add('active');
-                            });
-                    });
-                });
-            }
-
-            if (btnReupload) {
-                btnReupload.addEventListener('click', function() {
-                    selectedFile = null;
-                    pestPhotoInput.value = '';
-                    resultState.classList.remove('active');
-                    uploadState.classList.add('active');
-                });
-            }
-        });
-    </script>
 </body>
 </html>

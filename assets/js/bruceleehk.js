@@ -62,13 +62,26 @@
     }
 
     /* ---------- Floating AI Assistant (右下角滅蟲師妹視窗控制) ---------- */
+    /* v5.1 性能優化：Dify iframe 改為按鈕點擊後才載入，避免阻塞首屏渲染 */
     function initFloatingAI() {
         const btn = document.getElementById('floating-ai-btn');
         const popup = document.getElementById('ai-popup');
         const closeBtn = document.getElementById('ai-popup-close');
+        const aiIframe = document.getElementById('ai-chatbot-iframe');
         if (!btn || !popup || !closeBtn) return;
 
+        let iframeLoaded = false;
+
+        // 點擊按鈕時先動態載入 Dify iframe，再開啟彈窗
         btn.addEventListener('click', () => {
+            // 第一次點擊時先載入 iframe（慳 2.2MB 首屏流量）
+            if (aiIframe && !iframeLoaded) {
+                const dataSrc = aiIframe.getAttribute('data-src');
+                if (dataSrc && (aiIframe.src === 'about:blank' || !aiIframe.src || aiIframe.src === '')) {
+                    aiIframe.src = dataSrc;
+                    iframeLoaded = true;
+                }
+            }
             popup.classList.toggle('open');
             const isOpen = popup.classList.contains('open');
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
