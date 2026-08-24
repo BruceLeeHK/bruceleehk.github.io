@@ -11,9 +11,12 @@
     <link rel="preload" as="image" href="/assets/img/hero-tech.webp" fetchpriority="high">
     <link rel="apple-touch-icon" href="assets/img/logo-192.png">
     <link rel="manifest" href="manifest.json">
+    
+    <!-- 網路預先連線優化 -->
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://comment-handler.cedars5282.workers.dev">
+    <link rel="dns-prefetch" href="https://pest-vision-worker.cedars5282.workers.dev">
 
     <!-- hreflang alternates for SEO (HK Trad + Simplified Chinese + English) -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/">
@@ -55,14 +58,14 @@
         "image": {
             "@type": "ImageObject",
             "url": "https://bruceleehk.com/assets/img/logo.png",
-            "width": 440,
-            "height": 378
+            "width": 154,
+            "height": 132
         },
         "logo": {
             "@type": "ImageObject",
             "url": "https://bruceleehk.com/assets/img/logo.png",
-            "width": 440,
-            "height": 378
+            "width": 154,
+            "height": 132
         },
         "url": "https://bruceleehk.com/",
         "telephone": "+85252821552",
@@ -110,8 +113,10 @@
     </script>
 
     <link rel="stylesheet" href="assets/css/bruceleehk.css">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- ⚡ Font Awesome 非阻塞異步加載優化 -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <style>
         /* ============ Hero ============ */
@@ -390,7 +395,6 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* 動態產生的 WhatsApp 按鈕樣式 */
         .ai-wa-link {
             display: inline-flex;
             align-items: center;
@@ -729,14 +733,14 @@
             .hero h1 { font-size: 2.5rem; }
         }
     </style>
-    <!-- ⚠️ 關鍵升級：加入了您的 whatsapp-bot URL 到 connect-src 白名單 -->
+    
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
-      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://cloudflareinsights.com;
       frame-src https://udify.app;
       object-src 'none';
       base-uri 'self';
@@ -753,7 +757,8 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
+                <!-- ⚡ 修正：補充明確寬高 width/height 消除 CLS 與 PageSpeed 診斷警告 -->
+                <img src="assets/img/logo.png" alt="滅蟲師傅 Logo" width="77" height="66" fetchpriority="high" decoding="async">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
@@ -844,7 +849,7 @@
                         <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
                         <a href="/ai/" class="smart-card-link">查看完整版系統 →</a>
 
-                        <!-- 🚀 全新真實版 AI Diagnosis Embedded Card -->
+                        <!-- AI Diagnosis Embedded Card -->
                         <div class="ai-embedded">
                             <p class="ai-embedded-title">
                                 <span class="live-dot" aria-hidden="true"></span>
@@ -867,7 +872,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 2. 預覽與確認區 (預設隱藏) -->
+                                <!-- 2. 預覽與確認區 -->
                                 <div id="previewArea" style="display: none; text-align: center; padding: 10px 0;">
                                     <img id="imagePreview" src="" alt="預覽相片" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); margin-bottom: 15px;">
                                     <br>
@@ -876,7 +881,7 @@
                                     </button>
                                 </div>
 
-                                <!-- 3. 載入中 (預設隱藏) -->
+                                <!-- 3. 載入中 -->
                                 <div id="loadingArea" style="display: none;">
                                     <div class="ai-loading">
                                         <div class="ai-spinner" aria-hidden="true"></div>
@@ -886,10 +891,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 4. 診斷結果區 (預設隱藏) -->
+                                <!-- 4. 診斷結果區 -->
                                 <div id="resultArea" style="display: none; text-align: left; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 10px; box-shadow: var(--shadow-sm);">
                                     <h4 style="color: var(--primary-dark); margin: 0 0 10px 0;"><i class="fa-solid fa-clipboard-check"></i> 滅蟲師妹 AI 診斷報告</h4>
-                                    <!-- 診斷文字會顯示在這裡 -->
                                     <div id="diagnosisText" style="line-height: 1.7; color: var(--text-main); font-size: 0.92rem;"></div>
                                     
                                     <button type="button" class="btn btn-ghost" id="btnReupload" style="margin-top: 15px; width: 100%;">
@@ -899,7 +903,6 @@
 
                             </div>
                         </div>
-                        <!-- 結束 AI 區塊 -->
 
                     </div>
                 </article>
@@ -1233,7 +1236,7 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // 🚀 全新真實版 AI 診斷 API 串接邏輯 (加入強效防錯機制與過濾)
+        // 🚀 AI 診斷 API 串接邏輯 (精準指向 pest-vision-worker)
         document.addEventListener('DOMContentLoaded', function() {
             const pestImageInput = document.getElementById('pestImageInput');
             const uploadBox = document.getElementById('uploadBox');
@@ -1247,7 +1250,7 @@
 
             let selectedFile = null;
 
-            // 1. 選擇相片後顯示預覽，並利用 Canvas 閹割 EXIF + 壓縮
+            // 1. 選擇相片後顯示預覽 + Canvas 去除 EXIF & 縮放
             if (pestImageInput) {
                 pestImageInput.addEventListener('change', function(e) {
                     const file = e.target.files[0];
@@ -1259,7 +1262,6 @@
                         return;
                     }
 
-                    // 使用 Canvas 閹割 EXIF + 壓縮
                     const reader = new FileReader();
                     reader.onload = function(evt) {
                         const img = new Image();
@@ -1275,12 +1277,9 @@
                             }
                             canvas.width = width;
                             canvas.height = height;
-                            // 將圖片畫上 Canvas (這個動作會徹底破壞丟棄所有 EXIF/GPS 數據)
                             ctx.drawImage(img, 0, 0, width, height);
                             canvas.toBlob(function(blob) {
-                                // 將洗乾淨的 Blob 存入 selectedFile 準備上傳
                                 selectedFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
-                                // 顯示預覽
                                 imagePreview.src = URL.createObjectURL(blob);
                                 uploadBox.style.display = 'none';
                                 previewArea.style.display = 'block';
@@ -1291,9 +1290,9 @@
                     };
                     reader.readAsDataURL(file);
                 });
-            } // <--- 🐛 就是這裡原本多了一個 } 導致崩潰！已經幫你拿走了！
+            }
 
-            // 2. 點擊開始分析，傳送圖片給 Cloudflare API
+            // 2. 傳送圖片至 Cloudflare pest-vision-worker API
             if (btnAnalyze) {
                 btnAnalyze.addEventListener('click', async function() {
                     if (!selectedFile) return;
@@ -1305,33 +1304,28 @@
                     formData.append('image', selectedFile);
 
                     try {
-                        // 呼叫您的專屬 Cloudflare Worker API
-                        const response = await fetch('https://whatsapp-bot.cedars5282.workers.dev/api/analyze-pest', {
+                        // ⚡ 正確連結至專屬辨識 Worker
+                        const response = await fetch('https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest', {
                             method: 'POST',
                             body: formData
                         });
 
                         const data = await response.json();
 
-                        // ⚠️ 檢查 Dify 是否真的有傳回診斷內容
                         if (data.success && data.diagnosis) {
                             let formattedHtml = data.diagnosis;
                             
-                            // ✂️ 【前端雙重保險】：尋找第一個「🐛」符號，將前面的簡體字內心戲全部剪走！
                             const bugEmojiIndex = formattedHtml.indexOf('🐛');
                             if (bugEmojiIndex !== -1) {
                                 formattedHtml = formattedHtml.substring(bugEmojiIndex);
                             }
 
-                            // 將 Dify 產生的 Markdown 連結，轉換為華麗的綠色 WhatsApp 按鈕
                             formattedHtml = formattedHtml.replace(
                                 /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g, 
                                 '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
                             );
                             
-                            // 粗體文字轉換
                             formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                            // 換行轉換
                             formattedHtml = formattedHtml.replace(/\n/g, '<br>');
 
                             diagnosisText.innerHTML = formattedHtml;
@@ -1339,17 +1333,15 @@
                             loadingArea.style.display = 'none';
                             resultArea.style.display = 'block';
                         } else {
-                            // 如果 Cloudflare 有回傳錯誤，或者 Dify 沒有答案
                             console.error("API 回傳異常資料:", data);
-                            throw new Error(data.error || 'Dify AI 系統繁忙，無法產生診斷內容。');
+                            throw new Error(data.error || 'AI 系統繁忙，無法產生診斷內容。');
                         }
                     } catch (error) {
                         console.error("前端攔截到錯誤:", error);
-                        // 💡 完善報錯機制：如果失敗，彈出提示，並回到預覽畫面，等客人可以再撳
                         alert('⚠️ 系統提示：\n網絡連線超時或出現異常，請稍後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。\n\n(錯誤細節: ' + error.message + ')');
                         
                         loadingArea.style.display = 'none';
-                        previewArea.style.display = 'block'; // 回到預覽畫面
+                        previewArea.style.display = 'block';
                     }
                 });
             }
@@ -1364,7 +1356,6 @@
                 });
             }
             
-            // 安全移除舊版 js 避免衝突
             if (window.initAIDiagnosis) {
                 window.initAIDiagnosis = function() {}; 
             }
