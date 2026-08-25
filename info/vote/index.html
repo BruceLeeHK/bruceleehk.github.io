@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://bruceleehk.com/info/vote/">
-    <!-- hreflang alternates for SEO -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/vote/">
     <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/vote/">
     <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/vote/"><meta name="author" content="CEDARS Ltd.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="language" content="zh-HK, en-HK, zh-CN">
     <title>2026全港害蟲苦主討論區＋投票 Pest Vote & Forum | 滅蟲師傅</title>
-    <meta name="description" content="2026全港家居害蟲苦主討論區與投票！遇到床蝨（木蝨）、白蟻、曱甴、老鼠、粉蟎/卜泥？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答。2026 HK pest forum & voting — upload photos, ask questions, see the most-hated pest ranking, get free advice from pros. 2026全港害虫苦主讨论区+投票，上传照片发问，专业灭虫师傅线上解答。"
+    <meta name="description" content="2026全港家居害蟲苦主討論區與投票！遇到床蝨（木蝨）、白蟻、曱甴、老鼠、粉蟎/卜泥？即時上傳照片發問、睇熱門厭惡害蟲排名，專業滅蟲師傅即時線上免費解答。2026 HK pest forum & voting — upload photos, ask questions, see the most-hated pest ranking, get free advice from pros. 2026全港害虫苦主讨论区+投票，上传照片发问，专业灭虫师傅线上解答。">
     <meta name="keywords" content="2026害蟲排名,港人最厭惡害蟲,香港家居害蟲苦主,木蝨相片,床蝨點搞,白蟻木粉,飛天曱甴,粉蟎牆身,香港滅蟲討論區,滅蟲師傅線上解答,HK pest vote,pest forum Hong Kong,pest ranking 2026,2026害虫排名,香港害虫讨论区,灭虫师傅线上解答,床虱怎么治,白蚁木粉,粉螨墙身">
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -21,7 +20,6 @@
     <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
     <link rel="manifest" href="/manifest.json">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_HK">
     <meta property="og:locale:alternate" content="zh_CN">
@@ -35,9 +33,11 @@
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnQoZQqzqyGz/hT/ZoG503wRkY/F09RKNyR9jZ39wzXkZ8i8R34N+gI6s8oM6sLbb05V+h80Xow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
 :root {
@@ -359,15 +359,40 @@ footer {
 .pest-category { margin-bottom: 28px; }
 .pest-category h4 { font-size: 1.05rem; color: var(--dark-bg); margin: 0 0 12px; border-left: 4px solid var(--primary); padding-left: 12px; }
 .pest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+
+/* ===== Vote Section ===== */
+.vote-section { margin-bottom: 50px; }
+.vote-intro { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; margin: 0 auto 22px; }
+.vote-intro h2 { font-size: 1.45rem; color: var(--dark-bg); margin: 0 0 12px; line-height: 1.4; }
+.vote-intro > p { color: var(--text-main); font-size: 0.95rem; line-height: 1.7; margin: 0 0 14px; }
+.vote-meta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 0.88rem; color: var(--text-muted); }
+.vote-total strong { color: var(--primary-dark); font-size: 1.1rem; margin-left: 4px; }
+
+.pest-category { margin-bottom: 22px; }
+.pest-category > h4 { font-size: 1.1rem; color: var(--dark-bg); margin: 0 0 6px; border-left: 4px solid var(--primary); padding-left: 12px; }
+.pest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
 .pest-card {
     background: #fff;
     border: 2px solid var(--border);
     border-radius: var(--radius-sm);
-    padding: 16px;
+    padding: 16px 14px 14px;
     cursor: pointer;
     position: relative;
+    transition: all 0.2s ease;
+    text-align: center;
 }
-.pest-card.selected { border-color: var(--primary); background: var(--primary-light); }
+.pest-card:hover, .pest-card:focus-visible {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(16,185,129,0.18);
+    outline: none;
+}
+.pest-card.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: 0 6px 20px rgba(16,185,129,0.3);
+}
 .pest-card.selected::after {
     content: '✓';
     position: absolute;
@@ -379,13 +404,26 @@ footer {
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: bold;
 }
-.pest-name { font-weight: 700; font-size: 0.97rem; }
-.pest-sub { font-size: 0.8rem; color: var(--text-muted); }
-.pest-votes { font-size: 0.78rem; color: var(--primary-dark); margin-top: 8px; font-weight: 600; }
+.pest-card.voted::before {
+    content: '已投 Voted';
+    position: absolute;
+    top: 8px; left: 10px;
+    background: var(--tech-blue);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.pest-emoji { font-size: 2rem; line-height: 1; margin-bottom: 6px; }
+.pest-name { font-weight: 700; font-size: 0.97rem; color: var(--dark-bg); }
+.pest-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+.pest-votes { font-size: 0.78rem; color: var(--primary-dark); margin-top: 8px; font-weight: 700; }
 .vote-bar-wrap { background: var(--light-bg); border-radius: 4px; height: 8px; margin-top: 6px; overflow: hidden; }
 .vote-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--tech-blue)); transition: width .6s ease; }
 
-.vote-actions { text-align: center; padding: 22px 0; }
+.vote-actions { text-align: center; padding: 22px 0 10px; }
 .btn-vote {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: #fff !important;
@@ -395,8 +433,20 @@ footer {
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
 }
 .btn-vote:disabled { background: #cbd5e1; cursor: not-allowed; }
+.btn-vote:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+.btn-vote.voting { background: var(--warning); }
+@media (max-width: 768px) {
+    .pest-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .pest-card { padding: 12px 8px 10px; }
+    .pest-emoji { font-size: 1.6rem; }
+    .pest-name { font-size: 0.88rem; }
+}
 
 .comment-outer-wrap { max-width: 1000px; margin: 50px auto 30px; padding: 0 12px; }
 .comment-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-md); }
@@ -432,7 +482,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .comment-time { font-size: 0.78rem; color: var(--text-muted); }
 .comment-body { font-size: 0.93rem; line-height: 1.75; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
-.comment-img-thumb { max-width: 220px; max-height: 180px; border-radius: var(--radius-sm); margin-top: 12px; cursor: zoom-in; object-fit: cover; border: 1px solid var(--border); }
+/* ⚡ 加入 Zoom 游標提示 */
+.comment-img-thumb { max-width: 220px; max-height: 180px; border-radius: var(--radius-sm); margin-top: 12px; cursor: zoom-in; object-fit: cover; border: 1px solid var(--border); transition: transform var(--transition); }
+.comment-img-thumb:hover { transform: scale(1.02); }
 
 .reply-thread { margin-top: 14px; padding-left: 18px; border-left: 3px solid var(--primary-light); margin-left: 8px; }
 .reply-item { background: var(--light-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 8px; }
@@ -454,100 +506,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 @media (min-width: 769px) { .mobile-thumb-zone { display: none; } body { padding-bottom: 0; } }
     </style>
-    <style>
-        /* ===== Vote Section ===== */
-        .vote-section { margin-bottom: 50px; }
-        .vote-intro { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; margin: 0 auto 22px; }
-        .vote-intro h2 { font-size: 1.45rem; color: var(--dark-bg); margin: 0 0 12px; line-height: 1.4; }
-        .vote-intro > p { color: var(--text-main); font-size: 0.95rem; line-height: 1.7; margin: 0 0 14px; }
-        .vote-meta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 0.88rem; color: var(--text-muted); }
-        .vote-total strong { color: var(--primary-dark); font-size: 1.1rem; margin-left: 4px; }
-
-        .pest-category { margin-bottom: 22px; }
-        .pest-category > h4 { font-size: 1.1rem; color: var(--dark-bg); margin: 0 0 6px; border-left: 4px solid var(--primary); padding-left: 12px; }
-        .pest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-        .pest-card {
-            background: #fff;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 16px 14px 14px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-        .pest-card:hover, .pest-card:focus-visible {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(16,185,129,0.18);
-            outline: none;
-        }
-        .pest-card.selected {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            box-shadow: 0 6px 20px rgba(16,185,129,0.3);
-        }
-        .pest-card.selected::after {
-            content: '✓';
-            position: absolute;
-            top: 8px; right: 10px;
-            background: var(--primary);
-            color: #fff;
-            width: 24px; height: 24px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: bold;
-        }
-        .pest-card.voted::before {
-            content: '已投 Voted';
-            position: absolute;
-            top: 8px; left: 10px;
-            background: var(--tech-blue);
-            color: #fff;
-            font-size: 0.65rem;
-            padding: 2px 7px;
-            border-radius: 10px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .pest-emoji { font-size: 2rem; line-height: 1; margin-bottom: 6px; }
-        .pest-name { font-weight: 700; font-size: 0.97rem; color: var(--dark-bg); }
-        .pest-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
-        .pest-votes { font-size: 0.78rem; color: var(--primary-dark); margin-top: 8px; font-weight: 700; }
-        .vote-bar-wrap { background: var(--light-bg); border-radius: 4px; height: 8px; margin-top: 6px; overflow: hidden; }
-        .vote-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--tech-blue)); transition: width .6s ease; }
-
-        .vote-actions { text-align: center; padding: 22px 0 10px; }
-        .btn-vote {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: #fff !important;
-            border: none;
-            padding: 14px 44px;
-            border-radius: var(--radius-sm);
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        .btn-vote:disabled { background: #cbd5e1; cursor: not-allowed; }
-        .btn-vote:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
-        .btn-vote.voting { background: var(--warning); }
-        @media (max-width: 768px) {
-            .pest-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-            .pest-card { padding: 12px 8px 10px; }
-            .pest-emoji { font-size: 1.6rem; }
-            .pest-name { font-size: 0.88rem; }
-        }
-</style>
+    
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-      img-src 'self' data: https:;
+      img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
       frame-src https://udify.app;
@@ -561,7 +525,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 <body>
     <a href="#main-content" class="skip-link">跳到主要內容 / Skip to main content</a>
 
-    <!-- Header -->
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
@@ -587,7 +550,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     </header>
 
     <main id="main-content">
-        <!-- Hero -->
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-badge-group">
@@ -605,12 +567,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
         <section class="vote-page">
             <div class="container">
-                <!-- Slogan Banner -->
                 <div class="slogan-banner">
                     <span class="slogan-text">✨ 智慧滅蟲梗喺滅蟲師傅啦 ✨</span>
                 </div>
 
-                <!-- ===== Voting Section ===== -->
                 <section class="vote-section" id="vote-section" aria-labelledby="vote-title">
                     <div class="vote-intro">
                         <h2 id="vote-title"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true" style="color: var(--primary);"></i> 2026 全民投票：你最厭惡邊隻害蟲？</h2>
@@ -623,7 +583,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
                     <div class="pest-category">
                         <h4><i class="fa-solid fa-bug" aria-hidden="true"></i> 香港常見害蟲 12 種</h4>
-                        <p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 12px;">點擊害蟲卡片投一票（每個 IP 每 24 小時每種害蟲限投一次）。</p>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 12px;">點擊害蟲卡片投票，<strong>最多可多選 10 種</strong>（每個 IP 每種害蟲 24 小時限投一次）。</p>
                         <div class="pest-grid" id="pestGrid">
                         <div class="pest-card" data-pest-id="cockroach_german" role="button" tabindex="0" aria-label="投 德國曱甴 一票 / Vote for German Cockroach">
                             <div class="pest-emoji">🪳</div>
@@ -715,13 +675,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     <div class="vote-actions">
                         <button type="button" class="btn-vote" id="btnSubmitVote" disabled>
                             <i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i>
-                            <span class="vote-btn-label">請先選擇害蟲 / Select a pest first</span>
+                            <span class="vote-btn-label">請先選擇害蟲 / Select pests first</span>
                         </button>
                     </div>
                 </section>
-                <!-- ===== End Voting Section ===== -->
-
-                <!-- Comment Section -->
                 <div class="comment-outer-wrap" id="comments">
                     <div class="comment-card">
                         <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> 香港家居害蟲苦主討論區</h2>
@@ -732,7 +689,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             <span><strong>留言須知：</strong>首次留言或回覆提交後需經管理員審核，通過審核後即時公開。你自己可即時預覽。</span>
                         </div>
 
-                        <!-- Comment Form -->
                         <form id="mainCommentForm" class="comment-form">
                             <div class="form-group">
                                 <label for="inputNickname">暱稱 <span style="color:var(--danger)">*</span></label>
@@ -763,7 +719,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             </button>
                         </form>
 
-                        <!-- Reply Hint -->
                         <div id="replyHint" style="display:none; background:var(--primary-light); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:18px; font-size:0.92rem; color:var(--primary-dark); align-items:center; gap:10px;">
                             <i class="fa-solid fa-reply" aria-hidden="true"></i>
                             <span id="replyHintText" style="flex:1;">正回覆 @：</span>
@@ -772,7 +727,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             </button>
                         </div>
 
-                        <!-- Comment List -->
                         <div class="comment-list-header">
                             苦主交流與問題紀錄
                             <span class="comment-count" id="commentCount" style="background:var(--primary); color:#fff; padding:2px 8px; border-radius:10px; font-size:0.8rem;">0</span>
@@ -788,12 +742,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
-    <!-- Vote System Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" integrity="sha512-S/H9RQ6govCzeA7F9D0m8NGfsGf0/Hj0i03ZvdjdFwqO004-FizO3/0651Rj06h3E8+j6yJ6BokVzJ1fE5rEaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="/assets/js/i18n.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
     <script>
@@ -803,6 +757,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         var captchaNumA = 0, captchaNumB = 0;
         var uploadedImgUrl = '';
         var currentReplyTo = null;
+        var myLightbox = null; // 初始化 Lightbox 變數
 
         function initCaptcha() {
             captchaNumA = Math.floor(Math.random() * 10) + 1;
@@ -922,7 +877,11 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 var isPending = (item.approved === 0);
                 var officialBadge = item.is_official ? '<span class="official-badge"><i class="fa-solid fa-circle-check"></i> 滅蟲師傅 官方</span>' : '';
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> 審核中...</span>' : '';
-                var imgHtml = item.image_url ? ('<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy">') : '';
+                
+                // ⚡ 核心修改：用 <a> 標籤包裝圖片，加上 glightbox 類別
+                var imgHtml = item.image_url ? 
+                    ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery">' + 
+                     '<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy"></a>') : '';
 
                 var repliesHtml = '';
                 if (item.replies && item.replies.length > 0) {
@@ -961,6 +920,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
                 });
             });
+
+            // ⚡ 初始化或重載 GLightbox
+            if (typeof GLightbox !== 'undefined') {
+                if (myLightbox) { myLightbox.reload(); } 
+                else { myLightbox = GLightbox({ selector: '.glightbox' }); }
+            }
         }
 
         function handleMainSubmit(e) {
@@ -1070,17 +1035,13 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     });
     </script>
 
-    <!-- ===== Vote System Script ===== -->
     <script>
-    /* ===== Voting System Logic (v4.0) ===== */
     const PEST_DATA = {'cockroach_german': {'emoji': '🪳', 'zh': '德國曱甴', 'en': 'German Cockroach', 'zh_simp': '德国曱甴'}, 'cockroach_american': {'emoji': '🪳', 'zh': '美國曱甴', 'en': 'American Cockroach', 'zh_simp': '美国曱甴'}, 'bedbug': {'emoji': '🛏️', 'zh': '床蝨 / 木蝨', 'en': 'Bed Bug', 'zh_simp': '床虱/木虱'}, 'termite': {'emoji': '🐜', 'zh': '白蟻', 'en': 'Termite', 'zh_simp': '白蚁'}, 'rat': {'emoji': '🐭', 'zh': '老鼠', 'en': 'Rodent / Rat', 'zh_simp': '老鼠'}, 'mosquito': {'emoji': '🦟', 'zh': '蚊', 'en': 'Mosquito', 'zh_simp': '蚊'}, 'ant': {'emoji': '🐜', 'zh': '螞蟻', 'en': 'Ant', 'zh_simp': '蚂蚁'}, 'wasp': {'emoji': '🐝', 'zh': '蜂 / 黃蜂', 'en': 'Wasp', 'zh_simp': '蜂/黄蜂'}, 'flea': {'emoji': '🐛', 'zh': '蚤', 'en': 'Flea', 'zh_simp': '蚤'}, 'silverfish': {'emoji': '🐛', 'zh': '衣魚', 'en': 'Silverfish', 'zh_simp': '衣鱼'}, 'powderpost_beetle': {'emoji': '🐛', 'zh': '蛀木蟲', 'en': 'Powderpost Beetle', 'zh_simp': '蛀木虫'}, 'psocid': {'emoji': '🔬', 'zh': '卜泥 / 書蝨', 'en': 'Psocid / Book Louse', 'zh_simp': '卜泥/书虱'}};
 
-    // Reference to WORKER_BASE (set in the inline script above)
     var VOTE_WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
-    let selectedPestId = null;
+    let selectedPestIds = new Set(); // ⚡ 改為 Set 支援多選
     let votedPestIds = new Set();
 
-    // Load voted pest IDs from localStorage
     function loadVotedPestIds() {
         try {
             const stored = JSON.parse(localStorage.getItem('voted_pest_ids') || '[]');
@@ -1091,12 +1052,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         try { localStorage.setItem('voted_pest_ids', JSON.stringify(Array.from(votedPestIds))); } catch (e) {}
     }
 
-    // Render pest cards with vote data
     function renderVotes(votes) {
         const totalVotes = (votes || []).reduce((sum, v) => sum + v.votes, 0);
         const totalEl = document.getElementById('totalVotes');
         if (totalEl) totalEl.textContent = totalVotes;
-
         const maxVotes = Math.max(...(votes || []).map(v => v.votes), 1);
 
         votes.forEach(v => {
@@ -1115,24 +1074,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         });
     }
 
-    // Fetch all votes from API
     function loadVotes() {
         fetch(VOTE_WORKER_BASE + '/api/votes')
             .then(res => res.json())
-            .then(data => {
-                if (data.success) renderVotes(data.votes);
-            })
+            .then(data => { if (data.success) renderVotes(data.votes); })
             .catch(err => {
-                console.error('Load votes failed:', err);
                 const zeroVotes = Object.keys(PEST_DATA).map(id => ({ pest_id: id, votes: 0 }));
                 renderVotes(zeroVotes);
             });
     }
 
-    // Show toast (re-use from outer scope if available; else define local)
     function voteShowToast(msg, type) {
         if (typeof window.showToast === 'function') { window.showToast(msg, type); return; }
-        // fallback simple toast
         var t = document.createElement('div');
         t.className = 'toast' + (type ? ' toast-' + type : '');
         t.textContent = msg;
@@ -1141,89 +1094,99 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); }, 300); }, 3000);
     }
 
-    // Select a pest card
+    // ⚡ 核心修改：處理多重選擇邏輯
     function selectPest(pestId) {
         if (votedPestIds.has(pestId)) {
             voteShowToast('你已投過呢隻害蟲啦 / You already voted for this pest', 'warning');
             return;
         }
-        document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
+        
         const card = document.querySelector('.pest-card[data-pest-id="' + pestId + '"]');
-        if (card) card.classList.add('selected');
-        selectedPestId = pestId;
+        
+        // 如果已經選擇了，再次點擊就取消選擇
+        if (selectedPestIds.has(pestId)) {
+            selectedPestIds.delete(pestId);
+            if (card) card.classList.remove('selected');
+        } else {
+            // 如果未選擇，檢查是否超過 10 種
+            if (selectedPestIds.size >= 10) {
+                voteShowToast('最多只能選擇 10 種害蟲！', 'warning');
+                return;
+            }
+            selectedPestIds.add(pestId);
+            if (card) card.classList.add('selected');
+        }
+
+        // 更新提交按鈕狀態
         const btn = document.getElementById('btnSubmitVote');
-        btn.disabled = false;
-        const pest = PEST_DATA[pestId];
-        btn.querySelector('.vote-btn-label').textContent = '投票：' + pest.zh + ' / Vote: ' + pest.en;
+        if (selectedPestIds.size > 0) {
+            btn.disabled = false;
+            btn.querySelector('.vote-btn-label').textContent = '提交 ' + selectedPestIds.size + ' 種投票 / Submit';
+        } else {
+            btn.disabled = true;
+            btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select pests first';
+        }
     }
 
-    // Submit a vote
+    // ⚡ 核心修改：使用 Promise.all 並行發送多個投票，無需修改後端
     function submitVote() {
-        if (!selectedPestId) return;
+        if (selectedPestIds.size === 0) return;
         const btn = document.getElementById('btnSubmitVote');
         btn.disabled = true;
         btn.classList.add('voting');
-        btn.querySelector('.vote-btn-label').textContent = '投票中... Submitting...';
+        btn.querySelector('.vote-btn-label').textContent = '處理中... Submitting...';
 
-        fetch(VOTE_WORKER_BASE + '/api/vote', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pest_id: selectedPestId })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    votedPestIds.add(selectedPestId);
-                    saveVotedPestIds();
-                    const pest = PEST_DATA[selectedPestId];
-                    voteShowToast('✓ 多謝你投咗「' + pest.zh + '」一票！ / Thanks for voting "' + pest.en + '"!', 'success');
-                    renderVotes(data.votes || []);
-                    // Reset selection
-                    document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
-                    selectedPestId = null;
-                    btn.disabled = true;
-                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+        const votePromises = Array.from(selectedPestIds).map(pestId => {
+            return fetch(VOTE_WORKER_BASE + '/api/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pest_id: pestId })
+            }).then(res => res.json()).then(data => ({ pestId, data })).catch(err => ({ pestId, error: true }));
+        });
 
-                    // Show hint to discuss
-                    setTimeout(() => {
-                        var commentsEl = document.getElementById('comments');
-                        if (commentsEl) commentsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 1200);
-                } else if (data.code === 'ALREADY_VOTED') {
-                    voteShowToast('24 小時內已投過呢隻害蟲 / Already voted today', 'warning');
-                    votedPestIds.add(selectedPestId);
-                    saveVotedPestIds();
-                    btn.disabled = true;
-                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
-                    document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
-                    selectedPestId = null;
-                } else {
-                    voteShowToast('投票失敗：' + (data.error_zh || data.error || 'Unknown error'), 'error');
-                    btn.disabled = false;
-                    btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
+        Promise.all(votePromises).then(results => {
+            let successCount = 0;
+            let finalVotesData = [];
+
+            results.forEach(result => {
+                if (result.data && result.data.success) {
+                    successCount++;
+                    votedPestIds.add(result.pestId);
+                    finalVotesData = result.data.votes || finalVotesData;
+                } else if (result.data && result.data.code === 'ALREADY_VOTED') {
+                    votedPestIds.add(result.pestId); // 記錄為已投
                 }
-            })
-            .catch(err => {
-                console.error(err);
-                voteShowToast('網絡錯誤，請稍後再試 / Network error, try again', 'error');
-                btn.disabled = false;
-                btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select a pest first';
-            })
-            .finally(() => {
-                btn.classList.remove('voting');
             });
+
+            saveVotedPestIds();
+            
+            if (successCount > 0) {
+                voteShowToast('✓ 成功提交 ' + successCount + ' 票，多謝參與！', 'success');
+                if (finalVotesData.length > 0) renderVotes(finalVotesData);
+                
+                setTimeout(() => {
+                    var commentsEl = document.getElementById('comments');
+                    if (commentsEl) commentsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 1200);
+            } else {
+                voteShowToast('投票失敗或今日已投過此項目', 'warning');
+            }
+
+            // 清空選擇狀態
+            document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
+            selectedPestIds.clear();
+            btn.disabled = true;
+            btn.querySelector('.vote-btn-label').textContent = '請先選擇害蟲 / Select pests first';
+            btn.classList.remove('voting');
+        });
     }
 
-    // Initialize voting
     function initVote() {
         loadVotedPestIds();
         loadVotes();
 
-        // Click on pest cards
         document.querySelectorAll('.pest-card').forEach(card => {
-            card.addEventListener('click', function() {
-                selectPest(this.getAttribute('data-pest-id'));
-            });
+            card.addEventListener('click', function() { selectPest(this.getAttribute('data-pest-id')); });
             card.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -1232,12 +1195,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             });
         });
 
-        // Submit button
         var voteBtn = document.getElementById('btnSubmitVote');
         if (voteBtn) voteBtn.addEventListener('click', submitVote);
     }
 
-    // Run vote init after DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(initVote, 50);
     });
