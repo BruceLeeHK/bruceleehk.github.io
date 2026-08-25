@@ -36,8 +36,8 @@
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
     
-    <!-- ⚡ 引入 GLightbox 樣式 (用於圖片點擊放大) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnQoZQqzqyGz/hT/ZoG503wRkY/F09RKNyR9jZ39wzXkZ8i8R34N+gI6s8oM6sLbb05V+h80Xow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ⚡ 修正：移除 integrity 校驗碼，確保 GLightbox CSS 順利載入 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -760,8 +760,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
-    <!-- ⚡ 引入 GLightbox 腳本 (用於圖片放大功能) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" integrity="sha512-S/H9RQ6govCzeA7F9D0m8NGfsGf0/Hj0i03ZvdjdFwqO004-FizO3/0651Rj06h3E8+j6yJ6BokVzJ1fE5rEaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- ⚡ 修正：移除 integrity 校驗碼，確保 GLightbox JS 順利載入 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Vote System Scripts -->
     <script src="/assets/js/i18n.js" defer></script>
@@ -894,7 +894,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 var officialBadge = item.is_official ? '<span class="official-badge"><i class="fa-solid fa-circle-check"></i> 滅蟲師傅 官方</span>' : '';
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> 審核中...</span>' : '';
                 
-                // ⚡ 核心修改：用 <a> 標籤包裝圖片，加上 glightbox 類別，確保 href 指向大圖
+                // ⚡ 用 <a> 標籤包裝圖片，加上 glightbox 類別，確保 href 指向大圖
                 var imgHtml = item.image_url ? 
                     ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery">' + 
                      '<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy"></a>') : '';
@@ -917,6 +917,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     repliesHtml += '</div>';
                 }
 
+                // ⚡ 修正：移除了之前多餘的 }，確保字串拼接正常運作
                 html += '<div class="comment-item ' + (isPending ? 'pending-local' : '') + '">' +
                     '<div class="comment-meta">' +
                         '<span class="comment-nickname">' + escapeHtml(item.nickname) + ' ' + officialBadge + ' ' + pendingBadge + '</span>' +
@@ -926,13 +927,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     imgHtml +
                     (isPending ? '' : ('<button type="button" class="btn-reply js-reply-btn" data-reply-id="' + escapeAttr(item.id) + '" data-reply-name="' + escapeAttr(item.nickname) + '"><i class="fa-solid fa-reply"></i> 回覆</button>')) +
                     repliesHtml +
-                }
-                </div>';
+                '</div>';
             });
 
             listEl.innerHTML = html;
 
-            // ⚡ 修正：渲染完成後發送自定義事件，通知 Lightbox 庫進行重新綁定
+            // ⚡ 渲染完成後發送自定義事件，通知 Lightbox 庫進行重新綁定
             listEl.dispatchEvent(new CustomEvent('commentsRendered', { bubbles: true }));
 
             listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
@@ -980,7 +980,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     return;
                 }
                 
-                // 🔑 修復重點：無論是新留言還是回覆，都寫入 LocalStorage 暫存
+                // 無論是新留言還是回覆，都寫入 LocalStorage 暫存
                 saveLocalPendingComment({
                     id: data.comment_id,
                     nickname: nickname,
@@ -1049,12 +1049,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     });
     </script>
 
-    <!-- ===== Vote System Script (Updated for Multi-select) ===== -->
+    <!-- ===== Vote System Script (Multi-select) ===== -->
     <script>
     const PEST_DATA = {'cockroach_german': {'emoji': '🪳', 'zh': '德國曱甴', 'en': 'German Cockroach', 'zh_simp': '德国曱甴'}, 'cockroach_american': {'emoji': '🪳', 'zh': '美國曱甴', 'en': 'American Cockroach', 'zh_simp': '美国曱甴'}, 'bedbug': {'emoji': '🛏️', 'zh': '床蝨 / 木蝨', 'en': 'Bed Bug', 'zh_simp': '床虱/木虱'}, 'termite': {'emoji': '🐜', 'zh': '白蟻', 'en': 'Termite', 'zh_simp': '白蚁'}, 'rat': {'emoji': '🐭', 'zh': '老鼠', 'en': 'Rodent / Rat', 'zh_simp': '老鼠'}, 'mosquito': {'emoji': '🦟', 'zh': '蚊', 'en': 'Mosquito', 'zh_simp': '蚊'}, 'ant': {'emoji': '🐜', 'zh': '螞蟻', 'en': 'Ant', 'zh_simp': '蚂蚁'}, 'wasp': {'emoji': '🐝', 'zh': '蜂 / 黃蜂', 'en': 'Wasp', 'zh_simp': '蜂/黄蜂'}, 'flea': {'emoji': '🐛', 'zh': '蚤', 'en': 'Flea', 'zh_simp': '蚤'}, 'silverfish': {'emoji': '🐛', 'zh': '衣魚', 'en': 'Silverfish', 'zh_simp': '衣鱼'}, 'powderpost_beetle': {'emoji': '🐛', 'zh': '蛀木蟲', 'en': 'Powderpost Beetle', 'zh_simp': '蛀木虫'}, 'psocid': {'emoji': '🔬', 'zh': '卜泥 / 書蝨', 'en': 'Psocid / Book Louse', 'zh_simp': '卜泥/书虱'}};
 
     var VOTE_WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
-    let selectedPestIds = new Set(); // ⚡ 改為 Set 支援多選
+    let selectedPestIds = new Set();
     let votedPestIds = new Set();
 
     function loadVotedPestIds() {
@@ -1109,7 +1109,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); }, 300); }, 3000);
     }
 
-    // ⚡ 核心修改：處理多重選擇邏輯
     function selectPest(pestId) {
         if (votedPestIds.has(pestId)) {
             voteShowToast('你已投過呢隻害蟲啦 / You already voted for this pest', 'warning');
@@ -1140,7 +1139,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         }
     }
 
-    // ⚡ 核心修改：使用 Promise.all 並行發送多個投票，無需修改後端
     function submitVote() {
         if (selectedPestIds.size === 0) return;
         const btn = document.getElementById('btnSubmitVote');
@@ -1215,22 +1213,16 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     });
     </script>
 
-    <!-- ⚡ 修正：確保 Lightbox 在庫載入完成且留言渲染後才初始化 -->
+    <!-- ⚡ 確保 Lightbox 在庫載入完成且留言渲染後才初始化 -->
     <script>
-        // 初始化全局 Lightbox 變數
-        var myLightbox = null;
-
         // 監聽評論清單渲染完成的自定義事件
         document.getElementById('commentList').addEventListener('commentsRendered', function() {
-            // 確保庫已載入
             if (typeof GLightbox !== 'undefined') {
-                if (myLightbox) {
-                    // 如果已存在，則重新整理以綁定新元素
-                    myLightbox.reload();
+                if (window.myLightbox) {
+                    window.myLightbox.reload();
                 } else {
-                    // 否則，進行第一次初始化
-                    myLightbox = GLightbox({
-                        selector: '.glightbox', // 綁定所有 .glightbox 類別的元素
+                    window.myLightbox = GLightbox({
+                        selector: '.glightbox',
                         touchNavigation: true,
                         loop: true,
                         zoomable: true
