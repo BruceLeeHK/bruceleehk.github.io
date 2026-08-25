@@ -896,7 +896,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 
                 // ⚡ 用 <a> 標籤包裝圖片，加上 glightbox 類別，確保 href 指向大圖
                 var imgHtml = item.image_url ? 
-                    ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery">' + 
+                    ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery" data-type="image">' + 
                      '<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy"></a>') : '';
 
                 var repliesHtml = '';
