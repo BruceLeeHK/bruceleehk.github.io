@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://bruceleehk.com/info/vote/">
+    <!-- hreflang alternates for SEO -->
     <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/vote/">
     <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/vote/">
     <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/vote/"><meta name="author" content="CEDARS Ltd.">
@@ -20,6 +21,7 @@
     <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
     <link rel="manifest" href="/manifest.json">
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_HK">
     <meta property="og:locale:alternate" content="zh_CN">
@@ -34,6 +36,7 @@
 
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
     
+    <!-- ⚡ 引入 GLightbox 樣式 (用於圖片點擊放大) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" integrity="sha512-T+KoG3fbDoSnQoZQqzqyGz/hT/ZoG503wRkY/F09RKNyR9jZ39wzXkZ8i8R34N+gI6s8oM6sLbb05V+h80Xow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -525,6 +528,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 <body>
     <a href="#main-content" class="skip-link">跳到主要內容 / Skip to main content</a>
 
+    <!-- Header -->
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
@@ -550,6 +554,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     </header>
 
     <main id="main-content">
+        <!-- Hero -->
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-badge-group">
@@ -567,10 +572,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
         <section class="vote-page">
             <div class="container">
+                <!-- Slogan Banner -->
                 <div class="slogan-banner">
                     <span class="slogan-text">✨ 智慧滅蟲梗喺滅蟲師傅啦 ✨</span>
                 </div>
 
+                <!-- ===== Voting Section ===== -->
                 <section class="vote-section" id="vote-section" aria-labelledby="vote-title">
                     <div class="vote-intro">
                         <h2 id="vote-title"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true" style="color: var(--primary);"></i> 2026 全民投票：你最厭惡邊隻害蟲？</h2>
@@ -679,6 +686,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                         </button>
                     </div>
                 </section>
+                <!-- ===== End Voting Section ===== -->
+
+                <!-- Comment Section -->
                 <div class="comment-outer-wrap" id="comments">
                     <div class="comment-card">
                         <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> 香港家居害蟲苦主討論區</h2>
@@ -689,6 +699,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             <span><strong>留言須知：</strong>首次留言或回覆提交後需經管理員審核，通過審核後即時公開。你自己可即時預覽。</span>
                         </div>
 
+                        <!-- Comment Form -->
                         <form id="mainCommentForm" class="comment-form">
                             <div class="form-group">
                                 <label for="inputNickname">暱稱 <span style="color:var(--danger)">*</span></label>
@@ -719,6 +730,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             </button>
                         </form>
 
+                        <!-- Reply Hint -->
                         <div id="replyHint" style="display:none; background:var(--primary-light); padding:12px 16px; border-radius:var(--radius-sm); margin-bottom:18px; font-size:0.92rem; color:var(--primary-dark); align-items:center; gap:10px;">
                             <i class="fa-solid fa-reply" aria-hidden="true"></i>
                             <span id="replyHintText" style="flex:1;">正回覆 @：</span>
@@ -727,6 +739,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                             </button>
                         </div>
 
+                        <!-- Comment List -->
                         <div class="comment-list-header">
                             苦主交流與問題紀錄
                             <span class="comment-count" id="commentCount" style="background:var(--primary); color:#fff; padding:2px 8px; border-radius:10px; font-size:0.8rem;">0</span>
@@ -742,12 +755,15 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
     </footer>
 
+    <!-- ⚡ 引入 GLightbox 腳本 (用於圖片放大功能) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" integrity="sha512-S/H9RQ6govCzeA7F9D0m8NGfsGf0/Hj0i03ZvdjdFwqO004-FizO3/0651Rj06h3E8+j6yJ6BokVzJ1fE5rEaw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Vote System Scripts -->
     <script src="/assets/js/i18n.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
     <script>
@@ -878,7 +894,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 var officialBadge = item.is_official ? '<span class="official-badge"><i class="fa-solid fa-circle-check"></i> 滅蟲師傅 官方</span>' : '';
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> 審核中...</span>' : '';
                 
-                // ⚡ 核心修改：用 <a> 標籤包裝圖片，加上 glightbox 類別
+                // ⚡ 核心修改：用 <a> 標籤包裝圖片，加上 glightbox 類別，確保 href 指向大圖
                 var imgHtml = item.image_url ? 
                     ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery">' + 
                      '<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy"></a>') : '';
@@ -910,22 +926,20 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     imgHtml +
                     (isPending ? '' : ('<button type="button" class="btn-reply js-reply-btn" data-reply-id="' + escapeAttr(item.id) + '" data-reply-name="' + escapeAttr(item.nickname) + '"><i class="fa-solid fa-reply"></i> 回覆</button>')) +
                     repliesHtml +
-                '</div>';
+                }
+                </div>';
             });
 
             listEl.innerHTML = html;
+
+            // ⚡ 修正：渲染完成後發送自定義事件，通知 Lightbox 庫進行重新綁定
+            listEl.dispatchEvent(new CustomEvent('commentsRendered', { bubbles: true }));
 
             listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
                 });
             });
-
-            // ⚡ 初始化或重載 GLightbox
-            if (typeof GLightbox !== 'undefined') {
-                if (myLightbox) { myLightbox.reload(); } 
-                else { myLightbox = GLightbox({ selector: '.glightbox' }); }
-            }
         }
 
         function handleMainSubmit(e) {
@@ -1035,6 +1049,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     });
     </script>
 
+    <!-- ===== Vote System Script (Updated for Multi-select) ===== -->
     <script>
     const PEST_DATA = {'cockroach_german': {'emoji': '🪳', 'zh': '德國曱甴', 'en': 'German Cockroach', 'zh_simp': '德国曱甴'}, 'cockroach_american': {'emoji': '🪳', 'zh': '美國曱甴', 'en': 'American Cockroach', 'zh_simp': '美国曱甴'}, 'bedbug': {'emoji': '🛏️', 'zh': '床蝨 / 木蝨', 'en': 'Bed Bug', 'zh_simp': '床虱/木虱'}, 'termite': {'emoji': '🐜', 'zh': '白蟻', 'en': 'Termite', 'zh_simp': '白蚁'}, 'rat': {'emoji': '🐭', 'zh': '老鼠', 'en': 'Rodent / Rat', 'zh_simp': '老鼠'}, 'mosquito': {'emoji': '🦟', 'zh': '蚊', 'en': 'Mosquito', 'zh_simp': '蚊'}, 'ant': {'emoji': '🐜', 'zh': '螞蟻', 'en': 'Ant', 'zh_simp': '蚂蚁'}, 'wasp': {'emoji': '🐝', 'zh': '蜂 / 黃蜂', 'en': 'Wasp', 'zh_simp': '蜂/黄蜂'}, 'flea': {'emoji': '🐛', 'zh': '蚤', 'en': 'Flea', 'zh_simp': '蚤'}, 'silverfish': {'emoji': '🐛', 'zh': '衣魚', 'en': 'Silverfish', 'zh_simp': '衣鱼'}, 'powderpost_beetle': {'emoji': '🐛', 'zh': '蛀木蟲', 'en': 'Powderpost Beetle', 'zh_simp': '蛀木虫'}, 'psocid': {'emoji': '🔬', 'zh': '卜泥 / 書蝨', 'en': 'Psocid / Book Louse', 'zh_simp': '卜泥/书虱'}};
 
@@ -1103,12 +1118,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         
         const card = document.querySelector('.pest-card[data-pest-id="' + pestId + '"]');
         
-        // 如果已經選擇了，再次點擊就取消選擇
         if (selectedPestIds.has(pestId)) {
             selectedPestIds.delete(pestId);
             if (card) card.classList.remove('selected');
         } else {
-            // 如果未選擇，檢查是否超過 10 種
             if (selectedPestIds.size >= 10) {
                 voteShowToast('最多只能選擇 10 種害蟲！', 'warning');
                 return;
@@ -1117,7 +1130,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             if (card) card.classList.add('selected');
         }
 
-        // 更新提交按鈕狀態
         const btn = document.getElementById('btnSubmitVote');
         if (selectedPestIds.size > 0) {
             btn.disabled = false;
@@ -1154,7 +1166,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     votedPestIds.add(result.pestId);
                     finalVotesData = result.data.votes || finalVotesData;
                 } else if (result.data && result.data.code === 'ALREADY_VOTED') {
-                    votedPestIds.add(result.pestId); // 記錄為已投
+                    votedPestIds.add(result.pestId);
                 }
             });
 
@@ -1172,7 +1184,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 voteShowToast('投票失敗或今日已投過此項目', 'warning');
             }
 
-            // 清空選擇狀態
             document.querySelectorAll('.pest-card').forEach(c => c.classList.remove('selected'));
             selectedPestIds.clear();
             btn.disabled = true;
@@ -1202,6 +1213,31 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(initVote, 50);
     });
+    </script>
+
+    <!-- ⚡ 修正：確保 Lightbox 在庫載入完成且留言渲染後才初始化 -->
+    <script>
+        // 初始化全局 Lightbox 變數
+        var myLightbox = null;
+
+        // 監聽評論清單渲染完成的自定義事件
+        document.getElementById('commentList').addEventListener('commentsRendered', function() {
+            // 確保庫已載入
+            if (typeof GLightbox !== 'undefined') {
+                if (myLightbox) {
+                    // 如果已存在，則重新整理以綁定新元素
+                    myLightbox.reload();
+                } else {
+                    // 否則，進行第一次初始化
+                    myLightbox = GLightbox({
+                        selector: '.glightbox', // 綁定所有 .glightbox 類別的元素
+                        touchNavigation: true,
+                        loop: true,
+                        zoomable: true
+                    });
+                }
+            }
+        });
     </script>
 </body>
 </html>
