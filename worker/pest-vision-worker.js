@@ -1,10 +1,9 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.3 終極穩定版)
+ * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v6.1 智庫精準版)
  *
- * v5.3 優化亮點：
- *   🛡️ 型別安全防護：徹底解決 responseText.replace is not a function 崩潰問題。
- *   ⚡ 分塊轉碼優化：解決大圖片 Base64 轉換時的 CPU 記憶體溢出 (OOM) 風險。
- *   ✂️ 三重剪刀過濾機制：精準提取 JSON，移除 <think> 標籤，100% 強制香港繁體。
+ * v6.1 升級亮點：
+ *   👁️ 盲測特徵提取：嚴禁 Llama 猜測昆蟲名稱，強制提取「腰部、觸角、顏色」等決定性特徵。
+ *   🧠 聯動滅蟲智庫：引導 Dify/DeepSeek 根據客觀特徵比對智庫（精準區分飛蟻與白蟻），消滅幻覺。
  */
 
 const ALLOWED_ORIGINS = new Set([
@@ -20,13 +19,16 @@ const ALLOWED_ORIGINS = new Set([
 const MAX_REQUEST_BYTES = 10_000_000; // 10 MB 上限
 const AI_TIMEOUT_MS = 25000;          // 25 秒超時限制
 
+// 🔑 Dify API Key (已保留您的設定)
+const DIFY_API_KEY = 'app-EOJafBJvdrPPJdbgjlkpdq5o'; 
+const DIFY_API_URL = 'https://api.dify.ai/v1/chat-messages';
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get('Origin') || '';
     const corsOrigin = ALLOWED_ORIGINS.has(origin) ? origin : '';
 
-    // 設定 CORS 安全標頭
     const corsHeaders = {
       'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -42,24 +44,14 @@ export default {
       corsHeaders['Access-Control-Allow-Credentials'] = 'true';
     }
 
-    // 處理 OPTIONS 預檢請求
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
-    // 系統健康檢查端點
     if (url.pathname === '/health') {
-      return json({
-        status: 'ok',
-        version: '5.3',
-        ai_bound: !!env.AI,
-        kv_bound: !!env.PEST_KV,
-        ai_language: 'zh-HK',
-        time: new Date().toISOString()
-      }, 200, corsHeaders);
+      return json({ status: 'ok', version: '6.1-KnowledgeBase', time: new Date().toISOString() }, 200, corsHeaders);
     }
 
-    // 攔截非 API 請求
     if (url.pathname !== '/api/analyze-pest') {
         return json({ error: 'Not Found' }, 404, corsHeaders);
     }
@@ -67,28 +59,18 @@ export default {
       return json({ error: 'Method not allowed' }, 405, corsHeaders);
     }
 
-    // 檢查檔案大小限制
     const contentLen = parseInt(request.headers.get('Content-Length') || '0', 10);
     if (contentLen > MAX_REQUEST_BYTES) {
-      return json({
-        error: '圖片檔案過大（上限 10MB） / Image too large (max 10MB)',
-        code: 'REQUEST_TOO_LARGE'
-      }, 413, corsHeaders);
+      return json({ error: '圖片檔案過大（上限 10MB）', code: 'REQUEST_TOO_LARGE' }, 413, corsHeaders);
     }
 
     try {
-      // 確保 AI 綁定正常
       if (!env.AI) {
-        console.error('AI binding 未設定');
-        return json({
-          error: '伺服器未綁定 Workers AI，請檢查 Cloudflare 後台設定。',
-          code: 'AI_NOT_BOUND'
-        }, 503, corsHeaders);
+        return json({ error: '伺服器未綁定 Workers AI', code: 'AI_NOT_BOUND' }, 503, corsHeaders);
       }
 
       const formData = await request.formData();
       const imageFile = formData.get('image');
-      
       if (!imageFile) {
         return json({ error: '找不到上傳的圖片檔案', code: 'MISSING_IMAGE' }, 400, corsHeaders);
       }
@@ -96,7 +78,7 @@ export default {
       const arrayBuffer = await imageFile.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
 
-      // ⚡ 性能優化：分塊 base64 編碼，防止大型圖片拖垮 Worker 記憶體
+      // ⚡ 分塊 base64 編碼
       const CHUNK_SIZE = 32768;
       let binaryString = '';
       for (let i = 0; i < uint8Array.length; i += CHUNK_SIZE) {
@@ -105,63 +87,33 @@ export default {
       }
       const imageBase64 = btoa(binaryString);
 
-      /* ============================================================
-         Step 1: 首次同意 Llama 3.2 Vision 授權（透過 KV 快取狀態）
-         ============================================================ */
+      // 首次同意授權處理
       let agreed = false;
       if (env.PEST_KV) {
-        try {
-          const cached = await env.PEST_KV.get('llama_vision_agreed');
-          agreed = cached === 'true';
-        } catch (e) {
-          console.warn('KV 讀取失敗:', e.message);
-        }
+        try { agreed = (await env.PEST_KV.get('llama_vision_agreed')) === 'true'; } catch (e) {}
       }
-
       if (!agreed) {
         try {
           const agreeController = new AbortController();
-          const agreeTimeout = setTimeout(() => agreeController.abort(), 5000);
-          await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
-            messages: [{ role: 'user', content: 'agree' }],
-            max_tokens: 16,
-          }, { signal: agreeController.signal });
-          clearTimeout(agreeTimeout);
-          agreed = true;
-          
-          if (env.PEST_KV) {
-            try { await env.PEST_KV.put('llama_vision_agreed', 'true', { expirationTtl: 86400 }); } catch (e) {}
-          }
-        } catch (e) {
-          console.warn('送出 agree prompt 失敗（可能已經同意過）:', e.message);
-        }
+          setTimeout(() => agreeController.abort(), 5000);
+          await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', { messages: [{ role: 'user', content: 'agree' }], max_tokens: 16 }, { signal: agreeController.signal });
+          if (env.PEST_KV) await env.PEST_KV.put('llama_vision_agreed', 'true', { expirationTtl: 86400 });
+        } catch (e) {}
       }
 
       /* ============================================================
-         Step 2: 呼叫 Llama 3.2 Vision (極簡純繁體提示詞)
+         👁️ 眼睛 (Cloudflare Llama)：「只看不猜」的無情特徵提取器
          ============================================================ */
-      const prompt = `你是一個香港頂尖嘅資深滅蟲專家，精通香港在地常見害蟲嘅習性同「三十六計」兵法策略。
-請仔細分析圖片，並嚴格以「純香港繁體中文（zh-HK）」的 JSON 格式回應。嚴禁使用簡體字！嚴禁輸出任何 Markdown 標記、開場白、思考過程或說明文字！
+      // 🎯 v6.1 嚴格限制：絕對不准輸出昆蟲名稱，強制觀察腰部與觸角！
+      const visionPrompt = `你是一個極度客觀的生物特徵提取器。請仔細觀察圖片中的昆蟲，並用簡練的純文字給出一份「純客觀特徵報告」。
+請必須詳細描述以下幾點，【絕對不要】猜測或寫出任何昆蟲的名稱（嚴禁出現白蟻、螞蟻、飛蟻、曱甴等字眼）：
+1. 顏色：整體顏色是什麼？（例如：純黑色、深啡色、淺黃色）
+2. 腰部結構：胸部與腹部之間是粗壯連接著，還是有明顯縮窄的「幼細腰部」？
+3. 觸角形狀：觸角是筆直的一條，還是呈現彎曲（呈 L 型/念珠狀）？
+4. 翅膀特徵（如有）：翅膀是否明顯長過身體？形狀和紋理如何？
+5. 比例與大小：相對於背景的視覺比例。
 
-請直接輸出以下 JSON 結構：
-{
-  "pest": "害蟲中文名稱（必須選自：曱甴|木蝨|老鼠|白蟻|蚊|蛀木蟲|螞蟻|蜂|蜈蚣|衣魚|蜘蛛|飛蟲|蟎蟲|卜泥|其他）",
-  "confidence": 85,
-  "risk": "低|中|高|極高",
-  "nest": "潛在暗巢位置描述（用香港本地家居環境術語，如：床板縫隙、廚房罅隙、冷氣機周邊）",
-  "strategy": "採用三十六計名稱：結合現場特徵嘅專業防治說明",
-  "price": "HK$ 600 - 1,800"
-}
-
-如果圖片唔清晰或完全唔係害蟲，請回應：
-{
-  "pest": "未確認物體",
-  "confidence": 0,
-  "risk": "待評估",
-  "nest": "建議由專員現場勘察",
-  "strategy": "請聯絡師傅現場評估",
-  "price": "免費估價"
-}`;
+注意：只需客觀描述你看到的物理特徵，嚴禁自行判斷品種！`;
 
       const visionController = new AbortController();
       const visionTimeout = setTimeout(() => visionController.abort(), AI_TIMEOUT_MS);
@@ -170,113 +122,80 @@ export default {
       try {
         aiResponse = await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
           messages: [
-            {
-              role: 'user',
-              content: [
-                { type: 'text', text: prompt },
-                { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + imageBase64 } }
-              ]
-            }
+            { role: 'user', content: [{ type: 'text', text: visionPrompt }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + imageBase64 } }] }
           ],
-          max_tokens: 1000,
-          temperature: 0.1,
+          max_tokens: 500,
+          temperature: 0.1, // 極低溫度，保持客觀不亂想
         }, { signal: visionController.signal });
       } catch (e) {
         clearTimeout(visionTimeout);
-        if (e.name === 'AbortError') {
-          return json({ error: 'AI 分析逾時（超過 25 秒），請重試', code: 'AI_TIMEOUT' }, 504, corsHeaders);
-        }
-        return json({ error: 'AI 模型暫時無法使用：' + e.message, code: 'AI_FAILED' }, 502, corsHeaders);
+        return json({ error: '視覺感測器分析逾時或失效：' + e.message, code: 'VISION_FAILED' }, 502, corsHeaders);
       } finally {
         clearTimeout(visionTimeout);
       }
 
+      let visionReportText = typeof aiResponse === 'string' ? aiResponse : (aiResponse?.response || JSON.stringify(aiResponse));
+      visionReportText = visionReportText.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
       /* ============================================================
-         Step 3: 🛡️ 型別安全防護與三重「剪刀過濾」
+         🧠 大腦 (Dify / DeepSeek)：結合【滅蟲智庫】精準斷案
          ============================================================ */
-      
-      // 🛡️ 型別安全處理：確保 responseText 百分之百是一個 String
-      let responseText = '';
-      if (typeof aiResponse === 'string') {
-        responseText = aiResponse;
-      } else if (aiResponse && typeof aiResponse.response === 'string') {
-        responseText = aiResponse.response;
-      } else {
-        responseText = JSON.stringify(aiResponse); // 強制轉化為字串，杜絕 replace 報錯
-      }
+      // 🎯 v6.1 強化指令：要求 DeepSeek 拿著特徵去查智庫，並提示防呆機制
+      const difyQuery = `【系統通知】這是一份由前端視覺感測器傳來的客觀生物特徵報告：
 
-      // 如果轉化後依然不是字串 (極端防禦)，給予預設值
-      if (typeof responseText !== 'string') {
-          responseText = "{}";
-      }
+${visionReportText}
 
-      // ✂️ 剪刀 1：移除 <think>...</think> 思考過程標籤
-      responseText = responseText.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+【你的分析任務】
+1. 仔細閱讀上述物理特徵（特別注意「腰部粗細」、「觸角形狀」與「顏色」）。
+2. 結合你內建的【滅蟲智庫】進行嚴格比對。
+   ⚠️ 智庫防呆提醒：如果特徵顯示為「黑色」、「有明顯幼細腰部」或「彎曲觸角」，這通常是飛蟻或螞蟻；必須具備「淺色/啡色」、「粗腰」及「直觸角」才可能是白蟻。
+3. 根據比對結果，以「滅蟲師妹」的身份做出最準確的判斷，並嚴格按照三十六計的 Markdown 格式輸出最終診斷報告。`;
 
-      // ✂️ 剪刀 2：強效 Regex 提取 JSON {} 區塊
-      let parsedData = {};
+      const difyController = new AbortController();
+      const difyTimeout = setTimeout(() => difyController.abort(), 35000); 
+
+      let difyResultText = "";
       try {
-        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          parsedData = JSON.parse(jsonMatch[0]);
-        } else {
-          throw new Error("找不到 JSON 結構");
+        const difyResponse = await fetch(DIFY_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${DIFY_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            inputs: {}, // 如果 Dify 內部有設定變數可在此傳入
+            query: difyQuery,
+            response_mode: "blocking",
+            user: "web-visitor-" + Date.now() 
+          }),
+          signal: difyController.signal
+        });
+
+        if (!difyResponse.ok) {
+            throw new Error(`Dify API 錯誤: ${difyResponse.status}`);
         }
+
+        const difyData = await difyResponse.json();
+        difyResultText = difyData.answer || "⚠️ 師妹暫時無法生成完整報告，請稍後重試。";
+
       } catch (e) {
-        console.warn("JSON 解析失敗，啟用備用數據。原始回應:", responseText);
-        parsedData = {
-          pest: "未能完全辨識",
-          risk: "待評估",
-          nest: "建議由專員現場勘察",
-          strategy: "請聯絡師傅為你親自對照相片",
-          price: "免費估價"
-        };
+        clearTimeout(difyTimeout);
+        return json({ error: '滅蟲大腦 (Dify) 失去連線：' + e.message, code: 'DIFY_FAILED' }, 502, corsHeaders);
+      } finally {
+        clearTimeout(difyTimeout);
       }
 
-      // ✂️ 剪刀 3：簡繁字詞自動校正字典
-      const sanitizeHkText = (str) => {
-        if (!str || typeof str !== 'string') return '';
-        return str
-          .replace(/蟑螂/g, '曱甴')
-          .replace(/床虱/g, '木蝨')
-          .replace(/木虱/g, '木蝨')
-          .replace(/白蚁/g, '白蟻')
-          .replace(/蚂蚁/g, '螞蟻')
-          .replace(/检查/g, '檢查')
-          .replace(/评估/g, '評估')
-          .replace(/建议/g, '建議')
-          .replace(/隐患/g, '隱患')
-          .replace(/缝隙/g, '罅隙')
-          .replace(/厨房/g, '廚房')
-          .replace(/现场/g, '現場')
-          .replace(/师傅/g, '師傅')
-          .replace(/针对/g, '針對');
-      };
+      // ✂️ 移除 DeepSeek 可能產生的 <think> 標籤
+      difyResultText = difyResultText.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
 
-      const safePest = sanitizeHkText(parsedData.pest || '未確認物體');
-      const safeNest = sanitizeHkText(parsedData.nest || '建議由專員現場勘察');
-      const safeRisk = sanitizeHkText(parsedData.risk || '中');
-      const safeStrategy = sanitizeHkText(parsedData.strategy || '請聯絡師傅現場評估');
-      const safePrice = sanitizeHkText(parsedData.price || '免費估價');
-
-      // 🎯 組合前端期待的「🐛 完美純香港繁體 Markdown」格式
-      const formattedDiagnosis = `🐛 **初步診斷**：根據相片特徵，極可能是 **${safePest}**。
-👩🏻‍🔧 **師妹溫馨提示**：潛在暗巢位置可能喺「${safeNest}」，風險程度為 **${safeRisk}**。切勿自行亂噴殺蟲水，以免蟲患擴散！
-💡 **三十六計方案**：我哋「滅蟲師傅」採用獨家「${safeStrategy}」策略，針對性根治。
-💰 **參考估價**：${safePrice}（實際以現場評估為準）。
-🛡️ **專業聲明**：AI 診斷僅供初步參考。實際蟲患情況、根治方案及最終報價，須以我哋「滅蟲師傅」現場勘察為準。
-
----
-💡 **每個蟲患情況都唔同，我哋師傅而家已經在線！**
-想攞到最準確嘅免費報價同專屬滅蟲方案？即刻撳下面條 Link WhatsApp 我哋師傅，並 **將你啱啱影嘅相片 Send 畀師傅幫眼睇睇** 啦（絕不硬銷，歡迎問價）：
-👉 [點擊這裡與真人師傅對話 (WhatsApp: 5282 1552)](https://wa.me/85252821552?text=你好，我喺網站用完AI分析。初步診斷係「${safePest}」，我想進一步查詢！相片我會喺下面傳送畀你。)`;
-
+      /* ============================================================
+         Step 3: 回傳最終結果給前端
+         ============================================================ */
       return json({
         success: true,
-        diagnosis: formattedDiagnosis,
-        raw_json: parsedData,
-        version: '5.3',
-        ai_language: 'zh-HK'
+        diagnosis: difyResultText, 
+        raw_json: { pest: "DeepSeek 分析完成", source: "Dify" }, 
+        version: '6.1 (Llama_Features + Dify_Knowledge)'
       }, 200, corsHeaders);
 
     } catch (err) {
@@ -286,7 +205,6 @@ export default {
   }
 };
 
-// 輔助函數：統一 JSON 回應格式
 function json(data, status, headers) {
   return new Response(JSON.stringify(data), { 
     status, 
