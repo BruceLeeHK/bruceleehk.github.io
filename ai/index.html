@@ -520,7 +520,7 @@
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-      img-src 'self' data: https:;
+      img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
       frame-src https://udify.app;
@@ -538,7 +538,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
-                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
+                <img src="../assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async" width="154" height="132">
                 <div class="logo-text">
                     <span class="logo-title">滅蟲師傅</span>
                     <span class="logo-subtitle">PEST CONTROL MASTER</span>
@@ -712,7 +712,7 @@
                     <p>結合雲端邊緣運算 × DeepSeek 大腦 × 獨家三十六計知識庫 — 全港首創智慧滅蟲閉環系統</p>
                 </div>
                 <div class="arch-image-wrap">
-                    <img src="../assets/img/ai-architecture.jpg" alt="AI 害蟲分析系統架構示意圖" loading="lazy" decoding="async">
+                    <img src="../assets/img/ai-architecture.jpg" alt="AI 害蟲分析系統架構示意圖" loading="lazy" decoding="async" width="1024" height="1024">
                 </div>
                 <div class="arch-flow">
                     <div class="arch-step">
@@ -903,11 +903,24 @@
                         const formData = new FormData();
                         formData.append('image', selectedFile);
 
-                        fetch('https://whatsapp-bot.cedars5282.workers.dev/api/analyze-pest', {
+                        // 前端 30 秒 AbortController 超時保護
+                        const aiController = new AbortController();
+                        const aiTimeoutId = setTimeout(() => aiController.abort(), 30000);
+
+                        fetch('https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest', {
                             method: 'POST',
-                            body: formData
+                            body: formData,
+                            signal: aiController.signal
                         })
-                            .then(res => res.json())
+                            .then(res => {
+                                clearTimeout(aiTimeoutId);
+                                if (!res.ok) {
+                                    return res.json().then(errData => {
+                                        throw new Error(errData.error || ('HTTP ' + res.status));
+                                    }).catch(() => { throw new Error('伺服器錯誤 (HTTP ' + res.status + ')'); });
+                                }
+                                return res.json();
+                            })
                             .then(data => {
                                 if (data.success) {
                                     let formattedHtml = data.diagnosis;
@@ -933,8 +946,17 @@
                                 }
                             })
                             .catch(error => {
-                                console.error(error);
-                                alert('系統繁忙或網絡不穩，請稍後再試！');
+                                clearTimeout(aiTimeoutId);
+                                console.error('AI 診斷錯誤:', error);
+                                let msg;
+                                if (error.name === 'AbortError') {
+                                    msg = 'AI 視覺模型處理逾時（超過 30 秒），請稍後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                                } else if (error.message && error.message.includes('Failed to fetch')) {
+                                    msg = '無法連線至 AI 伺服器，請檢查網絡後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                                } else {
+                                    msg = error.message || '系統繁忙或網絡不穩，請稍後再試！';
+                                }
+                                alert('⚠️ 系統提示：\n' + msg);
                                 analyzingState.classList.remove('active');
                                 uploadState.classList.add('active');
                             });

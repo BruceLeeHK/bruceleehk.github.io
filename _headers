@@ -1,6 +1,6 @@
 # Cloudflare Pages / GitHub Pages _headers file
 # Long-term caching for static assets (PageSpeed optimization)
-# 2026-08-22 v5.1
+# 2026-08-26 v5.3 — added blob: to CSP img-src + Service-Worker-Allowed
 
 # Static assets: cache for 1 year (immutable)
 /assets/img/*
@@ -37,3 +37,4 @@
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-XSS-Protection: 1; mode=block

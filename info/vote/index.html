@@ -37,7 +37,8 @@
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
     
     <!-- ⚡ 修正：移除 integrity 校驗碼，確保 GLightbox CSS 順利載入 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
     
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -716,6 +717,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                                 <label for="imageFile">上傳蟲害照片（選填，最大 5MB）：</label>
                                 <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
                                 <p style="font-size:0.74rem;color:var(--primary-dark);margin-top:6px;"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 安心上傳保證：相片僅作留言展示，系統會自動抹除 GPS / EXIF 數據，絕不外洩。</p>
+                                <img id="imagePreviewInline" alt="預覽照片" style="display:none; max-width:160px; max-height:140px; margin-top:10px; border-radius:var(--radius-sm); border:1px solid var(--border); object-fit:cover;">
                             </div>
 
                             <div class="captcha-row" style="display:flex; gap:10px; align-items:center; margin-bottom:16px;">
@@ -761,7 +763,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     </footer>
 
     <!-- ⚡ 修正：移除 integrity 校驗碼，確保 GLightbox JS 順利載入 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 
     <!-- Vote System Scripts -->
     <script src="/assets/js/i18n.js" defer></script>
@@ -771,7 +773,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
         var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
         var PAGE_ID     = 'vote-page-2026';
         var captchaNumA = 0, captchaNumB = 0;
-        var uploadedImgUrl = '';
+        var uploadedImgUrl = '';        // 大圖 (HD version for lightbox)
+        var uploadedThumbUrl = '';     // 縮圖 (thumbnail for comment list)
         var currentReplyTo = null;
         var myLightbox = null; // 初始化 Lightbox 變數
 
@@ -796,23 +799,54 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
         function handleImageSelect(e) {
             var file = e.target.files[0];
-            if (!file) { uploadedImgUrl = ''; return; }
+            if (!file) { uploadedImgUrl = ''; uploadedThumbUrl = ''; return; }
             if (file.size > 5 * 1024 * 1024) { showToast('圖片檔案不能超過 5MB！', 'warning'); return; }
-            // 使用 Canvas 閹割 EXIF + 壓縮
+            // 預覽縮圖立即顯示（給用戶即時反饕）
+            var previewEl = document.getElementById('imagePreviewInline');
+            if (previewEl) {
+                var oURL = URL.createObjectURL(file);
+                previewEl.src = oURL;
+                previewEl.style.display = 'block';
+            }
+
+            // 使用 Canvas 閹割 EXIF + 雙尺寸壓縮 (HD 大圖 + 列表縮圖)
             var reader = new FileReader();
             reader.onload = function(evt) {
                 var img = new Image();
                 img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d');
-                    var MAX_WIDTH = 1200;
-                    var width = img.width, height = img.height;
-                    if (width > MAX_WIDTH) { height = Math.round((height * MAX_WIDTH) / width); width = MAX_WIDTH; }
-                    canvas.width = width; canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    uploadedImgUrl = canvas.toDataURL('image/jpeg', 0.85);
+                    // === Step 1: 生成 HD 大圖 (max 1600px, JPEG 0.92, ~150-400KB) ===
+                    var canvasHD = document.createElement('canvas');
+                    var ctxHD = canvasHD.getContext('2d');
+                    var HD_MAX = 1600;
+                    var w1 = img.width, h1 = img.height;
+                    if (w1 > HD_MAX) { h1 = Math.round((h1 * HD_MAX) / w1); w1 = HD_MAX; }
+                    canvasHD.width = w1; canvasHD.height = h1;
+                    ctxHD.drawImage(img, 0, 0, w1, h1);
+                    uploadedImgUrl = canvasHD.toDataURL('image/jpeg', 0.92);
+
+                    // === Step 2: 生成列表縮圖 (max 400px, JPEG 0.7, ~20-50KB) ===
+                    var canvasThumb = document.createElement('canvas');
+                    var ctxThumb = canvasThumb.getContext('2d');
+                    var THUMB_MAX = 400;
+                    var w2 = img.width, h2 = img.height;
+                    if (w2 > THUMB_MAX) { h2 = Math.round((h2 * THUMB_MAX) / w2); w2 = THUMB_MAX; }
+                    canvasThumb.width = w2; canvasThumb.height = h2;
+                    ctxThumb.drawImage(img, 0, 0, w2, h2);
+                    uploadedThumbUrl = canvasThumb.toDataURL('image/jpeg', 0.7);
+
+                    showToast('圖片已就緒 ✓', 'success');
+                };
+                img.onerror = function() {
+                    showToast('圖片格式無法讀取，請改用 JPG/PNG/WEBP 格式。', 'warning');
+                    uploadedImgUrl = '';
+                    uploadedThumbUrl = '';
                 };
                 img.src = evt.target.result;
+            };
+            reader.onerror = function() {
+                showToast('讀取圖片失敗，請重試。', 'warning');
+                uploadedImgUrl = '';
+                uploadedThumbUrl = '';
             };
             reader.readAsDataURL(file);
         }
@@ -894,10 +928,14 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 var officialBadge = item.is_official ? '<span class="official-badge"><i class="fa-solid fa-circle-check"></i> 滅蟲師傅 官方</span>' : '';
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> 審核中...</span>' : '';
                 
-                // ⚡ 用 <a> 標籤包裝圖片，加上 glightbox 類別，確保 href 指向大圖
-                var imgHtml = item.image_url ? 
-                    ('<a href="' + escapeAttr(item.image_url) + '" class="glightbox" data-gallery="forum-gallery" data-type="image">' + 
-                     '<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy"></a>') : '';
+                // ⚡ 用 <a> 標籤包裝圖片，加上 glightbox 類別
+                // 大圖 (item.image_url) 用於 lightbox HD 顯示，縮圖 (item.thumb_url) 用於列表快速載入
+                // 如果沒有縮圖（舊資料），fallback 使用大圖作為縮圖
+                var largeUrl = item.image_url || '';
+                var thumbUrl = item.thumb_url || largeUrl; // fallback for legacy data
+                var imgHtml = largeUrl ? 
+                    ('<a href="' + escapeAttr(largeUrl) + '" class="glightbox" data-gallery="forum-gallery" data-type="image" data-title="' + escapeAttr(item.nickname || '') + ' 嘅照片">' + 
+                     '<img src="' + escapeAttr(thumbUrl) + '" class="comment-img-thumb" loading="lazy" alt="' + escapeAttr(item.nickname || '') + ' 嘅照片" width="220" height="180"></a>') : '';
 
                 var repliesHtml = '';
                 if (item.replies && item.replies.length > 0) {
@@ -962,6 +1000,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 nickname: nickname,
                 content: content,
                 image_url: currentReplyTo ? '' : uploadedImgUrl,
+                thumb_url:  currentReplyTo ? '' : uploadedThumbUrl,
                 captcha_a: captchaNumA,
                 captcha_b: captchaNumB,
                 captcha_answer: answer
@@ -986,6 +1025,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     nickname: nickname,
                     content: content,
                     image_url: currentReplyTo ? '' : uploadedImgUrl,
+                    thumb_url:  currentReplyTo ? '' : uploadedThumbUrl,
                     parent_id: currentReplyTo ? currentReplyTo.id : null,
                     approved: 0,
                     created_at: new Date().toISOString()
@@ -994,6 +1034,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 showToast('留言已成功提交！將會在審核後正式公開。', 'success');
                 document.getElementById('mainCommentForm').reset();
                 uploadedImgUrl = '';
+                uploadedThumbUrl = '';
+                var previewEl = document.getElementById('imagePreviewInline');
+                if (previewEl) { previewEl.style.display = 'none'; previewEl.removeAttribute('src'); }
                 if (currentReplyTo) cancelReply();
                 initCaptcha();
                 loadComments();

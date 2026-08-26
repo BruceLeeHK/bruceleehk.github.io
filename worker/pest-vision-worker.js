@@ -92,10 +92,14 @@ export default {
 
       const arrayBuffer = await imageFile.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
-      
+
+      // ⚡ v5.3 性能優化：分塊 base64 編碼，避免逐字元 loop 觸發 Worker CPU 限制
+      // 舊版逐字元 String.fromCharCode 在 1MB+ 圖片時會超時，新版改為 32KB 分塊處理
+      const CHUNK_SIZE = 32768;
       let binaryString = '';
-      for (let i = 0; i < uint8Array.length; i++) {
-        binaryString += String.fromCharCode(uint8Array[i]);
+      for (let i = 0; i < uint8Array.length; i += CHUNK_SIZE) {
+        const chunk = uint8Array.subarray(i, Math.min(i + CHUNK_SIZE, uint8Array.length));
+        binaryString += String.fromCharCode.apply(null, chunk);
       }
       const imageBase64 = btoa(binaryString);
 

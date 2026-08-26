@@ -22,10 +22,11 @@
     <meta property="og:url" content="https://bruceleehk.com/en/info/vote/">
     <meta property="og:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev; frame-src; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev; frame-src; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#10b981">
     <style>
@@ -233,6 +234,7 @@
                             <div class="form-group">
                                 <label for="imageFile">Upload pest photo (optional, max 5MB):</label>
                                 <input type="file" id="imageFile" class="form-input" accept="image/jpeg,image/png,image/webp,image/gif">
+                                <img id="imagePreviewInline" alt="Preview photo" style="display:none; max-width:160px; max-height:140px; margin-top:10px; border-radius:var(--radius-sm); border:1px solid var(--border); object-fit:cover;">
                                 <p style="font-size:0.74rem;color:var(--primary-dark);margin-top:6px;"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Safe Upload Guarantee: Photos used only for instant recognition. GPS/EXIF auto-stripped; images destroyed after moderation; never stored.</p>
                             </div>
                             <div class="captcha-row" style="display:flex;gap:10px;align-items:center;margin-bottom:16px;">
@@ -278,7 +280,9 @@
         var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
         var PAGE_ID     = 'vote-page-2026';
         var captchaNumA = 0, captchaNumB = 0;
-        var uploadedImgUrl = '';
+        var uploadedImgUrl = '';        // HD image (large, for lightbox)
+        var uploadedThumbUrl = '';     // Thumbnail (small, for list)
+        var myLightbox = null;
         var currentReplyTo = null;
 
         function initCaptcha() {
@@ -299,26 +303,51 @@
             document.getElementById('charCounter').textContent = len + ' / ' + max;
         });
 
-        // EXIF stripping for uploaded images
+        // EXIF stripping + dual-size compression (HD large + small thumbnail)
         function handleImageSelect(e) {
             var file = e.target.files[0];
-            if (!file) { uploadedImgUrl = ''; return; }
+            if (!file) { uploadedImgUrl = ''; uploadedThumbUrl = ''; return; }
             if (file.size > 5 * 1024 * 1024) { showToast('Image cannot exceed 5MB!', 'warning'); return; }
-            // Strip EXIF via canvas
+            // Show inline preview immediately for instant feedback
+            var previewEl = document.getElementById('imagePreviewInline');
+            if (previewEl) {
+                previewEl.src = URL.createObjectURL(file);
+                previewEl.style.display = 'block';
+            }
+            // Strip EXIF + generate HD (1600px, q=0.92) + thumbnail (400px, q=0.7)
             var reader = new FileReader();
             reader.onload = function(evt) {
                 var img = new Image();
                 img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    var ctx = canvas.getContext('2d');
-                    var MAX_WIDTH = 1200;
-                    var width = img.width, height = img.height;
-                    if (width > MAX_WIDTH) { height = Math.round((height * MAX_WIDTH) / width); width = MAX_WIDTH; }
-                    canvas.width = width; canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-                    uploadedImgUrl = canvas.toDataURL('image/jpeg', 0.85);
+                    // HD large image (max 1600px, ~150-400KB)
+                    var canvasHD = document.createElement('canvas');
+                    var ctxHD = canvasHD.getContext('2d');
+                    var HD_MAX = 1600;
+                    var w1 = img.width, h1 = img.height;
+                    if (w1 > HD_MAX) { h1 = Math.round((h1 * HD_MAX) / w1); w1 = HD_MAX; }
+                    canvasHD.width = w1; canvasHD.height = h1;
+                    ctxHD.drawImage(img, 0, 0, w1, h1);
+                    uploadedImgUrl = canvasHD.toDataURL('image/jpeg', 0.92);
+                    // Thumbnail (max 400px, ~20-50KB)
+                    var canvasThumb = document.createElement('canvas');
+                    var ctxThumb = canvasThumb.getContext('2d');
+                    var THUMB_MAX = 400;
+                    var w2 = img.width, h2 = img.height;
+                    if (w2 > THUMB_MAX) { h2 = Math.round((h2 * THUMB_MAX) / w2); w2 = THUMB_MAX; }
+                    canvasThumb.width = w2; canvasThumb.height = h2;
+                    ctxThumb.drawImage(img, 0, 0, w2, h2);
+                    uploadedThumbUrl = canvasThumb.toDataURL('image/jpeg', 0.7);
+                    showToast('Image ready ✓', 'success');
+                };
+                img.onerror = function() {
+                    showToast('Cannot read image format, please use JPG/PNG/WEBP.', 'warning');
+                    uploadedImgUrl = ''; uploadedThumbUrl = '';
                 };
                 img.src = evt.target.result;
+            };
+            reader.onerror = function() {
+                showToast('Failed to read file, please retry.', 'warning');
+                uploadedImgUrl = ''; uploadedThumbUrl = '';
             };
             reader.readAsDataURL(file);
         }
@@ -375,7 +404,9 @@
                 var isPending = (item.approved === 0);
                 var officialBadge = item.is_official ? '<span class="official-badge"><i class="fa-solid fa-circle-check"></i> Official</span>' : '';
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> Pending...</span>' : '';
-                var imgHtml = item.image_url ? ('<img src="' + escapeAttr(item.image_url) + '" class="comment-img-thumb" loading="lazy" style="max-width:220px;max-height:180px;border-radius:var(--radius-sm);margin-top:12px;cursor:zoom-in;object-fit:cover;border:1px solid var(--border);">') : '';
+                var largeUrl = item.image_url || '';
+                var thumbUrl = item.thumb_url || largeUrl; // fallback for legacy data
+                var imgHtml = largeUrl ? ('<a href="' + escapeAttr(largeUrl) + '" class="glightbox" data-gallery="forum-gallery" data-type="image" data-title="' + escapeAttr(item.nickname || '') + '\'s photo"><img src="' + escapeAttr(thumbUrl) + '" class="comment-img-thumb" loading="lazy" alt="' + escapeAttr(item.nickname || '') + '\'s photo" width="220" height="180" style="max-width:220px;max-height:180px;border-radius:var(--radius-sm);margin-top:12px;cursor:zoom-in;object-fit:cover;border:1px solid var(--border);"></a>') : '';
                 var repliesHtml = '';
                 if (item.replies && item.replies.length > 0) {
                     repliesHtml = '<div class="reply-thread">';
@@ -390,6 +421,8 @@
                 html += '<div class="comment-item ' + (isPending ? 'pending-local' : '') + '"><div class="comment-meta"><span class="comment-nickname">' + escapeHtml(item.nickname) + ' ' + officialBadge + ' ' + pendingBadge + '</span><span class="comment-time">' + formatTime(item.created_at) + '</span></div><div class="comment-body">' + escapeHtml(item.content) + '</div>' + imgHtml + (isPending ? '' : ('<button type="button" class="btn-reply js-reply-btn" data-reply-id="' + escapeAttr(item.id) + '" data-reply-name="' + escapeAttr(item.nickname) + '"><i class="fa-solid fa-reply"></i> Reply</button>')) + repliesHtml + '</div>';
             });
             listEl.innerHTML = html;
+            // Notify lightbox to re-bind after rendering
+            listEl.dispatchEvent(new CustomEvent('commentsRendered', { bubbles: true }));
             listEl.querySelectorAll('.js-reply-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     startReply(this.getAttribute('data-reply-id'), this.getAttribute('data-reply-name'));
@@ -406,16 +439,18 @@
             if (answer !== (captchaNumA + captchaNumB)) { showToast('Math check answer is incorrect!', 'warning'); return; }
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-            var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
+            var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
             fetch(WORKER_BASE + '/api/comments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
                 .then(function(res){ return res.json(); })
                 .then(function(data){
                     if (!data.success) { showToast('Submit failed: ' + (data.error || 'Unknown error'), 'warning'); return; }
-                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 0, created_at: new Date().toISOString() });
+                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 0, created_at: new Date().toISOString() });
                     showToast('Comment submitted! Will be public after review.', 'success');
                     document.getElementById('mainCommentForm').reset();
-                    uploadedImgUrl = '';
+                    uploadedImgUrl = ''; uploadedThumbUrl = '';
+                    var previewEl = document.getElementById('imagePreviewInline');
+                    if (previewEl) { previewEl.style.display = 'none'; previewEl.removeAttribute('src'); }
                     if (currentReplyTo) cancelReply();
                     initCaptcha();
                     loadComments();
@@ -601,6 +636,26 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() { setTimeout(initVote, 50); });
+    </script>
+
+    <!-- GLightbox library for HD image enlarge -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Initialize GLightbox after comments are rendered
+        document.getElementById('commentList').addEventListener('commentsRendered', function() {
+            if (typeof GLightbox !== 'undefined') {
+                if (window.myLightbox) {
+                    window.myLightbox.reload();
+                } else {
+                    window.myLightbox = GLightbox({
+                        selector: '.glightbox',
+                        touchNavigation: true,
+                        loop: true,
+                        zoomable: true
+                    });
+                }
+            }
+        });
     </script>
 </body>
 </html>

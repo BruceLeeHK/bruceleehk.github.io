@@ -16,7 +16,7 @@
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-      img-src 'self' data: https:;
+      img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
       frame-src https://udify.app;
@@ -36,7 +36,7 @@
 <header id="site-header">
   <div class="nav-container">
     <div class="logo">
-      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async">
+      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async" width="154" height="132">
       <div class="logo-text">
         <span class="logo-main">滅蟲師傅</span>
         <span class="logo-sub">Pest Control Master</span>

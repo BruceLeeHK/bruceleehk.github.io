@@ -511,7 +511,7 @@
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
-      img-src 'self' data: https:;
+      img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
       frame-src;
@@ -530,7 +530,7 @@
     <header class="site-header">
         <div class="nav-container">
             <a href="/en/" class="logo" aria-label="Pest Control Master Home">
-                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" fetchpriority="high" decoding="async">
+                <img src="/assets/img/logo.png" alt="Pest Control Master Logo" fetchpriority="high" decoding="async" width="154" height="132">
                 <div class="logo-text">
                     <span class="logo-title">Pest Control Master</span>
                     <span class="logo-subtitle">滅蟲師傅</span>
@@ -614,7 +614,7 @@
             </div>
             <div class="grid-3">
                 <article class="smart-card">
-                    <picture><source srcset="/assets/img/smart-ai-recognition.webp" type="image/webp"><img src="/assets/img/smart-ai-recognition.jpg" alt="AI Pest Analysis System — photo recognition" loading="lazy" decoding="async" class="smart-card-image"></picture>
+                    <picture><source srcset="/assets/img/smart-ai-recognition.webp" type="image/webp"><img src="/assets/img/smart-ai-recognition.jpg" alt="AI Pest Analysis System — photo recognition" loading="lazy" decoding="async" class="smart-card-image" width="1024" height="1024"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
                         <h3>AI Pest Analysis System</h3>
@@ -642,7 +642,7 @@
                 </article>
 
                 <article class="smart-card">
-                    <picture><source srcset="/assets/img/smart-iot-rat.webp" type="image/webp"><img src="/assets/img/smart-iot-rat.jpg" alt="IoT Smart Rodent Monitor" loading="lazy" decoding="async" class="smart-card-image"></picture>
+                    <picture><source srcset="/assets/img/smart-iot-rat.webp" type="image/webp"><img src="/assets/img/smart-iot-rat.jpg" alt="IoT Smart Rodent Monitor" loading="lazy" decoding="async" class="smart-card-image" width="1024" height="1024"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
                         <h3>IoT Smart Rodent Monitor</h3>
@@ -650,7 +650,7 @@
                     </div>
                 </article>
                 <article class="smart-card">
-                    <picture><source srcset="/assets/img/smart-thermal.webp" type="image/webp"><img src="/assets/img/smart-thermal.jpg" alt="Thermal Imaging Nest Scan" loading="lazy" decoding="async" class="smart-card-image"></picture>
+                    <picture><source srcset="/assets/img/smart-thermal.webp" type="image/webp"><img src="/assets/img/smart-thermal.jpg" alt="Thermal Imaging Nest Scan" loading="lazy" decoding="async" class="smart-card-image" width="1024" height="1024"></picture>
                     <div class="smart-card-body">
                         <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
                         <h3>Thermal Imaging Nest Scan</h3>
@@ -755,7 +755,7 @@
                 <div class="video-grid">
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Cockroach Systemic Control">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-cockroach.webp" type="image/webp"><img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async"></picture>
+                            <picture><source srcset="/assets/img/video-cockroach.webp" type="image/webp"><img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async" width="768" height="1344"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:45</span>
                         </div>
@@ -766,7 +766,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Bed Bug High-Temp Steam">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-bedbug.webp" type="image/webp"><img src="/assets/img/video-bedbug.jpg" alt="Bed bug high-temp steam case" loading="lazy" decoding="async"></picture>
+                            <picture><source srcset="/assets/img/video-bedbug.webp" type="image/webp"><img src="/assets/img/video-bedbug.jpg" alt="Bed bug high-temp steam case" loading="lazy" decoding="async" width="768" height="1344"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:58</span>
                         </div>
@@ -777,7 +777,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: IoT Smart Rodent Monitoring">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-iot-rat.webp" type="image/webp"><img src="/assets/img/video-iot-rat.jpg" alt="IoT smart rodent monitoring case" loading="lazy" decoding="async"></picture>
+                            <picture><source srcset="/assets/img/video-iot-rat.webp" type="image/webp"><img src="/assets/img/video-iot-rat.jpg" alt="IoT smart rodent monitoring case" loading="lazy" decoding="async" width="768" height="1344"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">1:12</span>
                         </div>
@@ -788,7 +788,7 @@
                     </a>
                     <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Termite Thermal Imaging">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-termite.webp" type="image/webp"><img src="/assets/img/video-termite.jpg" alt="Thermal imaging termite nest scan case" loading="lazy" decoding="async"></picture>
+                            <picture><source srcset="/assets/img/video-termite.webp" type="image/webp"><img src="/assets/img/video-termite.jpg" alt="Thermal imaging termite nest scan case" loading="lazy" decoding="async" width="768" height="1344"></picture>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
                             <span class="video-duration">0:52</span>
                         </div>

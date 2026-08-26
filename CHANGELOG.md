@@ -1,4 +1,71 @@
-# 修復日誌 (v3.3 — 2026-08-17)
+# 修復日誌 (v5.3 — 2026-08-26)
+
+## v5.3 全面診斷優化（本次修復）
+
+針對用戶反饋嘅三大問題（AI 診斷網絡連線超時、投票系統圖片顯示、PageSpeed 性能）完成 6 大修復：
+
+### 🔧 問題 1：AI 診斷系統 [網絡連線超時] 修復
+
+**根因分析：**
+- 前端 `fetch()` 無逾時保護，AI 模型卡死時無法及時回饋
+- CSP `img-src` 未包含 `blob:`，導致 `URL.createObjectURL()` 預覽圖片被封鎖
+- 後端 Worker 嘅 `base64` 逐字元轉換喺大圖片時觸發 CPU 限制，回傳 500 錯誤
+- 錯誤訊息籠統，一律顯示「網絡連線超時」誤導用戶
+
+**修復措施：**
+1. **24 個 HTML 頁面** CSP 全部加上 `blob:` 至 `img-src` 指令
+2. **前端加入 30 秒 AbortController** 逾時保護，比 Worker 端 25s 稍長，讓 Worker 的 504 訊息先回來
+3. **後端 Worker base64 改用 32KB 分塊處理**（v5.3 性能優化），避免逐字元 loop 觸發 CPU 限制
+4. **按錯誤碼提供精準訊息**：`AI_TIMEOUT` / `AI_FAILED` / `AI_NOT_BOUND` / `REQUEST_TOO_LARGE` 各有專屬提示
+5. **按鈕加 spinner + 防重複點擊**，避免用戶誤觸多次發送
+
+### 🔧 問題 2：投票系統苦主留言區 圖片上傳＋HD 放大
+
+**根因分析：**
+- 舊版僅生成一個 1200px 中等圖，列表縮圖與 lightbox 放大均用同一張，體積過大、放大後又唔夠清
+- 缺少即時預覽，用戶上傳後無反饋
+- EN 版留言區根本無 GLightbox，圖片無法點擊放大
+
+**修復措施：**
+1. **雙尺寸圖片生成**：
+   - HD 大圖：max 1600px × JPEG q=0.92（~150-400KB）— 用於 lightbox 放大顯示
+   - 列表縮圖：max 400px × JPEG q=0.7（~20-50KB）— 用於列表快速載入
+2. **後端 Worker 已支援 `thumb_url` 字段儲存**（沿用既有 schema）
+3. **前端渲染分離 src 與 href**：`<img src="thumb_url">` + `<a href="image_url" class="glightbox">`，點擊放大顯示 HD 版本
+4. **加入即時 inline 預覽**：選取圖片後立即顯示縮圖，無需等待 canvas 壓縮
+5. **EN 版留言區補齊 GLightbox 庫**（CSS + JS）與事件綁定，與中文版功能對齊
+6. **fallback 機制**：舊留言無 `thumb_url` 時自動 fallback 用 `image_url` 作為縮圖
+
+### 🔧 問題 3：PageSpeed Insights 性能優化（目標 90+）
+
+**修復措施：**
+1. **20 張圖片補上 `width` 與 `height` 屬性**（覆蓋 index.html / 404.html / quote / ai / en/* 等 6 個頁面），消除 CLS（Cumulative Layout Shift）
+2. **GLightbox CSS 改用 preload 異步載入**模式（原為同步 render-blocking）
+3. **GLightbox JS 加 `defer` 屬性**，避免阻塞首屏渲染
+4. **`_headers` 加入 `X-XSS-Protection: 1; mode=block`** 強化安全標頭
+5. 既有優化保留：WebP 圖片、Font Awesome preload、Hero 圖 preload、`loading="lazy"`、`decoding="async"`、長快取等
+
+### 🔧 額外修復
+
+1. **`en/ai/index.html` 修復未關閉嘅 `<script>` 標籤**（原先導致 HTML 結構異常）
+2. **`/ai/` 頁面 AI fetch 改用 pest-vision-worker** 統一端點，並加入 30 秒逾時保護
+3. **`/ai/` 頁面錯誤處理改善**：區分 AbortError / Failed to fetch / 其他錯誤，訊息更精準
+
+### 📦 修復覆蓋範圍
+
+| 類別 | 修改檔案數 | 關鍵改動 |
+|------|-----------|---------|
+| CSP 修復 | 24 個 HTML | 全部加上 `blob:` 至 `img-src` |
+| 圖片尺寸 | 6 個 HTML | 20 張圖片加 width/height |
+| AI 診斷 | index.html + ai/index.html | AbortController + 精準錯誤訊息 |
+| Worker 後端 | pest-vision-worker.js | 分塊 base64 轉換 |
+| 投票圖片 | info/vote + en/info/vote | HD+縮圖雙尺寸 + GLightbox |
+| 安全標頭 | _headers | X-XSS-Protection |
+| HTML 結構 | en/ai/index.html | 修復未關閉 script 標籤 |
+
+---
+
+## v3.3 — 2026-08-17
 
 ## 本次修復概覽
 
