@@ -1,12 +1,10 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.2 淨化過濾版)
+ * Cloudflare Worker — 滅蟲師傅 AI 害蟲視覺辨識後端 (v5.3 終極穩定版)
  *
- * v5.2 優化亮點：
- *   ✂️ 三重剪刀過濾機制：
- *      1. 強制切除 <think>...</think> LLM 推理過程標籤。
- *      2. Regex 精準提取 JSON {} 區塊，完全撕掉前後開場白與廢話。
- *      3. 自動繁簡字詞轉化字典（如：蟑螂→曱甴、床虱→木蝨），確保 100% 純香港繁體。
- *   🔒 保持 v5.1 完整 API 白名單與安全標頭。
+ * v5.3 優化亮點：
+ *   🛡️ 型別安全防護：徹底解決 responseText.replace is not a function 崩潰問題。
+ *   ⚡ 分塊轉碼優化：解決大圖片 Base64 轉換時的 CPU 記憶體溢出 (OOM) 風險。
+ *   ✂️ 三重剪刀過濾機制：精準提取 JSON，移除 <think> 標籤，100% 強制香港繁體。
  */
 
 const ALLOWED_ORIGINS = new Set([
@@ -19,8 +17,8 @@ const ALLOWED_ORIGINS = new Set([
   'http://127.0.0.1:8080',
 ]);
 
-const MAX_REQUEST_BYTES = 10_000_000; // 10 MB
-const AI_TIMEOUT_MS = 25000;          // 25 seconds
+const MAX_REQUEST_BYTES = 10_000_000; // 10 MB 上限
+const AI_TIMEOUT_MS = 25000;          // 25 秒超時限制
 
 export default {
   async fetch(request, env) {
@@ -28,6 +26,7 @@ export default {
     const origin = request.headers.get('Origin') || '';
     const corsOrigin = ALLOWED_ORIGINS.has(origin) ? origin : '';
 
+    // 設定 CORS 安全標頭
     const corsHeaders = {
       'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -43,14 +42,16 @@ export default {
       corsHeaders['Access-Control-Allow-Credentials'] = 'true';
     }
 
+    // 處理 OPTIONS 預檢請求
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
 
+    // 系統健康檢查端點
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '5.2',
+        version: '5.3',
         ai_bound: !!env.AI,
         kv_bound: !!env.PEST_KV,
         ai_language: 'zh-HK',
@@ -58,14 +59,15 @@ export default {
       }, 200, corsHeaders);
     }
 
+    // 攔截非 API 請求
     if (url.pathname !== '/api/analyze-pest') {
         return json({ error: 'Not Found' }, 404, corsHeaders);
     }
-
     if (request.method !== 'POST') {
       return json({ error: 'Method not allowed' }, 405, corsHeaders);
     }
 
+    // 檢查檔案大小限制
     const contentLen = parseInt(request.headers.get('Content-Length') || '0', 10);
     if (contentLen > MAX_REQUEST_BYTES) {
       return json({
@@ -75,10 +77,11 @@ export default {
     }
 
     try {
+      // 確保 AI 綁定正常
       if (!env.AI) {
         console.error('AI binding 未設定');
         return json({
-          error: '伺服器未綁定 Workers AI',
+          error: '伺服器未綁定 Workers AI，請檢查 Cloudflare 後台設定。',
           code: 'AI_NOT_BOUND'
         }, 503, corsHeaders);
       }
@@ -87,14 +90,13 @@ export default {
       const imageFile = formData.get('image');
       
       if (!imageFile) {
-        return json({ error: 'Missing image in FormData' }, 400, corsHeaders);
+        return json({ error: '找不到上傳的圖片檔案', code: 'MISSING_IMAGE' }, 400, corsHeaders);
       }
 
       const arrayBuffer = await imageFile.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
 
-      // ⚡ v5.3 性能優化：分塊 base64 編碼，避免逐字元 loop 觸發 Worker CPU 限制
-      // 舊版逐字元 String.fromCharCode 在 1MB+ 圖片時會超時，新版改為 32KB 分塊處理
+      // ⚡ 性能優化：分塊 base64 編碼，防止大型圖片拖垮 Worker 記憶體
       const CHUNK_SIZE = 32768;
       let binaryString = '';
       for (let i = 0; i < uint8Array.length; i += CHUNK_SIZE) {
@@ -104,7 +106,7 @@ export default {
       const imageBase64 = btoa(binaryString);
 
       /* ============================================================
-         Step 1: 首次同意 Llama 3.2 Vision 授權（KV 快取）
+         Step 1: 首次同意 Llama 3.2 Vision 授權（透過 KV 快取狀態）
          ============================================================ */
       let agreed = false;
       if (env.PEST_KV) {
@@ -126,11 +128,12 @@ export default {
           }, { signal: agreeController.signal });
           clearTimeout(agreeTimeout);
           agreed = true;
+          
           if (env.PEST_KV) {
             try { await env.PEST_KV.put('llama_vision_agreed', 'true', { expirationTtl: 86400 }); } catch (e) {}
           }
         } catch (e) {
-          console.warn('送出 agree prompt 失敗（可能已同意）:', e.message);
+          console.warn('送出 agree prompt 失敗（可能已經同意過）:', e.message);
         }
       }
 
@@ -140,7 +143,7 @@ export default {
       const prompt = `你是一個香港頂尖嘅資深滅蟲專家，精通香港在地常見害蟲嘅習性同「三十六計」兵法策略。
 請仔細分析圖片，並嚴格以「純香港繁體中文（zh-HK）」的 JSON 格式回應。嚴禁使用簡體字！嚴禁輸出任何 Markdown 標記、開場白、思考過程或說明文字！
 
-請直接輸出以下 JSON：
+請直接輸出以下 JSON 結構：
 {
   "pest": "害蟲中文名稱（必須選自：曱甴|木蝨|老鼠|白蟻|蚊|蛀木蟲|螞蟻|蜂|蜈蚣|衣魚|蜘蛛|飛蟲|蟎蟲|卜泥|其他）",
   "confidence": 85,
@@ -150,7 +153,7 @@ export default {
   "price": "HK$ 600 - 1,800"
 }
 
-如果圖片唔清晰或唔係害蟲，請回應：
+如果圖片唔清晰或完全唔係害蟲，請回應：
 {
   "pest": "未確認物體",
   "confidence": 0,
@@ -181,7 +184,7 @@ export default {
       } catch (e) {
         clearTimeout(visionTimeout);
         if (e.name === 'AbortError') {
-          return json({ error: 'AI 分析逾時（超過 25 秒）', code: 'AI_TIMEOUT' }, 504, corsHeaders);
+          return json({ error: 'AI 分析逾時（超過 25 秒），請重試', code: 'AI_TIMEOUT' }, 504, corsHeaders);
         }
         return json({ error: 'AI 模型暫時無法使用：' + e.message, code: 'AI_FAILED' }, 502, corsHeaders);
       } finally {
@@ -189,31 +192,38 @@ export default {
       }
 
       /* ============================================================
-         Step 3: 三重「剪刀過濾」與格式化 (無縫對接前端)
+         Step 3: 🛡️ 型別安全防護與三重「剪刀過濾」
          ============================================================ */
+      
+      // 🛡️ 型別安全處理：確保 responseText 百分之百是一個 String
       let responseText = '';
       if (typeof aiResponse === 'string') {
         responseText = aiResponse;
-      } else if (aiResponse && aiResponse.response) {
+      } else if (aiResponse && typeof aiResponse.response === 'string') {
         responseText = aiResponse.response;
       } else {
-        responseText = JSON.stringify(aiResponse);
+        responseText = JSON.stringify(aiResponse); // 強制轉化為字串，杜絕 replace 報錯
+      }
+
+      // 如果轉化後依然不是字串 (極端防禦)，給予預設值
+      if (typeof responseText !== 'string') {
+          responseText = "{}";
       }
 
       // ✂️ 剪刀 1：移除 <think>...</think> 思考過程標籤
       responseText = responseText.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
 
-      // ✂️ 剪刀 2：強效 Regex 提取 JSON {} 區塊（過濾掉 JSON 前後的任何廢話）
+      // ✂️ 剪刀 2：強效 Regex 提取 JSON {} 區塊
       let parsedData = {};
       try {
         const jsonMatch = responseText.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
           parsedData = JSON.parse(jsonMatch[0]);
         } else {
-          throw new Error("No JSON found in response");
+          throw new Error("找不到 JSON 結構");
         }
       } catch (e) {
-        console.warn("JSON Parse Failed, using fallback. Raw:", responseText);
+        console.warn("JSON 解析失敗，啟用備用數據。原始回應:", responseText);
         parsedData = {
           pest: "未能完全辨識",
           risk: "待評估",
@@ -223,7 +233,7 @@ export default {
         };
       }
 
-      // ✂️ 剪刀 3：簡繁字詞自動校正（徹底去除殘留簡體與內陸稱呼）
+      // ✂️ 剪刀 3：簡繁字詞自動校正字典
       const sanitizeHkText = (str) => {
         if (!str || typeof str !== 'string') return '';
         return str
@@ -265,7 +275,7 @@ export default {
         success: true,
         diagnosis: formattedDiagnosis,
         raw_json: parsedData,
-        version: '5.2',
+        version: '5.3',
         ai_language: 'zh-HK'
       }, 200, corsHeaders);
 
@@ -276,6 +286,10 @@ export default {
   }
 };
 
+// 輔助函數：統一 JSON 回應格式
 function json(data, status, headers) {
-  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } });
+  return new Response(JSON.stringify(data), { 
+    status, 
+    headers: { 'Content-Type': 'application/json; charset=utf-8', ...headers } 
+  });
 }

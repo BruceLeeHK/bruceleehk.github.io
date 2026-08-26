@@ -38,4 +38,4 @@ binding = "AI"
 # 然後將下方 id 替換為實際 namespace ID
 [[kv_namespaces]]
 binding = "PEST_KV"
-id = "a6c1483100b64d5fb29a3996b935883d"   # ← 替換為你嘅 KV Namespace ID
+id = "bd7cf93c5600494d99f75b20cf9c3e4c"   # ← 替換為你嘅 KV Namespace ID
