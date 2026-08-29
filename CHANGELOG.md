@@ -1,3 +1,34 @@
+# 修復日誌 (v9.2 — 2026-08-29)
+
+## v9.2 新增：AI 行業趨勢 Blog 文章 + SEO 內部連結強化
+
+### 📰 新增內容
+
+1. **新文章頁面 `/info/blog-9/`**：《【行業顛覆】傳統滅蟲師傅會被 AI 淘汰？探討 AI 智慧滅蟲與人工經驗的「共贏」新未來！》
+   - 文章結構：引言 → 3 大章節（AI 與師傅合作互補／AI 算力補足經驗短板／O2O 共贏商業模式）→ 結語 → CTA → 5 條 FAQ
+   - **對比圖區塊**：新增「傳統年代：電筒斷估 VS AI 年代：數據斷症」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51KB + jpg 102KB 雙格式）
+   - **內部連結（Internal Linking）**：文中加粗關鍵詞全部設為 hyperlink，強化 Google 站點結構評分——
+     - 三十六計精準防治／滅蟲智庫 → `/strategy/`
+     - 上門滅蟲服務／IoT 智慧監測追蹤 → `/services/`
+     - AI 害蟲圖像識別／AI 智慧滅蟲 → `/ai/`
+     - 滅蟲收費估價 → `/quote/`
+     - 綜合防治理念（IPM） → `/info/blog-7/`
+     - 香港滅蟲公司 → `/`（首頁）
+   - **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD（豐富摘要觸發 FAQ 折疊顯示）
+   - FAQ 採用原生 `<details>/<summary>` 手風琴（零 JS、無障礙、避免 blog-8 的 onclick 缺陷方案）
+
+2. **資訊列表頁**：中文版 `/info/` 及英文版 `/en/info/` 均新增 blog-9 卡片
+
+3. **sitemap.xml**：新增 blog-9 URL（lastmod 2026-08-29）
+
+### 🎯 首頁及 Worker 同步升級（v9.1）
+
+4. **首頁 `index.html` → v9.1**：可選補充描述框（50 字封頂）＋前端清洗＋信賴徽章；本次補回 v5.3 的 CLS 圖片尺寸屬性（3 張 smart-card + 4 張 video 卡圖）
+
+5. **Worker `pest-vision-worker.js` → v9.1**：多模態上下文先驗（user_desc 白名單清洗＋攻擊絆線＋50 字封印）＋快取鍵 v2＋雙通道傳送＋假死攔截
+
+---
+
 # 修復日誌 (v5.3 — 2026-08-26)
 
 ## v5.3 全面診斷優化（本次修復）
