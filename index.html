@@ -417,6 +417,45 @@
         }
         .ai-wa-link:hover { transform: translateY(-2px); background: var(--whatsapp-dark); }
 
+        /* ============ v9.0 多模態上下文先驗：可選補充描述框 ============ */
+        /* 三大黃金法則落實：標明可選（唔搶眼、唔阻住即刻化驗）+ 限制 50 字 */
+        .ai-desc-field { margin: 12px 0 0; text-align: left; }
+        .ai-desc-field .ai-desc-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        .ai-desc-field .ai-desc-label .ai-desc-optional {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+        .ai-desc-field textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            font-family: inherit;
+            line-height: 1.45;
+            height: 46px;
+            resize: none;
+            background: #fff;
+            color: var(--text-main);
+            transition: border-color var(--transition);
+        }
+        .ai-desc-field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+        .ai-desc-field textarea::placeholder { color: var(--text-muted); }
+        .ai-desc-count {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: 3px;
+        }
+
         /* ============ Stratagem Carousel ============ */
         .stratagem-wrapper { position: relative; }
         .stratagem-scroll {
@@ -879,6 +918,17 @@
                                 <div id="previewArea" style="display: none; text-align: center; padding: 10px 0;">
                                     <img id="imagePreview" src="" alt="預覽相片" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); margin-bottom: 15px;">
                                     <br>
+                                    <!-- v9.0 多模態上下文先驗：可選補充描述（環境線索助 AI 收窄判定範圍） -->
+                                    <div class="ai-desc-field">
+                                        <label class="ai-desc-label" for="pestDescInput">
+                                            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 補充發現位置或情況
+                                            <span class="ai-desc-optional">（可選・唔填都即刻化驗）</span>
+                                        </label>
+                                        <textarea id="pestDescInput" maxlength="50" rows="2" autocomplete="off"
+                                            aria-describedby="pestDescCount"
+                                            placeholder="例：廚房灶頭底發現，半夜開燈先見到"></textarea>
+                                        <div class="ai-desc-count"><span id="pestDescCount">0</span>/50</div>
+                                    </div>
                                     <button class="btn btn-primary" id="btnAnalyze" type="button" style="width: 100%;">
                                         <i class="fa-solid fa-wand-magic-sparkles"></i> 開始 AI 智能診斷
                                     </button>
@@ -897,6 +947,11 @@
                                 <!-- 4. 診斷結果區 -->
                                 <div id="resultArea" style="display: none; text-align: left; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 10px; box-shadow: var(--shadow-sm);">
                                     <h4 style="color: var(--primary-dark); margin: 0 0 10px 0;"><i class="fa-solid fa-clipboard-check"></i> 滅蟲師妹 AI 診斷報告</h4>
+                                    <!-- v9.1 信賴徽章：AI 有聽客人講嘢（透明度 → 客戶信賴），有補充描述時先顯示 -->
+                                    <p id="descUsedNote" style="display: none; margin: 0 0 10px; font-size: 0.75rem; line-height: 1.5; color: var(--primary-dark); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: 6px; padding: 6px 10px;">
+                                        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                                        <strong>已結合你嘅補充描述一齊分析：</strong>環境線索已納入 AI 判定參考，報告更貼合你嘅實際情況。
+                                    </p>
                                     <div id="diagnosisText" style="line-height: 1.7; color: var(--text-main); font-size: 0.92rem;"></div>
                                     
                                     <button type="button" class="btn btn-ghost" id="btnReupload" style="margin-top: 15px; width: 100%;">
@@ -1239,9 +1294,11 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // AI 診斷 API 串接邏輯 (v8.0 — MoE 雙腦架構優化版)
+        // AI 診斷 API 串接邏輯 (v9.1 — MoE 雙腦 + 多模態上下文先驗知識版)
         // 優化重點：影像預處理提升識圖準確度、110秒防卡死超時、
-        // 錯誤分類 + 頁內錯誤卡片（取代突兀 alert）、記憶體洩漏修復
+        // 錯誤分類 + 頁內錯誤卡片（取代突兀 alert）、記憶體洩漏修復、
+        // v9.0 新增：可選補充描述（≤50字）提供環境線索，AI 結合圖片+線索大幅提升準確度
+        // v9.1 新增：信賴徽章（已結合補充描述）— 將 AI 透明度轉化為客戶信賴
         document.addEventListener('DOMContentLoaded', function() {
             const pestImageInput = document.getElementById('pestImageInput');
             const uploadBox = document.getElementById('uploadBox');
@@ -1252,10 +1309,30 @@
             const resultArea = document.getElementById('resultArea');
             const diagnosisText = document.getElementById('diagnosisText');
             const btnReupload = document.getElementById('btnReupload');
+            const descUsedNote = document.getElementById('descUsedNote');
+            const pestDescInput = document.getElementById('pestDescInput');
+            const pestDescCount = document.getElementById('pestDescCount');
 
             const WORKER_URL = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
             const FETCH_TIMEOUT_MS = 110000; // 涵蓋 GPT 化驗 + DeepSeek 寫作雙階段
             const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+
+            /* v9.0 補充描述前端清洗（黃金法則一：限制 50 字 + 過濾危險符號）
+               後端 Worker 會用白名單再清洗一次（雙重保險），呢度主要係第一道閘 */
+            function sanitizeDescForSubmit(s) {
+                return String(s || '')
+                    .replace(/[\u0000-\u001f\u007f]/g, '')
+                    .replace(/[{}[\]<>"'`$\\;]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .slice(0, 50);
+            }
+            /* 即時字數計數器（0/50），到頂 maxlength 會自動截停 */
+            if (pestDescInput) {
+                pestDescInput.addEventListener('input', function() {
+                    if (pestDescCount) pestDescCount.textContent = String(this.value.length);
+                });
+            }
 
             let selectedFile = null;
             let previewUrl = null;
@@ -1385,6 +1462,8 @@
 
                     preprocessImage(file, function(blob) {
                         selectedFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
+                        /* 換新相 = 舊描述失效，自動清空避免張冠李戴 */
+                        if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
                         clearPreviewUrl();
                         previewUrl = URL.createObjectURL(blob);
                         imagePreview.src = previewUrl;
@@ -1410,6 +1489,9 @@
                     try {
                         const formData = new FormData();
                         formData.append('image', selectedFile);
+                        // v9.0 附加可選補充描述（多模態上下文先驗知識，≤50字環境線索）
+                        const userDesc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
+                        if (userDesc) formData.append('user_desc', userDesc);
 
                         const response = await fetch(WORKER_URL, {
                             method: 'POST',
@@ -1423,6 +1505,9 @@
 
                         if (response.ok && data && data.success && data.diagnosis) {
                             diagnosisText.innerHTML = renderDiagnosis(data.diagnosis);
+                            /* v9.1 信賴徽章：後端回報 user_desc_used 時顯示「已結合補充描述」
+                               （透明度建立信賴：客人知道 AI 有聽佢講嘢，報告唔係罐頭回覆） */
+                            if (descUsedNote) descUsedNote.style.display = data.user_desc_used ? 'block' : 'none';
 
                             loadingArea.style.display = 'none';
                             resultArea.style.display = 'block';
@@ -1448,6 +1533,10 @@
             if (btnReupload) {
                 btnReupload.addEventListener('click', function() {
                     selectedFile = null;
+                    /* 重新上傳 = 全新診斷，清空舊描述 */
+                    if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
+                    /* v9.1：收埋信賴徽章（下張相未必有描述） */
+                    if (descUsedNote) descUsedNote.style.display = 'none';
                     clearPreviewUrl();
                     pestImageInput.value = '';
                     resultArea.style.display = 'none';
