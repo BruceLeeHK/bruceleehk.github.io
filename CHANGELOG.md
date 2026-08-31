@@ -1,3 +1,42 @@
+# 修復日誌 (v9.3 — 2026-08-31)
+
+## v9.3 新增：遙距滅蟲服務（SERVICE 05）+ 海外業主遠程滅蟲攻略文章
+
+### 🌍 新增內容
+
+1. **服務頁 `/services/` 新增 SERVICE 05「遙距滅蟲 / 海外業主代辦」**（位於白蟻防治 SERVICE 04 之後）：
+   - 專業服務快捷導覽帶新增第 5 個按鈕「遙距滅蟲」（地球 icon，錨點跳轉 `#remote`）
+   - 服務標籤：海外港人專屬／全程相片彙報／AI 零時差診斷／交吉起租必備
+   - 服務特色與收費：全程遙距監工（施工前後相片/影片對比）／零時差對接（WhatsApp 國際專線＋24 小時 AI）／交吉起租深層防治（由 HK$1,500 起）／多渠道跨國付款
+   - 文中連結 `/ai/`（7x24 AI 害蟲分析系統）及 `/info/blog-10/`（攻略文章），與新文章互相呼應
+   - **JSON-LD**：新增 Service 結構化數據（serviceType: Remote Pest Control，areaServed 涵蓋香港/英國/加拿大/澳洲）
+   - meta description/keywords 加入「遙距滅蟲、海外業主、出租屋滅蟲代辦、交吉滅蟲」等長尾關鍵詞（中英簡三語）
+
+2. **新文章頁面 `/info/blog-10/`**：《【海外業主必讀】移民海外如何遙距處理香港物業蟲患？業主遠程滅蟲全攻略！》
+   - 文章結構：引言 → 3 大蟲患場景（出租物業／幫留港家人預約／交吉起租）→ 3 大痛點（時差／信任監工／付款單據）→ 3 招解決（AI 零時差診斷／全程相片彙報／跨國支付）→ 遙距預約 4 步曲 → 結語 → CTA → 5 條 FAQ
+   - **對比圖區塊**：「傳統困局：隔洋乾著急 VS 遙距新章：零時差監工」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51/64KB + jpg 94/112KB 雙格式）
+   - **內部連結（與遙距滅蟲服務相呼應）**：
+     - 遙距滅蟲代辦服務 → `/services/#remote`（雙向連結核心）
+     - AI 害蟲圖像診斷器／7x24 AI 害蟲診斷 → `/ai/`
+     - 滅蟲師傅（BruceLeeHK）／滅蟲師傅網站 → `/`（首頁）
+     - IPM 綜合防治 → `/info/blog-7/`
+     - 床蝨（木蝨） → `/services/#bedbug`
+   - **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD
+   - Meta Title/Description/Keywords 按文章文檔建議設定（涵蓋香港遙距滅蟲、海外業主香港滅蟲、出租屋滅蟲代辦等長尾詞）
+
+3. **英文服務頁 `/en/services/`**：新增 "🌍 Remote Pest Control / Overseas Owner Service" 卡片（呼應海外客群）
+
+4. **資訊列表頁**：中文版 `/info/` 及英文版 `/en/info/` 均新增 blog-10 卡片
+
+5. **sitemap.xml**：新增 blog-10 URL（lastmod 2026-08-31）；services 及 en/services lastmod 更新
+
+### 🎯 設計原則
+
+- 網站原有架構、設計風格、既有內容 100% 不變（blog-10 完整複用 blog-9 已驗證嘅 CSS 框架）
+- SERVICE 05 沿用既有 modern-card／number-badge／service-tags／pricing-box 組件，零新 CSS
+
+---
+
 # 修復日誌 (v9.2 — 2026-08-29)
 
 ## v9.2 新增：AI 行業趨勢 Blog 文章 + SEO 內部連結強化
