@@ -29,7 +29,7 @@
 
     if (currentLang === 'zh') {
       // From Chinese → English: prefix /en/
-      // Examples: /services/ → /en/services/, /info/blog-3/ → /en/info/blog-3/, / → /en/
+      // Examples: /services/ → /en/services/, /info/blog-10/ → /en/info/blog-10/, / → /en/
       let cleanPath = path.replace(/\/+$/, '');
       if (cleanPath === '') {
         return '/en/';
@@ -39,6 +39,12 @@
         cleanPath = cleanPath.replace('/index.html', '');
       } else if (cleanPath.endsWith('index.html')) {
         cleanPath = cleanPath.replace('index.html', '');
+      }
+      // Blog articles: only blog-10 has an English counterpart —
+      // fall back to the English Info Hub for all other posts (prevents 404)
+      const blogMatch = cleanPath.match(/^\/info\/blog-(\d+)$/);
+      if (blogMatch) {
+        return parseInt(blogMatch[1], 10) === 10 ? '/en/info/blog-10/' : '/en/info/';
       }
       return '/en' + (cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath) + (cleanPath.endsWith('/') ? '' : '/');
     } else {

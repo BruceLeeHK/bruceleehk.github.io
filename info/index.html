@@ -1099,10 +1099,10 @@ footer {
     }
     </script>
 
-    <!-- Dify Chatbot -->
+    <!-- AI 助手模組 -->
     <script src="/assets/js/i18n.js" defer></script>
     <script src="/assets/js/bruceleehk.js" defer></script>
-    <!-- Lazy-load Dify Chatbot (v5.1 性能優化) -->
+    <!-- Lazy-load AI 助手 (v5.1 性能優化) -->
     <div id="lazy-dify-bubble" style="position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.5);z-index:998;border:none;transition:transform 0.2s;" role="button" tabindex="0" aria-label="開啟滅蟲師妹 AI 助手">
         <i class="fa-solid fa-robot" aria-hidden="true"></i>
     </div>
@@ -1122,7 +1122,7 @@ footer {
             s.id = 'C3DvioLaCmagSaUc';
             s.defer = true;
             document.head.appendChild(s);
-            // Hide the manual bubble once Dify loads its own
+            // Hide the manual bubble once the assistant widget loads
             setTimeout(function() {
                 bubble.style.display = 'none';
             }, 1500);

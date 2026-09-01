@@ -939,7 +939,7 @@
                                     <div class="ai-loading">
                                         <div class="ai-spinner" aria-hidden="true"></div>
                                         <p class="ai-loading-text" style="color: var(--primary-dark); font-weight: bold;">
-                                            <i class="fa-solid fa-microchip"></i> 滅蟲師妹 AI 雙腦分析中（視覺化驗 + 智庫配對），請稍等約 15-30 秒...
+                                            <i class="fa-solid fa-microchip"></i> 滅蟲師妹 AI 智能分析中（視覺辨識 + 智庫配對），請稍等約 15-30 秒...
                                         </p>
                                     </div>
                                 </div>
@@ -1294,7 +1294,7 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // AI 診斷 API 串接邏輯 (v9.1 — MoE 雙腦 + 多模態上下文先驗知識版)
+        // AI 診斷引擎串接邏輯 (v9.1 — 多引擎協同 + 多模態上下文先驗知識版)
         // 優化重點：影像預處理提升識圖準確度、110秒防卡死超時、
         // 錯誤分類 + 頁內錯誤卡片（取代突兀 alert）、記憶體洩漏修復、
         // v9.0 新增：可選補充描述（≤50字）提供環境線索，AI 結合圖片+線索大幅提升準確度
@@ -1314,7 +1314,7 @@
             const pestDescCount = document.getElementById('pestDescCount');
 
             const WORKER_URL = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
-            const FETCH_TIMEOUT_MS = 110000; // 涵蓋 GPT 化驗 + DeepSeek 寫作雙階段
+            const FETCH_TIMEOUT_MS = 110000; // 涵蓋視覺化驗 + 智庫寫作雙階段
             const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
             /* v9.0 補充描述前端清洗（黃金法則一：限制 50 字 + 過濾危險符號）
@@ -1376,8 +1376,8 @@
 
             /* 分階段載入提示 + 已等待秒數（管理用戶期望，減少中途放棄） */
             const LOADING_STAGES = [
-                'AI 雙腦分析中（視覺化驗 + 智庫配對），請稍等約 15-30 秒...',
-                '👁️ 視覺化驗師 GPT 正在提取蟲體特徵（觸角、體型、紋路）…',
+                'AI 智能分析中（視覺辨識 + 智庫配對），請稍等約 15-30 秒...',
+                '👁️ 多模態視覺引擎正在提取蟲體特徵（觸角、體型、紋路）…',
                 '📚 滅蟲智庫配對緊「三十六計」防治策略…',
                 '✍️ 師妹執緊份廣東話診斷報告，快好喇…'
             ];

@@ -1,3 +1,64 @@
+# 修復日誌 (v9.4 — 2026-09-01)
+
+## v9.4 三大修正：AI 架構去品牌化 + 英文版 blog-10 補完 + PageSpeed 優化
+
+### 🕵️ 1. AI 害蟲診斷系統「去品牌化」整改（依《修正架構圖文字.docx》方案）
+
+**目標：清晰、專業權威、保持神秘感 — 隱藏背後技術供應商**
+
+架構圖文字全面替換（對照文檔五站點方案）：
+
+| 位置 | 原字眼 | 新字眼 |
+|------|--------|--------|
+| 客戶端入口 | Web: WalzApp Platform / User Patient | Omnichannel Smart Portal（全渠道智能入口）/ Client Interface |
+| 雲端邊緣傳輸 | Cloudfare Worker | Edge Computing Network（邊緣運算網絡）|
+| 核心 AI 大腦 | Vision AI API Data Transier | Multimodal Vision Engine（多模態視覺引擎）|
+| 獨家知識庫 | 36 Data Library | Proprietary IPM Knowledge Base（獨家 IPM 綜合防治智庫）|
+| 診斷與報價輸出 | Stattcy Matching…/ Diagnosis Card Piaeit / Price Estimate | Dynamic Strategy Matrix（動態策略矩陣）/ Automated Diagnostic & Quote |
+
+具體修改：
+
+1. **`/ai/` 架構圖以專業 inline SVG 重新繪製**（取代原 AI 生成 jpg 圖，杜絕圖中 "WalzApp / Cloudfare / Transier / Stattcy / Piaeit" 等 AI 錯字）：
+   - 五站點流程：全渠道智能入口 → 邊緣運算網絡 → 多模態視覺引擎（核心）→ 獨家 IPM 綜合防治智庫 → 動態策略矩陣
+   - 中英雙語標籤、統一科技藍扁平 Icon、無第三方 Logo、發光效果收斂（依文檔視覺建議）
+   - 附帶性能紅利：減少一個 108KB 圖片請求，SVG 任何解像度都清晰
+2. **`/ai/` 可見字眼替換**：「DeepSeek 大腦」→「多模態視覺引擎」；「Cloudflare 圖像預處理」→「邊緣運算網絡圖像預處理」；「Dify 邏輯大腦深度思考中」→「IPM 防治智庫邏輯推演中」；架構六步驟卡全數採用文檔英文術語
+3. **首頁 `/` AI 診斷流程文案**：「視覺化驗師 GPT」→「多模態視覺引擎」；「AI 雙腦分析（視覺化驗+智庫配對）」→「AI 智能分析（視覺辨識+智庫配對）」
+4. **`/info/blog-4/` 修正隱藏外連**：正文「滅蟲師傅」文字誤連去 `cloud.dify.ai/apps` 後台 → 改連回 `/` 首頁（嚴重品牌外洩）
+5. **`/en/ai/`** 徽章「AI Vision Recognition」→「Multimodal Vision Recognition」
+6. **原始碼註解清理**（HTML/JS 註解唔會畀一般訪客見到，但 view-source 會暴露）：`<!-- Dify Chatbot -->` → `<!-- AI 助手模組 -->` 等，覆蓋全部 19 個 HTML + bruceleehk.js
+7. **功能層零改動**：CSP、preconnect、udify.app embed、workers.dev 端點、difyChatbotConfig 等 SDK 合約全部保留，AI 診斷同聊天助手功能不受影響
+
+### 🌍 2. 英文版 blog-10 補完（修正 EN 404）
+
+1. **新增 `/en/info/blog-10/`**：《Managing HK Property Pests from Overseas? The Complete Remote Pest Control Guide》完整英文版：
+   - 與中文版 100% 同款設計框架（同一套 inline CSS／對比圖／FAQ 手風琴／CTA）
+   - 全文專業英文翻譯（3 大場景、3 大痛點、3 招解決、4 步預約、5 條 FAQ）
+   - BreadcrumbList + Article + FAQPage 三段英文 JSON-LD
+   - 內部連結指向英文版（/en/services/#remote、/en/ai/ 等）；WhatsApp 預填訊息改英文
+   - 效能規格與中文版一致（webp 預載、lazy loading、async FA、defer JS）
+2. **修正 404 根因**：`i18n.js` 語言切換器將 `/info/blog-10/` 直接映射 `/en/info/blog-10/`，但該頁從未存在 → 現已建立
+3. **i18n.js 加入 fallback 防護**：冇英文版嘅網誌（blog-1 至 blog-9）撳 EN 會去 `/en/info/` 資訊主頁，唔會再 404
+4. **zh blog-10 加入 `<link rel="alternate" hreflang="en">`**；canonical/hreflang 結構完整
+5. **`/en/info/` 列表卡**：blog-10 卡片改連 `/en/info/blog-10/`，徽章加「· EN」標示，頂部提示更新為「最新遙距滅蟲指南已提供英文版」
+6. **sitemap.xml**：新增 `/en/info/blog-10/` URL（含 zh-HK/en/x-default hreflang），zh blog-10 lastmod 更新至 2026-09-01
+
+### ⚡ 3. PageSpeed 手機效能優化（目標 ≥90）
+
+1. **修正 Hero 圖「預載浪費」**（16 個頁面）：`<link rel="preload">` 預載 `hero-tech.webp`（65KB）但 CSS 背景卻用 `hero-tech.jpg`（114KB）→ 瀏覽器實際下載兩個檔共 179KB，且 LCP 用咗大嘅 jpg。已將 CSS 背景統一改用 webp，preload 生效，LCP 減輕約 100KB
+   - 涉及：全部 blog-1 至 blog-10、en/ 首頁、en/services、en/strategy、en/info、en/info/vote
+2. **en/ai、en/quote** hero 背景同樣 jpg → webp（慳約 40KB）
+3. **`/ai/` 移除 108KB 架構圖 jpg 請求**（改 inline SVG，見上）
+4. 既有基礎保持：圖片 lazy loading + width/height 防 CLS、Font Awesome CDN 異步載入、i18n/bruceleehk.js defer、_headers 長期快取策略不變
+
+### 🎯 設計原則
+
+- 網站整體架構、設計風格、既有內容 100% 不變
+- 所有品牌詞替換嚴格採用《修正架構圖文字.docx》建議詞匯，中英對照一致
+- 功能性基礎設施（CSP／SDK 合約／Worker 端點）零改動，診斷與聊天功能不受影響
+
+---
+
 # 修復日誌 (v9.3 — 2026-08-31)
 
 ## v9.3 新增：遙距滅蟲服務（SERVICE 05）+ 海外業主遠程滅蟲攻略文章

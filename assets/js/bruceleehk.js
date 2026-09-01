@@ -7,7 +7,7 @@
    - Added ESC key + outside-click to close mobile menu
    - Added reduced-motion respect for animations
    - Hero quick-quote form now respects current language when composing WhatsApp message
-   Note: AI 害蟲診斷邏輯由各頁面底部 Script 串接 Cloudflare Vision + Dify
+   Note: AI 害蟲診斷邏輯由各頁面底部 Script 串接智能診斷引擎
    ============================================================ */
 
 (function () {
@@ -62,7 +62,7 @@
     }
 
     /* ---------- Floating AI Assistant (右下角滅蟲師妹視窗控制) ---------- */
-    /* v5.1 性能優化：Dify iframe 改為按鈕點擊後才載入，避免阻塞首屏渲染 */
+    /* v5.1 性能優化：AI 助手 iframe 改為按鈕點擊後才載入，避免阻塞首屏渲染 */
     function initFloatingAI() {
         const btn = document.getElementById('floating-ai-btn');
         const popup = document.getElementById('ai-popup');
@@ -72,7 +72,7 @@
 
         let iframeLoaded = false;
 
-        // 點擊按鈕時先動態載入 Dify iframe，再開啟彈窗
+        // 點擊按鈕時先動態載入 AI 助手 iframe，再開啟彈窗
         btn.addEventListener('click', () => {
             // 第一次點擊時先載入 iframe（慳 2.2MB 首屏流量）
             if (aiIframe && !iframeLoaded) {
