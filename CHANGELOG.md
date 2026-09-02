@@ -1,3 +1,43 @@
+# 修復日誌 (v9.5 — 2026-09-02)
+
+## v9.5 修正：英文版 blog-1 至 blog-9 全面補完（消除 EN 404）
+
+### 🌍 1. 九篇英文版文章一次過補齊
+
+按照 v9.4 修復 blog-10 嘅同一套方法（gen 腳本 exact-string 替換 + checker 驗收），為
+`/en/info/blog-1/` 至 `/en/info/blog-9/` 建立完整英文版：
+
+| 文章 | EN 標題 | 規模 |
+|------|---------|------|
+| blog-1 選擇滅蟲公司 5 大指標 | Best Pest Control Company in HK 2026 | ~900 詞 |
+| blog-2 2026 專業新視角 | 2026: Our Professional Outlook | ~700 詞 |
+| blog-3 2026 滅蟲公司推介 | 2026 Pest Control Company Recommendation | ~700 詞 |
+| blog-4 家居滅蟲方案 | 2026 Home Pest Control Plans | ~740 詞 |
+| blog-5 床蝨檢查治理預防 | Bed Bug Inspection & Prevention Guide | ~860 詞 |
+| blog-6 白蟻定螞蟻 | Termite vs Ant: How to Tell Them Apart | ~1,300 詞 |
+| blog-7 滅蟲收費行情 | 2026 Pest Control Prices in Hong Kong | ~2,180 詞（24 個 HK$ 價格全保留）|
+| blog-8 害蟲抗藥性真相 | Why Insecticides Stop Working | ~1,300 詞（10 條 FAQ 全譯）|
+| blog-9 AI 智慧滅蟲共贏 | Will AI Replace Pest Controllers? | ~1,300 詞 |
+
+每篇均含：BreadcrumbList + Article + FAQPage 三段英文 JSON-LD（日期保留原值）、
+內部連結全數指向英文版、WhatsApp 預填英文訊息、與中文版 100% 同款設計框架。
+驗收：`check_en_blog.py` 十篇全 PASS（標籤平衡／JSON-LD valid／無殘留中文／連結全 EN）。
+
+### 🔗 2. 配套修正
+
+1. **`i18n.js`**：語言切換器 blog-1~9 由「fallback 去英文資訊頁」改為「直接映射 `/en/info/blog-N/`」——訪客撳 EN 即達對應英文文章（未來新文章仍 fallback 去hub，杜絕 404）
+2. **`en/info/` 資訊樞紐**：10 張文章卡全部改連英文版＋徽章加「· EN」標記；原卡片標題同實際文章內容不符（例如 blog-1 卡寫「Bed Bug Guide」但文章實為選擇指南）已按實際內容修正；提示盒更新為「全部文章備有英文版」
+3. **`zh info/blog-9`**：head 補返缺失嘅 `hreflang="en"` 行（blog-1~8 之前已有）
+4. **`en/info/blog-10`**：內文 IPM 連結由中文版 `/info/blog-7/` 改指英文版 `/en/info/blog-7/`
+5. **`sitemap.xml`**：新增 9 個 EN 文章 URL（總數 25→34），blog-1~9 中英條目齊備 zh-HK/en/x-default 三向 hreflang；blog-9 zh lastmod 更新至 2026-09-02
+6. **`en/info/blog-10` og:site_name** 統一為「Pest Control Master 滅蟲師傅」（同其他 EN 頁一致）
+
+### 📦 部署
+
+打包 `bruceleehk-v9.5-github-upload.zip`（139 files），覆蓋上傳 GitHub 即生效。
+
+---
+
 # 修復日誌 (v9.4 — 2026-09-01)
 
 ## v9.4 三大修正：AI 架構去品牌化 + 英文版 blog-10 補完 + PageSpeed 優化

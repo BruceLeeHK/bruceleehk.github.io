@@ -40,11 +40,14 @@
       } else if (cleanPath.endsWith('index.html')) {
         cleanPath = cleanPath.replace('index.html', '');
       }
-      // Blog articles: only blog-10 has an English counterpart —
-      // fall back to the English Info Hub for all other posts (prevents 404)
+      // Blog articles: every post (blog-1 … blog-10) now has an English counterpart
       const blogMatch = cleanPath.match(/^\/info\/blog-(\d+)$/);
       if (blogMatch) {
-        return parseInt(blogMatch[1], 10) === 10 ? '/en/info/blog-10/' : '/en/info/';
+        const n = parseInt(blogMatch[1], 10);
+        if (n >= 1 && n <= 10) {
+          return '/en/info/blog-' + n + '/';
+        }
+        return '/en/info/';  // future posts without EN version → Info Hub fallback
       }
       return '/en' + (cleanPath.startsWith('/') ? cleanPath : '/' + cleanPath) + (cleanPath.endsWith('/') ? '' : '/');
     } else {
