@@ -1,6 +1,6 @@
 # 修復日誌 (v9.7 — 2026-09-05)
 
-## v9.7 優化：AI 診斷提速（解決 30 秒逾時）+ 補充描述欄位 + WhatsApp Channel（依《優化引流到 VIP 包廂+Whats頻道.docx》）
+## v9.7 優化：AI 診斷提速（解決 30 秒逾時）+ 補充描述欄位 + WhatsApp Channel + 全站 Footer 頻道化（依《優化引流到 VIP 包廂+Whats頻道.docx》+ 用戶追加指示）
 
 ### 1️⃣ 解決「AI 處理逾時（超過 30 秒）」（文檔指定：前端圖片壓縮治本）
 
@@ -29,15 +29,33 @@
 「👉 立即加入 WhatsApp 頻道」→ https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42
 （`target="_blank"` 唔會關閉原診斷結果）。將一次性訪客轉化為長期潛在客戶。
 
+### 4️⃣ 全站 Footer WhatsApp 小圖標 → WhatsApp 頻道連結（用戶追加指示）
+
+頁面底部社交圖標列（Instagram → X → **WhatsApp** → Gmail → YouTube）中間嘅
+WhatsApp 小圖標，由個人號 `wa.me/85252821552` 改為頻道
+`https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42`，
+繁中 + EN 全站同步——與結果頁訂閱按鈕（第 3 點）同一條頻道連結，引流口徑統一。
+
+- **只動 footer 圖標**：腳本以 `<footer>` 區間包夾 + 驗證 aria-label/title="WhatsApp"，
+  頁面其他 wa.me CTA（hero 按鈕／浮動按鈕／thumb zone／AI 副選項）全部保持不變
+- **34 個檔案替換**：zh 17 頁 + en 17 頁（含兩版 404 頁）
+- **合理豁免 4 個**：`info/vote/` 兩版（footer 本身無社交圖標）、
+  `info/vote/admin.html`（後台）、Google 驗證檔
+- 每檔案四重驗證：wa.me 計數 −1、channel 計數 +1、`<a>` 標籤平衡、
+  footer 區間內 wa.me 恰好 1 處；全站終檢 0 個 footer wa.me 殘留
+
 ### ✅ 驗收
 
 - 11 處 exact-string 替換全命中；舊 30s/1200 零殘留；標籤平衡；`node --check` 通過
+- Footer 頻道化：34 檔案替換 + 4 豁免，全站 footer 0 wa.me 殘留，
+  全站共 36 處 channel 連結（35 檔案；ai 頁 2 處 = footer + 結果頁）與預期完全一致
 - agent-browser 手機 viewport 全流程實測（頁內 mock Worker 回應，零真實 API 消耗）：
   5MB 保護罩正常拒收 5.25MB 檔案 → 3.56MB 原圖自動壓到 264KB 上傳 →
   補充描述隨請求送出 → 結果報告渲染 → WhatsApp Channel 按鈕就位 →
   重新上載描述清空，console 零錯誤
-- 只改 `ai/index.html` 一個檔案；首頁入口卡、EN 版（本身無 AI 上傳系統）、
-  Worker 後端等其他一切不變
+- 改動範圍：第一階段（AI 提速三點）只改 `ai/index.html`；
+  第二階段（Footer 頻道化）改全站 34 個 HTML。Worker 後端、共用 JS、
+  sitemap、CSS 等其他一切不變
 
 ---
 
