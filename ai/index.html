@@ -602,6 +602,15 @@
                                 <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> 選擇相片</span>
                                 <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/webp">
                             </label>
+                            <!-- v9.7 補充發現位置或情況（可選填）— 環境線索助 AI 配對更精準「三十六計」 -->
+                            <div style="margin-top:14px; text-align:left;">
+                                <label for="pestDescInput" style="display:block; font-weight:700; color:var(--dark-bg); font-size:0.9rem; margin-bottom:6px;">
+                                    <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 補充發現位置或情況
+                                    <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">（可選填・填咗 AI 配對三十六計更精準）</span>
+                                </label>
+                                <textarea id="pestDescInput" maxlength="50" rows="2" placeholder="例：廚房灶頭底發現，半夜開燈先見到" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1.5px solid #cbd5e1; border-radius:8px; font-size:0.9rem; font-family:inherit; line-height:1.5; resize:vertical; background:#fff; color:var(--text-main);"></textarea>
+                                <div style="text-align:right; font-size:0.72rem; color:var(--text-muted); margin-top:3px;"><span id="pestDescCount">0</span>/50</div>
+                            </div>
                             <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px 14px;border-radius:6px;font-size:0.82rem;margin-top:14px;line-height:1.6;">
                                         <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                                         <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，系統會自動抹除 GPS 定位並於分析後立即銷毀，絕不存檔，100% 保障您的家居私隱。
@@ -672,6 +681,18 @@
                                 <button type="button" class="btn btn-dark" id="r-reupload">
                                     <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 重新上載新相片
                                 </button>
+                            </div>
+                            <!-- WhatsApp Channel 訂閱按鈕區塊（v9.7 — 診斷報告最下方，趁熱打鐵轉化長期粉絲） -->
+                            <div style="margin-top:25px; padding:20px; background-color:#f0fdf4; border:1px solid #22c55e; border-radius:10px; text-align:center;">
+                                <h4 style="color:#166534; font-weight:bold; margin-bottom:10px; font-size:16px;">
+                                    💡 覺得 AI 認蟲好準、好有用？
+                                </h4>
+                                <p style="color:#15803d; font-size:14px; margin-bottom:15px;">
+                                    加入我哋 WhatsApp 頻道，接收香港轉季防蟲資訊及居家避雷指南！
+                                </p>
+                                <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42" target="_blank" rel="noopener noreferrer" style="display:inline-block; background-color:#25D366; color:white; padding:12px 24px; text-decoration:none; border-radius:8px; font-weight:bold; font-size:15px; box-shadow:0 4px 6px rgba(37,211,102,0.3); transition:all 0.3s ease;">
+                                    👉 立即加入 WhatsApp 頻道
+                                </a>
                             </div>
                         </div>
 
@@ -971,6 +992,9 @@
             const resultImg = document.getElementById('result-img');
             const diagnosisText = document.getElementById('diagnosisText');
             const btnReupload = document.getElementById('r-reupload');
+            // v9.7 補充描述欄位（可選填環境線索）
+            const pestDescInput = document.getElementById('pestDescInput');
+            const pestDescCount = document.getElementById('pestDescCount');
 
             // 步驟動畫元素
             const steps = [
@@ -981,6 +1005,24 @@
             ];
 
             let selectedFile = null;
+
+            /* v9.7 即時字數計（0/50），到頂 maxlength 自動截停 */
+            if (pestDescInput) {
+                pestDescInput.addEventListener('input', function() {
+                    if (pestDescCount) pestDescCount.textContent = String(this.value.length);
+                });
+            }
+
+            /* v9.7 描述前端清洗（黃金法則：限 50 字 + 過濾危險符號）
+               Worker 端會用白名單再清洗一次（雙重保險） */
+            function sanitizeDescForSubmit(s) {
+                return String(s || '')
+                    .replace(/[\u0000-\u001f\u007f]/g, '')
+                    .replace(/[{}[\]<>"'`$\\;]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .slice(0, 50);
+            }
 
             // EXIF 閹割函數 — 利用 Canvas 重繪相片，徹底抹除所有 GPS / 相機 / 時間等元數據
             function stripExifAndCompress(file, maxWidth, callback) {
@@ -999,12 +1041,28 @@
                         canvas.width = width;
                         canvas.height = height;
                         // 將圖片畫上 Canvas — 此動作會徹底破壞丟棄所有 EXIF/GPS 數據
+                        // v9.7 白底填充：透明底 PNG 轉 JPEG 唔會變黑底
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
                         ctx.drawImage(img, 0, 0, width, height);
-                        canvas.toBlob(function(blob) {
-                            // 輸出為壓縮過嘅 JPEG，並回傳乾淨嘅 File + 預覽 URL
-                            const cleanFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
-                            callback(cleanFile, URL.createObjectURL(blob));
-                        }, 'image/jpeg', 0.85);
+                        /* v9.7 自適應降質：目標 ≤ 700KB（1024px @ 4G 上載約 1-2 秒，
+                           上載+AI思考+回傳 < 20 秒，徹底避開 30 秒逾時死線，
+                           同時大幅節省 AI Token 費用） */
+                        const TARGET_BYTES = 700 * 1024;
+                        const QUALITIES = [0.82, 0.7, 0.6, 0.5];
+                        const self = this;
+                        function emitAt(qualityIdx) {
+                            canvas.toBlob(function(blob) {
+                                if (!blob) { alert('相片處理失敗，請重新選擇！'); return; }
+                                if (blob.size > TARGET_BYTES && qualityIdx < QUALITIES.length - 1) {
+                                    emitAt(qualityIdx + 1);   // 仍然太大 → 再降質重壓
+                                    return;
+                                }
+                                const cleanFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
+                                callback(cleanFile, URL.createObjectURL(blob));
+                            }, 'image/jpeg', QUALITIES[qualityIdx]);
+                        }
+                        emitAt(0);
                     };
                     img.src = evt.target.result;
                 };
@@ -1034,7 +1092,7 @@
                     }
 
                     // 第 0 步：先用 Canvas 閹割 EXIF + 壓縮，再顯示預覽
-                    stripExifAndCompress(file, 1200, function(cleanFile, previewUrl) {
+                    stripExifAndCompress(file, 1024, function(cleanFile, previewUrl) {
                         selectedFile = cleanFile;
                         resultImg.src = previewUrl;
 
@@ -1047,10 +1105,15 @@
                         // 2. 發送 API 請求（使用乾淨嘅 File）
                         const formData = new FormData();
                         formData.append('image', selectedFile);
+                        // v9.7 附加可選補充描述（環境線索助 AI 收窄判定範圍）
+                        const userDesc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
+                        if (userDesc) formData.append('user_desc', userDesc);
 
-                        // 前端 30 秒 AbortController 超時保護
+                        /* v9.7 前端 60 秒 AbortController 超時保護
+                           （配合前端壓縮：上載 1-2 秒 + AI 思考 10-15 秒，一般 20 秒內完成；
+                             60 秒上限只係最後防線，正常網絡下唔會掂到） */
                         const aiController = new AbortController();
-                        const aiTimeoutId = setTimeout(() => aiController.abort(), 30000);
+                        const aiTimeoutId = setTimeout(() => aiController.abort(), 60000);
 
                         fetch('https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest', {
                             method: 'POST',
@@ -1095,7 +1158,7 @@
                                 console.error('AI 診斷錯誤:', error);
                                 let msg;
                                 if (error.name === 'AbortError') {
-                                    msg = 'AI 視覺模型處理逾時（超過 30 秒），請稍後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                                    msg = 'AI 視覺模型處理逾時（超過 60 秒），請檢查網絡後再試一次！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
                                 } else if (error.message && error.message.includes('Failed to fetch')) {
                                     msg = '無法連線至 AI 伺服器，請檢查網絡後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
                                 } else {
@@ -1113,6 +1176,8 @@
             if (btnReupload) {
                 btnReupload.addEventListener('click', function() {
                     selectedFile = null;
+                    /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
+                    if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
                     pestPhotoInput.value = '';
                     resultState.classList.remove('active');
                     uploadState.classList.add('active');
