@@ -891,74 +891,32 @@
                         <p>上載害蟲相片即可自動識別種類，精準研判繁衍路徑並配對獨家「三十六計」應對策略。</p>
                         <a href="/ai/" class="smart-card-link">查看完整版系統 →</a>
 
-                        <!-- AI Diagnosis Embedded Card -->
+                        <!-- AI 診斷入口卡 — v9.6 引流到 VIP 包廂：
+                             首頁實戰短片／輪播會同 AI 相片上傳爭奪手機頻寬（60 秒超時主因），
+                             依《引流到 VIP 包廂》方案 A 改為入口：點擊即跳轉到乾淨嘅
+                             專屬【AI 害蟲分析系統】頁 (/ai/) 完成診斷，Wi-Fi / 4G / 5G 均秒速出報告；
+                             飛行模式／離線：雲端 AI 需要網絡先可用，即時偵測並顯示友善提示 -->
                         <div class="ai-embedded">
                             <p class="ai-embedded-title">
                                 <span class="live-dot" aria-hidden="true"></span>
                                 7×24 AI 即時診斷估價
                             </p>
-                            <div class="ai-states">
-                                
-                                <!-- 1. 上傳區 -->
-                                <div id="uploadBox" style="display: block;">
-                                    <label class="ai-upload-area" for="pestImageInput">
-                                        <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
-                                        <h4>上載或拍攝害蟲相片</h4>
-                                        <p>JPG / PNG ≤ 5MB • 可拍照或從相簿選擇</p>
-                                        <span class="ai-upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> 選擇相片</span>
-                                        <input type="file" id="pestImageInput" accept="image/jpeg,image/png,image/webp">
-                                    </label>
-                                    <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:8px 12px;border-radius:6px;font-size:0.74rem;margin-top:10px;line-height:1.5;">
-                                        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                                        <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，系統會自動抹除 GPS 定位並於分析後立即銷毀，絕不存檔，100% 保障您的家居私隱。
-                                    </div>
-                                </div>
-
-                                <!-- 2. 預覽與確認區 -->
-                                <div id="previewArea" style="display: none; text-align: center; padding: 10px 0;">
-                                    <img id="imagePreview" src="" alt="預覽相片" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); margin-bottom: 15px;">
-                                    <br>
-                                    <!-- v9.0 多模態上下文先驗：可選補充描述（環境線索助 AI 收窄判定範圍） -->
-                                    <div class="ai-desc-field">
-                                        <label class="ai-desc-label" for="pestDescInput">
-                                            <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 補充發現位置或情況
-                                            <span class="ai-desc-optional">（可選・唔填都即刻化驗）</span>
-                                        </label>
-                                        <textarea id="pestDescInput" maxlength="50" rows="2" autocomplete="off"
-                                            aria-describedby="pestDescCount"
-                                            placeholder="例：廚房灶頭底發現，半夜開燈先見到"></textarea>
-                                        <div class="ai-desc-count"><span id="pestDescCount">0</span>/50</div>
-                                    </div>
-                                    <button class="btn btn-primary" id="btnAnalyze" type="button" style="width: 100%;">
-                                        <i class="fa-solid fa-wand-magic-sparkles"></i> 開始 AI 智能診斷
-                                    </button>
-                                </div>
-
-                                <!-- 3. 載入中 -->
-                                <div id="loadingArea" style="display: none;">
-                                    <div class="ai-loading">
-                                        <div class="ai-spinner" aria-hidden="true"></div>
-                                        <p class="ai-loading-text" style="color: var(--primary-dark); font-weight: bold;">
-                                            <i class="fa-solid fa-microchip"></i> 滅蟲師妹 AI 智能分析中（視覺辨識 + 智庫配對），請稍等約 15-30 秒...
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- 4. 診斷結果區 -->
-                                <div id="resultArea" style="display: none; text-align: left; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid var(--primary); margin-top: 10px; box-shadow: var(--shadow-sm);">
-                                    <h4 style="color: var(--primary-dark); margin: 0 0 10px 0;"><i class="fa-solid fa-clipboard-check"></i> 滅蟲師妹 AI 診斷報告</h4>
-                                    <!-- v9.1 信賴徽章：AI 有聽客人講嘢（透明度 → 客戶信賴），有補充描述時先顯示 -->
-                                    <p id="descUsedNote" style="display: none; margin: 0 0 10px; font-size: 0.75rem; line-height: 1.5; color: var(--primary-dark); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: 6px; padding: 6px 10px;">
-                                        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                                        <strong>已結合你嘅補充描述一齊分析：</strong>環境線索已納入 AI 判定參考，報告更貼合你嘅實際情況。
-                                    </p>
-                                    <div id="diagnosisText" style="line-height: 1.7; color: var(--text-main); font-size: 0.92rem;"></div>
-                                    
-                                    <button type="button" class="btn btn-ghost" id="btnReupload" style="margin-top: 15px; width: 100%;">
-                                        <i class="fa-solid fa-rotate-right"></i> 重新上傳相片
-                                    </button>
-                                </div>
-
+                            <div id="aiEntryOfflineWrap" aria-live="polite" style="display:none;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.3);color:#b91c1c;padding:8px 12px;border-radius:6px;font-size:0.74rem;margin-bottom:10px;line-height:1.5;">
+                                <i class="fa-solid fa-plane" aria-hidden="true"></i>
+                                <strong>目前離線／飛行模式：</strong>雲端 AI 診斷需要網絡先可用（全世界雲端 AI 都一樣）。開返 Wi-Fi 或流動數據之後再撳下面按鈕，即刻可以免費得出 AI 分析報告。
+                            </div>
+                            <p style="color:var(--text-muted);font-size:0.82rem;line-height:1.6;margin:0 0 12px;">
+                                喺專屬「AI 害蟲分析系統」頁面完成診斷 — 避開首頁影片搶佔頻寬，手機喺 <strong>Wi-Fi / 4G / 5G</strong> 環境下均秒速上傳，約 15-30 秒即出廣東話 AI 診斷報告。
+                            </p>
+                            <a href="/ai/" id="aiEntryBtn" class="btn btn-primary" style="width:100%;">
+                                <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> 上載相片・即刻 AI 診斷
+                            </a>
+                            <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E4%BD%BF%E7%94%A8AI%E5%AE%B3%E8%9F%B2%E8%A8%BA%E6%96%B7" target="_blank" rel="noopener" class="ai-wa-link" style="margin-top:10px;">
+                                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 或直接 WhatsApp 搵師妹 AI 診斷
+                            </a>
+                            <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:8px 12px;border-radius:6px;font-size:0.74rem;margin-top:10px;line-height:1.5;">
+                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                                <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，系統會自動抹除 GPS 定位並於分析後立即銷毀，絕不存檔，100% 保障您的家居私隱。
                             </div>
                         </div>
 
@@ -1294,260 +1252,38 @@
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
 
-        // AI 診斷引擎串接邏輯 (v9.1 — 多引擎協同 + 多模態上下文先驗知識版)
-        // 優化重點：影像預處理提升識圖準確度、110秒防卡死超時、
-        // 錯誤分類 + 頁內錯誤卡片（取代突兀 alert）、記憶體洩漏修復、
-        // v9.0 新增：可選補充描述（≤50字）提供環境線索，AI 結合圖片+線索大幅提升準確度
-        // v9.1 新增：信賴徽章（已結合補充描述）— 將 AI 透明度轉化為客戶信賴
+        // v9.6 AI 診斷入口（引流到 VIP 包廂）：
+        // 首頁嘅實戰短片、三十六計輪播、高清架構圖會同 AI 相片上傳爭奪手機頻寬，
+        // 係「分析超過 60 秒未完成」嘅主因（資源爭奪 Resource Contention）。
+        // 依《引流到 VIP 包廂》方案 A：首頁 AI 區塊改為入口，撳一下即跳轉到
+        // 乾淨嘅專屬【AI 害蟲分析系統】頁 (/ai/) 完成診斷 —
+        // Wi-Fi / 4G / 5G 環境下均秒速上傳，約 15-30 秒出廣東話報告。
+        // 飛行模式／離線：雲端 AI 100% 需要網絡（全世界雲端 AI 都一樣），
+        // 呢度做即時偵測 + 友善提示，客人唔會再白等 60 秒先收到失敗訊息。
         document.addEventListener('DOMContentLoaded', function() {
-            const pestImageInput = document.getElementById('pestImageInput');
-            const uploadBox = document.getElementById('uploadBox');
-            const previewArea = document.getElementById('previewArea');
-            const imagePreview = document.getElementById('imagePreview');
-            const btnAnalyze = document.getElementById('btnAnalyze');
-            const loadingArea = document.getElementById('loadingArea');
-            const resultArea = document.getElementById('resultArea');
-            const diagnosisText = document.getElementById('diagnosisText');
-            const btnReupload = document.getElementById('btnReupload');
-            const descUsedNote = document.getElementById('descUsedNote');
-            const pestDescInput = document.getElementById('pestDescInput');
-            const pestDescCount = document.getElementById('pestDescCount');
+            var entryLink = document.getElementById('aiEntryBtn');
+            var offlineWrap = document.getElementById('aiEntryOfflineWrap');
 
-            const WORKER_URL = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
-            const FETCH_TIMEOUT_MS = 110000; // 涵蓋視覺化驗 + 智庫寫作雙階段
-            const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-
-            /* v9.0 補充描述前端清洗（黃金法則一：限制 50 字 + 過濾危險符號）
-               後端 Worker 會用白名單再清洗一次（雙重保險），呢度主要係第一道閘 */
-            function sanitizeDescForSubmit(s) {
-                return String(s || '')
-                    .replace(/[\u0000-\u001f\u007f]/g, '')
-                    .replace(/[{}[\]<>"'`$\\;]/g, '')
-                    .replace(/\s+/g, ' ')
-                    .trim()
-                    .slice(0, 50);
-            }
-            /* 即時字數計數器（0/50），到頂 maxlength 會自動截停 */
-            if (pestDescInput) {
-                pestDescInput.addEventListener('input', function() {
-                    if (pestDescCount) pestDescCount.textContent = String(this.value.length);
-                });
+            function refreshOfflineUI() {
+                if (!offlineWrap) return;
+                offlineWrap.style.display = navigator.onLine ? 'none' : 'block';
             }
 
-            let selectedFile = null;
-            let previewUrl = null;
-            let loadingTimer = null;
-
-            function clearPreviewUrl() {
-                if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
-            }
-
-            /* 影像預處理（識圖準確度關鍵）：
-               1. 新式瀏覽器自動按 EXIF 轉正相片（橫直唔會調轉）
-               2. 透明底 PNG 先填白再轉 JPEG，避免黑底遮蓋蟲體特徵
-               3. 長邊上限 1280px、質量 0.85 — 保留觸角/紋路細節，同時加快上傳 */
-            function preprocessImage(file, callback) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const img = new Image();
-                    img.onload = function() {
-                        const MAX_EDGE = 1280;
-                        let width = img.width, height = img.height;
-                        const scale = Math.min(1, MAX_EDGE / Math.max(width, height));
-                        width = Math.max(1, Math.round(width * scale));
-                        height = Math.max(1, Math.round(height * scale));
-                        const canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.fillStyle = '#ffffff';
-                        ctx.fillRect(0, 0, width, height);
-                        ctx.drawImage(img, 0, 0, width, height);
-                        canvas.toBlob(function(blob) {
-                            if (!blob) { alert('相片處理失敗，請重新選擇！'); return; }
-                            callback(blob);
-                        }, 'image/jpeg', 0.85);
-                    };
-                    img.onerror = function() { alert('無法讀取相片，請確認檔案冇損壞。'); };
-                    img.src = evt.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-
-            /* 分階段載入提示 + 已等待秒數（管理用戶期望，減少中途放棄） */
-            const LOADING_STAGES = [
-                'AI 智能分析中（視覺辨識 + 智庫配對），請稍等約 15-30 秒...',
-                '👁️ 多模態視覺引擎正在提取蟲體特徵（觸角、體型、紋路）…',
-                '📚 滅蟲智庫配對緊「三十六計」防治策略…',
-                '✍️ 師妹執緊份廣東話診斷報告，快好喇…'
-            ];
-            function startLoadingFeedback() {
-                const textEl = document.querySelector('#loadingArea .ai-loading-text');
-                if (!textEl) return;
-                const t0 = Date.now();
-                let stageIdx = 0;
-                loadingTimer = setInterval(function() {
-                    const elapsed = Math.round((Date.now() - t0) / 1000);
-                    stageIdx = Math.min(LOADING_STAGES.length - 1, Math.floor(elapsed / 8));
-                    textEl.innerHTML = '<i class="fa-solid fa-microchip"></i> ' + LOADING_STAGES[stageIdx] +
-                        ' <span style="font-weight:normal;color:var(--text-muted);">(已等候 ' + elapsed + ' 秒)</span>';
-                }, 1000);
-            }
-            function stopLoadingFeedback() {
-                if (loadingTimer) { clearInterval(loadingTimer); loadingTimer = null; }
-            }
-
-            /* 後端錯誤代碼 → 廣東話友善提示 */
-            function friendlyError(code, fallbackMsg) {
-                switch (code) {
-                    case 'RATE_LIMITED': return '分析次數暫時達上限（每小時 8 次），請稍後再試，或直接 WhatsApp 搵師傅即時跟進。';
-                    case 'INVALID_IMAGE': return '張相片格式有問題，請改用 JPG / PNG / WebP 相片再試。';
-                    case 'UPSTREAM_TIMEOUT':
-                    case 'NETWORK_ERROR': return 'AI 分析連線逾時，請稍後再試一次；若持續失敗，可直接 WhatsApp 搵師傅。';
-                    case 'UPSTREAM_ERROR': return 'AI 系統暫時異常，請稍後再試，或直接 WhatsApp 搵師傅即時跟進。';
-                    default: return fallbackMsg || '網絡連線異常，請稍後再試。';
-                }
-            }
-
-            /* 安全渲染：先轉義 HTML 再套用受控格式（防止 LLM 輸出注入頁面） */
-            function escapeHtml(s) {
-                return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-                                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            }
-            function renderDiagnosis(raw) {
-                let text = escapeHtml(raw);
-                const bugEmojiIndex = text.indexOf('🐛');
-                if (bugEmojiIndex > 0) text = text.substring(bugEmojiIndex);
-                text = text.replace(
-                    /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
-                    '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
-                );
-                text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                text = text.replace(/\n/g, '<br>');
-                return text;
-            }
-
-            /* 頁內錯誤卡片（重用現有 .ai-wa-link 設計語言，取代突兀 alert） */
-            function showInlineError(message) {
-                diagnosisText.innerHTML =
-                    '<p style="margin:0 0 10px;color:var(--danger,#dc2626);font-weight:700;">⚠️ 分析未能完成</p>' +
-                    '<p style="margin:0 0 6px;">' + escapeHtml(message) + '</p>' +
-                    '<button type="button" id="btnRetryAnalyze" class="btn btn-primary" style="width:100%;margin-top:12px;">' +
-                    '<i class="fa-solid fa-rotate-right"></i> 用返呢張相再試一次</button>' +
-                    '<a href="https://wa.me/85252821552?text=' + encodeURIComponent('你好，AI 診斷暫時失敗，我想直接查詢滅蟲服務') + '" target="_blank" rel="noopener" class="ai-wa-link">' +
-                    '<i class="fa-brands fa-whatsapp"></i> 直接 WhatsApp 搵師傅</a>';
-                loadingArea.style.display = 'none';
-                resultArea.style.display = 'block';
-                resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                const retryBtn = document.getElementById('btnRetryAnalyze');
-                if (retryBtn) retryBtn.addEventListener('click', function() { btnAnalyze.click(); });
-            }
-
-            if (pestImageInput) {
-                pestImageInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (!file) return;
-
-                    if (ALLOWED_TYPES.indexOf(file.type) === -1) {
-                        alert('請選擇 JPG / PNG / WebP 相片（iPhone 用家請揀「照片」而唔係「實況」相）。');
-                        this.value = '';
-                        return;
-                    }
-
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('相片大於 5MB，請重新選擇較小的相片！');
-                        this.value = '';
-                        return;
-                    }
-
-                    preprocessImage(file, function(blob) {
-                        selectedFile = new File([blob], "clean_image.jpg", { type: "image/jpeg" });
-                        /* 換新相 = 舊描述失效，自動清空避免張冠李戴 */
-                        if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
-                        clearPreviewUrl();
-                        previewUrl = URL.createObjectURL(blob);
-                        imagePreview.src = previewUrl;
-                        uploadBox.style.display = 'none';
-                        previewArea.style.display = 'block';
-                        resultArea.style.display = 'none';
-                    });
-                });
-            }
-
-            if (btnAnalyze) {
-                btnAnalyze.addEventListener('click', async function() {
-                    if (!selectedFile || btnAnalyze.disabled) return;
-
-                    previewArea.style.display = 'none';
-                    loadingArea.style.display = 'block';
-                    startLoadingFeedback();
-                    btnAnalyze.disabled = true;
-
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(function() { controller.abort(); }, FETCH_TIMEOUT_MS);
-
-                    try {
-                        const formData = new FormData();
-                        formData.append('image', selectedFile);
-                        // v9.0 附加可選補充描述（多模態上下文先驗知識，≤50字環境線索）
-                        const userDesc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
-                        if (userDesc) formData.append('user_desc', userDesc);
-
-                        const response = await fetch(WORKER_URL, {
-                            method: 'POST',
-                            body: formData,
-                            signal: controller.signal
-                        });
-
-                        const rawText = await response.text();
-                        let data = null;
-                        try { data = JSON.parse(rawText); } catch (_) { /* 非 JSON 回應（如閘道錯誤頁） */ }
-
-                        if (response.ok && data && data.success && data.diagnosis) {
-                            diagnosisText.innerHTML = renderDiagnosis(data.diagnosis);
-                            /* v9.1 信賴徽章：後端回報 user_desc_used 時顯示「已結合補充描述」
-                               （透明度建立信賴：客人知道 AI 有聽佢講嘢，報告唔係罐頭回覆） */
-                            if (descUsedNote) descUsedNote.style.display = data.user_desc_used ? 'block' : 'none';
-
-                            loadingArea.style.display = 'none';
-                            resultArea.style.display = 'block';
-                            resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        } else {
-                            console.error("API 回傳異常資料:", data || rawText.slice(0, 300));
-                            showInlineError(friendlyError(data && data.code, data && data.error));
-                        }
-                    } catch (error) {
-                        console.error("前端攔截到錯誤:", error);
-                        const isAbort = error.name === 'AbortError';
-                        showInlineError(isAbort
-                            ? 'AI 分析超過 ' + Math.round(FETCH_TIMEOUT_MS / 1000) + ' 秒仍未完成，請稍後再試一次。'
-                            : '網絡連線異常，請檢查網絡後再試，或直接 WhatsApp 搵師傅。');
-                    } finally {
-                        clearTimeout(timeoutId);
-                        stopLoadingFeedback();
-                        btnAnalyze.disabled = false;
+            if (entryLink) {
+                entryLink.addEventListener('click', function(e) {
+                    if (!navigator.onLine) {
+                        /* 離線／飛行模式：截停跳轉，即時提示（網絡恢復後再撳即可） */
+                        e.preventDefault();
+                        offlineWrap.style.display = 'block';
+                        offlineWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
             }
 
-            if (btnReupload) {
-                btnReupload.addEventListener('click', function() {
-                    selectedFile = null;
-                    /* 重新上傳 = 全新診斷，清空舊描述 */
-                    if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
-                    /* v9.1：收埋信賴徽章（下張相未必有描述） */
-                    if (descUsedNote) descUsedNote.style.display = 'none';
-                    clearPreviewUrl();
-                    pestImageInput.value = '';
-                    resultArea.style.display = 'none';
-                    uploadBox.style.display = 'block';
-                });
-            }
-            
-            if (window.initAIDiagnosis) {
-                window.initAIDiagnosis = function() {}; 
-            }
+            window.addEventListener('online', refreshOfflineUI);
+            window.addEventListener('offline', refreshOfflineUI);
+            refreshOfflineUI();
         });
-    </script>
+</script>
 </body>
 </html>
