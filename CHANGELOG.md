@@ -1,3 +1,47 @@
+# 修復日誌 (v9.8 — 2026-09-13)
+
+## v9.8 新文章：《神、人與昆蟲》SEO 潤色版上架（blog-11 中英雙語 + 雙劍合璧 FAQ，依《神、人與昆蟲》SEO 文章優化方案.docx）
+
+### 1️⃣ 文章潤色上架【蟲類資訊】（info/blog-11）
+
+按方案將《新舊約聖經啟示咗神、人與地上一切昆蟲類（爬行動物）之間的關係》長文，
+重構為 Google 爬蟲友好嘅五段 H2/H3 實戰文章：導言（痛點鉤子）→ 啟示一（第六日先造昆蟲
+再造人・猶太拉比謙卑詮釋・治理權柄）→ 啟示二（十災四蟲災・希律被蟲咬）→ 啟示三
+（彼得異象打破「不潔」框架）→ 結語（積財於天・好管家）。方案指定 H1／Meta Description／
+核心關鍵字（聖經昆蟲、基督徒滅蟲、蟲患啟示、教會滅蟲、天人合一）全數採用；
+原文經文精華（創世記 1:24-28、出埃及記 3:14、使徒行傳 12:23、利未記 11:20-23、
+馬太福音 6:19-20）悉數保留。
+
+### 2️⃣ 「雙劍合璧」黃金戰術 FAQ（5 條）
+
+文末【常見問題（FAQ）】做到三重雙劍合璧：(a) 信仰×實戰——Q1 基督徒可否滅蟲
+（創 1:28 治理權柄）、Q5 天人合一 vs 治理這地等神學問答，夾 Q3 白蟻粉末確認、
+Q4 教會消毒等實戰指引；(b) 可見×結構化——頁面手風琴（details/summary）+
+FAQPage JSON-LD 雙份供 Google 富摘要；(c) 內容×引流——答案無縫植入三大法寶
+（苦主討論區 /info/vote/、7x24 AI 診斷 /ai/、WhatsApp 教會/家居諮詢），
+連同「基督徒／教會機構實用除蟲指南」三鉤子與 blog-cta-box，將被哲理打動嘅讀者
+轉化為流量與客戶。
+
+### 3️⃣ 中英雙語版 + 全站接線
+
+- EN 版 /en/info/blog-11/：照 en_blog_translation_guide 模式全譯（60.6KB），
+  check_en_blog.py PASS；Breadcrumb/Article/FAQPage 三段 JSON-LD 全 EN
+- zh hub 卡片（屬靈反思・2026年9月）+ EN hub 卡片（SPIRITUAL REFLECTION · EN）加插
+- sitemap.xml +2 URL（36 條），blog-11 中英三向 hreflang
+- i18n.js blog 路由 1-10 → 1-11（zh blog-11 語言切換直達 EN 版）
+- footer WhatsApp 頻道連結（v9.7）自動繼承至新頁面
+
+### ✅ 驗收
+
+- 每檔 exact-string 斷言全命中；標籤平衡；JSON-LD 三段 valid（zh+EN）；sitemap XML valid
+- agent-browser 手機 viewport（390×844）實測：zh/EN 頁面標題、FAQ 5 條手風琴展開、
+  /ai/ ×4、/info/vote/ ×2、wa.me ×5（EN 版全部 /en/ 對應連結）、canonical/OG 正確、
+  hub 兩版卡片連結直達、i18n 路由 1-11 就位、console 零錯誤、截圖目視正常
+- 新增檔案：info/blog-11/index.html（58KB）、en/info/blog-11/index.html（60.6KB）；
+  修改：info/index.html、en/info/index.html、sitemap.xml、assets/js/i18n.js
+
+---
+
 # 修復日誌 (v9.7 — 2026-09-05)
 
 ## v9.7 優化：AI 診斷提速（解決 30 秒逾時）+ 補充描述欄位 + WhatsApp Channel + 全站 Footer 頻道化（依《優化引流到 VIP 包廂+Whats頻道.docx》+ 用戶追加指示）
