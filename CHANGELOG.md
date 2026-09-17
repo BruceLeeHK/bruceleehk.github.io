@@ -1,3 +1,59 @@
+# 修復日誌 (v9.10 — 2026-09-17)
+
+## v9.10 十八區地區 SEO 戰略地圖：/districts Hub + 18 區專頁雙語上架 + 全站權重灌注（依《網站增設districts頁面.docx》＋《全站權重灌注.docx》方案）
+
+### 1️⃣ /districts/ 十八區總目錄（Hub 頁，zh + en）
+
+- H1 按方案採用「香港十八區 AI 智慧滅蟲服務｜港島、九龍、新界即日上門｜獨家三十六計精準防治」
+- 三大區域分組（香港島 / 九龍 / 新界及離島，帶 #hk-island 等錨點）× 18 張區卡（區名 → 專頁連結、
+  覆蓋屋苑、常見蟲患 chips），深色科技 band 呈現「十八區 × 獨家科技解法」（AI 圖像識別 / IoT 鼠盒 /
+  Termatrac T3i / 三十六計）
+- PestControl Schema：areaServed 正式宣告 18 區（AdministrativeArea Place ×18，荔景邨工場大廈地址 +
+  9:00-18:00 營業時間標記），另有 BreadcrumbList + FAQPage（4 條通用問答）
+
+### 2️⃣ 18 個地區專頁（輻射子頁，zh + en = 36 頁）
+
+- 每區獨特文案（零 doorway content）：地區簡介、常見蟲患（附表一數據）、
+  「點解{區}特別容易出現{主蟲}」痛點分析、蟲患 × 科技解法對應表
+- 三十六計錨文本深鏈（全部指向 strategy 頁真實卡片錨點 strat-1..8）
+- 真實案例沉浸式植入（E-E-A-T）：九龍城區＝廣播道龍翔苑 T3i 微波探測實錄（YouTube facade，
+  點擊先載 iframe，重用 v9.9 WebP 海報）；中西區＝中環餐飲曱甴實戰影片卡；
+  西貢區＝日出康城床蝨高溫蒸氣影片卡；深水埗＝美孚新邨管道滅鼠、沙田＝沙田第一城白蟻等屋苑實證卡
+- 轉化鉤子（方案第三階段）：首屏＋結尾 AI 診斷 CTA、30 秒快速估價表單
+  （屋苑類型 × 害蟲類型下拉 → WhatsApp 預填文本）
+- FAQ Schema（方案第四階段）：每區 4 條在地化問答（收費／上門速度／技術／環境），FAQPage JSON-LD
+- 每頁 3 段 JSON-LD（Breadcrumb / Service / FAQ）+ canonical + hreflang 三件套 + 鄰區互連
+  （Topic Cluster 網狀內鏈），共用 /assets/css/bruceleehk.css（零額外請求）
+
+### 3️⃣ 全站權重灌注（《全站權重灌注.docx》三管齊下）
+
+- Sitewide Link：38 個既有頁面頂部導航加「十八區服務覆蓋 / Service Areas」+
+  72 個頁面 footer 加 footer-nav 頁尾導航（含 /districts/），全站權重直達樞紐
+- 首頁高速通道：Estate Wall 上方新增深色「服務覆蓋全港十八區｜即日上門滅蟲」band
+  （港島／九龍／新界三枚區域按鈕 → /districts/#錨點 + 主 CTA 按鈕）zh + en 同步
+- 首頁 PestControl Schema areaServed 由「香港」擴充為 18 區逐區宣告（zh + en）
+- 服務頁內文互連（Topic Cluster）：services zh/en 曱甴／滅蚊滅鼠／床木蝨／白蟻四大板塊，
+  每板塊加「十八區{蟲患}防護及滅蟲案例」錨文本連結 → /districts/
+- 修復全站死錨點：zh strategy 頁 8 張策略卡補回 id="strat-1..8"（EN 版原有），
+  首頁三十六計輪播 3 條錨點修正為真實卡片（strat-6 蚊借刀殺人／strat-5 鼠關門打狗／strat-3 床蝨釜底抽薪）
+
+### 4️⃣ sitemap.xml
+
+- 36 → 74 條目：/districts/ hub（0.9）+ 18 區專頁（0.8）zh/en 雙語各 19 條，
+  全部帶 hreflang zh-HK / en / x-default 三件套，lastmod 2026-09-17
+
+### 驗收
+
+- 靜態：38 新頁標籤平衡全過、39 段 JSON-LD 全 valid、canonical/hreflang/絕對 asset 路徑/H1 唯一全過
+- 動態（headless browser）：hub 18 區卡 + 3 區域 + 4 FAQ 渲染正常、console 零錯誤；
+  九龍城區頁 facade 點擊後 iframe 就位（youtube embed bKqEejFbn6g）＋紅標自動隱藏；
+  i18n 切換 /districts/kowloon-city/ ↔ /en/districts/kowloon-city/ 雙向正確；
+  首頁 band 位置正確（Estate Wall 前）、輪播錨點 [#strat-1,#strat-6,#strat-5,#strat-3]；
+  services zh/en 各 6 條 /districts/ 連結到位
+- 新頁面零圖片新增（重用既有 WebP），零 iframe 初始載入，維持「秒開」標準
+
+---
+
 # 修復日誌 (v9.9 — 2026-09-13)
 
 ## v9.9 首頁【熱成像白蟻暗巢掃描】升級：廣播道龍翔苑《白蟻復發救援》實錄影片上架（依《白蟻防治.docx》方案）

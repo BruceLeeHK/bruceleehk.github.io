@@ -328,4 +328,348 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-9/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-9/"/>
   </url>
+
+  <!-- ===== v9.10 十八區服務覆蓋 / 18 Districts Service Areas ===== -->
+  <url>
+    <loc>https://bruceleehk.com/districts/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/central-and-western/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/central-and-western/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/central-and-western/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/central-and-western/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/central-and-western/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/central-and-western/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/central-and-western/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/central-and-western/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/wan-chai/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/wan-chai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/wan-chai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/wan-chai/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/wan-chai/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/wan-chai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/wan-chai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/wan-chai/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/eastern/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/eastern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/eastern/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/eastern/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/eastern/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/eastern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/eastern/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/eastern/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/southern/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/southern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/southern/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/southern/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/southern/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/southern/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/southern/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/southern/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/yau-tsim-mong/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/yau-tsim-mong/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/yau-tsim-mong/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/yau-tsim-mong/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/yau-tsim-mong/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/yau-tsim-mong/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/yau-tsim-mong/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/yau-tsim-mong/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/sham-shui-po/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sham-shui-po/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sham-shui-po/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sham-shui-po/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/sham-shui-po/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sham-shui-po/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sham-shui-po/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sham-shui-po/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/kowloon-city/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kowloon-city/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kowloon-city/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kowloon-city/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/kowloon-city/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kowloon-city/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kowloon-city/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kowloon-city/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/wong-tai-sin/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/wong-tai-sin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/wong-tai-sin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/wong-tai-sin/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/wong-tai-sin/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/wong-tai-sin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/wong-tai-sin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/wong-tai-sin/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/kwun-tong/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kwun-tong/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kwun-tong/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kwun-tong/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/kwun-tong/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kwun-tong/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kwun-tong/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kwun-tong/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/kwai-tsing/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kwai-tsing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kwai-tsing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kwai-tsing/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/kwai-tsing/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/kwai-tsing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/kwai-tsing/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/kwai-tsing/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/tsuen-wan/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tsuen-wan/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tsuen-wan/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tsuen-wan/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/tsuen-wan/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tsuen-wan/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tsuen-wan/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tsuen-wan/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/tuen-mun/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tuen-mun/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tuen-mun/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tuen-mun/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/tuen-mun/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tuen-mun/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tuen-mun/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tuen-mun/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/yuen-long/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/yuen-long/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/yuen-long/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/yuen-long/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/yuen-long/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/yuen-long/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/yuen-long/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/yuen-long/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/north/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/north/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/north/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/north/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/north/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/north/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/north/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/north/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/tai-po/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tai-po/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tai-po/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tai-po/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/tai-po/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/tai-po/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/tai-po/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/tai-po/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/sha-tin/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sha-tin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sha-tin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sha-tin/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/sha-tin/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sha-tin/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sha-tin/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sha-tin/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/sai-kung/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sai-kung/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sai-kung/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sai-kung/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/sai-kung/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/sai-kung/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/sai-kung/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sai-kung/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/districts/islands/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/islands/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/islands/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/islands/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/islands/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/islands/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/islands/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/islands/"/>
+  </url>
 </urlset>

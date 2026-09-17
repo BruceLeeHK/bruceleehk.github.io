@@ -693,3 +693,81 @@ picture img {
     height: auto;
 }
 
+
+/* ============================================================
+   v9.10 — Sitewide footer nav (districts link juice) + homepage 18-district band
+   ============================================================ */
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 0;
+    margin: 0 0 16px;
+    font-size: 0.85rem;
+}
+.footer-nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-right: 1px solid #475569;
+    white-space: nowrap;
+}
+.footer-nav a:last-child { border-right: 0; }
+.footer-nav a:hover { color: #34d399; text-decoration: underline; }
+
+/* Homepage 18-district band (placed above Estate Wall) */
+.district-band {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    margin: 30px 0;
+    color: #e2e8f0;
+}
+.district-band .db-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+.district-band h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 1.18rem;
+    color: #fff;
+}
+.district-band h3 .fa-solid { color: #34d399; }
+.district-band .db-sub { margin: 0 0 14px; font-size: 0.88rem; color: #94a3b8; }
+.district-band .db-regions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.district-band .db-region {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+.district-band .db-region:hover { border-color: #34d399; background: rgba(52, 211, 153, 0.1); }
+.district-band .db-region .fa-solid { color: #34d399; }
+.district-band .db-cta { display: inline-flex; align-items: center; gap: 8px; }
+@media (max-width: 640px) {
+    .district-band { padding: 20px 16px; }
+    .district-band h3 { font-size: 1.02rem; }
+    .district-band .db-cta { width: 100%; }
+    .district-band .db-cta .btn { width: 100%; justify-content: center; }
+}
