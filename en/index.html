@@ -104,6 +104,24 @@
     }
     </script>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "廣播道龍翔苑白蟻復發救援實錄：Termatrac T3i 微波白蟻探測",
+      "description": "A real Kowloon Tong (Broadcast Drive) case: termites kept returning after treatment. Using the Australian-patented Termatrac T3i microwave radar, our master located the colony inside the door frame within 2 hours - non-invasive and precise.",
+      "thumbnailUrl": ["https://bruceleehk.com/assets/img/video-termite-relief-768.jpg"],
+      "uploadDate": "2026-09-13",
+      "contentUrl": "https://www.youtube.com/shorts/bKqEejFbn6g",
+      "embedUrl": "https://www.youtube.com/embed/bKqEejFbn6g",
+      "publisher": {
+        "@type": "Organization",
+        "name": "滅蟲師傅 Pest Control Master",
+        "logo": { "@type": "ImageObject", "url": "https://bruceleehk.com/assets/img/logo.png" }
+      }
+    }
+    </script>
+
     <link rel="stylesheet" href="/assets/css/bruceleehk.css">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -423,6 +441,35 @@
         .video-info { padding: 12px; text-align: left; }
         .video-title { font-size: 0.88rem; font-weight: 700; color: #fff; margin: 0 0 4px; line-height: 1.4; }
         .video-meta { font-size: 0.75rem; color: #94a3b8; margin: 0; }
+        /* ===== v9.9 白蟻復發救援 Feature 卡（Facade + 紅底個案標籤 + 雙 CTA） ===== */
+        .video-feature {
+            width: 300px;
+            border: 1px solid rgba(16,185,129,0.4);
+            box-shadow: 0 10px 34px rgba(16,185,129,0.16);
+        }
+        .video-case-badge {
+            position: absolute; top: 8px; left: 8px; right: 8px; z-index: 2;
+            background: rgba(220,38,38,0.93); color: #fff;
+            font-size: 0.68rem; font-weight: 700; line-height: 1.4;
+            padding: 5px 8px; border-radius: 6px;
+        }
+        .video-facade-hit {
+            position: absolute; inset: 0; z-index: 2;
+            width: 100%; background: transparent; border: 0; cursor: pointer; padding: 0;
+        }
+        .video-facade-hit:focus-visible { outline: 3px solid #10b981; outline-offset: -3px; }
+        .video-desc {
+            padding: 0 12px; margin: 0;
+            font-size: 0.74rem; line-height: 1.6; color: #94a3b8;
+        }
+        .video-cta-row { display: flex; gap: 8px; padding: 10px 12px 14px; flex-wrap: wrap; }
+        .btn-mini {
+            flex: 1 1 auto; text-align: center; text-decoration: none;
+            font-size: 0.72rem; font-weight: 700; padding: 9px 6px; border-radius: 8px;
+        }
+        .btn-mini-ai { background: var(--primary); color: #fff; }
+        .btn-mini-wa { background: #25d366; color: #06301a; }
+
 
         /* AI Widget CTA */
         .ai-widget-box {
@@ -503,6 +550,7 @@
             .hero h1 { font-size: 1.7rem; }
             .hero-form-grid { grid-template-columns: 1fr; }
             .video-card { width: 170px; }
+            .video-feature { width: min(280px, 86vw); }
         }
         @media (min-width: 769px) { .hero h1 { font-size: 2.5rem; } }
     </style>
@@ -514,7 +562,7 @@
       img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
-      frame-src;
+      frame-src https://www.youtube.com https://www.youtube-nocookie.com;
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
@@ -652,9 +700,9 @@
                 <article class="smart-card">
                     <picture><source srcset="/assets/img/smart-thermal.webp" type="image/webp"><img src="/assets/img/smart-thermal.jpg" alt="Thermal Imaging Nest Scan" loading="lazy" decoding="async" class="smart-card-image" width="1024" height="1024"></picture>
                     <div class="smart-card-body">
-                        <div class="smart-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
-                        <h3>Thermal Imaging Nest Scan</h3>
-                        <p>Non-destructive detection inside walls and wooden furniture — accurately locates bed bug and termite nests without damaging decor.</p>
+                        <div class="smart-icon"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
+                        <h3>Termatrac T3i Microwave Nest Detection</h3>
+                        <p>Australian-patented microwave radar penetrates walls, locating termite colonies earlier and more precisely than traditional thermal imaging — zero demolition.</p>
                     </div>
                 </article>
             </div>
@@ -786,17 +834,27 @@
                             <p class="video-meta">📍 Mei Foo Sun Chuen • Rodent</p>
                         </div>
                     </a>
-                    <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Termite Thermal Imaging">
+                    <div class="video-card video-feature" id="termiteReliefCard">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-termite.webp" type="image/webp"><img src="/assets/img/video-termite.jpg" alt="Thermal imaging termite nest scan case" loading="lazy" decoding="async" width="768" height="1344"></picture>
-                            <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:52</span>
+                            <picture>
+                                <source media="(max-width: 600px)" srcset="/assets/img/video-termite-relief-600.webp" type="image/webp" width="600" height="1050">
+                                <source srcset="/assets/img/video-termite-relief-768.webp" type="image/webp" width="768" height="1344">
+                                <img src="/assets/img/video-termite-relief-768.jpg" alt="Broadcast Drive Kowloon Tong termite relapse rescue: Termatrac T3i microwave detection of severe door frame termite damage" loading="lazy" decoding="async" width="768" height="1344">
+                            </picture>
+                            <span class="video-case-badge">📍 Broadcast Drive Real Case: 2-Hour Non-Invasive Precision Detection</span>
+                            <span class="video-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                            <button type="button" class="video-facade-hit" id="termiteReliefPlay" aria-label="Play video: Termite Relapse Rescue real case"></button>
                         </div>
                         <div class="video-info">
-                            <p class="video-title">Termite Thermal Imaging Scan</p>
-                            <p class="video-meta">📍 Taikoo Shing • Structural Protection</p>
+                            <p class="video-title">Termite Relapse Rescue: Real Case</p>
+                            <p class="video-meta">📍 Kowloon Tong (Broadcast Drive) • Termatrac T3i Radar</p>
                         </div>
-                    </a>
+                        <p class="video-desc">A real Kowloon Tong (Broadcast Drive) case: termites kept returning after previous treatments. Using the Australian-patented Termatrac T3i microwave radar, our master located the colony hidden inside the door frame within 2 hours — no demolition, precise targeted eradication. Trusted by 10,000+ households.</p>
+                        <div class="video-cta-row">
+                            <a href="/en/ai/" class="btn-mini btn-mini-ai">🔬 Free AI Pest Diagnosis</a>
+                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20book%20a%20Termatrac%20T3i%20termite%20inspection" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 Book T3i Radar Inspection</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -938,6 +996,29 @@
             prev.addEventListener('click', () => scroll.scrollBy({ left: -296, behavior: 'smooth' }));
             next.addEventListener('click', () => scroll.scrollBy({ left: 296, behavior: 'smooth' }));
         })();
+    </script>
+    <script>
+    /* v9.9 Facade Pattern: load the YouTube iframe only on click (saves ~1MB initial payload) */
+    (function () {
+        var playBtn = document.getElementById('termiteReliefPlay');
+        if (!playBtn) return;
+        playBtn.addEventListener('click', function () {
+            var card = document.getElementById('termiteReliefCard');
+            var thumb = card ? card.querySelector('.video-thumb') : null;
+            if (!thumb || thumb.querySelector('iframe')) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/bKqEejFbn6g?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+            iframe.title = 'Broadcast Drive Termite Relapse Rescue Video';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;');
+            thumb.appendChild(iframe);
+            card.querySelector('.video-play').style.display = 'none';
+            var badge = card.querySelector('.video-case-badge');
+            if (badge) badge.style.display = 'none';
+            playBtn.style.display = 'none';
+        });
+    })();
     </script>
 </body>
 </html>

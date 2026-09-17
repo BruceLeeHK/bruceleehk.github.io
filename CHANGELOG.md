@@ -1,4 +1,41 @@
-# 修復日誌 (v9.8 — 2026-09-13) 
+# 修復日誌 (v9.9 — 2026-09-13)
+
+## v9.9 首頁【熱成像白蟻暗巢掃描】升級：廣播道龍翔苑《白蟻復發救援》實錄影片上架（依《白蟻防治.docx》方案）
+
+### 1️⃣ 實戰案例卡升級（首頁實戰案例短片區）
+
+原「熱成像白蟻暗巢掃描」（太古城 0:52）卡片升級為「白蟻復發救援實錄」Feature 卡：
+影片連結 YouTube Shorts bKqEejFbn6g，紅底個案標籤「📍 廣播道龍翔苑實錄：2小時全屋無損精準定位」，
+下方 100 字長尾文案（九龍城廣播道龍翔苑／門框白蟻大窿／白蟻滅完又嚟點算／Termatrac T3i 微波白蟻探測／10,000+ 戶實證），
+雙 CTA：[🔬 免費 AI 蟲害初步診斷 → /ai/] ＋ [💬 WhatsApp 預約 T3i 微波探測 → wa.me 預約文本]。
+
+### 2️⃣ 圖片優化四大細則（用戶指定）
+
+- WebP 下一代格式：768×1344 桌面版 26KB ＋ 600×1050 手機版 16KB（遠優於 50-150KB 目標，肉眼無損）
+- 原生延遲加載：loading="lazy" + decoding="async"，首屏渲染零佔用
+- 響應式 srcset：`<source media="(max-width: 600px)">` 手機自動載 600w，桌面載 768w
+- 精準裁切統一比例：9:16 與現有 Shorts 卡一致（3468×4624 原圖裁 2601×4624，保留門框大窿＋電筒＋黃衣師傅實錄構圖）
+
+### 3️⃣ Facade 門面加載 + CSP + SEO
+
+- Facade Pattern：初始零 YouTube 請求（實測 resource API 0 命中），點擊海報先即時載入 iframe（慳約 800KB-1MB）
+- CSP frame-src 兩版首頁加白名單 https://www.youtube.com + youtube-nocookie.com（EN 版原為全禁 frame）
+- JSON-LD VideoObject schema（名稱/縮圖/uploadDate/contentUrl/embedUrl/發布者 滅蟲師傅）雙語版各 +1 段，爭取 Rich Snippet
+
+### 4️⃣ 智慧專區卡同步升級（E-E-A-T）
+
+「熱成像暗巢掃描」→「Termatrac T3i 微波暗巢探測」（fa-wave-square 動態波形圖示），
+文案凸顯「澳大利亞專利微波技術穿透牆身，比傳統熱成像更早鎖定白蟻暗巢」。
+
+### 驗收
+
+- 靜態：兩版標籤平衡、3 段 JSON-LD 全 valid、facade JS node --check 通過
+- 動態（Playwright 390×844 手機 viewport）：初始 youtube 請求 0、手機正確揀 600w、點擊後 iframe 就位＋播放鍵/標籤自動隱藏、EN 版同流程通過、console 零錯誤
+- 改動範圍：index.html ＋ en/index.html ＋ 新增 assets/img/video-termite-relief-{768,600}.webp/768.jpg，其他頁面零改動
+
+---
+
+# 修復日誌 (v9.8 — 2026-09-13)
 
 ## v9.8 新文章：《神、人與昆蟲》SEO 潤色版上架（blog-11 中英雙語 + 雙劍合璧 FAQ，依《神、人與昆蟲》SEO 文章優化方案.docx）
 
@@ -24,23 +61,23 @@ FAQPage JSON-LD 雙份供 Google 富摘要；(c) 內容×引流——答案無�
 
 ### 3️⃣ 中英雙語版 + 全站接線
 
-* EN 版 /en/info/blog-11/：照 en\_blog\_translation\_guide 模式全譯（60.6KB），
-check\_en\_blog.py PASS；Breadcrumb/Article/FAQPage 三段 JSON-LD 全 EN
-* zh hub 卡片（屬靈反思・2026年9月）+ EN hub 卡片（SPIRITUAL REFLECTION · EN）加插
-* sitemap.xml +2 URL（36 條），blog-11 中英三向 hreflang
-* i18n.js blog 路由 1-10 → 1-11（zh blog-11 語言切換直達 EN 版）
-* footer WhatsApp 頻道連結（v9.7）自動繼承至新頁面
+- EN 版 /en/info/blog-11/：照 en_blog_translation_guide 模式全譯（60.6KB），
+  check_en_blog.py PASS；Breadcrumb/Article/FAQPage 三段 JSON-LD 全 EN
+- zh hub 卡片（屬靈反思・2026年9月）+ EN hub 卡片（SPIRITUAL REFLECTION · EN）加插
+- sitemap.xml +2 URL（36 條），blog-11 中英三向 hreflang
+- i18n.js blog 路由 1-10 → 1-11（zh blog-11 語言切換直達 EN 版）
+- footer WhatsApp 頻道連結（v9.7）自動繼承至新頁面
 
 ### ✅ 驗收
 
-* 每檔 exact-string 斷言全命中；標籤平衡；JSON-LD 三段 valid（zh+EN）；sitemap XML valid
-* agent-browser 手機 viewport（390×844）實測：zh/EN 頁面標題、FAQ 5 條手風琴展開、
-/ai/ ×4、/info/vote/ ×2、wa.me ×5（EN 版全部 /en/ 對應連結）、canonical/OG 正確、
-hub 兩版卡片連結直達、i18n 路由 1-11 就位、console 零錯誤、截圖目視正常
-* 新增檔案：info/blog-11/index.html（58KB）、en/info/blog-11/index.html（60.6KB）；
-修改：info/index.html、en/info/index.html、sitemap.xml、assets/js/i18n.js
+- 每檔 exact-string 斷言全命中；標籤平衡；JSON-LD 三段 valid（zh+EN）；sitemap XML valid
+- agent-browser 手機 viewport（390×844）實測：zh/EN 頁面標題、FAQ 5 條手風琴展開、
+  /ai/ ×4、/info/vote/ ×2、wa.me ×5（EN 版全部 /en/ 對應連結）、canonical/OG 正確、
+  hub 兩版卡片連結直達、i18n 路由 1-11 就位、console 零錯誤、截圖目視正常
+- 新增檔案：info/blog-11/index.html（58KB）、en/info/blog-11/index.html（60.6KB）；
+  修改：info/index.html、en/info/index.html、sitemap.xml、assets/js/i18n.js
 
-\---
+---
 
 # 修復日誌 (v9.7 — 2026-09-05)
 
@@ -52,26 +89,26 @@ hub 兩版卡片連結直達、i18n 路由 1-11 就位、console 零錯誤、截
 撞上前端 30 秒 AbortController 死線。`/ai/` 頁四項升級：
 
 1. **自適應壓縮**：壓縮寬度 1200→1024px（文檔指定），輸出質量 0.82→0.7→0.6→0.5
-自動遞降，目標 ≤700KB — 實測 3.56MB 雜訊原圖壓到 **264KB（-93%）**，
-4G 上載由十幾秒跌到約 1 秒，全程 <20 秒完成，順帶節省 AI Token 費用
+   自動遞降，目標 ≤700KB — 實測 3.56MB 雜訊原圖壓到 **264KB（-93%）**，
+   4G 上載由十幾秒跌到約 1 秒，全程 <20 秒完成，順帶節省 AI Token 費用
 2. **白底填充**：透明底 PNG 轉 JPEG 前填白，唔會變黑底遮蓋蟲體特徵
 3. **前端超時 30s→60s**：配合壓縮後一般 20 秒內完成，60 秒只係最後防線
-（Workers Paid 後端有更多呼吸位）
+   （Workers Paid 後端有更多呼吸位）
 4. **逾時文案同步**：「處理逾時（超過 60 秒），請檢查網絡後再試一次」
 
 ### 2️⃣ 「補充發現位置或情況」欄位搬家保留（AI 更準嘅秘密武器）
 
 按文檔方案：首頁保持純按鈕引流（v9.6 已完成），欄位搬到 `/ai/` 上傳區下方——
 「補充發現位置或情況（可選填・填咗 AI 配對三十六計更精準）」50 字上限 + 即時字數計 +
-前端清洗（Worker 端白名單雙重保險），隨 FormData 以 `user\_desc` 附加（Worker v9.0 已支援）；
-重新上載自動清空，避免舊描述張冠李戴。實測 FormData 捕獲：`image | 269KB` + `user\_desc | 廚房灶頭底發現…`。
+前端清洗（Worker 端白名單雙重保險），隨 FormData 以 `user_desc` 附加（Worker v9.0 已支援）；
+重新上載自動清空，避免舊描述張冠李戴。實測 FormData 捕獲：`image | 269KB` + `user_desc | 廚房灶頭底發現…`。
 
 ### 3️⃣ AI 診斷結果頁最下方加入 WhatsApp Channel 訂閱按鈕
 
 「趁熱打鐵」：客人看完報告信任度最高之時，結果報告最底部加入綠色訂閱區塊
 （文檔提供 HTML 原文）——「💡 覺得 AI 認蟲好準、好有用？」+
 「👉 立即加入 WhatsApp 頻道」→ https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42
-（`target="\_blank"` 唔會關閉原診斷結果）。將一次性訪客轉化為長期潛在客戶。
+（`target="_blank"` 唔會關閉原診斷結果）。將一次性訪客轉化為長期潛在客戶。
 
 ### 4️⃣ 全站 Footer WhatsApp 小圖標 → WhatsApp 頻道連結（用戶追加指示）
 
@@ -80,28 +117,28 @@ WhatsApp 小圖標，由個人號 `wa.me/85252821552` 改為頻道
 `https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42`，
 繁中 + EN 全站同步——與結果頁訂閱按鈕（第 3 點）同一條頻道連結，引流口徑統一。
 
-* **只動 footer 圖標**：腳本以 `<footer>` 區間包夾 + 驗證 aria-label/title="WhatsApp"，
-頁面其他 wa.me CTA（hero 按鈕／浮動按鈕／thumb zone／AI 副選項）全部保持不變
-* **34 個檔案替換**：zh 17 頁 + en 17 頁（含兩版 404 頁）
-* **合理豁免 4 個**：`info/vote/` 兩版（footer 本身無社交圖標）、
-`info/vote/admin.html`（後台）、Google 驗證檔
-* 每檔案四重驗證：wa.me 計數 −1、channel 計數 +1、`<a>` 標籤平衡、
-footer 區間內 wa.me 恰好 1 處；全站終檢 0 個 footer wa.me 殘留
+- **只動 footer 圖標**：腳本以 `<footer>` 區間包夾 + 驗證 aria-label/title="WhatsApp"，
+  頁面其他 wa.me CTA（hero 按鈕／浮動按鈕／thumb zone／AI 副選項）全部保持不變
+- **34 個檔案替換**：zh 17 頁 + en 17 頁（含兩版 404 頁）
+- **合理豁免 4 個**：`info/vote/` 兩版（footer 本身無社交圖標）、
+  `info/vote/admin.html`（後台）、Google 驗證檔
+- 每檔案四重驗證：wa.me 計數 −1、channel 計數 +1、`<a>` 標籤平衡、
+  footer 區間內 wa.me 恰好 1 處；全站終檢 0 個 footer wa.me 殘留
 
 ### ✅ 驗收
 
-* 11 處 exact-string 替換全命中；舊 30s/1200 零殘留；標籤平衡；`node --check` 通過
-* Footer 頻道化：34 檔案替換 + 4 豁免，全站 footer 0 wa.me 殘留，
-全站共 36 處 channel 連結（35 檔案；ai 頁 2 處 = footer + 結果頁）與預期完全一致
-* agent-browser 手機 viewport 全流程實測（頁內 mock Worker 回應，零真實 API 消耗）：
-5MB 保護罩正常拒收 5.25MB 檔案 → 3.56MB 原圖自動壓到 264KB 上傳 →
-補充描述隨請求送出 → 結果報告渲染 → WhatsApp Channel 按鈕就位 →
-重新上載描述清空，console 零錯誤
-* 改動範圍：第一階段（AI 提速三點）只改 `ai/index.html`；
-第二階段（Footer 頻道化）改全站 34 個 HTML。Worker 後端、共用 JS、
-sitemap、CSS 等其他一切不變
+- 11 處 exact-string 替換全命中；舊 30s/1200 零殘留；標籤平衡；`node --check` 通過
+- Footer 頻道化：34 檔案替換 + 4 豁免，全站 footer 0 wa.me 殘留，
+  全站共 36 處 channel 連結（35 檔案；ai 頁 2 處 = footer + 結果頁）與預期完全一致
+- agent-browser 手機 viewport 全流程實測（頁內 mock Worker 回應，零真實 API 消耗）：
+  5MB 保護罩正常拒收 5.25MB 檔案 → 3.56MB 原圖自動壓到 264KB 上傳 →
+  補充描述隨請求送出 → 結果報告渲染 → WhatsApp Channel 按鈕就位 →
+  重新上載描述清空，console 零錯誤
+- 改動範圍：第一階段（AI 提速三點）只改 `ai/index.html`；
+  第二階段（Footer 頻道化）改全站 34 個 HTML。Worker 後端、共用 JS、
+  sitemap、CSS 等其他一切不變
 
-\---
+---
 
 # 修復日誌 (v9.6 — 2026-09-05)
 
@@ -117,26 +154,26 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ### 🚪 方案 A：首頁上傳框 → VIP 包廂入口（強烈推薦方案，完全採用）
 
 1. **移除首頁嵌入 AI 上傳系統**（上傳／預覽／載入／結果四狀態區塊 + 約 250 行診斷引擎 JS），
-改為輕量「入口卡片」：保留「7×24 AI 即時診斷估價」標題、安心上傳私隱保證，
-新增醒目按鈕「上載相片・即刻 AI 診斷」→ 直接跳轉乾淨嘅專屬【AI 害蟲分析系統】頁
-`/ai/`（該頁零 YouTube iframe、零影片爭奪）完成上傳同分析
+   改為輕量「入口卡片」：保留「7×24 AI 即時診斷估價」標題、安心上傳私隱保證，
+   新增醒目按鈕「上載相片・即刻 AI 診斷」→ 直接跳轉乾淨嘅專屬【AI 害蟲分析系統】頁
+   `/ai/`（該頁零 YouTube iframe、零影片爭奪）完成上傳同分析
 2. **副選項**：「或直接 WhatsApp 搵師妹 AI 診斷」一鍵直達 WhatsApp AI Bot
 3. **三網絡環境保證**：Wi-Fi / 4G / 5G 下，專屬頁頻寬全力支援 AI 運算與傳輸，
-秒速上傳、約 15-30 秒出廣東話診斷報告
+   秒速上傳、約 15-30 秒出廣東話診斷報告
 4. **飛行模式／離線誠實處理**：雲端 AI 100% 需要網絡（全世界雲端 AI 都一樣），
-首頁加入 `navigator.onLine` 即時偵測——離線時撳按鈕唔會白等 60 秒，即時顯示
-「目前離線／飛行模式」友善提示；網絡恢復（online 事件）提示自動收起，按鈕即時恢復跳轉
+   首頁加入 `navigator.onLine` 即時偵測——離線時撳按鈕唔會白等 60 秒，即時顯示
+   「目前離線／飛行模式」友善提示；網絡恢復（online 事件）提示自動收起，按鈕即時恢復跳轉
 
 ### ✅ 驗收
 
-* 舊診斷引擎 15 個標識（pestImageInput／WORKER\_URL／analyze-pest 等）零殘留
-* inline JS `node --check` 語法通過；HTML 標籤全部平衡
-* agent-browser 手機 viewport（390×844）實測三場景：
-在線撳掣直達 `/ai/`；開飛行模式即時彈提示、頁面唔會跳走；恢復上網提示自動收起、按鈕恢復正常
-* console 零錯誤；EN 首頁（早已係 WhatsApp 入口卡模式）、/ai/ 專屬頁、
-浮動 AI 助手、估價表、短片區等其他功能全部原封不動
+- 舊診斷引擎 15 個標識（pestImageInput／WORKER_URL／analyze-pest 等）零殘留
+- inline JS `node --check` 語法通過；HTML 標籤全部平衡
+- agent-browser 手機 viewport（390×844）實測三場景：
+  在線撳掣直達 `/ai/`；開飛行模式即時彈提示、頁面唔會跳走；恢復上網提示自動收起、按鈕恢復正常
+- console 零錯誤；EN 首頁（早已係 WhatsApp 入口卡模式）、/ai/ 專屬頁、
+  浮動 AI 助手、估價表、短片區等其他功能全部原封不動
 
-\---
+---
 
 # 修復日誌 (v9.5 — 2026-09-02)
 
@@ -147,36 +184,36 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 按照 v9.4 修復 blog-10 嘅同一套方法（gen 腳本 exact-string 替換 + checker 驗收），為
 `/en/info/blog-1/` 至 `/en/info/blog-9/` 建立完整英文版：
 
-|文章|EN 標題|規模|
-|-|-|-|
-|blog-1 選擇滅蟲公司 5 大指標|Best Pest Control Company in HK 2026|\~900 詞|
-|blog-2 2026 專業新視角|2026: Our Professional Outlook|\~700 詞|
-|blog-3 2026 滅蟲公司推介|2026 Pest Control Company Recommendation|\~700 詞|
-|blog-4 家居滅蟲方案|2026 Home Pest Control Plans|\~740 詞|
-|blog-5 床蝨檢查治理預防|Bed Bug Inspection \& Prevention Guide|\~860 詞|
-|blog-6 白蟻定螞蟻|Termite vs Ant: How to Tell Them Apart|\~1,300 詞|
-|blog-7 滅蟲收費行情|2026 Pest Control Prices in Hong Kong|\~2,180 詞（24 個 HK$ 價格全保留）|
-|blog-8 害蟲抗藥性真相|Why Insecticides Stop Working|\~1,300 詞（10 條 FAQ 全譯）|
-|blog-9 AI 智慧滅蟲共贏|Will AI Replace Pest Controllers?|\~1,300 詞|
+| 文章 | EN 標題 | 規模 |
+|------|---------|------|
+| blog-1 選擇滅蟲公司 5 大指標 | Best Pest Control Company in HK 2026 | ~900 詞 |
+| blog-2 2026 專業新視角 | 2026: Our Professional Outlook | ~700 詞 |
+| blog-3 2026 滅蟲公司推介 | 2026 Pest Control Company Recommendation | ~700 詞 |
+| blog-4 家居滅蟲方案 | 2026 Home Pest Control Plans | ~740 詞 |
+| blog-5 床蝨檢查治理預防 | Bed Bug Inspection & Prevention Guide | ~860 詞 |
+| blog-6 白蟻定螞蟻 | Termite vs Ant: How to Tell Them Apart | ~1,300 詞 |
+| blog-7 滅蟲收費行情 | 2026 Pest Control Prices in Hong Kong | ~2,180 詞（24 個 HK$ 價格全保留）|
+| blog-8 害蟲抗藥性真相 | Why Insecticides Stop Working | ~1,300 詞（10 條 FAQ 全譯）|
+| blog-9 AI 智慧滅蟲共贏 | Will AI Replace Pest Controllers? | ~1,300 詞 |
 
 每篇均含：BreadcrumbList + Article + FAQPage 三段英文 JSON-LD（日期保留原值）、
 內部連結全數指向英文版、WhatsApp 預填英文訊息、與中文版 100% 同款設計框架。
-驗收：`check\_en\_blog.py` 十篇全 PASS（標籤平衡／JSON-LD valid／無殘留中文／連結全 EN）。
+驗收：`check_en_blog.py` 十篇全 PASS（標籤平衡／JSON-LD valid／無殘留中文／連結全 EN）。
 
 ### 🔗 2. 配套修正
 
-1. **`i18n.js`**：語言切換器 blog-1\~9 由「fallback 去英文資訊頁」改為「直接映射 `/en/info/blog-N/`」——訪客撳 EN 即達對應英文文章（未來新文章仍 fallback 去hub，杜絕 404）
+1. **`i18n.js`**：語言切換器 blog-1~9 由「fallback 去英文資訊頁」改為「直接映射 `/en/info/blog-N/`」——訪客撳 EN 即達對應英文文章（未來新文章仍 fallback 去hub，杜絕 404）
 2. **`en/info/` 資訊樞紐**：10 張文章卡全部改連英文版＋徽章加「· EN」標記；原卡片標題同實際文章內容不符（例如 blog-1 卡寫「Bed Bug Guide」但文章實為選擇指南）已按實際內容修正；提示盒更新為「全部文章備有英文版」
-3. **`zh info/blog-9`**：head 補返缺失嘅 `hreflang="en"` 行（blog-1\~8 之前已有）
+3. **`zh info/blog-9`**：head 補返缺失嘅 `hreflang="en"` 行（blog-1~8 之前已有）
 4. **`en/info/blog-10`**：內文 IPM 連結由中文版 `/info/blog-7/` 改指英文版 `/en/info/blog-7/`
-5. **`sitemap.xml`**：新增 9 個 EN 文章 URL（總數 25→34），blog-1\~9 中英條目齊備 zh-HK/en/x-default 三向 hreflang；blog-9 zh lastmod 更新至 2026-09-02
-6. **`en/info/blog-10` og:site\_name** 統一為「Pest Control Master 滅蟲師傅」（同其他 EN 頁一致）
+5. **`sitemap.xml`**：新增 9 個 EN 文章 URL（總數 25→34），blog-1~9 中英條目齊備 zh-HK/en/x-default 三向 hreflang；blog-9 zh lastmod 更新至 2026-09-02
+6. **`en/info/blog-10` og:site_name** 統一為「Pest Control Master 滅蟲師傅」（同其他 EN 頁一致）
 
 ### 📦 部署
 
 打包 `bruceleehk-v9.5-github-upload.zip`（139 files），覆蓋上傳 GitHub 即生效。
 
-\---
+---
 
 # 修復日誌 (v9.4 — 2026-09-01)
 
@@ -188,21 +225,20 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 
 架構圖文字全面替換（對照文檔五站點方案）：
 
-|位置|原字眼|新字眼|
-|-|-|-|
-|客戶端入口|Web: WalzApp Platform / User Patient|Omnichannel Smart Portal（全渠道智能入口）/ Client Interface|
-|雲端邊緣傳輸|Cloudfare Worker|Edge Computing Network（邊緣運算網絡）|
-|核心 AI 大腦|Vision AI API Data Transier|Multimodal Vision Engine（多模態視覺引擎）|
-|獨家知識庫|36 Data Library|Proprietary IPM Knowledge Base（獨家 IPM 綜合防治智庫）|
-|診斷與報價輸出|Stattcy Matching…/ Diagnosis Card Piaeit / Price Estimate|Dynamic Strategy Matrix（動態策略矩陣）/ Automated Diagnostic \& Quote|
+| 位置 | 原字眼 | 新字眼 |
+|------|--------|--------|
+| 客戶端入口 | Web: WalzApp Platform / User Patient | Omnichannel Smart Portal（全渠道智能入口）/ Client Interface |
+| 雲端邊緣傳輸 | Cloudfare Worker | Edge Computing Network（邊緣運算網絡）|
+| 核心 AI 大腦 | Vision AI API Data Transier | Multimodal Vision Engine（多模態視覺引擎）|
+| 獨家知識庫 | 36 Data Library | Proprietary IPM Knowledge Base（獨家 IPM 綜合防治智庫）|
+| 診斷與報價輸出 | Stattcy Matching…/ Diagnosis Card Piaeit / Price Estimate | Dynamic Strategy Matrix（動態策略矩陣）/ Automated Diagnostic & Quote |
 
 具體修改：
 
 1. **`/ai/` 架構圖以專業 inline SVG 重新繪製**（取代原 AI 生成 jpg 圖，杜絕圖中 "WalzApp / Cloudfare / Transier / Stattcy / Piaeit" 等 AI 錯字）：
-
-   * 五站點流程：全渠道智能入口 → 邊緣運算網絡 → 多模態視覺引擎（核心）→ 獨家 IPM 綜合防治智庫 → 動態策略矩陣
-   * 中英雙語標籤、統一科技藍扁平 Icon、無第三方 Logo、發光效果收斂（依文檔視覺建議）
-   * 附帶性能紅利：減少一個 108KB 圖片請求，SVG 任何解像度都清晰
+   - 五站點流程：全渠道智能入口 → 邊緣運算網絡 → 多模態視覺引擎（核心）→ 獨家 IPM 綜合防治智庫 → 動態策略矩陣
+   - 中英雙語標籤、統一科技藍扁平 Icon、無第三方 Logo、發光效果收斂（依文檔視覺建議）
+   - 附帶性能紅利：減少一個 108KB 圖片請求，SVG 任何解像度都清晰
 2. **`/ai/` 可見字眼替換**：「DeepSeek 大腦」→「多模態視覺引擎」；「Cloudflare 圖像預處理」→「邊緣運算網絡圖像預處理」；「Dify 邏輯大腦深度思考中」→「IPM 防治智庫邏輯推演中」；架構六步驟卡全數採用文檔英文術語
 3. **首頁 `/` AI 診斷流程文案**：「視覺化驗師 GPT」→「多模態視覺引擎」；「AI 雙腦分析（視覺化驗+智庫配對）」→「AI 智能分析（視覺辨識+智庫配對）」
 4. **`/info/blog-4/` 修正隱藏外連**：正文「滅蟲師傅」文字誤連去 `cloud.dify.ai/apps` 後台 → 改連回 `/` 首頁（嚴重品牌外洩）
@@ -213,12 +249,11 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ### 🌍 2. 英文版 blog-10 補完（修正 EN 404）
 
 1. **新增 `/en/info/blog-10/`**：《Managing HK Property Pests from Overseas? The Complete Remote Pest Control Guide》完整英文版：
-
-   * 與中文版 100% 同款設計框架（同一套 inline CSS／對比圖／FAQ 手風琴／CTA）
-   * 全文專業英文翻譯（3 大場景、3 大痛點、3 招解決、4 步預約、5 條 FAQ）
-   * BreadcrumbList + Article + FAQPage 三段英文 JSON-LD
-   * 內部連結指向英文版（/en/services/#remote、/en/ai/ 等）；WhatsApp 預填訊息改英文
-   * 效能規格與中文版一致（webp 預載、lazy loading、async FA、defer JS）
+   - 與中文版 100% 同款設計框架（同一套 inline CSS／對比圖／FAQ 手風琴／CTA）
+   - 全文專業英文翻譯（3 大場景、3 大痛點、3 招解決、4 步預約、5 條 FAQ）
+   - BreadcrumbList + Article + FAQPage 三段英文 JSON-LD
+   - 內部連結指向英文版（/en/services/#remote、/en/ai/ 等）；WhatsApp 預填訊息改英文
+   - 效能規格與中文版一致（webp 預載、lazy loading、async FA、defer JS）
 2. **修正 404 根因**：`i18n.js` 語言切換器將 `/info/blog-10/` 直接映射 `/en/info/blog-10/`，但該頁從未存在 → 現已建立
 3. **i18n.js 加入 fallback 防護**：冇英文版嘅網誌（blog-1 至 blog-9）撳 EN 會去 `/en/info/` 資訊主頁，唔會再 404
 4. **zh blog-10 加入 `<link rel="alternate" hreflang="en">`**；canonical/hreflang 結構完整
@@ -228,19 +263,18 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ### ⚡ 3. PageSpeed 手機效能優化（目標 ≥90）
 
 1. **修正 Hero 圖「預載浪費」**（16 個頁面）：`<link rel="preload">` 預載 `hero-tech.webp`（65KB）但 CSS 背景卻用 `hero-tech.jpg`（114KB）→ 瀏覽器實際下載兩個檔共 179KB，且 LCP 用咗大嘅 jpg。已將 CSS 背景統一改用 webp，preload 生效，LCP 減輕約 100KB
-
-   * 涉及：全部 blog-1 至 blog-10、en/ 首頁、en/services、en/strategy、en/info、en/info/vote
+   - 涉及：全部 blog-1 至 blog-10、en/ 首頁、en/services、en/strategy、en/info、en/info/vote
 2. **en/ai、en/quote** hero 背景同樣 jpg → webp（慳約 40KB）
 3. **`/ai/` 移除 108KB 架構圖 jpg 請求**（改 inline SVG，見上）
-4. 既有基礎保持：圖片 lazy loading + width/height 防 CLS、Font Awesome CDN 異步載入、i18n/bruceleehk.js defer、\_headers 長期快取策略不變
+4. 既有基礎保持：圖片 lazy loading + width/height 防 CLS、Font Awesome CDN 異步載入、i18n/bruceleehk.js defer、_headers 長期快取策略不變
 
 ### 🎯 設計原則
 
-* 網站整體架構、設計風格、既有內容 100% 不變
-* 所有品牌詞替換嚴格採用《修正架構圖文字.docx》建議詞匯，中英對照一致
-* 功能性基礎設施（CSP／SDK 合約／Worker 端點）零改動，診斷與聊天功能不受影響
+- 網站整體架構、設計風格、既有內容 100% 不變
+- 所有品牌詞替換嚴格採用《修正架構圖文字.docx》建議詞匯，中英對照一致
+- 功能性基礎設施（CSP／SDK 合約／Worker 端點）零改動，診斷與聊天功能不受影響
 
-\---
+---
 
 # 修復日誌 (v9.3 — 2026-08-31)
 
@@ -249,36 +283,37 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ### 🌍 新增內容
 
 1. **服務頁 `/services/` 新增 SERVICE 05「遙距滅蟲 / 海外業主代辦」**（位於白蟻防治 SERVICE 04 之後）：
+   - 專業服務快捷導覽帶新增第 5 個按鈕「遙距滅蟲」（地球 icon，錨點跳轉 `#remote`）
+   - 服務標籤：海外港人專屬／全程相片彙報／AI 零時差診斷／交吉起租必備
+   - 服務特色與收費：全程遙距監工（施工前後相片/影片對比）／零時差對接（WhatsApp 國際專線＋24 小時 AI）／交吉起租深層防治（由 HK$1,500 起）／多渠道跨國付款
+   - 文中連結 `/ai/`（7x24 AI 害蟲分析系統）及 `/info/blog-10/`（攻略文章），與新文章互相呼應
+   - **JSON-LD**：新增 Service 結構化數據（serviceType: Remote Pest Control，areaServed 涵蓋香港/英國/加拿大/澳洲）
+   - meta description/keywords 加入「遙距滅蟲、海外業主、出租屋滅蟲代辦、交吉滅蟲」等長尾關鍵詞（中英簡三語）
 
-   * 專業服務快捷導覽帶新增第 5 個按鈕「遙距滅蟲」（地球 icon，錨點跳轉 `#remote`）
-   * 服務標籤：海外港人專屬／全程相片彙報／AI 零時差診斷／交吉起租必備
-   * 服務特色與收費：全程遙距監工（施工前後相片/影片對比）／零時差對接（WhatsApp 國際專線＋24 小時 AI）／交吉起租深層防治（由 HK$1,500 起）／多渠道跨國付款
-   * 文中連結 `/ai/`（7x24 AI 害蟲分析系統）及 `/info/blog-10/`（攻略文章），與新文章互相呼應
-   * **JSON-LD**：新增 Service 結構化數據（serviceType: Remote Pest Control，areaServed 涵蓋香港/英國/加拿大/澳洲）
-   * meta description/keywords 加入「遙距滅蟲、海外業主、出租屋滅蟲代辦、交吉滅蟲」等長尾關鍵詞（中英簡三語）
 2. **新文章頁面 `/info/blog-10/`**：《【海外業主必讀】移民海外如何遙距處理香港物業蟲患？業主遠程滅蟲全攻略！》
+   - 文章結構：引言 → 3 大蟲患場景（出租物業／幫留港家人預約／交吉起租）→ 3 大痛點（時差／信任監工／付款單據）→ 3 招解決（AI 零時差診斷／全程相片彙報／跨國支付）→ 遙距預約 4 步曲 → 結語 → CTA → 5 條 FAQ
+   - **對比圖區塊**：「傳統困局：隔洋乾著急 VS 遙距新章：零時差監工」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51/64KB + jpg 94/112KB 雙格式）
+   - **內部連結（與遙距滅蟲服務相呼應）**：
+     - 遙距滅蟲代辦服務 → `/services/#remote`（雙向連結核心）
+     - AI 害蟲圖像診斷器／7x24 AI 害蟲診斷 → `/ai/`
+     - 滅蟲師傅（BruceLeeHK）／滅蟲師傅網站 → `/`（首頁）
+     - IPM 綜合防治 → `/info/blog-7/`
+     - 床蝨（木蝨） → `/services/#bedbug`
+   - **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD
+   - Meta Title/Description/Keywords 按文章文檔建議設定（涵蓋香港遙距滅蟲、海外業主香港滅蟲、出租屋滅蟲代辦等長尾詞）
 
-   * 文章結構：引言 → 3 大蟲患場景（出租物業／幫留港家人預約／交吉起租）→ 3 大痛點（時差／信任監工／付款單據）→ 3 招解決（AI 零時差診斷／全程相片彙報／跨國支付）→ 遙距預約 4 步曲 → 結語 → CTA → 5 條 FAQ
-   * **對比圖區塊**：「傳統困局：隔洋乾著急 VS 遙距新章：零時差監工」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51/64KB + jpg 94/112KB 雙格式）
-   * **內部連結（與遙距滅蟲服務相呼應）**：
-
-     * 遙距滅蟲代辦服務 → `/services/#remote`（雙向連結核心）
-     * AI 害蟲圖像診斷器／7x24 AI 害蟲診斷 → `/ai/`
-     * 滅蟲師傅（BruceLeeHK）／滅蟲師傅網站 → `/`（首頁）
-     * IPM 綜合防治 → `/info/blog-7/`
-     * 床蝨（木蝨） → `/services/#bedbug`
-   * **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD
-   * Meta Title/Description/Keywords 按文章文檔建議設定（涵蓋香港遙距滅蟲、海外業主香港滅蟲、出租屋滅蟲代辦等長尾詞）
 3. **英文服務頁 `/en/services/`**：新增 "🌍 Remote Pest Control / Overseas Owner Service" 卡片（呼應海外客群）
+
 4. **資訊列表頁**：中文版 `/info/` 及英文版 `/en/info/` 均新增 blog-10 卡片
+
 5. **sitemap.xml**：新增 blog-10 URL（lastmod 2026-08-31）；services 及 en/services lastmod 更新
 
 ### 🎯 設計原則
 
-* 網站原有架構、設計風格、既有內容 100% 不變（blog-10 完整複用 blog-9 已驗證嘅 CSS 框架）
-* SERVICE 05 沿用既有 modern-card／number-badge／service-tags／pricing-box 組件，零新 CSS
+- 網站原有架構、設計風格、既有內容 100% 不變（blog-10 完整複用 blog-9 已驗證嘅 CSS 框架）
+- SERVICE 05 沿用既有 modern-card／number-badge／service-tags／pricing-box 組件，零新 CSS
 
-\---
+---
 
 # 修復日誌 (v9.2 — 2026-08-29)
 
@@ -287,28 +322,29 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ### 📰 新增內容
 
 1. **新文章頁面 `/info/blog-9/`**：《【行業顛覆】傳統滅蟲師傅會被 AI 淘汰？探討 AI 智慧滅蟲與人工經驗的「共贏」新未來！》
+   - 文章結構：引言 → 3 大章節（AI 與師傅合作互補／AI 算力補足經驗短板／O2O 共贏商業模式）→ 結語 → CTA → 5 條 FAQ
+   - **對比圖區塊**：新增「傳統年代：電筒斷估 VS AI 年代：數據斷症」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51KB + jpg 102KB 雙格式）
+   - **內部連結（Internal Linking）**：文中加粗關鍵詞全部設為 hyperlink，強化 Google 站點結構評分——
+     - 三十六計精準防治／滅蟲智庫 → `/strategy/`
+     - 上門滅蟲服務／IoT 智慧監測追蹤 → `/services/`
+     - AI 害蟲圖像識別／AI 智慧滅蟲 → `/ai/`
+     - 滅蟲收費估價 → `/quote/`
+     - 綜合防治理念（IPM） → `/info/blog-7/`
+     - 香港滅蟲公司 → `/`（首頁）
+   - **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD（豐富摘要觸發 FAQ 折疊顯示）
+   - FAQ 採用原生 `<details>/<summary>` 手風琴（零 JS、無障礙、避免 blog-8 的 onclick 缺陷方案）
 
-   * 文章結構：引言 → 3 大章節（AI 與師傅合作互補／AI 算力補足經驗短板／O2O 共贏商業模式）→ 結語 → CTA → 5 條 FAQ
-   * **對比圖區塊**：新增「傳統年代：電筒斷估 VS AI 年代：數據斷症」並排對比卡（手機自動堆疊），AI 生成配圖（webp 51KB + jpg 102KB 雙格式）
-   * **內部連結（Internal Linking）**：文中加粗關鍵詞全部設為 hyperlink，強化 Google 站點結構評分——
-
-     * 三十六計精準防治／滅蟲智庫 → `/strategy/`
-     * 上門滅蟲服務／IoT 智慧監測追蹤 → `/services/`
-     * AI 害蟲圖像識別／AI 智慧滅蟲 → `/ai/`
-     * 滅蟲收費估價 → `/quote/`
-     * 綜合防治理念（IPM） → `/info/blog-7/`
-     * 香港滅蟲公司 → `/`（首頁）
-   * **SEO 結構化數據**：BreadcrumbList + Article + FAQPage 三段 JSON-LD（豐富摘要觸發 FAQ 折疊顯示）
-   * FAQ 採用原生 `<details>/<summary>` 手風琴（零 JS、無障礙、避免 blog-8 的 onclick 缺陷方案）
 2. **資訊列表頁**：中文版 `/info/` 及英文版 `/en/info/` 均新增 blog-9 卡片
+
 3. **sitemap.xml**：新增 blog-9 URL（lastmod 2026-08-29）
 
 ### 🎯 首頁及 Worker 同步升級（v9.1）
 
 4. **首頁 `index.html` → v9.1**：可選補充描述框（50 字封頂）＋前端清洗＋信賴徽章；本次補回 v5.3 的 CLS 圖片尺寸屬性（3 張 smart-card + 4 張 video 卡圖）
-5. **Worker `pest-vision-worker.js` → v9.1**：多模態上下文先驗（user\_desc 白名單清洗＋攻擊絆線＋50 字封印）＋快取鍵 v2＋雙通道傳送＋假死攔截
 
-\---
+5. **Worker `pest-vision-worker.js` → v9.1**：多模態上下文先驗（user_desc 白名單清洗＋攻擊絆線＋50 字封印）＋快取鍵 v2＋雙通道傳送＋假死攔截
+
+---
 
 # 修復日誌 (v5.3 — 2026-08-26)
 
@@ -316,51 +352,45 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 
 針對用戶反饋嘅三大問題（AI 診斷網絡連線超時、投票系統圖片顯示、PageSpeed 性能）完成 6 大修復：
 
-### 🔧 問題 1：AI 診斷系統 \[網絡連線超時] 修復
+### 🔧 問題 1：AI 診斷系統 [網絡連線超時] 修復
 
 **根因分析：**
-
-* 前端 `fetch()` 無逾時保護，AI 模型卡死時無法及時回饋
-* CSP `img-src` 未包含 `blob:`，導致 `URL.createObjectURL()` 預覽圖片被封鎖
-* 後端 Worker 嘅 `base64` 逐字元轉換喺大圖片時觸發 CPU 限制，回傳 500 錯誤
-* 錯誤訊息籠統，一律顯示「網絡連線超時」誤導用戶
+- 前端 `fetch()` 無逾時保護，AI 模型卡死時無法及時回饋
+- CSP `img-src` 未包含 `blob:`，導致 `URL.createObjectURL()` 預覽圖片被封鎖
+- 後端 Worker 嘅 `base64` 逐字元轉換喺大圖片時觸發 CPU 限制，回傳 500 錯誤
+- 錯誤訊息籠統，一律顯示「網絡連線超時」誤導用戶
 
 **修復措施：**
-
 1. **24 個 HTML 頁面** CSP 全部加上 `blob:` 至 `img-src` 指令
 2. **前端加入 30 秒 AbortController** 逾時保護，比 Worker 端 25s 稍長，讓 Worker 的 504 訊息先回來
 3. **後端 Worker base64 改用 32KB 分塊處理**（v5.3 性能優化），避免逐字元 loop 觸發 CPU 限制
-4. **按錯誤碼提供精準訊息**：`AI\_TIMEOUT` / `AI\_FAILED` / `AI\_NOT\_BOUND` / `REQUEST\_TOO\_LARGE` 各有專屬提示
+4. **按錯誤碼提供精準訊息**：`AI_TIMEOUT` / `AI_FAILED` / `AI_NOT_BOUND` / `REQUEST_TOO_LARGE` 各有專屬提示
 5. **按鈕加 spinner + 防重複點擊**，避免用戶誤觸多次發送
 
 ### 🔧 問題 2：投票系統苦主留言區 圖片上傳＋HD 放大
 
 **根因分析：**
-
-* 舊版僅生成一個 1200px 中等圖，列表縮圖與 lightbox 放大均用同一張，體積過大、放大後又唔夠清
-* 缺少即時預覽，用戶上傳後無反饋
-* EN 版留言區根本無 GLightbox，圖片無法點擊放大
+- 舊版僅生成一個 1200px 中等圖，列表縮圖與 lightbox 放大均用同一張，體積過大、放大後又唔夠清
+- 缺少即時預覽，用戶上傳後無反饋
+- EN 版留言區根本無 GLightbox，圖片無法點擊放大
 
 **修復措施：**
-
 1. **雙尺寸圖片生成**：
-
-   * HD 大圖：max 1600px × JPEG q=0.92（\~150-400KB）— 用於 lightbox 放大顯示
-   * 列表縮圖：max 400px × JPEG q=0.7（\~20-50KB）— 用於列表快速載入
-2. **後端 Worker 已支援 `thumb\_url` 字段儲存**（沿用既有 schema）
-3. **前端渲染分離 src 與 href**：`<img src="thumb\_url">` + `<a href="image\_url" class="glightbox">`，點擊放大顯示 HD 版本
+   - HD 大圖：max 1600px × JPEG q=0.92（~150-400KB）— 用於 lightbox 放大顯示
+   - 列表縮圖：max 400px × JPEG q=0.7（~20-50KB）— 用於列表快速載入
+2. **後端 Worker 已支援 `thumb_url` 字段儲存**（沿用既有 schema）
+3. **前端渲染分離 src 與 href**：`<img src="thumb_url">` + `<a href="image_url" class="glightbox">`，點擊放大顯示 HD 版本
 4. **加入即時 inline 預覽**：選取圖片後立即顯示縮圖，無需等待 canvas 壓縮
 5. **EN 版留言區補齊 GLightbox 庫**（CSS + JS）與事件綁定，與中文版功能對齊
-6. **fallback 機制**：舊留言無 `thumb\_url` 時自動 fallback 用 `image\_url` 作為縮圖
+6. **fallback 機制**：舊留言無 `thumb_url` 時自動 fallback 用 `image_url` 作為縮圖
 
 ### 🔧 問題 3：PageSpeed Insights 性能優化（目標 90+）
 
 **修復措施：**
-
-1. **20 張圖片補上 `width` 與 `height` 屬性**（覆蓋 index.html / 404.html / quote / ai / en/\* 等 6 個頁面），消除 CLS（Cumulative Layout Shift）
+1. **20 張圖片補上 `width` 與 `height` 屬性**（覆蓋 index.html / 404.html / quote / ai / en/* 等 6 個頁面），消除 CLS（Cumulative Layout Shift）
 2. **GLightbox CSS 改用 preload 異步載入**模式（原為同步 render-blocking）
 3. **GLightbox JS 加 `defer` 屬性**，避免阻塞首屏渲染
-4. **`\_headers` 加入 `X-XSS-Protection: 1; mode=block`** 強化安全標頭
+4. **`_headers` 加入 `X-XSS-Protection: 1; mode=block`** 強化安全標頭
 5. 既有優化保留：WebP 圖片、Font Awesome preload、Hero 圖 preload、`loading="lazy"`、`decoding="async"`、長快取等
 
 ### 🔧 額外修復
@@ -371,17 +401,17 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 
 ### 📦 修復覆蓋範圍
 
-|類別|修改檔案數|關鍵改動|
-|-|-|-|
-|CSP 修復|24 個 HTML|全部加上 `blob:` 至 `img-src`|
-|圖片尺寸|6 個 HTML|20 張圖片加 width/height|
-|AI 診斷|index.html + ai/index.html|AbortController + 精準錯誤訊息|
-|Worker 後端|pest-vision-worker.js|分塊 base64 轉換|
-|投票圖片|info/vote + en/info/vote|HD+縮圖雙尺寸 + GLightbox|
-|安全標頭|\_headers|X-XSS-Protection|
-|HTML 結構|en/ai/index.html|修復未關閉 script 標籤|
+| 類別 | 修改檔案數 | 關鍵改動 |
+|------|-----------|---------|
+| CSP 修復 | 24 個 HTML | 全部加上 `blob:` 至 `img-src` |
+| 圖片尺寸 | 6 個 HTML | 20 張圖片加 width/height |
+| AI 診斷 | index.html + ai/index.html | AbortController + 精準錯誤訊息 |
+| Worker 後端 | pest-vision-worker.js | 分塊 base64 轉換 |
+| 投票圖片 | info/vote + en/info/vote | HD+縮圖雙尺寸 + GLightbox |
+| 安全標頭 | _headers | X-XSS-Protection |
+| HTML 結構 | en/ai/index.html | 修復未關閉 script 標籤 |
 
-\---
+---
 
 ## v3.3 — 2026-08-17
 
@@ -389,78 +419,71 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 
 基於用戶反饋與兩份 Google Search Console 文件，完成 3 大優化：
 
-1. **info/blog-1 \~ blog-8 全部 8 篇文章重新設計**（與首頁一致的現代科技風格）
+1. **info/blog-1 ~ blog-8 全部 8 篇文章重新設計**（與首頁一致的現代科技風格）
 2. **修正 Google Search Console 偵測到的無效項目**（aggregateRating 結構化資料錯誤）
 3. **移除 quote 頁面頂部 WhatsApp 圖示**
 
-\---
+---
 
-## 🔧 問題 1：blog-1 \~ blog-8 全面重新設計
+## 🔧 問題 1：blog-1 ~ blog-8 全面重新設計
 
 ### 完成事項
 
 將 8 篇蟲類資訊文章全部從舊版綠色 `#2c5e1a` 平面卡片風格，重新設計為與首頁一致的現代科技感：
 
-|頁面|標題|行數|
-|-|-|-|
-|blog-1|2026 滅蟲公司邊間好？5 大指標避坑|\~36KB|
-|blog-2|2026年「滅蟲師傅」的專業新視角|\~34KB|
-|blog-3|2026 滅蟲公司推介 — 專業根治白蟻/木蝨|\~35KB|
-|blog-4|家居滅蟲/白蟻/木蝨根治方案|\~35KB|
-|blog-5|家居床蝨檢查、治理及預防攻略|\~36KB|
-|blog-6|如何正確辨別白蟻及螞蟻|\~37KB|
-|blog-7|2026 滅蟲公司收費點計算？全港行情一覽|\~50KB|
-|blog-8|點解滅蟲藥越用越無效？害蟲抗藥性真相|\~44KB|
+| 頁面 | 標題 | 行數 |
+|------|------|------|
+| blog-1 | 2026 滅蟲公司邊間好？5 大指標避坑 | ~36KB |
+| blog-2 | 2026年「滅蟲師傅」的專業新視角 | ~34KB |
+| blog-3 | 2026 滅蟲公司推介 — 專業根治白蟻/木蝨 | ~35KB |
+| blog-4 | 家居滅蟲/白蟻/木蝨根治方案 | ~35KB |
+| blog-5 | 家居床蝨檢查、治理及預防攻略 | ~36KB |
+| blog-6 | 如何正確辨別白蟻及螞蟻 | ~37KB |
+| blog-7 | 2026 滅蟲公司收費點計算？全港行情一覽 | ~50KB |
+| blog-8 | 點解滅蟲藥越用越無效？害蟲抗藥性真相 | ~44KB |
 
 ### 每篇文章都套用：
-
-* **深色 Hero 區**：linear-gradient + radial glow 動畫 + 科技徽章（蟲類資訊 / 專業指南 / 實戰心得）
-* **「✨ 智慧滅蟲梗喺滅蟲師傅啦」slogan**：綠色藥丸標籤
-* **文章標題 Hero**：使用文章 H2 標題作為 Hero 大標
-* **WhatsApp CTA + 返回資訊列表**：雙按鈕
-* **現代化文章卡片**：
-
-  * 白色背景 + 圓角 + accent border-top 漸變（emerald → tech-blue）
-  * 陰影 + hover 上浮效果
-  * 返回連結帶 hover 動畫（gap 增大）
-  * 分類徽章漸變背景 + 陰影
-  * 日期帶 Font Awesome 圖示
-  * 文章標題加粗 + 字距優化
-  * H3 帶 accent bar（左側漸變垂直條）
-  * 段落 line-height 1.95 提升可讀性
-  * 強調文字使用 primary-dark 綠色
-  * 列表 marker 使用 primary 綠色
-* **行內提示卡（inline-discussion-hint）**：漸變背景 + accent border-left
-* **SEO 導流 Banner（vote-redirect-banner）**：黃色漸變 + 漸變 CTA 按鈕
-* **收費表格（price-table）**：漸變表頭 + 隔行變色
-* **定價盒（pricing-box）**：accent border-left + 漸變背景
-* **CTA Box（blog-cta-box）**：漸變背景 + radial 光暈 + 多按鈕
-* **標籤（tags）**：emerald-light 背景 + accent border
-* **與首頁完全一致的導航與頁尾**
-* **行動裝置底部固定 WhatsApp CTA**
+- **深色 Hero 區**：linear-gradient + radial glow 動畫 + 科技徽章（蟲類資訊 / 專業指南 / 實戰心得）
+- **「✨ 智慧滅蟲梗喺滅蟲師傅啦」slogan**：綠色藥丸標籤
+- **文章標題 Hero**：使用文章 H2 標題作為 Hero 大標
+- **WhatsApp CTA + 返回資訊列表**：雙按鈕
+- **現代化文章卡片**：
+  - 白色背景 + 圓角 + accent border-top 漸變（emerald → tech-blue）
+  - 陰影 + hover 上浮效果
+  - 返回連結帶 hover 動畫（gap 增大）
+  - 分類徽章漸變背景 + 陰影
+  - 日期帶 Font Awesome 圖示
+  - 文章標題加粗 + 字距優化
+  - H3 帶 accent bar（左側漸變垂直條）
+  - 段落 line-height 1.95 提升可讀性
+  - 強調文字使用 primary-dark 綠色
+  - 列表 marker 使用 primary 綠色
+- **行內提示卡（inline-discussion-hint）**：漸變背景 + accent border-left
+- **SEO 導流 Banner（vote-redirect-banner）**：黃色漸變 + 漸變 CTA 按鈕
+- **收費表格（price-table）**：漸變表頭 + 隔行變色
+- **定價盒（pricing-box）**：accent border-left + 漸變背景
+- **CTA Box（blog-cta-box）**：漸變背景 + radial 光暈 + 多按鈕
+- **標籤（tags）**：emerald-light 背景 + accent border
+- **與首頁完全一致的導航與頁尾**
+- **行動裝置底部固定 WhatsApp CTA**
 
 ### 保留所有原內容
+- 所有文章正文（段落、標題、列表、表格）
+- 所有 JSON-LD 區塊（BreadcrumbList + Article + FAQPage）
+- 所有 SEO meta 標籤
+- 所有圖片與連結
 
-* 所有文章正文（段落、標題、列表、表格）
-* 所有 JSON-LD 區塊（BreadcrumbList + Article + FAQPage）
-* 所有 SEO meta 標籤
-* 所有圖片與連結
-
-\---
+---
 
 ## 🔧 問題 2：Google Search Console 無效項目修正
 
 ### 問題診斷
-
 根據用戶提供的兩份 docx 文件：
-
 1. **偵測到 1 個無效項目.docx**：顯示首頁 JSON-LD 結構化資料被 Google 標記為無效
 2. **Google Search Console 驗證修正.docx**：解釋問題出在 `aggregateRating` 的父子節點結構
 
 ### 根本原因
-
 首頁 `index.html` 的 JSON-LD 中 `aggregateRating` 存在以下問題：
-
 1. `ratingValue: "4.9"` 是**字串**，應為**數值**
 2. `reviewCount: "10000"` 是**字串**，應為**整數**
 3. 缺少 `@id` 屬性（Google 要求 LocalBusiness 類型必須有）
@@ -470,7 +493,6 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 7. 缺少 `review` 屬性（Google 要求 aggregateRating 必須搭配至少一個 review）
 
 ### 修正方案
-
 完全重寫首頁 JSON-LD，符合 Google Rich Results 標準：
 
 ```json
@@ -493,7 +515,7 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
     "currenciesAccepted": "HKD",
     "address": { ... PostalAddress with addressCountry ... },
     "areaServed": { "@type": "Place", "name": "Hong Kong" },
-    "openingHoursSpecification": \[ ... OpeningHoursSpecification ... ],
+    "openingHoursSpecification": [ ... OpeningHoursSpecification ... ],
     "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": 4.9,        // ← 數值（非字串）
@@ -501,12 +523,11 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
         "bestRating": 5,
         "worstRating": 1
     },
-    "review": \[ ... 2 個 Review 物件 ... ]
+    "review": [ ... 2 個 Review 物件 ... ]
 }
 ```
 
 ### 關鍵修正點
-
 1. ✅ `ratingValue` 改為數值 `4.9`（原本是字串 `"4.9"`）
 2. ✅ `reviewCount` 改為整數 `10000`（原本是字串 `"10000"`）
 3. ✅ 加入 `@id` 屬性
@@ -520,17 +541,15 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 11. ✅ `reviewRating` 包含 `bestRating` 與 `worstRating`
 
 ### 驗證
+- JSON-LD 通過 `JSON.parse` 驗證 ✓
+- 符合 Google Rich Results for LocalBusiness 規範 ✓
+- 用戶可在 Google Search Console 點擊「驗證修正」按鈕
 
-* JSON-LD 通過 `JSON.parse` 驗證 ✓
-* 符合 Google Rich Results for LocalBusiness 規範 ✓
-* 用戶可在 Google Search Console 點擊「驗證修正」按鈕
-
-\---
+---
 
 ## 🔧 問題 3：移除 quote 頁面頂部 WhatsApp 圖示
 
 ### 完成事項
-
 移除 `quote/index.html` 頁首導航列中的 WhatsApp 圓形圖示按鈕：
 
 ```html
@@ -543,56 +562,47 @@ AI 圖片傳輸塞車 → 超過 60 秒超時 →「分析未能完成」。而�
 ```
 
 ### 視覺驗證
-
 VLM 確認：quote 頁面頂部導航列已無 WhatsApp 圖示，只剩 logo + 導航連結。
 
-\---
+---
 
 ## 📦 修改檔案清單
 
 ### 重新設計
-
-* `info/blog-1/index.html` \~ `info/blog-8/index.html`（8 個檔案全部重新設計）
+- `info/blog-1/index.html` ~ `info/blog-8/index.html`（8 個檔案全部重新設計）
 
 ### JSON-LD 修正
-
-* `index.html`（首頁 JSON-LD 完全重寫）
+- `index.html`（首頁 JSON-LD 完全重寫）
 
 ### WhatsApp 圖示移除
-
-* `quote/index.html`（移除 header-wa 按鈕）
+- `quote/index.html`（移除 header-wa 按鈕）
 
 ### 新增腳本
+- `scripts/redesign_blogs.py`（可重複執行的 blog 重新設計腳本）
 
-* `scripts/redesign\_blogs.py`（可重複執行的 blog 重新設計腳本）
-
-\---
+---
 
 ## ✅ 修復驗證
 
 ### 程式碼驗證
-
-* `python3 scripts/validate.py` → 0 errors, 0 warnings
-* 所有 JS 檔案通過 `node --check`
-* 所有 JSON-LD 區塊可被 `JSON.parse` 解析
+- `python3 scripts/validate.py` → 0 errors, 0 warnings
+- 所有 JS 檔案通過 `node --check`
+- 所有 JSON-LD 區塊可被 `JSON.parse` 解析
 
 ### 視覺驗證（VLM）
-
 使用 chrome-headless-shell + puppeteer-core 渲染所有頁面，並用 GLM-5V 視覺模型確認：
+- ✅ blog-1：深色 hero + slogan + 白色卡片 + accent border + 內容可讀
+- ✅ blog-4：深色 hero + slogan + 白色卡片 + 無佈局問題
+- ✅ blog-7：深色 hero + slogan + 白色卡片 + 無佈局問題
+- ✅ homepage：正常載入 + 深色 hero + slogan + 無佈局問題
+- ✅ quote：頂部導航列已無 WhatsApp 圖示
 
-* ✅ blog-1：深色 hero + slogan + 白色卡片 + accent border + 內容可讀
-* ✅ blog-4：深色 hero + slogan + 白色卡片 + 無佈局問題
-* ✅ blog-7：深色 hero + slogan + 白色卡片 + 無佈局問題
-* ✅ homepage：正常載入 + 深色 hero + slogan + 無佈局問題
-* ✅ quote：頂部導航列已無 WhatsApp 圖示
-
-\---
+---
 
 ## 🚀 部署步驟
 
 1. 將 `bruceleehk-fixed-v4` 資料夾上傳至 GitHub Pages / Cloudflare Pages / Netlify
-2. 訪問 https://bruceleehk.com/info/blog-1/ \~ /info/blog-8/ → 應看到與首頁一致的現代科技風格
+2. 訪問 https://bruceleehk.com/info/blog-1/ ~ /info/blog-8/ → 應看到與首頁一致的現代科技風格
 3. 訪問 https://bruceleehk.com/ → 首頁 JSON-LD 已修正
 4. 訪問 https://bruceleehk.com/quote/ → 頂部導航列已無 WhatsApp 圖示
 5. 前往 Google Search Console → 點擊「驗證修正」→ Google 會重新檢索並確認問題已解決
-
