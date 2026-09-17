@@ -1,4 +1,40 @@
-# 修復日誌 (v9.10 — 2026-09-17)
+# 修復日誌 (v9.11 — 2026-09-17)
+
+## v9.11 首頁導航修訂 + EN 英文版全面同步優化
+
+### 1️⃣ 首頁【十八區服務覆蓋】重複項修復（v9.10 遺留）
+
+- ZH 首頁頂部導航出現兩個相同【十八區服務覆蓋】（v9.10 全站 patch 時首頁重複加插），移除重複項只保留一個
+- 導航標籤全面改名：**十八區服務覆蓋 → 覆蓋十八區**（更短更醒目）
+- 全站統一：ZH 38 個頁面 93 處連結文字（頂部導航 + 頁尾導航 + 麵包屑連結）同步改名；
+  districts hub 頁面標題 / JSON-LD / 麵包屑當前頁名維持原狀（SEO 頁名不變）
+
+### 2️⃣ 首頁十八區 Band 標題修訂
+
+- ZH：服務覆蓋全港十八區｜即日上門滅蟲 → **服務覆蓋全港十八區｜最快即日上門滅蟲**
+- EN 同步：Service Coverage: All 18 Districts of Hong Kong | **Fastest** Same-Day Pest Control
+
+### 3️⃣ EN 英文版全面同步優化（對齊 ZH 全部功能）
+
+- **導航改名**：Service Areas → **18 Districts**（37 個 EN 頁面 91 處連結文字同步）
+- **《白蟻復發救援》視頻卡英文化補完**：VideoObject JSON-LD 名稱由中文
+  「廣播道龍翔苑白蟻復發救援實錄：Termatrac T3i 微波白蟻探測」改為英文
+  "Broadcast Drive Kowloon Tong Termite Relapse Rescue: Termatrac T3i Microwave Termite Detection"
+  （修復 Google 影片搜尋結果喺 EN 頁顯示中文標題嘅問題；頁面可見元素 v9.9 已全英文）
+- **補回 Floating AI 助手**：ZH 首頁獨有嘅右下角浮動 AI 按鈕 + AI Chat Popup 補到 EN 首頁
+  （AI Pest Assistant / Online 24/7 全英文界面；CSP script-src + frame-src 補白名單 udify.app；
+  iframe 維持點擊先載入嘅秒開模式，唔影響首屏速度）
+- **補回 IPM 綜合防治理念區塊**：ZH 首頁獨有嘅「Integrated Pest Management (IPM)」漸變綠理念卡
+  補到 EN 首頁（Estate Wall 與 Service Terms 之間），EN 用戶同樣感知專業 IPM 方法論（E-E-A-T）
+
+### ✅ v9.11 驗收
+
+- ZH 首頁 nav districts 項 = 1（重複修復）、漢堡選單 6 項：首頁／蟲類服務／覆蓋十八區／有蟲就有計／蟲類資訊／有蟲話我知
+- 兩版首頁標籤平衡、JSON-LD 各 3 段全部 valid、ZH 既有區塊零改動
+- agent-browser 實測：ZH nav/band ✓；EN nav "18 Districts"／band "Fastest Same-Day" ✓；
+  EN IPM 區塊渲染 ✓；EN 浮動 AI 按鈕點擊 → Popup 開啟（display:flex）→ iframe 由 about:blank
+  懶載入 udify chatbot（CSP 通過）→ 關閉正常；console 零錯誤
+- 改動檔案：index.html（ZH 首頁）+ en/index.html（EN 首頁）+ 全站 75 個頁面連結文字改名（零結構改動）
 
 ## v9.10 十八區地區 SEO 戰略地圖：/districts Hub + 18 區專頁雙語上架 + 全站權重灌注（依《網站增設districts頁面.docx》＋《全站權重灌注.docx》方案）
 

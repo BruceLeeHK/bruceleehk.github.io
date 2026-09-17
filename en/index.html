@@ -126,7 +126,7 @@
     {
       "@context": "https://schema.org",
       "@type": "VideoObject",
-      "name": "廣播道龍翔苑白蟻復發救援實錄：Termatrac T3i 微波白蟻探測",
+      "name": "Broadcast Drive Kowloon Tong Termite Relapse Rescue: Termatrac T3i Microwave Termite Detection",
       "description": "A real Kowloon Tong (Broadcast Drive) case: termites kept returning after treatment. Using the Australian-patented Termatrac T3i microwave radar, our master located the colony inside the door frame within 2 hours - non-invasive and precise.",
       "thumbnailUrl": ["https://bruceleehk.com/assets/img/video-termite-relief-768.jpg"],
       "uploadDate": "2026-09-13",
@@ -459,7 +459,7 @@
         .video-info { padding: 12px; text-align: left; }
         .video-title { font-size: 0.88rem; font-weight: 700; color: #fff; margin: 0 0 4px; line-height: 1.4; }
         .video-meta { font-size: 0.75rem; color: #94a3b8; margin: 0; }
-        /* ===== v9.9 白蟻復發救援 Feature 卡（Facade + 紅底個案標籤 + 雙 CTA） ===== */
+        /* ===== v9.9 Termite Relapse Rescue feature card (facade + case badge + dual CTA) ===== */
         .video-feature {
             width: 300px;
             border: 1px solid rgba(16,185,129,0.4);
@@ -575,12 +575,12 @@
     <!-- CSP -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com;
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://udify.app;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
       connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://whatsapp-bot.cedars5282.workers.dev https://cloudflareinsights.com;
-      frame-src https://www.youtube.com https://www.youtube-nocookie.com;
+      frame-src https://udify.app https://www.youtube.com https://www.youtube-nocookie.com;
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
@@ -606,7 +606,7 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/en/" class="active" aria-current="page">Home</a></li>
                     <li><a href="/en/services/">Services</a></li>
-                    <li><a href="/en/districts/">Service Areas</a></li>
+                    <li><a href="/en/districts/">18 Districts</a></li>
                     <li><a href="/en/strategy/">Strategies</a></li>
                     <li><a href="/en/info/">Info</a></li>
                     <li><a href="/en/quote/">Get Quote</a></li>
@@ -892,7 +892,7 @@
                 <!-- v9.10 18-district coverage band (homepage link juice direct to /en/districts/) -->
         <section class="container" aria-labelledby="district-band-title">
             <div class="district-band">
-                <h3 id="district-band-title"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Service Coverage: All 18 Districts of Hong Kong | Same-Day Pest Control</h3>
+                <h3 id="district-band-title"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Service Coverage: All 18 Districts of Hong Kong | Fastest Same-Day Pest Control</h3>
                 <p class="db-sub">Based in Lai King and reaching all 18 districts — Hong Kong Island, Kowloon, New Territories &amp; Islands — each with a dedicated page on local pests and our AI tech solutions.</p>
                 <div class="db-regions">
                     <a href="/en/districts/#hk-island" class="db-region"><i class="fa-solid fa-map-pin" aria-hidden="true"></i> Hong Kong Island (Central &amp; Western, Wan Chai, Eastern, Southern)</a>
@@ -952,6 +952,25 @@
             </div>
         </section>
 
+        <!-- IPM Integrated Pest Management (parity with ZH homepage) -->
+        <section class="container" aria-labelledby="ipm-title">
+            <div style="background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 100%); border: 1px solid #6ee7b7; border-radius: var(--radius); padding: 28px 24px; margin: 30px 0;">
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <h3 id="ipm-title" style="margin: 0 0 6px; font-size: 1.25rem; color: var(--dark-bg);">
+                        <i class="fa-solid fa-leaf" aria-hidden="true" style="color: var(--primary);"></i> Integrated Pest Management (IPM)
+                    </h3>
+                    <p style="margin: 0; font-size: 0.92rem; color: var(--text-muted);">Professional, Safe &amp; Sustainable Pest Control</p>
+                </div>
+                <p style="text-align: center; color: var(--text-main); font-size: 0.95rem; line-height: 1.8; margin: 0 0 14px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Our service is built on <b style="color: var(--primary-dark);">Integrated Pest Management (IPM)</b> — combining AI smart diagnosis, IoT monitoring, physical exclusion and professional-grade treatments to deliver long-term control programmes.
+                    <b style="color: var(--warning);">IPM requires ongoing execution: results are not instant, but they last.</b>
+                </p>
+                <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin: 0;">
+                    * All treatment plans and fees are subject to the final on-site assessment by our technicians. We do not promise absolute guarantees such as &ldquo;total eradication in one visit&rdquo;.
+                </p>
+            </div>
+        </section>
+
         <!-- Terms & Privacy Section -->
         <section class="container" aria-labelledby="terms-title">
             <div class="terms-section">
@@ -969,7 +988,7 @@
     <!-- Footer -->
     <footer>
         <p>Address: Lai King Estate Factory Building, N.T. | Service Area: All 18 Districts of Hong Kong | Hours: 9:00 - 18:00</p>
-        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">Service Areas</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a></nav>
+        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
@@ -991,6 +1010,28 @@
         </div>
         <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved.</p>
     </footer>
+
+    <!-- Floating AI Assistant -->
+    <div class="floating-ai">
+        <button class="floating-ai-btn" id="floating-ai-btn" aria-label="Open AI Pest Assistant" aria-expanded="false" aria-controls="ai-popup" type="button">
+            <i class="fa-solid fa-robot" aria-hidden="true"></i>
+        </button>
+        <span class="floating-ai-tooltip">AI Pest Assistant &bull; 24/7 Support</span>
+    </div>
+
+    <!-- AI Chat Popup -->
+    <div class="ai-popup" id="ai-popup" role="dialog" aria-label="AI Pest Assistant dialog">
+        <div class="ai-popup-header">
+            <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI Pest Assistant</h3>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span class="ai-popup-badge">Online 24/7</span>
+                <button class="ai-popup-close" id="ai-popup-close" aria-label="Close" type="button">&times;</button>
+            </div>
+        </div>
+        <div class="ai-popup-body">
+            <iframe id="ai-chatbot-iframe" data-src="https://udify.app/chatbot/C3DvioLaCmagSaUc" src="about:blank" allow="microphone" title="AI Pest Assistant chat"></iframe>
+        </div>
+    </div>
 
     <!-- Mobile Sticky Thumb Zone -->
     <div class="mobile-thumb-zone" role="navigation" aria-label="Quick Contact">
