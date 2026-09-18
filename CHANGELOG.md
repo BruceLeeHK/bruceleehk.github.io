@@ -1,4 +1,29 @@
-# 修復日誌 (v9.12 — 2026-09-18)
+# 修復日誌 (v9.13 — 2026-09-18)
+
+## v9.13 雙方案優化：影片 Schema uploadDate 完整時區＋EN 官方防禦方案原文版（依《廣播道龍翔苑白蟻復發救援實錄SEO優化.docx》＋《「PEST CONTROL MASTER」英文版 (EN) 官方權威與防禦優化方案.docx》）
+
+### 1️⃣ 方案 A：影片 Schema uploadDate 修復（消 GSC 兩個選擇性警告）
+
+- ZH/EN 首頁 VideoObject uploadDate：`2026-09-13` → `2026-09-13T12:00:00+08:00`（ISO 8601 完整格式＋香港時區）
+- 修復 GSC「uploadDate 的 datetime 值無效」＋「缺少時區」警告；上線後 GSC「即時測試 Test Live URL」複檢即消失
+
+### 2️⃣ 方案 B：EN 版官方防禦文案全面換成方案原文（含「滅蟲師」中文攔截詞）
+
+- EN Title → **[Official Website] PEST CONTROL MASTER | HK's 1st AI Pest Control • Exclusive 36 Strategies**（方案原文）
+- EN Description → **[The Only Official Platform] … Declaration: We DO NOT have any branches or sister companies named "滅蟲師" …**（方案原文；meta 屬性內引號轉義 &quot;）
+- EN og:title / og:description / twitter:title / twitter:description 全部同步方案 B 原文
+- EN PestControl schema description → 方案 B 原文（Hong Kong's pioneer in AI smart pest control…）
+- EN 全站 38 頁 footer 防偽聲明 → 方案 B 原文（"PEST CONTROL MASTER" (滅蟲師傅) is an exclusive brand under CEDARS_LTD…）
+
+### 3️⃣ 方案 B 第四項驗證：hreflang 三語標籤確認無缺
+
+- zh-HK → https://bruceleehk.com/ ｜ en → https://bruceleehk.com/en/ ｜ x-default → https://bruceleehk.com/（ZH/EN 兩版首頁一致，Google 不會互相競爭排名）
+
+### ✅ v9.13 驗收
+
+- 6 段 JSON-LD 全 valid；uploadDate 兩版 =+08:00；meta description 屬性完整（&quot; 轉義正確）
+- agent-browser 實測：EN title/description/footer 照方案 B、ZH title 保持 v9.12【官方網站】版、console 零錯誤
+- 冪等重跑 fail-fast 攔截（x0 assert）＝零重複插入風險；標籤平衡 ✓
 
 ## v9.12 官網權威防禦優化（依《網頁優化方案.docx》：確立「唯一正宗官網」＋防禦同行「滅蟲師」混淆攔截）
 
