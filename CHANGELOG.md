@@ -1,4 +1,35 @@
-# 修復日誌 (v9.14 — 2026-09-18)
+# 修復日誌 (v9.15 — 2026-09-19)
+
+## v9.15 愉景灣專頁 SEO 校準升級＋Google 商家優惠呼應（依《愉景灣滅白蟻SEO搜索排名進入前3名.docx》師妹方案，中英雙語同步）
+
+### 1️⃣ BreadcrumbList 校準（方案原文 3 層）
+
+- ZH：首頁 → 覆蓋十八區 → **愉景灣滅蟲**（方案原文命名，末層直接命中「愉景灣滅蟲」搜尋詞；原 v9.14 四層中的「離島區滅蟲服務」中間層移除）
+- EN：Home → 18 Districts → Discovery Bay Pest Control
+- 可見麵包屑同步改 3 級（schema ↔ 頁面 1:1），離島區連結保留喺「鄰近服務地區」區塊
+
+### 2️⃣ FAQPage 校準（方案原文 3 條逐字置頂 + 保留 v9.14 兩條）
+
+- Q1 愉景灣村屋做一次白蟻探測需要幾耐時間？→ **T3i 30–60 分鐘全屋暗巢掃描**（方案原文逐字）
+- Q2 發現白蟻泥路，可以自己噴殺蟲水嗎？→ **絕對不建議自行噴殺蟲水**（方案原文逐字）
+- Q3 愉景灣滅白蟻服務會否有隱藏收費？→ **AI 診斷＋實價報價，同意後先施工**（方案原文逐字）
+- 保留：白蟻復發成因＋海外業主遙距處理（移除與方案 Q3 重疊嘅「搭船加價」及非白蟻主軸嘅「花園蚊患」）
+- 可見 FAQ 區同步 5 條（Google 規範：schema 內容必須可見，1:1 對應）
+
+### 3️⃣ areaServed 校準（方案原文 AdministrativeArea 陣列）
+
+- Service schema areaServed 由單一 Place → **[{AdministrativeArea: Discovery Bay (愉景灣)}, {AdministrativeArea: Hong Kong Islands}]**
+- EN 版對應 Discovery Bay / Hong Kong Islands
+
+### 4️⃣ 限時優惠橫幅（與 Google 商家優惠活動遙相呼應）
+
+- ZH/EN 愉景灣頁麵包屑下方新增 **「限時優惠 / Limited-Time Offer」**琥珀虛線框橫幅：即日預約 T3i 勘察＋免費 WhatsApp 估價＋先報價後施工＋絕無隱藏收費，優惠期有限約滿即止
+- CTA 直達 WhatsApp 預填優惠訊息；客人由商家優惠點入即見對應優惠承托
+
+### 驗證
+
+- 驗收腳本全過：3 段 JSON-LD 合法、方案 Q&A 逐字比對、schema↔可見 1:1、標籤平衡、冪等重跑 fail-fast
+- agent-browser 實測 ZH/EN：優惠橫幅/FAQ×5/麵包屑 3 級渲染正常，console 零錯誤
 
 ## v9.14 十八區流量截擊＋AI 診斷系統穩定性修復升級（依《十八區滅蟲目錄」流量截擊與地區專頁佈局方案.docx》＋用戶 502 截圖，中英雙語同步）
 

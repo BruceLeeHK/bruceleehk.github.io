@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <!-- Structured Data: Breadcrumb / Service / FAQ -->
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -50,19 +50,13 @@
         {
             "@type": "ListItem",
             "position": 3,
-            "name": "離島區滅蟲服務",
-            "item": "https://bruceleehk.com/districts/islands/"
-        },
-        {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "愉景灣專屬滅蟲方案",
+            "name": "愉景灣滅蟲",
             "item": "https://bruceleehk.com/districts/discovery-bay/"
         }
     ]
 }
     </script>
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -71,24 +65,46 @@
     "provider": {
         "@id": "https://bruceleehk.com/#pestcontrol"
     },
-    "areaServed": {
-        "@type": "Place",
-        "name": "Discovery Bay 愉景灣, Lantau Island, Hong Kong"
-    },
+    "areaServed": [
+        {
+            "@type": "AdministrativeArea",
+            "name": "Discovery Bay (愉景灣)"
+        },
+        {
+            "@type": "AdministrativeArea",
+            "name": "Hong Kong Islands"
+        }
+    ],
     "url": "https://bruceleehk.com/districts/discovery-bay/"
 }
     </script>
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "愉景灣上門要搭船或轉車，會唔會加收費用？",
+            "name": "愉景灣村屋做一次白蟻探測需要幾耐時間？",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "唔會。愉景灣係我哋離島區正式服務範圍，收費同市區標準一致，巴士渡輪行程會預先計劃好；上門前 WhatsApp 先攞報價，全程 0 隱藏收費。"
+                "text": "我們採用澳洲 Termatrac T3i 微波探測儀，一般面積的村屋或獨立屋，只需約 30 至 60 分鐘即可完成全屋暗巢掃描，免拆牆且不破壞裝修。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "發現白蟻泥路，可以自己噴殺蟲水嗎？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "絕對不建議！自行噴射殺蟲水會驚動白蟻，令牠們擴散至屋內其他隱蔽位置築巢。請保持原狀並立即預約專業滅蟲師傅進行微波探測。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "愉景灣滅白蟻服務會否有隱藏收費？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "絕無隱藏收費。師傅上門利用 AI 圖像識別及微波探測後，會即場提供清晰的廣東話診斷報告及實價報價，客人同意後才會開始施工。"
             }
         },
         {
@@ -97,14 +113,6 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "愉景灣近山臨海，地下白蟻族群源頭喺山林泥土，普通噴藥只處理到表面工蟻，滅唔到主巢。要用 Termatrac T3i 微波探測定位主巢位置，灌注持效藥劑斷巢，再配合木結構環境改善先可以長期根治。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "愉景灣花園同綠化帶好多蚊，點處理？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "花園蚊患重點係處理孳生源：花盆底、雨水桶、溝渠沙井先用生物劑阻斷幼蟲孳生，綠化帶同陰暗角落再做成蟲霧化處理，配合 IoT 蚊患監測評估密度變化。"
             }
         },
         {
@@ -170,6 +178,12 @@
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
+.promo-banner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px dashed #f59e0b;border-radius:14px;padding:16px 20px;box-shadow:0 6px 18px rgba(245,158,11,.15)}
+.promo-banner .promo-tag{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#dc2626,#f59e0b);color:#fff;font-weight:800;font-size:.85rem;border-radius:999px;padding:8px 15px;white-space:nowrap;box-shadow:0 4px 12px rgba(220,38,38,.3)}
+.promo-banner .promo-text{flex:1;min-width:250px;font-size:.93rem;line-height:1.8;color:#78350f}
+.promo-banner .promo-text b{color:#9a3412}
+.promo-banner .promo-cta{background:linear-gradient(135deg,#dc2626,#ea580c);border:1px solid #ea580c;color:#fff;font-weight:800}
+.promo-banner .promo-cta:hover{filter:brightness(1.06)}
 @media (max-width:768px){
   .dist-hero{padding:44px 16px 28px}
   .dist-hero h1{font-size:1.28rem}
@@ -222,8 +236,17 @@
         </section>
 
         <nav class="dist-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">首頁</a><span class="sep">›</span><a href="/districts/">覆蓋十八區</a><span class="sep">›</span><a href="/districts/islands/">離島區</a><span class="sep">›</span><span aria-current="page">愉景灣</span>
+            <a href="/">首頁</a><span class="sep">›</span><a href="/districts/">覆蓋十八區</a><span class="sep">›</span><span aria-current="page">愉景灣</span>
         </nav>
+
+        <!-- v9.15 限時優惠橫幅：呼應 Google 商家優惠活動 -->
+        <section class="dist-section" id="promo" aria-labelledby="promo-title">
+            <div class="promo-banner">
+                <span class="promo-tag"><i class="fa-solid fa-gift" aria-hidden="true"></i> 限時優惠</span>
+                <div class="promo-text" id="promo-title"><b>愉景灣白蟻防治優惠進行中</b>：即日預約 Termatrac T3i 微波暗巢勘察，免費 WhatsApp 估價；師傅即場 AI 診斷，先報價、後施工，絕無隱藏收費。優惠期有限，約滿即止！</div>
+                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%98%E5%8F%96%E6%84%89%E6%99%AF%E7%81%A3%E7%99%BD%E8%9F%BB%E9%98%B2%E6%B2%BB%E9%99%90%E6%99%82%E5%84%AA%E6%83%A0%E4%B8%A6%E9%A0%90%E7%B4%84%E5%8B%98%E5%AF%9F%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="btn btn-secondary promo-cta"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即領取優惠報價</a>
+            </div>
+        </section>
 
         <!-- Overview + tech mapping -->
         <section class="dist-section" aria-labelledby="ov-title">
@@ -310,7 +333,7 @@
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 愉景灣滅蟲常見問題 FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣上門要搭船或轉車，會唔會加收費用？</h3><p>唔會。愉景灣係我哋離島區正式服務範圍，收費同市區標準一致，巴士渡輪行程會預先計劃好；上門前 WhatsApp 先攞報價，全程 0 隱藏收費。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣獨立屋白蟻點解成日滅完又復發？</h3><p>愉景灣近山臨海，地下白蟻族群源頭喺山林泥土，普通噴藥只處理到表面工蟻，滅唔到主巢。要用 Termatrac T3i 微波探測定位主巢位置，灌注持效藥劑斷巢，再配合木結構環境改善先可以長期根治。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣花園同綠化帶好多蚊，點處理？</h3><p>花園蚊患重點係處理孳生源：花盆底、雨水桶、溝渠沙井先用生物劑阻斷幼蟲孳生，綠化帶同陰暗角落再做成蟲霧化處理，配合 IoT 蚊患監測評估密度變化。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 我長期唔喺香港，愉景灣物業蟲患可以遙距處理嗎？</h3><p>可以。我哋設有<a href="/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">海外業主遠程滅蟲服務</a>：WhatsApp 傳相 AI 初步診斷，師傅代客上門勘察、開鎖安排、進度照片報告全程透明；長期空置物業可加裝 IoT 監測定期覆檢。</p></div>
+                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣村屋做一次白蟻探測需要幾耐時間？</h3><p>我們採用澳洲 Termatrac T3i 微波探測儀，一般面積的村屋或獨立屋，只需約 30 至 60 分鐘即可完成全屋暗巢掃描，免拆牆且不破壞裝修。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 發現白蟻泥路，可以自己噴殺蟲水嗎？</h3><p>絕對不建議！自行噴射殺蟲水會驚動白蟻，令牠們擴散至屋內其他隱蔽位置築巢。請保持原狀並立即預約專業滅蟲師傅進行微波探測。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣滅白蟻服務會否有隱藏收費？</h3><p>絕無隱藏收費。師傅上門利用 AI 圖像識別及微波探測後，會即場提供清晰的廣東話診斷報告及實價報價，客人同意後才會開始施工。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 愉景灣獨立屋白蟻點解成日滅完又復發？</h3><p>愉景灣近山臨海，地下白蟻族群源頭喺山林泥土，普通噴藥只處理到表面工蟻，滅唔到主巢。要用 Termatrac T3i 微波探測定位主巢位置，灌注持效藥劑斷巢，再配合木結構環境改善先可以長期根治。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 我長期唔喺香港，愉景灣物業蟲患可以遙距處理嗎？</h3><p>可以。我哋設有<a href="/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">海外業主遠程滅蟲服務</a>：WhatsApp 傳相 AI 初步診斷，師傅代客上門勘察、開鎖安排、進度照片報告全程透明；長期空置物業可加裝 IoT 監測定期覆檢。</p></div>
             </div>
         </section>
 

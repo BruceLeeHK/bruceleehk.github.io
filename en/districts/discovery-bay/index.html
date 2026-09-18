@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <!-- Structured Data: Breadcrumb / Service / FAQ -->
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -50,19 +50,13 @@
         {
             "@type": "ListItem",
             "position": 3,
-            "name": "Islands District Pest Control",
-            "item": "https://bruceleehk.com/en/districts/islands/"
-        },
-        {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Discovery Bay Dedicated Pest Control",
+            "name": "Discovery Bay Pest Control",
             "item": "https://bruceleehk.com/en/districts/discovery-bay/"
         }
     ]
 }
     </script>
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -71,24 +65,46 @@
     "provider": {
         "@id": "https://bruceleehk.com/en/#pestcontrol"
     },
-    "areaServed": {
-        "@type": "Place",
-        "name": "Discovery Bay, Lantau Island, Hong Kong"
-    },
+    "areaServed": [
+        {
+            "@type": "AdministrativeArea",
+            "name": "Discovery Bay"
+        },
+        {
+            "@type": "AdministrativeArea",
+            "name": "Hong Kong Islands"
+        }
+    ],
     "url": "https://bruceleehk.com/en/districts/discovery-bay/"
 }
     </script>
-        <script type="application/ld+json">
+                <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "Do you charge extra for travelling to Discovery Bay?",
+            "name": "How long does a termite inspection take for a Discovery Bay village house?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Discovery Bay is part of our formal Islands District service area and our pricing is the same as urban districts. Bus and ferry schedules are planned in advance; get your quote on WhatsApp before the visit — zero hidden fees."
+                "text": "Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "I found termite mud tubes — can I spray insecticide myself?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are there any hidden fees for termite treatment in Discovery Bay?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve."
             }
         },
         {
@@ -97,14 +113,6 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "There are many mosquitoes around my garden and green belt. What can be done?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Garden mosquito control starts at breeding sources: apply biological larvicide to flower-pot trays, rain barrels, drains and gullies, then fog the green belt and shaded corners for adult mosquitoes, with IoT mosquito monitoring to track density changes."
             }
         },
         {
@@ -170,6 +178,12 @@
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
+.promo-banner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px dashed #f59e0b;border-radius:14px;padding:16px 20px;box-shadow:0 6px 18px rgba(245,158,11,.15)}
+.promo-banner .promo-tag{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#dc2626,#f59e0b);color:#fff;font-weight:800;font-size:.85rem;border-radius:999px;padding:8px 15px;white-space:nowrap;box-shadow:0 4px 12px rgba(220,38,38,.3)}
+.promo-banner .promo-text{flex:1;min-width:250px;font-size:.93rem;line-height:1.8;color:#78350f}
+.promo-banner .promo-text b{color:#9a3412}
+.promo-banner .promo-cta{background:linear-gradient(135deg,#dc2626,#ea580c);border:1px solid #ea580c;color:#fff;font-weight:800}
+.promo-banner .promo-cta:hover{filter:brightness(1.06)}
 @media (max-width:768px){
   .dist-hero{padding:44px 16px 28px}
   .dist-hero h1{font-size:1.28rem}
@@ -222,8 +236,17 @@
         </section>
 
         <nav class="dist-breadcrumb" aria-label="Breadcrumb">
-            <a href="/en/">Home</a><span class="sep">›</span><a href="/en/districts/">18 Districts</a><span class="sep">›</span><a href="/en/districts/islands/">Islands District</a><span class="sep">›</span><span aria-current="page">Discovery Bay</span>
+            <a href="/en/">Home</a><span class="sep">›</span><a href="/en/districts/">18 Districts</a><span class="sep">›</span><span aria-current="page">Discovery Bay</span>
         </nav>
+
+        <!-- v9.15 Limited-time promo banner: echoes Google Merchant promotion -->
+        <section class="dist-section" id="promo" aria-labelledby="promo-title">
+            <div class="promo-banner">
+                <span class="promo-tag"><i class="fa-solid fa-gift" aria-hidden="true"></i> Limited-Time Offer</span>
+                <div class="promo-text" id="promo-title"><b>Discovery Bay termite treatment offer on now</b>: book a same-day Termatrac T3i microwave colony inspection with a free WhatsApp quote. On-the-spot AI diagnosis — quote first, work starts only after you approve. Zero hidden fees. Limited period, first come, first served!</div>
+                <a href="https://wa.me/85252821552?text=Hello%2C%20I%27d%20like%20to%20claim%20the%20Discovery%20Bay%20termite%20treatment%20limited-time%20offer%20and%20book%20an%20inspection%20quote." target="_blank" rel="noopener" class="btn btn-secondary promo-cta"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Claim Your Offer Quote</a>
+            </div>
+        </section>
 
         <!-- Overview + tech mapping -->
         <section class="dist-section" aria-labelledby="ov-title">
@@ -310,7 +333,7 @@
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Discovery Bay Pest Control FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do you charge extra for travelling to Discovery Bay?</h3><p>No. Discovery Bay is part of our formal Islands District service area and our pricing is the same as urban districts. Bus and ferry schedules are planned in advance; get your quote on WhatsApp before the visit — zero hidden fees.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Why do termites in my Discovery Bay villa keep coming back?</h3><p>Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> There are many mosquitoes around my garden and green belt. What can be done?</h3><p>Garden mosquito control starts at breeding sources: apply biological larvicide to flower-pot trays, rain barrels, drains and gullies, then fog the green belt and shaded corners for adult mosquitoes, with IoT mosquito monitoring to track density changes.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I'm based overseas. Can my Discovery Bay property be handled remotely?</h3><p>Yes. We run a <a href="/en/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">remote pest control service for overseas owners</a>: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection.</p></div>
+                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does a termite inspection take for a Discovery Bay village house?</h3><p>Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I found termite mud tubes — can I spray insecticide myself?</h3><p>Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Are there any hidden fees for termite treatment in Discovery Bay?</h3><p>Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Why do termites in my Discovery Bay villa keep coming back?</h3><p>Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I'm based overseas. Can my Discovery Bay property be handled remotely?</h3><p>Yes. We run a <a href="/en/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">remote pest control service for overseas owners</a>: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection.</p></div>
             </div>
         </section>
 
