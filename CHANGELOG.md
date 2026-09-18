@@ -1,4 +1,34 @@
-# 修復日誌 (v9.11 — 2026-09-17)
+# 修復日誌 (v9.12 — 2026-09-18)
+
+## v9.12 官網權威防禦優化（依《網頁優化方案.docx》：確立「唯一正宗官網」＋防禦同行「滅蟲師」混淆攔截）
+
+### 1️⃣ 首頁 Meta 防偽線（方案第一項，ZH/EN 同步）
+
+- ZH Title → **【官方網站】滅蟲師傅 PEST CONTROL MASTER｜香港首創 AI 智慧滅蟲 • 獨家三十六計精準防治**（方案原文照用）
+- ZH Description → **【唯一官方平臺】…鄭重聲明：全港「並無開設任何名為滅蟲師之分店」，敬請認清官方技術，提防假冒…**（方案原文照用）
+- EN Title → [Official Website] Pest Control Master 滅蟲師傅 | HK's First AI Smart Pest Control • Exclusive 36 Stratagems
+- EN Description → [The ONLY Official Website] … NO branch named 滅蟲師 in HK; beware of imposters …
+- OG / Twitter Card title+description 全部同步防偽版（社交分享卡片同樣顯示官方聲明）
+- keywords 增加官方識別詞：滅蟲師傅官網／滅蟲師傅官方網站／滅蟲師傅唯一官網／official website
+
+### 2️⃣ 全站 Footer 排他性防偽聲明（方案第二項，76 頁）
+
+- © 2026 CEDARS_LTD 版權行下方插入方案原文聲明：「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店…
+- ZH 38 頁（含 404）＋EN 38 頁，全站零遺漏；inline style（var fallback）免改共用 CSS
+
+### 3️⃣ Schema 結構化數據強化（方案第三項：LocalBusiness 權威信號）
+
+- 現有 PestControl schema 本身即 LocalBusiness 子類型（Google 官方等效），按方案精神補強而非重複植入：
+  - **sameAs**（方案要求，已替換為實際資源）：Instagram CEDARS_LTD + X CEDARS_LTD + WhatsApp 官方頻道（ZH/EN 兩版）
+  - **description** 防偽版＋**slogan**（ZH：全港僅此一家 · 唯一正宗官方網站／EN 對應）
+  - **WebSite schema + alternateName**（滅蟲師傅官網／PEST CONTROL MASTER 等品牌別名，強化品牌知識圖譜）
+- 6 段 JSON-LD（兩首頁各 3 段）全部 json parse valid
+
+### ✅ v9.12 驗收
+
+- 標籤平衡：ZH/EN 首頁 16 種標籤全平衡；冪等重跑 0 重複
+- agent-browser 實測：ZH/EN title 正確、footer 防偽聲明渲染正常（截圖目視）、sameAs=3、console 零錯誤
+- 覆蓋統計：ZH 38 + EN 38 = 76 頁 footer 防偽；sameAs 連結與 footer 社交資源一致
 
 ## v9.11 首頁導航修訂 + EN 英文版全面同步優化
 
