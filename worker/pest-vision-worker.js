@@ -1,7 +1,15 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI (v9.1 多模態上下文先驗知識版)
- * 基於生產版 v8.1 (MoE 雙腦) 升級，結合 Dify 雙腦工作流實況（LLM2 化驗師 + LLM3 師妹）
+ * Cloudflare Worker — 滅蟲師傅 AI (v9.2 抗間歇故障版)
+ * 基於生產版 v9.1 (MoE 雙腦 + Contextual Prior) 升級：
  *
+ * v9.2 升級亮點（v9.14 穩定性修復：解決間歇性 HTTP 502）：
+ *   🔁 步驟 2（chat-messages）加 5xx/網絡錯誤重試 1 次（1.5s backoff）——
+ *      Dify 間歇性過載唔會再直接變成 502 彈爆用戶；逾時（TIMEOUT）同 429 唔重試
+ *      （避免重複計費同加倍等待）
+ *   📮 錯誤碼細分：上游逾時而家返回 HTTP 504（前端可以區分「繁忙請重試」
+ *      vs「真故障」），其餘上游錯誤保持 502、限流 429
+ *   🩺 /health 版本號升級至 9.2，方便 Cloudflare dashboard 驗證部署生效
+ *   ♻️ 沿用 v9.1 全部功能：多模態上下文先驗、三大黃金法則、快取鍵 v2、防注入
  * v9.1 升級亮點（Multi-modal Contextual Prior + 三大黃金法則 + Token 精準投放）：
  *   🧠 客人可附加 ≤50 字「補充描述」（環境線索），AI 結合圖片 + 線索收窄判定範圍，
  *      準確度大幅提升，同時保持獨立判斷（絕不盲目附和客人猜測）
@@ -16,7 +24,8 @@
  *   ♻️ 沿用 v8.1 改進：假死報告（無法辨識）拒入快取、雙路徑路由、動態副檔名上傳
  *
  * 環境變數（wrangler.toml [vars] 或 secret，全部可選）：
- *   DIFY_API_URL / DIFY_API_KEY — Dify 應用端點與金鑰（建議用 wrangler secret put DIFY_API_KEY）
+ *   DIFY_API_URL / DIFY_API_KEY — Dify 應用端點與金鑰（⚠️ 生產環境請用 wrangler secret put
+ *     DIFY_API_KEY 覆寫預設值，避免金鑰明碼存在代碼庫）
  *   PEST_KV（或 CACHE_KV）— KV 綁定：智慧快取命名空間（兩個名都認，舊新綁定兼容）
  *   DESC_MAX_CHARS — 描述字數上限（預設 50，黃金法則一）
  *   DESC_CHANNEL — 描述傳送通道：both（預設，query+inputs 雙保障）| query | inputs
@@ -234,35 +243,46 @@ async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDes
   const fileId = uploadData && uploadData.id;
   if (!fileId) throw Object.assign(new Error('Dify 未回傳檔案 ID'), { code: 'UPSTREAM_ERROR' });
 
-  /* --- 步驟 2：攜圖呼叫雙腦 Chatflow（GPT 化驗 → 智庫 → DeepSeek 寫報告） --- */
-  const chatRes = await fetchWithTimeout(
-    `${cfg.DIFY_API_URL}/chat-messages`,
-    {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        // inputs 通道：Dify Chatflow Start 節點定義 user_desc 變數後即可用 {{user_desc}} 綁定
-        inputs: (userDesc && cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc } : {},
-        // query 通道：即時生效，唔使改 Dify 都確保線索 + 防禦裝甲送達模型（雙通道保障）
-        query: (userDesc && cfg.DESC_CHANNEL !== 'inputs')
-          ? buildAnalysisPrompt(userDesc, cfg.QUERY_MODE)
-          : (cfg.QUERY_MODE === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT),
-        response_mode: 'blocking',
-        user: userId,
-        files: [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId }],
-      }),
-    },
-    cfg.CHAT_TIMEOUT_MS, 'AI 分析'
-  );
+  /* --- 步驟 2：攜圖呼叫雙腦 Chatflow（GPT 化驗 → 智庫 → DeepSeek 寫報告）
+     v9.2：5xx/網絡錯誤重試 1 次（Dify 間歇過載唔會再直接 502 彈爆用戶）；
+     逾時唔重試（避免加倍等待），429 唔重試（避免重複計費） --- */
+  let chatData;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const chatRes = await fetchWithTimeout(
+      `${cfg.DIFY_API_URL}/chat-messages`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          // inputs 通道：Dify Chatflow Start 節點定義 user_desc 變數後即可用 {{user_desc}} 綁定
+          inputs: (userDesc && cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc } : {},
+          // query 通道：即時生效，唔使改 Dify 都確保線索 + 防禦裝甲送達模型（雙通道保障）
+          query: (userDesc && cfg.DESC_CHANNEL !== 'inputs')
+            ? buildAnalysisPrompt(userDesc, cfg.QUERY_MODE)
+            : (cfg.QUERY_MODE === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT),
+          response_mode: 'blocking',
+          user: userId,
+          files: [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId }],
+        }),
+      },
+      cfg.CHAT_TIMEOUT_MS, 'AI 分析'
+    );
 
-  if (!chatRes.ok) {
+    if (chatRes.ok) {
+      chatData = await chatRes.json();
+      break;
+    }
     const errText = await chatRes.text().catch(() => '');
-    throw Object.assign(new Error(`Dify 對話失敗 (${chatRes.status}) ${errText.slice(0, 200)}`), {
+    const err = Object.assign(new Error(`Dify 對話失敗 (${chatRes.status}) ${errText.slice(0, 200)}`), {
       code: chatRes.status === 429 ? 'RATE_LIMITED' : 'UPSTREAM_ERROR',
     });
+    // 僅 5xx（唔包 429）及網絡錯誤重試一次
+    const retryable = chatRes.status >= 500 && chatRes.status !== 429;
+    if (attempt === 2 || !retryable) throw err;
+    console.log(JSON.stringify({ requestId, stage: 'chat-retry', status: chatRes.status }));
+    await sleep(1500);
   }
 
-  const chatData = await chatRes.json();
   let answer = (chatData && chatData.answer) || '';
   // DeepSeek R1 推理標籤清理，保持報告排版乾淨
   answer = answer.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
@@ -301,8 +321,8 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '9.1-MoE-ContextualPrior',
-        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字)',
+        version: '9.2-MoE-Resilient',
+        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Auto-Retry',
         contextual_prior: true,
         max_desc_chars: Number(env.DESC_MAX_CHARS || DEFAULTS.DESC_MAX_CHARS),
         desc_channel: env.DESC_CHANNEL || DEFAULTS.DESC_CHANNEL,
@@ -375,7 +395,7 @@ export default {
       const payload = {
         success: true,
         diagnosis: answer,
-        version: '9.1 (MoE Dual-Brain + Contextual Prior)',
+        version: '9.2 (MoE Dual-Brain + Contextual Prior + Auto-Retry)',
         engine: 'MoE-GPT+DeepSeek',
         user_desc_used: !!userDesc,
         cached: false,
@@ -404,8 +424,10 @@ export default {
         : code === 'RATE_LIMITED'
         ? 'AI 系統而家好忙，請約 1 分鐘後再試。'
         : 'AI 系統暫時出現異常，請稍後再試，或直接 WhatsApp 搵師傅。';
+      /* v9.2 錯誤碼細分：上游逾時 → 504（前端區分「繁忙請重試」），其餘上游錯誤 → 502 */
+      const httpStatus = err.code === 'TIMEOUT' ? 504 : 502;
       console.error(JSON.stringify({ requestId, stage: 'error', code, message: err.message }));
-      return json({ success: false, code, error: friendly, debug: err.message, requestId }, 502);
+      return json({ success: false, code, error: friendly, debug: err.message, requestId }, httpStatus);
     }
   },
 };

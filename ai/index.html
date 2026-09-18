@@ -575,7 +575,7 @@
                 <div class="hero-slogan-tag">✨ 智慧滅蟲梗喺滅蟲師傅啦</div>
                 <div class="hero-badge-row">
                     <span class="tech-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> AI 圖像辨識</span>
-                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 10 秒回應</span>
+                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 30-90 秒深度報告</span>
                     <span class="tech-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 免費診斷</span>
                     <span class="service-247"><span class="dot" aria-hidden="true"></span> 7×24 全天候服務</span>
                 </div>
@@ -641,7 +641,7 @@
                             <div class="ai-loading">
                                 <div class="ai-loading-spinner" aria-hidden="true"></div>
                                 <h3>滅蟲師妹 AI 視覺模型分析中…</h3>
-                                <p>正在結合食環署資料庫，預計 10 秒完成</p>
+                                <p>正在結合食環署資料庫，深度報告預計 30–90 秒完成，請勿關閉頁面</p>
                                 <div class="ai-loading-steps">
                                     <div class="ai-loading-step active" id="step-1">
                                         <i class="fa-solid fa-circle-check" aria-hidden="true"></i> 邊緣運算網絡圖像預處理
@@ -655,6 +655,18 @@
                                     <div class="ai-loading-step" id="step-4">
                                         <i class="fa-solid fa-flag" aria-hidden="true"></i> 生成專屬三十六計報告
                                     </div>
+                                </div>
+                            </div>
+                            <!-- v9.14 inline 錯誤卡（取代 alert 彈窗：失敗時用戶唔會迷失，可以直接重試或 WhatsApp） -->
+                            <div id="ai-error-box" style="display:none;text-align:center;padding:26px 20px;">
+                                <div style="width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true" style="font-size:1.6rem;color:#dc2626;"></i>
+                                </div>
+                                <h3 style="color:var(--dark-bg);margin:0 0 8px;">AI 診斷暫時未能完成</h3>
+                                <p class="ai-err-msg" style="font-size:.92rem;line-height:1.8;color:var(--text-muted);max-width:420px;margin:0 auto 18px;"></p>
+                                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                                    <button type="button" id="ai-retry-btn" class="btn btn-primary"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 重新分析</button>
+                                    <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8CAI%E8%A8%BA%E6%96%B7%E5%87%BA%E9%8C%AF%EF%BC%8C%E6%83%B3%E7%9B%B4%E6%8E%A5%E5%95%8F%E5%B8%AB%E5%82%85" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 直接問師傅</a>
                                 </div>
                             </div>
                         </div>
@@ -939,7 +951,7 @@
         <section class="wa-bot-section" aria-labelledby="wa-bot-title">
             <div class="wa-bot-card">
                 <h3 id="wa-bot-title"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 也可以直接用 WhatsApp 搵師妹傾計！</h3>
-                <p>港人最習慣的渠道 — 直接在 WhatsApp 發送害蟲照片，AI 師妹系統 10 秒內自動回覆辨識結果、建議策略與預估報價，無需打開網頁。</p>
+                <p>港人最習慣的渠道 — 直接在 WhatsApp 發送害蟲照片，AI 師妹系統快速自動回覆辨識結果、建議策略與預估報價，無需打開網頁。</p>
                 <a href="https://wa.me/85252821552?text=你好，我想使用AI害蟲診斷" rel="noopener" class="btn">
                     <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 立即發送 WhatsApp
                 </a>
@@ -1103,74 +1115,145 @@
                         uploadState.classList.remove('active');
                         analyzingState.classList.add('active');
                         resultState.classList.remove('active');
+                        hideInlineError();
                         animateSteps();
 
-                        // 2. 發送 API 請求（使用乾淨嘅 File）
-                        const formData = new FormData();
-                        formData.append('image', selectedFile);
-                        // v9.7 附加可選補充描述（環境線索助 AI 收窄判定範圍）
-                        const userDesc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
-                        if (userDesc) formData.append('user_desc', userDesc);
+                        /* ============================================================
+                           v9.14 AI 診斷穩定性升級（配合 Worker v9.2）：
+                           ① 逾時 60s → 100s（DeepSeek 深度報告實際需 30–90 秒，舊版 60s
+                              會誤殺正常報告）
+                           ② 502/503/504/網絡斷線自動重試 1 次（2.5 秒後），Dify 間歇過載
+                              唔會再一彈 502 就叫用戶自己再嚟
+                           ③ 最終失敗改用 inline 錯誤卡（有「重新分析」＋「直接問師傅」按鈕），
+                              取代舊版 alert 彈窗 — 客人唔會流失
+                           ④ 修正舊版 bug：worker 返回嘅友善錯誤文案被內層 catch 食咗，
+                              而家正確顯示
+                           ============================================================ */
+                        var AI_ENDPOINT = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
+                        var AI_TIMEOUT_MS = 100000;   // 100 秒（配合 Worker CHAT_TIMEOUT_MS 100s）
+                        var AI_MAX_AUTO_RETRY = 1;    // 自動重試 1 次
+                        var aiErrorShown = false;
 
-                        /* v9.7 前端 60 秒 AbortController 超時保護
-                           （配合前端壓縮：上載 1-2 秒 + AI 思考 10-15 秒，一般 20 秒內完成；
-                             60 秒上限只係最後防線，正常網絡下唔會掂到） */
-                        const aiController = new AbortController();
-                        const aiTimeoutId = setTimeout(() => aiController.abort(), 60000);
+                        function buildFormData() {
+                            var fd = new FormData();
+                            fd.append('image', selectedFile);
+                            // v9.7 附加可選補充描述（環境線索助 AI 收窄判定範圍）
+                            var desc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
+                            if (desc) fd.append('user_desc', desc);
+                            return fd;
+                        }
 
-                        fetch('https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest', {
-                            method: 'POST',
-                            body: formData,
-                            signal: aiController.signal
-                        })
-                            .then(res => {
-                                clearTimeout(aiTimeoutId);
-                                if (!res.ok) {
-                                    return res.json().then(errData => {
-                                        throw new Error(errData.error || ('HTTP ' + res.status));
-                                    }).catch(() => { throw new Error('伺服器錯誤 (HTTP ' + res.status + ')'); });
-                                }
-                                return res.json();
+                        function showInlineError(msg) {
+                            aiErrorShown = true;
+                            var box = document.getElementById('ai-error-box');
+                            var loading = document.querySelector('#ai-analyzing .ai-loading');
+                            if (!box) { alert('⚠️ 系統提示：\n' + msg); return; }
+                            box.querySelector('.ai-err-msg').textContent = msg;
+                            box.style.display = 'block';
+                            if (loading) loading.style.display = 'none';
+                        }
+
+                        function hideInlineError() {
+                            aiErrorShown = false;
+                            var box = document.getElementById('ai-error-box');
+                            var loading = document.querySelector('#ai-analyzing .ai-loading');
+                            if (box) box.style.display = 'none';
+                            if (loading) loading.style.display = '';
+                            var title = document.querySelector('#ai-analyzing h3');
+                            if (title) title.textContent = '滅蟲師妹 AI 視覺模型分析中…';
+                        }
+
+                        function friendlyMsg(error) {
+                            if (error.name === 'AbortError') {
+                                return 'AI 深度分析超過 100 秒仍未完成（網絡可能不穩），請重新分析一次，或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                            }
+                            var m = error.message || '';
+                            if (m.indexOf('Failed to fetch') !== -1) {
+                                return '無法連線至 AI 伺服器，請檢查網絡後重新分析；或直接用 WhatsApp 搵師傅即時跟進。';
+                            }
+                            if (m.indexOf('429') !== -1 || m.indexOf('上限') !== -1) {
+                                return 'AI 系統暫時繁忙（每人每小時 8 次上限），請約 1 分鐘後重新分析，或直接用 WhatsApp 搵師傅。';
+                            }
+                            if (m.indexOf('504') !== -1 || m.indexOf('逾時') !== -1 || m.indexOf('超時') !== -1) {
+                                return 'AI 分析時間過長而中止（深度報告需 30–90 秒），請重新分析一次；或直接用 WhatsApp 搵師傅。';
+                            }
+                            if (m.indexOf('502') !== -1 || m.indexOf('503') !== -1) {
+                                return 'AI 伺服器暫時波動，已自動重試仍未成功。請稍等片刻再撳「重新分析」，或直接用 WhatsApp 搵師傅即時跟進。';
+                            }
+                            return (m || '系統繁忙或網絡不穩，請重新分析一次，或直接用 WhatsApp 搵師傅。');
+                        }
+
+                        function runAnalysis(remainingRetries) {
+                            if (!selectedFile) return;
+                            var aiController = new AbortController();
+                            var aiTimeoutId = setTimeout(function () { aiController.abort(); }, AI_TIMEOUT_MS);
+
+                            fetch(AI_ENDPOINT, {
+                                method: 'POST',
+                                body: buildFormData(),
+                                signal: aiController.signal
                             })
-                            .then(data => {
-                                if (data.success) {
-                                    let formattedHtml = data.diagnosis;
-
+                                .then(function (res) {
+                                    clearTimeout(aiTimeoutId);
+                                    if (!res.ok) {
+                                        // v9.14 修正：優先讀取 worker 返回嘅友善錯誤文案（舊版被內層 catch 食咗）
+                                        return res.json().catch(function () { return null; }).then(function (errData) {
+                                            var err = new Error((errData && errData.error) || ('HTTP ' + res.status));
+                                            err.httpStatus = res.status;
+                                            throw err;
+                                        });
+                                    }
+                                    return res.json();
+                                })
+                                .then(function (data) {
+                                    if (!data.success) {
+                                        var err = new Error(data.error || '分析失敗');
+                                        err.httpStatus = data.code === 'RATE_LIMITED' ? 429 : 0;
+                                        throw err;
+                                    }
+                                    var formattedHtml = data.diagnosis;
                                     // 將 Markdown 的 WhatsApp 連結轉為華麗的按鈕
                                     formattedHtml = formattedHtml.replace(
                                         /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
                                         '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
                                     );
-
                                     // 粗體文字處理
                                     formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
                                     // 換行處理
                                     formattedHtml = formattedHtml.replace(/\n/g, '<br>');
-
                                     // 填寫內容並顯示結果
                                     diagnosisText.innerHTML = formattedHtml;
-
                                     analyzingState.classList.remove('active');
                                     resultState.classList.add('active');
-                                } else {
-                                    throw new Error(data.error || '分析失敗');
-                                }
-                            })
-                            .catch(error => {
-                                clearTimeout(aiTimeoutId);
-                                console.error('AI 診斷錯誤:', error);
-                                let msg;
-                                if (error.name === 'AbortError') {
-                                    msg = 'AI 視覺模型處理逾時（超過 60 秒），請檢查網絡後再試一次！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
-                                } else if (error.message && error.message.includes('Failed to fetch')) {
-                                    msg = '無法連線至 AI 伺服器，請檢查網絡後再試！\n或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
-                                } else {
-                                    msg = error.message || '系統繁忙或網絡不穩，請稍後再試！';
-                                }
-                                alert('⚠️ 系統提示：\n' + msg);
-                                analyzingState.classList.remove('active');
-                                uploadState.classList.add('active');
+                                })
+                                .catch(function (error) {
+                                    clearTimeout(aiTimeoutId);
+                                    console.error('AI 診斷錯誤:', error);
+                                    // v9.14 自動重試：僅 5xx 伺服器波動／網絡斷線；逾時（AbortError）、429、客戶端錯誤唔重試
+                                    var status = error.httpStatus || 0;
+                                    var retryable = error.name !== 'AbortError' && status !== 429
+                                        && (status === 502 || status === 503 || status === 504 || status === 0);
+                                    if (remainingRetries > 0 && retryable && !aiErrorShown) {
+                                        var title = document.querySelector('#ai-analyzing h3');
+                                        if (title) title.textContent = 'AI 伺服器波動，2.5 秒後自動重試…';
+                                        setTimeout(function () { runAnalysis(remainingRetries - 1); }, 2500);
+                                        return;
+                                    }
+                                    showInlineError(friendlyMsg(error));
+                                });
+                        }
+
+                        // 「重新分析」按鈕：清除錯誤卡 → 回到分析中狀態 → 重新送出
+                        var aiRetryBtn = document.getElementById('ai-retry-btn');
+                        if (aiRetryBtn) {
+                            aiRetryBtn.addEventListener('click', function () {
+                                hideInlineError();
+                                animateSteps();
+                                runAnalysis(AI_MAX_AUTO_RETRY);
                             });
+                        }
+
+                        runAnalysis(AI_MAX_AUTO_RETRY);
                     });
                 });
             }

@@ -655,6 +655,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/sai-kung/"/>
   </url>
   <url>
+    <loc>https://bruceleehk.com/districts/discovery-bay/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/discovery-bay/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/discovery-bay/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/discovery-bay/"/>
+  </url>
+  <url>
     <loc>https://bruceleehk.com/districts/islands/</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -662,6 +671,15 @@
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/islands/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/islands/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/islands/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/districts/discovery-bay/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/districts/discovery-bay/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/discovery-bay/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/discovery-bay/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/en/districts/islands/</loc>

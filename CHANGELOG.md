@@ -1,4 +1,52 @@
-# 修復日誌 (v9.13 — 2026-09-18)
+# 修復日誌 (v9.14 — 2026-09-18)
+
+## v9.14 十八區流量截擊＋AI 診斷系統穩定性修復升級（依《十八區滅蟲目錄」流量截擊與地區專頁佈局方案.docx》＋用戶 502 截圖，中英雙語同步）
+
+### 1️⃣ 方案一：/districts/ 總目錄 Meta 更新（離島高搜尋量關鍵詞截擊）
+
+- ZH Description → 方案原文：**香港十八區專屬蟲患資訊，涵蓋港島、九龍、新界及離島（愉景灣、東涌、西貢、長洲等）…15-30 秒出廣東話診斷報告…**（meta＋og:description 同步）
+- EN Description → 對應英文版（Discovery Bay, Tung Chung, Sai Kung, Cheung Chau 關鍵詞）
+
+### 2️⃣ 方案二：總目錄→專屬子頁內部連結
+
+- 18 區卡整卡可點連結（v9.10 已實現，複核確認）✓
+- 離島區頁（ZH/EN）「鄰近服務地區」加**愉景灣專頁**深鏈，權重直達新專頁
+
+### 3️⃣ 方案三：愉景灣專屬子頁面上架（ZH/EN 雙語，首個二級 Spoke）
+
+- 新頁 `/districts/discovery-bay/`＋`/en/districts/discovery-bay/`
+- Title 照方案：**【愉景灣滅蟲服務】專治村屋獨立屋白蟻、蚊患｜Termatrac 微波無損探測**
+- H1 照方案：**愉景灣專屬滅蟲方案 ｜ 針對低密度住宅及村屋蟲患**
+- 內容主軸照方案：愉景灣地理特性四大白蟻風險因素（近山林巢源／臨海潮濕／花園貼屋身／木造裝修＋度假空置）
+- 技術展示：Termatrac T3i 實錄區塊（重用 v9.9 廣播道 WebP 海報 600/768 srcset＋lazy，連結九龍城完整案例）
+- CTA：WhatsApp 預約＋AI 識別＋快速估價表單（預設獨立洋房×白蟻）
+- 愉景灣在地 FAQ×4（搭船唔加價／白蟻復發成因／花園蚊患／海外業主遙距）＋FAQPage/PestControl areaServed Discovery Bay/BreadcrumbList 四層 Schema
+- sitemap.xml +2 URLs（76 條）；EN 版全英文對應
+
+### 4️⃣ 【AI 害蟲診斷系統】502 修復＋優化升級（Worker v9.2＋前端）
+
+- **根因診斷**：實測 Worker API 正常（間歇性故障）——Dify 上游偶爾過載/逾時時，Worker 步驟 2 無重試直接 502；且前端「預計 10 秒」文案與實際 30–90 秒嚴重不符
+- **Worker v9.2（抗間歇故障版）**：
+  - chat-messages 加 5xx 自動重試 1 次（1.5s backoff；逾時/429 不重試避免加倍等待及重複計費）
+  - 錯誤碼細分：上游逾時 → HTTP 504（前端可區分），其餘上游錯誤 → 502
+  - /health 版本號 9.2-MoE-Resilient；node --check 通過
+- **前端 ZH /ai/**：
+  - 逾時 60s → 100s（配合 Worker，避免誤殺正常長報告）
+  - 502/503/504/斷線**自動重試 1 次**（2.5 秒後，UI 顯示「伺服器波動，自動重試中…」）
+  - 最終失敗改 **inline 錯誤卡**（「重新分析」＋「直接問師傅」按鈕）取代 alert 彈窗，客人唔會流失
+  - 文案誠實化：「預計 10 秒完成」→「深度報告預計 30–90 秒完成，請勿關閉頁面」；badge「10 秒回應」→「30-90 秒深度報告」
+  - 修正舊版 bug：Worker 返回嘅友善錯誤文案被內層 catch 食咗
+- **前端 EN /en/ai/**：badge 同步修正＋加「Open the full AI Analyzer」入口連結
+
+### 5️⃣ 方案四：上線後置（見交付訊息）
+
+- GSC 提交 /districts/ 與 /districts/discovery-bay/ Request Indexing；sitemap 已同步
+
+### ✅ v9.14 驗收
+
+- 10 頁標籤平衡全過、19 段 JSON-LD 全 valid、sitemap 76 條
+- agent-browser 實測：愉景灣 ZH/EN 頁渲染（hero/FAQ×4/T3i 圖）、AI 頁錯誤卡＋重試按鈕存在、EN 分析器入口、console 零錯誤
+- 附帶修復：en/ai/index.html 舊版多餘 </div>（歷史遺留）
 
 ## v9.13 雙方案優化：影片 Schema uploadDate 完整時區＋EN 官方防禦方案原文版（依《廣播道龍翔苑白蟻復發救援實錄SEO優化.docx》＋《「PEST CONTROL MASTER」英文版 (EN) 官方權威與防禦優化方案.docx》）
 
