@@ -1,4 +1,56 @@
-# 修復日誌 (v9.15 — 2026-09-19)
+# 修復日誌 (v9.16 — 2026-09-19)
+
+## v9.16 全港大字攻頂：「滅蟲公司」Head Keyword 戰略部署（依《升級到「全港主戰場（滅蟲師傅、滅蟲公司）」.docx》師妹方案，中英雙語同步）
+
+### 1️⃣ 首頁 Title／H1 大字植入（方案第 1 點原文指令）
+
+- **ZH Title**：【官方網站】滅蟲師傅 PEST CONTROL MASTER｜**香港專業滅蟲公司推介**｜首創 AI 智慧滅蟲與 T3i 微波探測（方案指定原文）
+- **ZH H1**：**香港首選專業滅蟲公司**<br>首創 AI 智慧滅蟲與三十六計精準防治（方案指定原文）
+- **ZH Meta Description**：植入「香港首創 AI 智慧滅蟲之專業滅蟲公司」＋ Termatrac T3i 微波探測；保留防偽聲明與 WhatsApp 免費估價
+- **EN Title**：[Official Website] PEST CONTROL MASTER | **Top Pest Control Company in HK** | AI Smart Pest Control & T3i Radar
+- **EN H1**：**Hong Kong's Trusted Pest Control Company** | AI Smart Pest Control & 36 Stratagems
+- **EN Meta Description**：植入 "top professional pest control company in Hong Kong"；OG Title/Description 全部同步
+
+### 2️⃣ 品牌實體標籤 Brand Entity & Schema.org（方案第 4 點）
+
+- **ZH 首頁新增 Organization JSON-LD**：name「滅蟲師傅 PEST CONTROL MASTER」＋ **alternateName「滅蟲公司」**（方案指定）＋ description「香港首創引入 AI 害蟲圖像識別與 Termatrac T3i 微波探測的專業滅蟲公司…」＋ sameAs 四社媒 ＋ ContactPoint
+- **EN 首頁新增 Organization JSON-LD**：alternateName "Pest Control Company Hong Kong"
+- **PestControl Schema 強化**：alternateName 追加「滅蟲公司」（ZH）／"Pest Control Company Hong Kong"（EN）；description 植入「專業滅蟲公司」定義句
+- 首頁 JSON-LD 由 3 塊升級至 4 塊：PestControl + Organization + WebSite + VideoObject
+
+### 3️⃣ 全站頁尾（Footer）強化（方案第 4 點）
+
+- ZH 40 頁 footer-authenticity 追加：「本品牌是**全港領先的高科技專業滅蟲公司**，致力提供最優質的害蟲防治服務。」
+- EN 40 頁追加："We are a leading high-tech professional pest control company in Hong Kong, committed to delivering the highest quality pest control services."
+
+### 4️⃣ 特洛伊木馬權威文章（Pillar Content）（方案第 3 點）
+
+- **全新 blog-12 ZH**：《【2026 最新】香港滅蟲公司收費標準與揀選指南｜防伏必睇》
+  - 8 大章節：2026 收費標準總覽（6 蟲種價目表）→ 報價差異四大成本 → 5 大隱藏收費陷阱 → 傳統 vs 高科技滅蟲公司對照表（AI 診斷／T3i 微波探測／0 隱藏收費／三十六計／IoT 監測）→ 5 大防伏指標 → 蟲患方案速查 → 十八區覆蓋 → 免費報價 CTA
+  - 8 條 FAQ（Accordion ＋ FAQPage Schema 1:1）
+  - 內鏈矩陣：blog-1、blog-3、blog-5、blog-7、/services/、/districts/（沙田/元朗/觀塘/愉景灣）、/ai/、/quote/、WhatsApp
+- **全新 blog-12 EN**：[2026 Guide] Hong Kong Pest Control Company Prices & How to Choose | Anti-Scam Must-Read（同構全文翻譯）
+- JSON-LD 三件套：BreadcrumbList + Article（datePublished 2026-09-19）+ FAQPage
+
+### 5️⃣ 內鏈與收錄
+
+- info 目錄頁（ZH/EN）：blog-12 卡片插首位（防伏指南 · NEW）
+- 首頁（ZH/EN）：十八區 Band 後新增「2026 滅蟲公司防伏指南」旗艦文入口 Band（最新旗艦指南徽章＋雙 CTA），首頁權重直達 Pillar 文章
+- sitemap.xml：新增 blog-12 ZH/EN 兩條（priority 0.9，hreflang 三語），首頁 lastmod → 2026-09-19，合計 78 URLs
+
+### 6️⃣ 驗證
+
+- 全站 80 頁 JSON-LD 解析零錯誤；blog-12 內鏈目標全部存在
+- agent-browser 實測：ZH/EN 首頁＋blog-12 文章頁 console 零錯誤；價目表／FAQ Accordion／Guide Band 渲染正常
+- Footer 強化覆蓋 ZH 40 + EN 40 = 80 頁（含新增 blog-12）
+- 檔案數 157（v9.15 基準 155 + blog-12 雙語 2 頁）
+
+### 📋 站外配套（非網站代碼，需商家後台執行——方案第 2、5 點）
+
+- **GBP 次要類別**：商家後台確認主類別「Pest control service（害蟲防治服務）」，加齊環境衛生等相關類別
+- **引導式五星好評**：以優惠引導客人評論帶「滅蟲公司」「滅蟲師傅」關鍵字（範例文案見方案原文），累積 10–20 條後網站權重同步暴升
+- **外部反向連結（Digital PR）**：向創業媒體／LIHKG 科技台／Discuss／家居群組發布「香港滅蟲公司引入 AI 辨識曱甴，15秒出報告」實測並附 bruceleehk.com 連結
+
 
 ## v9.15 愉景灣專頁 SEO 校準升級＋Google 商家優惠呼應（依《愉景灣滅白蟻SEO搜索排名進入前3名.docx》師妹方案，中英雙語同步）
 

@@ -4,7 +4,7 @@
   <!-- ===== Chinese (HK Traditional) — Primary ===== -->
   <url>
     <loc>https://bruceleehk.com/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/"/>
@@ -164,11 +164,20 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-11/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-11/"/>
   </url>
+  <url>
+    <loc>https://bruceleehk.com/info/blog-12/</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-12/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-12/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-12/"/>
+  </url>
 
   <!-- ===== English Versions ===== -->
   <url>
     <loc>https://bruceleehk.com/en/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-09-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/"/>
@@ -246,6 +255,15 @@
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-11/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-11/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-11/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/blog-12/</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-12/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-12/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-12/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/en/info/blog-1/</loc>
