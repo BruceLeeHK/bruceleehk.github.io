@@ -1,3 +1,47 @@
+# 修復日誌 (v9.18 — 2026-09-19)
+
+## v9.18《白蟻復發點算》雙語旗艦文上架＋救援實錄導流＋簡體中文搜索無縫接入
+
+### 1️⃣ 新文章 blog-13 雙語上架（用戶上傳《白蟻復發點算？.docx》全文落地）
+
+- **ZH**：`/info/blog-13/`——Title【滅白蟻推薦】白蟻復發點算？Termatrac T3i 微波探測免拆牆搵出暗巢（docx 指定原文）；Meta Description 照 docx 原文；六大章節：傳統滅白蟻 3 大盲點／T3i 微波探測 3 大優勢／AI 智慧滅蟲方案／廣播道龍翔苑實戰實錄導流專區／FAQ×4／總結 CTA
+- **EN**：`/en/info/blog-13/`——"Termite Recurrence? Termatrac T3i Microwave Detection Without Wall Demolition"（廣播道=Lung Kei Court, Broadcast Drive 照 EN kowloon-city 頁命名）
+- **4 張 Termatrac T3i 實景照**（用戶上傳，合計 13.5MB 壓縮至 185KB WebP）：blog13-t3i-kowloon-city（T3i 衣櫃掃描）/ blog13-t3i-discovery-bay（愉景灣村屋 App 讀數）/ blog13-door-frame-hole（門框泥路）/ blog13-wardrobe-frame-hole（衣櫃門框大窿）；另出 blog13-og.jpg（1200×630）作 og:image
+- **結構化資料**：BreadcrumbList＋Article（datePublished 2026-09-19、image、inLanguage）＋FAQPage 4 條（docx 原文 Q&A，schema↔可見 1:1）
+- **URL**：採用 /info/blog-13/ 站內慣例（docx 建議之 slug /termite-detection-termatrac-t3i 不適用於本站 blog 架構）
+
+### 2️⃣ 導流至【白蟻復發救援實錄】（/districts/kowloon-city/）
+
+- blog-13 內建「實戰實錄」琥珀導流專區：個案故事（T3i 2 小時無損定位門框白蟻大窿）＋2 張現場照＋「睇完整【白蟻復發救援實錄】」CTA 按鈕＋WhatsApp 預約 T3i
+- kowloon-city ZH/EN 頁案例區加 reciprocal 延伸閱讀連結回 blog-13（雙向內鏈，SEO 互灌權重）
+
+### 3️⃣【有蟲就有計】板塊新增文章入口
+
+- `/strategy/`（ZH）三十六計卡後新增「最新實戰文章」區塊：blog-13＋救援實錄兩張連結卡（CTA Box 前）
+- `/en/strategy/`（EN）同步新增 "Latest Field Guides" 區塊
+- `/info/`＋`/en/info/` 目錄 blog-grid 首位插入 blog-13 卡（白蟻防治分類＋NEW 標記）
+
+### 4️⃣ 簡體中文搜索優化（保持繁體＋英文版不變）
+
+- **新建 `/sc/` 簡體中文官方 landing**（lang=zh-Hans）：Title【官方网站】香港灭虫公司推介｜灭虫师傅 PEST CONTROL MASTER｜首创AI灭虫与T3i微波探测；六大區塊：Hero（香港首选专业灭虫公司 H1）＋數據帶＋官方网站声明（防偽「灭虫师」）＋六項灭虫服务卡（链 /services/#termite 等）＋AI/T3i 双科技卡＋广播道实战案例带＋十八区覆盖＋灭虫知识文章（blog-13/12/7）＋FAQ×4＋终版 CTA；自帶完整 inline CSS（不載入全域 CSS 避免類名衝突）
+- **SC 結構化資料**：PestControl schema（alternateName「灭虫公司」＋knowsAbout 簡體詞庫＋sameAs）＋FAQPage 4 條（schema↔可見 1:1）
+- **hreflang zh-Hans 叢集**：ZH/EN 首頁＋/sc/ 互相宣告（zh-HK=/、zh-Hans=/sc/、en=/en/、x-default=/）；sitemap 首頁區塊同步 zh-Hans alternate
+- **全站 78 頁 footer nav 加「简体」連結**（ZH 39 頁＋EN 39 頁）→ /sc/ 內鏈全站灌注
+- **ZH 首頁 meta keywords 追加簡體詞**：灭虫公司,灭虫师傅,灭白蚁,消灭白蚁,白蚁防治,除虫公司,杀虫公司,香港灭虫
+
+### 5️⃣ sitemap＋既有 bug 修復
+
+- sitemap.xml 78→81 URLs（blog-13 ZH/EN＋/sc/）
+- **修復既有結構 bug**：ZH/EN 首頁 district-band section 缺少 `</section>`（其後 guide-band/estate/ipm 三個 section 全部錯誤嵌套其中，瀏覽器容錯渲染多年）——已補回閉合標籤
+
+### 驗證
+
+- scripts/v9_18_verify.py：85 頁全站掃描——218 段 JSON-LD 全部合法、標籤平衡（剝離註釋後）、內鏈全解析、sitemap 81 URLs、hreflang 叢集、單一實例檢查 → ALL PASS
+- agent-browser 實測：blog-13 ZH/EN（4 圖＋導流專區＋FAQ 渲染）、/sc/（4 FAQ＋6 服務卡＋3 文章卡＋語言切換器）、strategy 延伸閱讀區、kowloon-city 回鏈、首頁 footer 简体連結——console 零錯誤
+- 過程修正：修復 v9_18_site_patch.py 冪等防護缺陷（新字串含錨點致 4 處重複插入，已去重歸一）；/sc/ 移除全域 CSS 連結解決 .header-wa 樣式衝突
+
+---
+
 # 修復日誌 (v9.17 — 2026-09-19)
 
 ## v9.17 Social Share 面最後同步：twitter meta 對齊「滅蟲公司」大字（EN 英文版完成度收尾）
