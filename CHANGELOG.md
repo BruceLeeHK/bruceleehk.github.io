@@ -1,3 +1,17 @@
+# 修復日誌 (v9.17 — 2026-09-19)
+
+## v9.17 Social Share 面最後同步：twitter meta 對齊「滅蟲公司」大字（EN 英文版完成度收尾）
+
+- **背景**：《升級到「全港主戰場」》5 大策略網站代碼部分（Title/H1 大字、Organization Schema、Footer 強化、blog-12 Pillar 文章）v9.16 已雙語落地；本次審計發現唯一殘留缺口：ZH/EN 首頁 **twitter:title 仍為舊版**（OG 已更新但 Twitter Card 未同步），即 Google 分享／社交抓取面未覆蓋「滅蟲公司」Head Keyword
+- **ZH 首頁**：twitter:title 同步為【官方網站】滅蟲師傅 PEST CONTROL MASTER｜**香港專業滅蟲公司推介**｜首創 AI 智慧滅蟲與 T3i 微波探測；twitter:description 同步 og:description（含「專業滅蟲公司」定義＋防偽聲明）
+- **EN 首頁**：twitter:title 同步為 [Official Website] PEST CONTROL MASTER | **Top Pest Control Company in HK** | AI Smart Pest Control & T3i Radar；twitter:description 同步 og:description
+- **實施**：scripts/v9_17_twitter_sync.py 冪等腳本（exact-anchor 1 次替換＋重跑 fail-fast）；scripts/v9_14_verify.py 31 項 ALL PASS；agent-browser 實測 ZH/EN 首頁 title／twitter meta 正確、console 零錯誤
+- **站外配套交付物**（同日產出，不入站內 zip）：
+  - 《好評引導優惠卡》ZH/EN（1080px PNG＋印刷版 PDF＋HTML 源檔）——對應方案第 2 點 GBP「引導式五星好評」，範本句含「滅蟲公司／滅蟲師傅／推介」關鍵字
+  - 《全港主戰場_Digital_PR宣傳文案包.docx》8 頁 7 章節——對應方案第 5 點 Digital PR：LIHKG／Discuss／Facebook／科技媒體／EN Press Release 六渠道文案＋UTM 速查＋GSC 追蹤節奏
+
+---
+
 # 修復日誌 (v9.16 — 2026-09-19)
 
 ## v9.16 全港大字攻頂：「滅蟲公司」Head Keyword 戰略部署（依《升級到「全港主戰場（滅蟲師傅、滅蟲公司）」.docx》師妹方案，中英雙語同步）
