@@ -1,4 +1,46 @@
-# 修復日誌 (v9.20 — 2026-09-20)
+# 修復日誌 (v9.21 — 2026-09-20)
+
+## v9.21《EN 蟲類資訊 Blog-10~14 英文搜索習慣 SEO 深度優化》英文用戶精准直達＋結構化數據補全＋PAA 問句 FAQ 擴充
+
+### 1️⃣ Meta Description 全面重寫（5 頁，front-load 核心查詢詞）
+
+- 原_desc_超長（blog-10=437ch / blog-11=461ch / blog-12=262ch / blog-13=284ch / blog-14=300ch），Google 只顯示約 155 字符，核心詞被截斷
+- 全部重寫至 161~169 chars，**核心英文查詢詞前置**：blog-10「Pest control in Hong Kong」、blog-11「What does the Bible say about insects and pests?」、blog-12「How much does pest control cost in Hong Kong in 2026?」、blog-13「Termites came back after treatment?」、blog-14「Termites in your Mid-Levels home?」
+
+### 2️⃣ Article Schema 補全＋bug 修復（5 頁）
+
+- blog-10/11：補 keywords/url/inLanguage/wordCount；**blog-11 mainEntityOfPage 誤指 ZH URL（/info/blog-11/）→ 修正為 /en/info/blog-11/**
+- blog-12：補 inLanguage/wordCount；blog-13/14：keywords 刷新加入高流量詞（termites came back after treatment / termite inspection Mid-Levels）
+- 5 頁 dateModified → 2026-09-20（連動 sitemap lastmod）；全部補 wordCount（2110~3360）
+
+### 3️⃣ Meta Keywords 擴充（5 頁，英文搜索習慣長尾詞）
+
+- blog-10：pest control hong kong / exterminator hong kong / english speaking pest control hong kong / overseas property management 等
+- blog-11：insects in the bible / what does the bible say about insects / plagues of egypt / noah / bible verses about pests
+- blog-12：how much does pest control cost hong kong / pest control price list 2026 / exterminator cost hong kong / bed bug extermination cost
+- blog-13：termites came back after treatment / termite inspection hong kong / how to find termite nest in wall / termite company near me
+- blog-14：mid levels termite inspection / old building termite hong kong / termite in wall cavity / heritage home pest control
+
+### 4️⃣ 正文自然植入英文搜索習慣關鍵詞（13 處精準微編輯，冪等 exact-string assert）
+
+- blog-10（4 處）：pest control company in Hong Kong＋overseas landlord/property manager（導言）＋licensed exterminator（業主場景）
+- blog-11（3 處）：Insects in the Bible（開篇首句）＋Noah's ark（創造論述）＋plagues of Egypt（出埃及記十災）
+- blog-12（4 處）：How much does pest control cost in Hong Kong?（價格總覽段首）＋Termite treatment cost（速查表白蟻條）＋Bed bug treatment cost（床蝨條）＋blog-13 內鏈（FAQ 白蟻昂貴答案）
+- blog-13（3 處）：signs of termites（導言）＋termites came back after treatment（三大缺陷引言）＋termite inspection in Hong Kong（T3i 段）
+- blog-14（3 處）：heritage buildings（半山定位）＋termite control company trusted across Hong Kong（導言）＋wall cavities（T3i 雷達 bullet）
+
+### 5️⃣ PAA 式 FAQ 擴充（每頁 +2，HTML details＋FAQPage JSON-LD 雙同步，共 10 條）
+
+- 對準 Google People Also Ask 問句搜索習慣：blog-10（海外可處理蟲種/英語服務）、blog-11（聖經如何說昆蟲/蟲患是否審判）、blog-12（兒童寵物安全/服務頻率）、blog-13（白蟻檢查費用/免鑽牆探測原理）、blog-14（舊樓免拆偵測/豪宅工期）
+- FAQ 總量：blog-10/11 5→7、blog-12 8→10、blog-13/14 4→6；ZH 版不動（保持源文基準）
+
+### 6️⃣ 驗證與交付
+
+- v9_21_verify.py 189 項 ALL PASS（JSON-LD 合法性、FAQ 雙同步、desc 長度、body 關鍵詞、hreflang、標籤平衡、ZH 不變、sitemap lastmod）
+- agent-browser 實測 blog-10/11/12/13/14 EN：title/desc/FAQ 展開/console 零錯誤；blog-14 hero 截圖正常
+- sitemap.xml：5 頁 EN lastmod → 2026-09-20（ZH 不變）
+
+
 
 ## v9.20《十八區獨立專頁全部沖前3名》十八區專頁在地化 Bullet 強化＋PestControl Schema 遍地開花＋內部連結蜘蛛網
 
