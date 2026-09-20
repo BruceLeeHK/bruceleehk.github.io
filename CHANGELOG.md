@@ -1,3 +1,48 @@
+# 修復日誌 (v9.19 — 2026-09-20)
+
+## v9.19《主攻半山》半山豪宅白蟻旗艦文雙語上架＋中西區專頁半山主攻升級＋Termatrac T3i 微波探測限時八折優惠
+
+### 1️⃣ 新文章 blog-14 雙語上架（用戶上傳《主攻半山.docx》方案落地，發佈板塊【有蟲就有計】）
+
+- **ZH**：`/info/blog-14/`——Title【半山豪宅蟲患】白蟻係食木「罪魁禍首」定隱形「建築大師」？免拆牆揪出萬年暗巢（docx 指定原文）；Meta Description／keywords 全配半山＋中西區＋白蟻＋滅蟲公司關鍵詞
+- **EN**：`/en/info/blog-14/`——"Mid-Levels Luxury Home Termite Crisis: Wood-Eating Villain or Hidden Master Architect? Uncover the Age-Old Nest Without Demolition"
+- **正文六大章節**（docx 全文落地＋SEO 增強）：😱 雙面真兇（食木罪魁禍首 vs 隱形建築大師）／🛑 傳統滅蟲痛點（亂噴殺蟲水＋破壞性探測）／📡 Termatrac T3i 微波探測 3 大優勢（docx 原文）／🛡️ 即日上門 CTA 專區（docx 三連結：中西區專頁／免費 AI 診斷／WhatsApp 5 分鐘報價）／半山 FAQ×4／終極答案總結
+- **YouTube 實戰短片嵌入**（docx 指定）：半山豪宅驚現「藝術級」白蟻巢穴（7AlmZP8FoN4，2026-09-20 剛上架）——Facade 模式（點擊先載 iframe，youtube-nocookie），CSP frame-src 加白名單；海報 blog14-video-poster.webp 80KB（YT maxres 1280×720 轉製）
+- **限時八折優惠橫幅**：琥珀虛線框（沿用 v9.15 愉景灣 promo 設計），「半山白蟻微波探測 限時八折優惠進行中…全單八折」，CTA 直達 WhatsApp 預填優惠訊息
+- **結構化資料 4 段**：BreadcrumbList＋Article（datePublished 2026-09-20）＋**VideoObject**（name/description/thumbnailUrl/uploadDate=2026-09-20T18:29:48+08:00 照 YouTube 實際 publishDate 換算／embedUrl——Google 影片 Rich Result 資格）＋FAQPage 4 條（schema↔可見 1:1）
+- og:image＝blog14-og.jpg（1200×630 由 YT 縮圖轉製）；延伸閱讀互鏈 blog-13＋blog-12
+
+### 2️⃣ 中西區專頁半山主攻升級（/districts/central-and-western/，ZH+EN 同步）
+
+- Title／og:title／Meta Description／keywords／H1／hero 導言全面植入**半山＋白蟻**關鍵詞（原 focus 只有中環上環曱甴老鼠）
+- 蟲患 chips 加 🐜 白蟻；科技解法 tech-list **首位**新增「白蟻 — Termatrac T3i 微波探測免拆牆定位暗巢」＋blog-14 深鏈
+- 實戰案例區新增第二張卡：半山豪宅「藝術級」白蟻巢穴實錄（blog14 海報＋連結 /info/blog-14/）
+- **限時八折 promo 橫幅**（麵包屑後、Overview 前）呼應 Google 商家優惠
+- FAQ 4→5 條（新增「半山豪宅／舊樓懷疑有白蟻，可以唔使拆牆檢查嗎？」，FAQPage schema 同步 5/5）
+
+### 3️⃣ 全站導流（內鏈灌注）
+
+- `/strategy/`【有蟲就有計】最新實戰文章區：blog-14 卡置頂（琥珀色調）＋副題更新「半山豪宅白蟻實錄」；`/en/strategy/` 同步
+- `/info/`＋`/en/info/` 蟲類資訊目錄：blog-14 卡**首位**（白蟻防治分類＋2026 最新／NEW）
+- `/districts/` hub 中西區卡 pests 加 🐜 白蟻（ZH+EN）
+
+### 4️⃣ sitemap
+
+- 81→83 URLs（blog-14 ZH/EN，lastmod 2026-09-20，hreflang 三語 alternate）
+
+### 驗證
+
+- scripts/v9_19_verify.py：87 頁全站掃描——226 段 JSON-LD 全部合法、標籤平衡零失衡、blog-14 兩版 4 段 JSON-LD＋FAQ 4/4 schema↔可見、中西區 FAQ 5/5、內鏈／資產存在性 13 項、sitemap 83 → ALL PASS
+- agent-browser 實測：blog-14 ZH/EN（title／視頻 Facade 點擊載 iframe（CSP 通過）／八折橫幅／FAQ 展開／console 零錯誤）、中西區 ZH/EN（title／promo／tech-list 白蟻首位／2 張案例卡／FAQ 5）、strategy＋info 卡序正確、手機 390×844 視圖渲染正常
+
+### 上線後置（GSC）
+
+- GSC → 網址檢查 → Request Indexing：`/info/blog-14/`、`/en/info/blog-14/`、`/districts/central-and-western/`（title 已更新）
+- Rich Results Test 跑 `/info/blog-14/`：應顯示 Article＋Video＋FAQ 三種 Rich Result
+- Google 商家檔案優惠活動：優惠名稱建議「白蟻微波探測限時八折」，與網站八折橫幅遙相呼應
+
+---
+
 # 修復日誌 (v9.18 — 2026-09-19)
 
 ## v9.18《白蟻復發點算》雙語旗艦文上架＋救援實錄導流＋簡體中文搜索無縫接入
