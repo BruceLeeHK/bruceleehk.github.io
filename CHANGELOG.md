@@ -1,3 +1,44 @@
+# 修復日誌 (v9.20 — 2026-09-20)
+
+## v9.20《十八區獨立專頁全部沖前3名》十八區專頁在地化 Bullet 強化＋PestControl Schema 遍地開花＋內部連結蜘蛛網
+
+### 1️⃣ 十八區專頁「常見蟲患跡象＋高風險位置」AI 友好 Bullet 區塊（策略1：Local SEO Silo，36 頁）
+
+- **ZH 18 頁＋EN 18 頁**，每頁新增獨立區塊（插入「在地痛點」區之後）：H2「{區名}蟲患常見跡象 — 出現以下情況請即處理」＋4 條常見跡象 bullets＋H3「{區名}高風險位置檢查清單」＋4 條高風險位置 bullets＋📖 延伸閱讀連結
+- **全區在地化**（絕非 18 區同一篇文）：中西區＝半山無縫實木地板發黑＋古董木櫃泥路；愉景灣＝臨海潮濕木地台＋花園木棧道；九龍城＝廣播道依山潮氣復發；沙田＝第一城窗台泥路＋城門河蚊；元朗＝村屋木地台＋農地老鼠；油尖旺＝賓館床蝨＋餐廳隔油器德國曱甴；其餘各區按公屋/工廈/臨海/近山特性逐一撰寫
+- 點列式結構迎合 **Google AI Overviews 抓取胃口**（愉景灣 AI 概覽成功經驗複製到 18 區）
+- 延伸閱讀映射：白蟻重點 11 區→blog-13（白蟻復發點算）；中西區/九龍城→blog-13/14；灣仔/油尖旺/深水埗→blog-5（床蝨攻略）；東區/黃大仙/觀塘/葵青→blog-12（收費指南）
+
+### 2️⃣ PestControl Schema 遍地開花（策略4：LocalBusiness 宣告，36 頁）
+
+- 每區專頁 head 新增完整 **PestControl JSON-LD**（LocalBusiness 子類）：@id=reuse `https://bruceleehk.com/#pestcontrol`（與首頁實體合併，NAP 一致）＋name/alternateName/slogan「全港僅此一家 · 唯一正宗官方網站」＋telephone＋PostalAddress＋**areaServed 雙語區名**（如「沙田區」+「Sha Tin」；中西區另加「半山 Mid-Levels」）＋sameAs（IG/X/WhatsApp 頻道權威訊號）
+- 全站 JSON-LD 總量 226→262 段
+
+### 3️⃣ 內部連結蜘蛛網（策略2：Internal Linking，14 個 blog 頁）
+
+- **blog-1/3/4/5/6/7/8 ZH+EN**（14 頁）正文自然段落後新增關鍵字錨文本連結（`data-v920` 標記）：
+  - blog-3 →「愉景灣白蟻防治方案」＋「九龍城白蟻救援實錄」（ZH/EN）
+  - blog-4 →「中西區（半山）滅蟲攻略」＋「沙田區滅蟲攻略」（ZH/EN）
+  - blog-5 →「油尖旺」＋「深水埗」（床蝨高頻區，ZH/EN）
+  - blog-6 →「愉景灣白蟻防治」；blog-1/7/8 →「全港十八區」hub（ZH/EN）
+- 錨文本全部使用關鍵字（絕不用「按此了解更多」），雙向連結區頁↔文章灌注 Link Juice
+
+### 4️⃣ 策略3（GBP 服務區域＋地區評論）為站外操作
+
+- 依 v9.17 marketing kit 好評引導卡執行：GBP 後台「服務區域」加入全港 18 區名稱；引導客人好評時加入地區字眼（例：「多謝滅蟲師傅即日嚟到愉景灣幫我用儀器搵出白蟻巢」）
+
+### 驗證
+
+- scripts/v9_20_verify.py：**675 項 ALL PASS**——36 區頁 Bullet 區塊（8 條 bullets×36）＋PestControl schema（@id/slogan/sameAs/areaServed≥2×36）＋262 段 JSON-LD 全部合法＋標籤平衡＋14 blog 內鏈恰 1 條＋錨文本齊全＋內鏈目標頁存在＋全站 87 頁＋sitemap 83＋在地化內容抽查 7 頁
+- 冪等驗證：patch 腳本重跑 OK:0 SKIP:86 ERR:0（零重複保證）
+
+### 上線後置（GSC＋GBP）
+
+- GSC Request Indexing：18 區 ZH/EN 專頁（特別是 /districts/central-and-western/、/districts/discovery-bay/、/districts/sha-tin/）
+- GBP「服務區域」加 18 區；用 v9.17 好評引導卡收集地區標記五星好評（無痕模式第 11 位→前 3 名關鍵一步）
+
+---
+
 # 修復日誌 (v9.19 — 2026-09-20)
 
 ## v9.19《主攻半山》半山豪宅白蟻旗艦文雙語上架＋中西區專頁半山主攻升級＋Termatrac T3i 微波探測限時八折優惠
