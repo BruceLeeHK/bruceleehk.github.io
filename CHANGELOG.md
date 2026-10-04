@@ -1,4 +1,38 @@
-# 修復日誌 (v9.21 — 2026-09-20)
+# 修復日誌 (v9.22 — 2026-09-20)
+
+## v9.22《英文版網頁 SEO 優化》依《英文版網頁SEO優化.docx》四階段落地 — Google＋Bing 英文搜索衝前 3（僅動 EN 版，ZH/其他不變）
+
+### 1️⃣ 第一階段：Bing On-Page 基礎修正（en/index.html）
+
+- **title 111ch → 52ch**（方案原文）：`Pest Control Hong Kong | AI Termite & Bed Bug Expert`（解決 Bing Title 過長報錯，主攻最高搜索量核心詞）
+- **meta description 306ch → 157ch**（方案原文）：Top English-speaking pest control in Hong Kong + AI & Termatrac T3i + Same-day service + CTA（解決 Bing Description 過長報錯，大幅提升 SERP CTR）
+- og:title / og:description 同步新 title/desc（社媒分享一致性）
+
+### 2️⃣ 第二階段：高轉化英文長尾關鍵詞自然佈局（13 處正文微編輯）
+
+- **首頁 7 處**：hero 副題 English-speaking pest control experts；服務區副題 English speaking pest control team in Hong Kong；T3i 卡 non-destructive termite detection；IPM 段 eco-friendly pest control + pet-safe；18 區段 pest control services Hong Kong（精確短語）
+- **服務頁 5 處**：導言 English-speaking pest control company + pest control services Hong Kong families/expat businesses trust；白蟻段 termite inspection in HK + non-destructive termite detection；床蝨段 bed bug heat treatment Hong Kong；蚊鼠段 rodent control services；IPM 段 eco-friendly + pet-safe
+- **AI 頁 1 處**：hero 段 termite inspection questions（AI 工具承接白蟻檢查搜索流）
+- 兩頁 meta keywords 擴充 8 條方案長尾詞
+
+### 3️⃣ 第三階段：H1 重組＋圖片 Alt 英文本土化
+
+- EN 首頁 H1：`Hong Kong's Trusted Pest Control Company | ...` → 方案原文 `Hong Kong Pest Control Services: The First AI Smart Pest Management & 36 Stratagems`（前置地區服務字眼）
+- Alt 升級 4 張：IoT 老鼠監測（rodent control services）、熱成像（non-destructive termite detection）、床蝨蒸氣案例（bed bug heat treatment Hong Kong）、AI 分析照片（termite inspection support）
+
+### 4️⃣ 第四階段：收錄與本地權威（站外部分為用戶操作）
+
+- sitemap lastmod：/en/、/en/services/、/en/ai/ → 2026-09-20（sitemap 已含全部 /en/ 網址，符合 GSC 提交要求）
+- 站外清單（方案指引用戶執行）：Bing IndexNow（Cloudflare Crawler Hints 已啟動，push 後自動抓取）；GSC 對 https://bruceleehk.com/en/ Request Indexing；GBP 加全英文簡介 "English Speaking Staff Available"＋引導外籍客戶（愉景灣/半山）留英文五星評論
+- robots.txt 已確認含 Sitemap 宣告，無需修改
+
+### 驗證
+
+- v9_22_verify.py 74 項 ALL PASS（方案 title/desc/H1 精確比對、10 關鍵詞佈局、keywords 8 詞×2 頁、alt 4 張、ZH 首頁/服務頁 title 不變、防偽體系不變、JSON-LD 合法、標籤平衡、sitemap lastmod）
+- agent-browser 實測：EN 首頁 title/H1/desc/keywords 全命中、console 零錯誤；服務頁 4 關鍵詞全在、console 零錯誤；截圖目視正常
+- 無新頁面（87 頁/169 files 不變）；URL 結構維持現有語義化路徑（/en/services/#termite 等），符合方案第三階段 3 的要求
+
+
 
 ## v9.21《EN 蟲類資訊 Blog-10~14 英文搜索習慣 SEO 深度優化》英文用戶精准直達＋結構化數據補全＋PAA 問句 FAQ 擴充
 
