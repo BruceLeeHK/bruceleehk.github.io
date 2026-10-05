@@ -1,4 +1,29 @@
-# 修復日誌 (v9.22 — 2026-09-20)
+# 修復日誌 (v9.23 — 2026-10-05)
+
+## v9.23《【屬靈反思】因屋企有木蝨被拒返教會？》新文章上線 — 滅蟲資訊欄目雙語新頁（blog-15 ZH＋EN），引導屬靈反思 blog-11＋苦主討論區，谷歌 SEO 關鍵詞＋長尾詞佈局
+
+### 1️⃣ 新頁面上線（+2 頁面：/info/blog-15/ 與 /en/info/blog-15/）
+
+- **ZH 版**：title《【屬靈反思】因屋企有木蝨被拒返教會？床蝨危機中的聖經真理與滅蟲出路》；三大反思（不潔淨階級／愛裡沒有懼怕／治理這地）＋實用指南（苦主討論區／AI 診斷／WhatsApp）＋結語
+- **EN 版**：按英文用戶搜索習慣全面改寫《Rejected by Church Over Bed Bugs? Bible Truth & Practical Pest Help》——desc 156ch 前置 bed bugs/church 核心詞，正文佈局長尾詞：bed bugs in church pews、what does the Bible say about killing insects、perfect love casts out fear、can I go to church with bed bugs、Christian pest control Hong Kong、bed bug treatment Hong Kong、licensed exterminator 等
+- **導流三路**（用戶核心要求）：正文＋FAQ＋延伸閱讀多處內鏈至【屬靈反思】《先有蟲定先有人？》(blog-11) 與【苦主討論區】(/info/vote/)，另接 AI 診斷 (/ai/) 與 WhatsApp 諮詢（ZH/EN 各自預填訊息）
+
+### 2️⃣ SEO 結構化數據（雙語各 3 段 JSON-LD）
+
+- BreadcrumbList（首頁→蟲類資訊→本文）＋ Article（url/mainEntityOfPage 同語言指向、datePublished/dateModified=2026-10-05、inLanguage、keywords 長尾詞、og-cover.jpg）＋ FAQPage（6 問 6 答）
+- **6 條 FAQ**：原文 4 條（教會長椅藏蝨／教會支援／聖經點睇滅蟲／羞愧不敢返教會）＋新增 2 條 PAA（徹底處理後幾時可返教會／教會幾耐做一次防蟲檢查）；HTML `<details>` 與 JSON-LD 文本逐字同步
+
+### 3️⃣ 欄目與收錄
+
+- info/index.html（ZH）＋ en/info/index.html（EN）blog-grid 首位插入 blog-15 卡片（ZH：屬靈反思分類 fa-church；EN：SPIRITUAL REFLECTION · NEW）
+- sitemap.xml 新增 blog-15 ZH＋EN 區塊（hreflang 三語互鏈、lastmod=2026-10-05、priority 0.9），83→85 URLs
+
+### 驗證
+
+- v9_23_verify.py 149 項 ALL PASS（雙語 head/hreflang/H1/H2、32 條正文關鍵詞、內鏈數量、FAQ HTML==JSON 逐字同步、JSON-LD 3 段解析、標籤平衡 26 項、sitemap XML 合法 85 URLs、blog-14/列表頁基準不變、171 files）
+- agent-browser 實測：ZH/EN 新頁 title、FAQ 6 條可展開、3 段 JSON-LD 瀏覽器解析成功、內鏈 [blog-11, vote, ai] 全命中、console 零錯誤、截圖目視正常；列表頁卡片渲染正常
+- 檔案數 169 → 171（+2 新頁面）
+
 
 ## v9.22《英文版網頁 SEO 優化》依《英文版網頁SEO優化.docx》四階段落地 — Google＋Bing 英文搜索衝前 3（僅動 EN 版，ZH/其他不變）
 
