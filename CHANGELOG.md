@@ -1,3 +1,30 @@
+# 修復日誌 (v9.26 — 2026-10-05)
+
+## v9.26《blog-16 禁區實拍圖 ×3 植入》— 沙頭角禁區村屋真實個案照片進駐文章內文（文件名原封不變），圖片 SEO 與 E-E-A-T 雙強化
+
+### 1️⃣ 三張實拍圖分區植入（ZH/EN 雙語對稱，文件名保持不變）
+
+- **導言段後 → /assets/img/沙頭角-禁區紙-滅白蟻公司-白蟻防治.jpeg**（1600×899）：屋頂木樑間「大蟻竇」紅圈實拍——禁區白蟻氾濫鐵證，開篇即建立真實個案信任
+- **T3i 微波探測段後 → /assets/img/termite-inspection-hk-白蟻檢查預防.jpeg**（900×1600 直圖）：瓦頂樑木泥路實拍；新增 `.blog16-fig--tall`（max-width 460px 居中）直圖變體，避免直圖霸佔全欄
+- **結語段後 → /assets/img/pest-control-termites-hk-根除白蟻.jpeg**（1600×900）：門框泥路警號實拍，呼應「誘餌連根拔起、真正根除白蟻」收結導流至 CTA
+- alt 文案雙語 SEO 佈局：ZH（沙頭角禁區村屋白蟻實拍／禁區紙滅白蟻公司／白蟻檢查與預防／根除白蟻）＋EN（Sha Tau Kok closed area / termite inspection and prevention / eradicate termites）；figcaption 導流文案呼應禁區紙手續與 T3i 免拆牆賣點；全部 loading="lazy" decoding="async"，width/height 與實際尺寸逐像素一致（防 CLS）
+
+### 2️⃣ 實拍照片 E-E-A-T 價值
+
+- Xiaomi 17 Pro Max｜LEICA 水印＋拍攝日期＋GPS 座標（22°32'42"N 114°13'3x"E，沙頭角禁區範圍）——真實邊境個案第一手證據，Google 圖片搜索（白蟻實拍類查詢）與 E-E-A-T 經驗信號同步提升
+
+### 3️⃣ 驗證
+
+- git 範圍確認：僅 blog-16 ZH/EN 各 +13 行＋assets/img 新增 3 檔，其他 89 頁零改動
+- v9_26_verify.py：141 項 ALL PASS——src 與磁盤文件名逐字一致／MD5 與上傳原件一致／width-height 與 PIL 實測尺寸一致／alt 關鍵詞命中／落點順序（導言<fig1<🌲、T3i段<fig2<🛡️、結語<fig3<CTA）/JSON-LD 全合法／hreflang-canonical-og 基準不變／sitemap 87 URLs 不變／全站 91 HTML 標籤平衡
+- agent-browser 實測（本地 HTTP 伺服器）：ZH/EN 三圖 naturalWidth 全部載入、桌面直圖 460px 居中渲染、手機 390×844 自適應、console 零錯誤
+
+### 📋 發現（本輪不動，建議下輪處理）
+
+- blog-13/14/15/16 ZH+EN 共 8 頁沿用 blog-13 期模板存在四層嵌套容器（article.blog-article-card > .container > .blog-article-card > .blog-article-content），手機 390px 視口下內文欄寬僅 226px；blog-15 未改動基準實測同值，屬既有模板債務，非本輪回歸。建議下輪「手機欄寬修復」一次處理 8 頁
+
+---
+
 # 修復日誌 (v9.25 — 2026-10-05)
 
 ## v9.25《【禁區紙滅蟲】沙頭角和中英街滅蟲》新文章上線 — 蟲類資訊欄目雙語新頁（blog-16 ZH＋EN），與覆蓋十八區欄目呼應，搶佔邊境禁區白蟻搜索流量，樹立滅蟲公司首選品牌
