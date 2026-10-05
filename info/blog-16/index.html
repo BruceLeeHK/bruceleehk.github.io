@@ -931,7 +931,13 @@ footer {
             .blog-cta-box h4 { font-size: 1.1rem; }
         }
 
-    </style>
+    /* v9.27 mobile smooth: collapse nested card wrappers for full-width reading */
+@media (max-width:768px){
+article.blog-article-card:has(> .container){padding:24px 12px;}
+article.blog-article-card > .container{padding-left:0;padding-right:0;}
+article.blog-article-card > .container > .blog-article-card{padding:0;border:none;box-shadow:none;}
+}
+</style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
@@ -1044,7 +1050,7 @@ footer {
           <p>唔少邊境禁區業主都有一個共同痛點：屋企發現<b>白蟻泥路</b>或者木傢俬發黑，但市面絕大多數滅蟲公司因為嫌申請「<b>禁區紙</b>」手續繁複、路途遙遠而<b>拒絕接單</b>。結果蟲患越拖越嚴重，過百萬嘅實木裝修隨時被蛀空！</p>
           <p>如果你身處任何需要禁區紙先出入到嘅範圍，<a href="/">滅蟲師傅 PEST CONTROL MASTER</a>——全港禁區業主嘅<b>滅蟲公司首選品牌</b>——專為你提供無縫接軌嘅「邊境禁區村屋滅蟲服務」。我哋熟悉各區禁區紙出入程序，並引入全球頂尖黑科技，誓為新界北邊境業主保衛安樂窩。</p>
           <figure class="blog16-fig">
-            <img src="/assets/img/沙頭角-禁區紙-滅白蟻公司-白蟻防治.jpeg" alt="沙頭角禁區村屋白蟻實拍：屋頂木樑間大蟻竇——專辦禁區紙嘅滅白蟻公司白蟻防治案例" width="1600" height="899" loading="lazy" decoding="async">
+            <img src="/assets/img/sha-tau-kok-closed-area-termite-control.webp" alt="沙頭角禁區村屋白蟻實拍：屋頂木樑間大蟻竇——專辦禁區紙嘅滅白蟻公司白蟻防治案例" width="1280" height="719" loading="lazy" decoding="async">
             <figcaption>沙頭角禁區村屋實拍：屋頂木樑之間嘅大蟻竇（紅圈示）。邊境村屋白蟻氾濫絕非講笑，難怪業主急尋專辦禁區紙嘅滅白蟻公司。</figcaption>
           </figure>
 
@@ -1064,7 +1070,7 @@ footer {
             <li><b>連根拔起：</b>鎖定萬年暗巢後，師傅會精準施放獨家誘餌（三十六計之「誘敵深入計」），讓工蟻將藥物帶返巢穴毒殺蟻后，達致真正徹底滅族。</li>
           </ul>
           <figure class="blog16-fig blog16-fig--tall">
-            <img src="/assets/img/termite-inspection-hk-白蟻檢查預防.jpeg" alt="邊境村屋白蟻檢查與預防實拍：瓦頂木樑之間嘅白蟻泥路，Termatrac T3i 微波探測免拆牆都搵到" width="900" height="1600" loading="lazy" decoding="async">
+            <img src="/assets/img/termite-inspection-hk-prevention.webp" alt="邊境村屋白蟻檢查與預防實拍：瓦頂木樑之間嘅白蟻泥路，Termatrac T3i 微波探測免拆牆都搵到" width="800" height="1422" loading="lazy" decoding="async">
             <figcaption>白蟻檢查實拍：瓦頂樑木之間佈滿泥路同蟻巢。呢啲隱蔽位正正係 T3i 微波探測嘅強項——免拆牆都照樣揪出暗巢。</figcaption>
           </figure>
 
@@ -1137,7 +1143,7 @@ footer {
           <h3>🏡 禁區都到、免拆牆搵巢——交畀首選品牌就最穩陣</h3>
           <p>白蟻唔會自己走，禁區紙更加唔應該係處理蟲患嘅障礙。<b>業主配合辦證、技術交畀滅蟲師傅</b>，一條龍搞定邊境村屋蟲患：T3i 微波探測免拆牆鎖定暗巢、誘餌連根拔起、持牌師傅漁護署註冊藥劑，禁區村屋都享有同市區一樣嘅專業同保障。即刻點擊下方按鈕，為村屋做一次免拆牆嘅全屋白蟻排查！</p>
           <figure class="blog16-fig">
-            <img src="/assets/img/pest-control-termites-hk-根除白蟻.jpeg" alt="根除白蟻實拍：村屋門框邊緣嘅白蟻泥路——滅蟲師傅白蟻防治服務個案" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="/assets/img/pest-control-termites-hk-eradicate.webp" alt="根除白蟻實拍：村屋門框邊緣嘅白蟻泥路——滅蟲師傅白蟻防治服務個案" width="1280" height="720" loading="lazy" decoding="async">
             <figcaption>白蟻防治實拍：沿住門框邊緣伸展嘅泥路係白蟻入侵嘅明顯警號。及早安排 T3i 全屋排查，先可以真正根除白蟻、保住裝修。</figcaption>
           </figure>
           <div class="blog16-cta">

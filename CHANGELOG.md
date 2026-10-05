@@ -1,3 +1,39 @@
+# 修復日誌 (v9.27 — 2026-10-05)
+
+## v9.27《圖片 404 修復＋手機絲滑＋弱網優化》— 檔名 ASCII/WebP 化根治 GitHub Pages 404，24 頁手機閱讀欄寬 226→324px
+
+### 1️⃣ 圖片 404 根因修復（用戶截圖 DevTools 鐵證：中文檔名 percent-encoded URL 全 404）
+
+- **根因**：GitHub Pages（Jekyll build）對非 ASCII 檔名不兼容；真實瀏覽器實證 ASCII 檔名 webp 於線上正常載入（blog13 圖 1200×900 ✓）
+- **修復**：三圖轉 WebP＋ASCII 語義檔名（站內 blog13/14 慣例），並同步更新 blog-16 ZH+EN 六個 img 標籤的 src 與 width/height：
+  - 沙頭角-禁區紙-滅白蟻公司-白蟻防治.jpeg → **sha-tau-kok-closed-area-termite-control.webp**（1280×719）
+  - termite-inspection-hk-白蟻檢查預防.jpeg → **termite-inspection-hk-prevention.webp**（800×1422）
+  - pest-control-termites-hk-根除白蟻.jpeg → **pest-control-termites-hk-eradicate.webp**（1280×720）
+- **SEO 不損**：關鍵詞 alt/figcaption 逐字保留（沙頭角禁區/滅白蟻公司/白蟻防治…）；ASCII 檔名同時利於英語區 Google 圖片搜索
+
+### 2️⃣ 禁區弱網優化（總體積 438KB→202KB，-54%）
+
+- WebP q76＋LANCZOS 重採樣（1280px 對齊站內慣例）：59.8KB／81.3KB／61.2KB；lazy loading＋decoding=async＋width/height 防 CLS 保持
+- 三圖品質目測覆核：木紋理、泥路細節、紅圈標註清晰
+
+### 3️⃣ 手機絲滑：24 頁閱讀欄寬 226→324px（+43%）
+
+- 根因：blog 模板四層嵌套包裝（container→article-card→container→article-card）每層 ~20px padding＋雙邊框，390px 視口被蠶食至 226px
+- 修復：@media(max-width:768px) 折疊中間兩層（padding/border/shield 歸零）＋外層卡 12px——滲透 **24 頁**（blog-2~8、12~16 ZH+EN；blog-1/9/10/11 舊模板無嵌套不受影響）
+- 桌面 ≥769px 零改動（media query 隔離）
+
+### 4️⃣ 驗證
+
+- v9_27_verify.py：511 項 ALL PASS——全站 91 頁零中文檔名殘留／3 webp 存在＋尺寸正確＋<120KB／img 標籤逐字精確／嵌套=標記=24 頁一致／marker 位於首 style 塊內／JSON-LD 合法／sitemap 87 不變／全站標籤平衡
+- agent-browser 實測：ZH/EN 三圖 naturalWidth 全載入（1280/800/1280）；手機 390 blog-16/15/2 content 一致 324px；桌面 fig2 460px 居中、content 692px 不變；console 零錯誤
+- 線上實證：bruceleehk.com ASCII webp 真實瀏覽器載入成功
+
+### 📋 觀察（非本輪範圍）
+
+- 截圖 console 顯示 CSP 阻擋 cloudflareinsights beacon（static.cloudflareinsights.com 不在 script-src 白名單）——站內分析腳本被自家 CSP 攔截，屬既有設定問題，建議下輪檢視 _headers/meta CSP
+
+---
+
 # 修復日誌 (v9.26 — 2026-10-05)
 
 ## v9.26《blog-16 禁區實拍圖 ×3 植入》— 沙頭角禁區村屋真實個案照片進駐文章內文（文件名原封不變），圖片 SEO 與 E-E-A-T 雙強化

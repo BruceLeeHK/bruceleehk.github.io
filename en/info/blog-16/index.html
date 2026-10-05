@@ -930,7 +930,13 @@ footer {
             .blog-cta-box h4 { font-size: 1.1rem; }
         }
 
-    </style>
+    /* v9.27 mobile smooth: collapse nested card wrappers for full-width reading */
+@media (max-width:768px){
+article.blog-article-card:has(> .container){padding:24px 12px;}
+article.blog-article-card > .container{padding-left:0;padding-right:0;}
+article.blog-article-card > .container > .blog-article-card{padding:0;border:none;box-shadow:none;}
+}
+</style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
@@ -1043,7 +1049,7 @@ footer {
           <p>Owners across the Closed Area share one painful experience: you spot <b>termite mud tubes</b> or darkened timber furniture, yet almost every pest control company <b>refuses the job</b> because applying for the <b>Closed Area Permit</b> is troublesome and the journey is long. Meanwhile the infestation keeps growing — and your HK$1-million-plus timber renovation could be hollowed out.</p>
           <p>If your home sits anywhere requiring a Closed Area Permit, <a href="/en/">Pest Control Master</a> — the <b>first-choice pest control brand for Hong Kong's border communities</b> — delivers a seamless "frontier village house pest control service". We know the permit procedures for every checkpoint and bring in world-class detection technology to protect homes across the northern New Territories.</p>
           <figure class="blog16-fig">
-            <img src="/assets/img/沙頭角-禁區紙-滅白蟻公司-白蟻防治.jpeg" alt="Real case in Sha Tau Kok closed area: a large termite nest inside timber roof beams — closed-area permit termite control by a specialist Hong Kong company" width="1600" height="899" loading="lazy" decoding="async">
+            <img src="/assets/img/sha-tau-kok-closed-area-termite-control.webp" alt="Real case in Sha Tau Kok closed area: a large termite nest inside timber roof beams — closed-area permit termite control by a specialist Hong Kong company" width="1280" height="719" loading="lazy" decoding="async">
             <figcaption>Real shot from a closed-area village house in Sha Tau Kok: a massive termite nest (red circle) inside the timber roof structure. This is why border-home owners need a specialist company that handles Closed Area Permits.</figcaption>
           </figure>
 
@@ -1063,7 +1069,7 @@ footer {
             <li><b>Eradicate the colony:</b> once the age-old nest is located, technicians deploy our signature baiting strategy ("lure them deep"), letting worker termites carry the treatment back to poison the queen — total colony elimination.</li>
           </ul>
           <figure class="blog16-fig blog16-fig--tall">
-            <img src="/assets/img/termite-inspection-hk-白蟻檢查預防.jpeg" alt="Termite inspection and prevention in a Hong Kong border village house: mud tubes between roof beams, located without demolition by Termatrac T3i microwave radar" width="900" height="1600" loading="lazy" decoding="async">
+            <img src="/assets/img/termite-inspection-hk-prevention.webp" alt="Termite inspection and prevention in a Hong Kong border village house: mud tubes between roof beams, located without demolition by Termatrac T3i microwave radar" width="800" height="1422" loading="lazy" decoding="async">
             <figcaption>Termite inspection in progress: mud tubes woven between roof beams and tiles. Hidden spots like these are exactly what Termatrac T3i microwave detection finds — without tearing anything open.</figcaption>
           </figure>
 
@@ -1136,7 +1142,7 @@ footer {
           <h3>🏡 Every district reached, nests found without demolition — trust the first-choice brand</h3>
           <p>Termites won't leave on their own, and a Closed Area Permit should never be an obstacle to a pest-free home. <b>You handle the permit, we handle the technology</b>: T3i microwave detection locates the nest without demolition, baiting eliminates the colony at its root, and licensed technicians use AFCD-registered pesticides — closed-area village houses get exactly the same professionalism and protection as city homes. Click below to arrange a no-demolition, full-house termite survey today!</p>
           <figure class="blog16-fig">
-            <img src="/assets/img/pest-control-termites-hk-根除白蟻.jpeg" alt="Eradicating termites in a Hong Kong village house: termite mud tubes along a door frame edge — professional termite control case" width="1600" height="900" loading="lazy" decoding="async">
+            <img src="/assets/img/pest-control-termites-hk-eradicate.webp" alt="Eradicating termites in a Hong Kong village house: termite mud tubes along a door frame edge — professional termite control case" width="1280" height="720" loading="lazy" decoding="async">
             <figcaption>Termite control evidence: mud tubes running along a door frame edge are a clear invasion warning. Book a T3i full-house survey early to truly eradicate termites and protect your renovation.</figcaption>
           </figure>
           <div class="blog16-cta">

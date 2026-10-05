@@ -930,7 +930,13 @@ footer {
             .blog-cta-box h4 { font-size: 1.1rem; }
         }
 
-    </style>
+    /* v9.27 mobile smooth: collapse nested card wrappers for full-width reading */
+@media (max-width:768px){
+article.blog-article-card:has(> .container){padding:24px 12px;}
+article.blog-article-card > .container{padding-left:0;padding-right:0;}
+article.blog-article-card > .container > .blog-article-card{padding:0;border:none;box-shadow:none;}
+}
+</style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
       script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app;
