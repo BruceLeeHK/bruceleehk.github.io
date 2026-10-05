@@ -1,3 +1,38 @@
+# 修復日誌 (v9.24 — 2026-10-05)
+
+## v9.24《EN 蟲類資訊 Blog-11~15 同步確認＋英文搜索習慣 SEO 深度強化》— title/og/headline 壓縮至 ≤65ch 核心詞前置、og:description 同步、blog-11 內鏈補網、sitemap lastmod 更新
+
+### 1️⃣ 線上狀態確認（用戶反映「英文版只有 blog-1 至 blog-10」）
+
+- 實測 bruceleehk.com：/en/info/blog-11~15/ 六個 URL 全部 HTTP 200；/en/info/ 列表頁 15 張卡片齊全（blog-1~15）；sitemap 16 條 EN blog-11~15 記錄在案；線上與本地逐字節一致
+- 判斷：頁面早已上線（v9.19~v9.23 已交付），用戶所見為 Google 索引滯後或瀏覽器快取；本輪在此基礎上再做英文 SEO 深度強化並重新打包
+
+### 2️⃣ 五頁 EN title 壓縮（Google SERP 只顯示約 60ch，舊 title 89~142ch 會被截斷）
+
+- blog-11：142ch →《What Does the Bible Say About Insects? Bugs or Humans First?》(60ch)——對準英語區高流量 PAA 問句長尾詞
+- blog-12：110ch →《Hong Kong Pest Control Prices 2026: Costs & How to Choose》(57ch)
+- blog-13：99ch →《Termite Recurrence? Termatrac T3i Microwave Detection》(53ch)
+- blog-14：101ch →《Mid-Levels Termite Inspection: Find Nests Without Demolition》(60ch)
+- blog-15：89ch →《Rejected by Church Over Bed Bugs? Bible Truth & Pest Help》(58ch)
+- 同步鏈：og:title 與 Article JSON-LD headline 逐字同步（社群分享卡片＋富媒體結果一致）
+
+### 3️⃣ og:description 同步＋schema 日期刷新
+
+- 五頁 og:description（192~288ch 舊長文）統一同步為 meta description（120~185ch），WhatsApp/Facebook 分享摘要不再截斷失焦
+- 五頁 Article dateModified → 2026-10-05；sitemap EN blog-11~15 lastmod → 2026-10-05（ZH 區塊逐字不動）
+
+### 4️⃣ blog-11 EN 內鏈補網
+
+- 正文導言段新增 2 條關鍵字錨文本內鏈：termites gnawing at wooden crosses → /en/info/blog-13/（白蟻復發 T3i）、bed bugs hiding in the crevices of wooden chairs → /en/info/blog-15/（木蝨被拒返教會姊妹篇）
+- blog-11（屬靈反思）⇄ blog-15（木蝨反思）雙向互鏈閉環完成；hero 區段落不動
+
+### 5️⃣ 驗證
+
+- v9_24_verify.py：80 項 ALL PASS——五頁 title ≤65ch/og/headline 三同步、desc 120-185ch、JSON-LD 全合法、FAQ HTML==JSON、hreflang 三語、blog-11 內鏈恰 1 條×2、ZH blog-11~15 title 與 sitemap lastmod 基準不變、sitemap 85 URLs XML 合法、全站 89 個 HTML 標籤平衡＋JSON-LD 全部可解析
+- agent-browser 實測：blog-11~15 title 正確渲染、blog-11 內鏈 1+1 條、FAQ 7 可展開、console 零錯誤、blog-14 手機 390×844 截圖正常
+
+---
+
 # 修復日誌 (v9.23 — 2026-10-05)
 
 ## v9.23《【屬靈反思】因屋企有木蝨被拒返教會？》新文章上線 — 滅蟲資訊欄目雙語新頁（blog-15 ZH＋EN），引導屬靈反思 blog-11＋苦主討論區，谷歌 SEO 關鍵詞＋長尾詞佈局
