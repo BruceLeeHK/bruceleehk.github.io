@@ -1,3 +1,37 @@
+# 修復日誌 (v9.25 — 2026-10-05)
+
+## v9.25《【禁區紙滅蟲】沙頭角和中英街滅蟲》新文章上線 — 蟲類資訊欄目雙語新頁（blog-16 ZH＋EN），與覆蓋十八區欄目呼應，搶佔邊境禁區白蟻搜索流量，樹立滅蟲公司首選品牌
+
+### 1️⃣ 新頁面上線（+2 頁面：/info/blog-16/ 與 /en/info/blog-16/）
+
+- **ZH 版**：title《【禁區紙滅蟲】沙頭角、中英街、打鼓嶺、落馬洲邊境村屋白蟻氾濫？專辦禁區滅白蟻，T3i 微波免拆牆揪出萬年暗巢！》——三大高危因素（大自然與濕地包圍／底層潮濕地氣／隱蔽破壞力）＋T3i 三大優勢（隔空透視／零破壞／連根拔起）＋首選品牌三大專屬優勢（專辦禁區紙／持牌不外判／0 隱藏收費）＋AI 自救指南
+- **EN 版**：按英語區搜索習慣全面改寫《Sha Tau Kok Pest Control | Closed Area Termite Experts》(54ch)——desc 187ch 前置核心詞，正文佈局長尾詞：closed area pest control hong kong、frontier closed area termite control、village house termite treatment hong kong、sha tau kok termite treatment、chung ying street pest control、termite detection without demolition、ta kwu ling／lok ma chau／lo wu／heung yuen wai 等
+- **首選品牌定位**：正文＋結語兩處強調「全港禁區業主嘅滅蟲公司首選品牌」／"the first-choice pest control brand for Hong Kong's border communities"
+
+### 2️⃣ 與【覆蓋十八區】欄目雙向呼應（內鏈閉環）
+
+- blog-16 正文「專辦禁區紙，邊境全覆蓋」段：北區六地（沙頭角、中英街、打鼓嶺、羅湖、香園圍）鏈至<a href="/districts/north/">北區專頁</a>，落馬洲鏈至<a href="/districts/yuen-long/">元朗區專頁</a>（ZH/EN 各自語言路徑）
+- 反向導流：北區＋元朗區專頁（ZH/EN 共 4 頁）「延伸閱讀」區新增 blog-16 深鏈，禁區業主瀏覽區頁即達專文
+- FAQ Q1 答案同時內鏈 /districts/（十八區總覽）＋北區專頁；導流閉環：blog-16 ⇄ north/yuen-long 區頁 ⇄ districts 總覽
+
+### 3️⃣ SEO 結構化數據（雙語各 3 段 JSON-LD）＋5 條 FAQ
+
+- BreadcrumbList（首頁→蟲類資訊→本文）＋ Article（url/mainEntityOfPage 同語言指向、datePublished/dateModified=2026-10-05、inLanguage、keywords 長尾詞）＋ FAQPage（5 問 5 答）；HTML `<details>` 與 JSON-LD 文本逐字同步
+- **FAQ**：原文 3 條（服務範圍涵蓋禁區？／花園白蟻蔓延入屋？／藥劑對放養寵物安全？）＋新增 2 條 PAA（冇禁區紙點安排檢查？／禁區收費會否特別貴？——對應禁區紙手續與明碼實價高搜索意圖）
+- keywords 佈局：ZH 22 詞（禁區滅蟲/禁區紙滅蟲/沙頭角滅蟲/中英街滅蟲/打鼓嶺滅蟲/落馬洲滅蟲/羅湖滅蟲/香園圍滅蟲/邊境村屋滅蟲/村屋白蟻/免拆牆滅白蟻/滅蟲公司首選等）；EN 15 詞
+
+### 4️⃣ 欄目與收錄
+
+- info/index.html（ZH）＋ en/info/index.html（EN）blog-grid 首位插入 blog-16 卡片（ZH：禁區專辦 fa-id-card；EN：FRONTIER CLOSED AREA · NEW）
+- sitemap.xml 新增 blog-16 ZH＋EN 區塊（hreflang 三語互鏈、lastmod=2026-10-05、priority 0.9），85→87 URLs
+
+### 5️⃣ 驗證
+
+- v9_25_verify.py：121 項 ALL PASS——雙頁 title/desc/keywords/hreflang/canonical/JSON-LD×3/FAQ 5對5/內鏈 6 條/WA 預填連結/零模板殘留、列表頁卡序 16>15>14、sitemap 87 URLs XML 合法、四區頁 echo 恰 1 條、ZH/EN blog-15 基準不變、全站 91 個 HTML 標籤平衡＋JSON-LD 全部可解析
+- agent-browser 實測：ZH/EN blog-16 title 渲染、FAQ 5 可展開、JSON-LD 3 段、北區 echo 連結、列表頁 17 張卡首位為 blog-16、console 零錯誤、截圖正常
+
+---
+
 # 修復日誌 (v9.24 — 2026-10-05)
 
 ## v9.24《EN 蟲類資訊 Blog-11~15 同步確認＋英文搜索習慣 SEO 深度強化》— title/og/headline 壓縮至 ≤65ch 核心詞前置、og:description 同步、blog-11 內鏈補網、sitemap lastmod 更新
