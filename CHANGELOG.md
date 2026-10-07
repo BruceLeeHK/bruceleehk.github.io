@@ -1,3 +1,48 @@
+# 修復日誌 (v9.30 — 2026-10-07)
+
+## v9.30《Google SEO 版香港滅蟲關注組》— 苦主討論區貼身攔截 FB 關注組搜索流量，突出免註冊／保私隱／即時互動三大優勢
+
+依《打造成「Google SEO 版香港滅蟲關注組」.docx》四步方案，將【2026年港人最厭惡嘅10大害蟲全民投票＋苦主討論區】（/info/vote/）升級為「網頁免登入版香港滅蟲關注組」：當用戶喺 Google 搜尋「香港滅蟲關注組」時，本站同 FB 關注組（4.9 萬成員）一齊出現，並以「免註冊、唔使用真名、保護私隱」三大優勢將用戶轉移到網站討論。
+
+### 1️⃣ SEO 標題與描述「貼身攔截」（Meta Tags 優化）
+
+- ZH title：`香港滅蟲關注組 (網頁免登入版) 暨 苦主討論區 2026 | 滅蟲師傅`（精準命中「香港滅蟲關注組」搜索詞）
+- ZH meta description：`全港最活躍的網頁版香港滅蟲關注組及苦主討論區！無需 Facebook 註冊、免登入、真名保密。上載相片即時免費解答床蝨、白蟻、曱甴疑難，系統自動抹除相片 GPS 數據，100% 保障您的家居私隱。`
+- og:title／og:description 同步更新；EN 對稱（Hong Kong Pest Control Group (No-Login Web Version) & Pest Victims Forum 2026）
+- sitemap vote ZH/EN lastmod → 2026-10-07（促請重新抓取）
+
+### 2️⃣ 首屏文案「直擊 Facebook 痛點」（H1 & Copywriting）
+
+- H1：`香港滅蟲關注組 (網頁免登入版) 暨 苦主討論區 2026`；hero badge 新增「🫥 免 Facebook 登入」
+- 引言升級＋三大優勢卡（.group-usps 深色玻璃風格，手機自動單欄）：
+  - ✅ 免註冊 / 免登入：唔使用 Facebook 真名，避免親友睇到，隨時化名（如：將軍澳街坊）即時發問
+  - ✅ 100% 私隱保護：上傳蟲害照片，系統自動抹除 GPS / EXIF 數據，絕不外洩地址
+  - ✅ 專家即時解答：專業滅蟲師傅長駐解答，並設有全港獨家 7x24 AI 害蟲診斷（連結 → /ai/ 蜘蛛網引流）
+- 「2026年港人最厭惡嘅10大害蟲全民投票」關鍵詞保留喺引言下方，投票 SEO 不流失
+
+### 3️⃣ 留言板「無障礙互動」體驗強化
+
+- 上傳照片欄新增吸睛提示：**📸 唔知係咩蟲？即刻影相擺上嚟，街坊與師傅為您即時解答！**（ZH/EN 對稱）
+- 置頂徽章渲染補全：worker `is_pinned` 置頂留言前排＋前端顯示 📌 置頂／Pinned 徽章（此前 CSS 有但 JS 未渲染）
+- 運營提示：管理員可喺後台（/info/vote/admin.html）置頂床蝨／白蟻常見問答，以「滅蟲師傅」官方帳號長文回覆建立權威感
+
+### 4️⃣ DiscussionForumPosting 結構化資料（霸佔 Google SERP）
+
+- /info/vote/ ZH＋EN 各注入 `DiscussionForumPosting` JSON-LD（id="ld-forum-jsonld"）：
+  - 主帖 headline／description／image／datePublished／inLanguage／author（Organization）
+  - 4 條代表性 Comment（長洲黃太床蝨提問＋滅蟲師傅官方回覆＋Chris Fu 白蟻 T3i 分享＋官方回覆），EN 對稱
+  - interactionStatistic：CommentAction 互動數保底 128
+- 動態增強：loadComments 成功後 JS 自動以真實留言數更新 userInteractionCount（Google 渲染 JS 後讀取真實活躍度）
+
+### 驗證與部署
+
+- v9_30_verify.py 靜態驗證 80/80 PASS（meta／H1／三大優勢／上傳提示／pinnedBadge／JSON-LD 雙頁合法且恰 1 份／防重複 16 項／v9.28 直出文案＋bannedNotice 零回歸／標籤平衡／sitemap 87 URLs）
+- 內聯 JS node --check 全過；agent-browser 實測 ZH/EN 手機 390px：badge 3 個、usp 3 卡單欄、JSON-LD 瀏覽器解析成功、console 零錯誤
+- 部署：GitHub Desktop 三步上傳即可（純前台改動，Worker 無需重新部署）；上線後 GSC Request Indexing /info/vote/、/en/info/vote/
+- 運營跟進：管理員置頂 1-2 條常見問答（床蝨點處理／白蟻點分）並以官方帳號專業長文回覆
+
+---
+
 # 修復日誌 (v9.29 — 2026-10-07)
 
 ## v9.29《蜘蛛網引流策略》— 十八區 SEO 關鍵字全覆蓋＋四大引流通道＋Schema 結構化資料，搶佔「滅白蟻／滅木蝨床蝨／滅書蝨」谷歌搜索
