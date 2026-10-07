@@ -164,7 +164,7 @@
 <!-- ========== 登入卡 ========== -->
 <div class="login-wrap" id="loginCard">
   <h2><i class="fas fa-lock"></i> 管理員登入</h2>
-  <p class="login-desc">輸入你嘅管理員密鑰（ADMIN_SECRET），即可一鍵審核所有待處理留言。</p>
+  <p class="login-desc">輸入你嘅管理員密鑰（ADMIN_SECRET），即可管理所有留言、審核舊待審留言並封鎖垃圾 IP。</p>
   <div class="form-group">
     <label for="adminSecret"><i class="fas fa-key"></i> 管理密鑰</label>
     <input type="password" id="adminSecret" class="form-input" placeholder="輸入 ADMIN_SECRET…" autocomplete="off">
@@ -183,7 +183,7 @@
 
   <div class="notice">
     <i class="fas fa-lightbulb"></i>
-    <strong>使用提示：</strong>點擊【批准】即時公開留言；點擊【刪除】永久移除（含所有回覆）；點擊【官方回覆】以師傅身份回應；點擊【置頂】將留言釘喺列表最頂。
+    <strong>使用提示：</strong>留言現採用「即時公開」制（通過數學驗證＋IP 頻率限制後直出，無需審核）。發現垃圾留言？點擊【🚫 刪除並封鎖 IP】一次過刪除留言（含回覆）並永久封鎖該 IP；點擊【IP 封鎖名單】可查看、手動封鎖或解除封鎖。【官方回覆】【置頂】【批准】（兼容舊待審留言）照舊可用。
   </div>
 
   <!-- 工具欄 -->
@@ -202,6 +202,9 @@
     </div>
     <button type="button" class="btn btn-info btn-sm" onclick="loadComments()">
       <i class="fas fa-rotate"></i> 重新整理
+    </button>
+    <button type="button" class="btn btn-danger btn-sm" onclick="openBanModal()">
+      <i class="fas fa-ban"></i> IP 封鎖名單 (<span id="statBanned">0</span>)
     </button>
   </div>
 
@@ -232,6 +235,29 @@
       <button type="button" class="btn btn-success btn-sm" id="btnSubmitReply" onclick="submitOfficialReply()">
         <i class="fas fa-paper-plane"></i> 發佈回覆
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== IP 封鎖名單 Modal ========== -->
+<div class="modal-overlay" id="banModal">
+  <div class="modal-card">
+    <h3><i class="fas fa-ban"></i> IP 封鎖名單管理</h3>
+    <p style="font-size:.85rem;color:var(--text-light);margin-bottom:12px;">
+      被封鎖嘅 IP 無法再發佈留言（前台表單亦會自動隱藏）。新增／解除即時生效，黑名單永久保存直至解除。
+    </p>
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <input type="text" id="banIpInput" class="form-input" placeholder="輸入 IP，例如 118.143.135.45" style="flex:2;min-width:180px;">
+      <input type="text" id="banNoteInput" class="form-input" placeholder="備註（選填，例如：賣廣告）" style="flex:2;min-width:160px;">
+      <button type="button" class="btn btn-danger btn-sm" onclick="banIpDirect()">
+        <i class="fas fa-plus"></i> 加入封鎖
+      </button>
+    </div>
+    <div id="banList" style="max-height:320px;overflow-y:auto;">
+      <p style="color:var(--text-light);font-size:.85rem;">載入中…</p>
+    </div>
+    <div class="actions" style="margin-top:14px;">
+      <button type="button" class="btn btn-ghost btn-sm" onclick="closeBanModal()">關閉</button>
     </div>
   </div>
 </div>
@@ -270,6 +296,7 @@ function login() {
       document.getElementById('dashboard').classList.add('active');
       document.getElementById('btnLogout').style.display = 'inline-flex';
       showToast('登入成功！', 'success');
+      loadBanlist(); /* v5.0: 同步載入 IP 封鎖名單計數 */
     } else {
       adminSecret = '';
       try { sessionStorage.removeItem('adminSecret'); } catch (e) {}
@@ -489,6 +516,11 @@ function renderCommentCard(c) {
   }
   html += '  <button type="button" class="btn btn-danger btn-sm js-action-btn" data-action="delete" data-id="' + escAttr(c.id) + '" data-is-reply="' + (c.parent_id ? 'true' : 'false') + '">';
   html += '    <i class="fas fa-trash"></i> 刪除</button>';
+  /* v5.0: 刪除並封鎖 IP（僅對真實用戶留言顯示） */
+  if (c.client_ip && c.client_ip !== 'admin') {
+    html += '  <button type="button" class="btn btn-danger btn-sm js-action-btn" style="background:#991b1b;border-color:#991b1b;" data-action="deleteban" data-id="' + escAttr(c.id) + '" data-ip="' + escAttr(c.client_ip) + '">';
+    html += '    <i class="fas fa-ban"></i> 刪除並封鎖 IP</button>';
+  }
   html += '</div>';
 
   html += '</div>';
@@ -515,6 +547,7 @@ function bindActionButtons() {
       else if (action === 'pin') togglePin(id, true);
       else if (action === 'unpin') togglePin(id, false);
       else if (action === 'delete') deleteComment(id, this.getAttribute('data-is-reply') === 'true');
+      else if (action === 'deleteban') deleteAndBan(id, this.getAttribute('data-ip'));
     });
   });
 
@@ -649,6 +682,128 @@ async function submitOfficialReply() {
   }
 }
 
+/* ===== v5.0: 刪除並封鎖 IP ===== */
+async function deleteAndBan(id, ip) {
+  if (!confirm('確定刪除呢條留言（含所有回覆），並永久封鎖 IP ' + (ip || '（未知）') + '？\n\n被封鎖嘅 IP 日後將無法再發佈留言，前台表單亦會對佢隱藏。')) return;
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/banip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, id: id, page_id: PAGE_ID })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast(data.message || ('已刪除並封鎖 IP ' + (data.banned_ip || '')), 'success');
+      loadComments();
+      loadBanlist();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
+/* ===== v5.0: IP 封鎖名單管理 ===== */
+function openBanModal() {
+  document.getElementById('banModal').classList.add('active');
+  loadBanlist();
+}
+
+function closeBanModal() {
+  document.getElementById('banModal').classList.remove('active');
+}
+
+async function loadBanlist() {
+  if (!adminSecret) return;
+  var listEl = document.getElementById('banList');
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/banlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret })
+    });
+    var data = await res.json();
+    if (!data.success) {
+      listEl.innerHTML = '<p style="color:var(--danger);font-size:.85rem;">' + escHtml(data.error || '載入失敗') + '</p>';
+      return;
+    }
+    var ips = data.banned || [];
+    var statEl = document.getElementById('statBanned');
+    if (statEl) statEl.textContent = data.total || ips.length;
+    if (ips.length === 0) {
+      listEl.innerHTML = '<p style="color:var(--text-light);font-size:.85rem;">目前冇任何 IP 被封鎖。</p>';
+      return;
+    }
+    var html = '';
+    ips.forEach(function (b) {
+      html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.86rem;">' +
+        '<i class="fas fa-ban" style="color:var(--danger);"></i>' +
+        '<code style="font-weight:700;">' + escHtml(b.ip) + '</code>' +
+        '<span style="color:var(--text-light);flex:1;">' + escHtml(b.note || '') + (b.banned_at ? ' · ' + formatTime(b.banned_at) : '') + '</span>' +
+        '<button type="button" class="btn btn-ghost btn-sm js-unban-btn" data-ip="' + escAttr(b.ip) + '">' +
+        '<i class="fas fa-unlock"></i> 解除</button>' +
+      '</div>';
+    });
+    listEl.innerHTML = html;
+    listEl.querySelectorAll('.js-unban-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { unbanIp(this.getAttribute('data-ip')); });
+    });
+  } catch (err) {
+    listEl.innerHTML = '<p style="color:var(--danger);font-size:.85rem;">網絡錯誤：' + escHtml(err.message) + '</p>';
+  }
+}
+
+async function banIpDirect() {
+  var ipEl = document.getElementById('banIpInput');
+  var noteEl = document.getElementById('banNoteInput');
+  var ip = ipEl.value.trim();
+  var note = noteEl.value.trim();
+  if (!ip) {
+    showToast('請輸入要封鎖嘅 IP 地址', 'warning');
+    return;
+  }
+  if (!confirm('確定封鎖 IP ' + ip + '？被封鎖後該網絡將無法再發佈留言。')) return;
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/banip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, ip: ip, note: note })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast(data.message || ('已封鎖 IP ' + ip), 'success');
+      ipEl.value = '';
+      noteEl.value = '';
+      loadBanlist();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
+async function unbanIp(ip) {
+  if (!confirm('確定解除封鎖 IP ' + ip + '？解除後該網絡即可再次留言（仍受頻率限制約束）。')) return;
+  try {
+    var res = await fetch(WORKER_BASE + '/api/admin/unbanip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: adminSecret, ip: ip })
+    });
+    var data = await res.json();
+    if (data.success) {
+      showToast(data.message || ('已解除封鎖 IP ' + ip), 'success');
+      loadBanlist();
+    } else {
+      showToast(data.error || '操作失敗', 'error');
+    }
+  } catch (err) {
+    showToast('網絡錯誤：' + err.message, 'error');
+  }
+}
+
 /* ===== 圖片燈箱 ===== */
 function openLightbox(url) {
   document.getElementById('lightboxImg').src = url;
@@ -664,6 +819,7 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     closeLightbox();
     closeReplyModal();
+    closeBanModal();
   }
 });
 

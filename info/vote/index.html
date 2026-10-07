@@ -466,6 +466,13 @@ footer {
 }
 
 .comment-form { background: var(--light-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 22px; margin-bottom: 26px; }
+/* v5.0: 手機絲滑 — 嵌套容器 padding 鏈瘦身（390px 視口表單輸入區 222px→294px） */
+@media (max-width: 768px) {
+  .comment-outer-wrap { padding: 0 6px; }
+  .comment-card { padding: 18px 12px; }
+  .comment-form { padding: 14px 10px; }
+  .comment-form .form-input { font-size: 16px; }
+}
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-weight: 700; color: var(--dark-bg); margin-bottom: 7px; font-size: 0.92rem; }
 .form-input {
@@ -694,11 +701,16 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 <div class="comment-outer-wrap" id="comments">
                     <div class="comment-card">
                         <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> 香港家居害蟲苦主討論區</h2>
-                        <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言經審核後會公開顯示，亦可上傳蟲害照片直接展示。</p>
+                        <p class="sub-desc">歡迎分享你嘅害蟲遭遇或發問！留言通過數學驗證後<strong>即時公開顯示</strong>，亦可上傳蟲害照片直接展示。</p>
 
                         <div class="moderation-notice">
                             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                            <span><strong>留言須知：</strong>首次留言或回覆提交後需經管理員審核，通過審核後即時公開。你自己可即時預覽。</span>
+                            <span><strong>留言須知：</strong>填寫暱稱同留言，通過數學驗證後即時公開，無需等待審核。防護限制：同一網絡<strong>每小時限發 1 則、每日限 3 則</strong>；垃圾廣告同機器人會被自動攔截，惡意 IP 將被管理員永久封鎖。</span>
+                        </div>
+
+                        <div class="moderation-notice" id="bannedNotice" style="display:none;background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);border-left-color:var(--danger);color:#7f1d1d;">
+                            <i class="fa-solid fa-ban" aria-hidden="true"></i>
+                            <span><strong>存取受限：</strong>你嘅網絡 IP 已被封鎖，暫時無法參與留言。如有異議，歡迎透過 WhatsApp 或電話聯絡我們查詢。</span>
                         </div>
 
                         <!-- Comment Form -->
@@ -860,7 +872,15 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 .then(function(res){ return res.json(); })
                 .then(function(data){
                     if (!data.success) return;
-                    
+
+                    /* v5.0: 訪客 IP 被封鎖 → 隱藏留言表單，顯示受限提示 */
+                    if (data.viewer_banned) {
+                        var formEl = document.getElementById('mainCommentForm');
+                        if (formEl) formEl.style.display = 'none';
+                        var bnEl = document.getElementById('bannedNotice');
+                        if (bnEl) bnEl.style.display = '';
+                    }
+
                     var serverComments = data.comments || [];
                     var pendingLocal = getLocalPendingComments();
 
@@ -1017,11 +1037,19 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             .then(function(res){ return res.json(); })
             .then(function(data){
                 if (!data.success) {
-                    showToast('提交失敗：' + (data.error || '未知錯誤'), 'warning');
+                    /* v5.0: 被封鎖 IP → 隱藏表單＋紅色提示 */
+                    if (data.code === 'IP_BANNED') {
+                        document.getElementById('mainCommentForm').style.display = 'none';
+                        var bn = document.getElementById('bannedNotice');
+                        if (bn) bn.style.display = '';
+                        showToast('你嘅 IP 已被封鎖，無法發佈留言。', 'error');
+                    } else {
+                        showToast('提交失敗：' + (data.error || '未知錯誤'), 'warning');
+                    }
                     return;
                 }
                 
-                // 無論是新留言還是回覆，都寫入 LocalStorage 暫存
+                // 無論是新留言還是回覆，都寫入 LocalStorage 暫存（直出制：即時以已公開狀態渲染，伺服器同步後自動對帳）
                 saveLocalPendingComment({
                     id: data.comment_id,
                     nickname: nickname,
@@ -1029,11 +1057,11 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                     image_url: currentReplyTo ? '' : uploadedImgUrl,
                     thumb_url:  currentReplyTo ? '' : uploadedThumbUrl,
                     parent_id: currentReplyTo ? currentReplyTo.id : null,
-                    approved: 0,
+                    approved: 1,
                     created_at: new Date().toISOString()
                 });
 
-                showToast('留言已成功提交！將會在審核後正式公開。', 'success');
+                showToast('發佈成功！留言已即時公開顯示。', 'success');
                 document.getElementById('mainCommentForm').reset();
                 uploadedImgUrl = '';
                 uploadedThumbUrl = '';

@@ -104,6 +104,13 @@
         .comment-card h2{font-size:1.45rem;color:var(--dark-bg);margin:0 0 10px;}
         .moderation-notice{background:linear-gradient(135deg,#fef3c7 0%,#fef9c3 100%);border-left:4px solid var(--warning);padding:14px 18px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:22px;font-size:0.88rem;color:#5d4037;}
         .comment-form{background:var(--light-bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:22px;margin-bottom:26px;}
+        /* v5.0: mobile smoothness — nested padding-chain slimming (390px viewport input area 222px→294px) */
+        @media (max-width:768px){
+          .comment-outer-wrap{padding:0 6px;}
+          .comment-card{padding:18px 12px;}
+          .comment-form{padding:14px 10px;}
+          .comment-form .form-input{font-size:16px;}
+        }
         .form-group{margin-bottom:16px;}
         .form-group label{display:block;font-weight:700;color:var(--dark-bg);margin-bottom:7px;font-size:0.92rem;}
         .form-input{width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:var(--radius-sm);font-size:0.95rem;font-family:inherit;background:#fff;}
@@ -215,11 +222,16 @@
                 <div class="comment-outer-wrap" id="comments">
                     <div class="comment-card">
                         <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> HK Pest Forum</h2>
-                        <p class="sub-desc" style="color:var(--text-muted);font-size:0.92rem;margin:0 0 16px;">Share your pest experience or ask questions. Comments are reviewed before public display. You can preview your own submission immediately.</p>
+                        <p class="sub-desc" style="color:var(--text-muted);font-size:0.92rem;margin:0 0 16px;">Share your pest experience or ask questions. Comments go <strong>live instantly</strong> once the math check passes. You can also upload pest photos.</p>
 
                         <div class="moderation-notice">
                             <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                            <span><strong>Posting Notes:</strong> First-time comments are reviewed before public display. You can preview your own submission immediately.</span>
+                            <span><strong>Posting Notes:</strong> Enter a nickname and your message — once the math check passes, it's published instantly, no review waiting. Protection: <strong>1 post per hour, 3 per day</strong> per network; spam and bots are blocked automatically, and abusive IPs are permanently banned by the admin.</span>
+                        </div>
+
+                        <div class="moderation-notice" id="bannedNotice" style="display:none;background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);border-left-color:var(--danger);color:#7f1d1d;">
+                            <i class="fa-solid fa-ban" aria-hidden="true"></i>
+                            <span><strong>Access restricted:</strong> Your network IP has been banned from posting. For enquiries, please contact us via WhatsApp or phone.</span>
                         </div>
 
                         <form id="mainCommentForm" class="comment-form">
@@ -360,6 +372,13 @@
                 .then(function(res){ return res.json(); })
                 .then(function(data){
                     if (!data.success) return;
+                    /* v5.0: banned viewer → hide comment form, show restricted notice */
+                    if (data.viewer_banned) {
+                        var formEl = document.getElementById('mainCommentForm');
+                        if (formEl) formEl.style.display = 'none';
+                        var bnEl = document.getElementById('bannedNotice');
+                        if (bnEl) bnEl.style.display = '';
+                    }
                     var serverComments = data.comments || [];
                     var pendingLocal = getLocalPendingComments();
                     if (pendingLocal.length > 0 && serverComments.length > 0) {
@@ -446,9 +465,21 @@
             fetch(WORKER_BASE + '/api/comments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
                 .then(function(res){ return res.json(); })
                 .then(function(data){
-                    if (!data.success) { showToast('Submit failed: ' + (data.error || 'Unknown error'), 'warning'); return; }
-                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 0, created_at: new Date().toISOString() });
-                    showToast('Comment submitted! Will be public after review.', 'success');
+                    if (!data.success) {
+                        /* v5.0: banned IP → hide form + red notice */
+                        if (data.code === 'IP_BANNED') {
+                            document.getElementById('mainCommentForm').style.display = 'none';
+                            var bn = document.getElementById('bannedNotice');
+                            if (bn) bn.style.display = '';
+                            showToast('Your IP has been banned from posting.', 'error');
+                        } else {
+                            showToast('Submit failed: ' + (data.error || 'Unknown error'), 'warning');
+                        }
+                        return;
+                    }
+                    // Local optimistic cache (live-publish mode: render as published immediately, auto-reconciled with server)
+                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 1, created_at: new Date().toISOString() });
+                    showToast('Published! Your comment is now live.', 'success');
                     document.getElementById('mainCommentForm').reset();
                     uploadedImgUrl = ''; uploadedThumbUrl = '';
                     var previewEl = document.getElementById('imagePreviewInline');

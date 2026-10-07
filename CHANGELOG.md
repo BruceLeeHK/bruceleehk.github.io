@@ -1,4 +1,41 @@
-# 修復日誌 (v9.27 — 2026-10-05)
+# 修復日誌 (v9.28 — 2026-10-07)
+
+## v9.28《苦主討論區「直出」發佈＋IP 防護升級》— 取消人工審核即時公開，Worker v5.0 三重防線攔截垃圾廣告與機器人
+
+依《更新優化苦主討論區和管理員後臺相關功能》文檔思路實施：用戶只需填寫暱稱和留言直接發佈，同一 IP 每日限 3 次（每次時隔 1 小時），管理員後台可刪除並封鎖垃圾 IP，確保真實苦主暢通無阻分享信息。
+
+### 1️⃣ 留言「直出」— 取消人工審核（comment-handler.js v4.1 → v5.0）
+
+- 新留言／回覆通過數學驗證＋防護檢查後 `approved: 1` 即時公開，心急如焚嘅苦主即刻得到關注
+- 防護防線全數繼承：數學驗證（伺服器覆核）、Honeypot 靜默丟棄機器人、XSS 清洗、回覆 URL 遮蔽、圖片格式/體積校驗
+- 舊待審留言兼容：admin【批准】照常可用；公開列表繼續過濾未批准留言
+
+### 2️⃣ IP 發言配額 — 同一 IP 每小時 1 則 ＋ 每日 3 則
+
+- 1 小時冷卻：KV key `cool:{ip}`（TTL 3600s），發言過於頻繁即攔截並提示倒數分鐘
+- 每日 3 則上限：KV key `dcount:{ip}:{YYYYMMDD}`（香港時區日重置，TTL 86400s）
+- 精細計費：只喺留言成功寫入後先記錄配額——驗證失敗／captcha 錯誤唔會消耗配額；管理員密鑰發言完全豁免
+- 攔截回應雙語（error + error_en）：COOLDOWN_ACTIVE／DAILY_LIMIT_REACHED 兩種錯誤碼
+
+### 3️⃣ IP 封鎖名單 — 一鍵「刪除並封鎖」＋後台管理
+
+- 新端點：`POST /api/admin/banip`（傳 id＝刪除留言連回覆＋封鎖其 IP；傳 ip＝手動封鎖，可附 note 備註）、`/api/admin/unbanip`（解除）、`/api/admin/banlist`（名單）
+- 黑名單存 KV `ipblacklist`（無 TTL，永久生效直至解除）；IPv4（含 0-255 數值校驗）／IPv6 白名單式驗證，`admin`／環回位址不可封鎖
+- 被封鎖 IP：POST → 403 IP_BANNED（連驗證都唔使做）；GET `/api/comments` 回應帶 `viewer_banned: true` → 前台自動隱藏留言表單並顯示紅色「存取受限」提示
+- admin.html 升級：每條留言新增【🚫 刪除並封鎖 IP】深紅按鈕（官方回覆不顯示）＋【IP 封鎖名單】管理 Modal（列表／手動封鎖／一鍵解除，工具欄實時計數，Esc 關閉）
+- 可選加碼：如需 Cloudflare WAF 層面全站封鎖，可喺 Dashboard 將同一批 IP 加入 WAF IP Access Rules（Worker 名單已足夠保護留言系統）
+
+### 4️⃣ 順手修復＋體驗優化
+
+- 🔧 Worker admin 系列端點雙重 KV 讀取 bug 修復（list/approve/delete/reply/pin 全部改讀一次入變數，減 KV 讀取量）
+- 📱 討論區手機絲滑：嵌套 padding 鏈瘦身（390px 視口留言輸入區 222→290px +31%，表單 264→312px），輸入框 16px 防 iOS 自動縮放；ZH/EN 對稱
+- 🌐 Worker CORS 白名單補 localhost:8808（本地測試埠，無生產影響）
+
+### 📋 部署提示（重要！兩步缺一不可）
+
+1. **前端**：照常 GitHub Desktop 上傳（本 zip）
+2. **後端**：Worker 必須重新部署先生效——Cloudflare Dashboard → Workers & Pages → comment-handler → 編輯代碼 → 貼上 `worker/comment-handler.js` 全文 → Deploy；或 `npx wrangler deploy`
+3. 驗證：開投票頁發一則留言應即時顯示「審核中」字樣消失；admin 後台點【IP 封鎖名單】應正常列出
 
 ## v9.27《圖片 404 修復＋手機絲滑＋弱網優化》— 檔名 ASCII/WebP 化根治 GitHub Pages 404，24 頁手機閱讀欄寬 226→324px
 

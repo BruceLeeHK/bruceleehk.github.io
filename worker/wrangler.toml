@@ -1,4 +1,4 @@
-# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（安全升級版 v3.1）
+# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（直出＋IP 防護版 v5.0）
 #
 # 部署步驟：
 #   1. 建立 KV Namespace（二選一）：
@@ -9,6 +9,12 @@
 #      （重要：必須使用 wrangler secret 設定，唔好直接寫喺呢個 toml 檔入面）
 #   4. 部署：npx wrangler deploy
 #
+# ===== v5.0 直出＋IP 防護升級亮點（2026-10-07）=====
+#   🚀 留言直出：通過數學驗證後即時公開（approved: 1），取消人工審核
+#   🛡️ IP 發言配額：同一 IP 每小時限發 1 則 ＋ 每日限 3 則（香港時區日重置）
+#   🚫 IP 封鎖名單：管理員一鍵「刪除並封鎖 IP」；被封鎖 IP 無法發言（前台表單自動隱藏）
+#      黑名單存於 KV key「ipblacklist」（無 TTL，永久生效直至解除）
+#   🔒 繼承 v3.1 全部安全防護（safeCompare / Honeypot / 遞迴刪除 / CORS 白名單）
 # ===== v3.1 安全升級亮點 =====
 #   🔧 修正「密碼錯誤」誤判問題：
 #      - ADMIN_SECRET 未設定時，回傳專屬錯誤碼 ADMIN_SECRET_NOT_SET
@@ -28,14 +34,17 @@
 #
 # ===== API 端點 =====
 #   GET  /api/health                  → 健康檢查（含 admin_secret_set 欄位）
-#   GET  /api/comments?page_id=xxx     → 讀取已審核留言（樹狀結構）
-#   POST /api/comments                 → 提交新留言（主留言 / 回覆，支援 honeypot）
+#   GET  /api/comments?page_id=xxx     → 讀取已公開留言（樹狀結構；封鎖 IP 訪客帶 viewer_banned=true）
+#   POST /api/comments                 → 提交新留言（直出公開；1小時冷卻＋每日3次；honeypot 靜默丟棄）
 #   POST /api/admin/test               → 測試管理密鑰是否正確
-#   POST /api/admin/list              → 列出所有留言（含未審核）
-#   POST /api/admin/approve           → 審核通過
+#   POST /api/admin/list              → 列出所有留言（含未公開舊留言）
+#   POST /api/admin/approve           → 審核通過（兼容 v5.0 前嘅舊待審留言）
 #   POST /api/admin/delete            → 遞迴刪除留言（含所有後代回覆）
 #   POST /api/admin/reply             → 管理員官方回覆（強制「滅蟲師傅」暱稱）
 #   POST /api/admin/pin               → 置頂 / 取消置頂
+#   POST /api/admin/banip             → 刪除並封鎖 IP（傳 id）／手動封鎖（傳 ip）／可附 note 備註
+#   POST /api/admin/unbanip           → 解除封鎖 IP
+#   POST /api/admin/banlist           → 列出封鎖名單（含 banned_at / note）
 #
 # ===== 審核密鑰設定（重要！）=====
 #   npx wrangler secret put ADMIN_SECRET
