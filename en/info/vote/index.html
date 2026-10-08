@@ -330,6 +330,8 @@
                                 <img id="imagePreviewInline" alt="Preview photo" style="display:none; max-width:160px; max-height:140px; margin-top:10px; border-radius:var(--radius-sm); border:1px solid var(--border); object-fit:cover;">
                                 <p style="font-size:0.74rem;color:var(--primary-dark);margin-top:6px;"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Safe Upload Guarantee: Photos used only for instant recognition. GPS/EXIF auto-stripped; images destroyed after moderation; never stored.</p>
                             </div>
+                            <div id="tsBox" style="margin-bottom:16px;"></div>
+
                             <div class="captcha-row" style="display:flex;gap:10px;align-items:center;margin-bottom:16px;">
                                 <label><i class="fa-solid fa-shield-halved"></i> Math check:</label>
                                 <span id="captchaQuestion">? + ? =</span>
@@ -373,6 +375,43 @@
     document.addEventListener('DOMContentLoaded', function() {
         var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
         var PAGE_ID     = 'vote-page-2026';
+
+        /* ===== v9.35: Cloudflare Turnstile (phased rollout) =====
+           Fill in TURNSTILE_SITEKEY to activate: loads the widget dynamically,
+           sends turnstile_token with the post for backend siteverify double-check.
+           Empty = unchanged behaviour (math check + IP quota), zero impact. */
+        var TURNSTILE_SITEKEY = '';   /* ← paste your Turnstile Sitekey here (from Cloudflare Turnstile) */
+        var tsToken = '';
+
+        function initTurnstile() {
+            if (!TURNSTILE_SITEKEY) return;
+            var s = document.createElement('script');
+            s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+            s.async = true; s.defer = true;
+            s.onload = function() {
+                if (window.turnstile) {
+                    turnstile.render(document.getElementById('tsBox'), {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(t) { tsToken = t; },
+                        'expired-callback': function() { tsToken = ''; },
+                        'error-callback': function() { tsToken = ''; },
+                        theme: 'light',
+                        language: 'en'
+                    });
+                }
+            };
+            document.head.appendChild(s);
+        }
+
+        function resetTurnstile() {
+            tsToken = '';
+            if (TURNSTILE_SITEKEY && window.turnstile) {
+                try { turnstile.reset(); } catch (e) {}
+            }
+        }
+
+        initTurnstile();
+
         var captchaNumA = 0, captchaNumB = 0;
         var uploadedImgUrl = '';        // HD image (large, for lightbox)
         var uploadedThumbUrl = '';     // Thumbnail (small, for list)
@@ -549,13 +588,20 @@
             var content = document.getElementById('inputContent').value.trim();
             var answer = parseInt(document.getElementById('captchaAnswer').value, 10);
             if (answer !== (captchaNumA + captchaNumB)) { showToast('Math check answer is incorrect!', 'warning'); return; }
+            if (TURNSTILE_SITEKEY && !tsToken) {
+                showToast('Please complete the bot verification (Turnstile) before submitting.', 'warning');
+                return;
+            }
+
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
             var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
+            if (tsToken) payload.turnstile_token = tsToken;
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
             fetch(WORKER_BASE + '/api/comments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
                 .then(function(res){ return res.json(); })
                 .then(function(data){
+                    resetTurnstile();
                     if (!data.success) {
                         /* v5.0: banned IP → hide form + red notice */
                         if (data.code === 'IP_BANNED') {
@@ -579,7 +625,7 @@
                     initCaptcha();
                     loadComments();
                 })
-                .catch(function(err){ showToast('Failed to send, please try again later.', 'error'); })
+                .catch(function(err){ resetTurnstile(); showToast('Failed to send, please try again later.', 'error'); })
                 .finally(function(){ btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit'; });
         }
 

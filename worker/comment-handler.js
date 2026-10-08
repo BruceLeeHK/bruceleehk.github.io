@@ -14,6 +14,18 @@
  * - 遞迴刪除所有後代回覆
  * - 24h Vote Cooldown（投票系統）
  * 🔧 修復：admin 系列端點雙重 KV 讀取（讀取一次入變數，提升可靠性）
+ *
+ * v6.0 升級亮點（「封殺藏在細節裡魔鬼」安全強化 — 2026-10-08）：
+ * 🌍 地區封鎖：默認封鎖 RU/IN/KP 三國所有 API 請求（403 GEO_BLOCKED），
+ *    可用環境變數 BLOCKED_COUNTRIES 覆寫（例 "RU,IN,KP,VN"），設 "none" 停用。
+ *    攔截喺 fetch 最頂層：零 KV 讀取、零 subrequest，唔消耗任何配額。
+ * 🛡️ Turnstile 後端覆核：設定 TURNSTILE_SECRET_KEY 後，所有非管理員
+ *    POST /api/comments 必須附帶合法未過期 turnstile_token，Worker 向
+ *    Cloudflare siteverify API 二次核對（防 Postman/腳本繞過前端）。
+ *    未設定 secret 時自動跳過（分階段啟用，前台照常運作）。
+ * 🧹 過期留言自動清理：每次寫入留言自動剔除超過 365 日嘅普通留言
+ *    （管理員置頂 is_pinned／官方回覆 is_official 永不過期），
+ *    防止垃圾留言長年累月塞爆 COMMENT_KV。
  */
 
 const MAX_REQUEST_BYTES = 5_500_000;
@@ -26,6 +38,11 @@ const POST_COOLDOWN_SEC = 3600;   // 兩次發言至少相隔 1 小時
 const POST_DAILY_MAX    = 3;      // 每日上限 3 則（香港時區日重置）
 const DAILY_TTL_SEC     = 86400;  // 日計數 key 保留 24 小時（key 含日期自動輪換）
 const IP_BLACKLIST_KEY  = 'ipblacklist';  // KV 黑名單（無 TTL，永久生效直至解除）
+
+/* ===== v6.0: 「封殺藏在細節裡魔鬼」安全強化 ===== */
+const TURNSTILE_VERIFY_URL      = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const DEFAULT_BLOCKED_COUNTRIES = 'RU,IN,KP';  // 地區封鎖默認名單（env.BLOCKED_COUNTRIES 可覆寫）
+const COMMENT_MAX_AGE_SEC       = 31_536_000;  // 普通留言 365 日過期（置頂／官方除外）
 
 /* ===== v4.1: 投票系統設定 ===== */
 const VOTE_TTL_SEC      = 15_552_000; // 票數保留 6 個月
@@ -40,6 +57,19 @@ const VALID_PEST_IDS    = new Set([
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    /* ===== v6.0: 地區封鎖（最頂層攔截 — 零 KV 讀取、零 subrequest、零配額消耗）=====
+       request.cf.country 由 Cloudflare 邊緣注入；本地開發（無 cf）自動放行 */
+    const blockedCountries = String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES).trim();
+    if (blockedCountries && blockedCountries.toLowerCase() !== 'none'
+        && request.cf && request.cf.country
+        && blockedCountries.toUpperCase().split(',').map(s => s.trim()).includes(String(request.cf.country).toUpperCase())) {
+      return jsonResponse({
+        success: false,
+        error: '此地區暫不開放存取 / Access from this region is not available',
+        code: 'GEO_BLOCKED'
+      }, 403, { 'X-Content-Type-Options': 'nosniff' });
+    }
 
     /* ===== CORS ===== */
     const allowedOrigins = new Set([
@@ -92,8 +122,10 @@ export default {
           status: kv ? 'ok' : 'degraded',
           kv_bound: !!kv,
           admin_secret_set: !!env.ADMIN_SECRET,
-          version: '5.0',
-          features: ['nested_reply', 'pin', 'captcha', 'recursive_delete', 'auto_publish', 'ip_blacklist', 'quota_1h_daily3', 'honeypot', 'vote_system', 'bilingual_errors'],
+          version: '6.0',
+          turnstile_enforced: !!env.TURNSTILE_SECRET_KEY,
+          blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
+          features: ['nested_reply', 'pin', 'captcha', 'recursive_delete', 'auto_publish', 'ip_blacklist', 'quota_1h_daily3', 'honeypot', 'vote_system', 'bilingual_errors', 'turnstile_verify', 'geo_block', 'comment_ttl_prune'],
           time: new Date().toISOString()
         }, 200, securityHeaders);
       }
@@ -390,7 +422,31 @@ async function handlePostComment(request, kv, env, headers) {
     }
   }
 
-  /* v5.0: 發言配額檢查 — 1 小時冷卻 ＋ 每日 3 則（管理員豁免；驗證全過才檢查，失敗唔會消耗配額） */
+  /* v6.0: Turnstile 後端覆核（防 Postman/腳本繞過前端直接 POST）
+     設定 TURNSTILE_SECRET_KEY 即強制；未設定時跳過（分階段啟用）。
+     放喺配額檢查之前：驗證失敗唔會消耗任何 KV 讀寫。 */
+  if (!isAdmin && env.TURNSTILE_SECRET_KEY) {
+    const tsToken = String((body && body.turnstile_token) || '').trim();
+    if (!tsToken) {
+      return jsonResponse({
+        success: false,
+        error: '機器人驗證未通過，請喺網頁完成人機驗證後再提交。',
+        error_en: 'Bot verification missing. Please complete the Turnstile challenge and try again.',
+        code: 'TURNSTILE_MISSING'
+      }, 403, headers);
+    }
+    const tsOk = await verifyTurnstileToken(env.TURNSTILE_SECRET_KEY, tsToken, clientIp === '127.0.0.1' ? '' : clientIp);
+    if (!tsOk) {
+      return jsonResponse({
+        success: false,
+        error: '人機驗證無效或已過期，請重新完成驗證。',
+        error_en: 'Bot verification failed or expired. Please retry the Turnstile challenge.',
+        code: 'TURNSTILE_FAILED'
+      }, 403, headers);
+    }
+  }
+
+  /* v5.0: 發言配額檢查 — 同一 IP 每小時 1 則 ＋ 每日 3 則（管理員豁免；驗證全過才檢查，失敗唔會消耗配額） */
   let quota = null;
   if (!isAdmin) {
     quota = await checkPostQuota(kv, clientIp);
@@ -439,8 +495,11 @@ async function handlePostComment(request, kv, env, headers) {
     is_reply:   isReply
   };
 
-  comments.push(newComment);
-  await kv.put(key, JSON.stringify(comments), { expirationTtl: COMMENT_TTL_SEC });
+  /* v6.0: 寫入前先剔除過期普通留言（365 日）— 防止垃圾留言長年塞爆 COMMENT_KV
+     （admin 各寫入路徑冇即時 prune，但任何新留言都會觸發本頁清理，老舊垃圾自動退場） */
+  const prunedComments = pruneExpiredComments(comments);
+  prunedComments.push(newComment);
+  await kv.put(key, JSON.stringify(prunedComments), { expirationTtl: COMMENT_TTL_SEC });
 
   /* v5.0: 發言成功 → 記錄配額（1 小時冷卻 ＋ 日計數 +1）；記錄失敗唔影響留言 */
   if (!isAdmin && quota) {
@@ -774,6 +833,38 @@ function secondsUntilHkMidnight() {
   } catch {
     return 3600;
   }
+}
+
+/* =========================================================================
+ * v6.0: Turnstile siteverify 後端覆核 / 過期留言清理
+ * ========================================================================= */
+
+/** 向 Cloudflare siteverify 二次核對 Turnstile Token（防腳本直接 POST 繞過前端） */
+async function verifyTurnstileToken(secret, token, remoteIp) {
+  try {
+    const form = new FormData();
+    form.append('secret', secret);
+    form.append('response', token);
+    if (remoteIp) form.append('remoteip', remoteIp);
+    const res = await fetch(TURNSTILE_VERIFY_URL, { method: 'POST', body: form });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return !!data.success;
+  } catch (e) {
+    console.warn('Turnstile siteverify 失敗:', e.message);
+    return false;  /* siteverify 網絡故障時保守處理：拒絕寫入（fail-closed） */
+  }
+}
+
+/** v6.0: 剔除超過 365 日嘅普通留言（管理員置頂／官方回覆永不過期；無時間戳舊數據保留防誤刪） */
+function pruneExpiredComments(comments) {
+  const cutoff = Date.now() - COMMENT_MAX_AGE_SEC * 1000;
+  return comments.filter(c => {
+    if (c.is_pinned || c.is_official) return true;
+    const ts = Date.parse(c.created_at || '');
+    if (Number.isNaN(ts)) return true;
+    return ts >= cutoff;
+  });
 }
 
 function buildCorsHeaders(allowOrigin) {

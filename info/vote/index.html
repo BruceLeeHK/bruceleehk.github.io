@@ -813,6 +813,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                                 <img id="imagePreviewInline" alt="預覽照片" style="display:none; max-width:160px; max-height:140px; margin-top:10px; border-radius:var(--radius-sm); border:1px solid var(--border); object-fit:cover;">
                             </div>
 
+                            <div id="tsBox" style="margin-bottom:16px;"></div>
+
                             <div class="captcha-row" style="display:flex; gap:10px; align-items:center; margin-bottom:16px;">
                                 <label><i class="fa-solid fa-shield-halved"></i> 數學驗證：</label>
                                 <span id="captchaQuestion">? + ? =</span>
@@ -866,6 +868,43 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     document.addEventListener('DOMContentLoaded', function() {
         var WORKER_BASE = 'https://comment-handler.cedars5282.workers.dev';
         var PAGE_ID     = 'vote-page-2026';
+
+        /* ===== v9.35: Cloudflare Turnstile（分階段啟用）=====
+           TURNSTILE_SITEKEY 貼上 sitekey 後即刻生效：動態載入 Turnstile 元件，
+           提交時附帶 turnstile_token 交由 Worker 向 siteverify 後端二次核對。
+           留空 = 維持現狀（數學驗證＋IP 配額），零影響。 */
+        var TURNSTILE_SITEKEY = '';   /* ← 喺呢度貼上 Turnstile Sitekey（Cloudflare Turnstile 建立後取得） */
+        var tsToken = '';
+
+        function initTurnstile() {
+            if (!TURNSTILE_SITEKEY) return;
+            var s = document.createElement('script');
+            s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+            s.async = true; s.defer = true;
+            s.onload = function() {
+                if (window.turnstile) {
+                    turnstile.render(document.getElementById('tsBox'), {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(t) { tsToken = t; },
+                        'expired-callback': function() { tsToken = ''; },
+                        'error-callback': function() { tsToken = ''; },
+                        theme: 'light',
+                        language: 'zh-hk'
+                    });
+                }
+            };
+            document.head.appendChild(s);
+        }
+
+        function resetTurnstile() {
+            tsToken = '';
+            if (TURNSTILE_SITEKEY && window.turnstile) {
+                try { turnstile.reset(); } catch (e) {}
+            }
+        }
+
+        initTurnstile();
+
         var captchaNumA = 0, captchaNumB = 0;
         var uploadedImgUrl = '';        // 大圖 (HD version for lightbox)
         var uploadedThumbUrl = '';     // 縮圖 (thumbnail for comment list)
@@ -1105,6 +1144,11 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 return;
             }
 
+            if (TURNSTILE_SITEKEY && !tsToken) {
+                showToast('請先完成人機驗證（Turnstile）再提交。', 'warning');
+                return;
+            }
+
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 提交中...';
 
@@ -1118,6 +1162,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 captcha_b: captchaNumB,
                 captcha_answer: answer
             };
+            if (tsToken) payload.turnstile_token = tsToken;
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
 
             fetch(WORKER_BASE + '/api/comments', {
@@ -1127,6 +1172,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             })
             .then(function(res){ return res.json(); })
             .then(function(data){
+                resetTurnstile();
                 if (!data.success) {
                     /* v5.0: 被封鎖 IP → 隱藏表單＋紅色提示 */
                     if (data.code === 'IP_BANNED') {
@@ -1162,7 +1208,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 initCaptcha();
                 loadComments();
             })
-            .catch(function(err){ showToast('發送失敗，請稍後再試。', 'error'); })
+            .catch(function(err){ resetTurnstile(); showToast('發送失敗，請稍後再試。', 'error'); })
             .finally(function(){
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 提交留言';

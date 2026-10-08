@@ -1,6 +1,14 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI (v9.2 抗間歇故障版)
- * 基於生產版 v9.1 (MoE 雙腦 + Contextual Prior) 升級：
+ * Cloudflare Worker — 滅蟲師傅 AI (v9.3 安全強化版)
+ * 基於生產版 v9.2 (MoE 雙腦 + Contextual Prior + Auto-Retry) 升級：
+ *
+ * v9.3 升級亮點（「封殺藏在細節裡魔鬼」安全強化 — 2026-10-08）：
+ *   🔐 金鑰清庫：移除代碼內明碼 DIFY_API_KEY 預設值（舊金鑰已隨代碼庫外洩，
+ *      必須喺 Dify 後台輪換新金鑰，再用 wrangler secret / dashboard Secret 設定）。
+ *      未設定金鑰時 /api/analyze-pest 返回 503 AI_NOT_CONFIGURED（fail-closed）。
+ *   🌍 地區封鎖：默認封鎖 RU/IN/KP 三國請求（403 GEO_BLOCKED），可用
+ *      env.BLOCKED_COUNTRIES 覆寫（例 "RU,IN,KP,VN"），設 "none" 停用。
+ *   🩺 /health 新增 dify_key_set / blocked_countries 欄位，方便部署驗證。
  *
  * v9.2 升級亮點（v9.14 穩定性修復：解決間歇性 HTTP 502）：
  *   🔁 步驟 2（chat-messages）加 5xx/網絡錯誤重試 1 次（1.5s backoff）——
@@ -34,6 +42,9 @@
  *                提示詞，供未升級嘅單 LLM Dify App 應急使用）
  */
 
+/* v9.3: 地區封鎖默認名單（env.BLOCKED_COUNTRIES 可覆寫，設 "none" 停用） */
+const DEFAULT_BLOCKED_COUNTRIES = 'RU,IN,KP';
+
 const ALLOWED_ORIGINS = new Set([
   'https://bruceleehk.com',
   'https://www.bruceleehk.com',
@@ -46,7 +57,7 @@ const ALLOWED_ORIGINS = new Set([
 
 const DEFAULTS = {
   DIFY_API_URL: 'https://api.dify.ai/v1',
-  DIFY_API_KEY: 'app-EOJafBJvdrPPJdbgjlkpdq5o',
+  DIFY_API_KEY: '',   // v9.3 安全升級：金鑰一律用 secret 設定（wrangler secret put DIFY_API_KEY），代碼零明碼
   UPLOAD_TIMEOUT_MS: '30000',
   CHAT_TIMEOUT_MS: '100000',
   MAX_IMAGE_BYTES: String(8 * 1024 * 1024),
@@ -294,6 +305,19 @@ async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDes
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    /* ===== v9.3: 地區封鎖（最頂層攔截 — 零 KV 讀取、零 subrequest、零配額消耗）=====
+       request.cf.country 由 Cloudflare 邊緣注入；本地開發（無 cf）自動放行 */
+    const blockedCountries = String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES).trim();
+    if (blockedCountries && blockedCountries.toLowerCase() !== 'none'
+        && request.cf && request.cf.country
+        && blockedCountries.toUpperCase().split(',').map(s => s.trim()).includes(String(request.cf.country).toUpperCase())) {
+      return new Response(JSON.stringify({
+        success: false, code: 'GEO_BLOCKED',
+        error: '此地區暫不開放存取 / Access from this region is not available'
+      }), { status: 403, headers: { 'Content-Type': 'application/json; charset=utf-8', 'X-Content-Type-Options': 'nosniff' } });
+    }
+
     const origin = request.headers.get('Origin') || '';
     const corsOrigin = ALLOWED_ORIGINS.has(origin) ? origin : '';
     const requestId = crypto.randomUUID().slice(0, 8);
@@ -321,7 +345,9 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '9.2-MoE-Resilient',
+        version: '9.3-MoE-Hardened',
+        dify_key_set: !!(env.DIFY_API_KEY),
+        blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
         architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Auto-Retry',
         contextual_prior: true,
         max_desc_chars: Number(env.DESC_MAX_CHARS || DEFAULTS.DESC_MAX_CHARS),
@@ -346,6 +372,15 @@ export default {
     }
     for (const k of ['UPLOAD_TIMEOUT_MS', 'CHAT_TIMEOUT_MS', 'MAX_IMAGE_BYTES', 'CACHE_TTL_SECONDS', 'RATE_LIMIT_MAX', 'RATE_LIMIT_WINDOW_MS', 'DESC_MAX_CHARS']) {
       cfg[k] = Number(cfg[k]);
+    }
+
+    /* v9.3: fail-closed — 金鑰未設定時拒絕分析（唔會靜靜雞用空金鑰打到上游全 401） */
+    if (!cfg.DIFY_API_KEY) {
+      return json({
+        success: false, code: 'AI_NOT_CONFIGURED',
+        error: 'AI 診斷服務未完成配置（管理員請設定 DIFY_API_KEY secret）。歡迎直接 WhatsApp 搵師傅即時跟進。',
+        requestId
+      }, 503);
     }
 
     try {

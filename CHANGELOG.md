@@ -1,4 +1,32 @@
-# 修復日誌 (v9.34 — 2026-10-08)
+# 修復日誌 (v9.35 — 2026-10-08)
+
+## v9.35《封殺藏在細節裡魔鬼》— Cloudflare Workers 安全強化＋地區封鎖＋金鑰清庫
+
+依《封殺藏在細節裡魔鬼.docx》方案，全面診斷兩個 Worker 與前端表單，將俄羅斯／印度／朝鮮等地惡意流量攔在萌芽階段，杜絕一切不必要嘅資金消耗：
+
+### 🌍 comment-handler.js v5.0 → v6.0
+- **地區封鎖**（fetch 最頂層）：默認封鎖 RU/IN/KP 全部 API 請求（403 GEO_BLOCKED）；環境變數 `BLOCKED_COUNTRIES` 可加碼或設 `none` 停用。零 KV 讀取、零 subrequest、零配額消耗
+- **Turnstile 後端二次核對**（魔鬼細節 1）：設定 `TURNSTILE_SECRET_KEY` 後，所有非管理員 POST /api/comments 必須附帶合法 token，Worker 向 siteverify API 覆核（防 Postman/腳本繞過前端）；未設定時自動跳過，分階段啟用零停機
+- **過期留言自動清理**（魔鬼細節 3）：每次寫入自動剔除超過 365 日嘅普通留言（管理員置頂／官方回覆永不過期；無時間戳舊數據保留防誤刪），垃圾留言再也塞不爆 COMMENT_KV
+- /api/health 新增 `version 6.0`、`turnstile_enforced`、`blocked_countries` 欄位
+
+### 🔐 pest-vision-worker.js v9.2 → v9.3
+- **金鑰清庫（最高優先）**：移除代碼內明碼 `DIFY_API_KEY: 'app-EOJa...'` 預設值——舊金鑰已隨代碼庫公開外洩，任何人可直接燒 Dify 帳戶。必須輪換新金鑰並用 secret 設定
+- **fail-closed 守衛**：金鑰未設定時 /api/analyze-pest 返回 503 AI_NOT_CONFIGURED（絕不靜默打空砲）
+- **地區封鎖**：同 comment-handler（RU/IN/KP 默認，環境變數可調）
+- /health 新增 `version 9.3-MoE-Hardened`、`dify_key_set`、`blocked_countries`
+- CORS 白名單（魔鬼細節 5）v3.0 已鎖定，本次覆核無需改動
+
+### 🖥️ 前端 vote 頁 ZH/EN — Turnstile 分階段接入
+- 新增 `TURNSTILE_SITEKEY` 配置位（留空 = 維持現狀零影響）；填入 sitekey 後自動載入元件、提交附 `turnstile_token`、後端強制核對
+- tsBox 容器＋提交前檢查＋成功/失敗/網絡錯誤後自動重置元件
+- 原有數學驗證、honeypot、IP 配額（1小時/日3則）全部保留
+
+### 📋 新增 worker/SECURITY-CHECKLIST.md
+- Cloudflare Dashboard 人手操作清單：Dify 金鑰輪換步驟、Worker Secrets 設定、Turnstile widget 建立、WAF Rate Limiting 規則（/api/comments POST 3次/10分鐘/IP）、WAF 地區 Managed Challenge 規則（非香港 IP 提交 /api/*）、部署順序與驗證、每月 5 分鐘監控守則
+
+改動檔案：worker/comment-handler.js、worker/pest-vision-worker.js、worker/SECURITY-CHECKLIST.md（新）、info/vote/index.html、en/info/vote/index.html、CHANGELOG.md 共 6 檔；無新頁面（sitemap 91 URLs 不變）
+⚠️ 部署提醒：pest-vision-worker 部署前必須先完成 Dify 金鑰輪換並設定 secret（見 SECURITY-CHECKLIST 第 0/1 步），否則 AI 診斷會進入 fail-closed 保護狀態
 
 ## v9.34《事實修正》— 李太求救時間 深夜→朝早（ZH/EN 對稱）＋正文錯字
 
