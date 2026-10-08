@@ -1,4 +1,32 @@
-# 修復日誌 (v9.31 — 2026-10-07)
+# 修復日誌 (v9.32 — 2026-10-08)
+
+## v9.32《蟲類資訊增設【師傅出更】分類》— E-E-A-T 真實經驗內容系列上線：南丫島村屋滅老鼠實錄（blog-17 雙語）
+
+依《蟲類資訊增設【師傅出更】分類.docx》＋《南丫島村屋驚現大老鼠.docx》＋《5 個「滅老鼠」專用 WhatsApp 截圖 SEO 檔案名.docx》三份方案：
+
+### 1️⃣ 新文章 /info/blog-17/（ZH＋EN 對稱）
+
+- 全新【師傅出更】E-E-A-T 分類首篇：移居美國李太為南丫島村屋囝囝越洋 WhatsApp 求救滅老鼠，師傅誠實診斷「費用可以慳返」，李太仍堅持專業防鼠消毒（三十六計之「釜底抽薪計」）
+- 內容依文檔儘量簡化：個案檔案三欄＋越洋求救＋誠實診斷＋情懷擔當＋滅鼠防伏三步＋蜘蛛網 CTA 三按鈕（討論區/AI 診斷/WhatsApp）
+- 依《師傅出更》方案植入：✍️ 作者欄（撰文：滅蟲師傅 PEST CONTROL MASTER，連回首頁）、BlogPosting JSON-LD（author/datePublished 2026-10-08/headline/articleSection=師傅出更）、真實個案鐵證截圖
+- 4 張真實 WhatsApp 諮詢初錄截圖，SEO 檔案名 5 選 4（捨棄美孚公屋管道名——與南丫島村屋個案不符）：
+  - 屋企-半夜-發現老鼠-緊急-滅鼠服務-whatsapp-求救.jpg（半夜求救意圖）
+  - iot-智慧鼠盒-捉老鼠-滅鼠公司-推介-whatsapp-對話.jpg（捉老鼠/滅鼠公司推介意圖）
+  - 中環-餐廳-廚房-滅老鼠-防鼠網工程-whatsapp-諮詢.jpg（廚房老鼠/防鼠工程諮詢意圖）
+  - 南丫島-村屋-滅老鼠-whatsapp-免費報價-真實個案.jpg（村屋報價/南丫島意圖）
+- EN 版用英文檔名對稱（lamma-island-village-house-rat-control-whatsapp-quote.jpg 等 4 個），alt text 全部如實描述（filename 攔截意圖＋alt 講真相，雙管齊下）
+- 截圖已壓縮 954×2131→780×1742（137-176KB/張），width/height 屬性齊全免 CLS
+
+### 2️⃣ 蟲類資訊中樞增設【師傅出更】分類（ZH＋EN）
+
+- ZH 中樞 blog-grid 首位插入「🚨 師傅出更」分類卡（fa-helmet-safety 圖標）；EN 中樞首位插入「MASTER ON DUTY · NEW」卡
+- 順手修復歷史遺留：ZH 中樞 blog-14 卡重複兩張 → 刪除一張
+
+### 3️⃣ 技術配套
+
+- sitemap.xml：+2 URLs（blog-17 ZH/EN，hreflang 對，lastmod 2026-10-08），87→89
+- i18n.js：blog 語言切換映射範圍 1-11 → 1-17（修復 blog-12~16 一直跌入 /en/info/ fallback 嘅舊問題）
+
 
 ## v9.31《Title 標籤優化》— 38 區 title 全面補「滅白蟻」，搶佔「上環滅白蟻／西環滅白蟻／西貢滅白蟻」等全港地區搜索首頁前 3
 
