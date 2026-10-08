@@ -1,4 +1,25 @@
-# 修復日誌 (v9.33 — 2026-10-08)
+# 修復日誌 (v9.34 — 2026-10-08)
+
+## v9.34《事實修正》— 李太求救時間 深夜→朝早（ZH/EN 對稱）＋正文錯字
+
+依用戶指正：「李太深夜求救」改為「李太朝早求救」。正文時間線本為 老鼠尋晚深夜出現→囝囝用滅鼠器捕捉→李太今朝越洋 WhatsApp 求救→同朝報價，截圖（一）說明文字誤寫「深夜求救」與正文矛盾，現予修正：
+
+### 繁中版 info/blog-17
+- 截圖（一）figcaption：李太**深夜求救** → 李太**朝早求救**
+- 圖片 alt：李太深夜透過 WhatsApp → 李太朝早透過 WhatsApp
+- Hero 段：李太為囝囝深夜越洋求助 → 朝早越洋求助
+- 正文引述錯字：事發「**作**夜」→「**昨**夜」
+- 保留：meta/og「深夜驚現大老鼠」及正文「事發喺尋晚深夜」——老鼠深夜出現屬實，與求救時間無衝突
+
+### 英文版對稱 en/info/blog-17（Overnight→Morning）
+- H1：An Overseas Mum's **Overnight** WhatsApp Rescue → **Morning** WhatsApp Rescue
+- H3、hero 段（sought help overnight → first thing in the morning）、meta description、og:description、JSON-LD description、截圖（一）alt＋figcaption 全部對稱修正
+- 保留：「rat found at midnight」（老鼠深夜出現屬實）
+
+### EN 中樞卡 en/info
+- blog-17 卡片簡介 "WhatsApped us overnight" → "in the morning"
+
+改動檔案：info/blog-17/index.html、en/info/blog-17/index.html、en/info/index.html、CHANGELOG.md 共 4 檔；無新增頁面（sitemap 91 URLs 不變，圖檔名不變）
 
 ## v9.33《【師傅出更】E-E-A-T 網站優化》— 南丫島滅老鼠實錄四項修正＋作者專頁上線
 
