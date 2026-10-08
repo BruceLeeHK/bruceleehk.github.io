@@ -1,4 +1,28 @@
-# 修復日誌 (v9.32 — 2026-10-08)
+# 修復日誌 (v9.33 — 2026-10-08)
+
+## v9.33《【師傅出更】E-E-A-T 網站優化》— 南丫島滅老鼠實錄四項修正＋作者專頁上線
+
+依《【師傅出更】E-E-A-T 網站優化.docx》＋《新增「作者欄 ➔ 作者專頁」.docx》兩份方案，對 blog-17 進行四項優化：
+
+### 1️⃣ 修復 WhatsApp 截圖無法顯示（手機＋電腦）
+- **根因**：ZH 版 4 張截圖採用中文檔名（屋企-半夜-…求救.jpg 等），GitHub Desktop 上傳鏈路中 Windows 解壓時 UTF-8 中文檔名亂碼 → 線上 404
+- **修復**：4 張圖全部改用 ASCII 檔名（night-rat-sighting-emergency-rodent-control-whatsapp-sos.jpg 等，5 個 SEO 檔名意圖保留於新英文組合），HTML 引用＋JSON-LD image 同步更新，原中文檔名檔案移除
+- 全站現已零中文檔名圖片（v9.27 已改其餘圖片，本次清零最後 4 張）
+
+### 2️⃣ 刪除「根據 E-E-A-T 原則」字樣
+- ZH：句子改為直接以「真正嘅專家唔係一味叫客畀錢」開頭；EN 對稱移除 "that is what E-E-A-T stands for"
+- E-E-A-T 訊號保留於結構化數據（BlogPosting author/datePublished）與作者專頁，不再以行話示人
+
+### 3️⃣ 手機只保留 WhatsApp 諮詢
+- 移除底部粘性欄「致電」按鈕（ZH/EN），只留 WhatsApp——桌面版粘性欄本就隱藏，無影響
+
+### 4️⃣ 作者欄 ➔ 作者專頁（頂層獨立頁 /about/）
+- 新建 /about/（ZH）＋ /en/about/（EN）：撰文團隊資歷、E-E-A-T 三卡（經驗/專業/信任）、核心裝備、服務承諾、CTA；AboutPage JSON-LD
+- blog-17 作者欄連結改指 /about/（rel="author"）；JSON-LD author.url 同步指向作者專頁
+- 全站 footer 導航新增「關於滅蟲師傅 / About Us」鏈接
+- sitemap 89 → 91 URLs
+
+
 
 ## v9.32《蟲類資訊增設【師傅出更】分類》— E-E-A-T 真實經驗內容系列上線：南丫島村屋滅老鼠實錄（blog-17 雙語）
 

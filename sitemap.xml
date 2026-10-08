@@ -812,4 +812,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/districts/islands/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/districts/islands/"/>
   </url>
+  <url>
+    <loc>https://bruceleehk.com/about/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/about/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/about/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/about/"/>
+  </url>
 </urlset>
