@@ -1,4 +1,17 @@
-# 修復日誌 (v9.35 — 2026-10-08)
+# 修復日誌 (v9.36 — 2026-10-09)
+
+## v9.36《全港正名＋免責聲明》— 討論區改名「全港滅蟲關注組 (免登入版)」＋獨立性免責聲明
+
+依用戶指示：一、將「香港滅蟲關注組（網頁免登入版）」改名「全港滅蟲關注組 (免登入版)」；二、當眼處加上「免責聲明 (Disclaimer)」，用細字但清晰可見嘅方式寫明本討論區嘅獨立性。
+
+### info/vote ZH＋en/info/vote EN 對稱更新
+- **改名 8 處×2 語言**：title／og:title／meta description／og:description／JSON-LD headline／JSON-LD description／首屏 H1／三大優勢 aria-label；描述類句式同步重構，避免「全港最活躍嘅全港滅蟲關注組」疊字
+- **免責聲明 ×2 當眼位置（ZH/EN 對稱）**：①Hero 簡介位置（第一屏深色玻璃細字框）②討論區最頂部（留言須知上方藍色 info 提示框）
+- 聲明原文：「本免登入討論區由【滅蟲師傅 PEST CONTROL MASTER】獨立開發及營運，旨在保障苦主私隱，與 Facebook 上任何同名群組均無任何附屬、贊助或合作關係。」（EN 版同義翻譯）
+- 保留：hero 描述句「香港首個免登入嘅滅蟲關注組」（屬描述非品牌名）、討論區 h2「香港家居害蟲苦主討論區」（另一獨立名稱）
+- sitemap vote 雙版 lastmod → 2026-10-09
+
+改動檔案：info/vote/index.html、en/info/vote/index.html、sitemap.xml、CHANGELOG.md 共 4 檔；無新頁面（sitemap 91 URLs 不變）；Worker 無需部署
 
 ## v9.35《封殺藏在細節裡魔鬼》— Cloudflare Workers 安全強化＋地區封鎖＋金鑰清庫
 
