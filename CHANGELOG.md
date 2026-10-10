@@ -1,3 +1,37 @@
+# 修復日誌 (v9.39 — 2026-10-10)
+
+## v9.39《沙頭角百年金行上線》— 師傅出更文化保護 SEO 矩陣＋首頁實戰短片換真
+
+依用戶上傳《沙頭角禁區百年金行遭受白蟻危機！.docx》兩線並行：①文章入驻【師傅出更】＋百年老店/文化建築 SEO ②首頁【實戰案例短片】嵌入沙頭角現場施工影片。
+
+### 任務一：info/blog-19 ZH＋en/info/blog-19 EN 正式上線【師傅出更】
+- **內容**：以 blog-17（師傅出更）為模板手術式構建——hero（badge：師傅出更/滅白蟻攻略/文化建築）＋casefile（北區沙頭角禁區/百年建築白蟻/擒賊擒王計＋無損微波探測）＋正文四節＋FAQ 手風琴 4 問＋CTA＋延伸閱讀（blog-16 姊妹篇互鏈＋blog-13＋北區專頁）
+- **文化保護 SEO 長尾矩陣**：沙頭角滅白蟻/禁區滅蟲/百年老店滅白蟻/金行白蟻/寺廟滅蟲/寺廟滅白蟻/文化建築白蟻/文物保護單位滅蟲/歷史建築白蟻/古蹟滅蟲/免拆牆滅白蟻/白蟻探測器/Termatrac T3i——title/H1/hero/description/keywords/正文/FAQ/JSON-LD 全布局；EN 對稱（Sha Tau Kok termite control/heritage building/temple termite/cultural heritage）
+- **現場相片 ×2**（docx 內嵌提取）：`sha-tau-kok-heritage-gold-shop-termite-inspection.jpg`（百年金行門外騎樓實拍）＋`sha-tau-kok-termite-t3i-inspection-on-site.jpg`（師傅木構內探測實拍），SEO 檔名＋alt
+- **現場施工影片內嵌**：youtube-nocookie embed UGsqF-hFcK8（9:16 Shorts 豎版組件 .blog19-video，lazy 加載；實測真實時長 1:17）
+- **JSON-LD 三段**：BreadcrumbList＋BlogPosting（articleSection=師傅出更）＋FAQPage 4 問——ZH/EN 對稱
+- **中樞新卡**：ZH 蟲類資訊 blog-18 卡後新增【師傅出更】卡；EN 中樞新增 MASTER ON DUTY · HERITAGE · NEW 卡
+
+### 任務二：首頁【實戰案例短片】第三卡換片
+- IoT 智慧鼠盒監測（美孚新邨）→ **沙頭角禁區滅白蟻**（youtube.com/shorts/UGsqF-hFcK8，時長 1:17 實測值）
+- 縮圖新製：`video-shataukok-termite.jpg/webp`（768×1344，金行門面豎版裁切）；EN 對稱（Sha Tau Kok Termite Rescue）；smart-iot-rat 智慧鼠盒服務卡不受影響
+- i18n.js blog 映射 1-18 → 1-19；sitemap 93 → 95 URLs（blog-19 ZH/EN，lastmod 2026-10-10）
+
+### 質檢
+- `scripts/v9_39_blog19_build.py`（冪等：初跑 patch 幂等判斷缺陷致 CSS/FAQ 重複插入 ×4，`v9_39_cleanup.py` 清污＋patch 改「new in text 即 SKIP」根治後重跑）；`v9_39_integrate.py`（中樞錨點撞車 ×2 修復：卡 h3 獨有文本＋sitemap English Versions 分界）；30/30 斷言 PASS；agent-browser 實測：blog-19 ZH/EN 渲染（badge/圖×2/video/FAQ×4/console 零錯誤）、首頁雙語卡、i18n 雙向切換；EN CJK=16 與 blog-17 基線一致（語言切換組件，非殘留）
+
+# 修復日誌 (v9.38 — 2026-10-10)
+
+## v9.38《blog-18 封堵配圖換真》— WhatsApp 截圖退場，AI 示意圖上陣
+
+依用戶回報：blog-18「🛠️ 專業封堵唔靠發泡膠：金屬網＋防火泥塞死每個穿牆位」一節原配 WhatsApp 諮詢截圖，圖文不符。指示取消「WhatsApp 真實諮詢紀錄」，改用 AI 製作與描述吻合嘅圖片，日後有實景相再更新。
+
+- **AI 生成配圖**（1344×768 寫實風）：冷氣銅管穿牆位以金屬網封塞＋灰泥封邊，香港住宅外牆場景，無文字無浮水印——與 figcaption 描述逐字吻合
+- **ZH/EN 對稱替換**：blog-18 ZH → `rodent-proofing-metal-mesh-fire-mortar-sealing-ai.jpg`；EN → `rat-proofing-wall-penetration-metal-mesh-sealant-ai.jpg`；alt 同步改寫並誠實標註「AI 示意圖」
+- **figcaption 修正**：ZH「（WhatsApp 真實諮詢紀錄）」→「（AI 示意圖，實景相片稍後更新）」；EN「(real WhatsApp record)」→「(AI illustration, real photos coming soon)」
+- 舊截圖檔案保留（blog-17 仍引用）；og:image／JSON-LD 無舊圖引用零波及；sitemap blog-18 ZH/EN lastmod → 2026-10-10
+- 補丁腳本 `scripts/v9_38_img_swap.py`：8/8 OK，二次運行 8 SKIP 幂等驗證 PASS
+
 # 修復日誌 (v9.37 — 2026-10-09)
 
 ## v9.37《優化十八區＋滅鼠攻略上線》— 地區×滅白蟻長尾矩陣＋blog-18 老鼠防治全攻略

@@ -40,11 +40,11 @@
       } else if (cleanPath.endsWith('index.html')) {
         cleanPath = cleanPath.replace('index.html', '');
       }
-      // Blog articles: every post (blog-1 … blog-18) now has an English counterpart
+      // Blog articles: every post (blog-1 … blog-19) now has an English counterpart
       const blogMatch = cleanPath.match(/^\/info\/blog-(\d+)$/);
       if (blogMatch) {
         const n = parseInt(blogMatch[1], 10);
-        if (n >= 1 && n <= 18) {
+        if (n >= 1 && n <= 19) {
           return '/en/info/blog-' + n + '/';
         }
         return '/en/info/';  // future posts without EN version → Info Hub fallback
