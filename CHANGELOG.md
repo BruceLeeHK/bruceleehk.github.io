@@ -1,3 +1,31 @@
+# 修復日誌 (v9.40 — 2026-10-11)
+
+## v9.40《滅鼠 SEO 強攻》— /rat-control/ 滅鼠 Silo 上線＋關鍵詞矩陣綁定＋EN canonical 修復
+
+依用戶上傳《滅鼠關鍵字 SEO 內容佈局與轉化矩陣.docx》＋《優先強攻「十八區地區滅鼠」專頁.docx》三線並行：搶佔「滅鼠師傅／滅鼠公司」Google 排名前 3 位置。
+
+### 任務一：/rat-control/ 滅鼠 Silo 正式上線（12 新頁）
+- **樞紐 /rat-control/ ZH＋EN**：攔截滅鼠公司/滅鼠師傅/滅老鼠/捉老鼠大詞——H1「香港專業滅鼠公司｜滅鼠師傅即日上門｜源頭封堵斷尾，唔靠盲目放老鼠藥」；香港鼠患危害＋收費表（單次滅鼠 $1,500-$3,800/次／封堵工程勘察報價／長效保養）＋防伏提示＋「邊間好」5 大指標＋五大黑點區卡片＋實戰案例（南丫島/美孚/八鄉）＋FAQ 6 問
+- **五區子頁（方案二第一階段）**：`/rat-control/sham-shui-po/`（唐樓劏房渠網）、`/rat-control/yau-tsim-mong/`（旺角食肆後巷）、`/rat-control/kwun-tong/`（工廈貨倉無毒滅鼠）、`/rat-control/yuen-long/`（村屋花園，方案二黃金文案＋八鄉案例直接落地）、`/rat-control/tsuen-wan/`（舊樓村屋後山）——每區 30-40% 地區專屬差異化：地區痛點 3 條＋科技解法＋收費參考＋真實案例＋苦主討論區 UGC 捷徑＋FAQ 4 問
+- **WhatsApp 地區預填文字**：每區 CTA 帶「你好，我想查詢XX區滅老鼠收費」（方案二轉化要求）
+- **JSON-LD 五段／頁**：BreadcrumbList＋Service（OfferCatalog 串聯五區）＋FAQPage＋PestControl（areaServed）＋LocalBusiness（子地點）；設計系統 100% 復用 districts 區頁（CSS 直接抽取）＋rat-price-table/rat-forum 專屬組件
+- **i18n.js 零改動**：ZH↔EN 切換由通用路徑規則自動覆蓋 /rat-control/
+
+### 任務二：關鍵詞矩陣綁定（方案一映射表）
+- **blog-18**（知識攻略）：title→「老鼠入屋點算？滅鼠方法全攻略：封堵、捕捉、預防一次過」，desc×3（meta/og/JSON-LD）注入「老鼠入屋點算？香港滅鼠方法全攻略」，keywords＋滅鼠方法/家居滅鼠價錢/滅鼠公司收費，正文→滅鼠專門站內鏈
+- **blog-12**（價格）：title/desc 注入「滅鼠公司收費×家居滅鼠價錢」，正文收費章節後加滅鼠站內鏈（單次滅鼠 $1,500 起）
+- **blog-1**（推薦）：title→「5 大指標避坑｜滅鼠公司推薦×捉老鼠師傅」（順手修復雙品牌 title），desc 注入「搵滅鼠公司、捉老鼠師傅一樣適用」，清理 meta desc 歷史殘留床蝨英文句
+- **blog-17**（實戰）：延伸閱讀後加滅鼠站內鏈（村屋滅老鼠已布局）
+- **全站灌注**：首頁 ZH/EN keywords＋實戰短片後滅鼠通道 banner；districts 樞紐 web-extra 滅鼠鏈；services 滅蚊滅鼠 article 加滅鼠站連結（ZH/EN 對稱共 14 處內鏈指向 /rat-control/）
+
+### 任務三：技術 SEO 修復（存量 bug）
+- **EN 區頁 canonical 錯指 ZH 修復**：18 個 en/districts/X/ 頁＋en/districts/ 樞紐 canonical 由 `https://bruceleehk.com/districts/...` 改為自指 `/en/districts/...`（og:url 本已正確）——此前 Google 會將 EN 頁當 ZH 副本不予獨立排名
+- **sitemap 95→107 URLs**：rat-control 樞紐（priority 0.9 weekly）＋五區子頁（0.8 monthly）×雙語；首頁/en/blog×4/districts/services 共 14 頁 lastmod→2026-10-11
+
+### 質檢
+- `scripts/v9_40_build_rat.py`＋`v9_40_build_hub.py`（數據驅動生成 12 頁，設計 CSS 從 districts/yuen-long 動態抽取保證一致）；`v9_40_matrix_patch.py`＋`v9_40_matrix_patch2.py`（冪等補丁，kw_append 修正 marker 檢查 keywords 行而非全文的誤判）；`v9_40_canonical_sitemap.py`；`v9_40_check_rat.py`（12 頁 JSON-LD 解析＋標籤平衡＋canonical 自指）；`v9_40_verify.py` 60/60 PASS
+- agent-browser 實測：rat-control 樞紐 ZH/EN 渲染、五區子頁、首頁 banner、i18n 切換、console 零錯誤
+
 # 修復日誌 (v9.39 — 2026-10-10)
 
 ## v9.39《沙頭角百年金行上線》— 師傅出更文化保護 SEO 矩陣＋首頁實戰短片換真
