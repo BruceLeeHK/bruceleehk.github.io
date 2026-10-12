@@ -32,6 +32,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/services/"/>
   </url>
   <url>
+    <loc>https://bruceleehk.com/service/rodent/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/rodent/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/rodent/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/rodent/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/service/rodent/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/rodent/"/>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/rodent/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/rodent/"/>
+  </url>
+  <url>
     <loc>https://bruceleehk.com/strategy/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>

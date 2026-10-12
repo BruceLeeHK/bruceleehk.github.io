@@ -1,4 +1,29 @@
-# 修復日誌 (v9.45 — 2026-10-12)
+# 修復日誌 (v9.46 — 2026-10-12)
+
+## v9.46《滅鼠公司 Pillar Page》— 新建 /service/rodent/ 服務主頁（雙語）＋全站錨文本灌溉＋rat-control 轉攻滅鼠師傅
+
+依《新建或優化一頁獨立嘅「滅鼠公司」服務主頁.docx》＋《滅鼠關鍵字 SEO 內容佈局與轉化矩陣.docx》兩文檔建議：以 Pillar &amp; Cluster 架構搶佔「滅鼠公司」全港核心大詞（現排 60 名外），避免再用資訊型 blog 打交易型意圖。
+
+### 新建「滅鼠公司」服務主頁 /service/rodent/（ZH）＋ /en/service/rodent/（EN）
+- Pillar &amp; Cluster 架構落地：Title【香港滅鼠公司推介】明碼實價價目表・IoT智慧監測・最快即日上門；H1 香港專業滅鼠公司｜IoT 智慧監測・源頭防鼠封堵工程；首 100 字 exact-match「滅鼠公司」
+- 內容十區塊：服務範圍（6 物業類型）／服務流程四步／IoT 智慧鼠盒／明碼實價價目表（$1,500–$3,800 過往個案參考，與 rat-control 一致）／四項可驗證推薦指標／十八區覆蓋（五大黑點區專頁＋食環署 2024 數據圖）／服務網絡（滅白蟻公司→blog-13、滅蝨公司→blog-5、滅曱甴公司→/services/、滅黃蜂公司→/quote/）／實證個案（南丫島・美孚・八鄉・荃灣安裕查詢個案如實陳述）／FAQ×6／快速估價表單
+- JSON-LD×4：BreadcrumbList＋Service（hasOfferCatalog 3 項目）＋FAQPage（6 問 Rich Snippet）＋PestControl entity（與 rat-control 同一 @id）
+- 合規用詞（承 v9.45）：無「保證／根除／100%／最平／全港首創」；收費列明「過往個案綜合參考，以書面報價為準」； licences 表述「除害劑牌照專業團隊・漁護署註冊除害劑」
+- 設計系統 100% 沿用 rat-control（dist-hero／dist-card／web-net／hub-grid／rat-price-table／faq-item），雙語對稱、i18n 語言切換自動映射（generic 路徑規則）
+
+### 全站錨文本權重灌溉（文檔第二步）
+- ~108 頁 footer-nav「覆蓋十八區」後插入 exact-anchor 連結：ZH「滅鼠公司」→ /service/rodent/；EN「Rat Control Company」→ /en/service/rodent/（冪等、區域限定 footer-nav）
+- blog-12「🐭 專門搵滅鼠公司？」連結改道→【滅鼠公司服務主頁】（原只連滅鼠專門站）
+- 首頁【滅鼠專門站】banner 加第三按鈕「滅鼠公司服務主頁」
+
+### rat-control 轉攻「滅鼠師傅」（避免 cannibalization）
+- ZH title/H1/og/twitter/meta description/JSON-LD Service name：【滅鼠公司】→【滅鼠師傅】香港專業滅老鼠服務｜十八區即日上門；EN 同步 Rat Control Company→Rat Exterminator
+- hero 加「滅鼠公司服務主頁」連結（簇→柱）；十八區 Silo 與地區專頁零改動
+
+### sitemap／其他
+- sitemap +2 URLs（111→113）：/service/rodent/＋/en/service/rodent/（hreflang 互指，lastmod 2026-10-12）
+- 清理 assets/img 7 個中文檔名殘留圖（v9.42 遺漏；零 HTML/JS/XML 引用已核實）：iot-智慧鼠盒-捉老鼠-滅鼠公司-推介-whatsapp-對話.jpg、pest-control-termites-hk-根除白蟻.jpeg、termite-inspection-hk-白蟻檢查預防.jpeg、中環-餐廳-廚房-滅老鼠-防鼠網工程-whatsapp-諮詢.jpg、南丫島-村屋-滅老鼠-whatsapp-免費報價-真實個案.jpg、屋企-半夜-發現老鼠-緊急-滅鼠服務-whatsapp-求救.jpg、沙頭角-禁區紙-滅白蟻公司-白蟻防治.jpeg
+- ⚠️ 用戶端：GitHub repo 如仍有上述 7 個中文檔名檔案，解壓覆蓋後需手動刪除（解壓唔會刪檔）
 
 ## v9.45《苦主告急》— blog-21 分類改名＋如實陳述修正＋香港法例合規（第362章／第132章）
 
