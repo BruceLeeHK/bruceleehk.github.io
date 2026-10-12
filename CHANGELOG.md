@@ -1,4 +1,22 @@
-# 修復日誌 (v9.43 — 2026-10-12)
+# 修復日誌 (v9.44 — 2026-10-12)
+
+## v9.44《蟲患速遞》新分類專欄——blog-21《荃灣安裕大廈疑爆發嚴重鼠患》雙語上線，強攻「滅老鼠」關鍵詞
+
+【蟲類資訊】增設全新分類【蟲患速遞】（⚡ 突發警報導向），首篇文章即為荃灣安裕大廈疑似鼠患爆發真實個案，目標快速搶佔「滅老鼠公司」「荃灣滅老鼠」「安裕大廈 老鼠」等 Google 搜索關鍵詞。
+
+### 新增檔案
+- `info/blog-21/index.html`＋`en/info/blog-21/index.html`：雙語完整文章頁（hero 警報設計＋個案檔案條＋3 張 WhatsApp 真實截圖＋釜底抽薪三步＋FAQ 手風琴×4＋標籤）
+- `assets/img/` 6 個 ASCII 檔名新圖（ZH/EN 各一套長尾名）：
+  - `tsuen-wan-on-yu-rat-sighting-dawn-whatsapp-sos.jpg`（ZH）／`tsuen-wan-rat-infestation-emergency-rodent-control-whatsapp-quote.jpg`（EN）——清晨 5:19 求救報價對話（733×1024）
+  - `kitchen-rat-sighting-rat-droppings-whatsapp-consultation.jpg`（ZH）／`on-yu-building-kitchen-rat-assessment-whatsapp-chat.jpg`（EN）——廚房老鼠蹤跡問診（由雙截圖合成檔拆分，508×572）
+  - `on-yu-building-rat-photo-verification-whatsapp.jpg`（ZH）／`rat-sighting-photo-verification-tsuen-wan-pest-control-whatsapp.jpg`（EN）——現場相＋「安裕大廈」確認（拆分，509×572）
+
+### SEO 佈局
+- Title／H1／meta 布滿「滅老鼠公司・荃灣滅老鼠・老鼠入屋・滅鼠收費」長尾矩陣；BlogPosting JSON-LD image 4 URL；FAQPage JSON-LD×4 問題；sitemap +2 URLs（109→111）
+- 內鏈：/rat-control/ 滅鼠專門站＋/rat-control/tsuen-wan/ 荃灣專頁（新同區實錄卡）＋blog-18／blog-20／blog-17／苦主討論區／/ai/ 診斷
+- info 中樞 ZH/EN 頭部新卡（蟲患速遞 / PEST ALERT badge）；i18n.js blog 放行 n≤21
+
+---
 
 ## v9.43《AI 客服頁面分流》— 全站師妹照舊，AI 分析專頁專用「滅蟲師姐」上線
 
