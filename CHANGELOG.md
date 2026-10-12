@@ -1,3 +1,22 @@
+# 修復日誌 (v9.43 — 2026-10-12)
+
+## v9.43《AI 客服頁面分流》— 全站師妹照舊，AI 分析專頁專用「滅蟲師姐」上線
+
+兩個 Dify AI 分流部署：右下角『滅蟲師妹 AI』（C3DvioLaCmagSaUc）繼續全站 7×24 接待零改動；客人進入『AI 害蟲分析系統』專頁（/ai/）時，對接專頁專用嘅『滅蟲師姐』（DKKeV6Vb9y16r6HL）。
+
+### /ai/ 專頁 ZH＋EN（分流主體）
+- 新增「即刻同滅蟲師姐 AI 傾兩句」專屬對話區（ai-tool-section 之後）：section 標題＋簡介＋ iframe 卡片（max-width 860px、圓角 16px、高度 700px／手機 620px、loading="lazy"、allow="microphone;clipboard-write"）
+- 防禦性隱藏：`#lazy-dify-bubble / #dify-chatbot-bubble-* / #ai-chatbot-iframe{display:none!important}`——本頁任何形態嘅師妹均隱形（future-proof，日後模板變動都唔會雙 AI 同框）
+- EN 版 /en/ai/ 對稱上線（AI Pest Expert Assistant）
+- CSP：/ai/ 本已放行 udify.app；**修復 /en/ai/ 存量 bug**——frame-src 空值 `frame-src;`（連任何 iframe 都禁）→ `frame-src https://udify.app;`
+
+### 順手救火：全站 footer 簡體連結語法錯亂（106 頁）
+- 存量 bug：`<a href="/sc/"> lang="zh-Hans">简体</a>`——lang 屬性飄出標籤外，頁面實際渲染出「 lang="zh-Hans">简体」垃圾文字
+- 修正：`<a href="/sc/" lang="zh-Hans">简体</a>`（ZH 頁「简体」／EN 頁「简体中文」兩變體通殺，106 頁全修）
+- sitemap /ai/＋/en/ai/ lastmod → 2026-10-12
+
+---
+
 # 修復日誌 (v9.42 — 2026-10-12)
 
 ## v9.42《SEO 素材圖全 ASCII 化》— 7 張中文檔名圖退役，白蟻實拍三圖接入 blog-19
