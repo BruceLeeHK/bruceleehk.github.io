@@ -1,3 +1,31 @@
+# 修復日誌 (v9.42 — 2026-10-12)
+
+## v9.42《SEO 素材圖全 ASCII 化》— 7 張中文檔名圖退役，白蟻實拍三圖接入 blog-19
+
+用戶確認 7 張中文檔名圖為 SEO 圖片搜索素材，要求全部 ASCII 化（全英文細階＋連字號）並接入對應文章。Google 圖片搜索檔名即可讀 URL，中文檔名上 GitHub Pages 有編碼風險（v9.27 遺留項），本次一併根治。
+
+### 圖片檔名 ASCII 化（7 張全數退役）
+- 4 張老鼠 WhatsApp 個案圖：舊會話已完成 ASCII 化並接入 blog-17/blog-18 ZH/EN（ZH/EN 各一套長尾 SEO 檔名，MD5 位元組級核對一致）——本次刪除中文原始檔收尾：
+  - 智慧鼠盒 → smart-rat-trap-catch-…（ZH）／iot-smart-rat-trap-…（EN）
+  - 中環餐廳 → kitchen-rodent-proofing-…（ZH）／central-restaurant-kitchen-…（EN）
+  - 南丫島村屋 → lamma-island-village-house-…（ZH/EN）
+  - 屋企半夜求救 → night-rat-sighting-emergency-…（ZH）／home-emergency-rat-…（EN）
+- 3 張白蟻實拍圖（GPS 22°32'N 114°13'E＝沙頭角金行個案現場）本次 ASCII 化＋接入：
+  - 大蟻竇紅圈標註圖 → **termite-nest-detection-hk.jpg**（1600×899）
+  - 木橫樑瓦頂泥路圖 → **termite-inspection-mud-tubes-wooden-beam-hk.jpg**（900×1600）
+  - 門框泥路近攝圖 → **termite-mud-tube-door-frame-eradication-hk.jpg**（1600×900）
+- 刪除 7 個中文原始檔：assets/img 全站零非 ASCII 檔名（GitHub Pages 編碼風險根治）
+- ⚠️ 用戶端必做：GitHub Desktop 覆蓋後須手動刪除 repo 內同 7 個中文檔名舊檔（解壓覆蓋不會刪檔）
+
+### blog-19《沙頭角百年金行》實證相簿擴充（ZH/EN 對稱）
+- 「⚔️ 師傅出更」相簿 2→3 圖：加大蟻竇實拍（紅圈＋標註，個案核心證據）
+- 「🔬 科技守護古建」段新增泥路實拍相簿（木樑泥路＋門框泥路 2 圖，呼應正文「蟻路泥被藏於橫樑交接位」）
+- alt 長尾布詞：沙頭角滅白蟻／禁區滅白蟻公司／文化建築白蟻防治／白蟻檢查／根除白蟻
+- BlogPosting JSON-LD image 陣列 2→5 URL（Google 圖片搜索多圖提名）
+- sitemap blog-19 ZH/EN lastmod → 2026-10-12
+
+---
+
 # 修復日誌 (v9.41 — 2026-10-12)
 
 ## v9.41《深化十八區地區滅鼠》— 2024 食環署官方鼠患數據全面植入
