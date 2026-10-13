@@ -1,4 +1,26 @@
-# 修復日誌 (v9.47 — 2026-10-13)
+# 修復日誌 (v9.48 — 2026-10-13)
+
+## v9.48《蟲種服務主頁網絡》— 新建 /service/termite/、/service/flea/、/service/cockroach/、/service/wasp/ 四大蟲種 Pillar Page（雙語）＋全站 footer 錨文本灌溉＋rodent 服務網絡卡改道
+
+依用戶指令「再開 /service/termite/、/service/flea/ 等獨立公司頁」，承 v9.46 滅鼠公司 Pillar 模板落地 v9.46 遺留方案：四大蟲種各開獨立服務主頁，與滅鼠公司 Pillar 組成全蟲種服務主頁網絡（Pillar &amp; Cluster）。
+
+### 新建四大蟲種服務主頁（ZH＋EN 共 8 頁）
+- /service/termite/ 滅白蟻公司：Termatrac T3i 微波探測免拆牆定位蟻巢＋針對性灌注＋保養覆查；簇內鏈 blog-13/14/16/19＋愉景灣地區頁；蟻路實拍圖 alt 布詞
+- /service/flea/ 滅蝨公司：床蝨（木蝨）高溫蒸氣＋縫隙處理＋床腳偵測器＋60 日兩次覆檢；簇內鏈 blog-5/22；收費與 blog-5/12 一致（局部 $1,200 起／全單位 $3,000–5,800）
+- /service/cockroach/ 滅曱甴公司：德國小蠊辨種＋藥餌凝膠點注巢群處理＋環境治理；收費與 blog-12 一致（$900–1,800）；簇內鏈中環／深水埗地區頁＋收費指南＋揀公司指南
+- /service/wasp/ 滅黃蜂公司：蜂種辨別（黃蜂／蜜蜂）＋防護移除＋復巢預防；蜜蜂保護原則（確認蜜蜂巢優先建議接收處理）；收費如實「唔設劃一價目，勘察後書面報價」＋DIY 摘巢危險警告
+- 十區塊結構與 rodent Pillar 完全一致（服務範圍6／流程4步／技術／明碼實價價目表／四項可驗證推薦／地區實戰 hub-grid／服務網絡互鏈／個案／FAQ×6／快速估價表單）；JSON-LD×4（Breadcrumb＋Service hasOfferCatalog 3 項＋FAQPage 6 問＋PestControl 同一 @id）；title/H1/首100字 exact-match「滅白蟻公司／滅蝨公司／滅曱甴公司／滅黃蜂公司」
+- 合規（承 v9.45 標準）：全文零「保證／根除／根治／100%／最平／全港首創」；收費列明「過往個案綜合參考，以勘察後書面報價為準」；漁護署註冊除害劑；第132章公用地方責任分工交代（大廈管理處卡＋FAQ）；EN 頁正文 CJK=109 字元與 rodent EN 基準完全一致（僅導航頁腳固有）
+
+### 全站整合
+- rodent Pillar（ZH/EN）服務網絡卡 4 張改道：滅白蟻公司→/service/termite/、滅蝨公司→/service/flea/、滅曱甴公司→/service/cockroach/、滅黃蜂公司→/service/wasp/（原 blog-13/blog-5/services/quote 連結保留於各 pillar 簇內）
+- services 頁（ZH/EN）曱甴／床蝨／白蟻三文章區各加「專頁入口」深鏈（Pillar 深鏈）
+- footer 錨文本灌溉：footer-nav 區段內滅鼠公司錨後插入 4 條 exact-anchor（ZH 滅白蟻公司／滅蝨公司／滅曱甴公司／滅黃蜂公司；EN Termite/Bed Bug/Cockroach Control Company＋Wasp Nest Removal；sep/nosep 兩變體冪等；嚴格限定 footer-nav 區段避免誤傷 blog-12 正文裸錨）
+- sitemap 115→123 URLs（8 新頁 hreflang 互指，lastmod 2026-10-13）；i18n.js 通用路徑規則自動支援 /service/*/ 雙語切換，零改動
+
+### 驗證與交付
+- v9_48_verify.py 全過：8 頁 title/H1/canonical/hreflang×3／JSON-LD×4 parse／FAQ×6／內鏈零死鏈／風險詞零；footer 灌溉計數；sitemap XML valid；回歸（rodent/blog-21 苦主告急//ai/ 師姐/首頁師妹）
+- agent-browser 390px 實測 ZH/EN 多頁 console 零錯誤
 
 ## v9.47《床蝨警報＋數據留存》— ①blog-22《澳航客機驚現床蝨急停飛》雙語上線（新聞整合＋旅遊防蝨攻略，第362章合規 hardening）②依《網站圖片 SEO 自動化重命名與 AI 診斷數據留存技術規格說明書》落地：討論區圖片 SEO slugify 引擎＋AI 診斷數據留存端點（第486章 PDPO 合規）
 

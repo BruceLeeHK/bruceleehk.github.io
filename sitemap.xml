@@ -50,6 +50,78 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/rodent/"/>
   </url>
   <url>
+    <loc>https://bruceleehk.com/service/termite/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/termite/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/termite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/termite/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/service/termite/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/termite/"/>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/termite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/termite/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/service/flea/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/flea/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/flea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/flea/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/service/flea/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/flea/"/>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/flea/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/flea/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/service/cockroach/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/cockroach/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/cockroach/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/cockroach/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/service/cockroach/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/cockroach/"/>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/cockroach/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/cockroach/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/service/wasp/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/wasp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/wasp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/wasp/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/service/wasp/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/service/wasp/"/>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/service/wasp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/service/wasp/"/>
+  </url>
+  <url>
     <loc>https://bruceleehk.com/strategy/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
