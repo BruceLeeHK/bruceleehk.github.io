@@ -494,6 +494,39 @@
             reader.readAsDataURL(file);
         }
 
+        /* ===== v9.47 圖片 SEO 自動重命名引擎（方案一）=====
+           檔名規格：pest-control-[district]-[pest]-[date]-[hash]（規格書 1.3）
+           alt/title 自動注入（規格書 1.4）：地區＋害蟲類型由留言內容自動識別 */
+        var uploadedImgSeo = null;
+        var SEO_DISTRICTS = {'central and western':'central-and-western','wan chai':'wan-chai','eastern':'eastern','southern':'southern','yau tsim mong':'yau-tsim-mong','tsim sha tsui':'yau-tsim-mong','mong kok':'yau-tsim-mong','yau ma tei':'yau-tsim-mong','sham shui po':'sham-shui-po','kowloon city':'kowloon-city','wong tai sin':'wong-tai-sin','kwun tong':'kwun-tong','kwai tsing':'kwai-tsing','tsuen wan':'tsuen-wan','tuen mun':'tuen-mun','yuen long':'yuen-long','north district':'north','tai po':'tai-po','sha tin':'sha-tin','sai kung':'sai-kung','islands':'islands'};
+        var SEO_DISTRICT_NAMES = {'central-and-western':'Central & Western','wan-chai':'Wan Chai','eastern':'Eastern','southern':'Southern','yau-tsim-mong':'Yau Tsim Mong','sham-shui-po':'Sham Shui Po','kowloon-city':'Kowloon City','wong-tai-sin':'Wong Tai Sin','kwun-tong':'Kwun Tong','kwai-tsing':'Kwai Tsing','tsuen-wan':'Tsuen Wan','tuen-mun':'Tuen Mun','yuen-long':'Yuen Long','north':'North','tai-po':'Tai Po','sha-tin':'Sha Tin','sai-kung':'Sai Kung','islands':'Islands','hong-kong':'Hong Kong'};
+        var SEO_PESTS = [['termite','termite'],['rat','rat'],['mouse','rat'],['bed bug','bedbug'],['bedbug','bedbug'],['wood lice','bedbug'],['cockroach','cockroach'],['flea','flea'],['mosquito','mosquito'],['wasp','wasp'],['ant','ant'],['spider','spider']];
+        var SEO_PEST_NAMES = {'rat':'rat','bedbug':'bed bug','cockroach':'cockroach','termite':'termite','mosquito':'mosquito','flea':'flea','wasp':'wasp','ant':'ant','spider':'spider','case':''};
+        function seoDetectDistrict(text) {
+            var haystack = String(text || '').toLowerCase();
+            for (var name in SEO_DISTRICTS) { if (haystack.indexOf(name) !== -1) return SEO_DISTRICTS[name]; }
+            return 'hong-kong';
+        }
+        function seoDetectPest(text) {
+            var haystack = String(text || '').toLowerCase();
+            for (var i = 0; i < SEO_PESTS.length; i++) { if (haystack.indexOf(SEO_PESTS[i][0]) !== -1) return SEO_PESTS[i][1]; }
+            return 'case';
+        }
+        function buildImageSeo(content) {
+            var d = seoDetectDistrict(content);
+            var p = seoDetectPest(content);
+            var date = new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }).slice(0, 10).replace(/-/g, '');
+            var hash = Math.random().toString(36).slice(2, 6);
+            var slug = 'pest-control-' + d + '-' + p + '-' + date + '-' + hash;
+            var dn = SEO_DISTRICT_NAMES[d] || 'Hong Kong';
+            var pn = (p === 'case') ? '' : (SEO_PEST_NAMES[p] || 'pest');
+            return {
+                slug: slug,
+                alt: dn + (pn ? ' ' + pn : '') + ' pest case - Pest Victims Forum help photo',
+                title: dn + (pn ? ' ' + pn : '') + ' pest case - Pest Control Master'
+            };
+        }
+
         function loadComments() {
             var listEl = document.getElementById('commentList');
             fetch(WORKER_BASE + '/api/comments?page_id=' + encodeURIComponent(PAGE_ID))
@@ -566,7 +599,9 @@
                 var pendingBadge = isPending ? '<span class="pending-tag"><i class="fa-solid fa-hourglass-half"></i> Pending...</span>' : '';
                 var largeUrl = item.image_url || '';
                 var thumbUrl = item.thumb_url || largeUrl; // fallback for legacy data
-                var imgHtml = largeUrl ? ('<a href="' + escapeAttr(largeUrl) + '" class="glightbox" data-gallery="forum-gallery" data-type="image" data-title="' + escapeAttr(item.nickname || '') + '\'s photo"><img src="' + escapeAttr(thumbUrl) + '" class="comment-img-thumb" loading="lazy" alt="' + escapeAttr(item.nickname || '') + '\'s photo" width="220" height="180" style="max-width:220px;max-height:180px;border-radius:var(--radius-sm);margin-top:12px;cursor:zoom-in;object-fit:cover;border:1px solid var(--border);"></a>') : '';
+                var imgSeoAlt = item.img_alt || ((item.nickname || '') + "'s photo");
+                var imgSeoTitle = item.img_title || imgSeoAlt;
+                var imgHtml = largeUrl ? ('<a href="' + escapeAttr(largeUrl) + '" class="glightbox" data-gallery="forum-gallery" data-type="image" data-title="' + escapeAttr(imgSeoTitle) + '"><img src="' + escapeAttr(thumbUrl) + '" class="comment-img-thumb" loading="lazy" alt="' + escapeAttr(imgSeoAlt) + '" title="' + escapeAttr(imgSeoTitle) + '" width="220" height="180" style="max-width:220px;max-height:180px;border-radius:var(--radius-sm);margin-top:12px;cursor:zoom-in;object-fit:cover;border:1px solid var(--border);"></a>') : '';
                 var repliesHtml = '';
                 if (item.replies && item.replies.length > 0) {
                     repliesHtml = '<div class="reply-thread">';
@@ -604,7 +639,9 @@
 
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-            var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
+            /* v9.47: compute image SEO slug / alt / title at submit time (Spec Plan 1) */
+            if (!currentReplyTo && uploadedImgUrl) { uploadedImgSeo = buildImageSeo(content); } else { uploadedImgSeo = null; }
+            var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '', img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '', img_title: uploadedImgSeo ? uploadedImgSeo.title : '', captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
             if (tsToken) payload.turnstile_token = tsToken;
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
             fetch(WORKER_BASE + '/api/comments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
@@ -624,10 +661,10 @@
                         return;
                     }
                     // Local optimistic cache (live-publish mode: render as published immediately, auto-reconciled with server)
-                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 1, created_at: new Date().toISOString() });
+                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '', img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '', img_title: uploadedImgSeo ? uploadedImgSeo.title : '', parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 1, created_at: new Date().toISOString() });
                     showToast('Published! Your comment is now live.', 'success');
                     document.getElementById('mainCommentForm').reset();
-                    uploadedImgUrl = ''; uploadedThumbUrl = '';
+                    uploadedImgUrl = ''; uploadedThumbUrl = ''; uploadedImgSeo = null;
                     var previewEl = document.getElementById('imagePreviewInline');
                     if (previewEl) { previewEl.style.display = 'none'; previewEl.removeAttribute('src'); }
                     if (currentReplyTo) cancelReply();

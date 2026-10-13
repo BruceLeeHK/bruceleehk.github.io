@@ -44,7 +44,7 @@
       const blogMatch = cleanPath.match(/^\/info\/blog-(\d+)$/);
       if (blogMatch) {
         const n = parseInt(blogMatch[1], 10);
-        if (n >= 1 && n <= 21) {
+        if (n >= 1 && n <= 22) {
           return '/en/info/blog-' + n + '/';
         }
         return '/en/info/';  // future posts without EN version → Info Hub fallback

@@ -1,4 +1,35 @@
-# 修復日誌 (v9.46 — 2026-10-12)
+# 修復日誌 (v9.47 — 2026-10-13)
+
+## v9.47《床蝨警報＋數據留存》— ①blog-22《澳航客機驚現床蝨急停飛》雙語上線（新聞整合＋旅遊防蝨攻略，第362章合規 hardening）②依《網站圖片 SEO 自動化重命名與 AI 診斷數據留存技術規格說明書》落地：討論區圖片 SEO slugify 引擎＋AI 診斷數據留存端點（第486章 PDPO 合規）
+
+依《澳航客機驚現床蝨急停飛！南韓汗蒸幕爆「集體巢穴」｜旅遊防蝨全攻略與香港滅蝨指南.docx》＋《網站圖片 SEO 自動化重命名與 AI 診斷數據留存技術規格說明書.docx》兩文檔執行，並確保符合香港法律法規（第362章商品說明／第132章公眾衞生／第486章私隱）。
+
+### blog-22 雙語上線 /info/blog-22/ ＋ /en/info/blog-22/
+- Title/H1【床蝨警報】澳航客機驚現床蝨急停飛！南韓汗蒸幕爆「集體巢穴」｜旅遊防蝨全攻略與香港滅蝨指南；內容六區塊：澳航 787 羅馬飛珀斯停飛事件／釜山影島汗蒸幕「集體巢穴」／外遊四大防蝨黃金指引（入住檢查・行李離地・60°C 高溫洗烘・-18°C 冷凍）／帶蝨返屋企處理（切勿亂噴殺蟲水）／AI 診斷 CTA／FAQ×4（含收費以書面報價為準）
+- 合規 hardening（承 v9.45 標準）：新聞內容全部「據報道」歸因（雪梨先驅晨報／BBC／公開網絡平台），免誹謗風險；無「一次過徹底根治／百分百保證」承諾；收費以技術人員實地勘察後書面報價為準；文首版權／成效／報價三聲明 legalbox
+- 2 張 AI 示意圖 ×ZH/EN 雙套長尾 SEO 檔名（hotel-suitcase-bed-bug-inspection-travel-hk 等 4 檔）；JSON-LD×3（Breadcrumb／BlogPosting image 3 URL／FAQPage 4 問）；tags×5（床蝨/木蝨/旅遊防蝨/飛機床蝨/韓國床蝨）
+- 內鏈：blog-5《家居床蝨檢查、治理及預防攻略》（主攻略簇）、blog-3 滅蟲公司推介、/info/vote/ 苦主討論區、/ai/；info 中樞 ZH/EN 新卡（床蝨攻略 fa-bed badge／EN featured 🛏️ BED BUG ALERT · NEW）
+
+### 方案一：苦主討論區圖片 SEO 自動重命名（規格書 1.3/1.4 任務 1＋2）
+- vote 頁 ZH/EN 內置 slugify 引擎：`pest-control-[district]-[pest]-[date]-[hash]`（18 區＋9 類害蟲由留言內容自動識別，預設 hong-kong/case；日期香港時區；4 位隨機 hash 防衝突）
+- 提交時自動生成 alt/title（規格書 1.4 範例格式：「荃灣區老鼠害蟲個案 - 苦主討論區求助圖片」）隨 payload 上送；前台渲染 `<img>` 自動帶 SEO alt/title，lightbox data-title 同步；LocalStorage 暫存同帶 img 欄位
+- comment-handler.js 後端：img_slug regex 白名單（`^[a-z0-9-]{10,120}$`）＋img_alt/img_title 200 字 sanitize，唔合法即丟棄；GET /api/comments 自動輸出（`...p` 展開）
+- 註：討論區圖片以 data URL 存 KV（無實體檔名），slug 為 SEO 語意元數據——管理員日後將圖片整理上站時採用 img_slug 作檔名即可延續規格
+
+### 方案二：AI 診斷數據留存端點（規格書 2.2–2.4 任務 3＋4，PDPO 合規）
+- 新增 worker/ai-case-log-worker.js：POST /api/v1/telemetry/ai-case-log（Bearer 時序安全驗證＋2MB 限制＋120/h 頻率限制）＋GET health＋admin/list／admin/get；KV 實現 ai_diagnosis_logs 結構（規格書 2.3 九欄位），TTL 預設 730 日到期自動刪除
+- PDPO：IP 僅以 SHA-256(IP+鹽) 單向雜湊入庫（原始 IP 永不保存）；name/phone/email/address 欄位直接拒收；user_desc 內香港電話／電郵自動遮蔽；圖片備份可選（BACKUP_IMAGES，預設關閉只存 URL）
+- 新增 worker/wrangler-ai-case-log.toml（Route：bruceleehk.com/api/v1/telemetry/* 攔截，其餘路徑照常 GitHub Pages）＋worker/AI-CASE-LOG-DEPLOY.md（5 步部署＋Dify HTTP 節點設定表＋端到端測試 curl 指令）
+- ⚠️ Worker 部署＋Dify HTTP 節點設定屬用戶端操作（wrangler deploy；詳見 AI-CASE-LOG-DEPLOY.md）
+
+### PDPO 合規：/ai/ 頁數據收集聲明（ZH/EN）
+- 新增「數據收集聲明」section（第486章 PICS 式告知：收集範圍／SHA-256 匿名化／保留約 24 個月／查閱更正權＋WhatsApp 查詢入口）
+- ⚠️ 同步修正舊聲明失實風險：「於分析後立即銷毀，絕不存檔」→ 如實反映方案二留存安排（匿名留存約 24 個月後自動刪除）——數據留存上線前必須修正，避免《商品說明條例》誤導性遺漏風險
+
+### sitemap／其他
+- sitemap 113→115 URLs（blog-22 ZH/EN，lastmod 2026-10-13）；/ai/＋/en/ai/ lastmod 同步 2026-10-13（內容有變）
+- assets/js/i18n.js 文章數上限 n≤21→22
+- 新增 4 個圖檔（2 圖 ×ZH/EN 檔名）；全站零刪檔；師妹/師姐分流、Worker 既有功能零改動
 
 ## v9.46《滅鼠公司 Pillar Page》— 新建 /service/rodent/ 服務主頁（雙語）＋全站錨文本灌溉＋rat-control 轉攻滅鼠師傅
 

@@ -471,6 +471,12 @@ async function handlePostComment(request, kv, env, headers) {
   const safeImageUrl = isValidImageUrl(imageUrl) ? imageUrl : '';
   const safeThumbUrl = isValidImageUrl(thumbUrl) ? thumbUrl : '';
 
+  /* v9.47: 圖片 SEO 檔名／alt／title（方案一）— 嚴格格式驗證，唔合法或冇圖即丟棄 */
+  const rawImgSlug = String(body.img_slug || '').trim().toLowerCase();
+  const safeImgSlug  = (imageUrl && /^[a-z0-9-]{10,120}$/.test(rawImgSlug)) ? rawImgSlug : '';
+  const safeImgAlt   = (imageUrl && body.img_alt)   ? sanitize(String(body.img_alt).trim().slice(0, 200))   : '';
+  const safeImgTitle = (imageUrl && body.img_title) ? sanitize(String(body.img_title).trim().slice(0, 200)) : '';
+
   if (isReply) safeContent = maskUrls(safeContent);
 
   const key = 'comments:' + pageId;
@@ -487,6 +493,9 @@ async function handlePostComment(request, kv, env, headers) {
     content:    safeContent,
     image_url:  safeImageUrl,
     thumb_url:  safeThumbUrl,
+    img_slug:   safeImgSlug,
+    img_alt:    safeImgAlt,
+    img_title:  safeImgTitle,
     approved:   1,
     created_at: new Date().toISOString(),
     created_at_hk: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Hong_Kong' }),

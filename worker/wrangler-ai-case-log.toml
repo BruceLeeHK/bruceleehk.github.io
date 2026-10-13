@@ -1,0 +1,41 @@
+# Cloudflare Worker 配置 — AI 診斷數據留存端點（v9.47 方案二）
+#
+# 對應文檔：《網站圖片 SEO 自動化重命名與 AI 診斷數據留存技術規格說明書》
+# 任務 3（ai_diagnosis_logs 數據表＋Storage）＋任務 4（/api/v1/telemetry/ai-case-log 端點）
+#
+# 部署步驟（詳見 worker/AI-CASE-LOG-DEPLOY.md）：
+#   1. npx wrangler kv namespace create AI_CASE_KV → 複製 id 填入下方
+#   2. npx wrangler secret put AI_CASE_LOG_SECRET -c wrangler-ai-case-log.toml
+#      （自訂 32+ 字元強密鑰——Dify HTTP 節點 Authorization: Bearer <密鑰>）
+#   3. npx wrangler secret put IP_HASH_SALT -c wrangler-ai-case-log.toml
+#      （隨機字串——IP SHA-256 雜湊鹽，PDPO 匿名化要求）
+#   4. （可選）npx wrangler secret put ADMIN_SECRET -c wrangler-ai-case-log.toml
+#      （後台 admin/list、admin/get 用；同 comment-handler 嘅 ADMIN_SECRET 可以共用同一個值）
+#   5. npx wrangler deploy -c wrangler-ai-case-log.toml
+#
+# 端點（部署後生效）：
+#   POST https://bruceleehk.com/api/v1/telemetry/ai-case-log   ← Dify HTTP 節點指向呢度
+#   GET  https://bruceleehk.com/api/v1/telemetry/health        ← 唔需要密鑰，瀏覽器開即驗
+#
+# ⚠️ 規格書要求 Dify 推送至 https://bruceleehk.com/api/v1/telemetry/ai-case-log，
+#    本配置用 Cloudflare Workers Route 攔截 bruceleehk.com/api/v1/telemetry/* 路徑——
+#    GitHub Pages 仍然處理所有其他路徑，網站零影響。如唔想用自訂域名 Route，
+#    可以改用 https://ai-case-log-worker.<你的子域>.workers.dev/api/v1/telemetry/ai-case-log
+#    （Dify 節點 URL 相應改為 workers.dev 域名即可）。
+
+name = "ai-case-log-worker"
+main = "ai-case-log-worker.js"
+compatibility_date = "2024-12-01"
+
+# ── 自訂域名 Route（攔截 /api/v1/telemetry/*，其餘路徑照常行 GitHub Pages）──
+route = { pattern = "bruceleehk.com/api/v1/telemetry/*", zone_name = "bruceleehk.com" }
+
+# ── KV Namespace 綁定（ai_diagnosis_logs 數據表＋圖片備份 Storage 嘅 serverless 替代）──
+[[kv_namespaces]]
+binding = "AI_CASE_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"   # ← npx wrangler kv namespace create AI_CASE_KV 後替換
+
+# ── 非敏感環境變數（可用 wrangler secret 覆寫為 secret 級）──
+[vars]
+AI_LOG_TTL_DAYS = "730"     # 數據保留期（日）— PDPO DPP(2) 保存期限原則；KV TTL 到期自動刪除
+# BACKUP_IMAGES = "true"    # 可選：開啟圖片備份（預設關閉，只存 URL）
