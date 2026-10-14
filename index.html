@@ -735,6 +735,10 @@
         }
         .btn-mini-ai { background: var(--primary); color: #fff; }
         .btn-mini-wa { background: #25d366; color: #06301a; }
+        /* v9.51 四卡統一 feature 版式 */
+        .video-grid .video-feature { width: 264px; }
+        a.video-facade-hit { display: block; }
+
 
         /* ============ AI Widget CTA ============ */
         .ai-widget-box {
@@ -1141,39 +1145,57 @@
                 <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> 榮仔智鬥過萬隻曱甴</h3>
                 <p>真實個案：餐廳廚房嚴重曱甴滋生，師傅即場示範智慧誘餌系統性防治全過程</p>
                 <div class="video-grid">
-                    <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="觀看短片：曱甴系統防治實戰">
+                    
+                    <div class="video-card video-feature" id="roachCard">
                         <div class="video-thumb">
                             <picture><source srcset="assets/img/video-cockroach.webp" type="image/webp"><img src="assets/img/video-cockroach.jpg" alt="曱甴系統防治實戰案例" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge">📍 中環餐飲業實錄 · 智慧誘餌系統防治</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:45</span>
+                            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-facade-hit" aria-label="觀看短片：曱甴系統防治實戰（前往 YouTube 頻道）"></a>
                         </div>
                         <div class="video-info">
                             <p class="video-title">曱甴系統防治實戰</p>
                             <p class="video-meta">📍 中環餐飲業 • Before & After</p>
                         </div>
-                    </a>
-                    <a href="https://www.youtube.com/shorts/7sbS9n_HW8g" rel="noopener" class="video-card" aria-label="觀看短片：粘鼠板瞬間變身鼠餌盒——滅鼠師傅捉老鼠 DIY 示範">
+                        <p class="video-desc">中環餐飲業廚房真實個案：曱甴嚴重滋生，師傅即場示範智慧誘餌系統性防治全過程，由廚櫃縫隙到電器位逐點處理，前後對比一目了然。</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E6%9B%B1%E7%94%B4%E9%98%B2%E6%B2%BB%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp 預約 曱甴防治</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card video-feature" id="ratBaitBoxCard">
                         <div class="video-thumb">
-                            <picture><source srcset="assets/img/video-rat-baitbox.webp" type="image/webp"><img src="assets/img/video-rat-baitbox.jpg" alt="粘鼠板瞬間變身立體鼠餌盒——資深滅鼠師傅魔術式摺法實戰示範" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <picture><source srcset="/assets/img/hong-kong-pest-control-rat-glue-board-bait-box.webp" type="image/webp"><img src="/assets/img/hong-kong-pest-control-rat-glue-board-bait-box.jpg" alt="粘鼠板瞬間變身立體鼠餌盒——資深滅鼠師傅變身魔術師實戰示範封面" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge" style="top:80px;">📍 住宅實錄 · 粘鼠板變身鼠餌盒</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">Shorts</span>
+                            <button type="button" class="video-facade-hit" id="ratBaitBoxPlay" aria-label="播放實戰短片：粘鼠板瞬間變身鼠餌盒——滅鼠師傅捉老鼠 DIY 示範"></button>
                         </div>
                         <div class="video-info">
                             <p class="video-title">粘鼠板變身鼠餌盒</p>
                             <p class="video-meta">📍 住宅實錄 • 滅鼠 DIY 實戰</p>
                         </div>
-                    </a>
-                    <a href="https://www.youtube.com/shorts/UGsqF-hFcK8" rel="noopener" class="video-card" aria-label="觀看短片：沙頭角禁區滅白蟻實錄">
+                        <p class="video-desc">老鼠對平鋪粘鼠板睇都唔睇？資深滅鼠師傅即場將粘鼠板摺成立體「鼠餌盒」，破解老鼠「新物恐懼症」同貼牆天性，DIY 三步曲即學即用。</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E8%80%81%E9%BC%A0%E9%98%B2%E6%B2%BB%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp 預約 老鼠防治</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card video-feature" id="shataukokCard">
                         <div class="video-thumb">
                             <picture><source srcset="assets/img/video-shataukok-termite.webp" type="image/webp"><img src="assets/img/video-shataukok-termite.jpg" alt="沙頭角禁區百年金行滅白蟻實錄：免拆牆精準滅白蟻" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge">📍 沙頭角禁區實錄 · 免拆牆精準滅蟻</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">1:17</span>
+                            <button type="button" class="video-facade-hit" id="shataukokPlay" aria-label="播放實錄影片：沙頭角禁區百年金行滅白蟻"></button>
                         </div>
                         <div class="video-info">
                             <p class="video-title">沙頭角禁區滅白蟻</p>
                             <p class="video-meta">📍 沙頭角禁區 • 百年金行實錄</p>
                         </div>
-                    </a>
+                        <p class="video-desc">沙頭角禁區百年金行白蟻危機：師傅免拆牆追蹤蟻路、針對性處理，保住百年木造結構；禁區紙安排全程協助，禁區及村屋個案經驗豐富。</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E7%99%BD%E8%9F%BB%E9%98%B2%E6%B2%BB%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp 預約 白蟻防治</a>
+                        </div>
+                    </div>
                     <div class="video-card video-feature" id="termiteReliefCard">
                         <div class="video-thumb">
                             <picture>
@@ -1479,5 +1501,32 @@
         });
     })();
     </script>
+    <script>
+    /* v9.51 Facade 擴展：鼠餌盒＋沙頭角卡同款頁內播放 */
+    (function () {
+        function attachFacade(cardId, btnId, embedUrl, title) {
+            var btn = document.getElementById(btnId);
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                var card = document.getElementById(cardId);
+                var thumb = card ? card.querySelector('.video-thumb') : null;
+                if (!thumb || thumb.querySelector('iframe')) return;
+                var iframe = document.createElement('iframe');
+                iframe.src = embedUrl;
+                iframe.title = title;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                iframe.allowFullscreen = true;
+                iframe.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;');
+                thumb.appendChild(iframe);
+                var play = card.querySelector('.video-play'); if (play) play.style.display = 'none';
+                var badge = card.querySelector('.video-case-badge'); if (badge) badge.style.display = 'none';
+                btn.style.display = 'none';
+            });
+        }
+        attachFacade('ratBaitBoxCard', 'ratBaitBoxPlay', 'https://www.youtube.com/embed/7sbS9n_HW8g?autoplay=1&rel=0&modestbranding=1&playsinline=1', '粘鼠板瞬間變身鼠餌盒——滅鼠師傅 DIY 實戰示範');
+        attachFacade('shataukokCard', 'shataukokPlay', 'https://www.youtube.com/embed/UGsqF-hFcK8?autoplay=1&rel=0&modestbranding=1&playsinline=1', '沙頭角禁區百年金行滅白蟻實錄');
+    })();
+    </script>
+</body>
 </body>
 </html>

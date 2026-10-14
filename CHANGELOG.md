@@ -1,4 +1,9 @@
-# 修復日誌 (v9.50 — 2026-10-14)
+# 修復日誌 (v9.51 — 2026-10-14)
+
+## v9.51《實戰案例短片四卡統一 feature 版式》— 首頁左 3 卡升級與第 4 卡同款版式（個案紅標＋描述＋CTA 行）＋第 2 卡換用戶指定新封面 hong-kong-pest-control-rat-glue-board-bait-box＋三顆 WhatsApp 預約按鈕（雙語）
+
+依用戶指令：①首頁【實戰案例短片】左 3 卡版式與第 4 卡（白蟻復發救援 feature 卡）統一：每卡加紅底個案標籤（📍）＋video-desc 描述＋video-cta-row；②第 1 卡曱甴加「💬 WhatsApp 預約 曱甴防治」（縮圖外鏃 YouTube 頻道不變）；③第 2 卡老鼠加「💬 WhatsApp 預約 老鼠防治」，封面換用戶指定 hong-kong-pest-control-rat-glue-board-bait-box.jpg（768×1344 jpg＋webp，SEO 檔名），並升級頁內 facade 播放（7sbS9n_HW8g，點縮圖不離站）；④第 3 卡沙頭角白蟻加「💬 WhatsApp 預約 白蟻防治」，同樣升級頁內 facade 播放（UGsqF-hFcK8）；⑤EN 首頁同步（WhatsApp Booking · Cockroach/Rat Control/Termite Control）。新 CSS：.video-grid .video-feature 統一 264px 四卡一行（1112px 容器實測）＋a.video-facade-hit display:block；卡 2 紅標下移 top:80px 避讓封面自帶標題（兩處打磨：初次 276px 於 1280 螢幕 wrap 3+1、badge 遮封面標題，均修正）；JS：attachFacade 泛化函數（複用 v9.9 facade 模式）。合規：描述如實陳述零「保證/根治」字眼。
+
 
 ## v9.50《官方新 Shorts 全面接軌＋實拍圖上陣＋中樞去重》— 死鏈舊 Shorts x35NdvWDfkM 全站 6 檔 10 處換新官方視頻 7sbS9n_HW8g＋blog-23 正文/og/JSON-LD 圖換 docx 實拍圖＋info 中樞重複卡修復（ZH 3→1、EN 3→1）
 

@@ -526,6 +526,10 @@
         }
         .btn-mini-ai { background: var(--primary); color: #fff; }
         .btn-mini-wa { background: #25d366; color: #06301a; }
+        /* v9.51 四卡統一 feature 版式 */
+        .video-grid .video-feature { width: 264px; }
+        a.video-facade-hit { display: block; }
+
 
 
         /* AI Widget CTA */
@@ -859,39 +863,57 @@
                 <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> Master vs 10,000+ Cockroaches</h3>
                 <p>Real case: heavy infestation in a restaurant kitchen — watch our master demonstrate smart bait systemic control.</p>
                 <div class="video-grid">
-                    <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" class="video-card" aria-label="Watch: Cockroach Systemic Control">
+                    
+                    <div class="video-card video-feature" id="roachCard">
                         <div class="video-thumb">
                             <picture><source srcset="/assets/img/video-cockroach.webp" type="image/webp"><img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge">📍 Central Restaurant Case · Smart Baiting System</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">0:45</span>
+                            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-facade-hit" aria-label="Watch: Cockroach Systemic Control (opens YouTube channel)"></a>
                         </div>
                         <div class="video-info">
                             <p class="video-title">Cockroach Systemic Control</p>
                             <p class="video-meta">📍 Central HK • Before & After</p>
                         </div>
-                    </a>
-                    <a href="https://www.youtube.com/shorts/7sbS9n_HW8g" rel="noopener" class="video-card" aria-label="Watch: Glue Board Transforms Into a Rat Bait Box in Seconds — DIY demo">
+                        <p class="video-desc">A real Central restaurant kitchen case: severe cockroach infestation. Our master demonstrates the full smart-baiting process on site — treating cabinet gaps and appliance spots one by one, with a clear before-and-after.</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20book%20a%20cockroach%20treatment" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp Booking · Cockroach</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card video-feature" id="ratBaitBoxCard">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-rat-baitbox.webp" type="image/webp"><img src="/assets/img/video-rat-baitbox.jpg" alt="Glue board folded into a 3D rat bait box in seconds — veteran rat exterminator's live DIY demonstration" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <picture><source srcset="/assets/img/hong-kong-pest-control-rat-glue-board-bait-box.webp" type="image/webp"><img src="/assets/img/hong-kong-pest-control-rat-glue-board-bait-box.jpg" alt="Glue board transforms into a 3D rat bait box — veteran rat exterminator's magic-style live demo cover" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge" style="top:80px;">📍 Residential Case · Glue Board → Rat Bait Box</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">Shorts</span>
+                            <button type="button" class="video-facade-hit" id="ratBaitBoxPlay" aria-label="Play video: Glue Board Transforms Into a Rat Bait Box — DIY demo"></button>
                         </div>
                         <div class="video-info">
                             <p class="video-title">Glue Board → Rat Bait Box</p>
                             <p class="video-meta">📍 Residential Case • Rat Control DIY</p>
                         </div>
-                    </a>
-                    <a href="https://www.youtube.com/shorts/UGsqF-hFcK8" rel="noopener" class="video-card" aria-label="Watch: Sha Tau Kok No-Drill Termite Treatment Live">
+                        <p class="video-desc">Rats walk straight past flat glue boards? Watch our veteran master fold one into a 3D rat bait box in seconds — beating rodent neophobia and wall-following instinct, with a 3-step DIY guide.</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20book%20a%20rat%20control%20treatment" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp Booking · Rat Control</a>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card video-feature" id="shataukokCard">
                         <div class="video-thumb">
                             <picture><source srcset="/assets/img/video-shataukok-termite.webp" type="image/webp"><img src="/assets/img/video-shataukok-termite.jpg" alt="No-drill termite treatment at a century-old gold shop in Sha Tau Kok Closed Area" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge">📍 Sha Tau Kok Closed Area · No-Drill Precision</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <span class="video-duration">1:17</span>
+                            <button type="button" class="video-facade-hit" id="shataukokPlay" aria-label="Play video: Sha Tau Kok Closed Area termite treatment live"></button>
                         </div>
                         <div class="video-info">
                             <p class="video-title">Sha Tau Kok Termite Rescue</p>
                             <p class="video-meta">📍 Closed Area • Century-Old Gold Shop</p>
                         </div>
-                    </a>
+                        <p class="video-desc">A century-old gold shop in the Sha Tau Kok Closed Area faced a termite crisis: our master tracked the termite trails without demolition and treated them precisely, preserving the historic wooden structure. Closed Area permits fully assisted.</p>
+                        <div class="video-cta-row">
+                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20book%20a%20termite%20treatment" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp Booking · Termite Control</a>
+                        </div>
+                    </div>
                     <div class="video-card video-feature" id="termiteReliefCard">
                         <div class="video-thumb">
                             <picture>
@@ -1173,5 +1195,32 @@
         });
     })();
     </script>
+    <script>
+    /* v9.51 Facade 擴展：鼠餌盒＋沙頭角卡同款頁內播放 */
+    (function () {
+        function attachFacade(cardId, btnId, embedUrl, title) {
+            var btn = document.getElementById(btnId);
+            if (!btn) return;
+            btn.addEventListener('click', function () {
+                var card = document.getElementById(cardId);
+                var thumb = card ? card.querySelector('.video-thumb') : null;
+                if (!thumb || thumb.querySelector('iframe')) return;
+                var iframe = document.createElement('iframe');
+                iframe.src = embedUrl;
+                iframe.title = title;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                iframe.allowFullscreen = true;
+                iframe.setAttribute('style', 'position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3;');
+                thumb.appendChild(iframe);
+                var play = card.querySelector('.video-play'); if (play) play.style.display = 'none';
+                var badge = card.querySelector('.video-case-badge'); if (badge) badge.style.display = 'none';
+                btn.style.display = 'none';
+            });
+        }
+        attachFacade('ratBaitBoxCard', 'ratBaitBoxPlay', 'https://www.youtube.com/embed/7sbS9n_HW8g?autoplay=1&rel=0&modestbranding=1&playsinline=1', 'Glue board to rat bait box — rat control DIY live demo');
+        attachFacade('shataukokCard', 'shataukokPlay', 'https://www.youtube.com/embed/UGsqF-hFcK8?autoplay=1&rel=0&modestbranding=1&playsinline=1', 'Sha Tau Kok Closed Area termite treatment live');
+    })();
+    </script>
+</body>
 </body>
 </html>
