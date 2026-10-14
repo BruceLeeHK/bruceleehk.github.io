@@ -10,7 +10,7 @@
     <meta name="author" content="CEDARS Ltd.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="language" content="zh-HK, en-HK, zh-CN">
-    <title>Rat Control Company Hong Kong | Transparent Pricing, IoT Smart Monitoring | Pest Control Master</title>
+    <title>Rat Control Company Hong Kong | Rat Removal from $1,500 · IoT Smart Trap Monitoring · Stainless Steel Rat-Proofing | Pest Control Master</title>
     <meta name="description" content="Hong Kong rat control company recommendation: same-day-response rodent control across all 18 districts — single-visit rat removal HK$1,500–$3,800 reference range, rodent-proofing quoted after survey, IoT smart rat boxes with 24-hour monitoring. IPM-based source sealing with stainless steel mesh. WhatsApp for a free quote!">
     <meta name="keywords" content="rat control company Hong Kong,pest control company HK,rat exterminator,rodent control price Hong Kong,rat proofing HK,mice removal,restaurant pest control HK,village house rat control,termite company HK,bed bug company HK,cockroach company HK,wasp nest removal HK">
 
@@ -274,6 +274,15 @@
 .fehb-fig figcaption{text-align:center;font-size:.82rem;color:#8a93a3;margin-top:8px;line-height:1.6}
 @media (max-width:600px){.fehb-table{font-size:.82rem}}
 @media (max-width:600px){.rat-price-table th,.rat-price-table td{font-size:.82rem;padding:8px 9px}}
+
+/* v9.49 rodent video facade */
+.rodent-video{margin:16px 0 6px;}
+.rodent-video-frame{position:relative;max-width:400px;margin:0 auto;aspect-ratio:9/16;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.18);}
+.rodent-video-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.rodent-video-frame iframe{width:100%;height:100%;border:0;display:block;}
+.rodent-video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:rgba(16,185,129,.92);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.rodent-video-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.62);color:#fff;font-size:.78rem;font-weight:700;padding:5px 10px;border-radius:999px;}
+.rodent-video figcaption{max-width:400px;margin:10px auto 0;font-size:.84rem;color:var(--text-muted);text-align:center;line-height:1.6;}
 </style>
 </head>
 <body>
@@ -341,6 +350,14 @@
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> Our Process — Four Documented Steps</h2>
                 <p>Rodent control is not "put down poison and hope". Our process runs in four documented steps, each with records and photos:</p>
+                <figure class="rodent-video">
+                    <div class="rodent-video-frame" id="rodent-yt" data-embed="https://www.youtube-nocookie.com/embed/7sbS9n_HW8g?autoplay=1&rel=0&playsinline=1" role="button" tabindex="0" aria-label="Play the live demo: glue board transforms into a rat bait box in seconds">
+                        <img src="/assets/img/video-rat-baitbox.jpg" alt="Glue board folded into a 3D rat bait box in seconds — veteran rat exterminator's DIY demonstration against rodent neophobia" width="768" height="1344" loading="lazy" decoding="async">
+                        <span class="rodent-video-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                        <span class="rodent-video-tag">🎬 Live Demo</span>
+                    </div>
+                    <figcaption>Live demo: our veteran master folds a flat glue board into a 3D bait box — one move to beat rodent neophobia.</figcaption>
+                </figure>
                 <ul class="tech-list">
 <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>Step 1 | 📲 WhatsApp enquiry</b> — Send photos or videos of the signs (where, how often, gnaw marks or droppings); we reply quickly with a preliminary price range and visit timing.</span></li>
 <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>Step 2 | 🔍 On-site survey</b> — Identify the species (Norway rat / roof rat / house mouse), track pathways with night vision, and mark every entry point: drains, pipe penetrations, door gaps, ceiling openings.</span></li>
@@ -509,5 +526,10 @@
     })();
     </script>
 <!-- v9.46 pillar page (service/rodent) -->
+
+    <!-- v9.49 rodent video facade -->
+    <script>
+    (function(){var f=document.getElementById('rodent-yt');if(!f)return;function load(){if(f.dataset.loaded)return;f.dataset.loaded='1';var ifr=document.createElement('iframe');ifr.setAttribute('src',f.getAttribute('data-embed'));ifr.setAttribute('title','粘鼠板瞬間變身鼠餌盒——滅鼠師傅 DIY 實戰示範');ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');ifr.setAttribute('allowfullscreen','');ifr.setAttribute('frameborder','0');f.innerHTML='';f.appendChild(ifr);}f.addEventListener('click',load);f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();load();}});})();
+    </script>
 </body>
 </html>

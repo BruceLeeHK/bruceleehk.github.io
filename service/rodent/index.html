@@ -10,7 +10,7 @@
     <meta name="author" content="CEDARS Ltd.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="language" content="zh-HK, en-HK, zh-CN">
-    <title>【香港滅鼠公司推介】明碼實價價目表・IoT智慧監測・最快即日上門 | 滅蟲師傅</title>
+    <title>【香港滅鼠公司推介】單次滅鼠 $1,500 起・IoT智慧鼠盒監測・不鏽鋼防鼠網封堵 | 滅蟲師傅</title>
     <meta name="description" content="香港滅鼠公司推介：滅蟲師傅團隊全港十八區滅鼠服務——單次滅鼠 $1,500–$3,800 過往個案參考價、防鼠封堵工程先勘察後出固定報價、IoT 智慧鼠盒 24 小時監測。IPM 綜合蟲害管理＋不鏽鋼防鼠網源頭封堵，人寵安全。WhatsApp 即時免費報價！">
     <meta name="keywords" content="滅鼠公司,香港滅鼠公司,滅鼠公司推介,滅鼠公司收費,滅鼠公司邊間好,家居滅鼠價錢,滅鼠師傅,捉老鼠,滅老鼠,老鼠入屋,滅鼠服務,防鼠封堵,村屋滅老鼠,餐廳滅鼠,食肆滅鼠,滅白蟻公司,滅蝨公司,滅曱甴公司,滅黃蜂公司,遙距滅蟲">
 
@@ -22,12 +22,12 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_HK">
     <meta property="og:site_name" content="滅蟲師傅 Pest Control Master">
-    <meta property="og:title" content="【香港滅鼠公司推介】明碼實價價目表・IoT智慧監測・最快即日上門">
+    <meta property="og:title" content="【香港滅鼠公司推介】單次滅鼠 $1,500 起・IoT智慧鼠盒監測・不鏽鋼防鼠網封堵">
     <meta property="og:description" content="香港滅鼠公司推介：滅蟲師傅團隊全港十八區滅鼠服務——單次滅鼠 $1,500–$3,800 過往個案參考價、防鼠封堵工程先勘察後出固定報價、IoT 智慧鼠盒 24 小時監測。IPM 綜合蟲害管理＋不鏽鋼防鼠網源頭封堵，人寵安全。WhatsApp 即時免費報價！">
     <meta property="og:url" content="https://bruceleehk.com/service/rodent/">
     <meta property="og:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="【香港滅鼠公司推介】明碼實價價目表・IoT智慧監測・最快即日上門">
+    <meta name="twitter:title" content="【香港滅鼠公司推介】單次滅鼠 $1,500 起・IoT智慧鼠盒監測・不鏽鋼防鼠網封堵">
     <meta name="twitter:description" content="香港滅鼠公司推介：滅蟲師傅團隊全港十八區滅鼠服務——單次滅鼠 $1,500–$3,800 過往個案參考價、防鼠封堵工程先勘察後出固定報價、IoT 智慧鼠盒 24 小時監測。IPM 綜合蟲害管理＋不鏽鋼防鼠網源頭封堵，人寵安全。WhatsApp 即時免費報價！">
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
@@ -274,6 +274,15 @@
 .fehb-fig figcaption{text-align:center;font-size:.82rem;color:#8a93a3;margin-top:8px;line-height:1.6}
 @media (max-width:600px){.fehb-table{font-size:.82rem}}
 @media (max-width:600px){.rat-price-table th,.rat-price-table td{font-size:.82rem;padding:8px 9px}}
+
+/* v9.49 rodent video facade */
+.rodent-video{margin:16px 0 6px;}
+.rodent-video-frame{position:relative;max-width:400px;margin:0 auto;aspect-ratio:9/16;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.18);}
+.rodent-video-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.rodent-video-frame iframe{width:100%;height:100%;border:0;display:block;}
+.rodent-video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:rgba(16,185,129,.92);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.rodent-video-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.62);color:#fff;font-size:.78rem;font-weight:700;padding:5px 10px;border-radius:999px;}
+.rodent-video figcaption{max-width:400px;margin:10px auto 0;font-size:.84rem;color:var(--text-muted);text-align:center;line-height:1.6;}
 </style>
 </head>
 <body>
@@ -341,6 +350,14 @@
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> 滅鼠服務流程 — 四步工程有紀錄有相為證</h2>
                 <p>滅鼠唔係「放堆藥等運到」。我哋嘅工程流程四步走，每一步都有紀錄、有相為證：</p>
+                <figure class="rodent-video">
+                    <div class="rodent-video-frame" id="rodent-yt" data-embed="https://www.youtube-nocookie.com/embed/7sbS9n_HW8g?autoplay=1&rel=0&playsinline=1" role="button" tabindex="0" aria-label="播放實戰短片：粘鼠板瞬間變身鼠餌盒——滅鼠師傅捉老鼠 DIY 示範">
+                        <img src="/assets/img/video-rat-baitbox.jpg" alt="粘鼠板瞬間變身立體鼠餌盒——資深滅鼠師傅示範摺法對抗老鼠新物恐懼症" width="768" height="1344" loading="lazy" decoding="async">
+                        <span class="rodent-video-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                        <span class="rodent-video-tag">🎬 實戰短片</span>
+                    </div>
+                    <figcaption>實戰短片：資深滅鼠師傅示範粘鼠板變身立體鼠餌盒，一招應對老鼠「新物恐懼症」。</figcaption>
+                </figure>
                 <ul class="tech-list">
 <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>步驟 1｜📲 WhatsApp 影相查詢</b> — 上載鼠蹤照片或影片，講述情況（邊度見到、幾多次、有無咬痕鼠糞），師傅快速回覆初步收費範圍同上門時間。</span></li>
 <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>步驟 2｜🔍 上門勘察評估</b> — 辨別鼠種（溝鼠／黑家鼠／小家鼠）、夜視追蹤活動路徑、逐一標記入屋位：渠口、喉管穿牆位、門底罅隙、天花吊位。</span></li>
@@ -509,5 +526,10 @@
     })();
     </script>
 <!-- v9.46 pillar page (service/rodent) -->
+
+    <!-- v9.49 rodent video facade -->
+    <script>
+    (function(){var f=document.getElementById('rodent-yt');if(!f)return;function load(){if(f.dataset.loaded)return;f.dataset.loaded='1';var ifr=document.createElement('iframe');ifr.setAttribute('src',f.getAttribute('data-embed'));ifr.setAttribute('title','粘鼠板瞬間變身鼠餌盒——滅鼠師傅 DIY 實戰示範');ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');ifr.setAttribute('allowfullscreen','');ifr.setAttribute('frameborder','0');f.innerHTML='';f.appendChild(ifr);}f.addEventListener('click',load);f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();load();}});})();
+    </script>
 </body>
 </html>

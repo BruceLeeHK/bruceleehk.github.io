@@ -1,4 +1,17 @@
-# 修復日誌 (v9.48 — 2026-10-13)
+# 修復日誌 (v9.50 — 2026-10-14)
+
+## v9.50《官方新 Shorts 全面接軌＋實拍圖上陣＋中樞去重》— 死鏈舊 Shorts x35NdvWDfkM 全站 6 檔 10 處換新官方視頻 7sbS9n_HW8g＋blog-23 正文/og/JSON-LD 圖換 docx 實拍圖＋info 中樞重複卡修復（ZH 3→1、EN 3→1）
+
+依用戶三項指令複核與落地：①《【師傅出更】資深滅鼠師傅變身魔術師！.docx》核對——文章已於 v9.49 上線 /info/blog-23/（標題/H1/發佈日期/【師傅出更】分類/六標籤與文檔一致），本輪將文檔內嵌實拍圖（師傅摺板雙格實拍 1024×765）替換正文配圖，og:image/twitter:image/BlogPosting JSON-LD image 同步換真實照片（強化 E-E-A-T 原創體驗訊號）；②《內部連結「權重灌溉」.docx》全項複核——策略一（footer 120 頁錨 v9.46＋blog/討論區 15 錨 v9.49）✓、策略二（rodent Title 重修＋流程區嵌片 v9.49）✓、策略三（FAQPage Schema 六問 v9.46）✓，策略四（GBP 公司名＋評論關鍵字＋本地外鏈投稿）屬站外待用戶執行；③新官方視頻 7sbS9n_HW8g（【滅老鼠方法】資深滅鼠師傅變身魔術師！粘鼠板瞬間變身鼠餌盒｜香港專業滅鼠公司）替換已失效舊 Shorts x35NdvWDfkM（YouTube playabilityStatus=ERROR）：blog-23 ZH/EN facade＋VideoObject embedUrl/contentUrl、首頁【實戰案例短片】粘鼠板變身鼠餌盒卡 ZH/EN、rodent ZH/EN 流程區 facade。
+
+### 修復
+- info 中樞重複卡（v9.49 插入補丁重跑遺留 bug）：ZH blog-23 標準卡 3→1、EN featured 卡 3→1
+- sitemap：6 個改動 URL lastmod 維持 2026-10-14（總數 125 不變）
+
+
+## v9.49《師傅出更魔術師＋權重灌溉＋首頁影片換血》— blog-23《【師傅出更】資深滅鼠師傅變身魔術師》雙語上線（圖＋Shorts 影片）＋內部連結權重灌溉（滅鼠公司錨文本→/service/rodent/）＋rodent Title 重修與流程區嵌片＋首頁實戰案例短片換血
+
+依用戶三項指令：①《【師傅出更】資深滅鼠師傅變身魔術師！.docx》上線【滅蟲資訊】（圖片＋YouTube Shorts x35NdvWDfkM 影片 facade 嵌文內 DIY 三步曲之後）；②《內部連結「權重灌溉」.docx》落地：blog-1/9/17/18/20/21＋討論區＋EN 對應共 15 處「滅鼠公司 / rat control company」錨文本精準指向 /service/rodent/，rodent 專頁 Title 重修（單次滅鼠 $1,500 起・IoT智慧鼠盒監測・不鏽鋼防鼠網封堵——文檔建議「斷尾」字眼按第362章合規標準不用），流程區嵌入實戰短片拉長 Dwell Time（FAQPage Schema v9.46 已有）；③首頁【實戰案例短片】木蝨高溫蒸氣卡更換為粘鼠板變身鼠餌盒卡（雙語）。
 
 ## v9.48《蟲種服務主頁網絡》— 新建 /service/termite/、/service/flea/、/service/cockroach/、/service/wasp/ 四大蟲種 Pillar Page（雙語）＋全站 footer 錨文本灌溉＋rodent 服務網絡卡改道
 
