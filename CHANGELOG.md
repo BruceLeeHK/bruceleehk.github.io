@@ -1,4 +1,9 @@
-# 修復日誌 (v9.51 — 2026-10-14)
+# 修復日誌 (v9.52 — 2026-10-14)
+
+## v9.52《四卡 AI 診斷按鈕全覆蓋》— 首頁【實戰案例短片】左 3 卡（曱甴／老鼠／白蟻）各增「🔬 免費 AI 蟲害初步診斷」按鈕（雙語）
+
+依用戶指令：首頁【實戰案例短片】左 3 卡 CTA 行在 WhatsApp 預約按鈕之前各加「🔬 免費 AI 蟲害初步診斷」按鈕（href=/ai/，沿用第 4 卡 btn-mini btn-mini-ai 樣式與按鈕順序——AI 診斷在前、WhatsApp 在後），四卡 CTA 版式完全統一：每卡兩顆按鈕（AI 診斷＋對應 WhatsApp 分流：曱甴防治／老鼠防治／白蟻防治／T3i 微波探測）。EN 首頁同步（🔬 Free AI Pest Diagnosis → /en/ai/）。零 CSS 改動（btn-mini-ai 既有）；零合規風險（純按鈕增設，文案零承諾）。
+
 
 ## v9.51《實戰案例短片四卡統一 feature 版式》— 首頁左 3 卡升級與第 4 卡同款版式（個案紅標＋描述＋CTA 行）＋第 2 卡換用戶指定新封面 hong-kong-pest-control-rat-glue-board-bait-box＋三顆 WhatsApp 預約按鈕（雙語）
 
