@@ -1,4 +1,25 @@
-# 修復日誌 (v9.52 — 2026-10-14)
+# 修復日誌 (v9.53 — 2026-10-14)
+
+## v9.53《關注組留言丟失修復》— 全港滅蟲關注組（免登入版）手機發相＋文字留言失敗全面檢測與修復（前端雙語＋Worker v6.1）
+
+依用戶報告「手機發相片和文字留言不成功」全面檢測，實證揪出雙重根因：①用戶 18:31 留言（含 958KB 相片）實際已成功入庫——「不成功」屬呈現層假象；②真正 bug＝留言存單一 KV blob，POST 讀→改→寫，KV 讀取滯後時後寫者用舊陣列覆蓋前一人剛出嘅留言（實測：3 則測試留言被吞 2 則；相隔 17 分鐘嘅連續 POST 後者竟無被冷卻攔截＝配額讀取同樣滯後）。
+
+### Worker v6.1（comment-handler.js，需貼上 Cloudflare Dashboard 重新部署）
+- 每則留言同步寫獨立備份鍵 c:<pageId>:<id>（TTL 與 blob 相同）；GET 以 kv.list(prefix) 掃描，blob 缺失即救援合併——內容永不流失（顯示層持續救援直至 admin 真刪）
+- client_ref 冪等：前端附 32 位 ref，Worker 於配額檢查之前查 ref 鍵，重發直接返回原 comment_id（duplicate:true）——重發唔會被 1 小時冷卻誤傷、唔會重複出帖；ref TTL 7 日
+- admin 刪除／刪除並封鎖同步遞迴剷備份鍵（防 GET 救援復活已刪留言）；/api/health version 6.1＋features 加 lost_update_recovery、client_ref_idempotent；GET 回應加 recovered 欄位
+- 單元測試（mock KV）4/4 PASS：stale 覆蓋→救援還原、admin 刪除→零復活、ref 取回原 id
+
+### 前端（vote ZH/EN）
+- 提交引擎重寫：res.text()＋JSON.parse 取代 res.json()（防 HTML 挑戰頁炸入 catch 變「未知錯誤」）；網絡中斷／非 JSON 回應自動重試 2 次（2.5s/6s backoff，同 ref 冪等）
+- 草稿保存：最終失敗（網絡中斷／防護攔截／429 冷卻）自動將暱稱＋內容＋相片 dataURL 存 localStorage comment_draft；重載頁面自動回復表單＋預覽＋ref，直接再按提交即可（唔使重新打過）；成功後清除草稿
+- 精準提示四類分道：網絡中斷／防護攔截（建議 WiFi⇄數據切換）／冷卻倒數／重發確認
+- 相片管道實測正常：File→FileReader→Canvas 雙尺寸壓縮（HD 1600px/縮圖 400px）→「圖片已就緒」；CORS 預檢 204 正常；Turnstile 未啟用；蜜罐欄位前端不存在（不會誤觸）
+
+### 部署順序與驗證
+- 雙向兼容：v6.0 Worker 會忽略 client_ref；前端重試／草稿純前端運作——先部署任何一方都安全
+- 實測記錄：線上站 E2E（真瀏覽器 390px 模擬揀相→提交）HTTP 200 成功入庫（該則「系統檢測」測試留言請管理員於 admin.html 刪除）；用戶 18:31 留言完整保留
+
 
 ## v9.52《四卡 AI 診斷按鈕全覆蓋》— 首頁【實戰案例短片】左 3 卡（曱甴／老鼠／白蟻）各增「🔬 免費 AI 蟲害初步診斷」按鈕（雙語）
 

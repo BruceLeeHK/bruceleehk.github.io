@@ -647,35 +647,87 @@
             var payload = { page_id: PAGE_ID, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '', img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '', img_title: uploadedImgSeo ? uploadedImgSeo.title : '', captcha_a: captchaNumA, captcha_b: captchaNumB, captcha_answer: answer };
             if (tsToken) payload.turnstile_token = tsToken;
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
-            fetch(WORKER_BASE + '/api/comments', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-                .then(function(res){ return res.json(); })
-                .then(function(data){
-                    resetTurnstile();
-                    if (!data.success) {
-                        /* v5.0: banned IP → hide form + red notice */
-                        if (data.code === 'IP_BANNED') {
-                            document.getElementById('mainCommentForm').style.display = 'none';
-                            var bn = document.getElementById('bannedNotice');
-                            if (bn) bn.style.display = '';
-                            showToast('Your IP has been banned from posting.', 'error');
-                        } else {
-                            showToast('Submit failed: ' + (data.error || 'Unknown error'), 'warning');
-                        }
-                        return;
+            payload.client_ref = getClientRef();
+                        /* ===== v9.53 冪等重發＋自動重試＋精準錯誤提示（同 ref 重發：Worker 返回原結果，唔會重複出帖／被冷卻誤傷） ===== */
+            var submitRef = getClientRef();
+            payload.client_ref = submitRef;
+
+            function sendAttempt() {
+                return fetch(WORKER_BASE + '/api/comments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(function(res) {
+                    return res.text().then(function(txt) {
+                        try { return { status: res.status, data: JSON.parse(txt) }; }
+                        catch (e) { return { badResponse: true, status: res.status }; }
+                    });
+                });
+            }
+            function sendWithRetry(i) {
+                return sendAttempt().then(function(r) {
+                    if (r.badResponse && i < 2) {
+                        showToast('Odd network response — auto-retrying (' + (i + 1) + '/2）…', 'warning');
+                        return new Promise(function(rs) { setTimeout(rs, 2500 + i * 3500); }).then(function() { return sendWithRetry(i + 1); });
                     }
-                    // Local optimistic cache (live-publish mode: render as published immediately, auto-reconciled with server)
-                    saveLocalPendingComment({ id: data.comment_id, nickname: nickname, content: content, image_url: currentReplyTo ? '' : uploadedImgUrl, thumb_url: currentReplyTo ? '' : uploadedThumbUrl, img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '', img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '', img_title: uploadedImgSeo ? uploadedImgSeo.title : '', parent_id: currentReplyTo ? currentReplyTo.id : null, approved: 1, created_at: new Date().toISOString() });
+                    return r;
+                }, function() {
+                    if (i < 2) {
+                        showToast('Unstable network — auto-retrying (', 'warning');
+                        return new Promise(function(rs) { setTimeout(rs, 2500 + i * 3500); }).then(function() { return sendWithRetry(i + 1); });
+                    }
+                    return { networkError: true };
+                });
+            }
+            sendWithRetry(0)
+            .then(function(r){
+                resetTurnstile();
+                if (r && r.networkError) {
+                    saveCommentDraft(nickname, content, submitRef);
+                    showToast('Sending failed (network interrupted). Your comment has been saved — simply tap "Submit" again later; no need to retype.', 'error');
+                    return;
+                }
+                if (r && r.badResponse) {
+                    saveCommentDraft(nickname, content, submitRef);
+                    showToast('Blocked by network protection. Your comment has been saved — try switching network (WiFi ⇄ mobile data) and submit again.', 'error');
+                    return;
+                }
+                var data = r.data;
+                if (!data.success) {
+                    /* v5.0: 被封鎖 IP → 隱藏表單＋紅色提示 */
+                    if (data.code === 'IP_BANNED') {
+                        document.getElementById('mainCommentForm').style.display = 'none';
+                        var bn = document.getElementById('bannedNotice');
+                        if (bn) bn.style.display = '';
+                        showToast('Your IP has been banned from posting.', 'error');
+                    } else {
+                        if (data.code === 'COOLDOWN_ACTIVE' || data.code === 'DAILY_LIMIT_REACHED') saveCommentDraft(nickname, content, submitRef);
+                        showToast('Submit failed: ' + (data.error || 'Unknown error'), 'warning');
+                    }
+                    return;
+                }
+                if (data.duplicate) {
+                    showToast('This comment was already published (duplicate submit ignored).', 'success');
+                } else {
                     showToast('Published! Your comment is now live.', 'success');
-                    document.getElementById('mainCommentForm').reset();
-                    uploadedImgUrl = ''; uploadedThumbUrl = ''; uploadedImgSeo = null;
-                    var previewEl = document.getElementById('imagePreviewInline');
-                    if (previewEl) { previewEl.style.display = 'none'; previewEl.removeAttribute('src'); }
-                    if (currentReplyTo) cancelReply();
-                    initCaptcha();
-                    loadComments();
-                })
-                .catch(function(err){ resetTurnstile(); showToast('Failed to send, please try again later.', 'error'); })
-                .finally(function(){ btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit'; });
+                }
+                clearCommentDraft();
+                currentSubmitRef = null;
+                document.getElementById('mainCommentForm').reset();
+                uploadedImgUrl = '';
+                uploadedThumbUrl = '';
+                uploadedImgSeo = null;
+                var previewEl = document.getElementById('imagePreviewInline');
+                if (previewEl) { previewEl.style.display = 'none'; previewEl.removeAttribute('src'); }
+                if (currentReplyTo) cancelReply();
+                initCaptcha();
+                loadComments();
+            })
+            .catch(function(){ /* 最後防線：唔好令按鈕卡死 */ })
+            .finally(function(){
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit';
+            });
         }
 
         function startReply(parentId, parentNickname) {
@@ -694,6 +746,51 @@
             var contentInput = document.getElementById('inputContent');
             contentInput.setAttribute('maxlength', '2000');
         }
+
+        
+        /* ===== v9.53 冪等重發＋草稿保存（修復「發佈成功但留言被 KV 覆蓋消失」/「發送失敗內容全失」） ===== */
+        var currentSubmitRef = null;
+        function getClientRef() {
+            if (!currentSubmitRef) {
+                try { currentSubmitRef = (window.crypto && crypto.randomUUID) ? crypto.randomUUID().replace(/-/g, '') : ('r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12)); }
+                catch (e) { currentSubmitRef = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12); }
+            }
+            return currentSubmitRef;
+        }
+        function saveCommentDraft(nick, txt, ref) {
+            try {
+                localStorage.setItem('comment_draft', JSON.stringify({
+                    nickname: nick, content: txt,
+                    image_url: currentReplyTo ? '' : uploadedImgUrl,
+                    thumb_url: currentReplyTo ? '' : uploadedThumbUrl,
+                    img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '',
+                    img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '',
+                    img_title: uploadedImgSeo ? uploadedImgSeo.title : '',
+                    parent_id: currentReplyTo ? currentReplyTo.id : null,
+                    client_ref: ref, saved_at: new Date().toISOString()
+                }));
+            } catch (e) {}
+        }
+        function clearCommentDraft() { try { localStorage.removeItem('comment_draft'); } catch (e) {} }
+        function restoreCommentDraft() {
+            var d = null;
+            try { d = JSON.parse(localStorage.getItem('comment_draft') || 'null'); } catch (e) {}
+            if (!d || !d.content) return;
+            try {
+                var nickEl = document.getElementById('inputNickname'), contEl = document.getElementById('inputContent');
+                if (nickEl && !nickEl.value) nickEl.value = d.nickname || '';
+                if (contEl && !contEl.value) contEl.value = d.content || '';
+                if (d.image_url && !uploadedImgUrl) {
+                    uploadedImgUrl = d.image_url; uploadedThumbUrl = d.thumb_url || '';
+                    uploadedImgSeo = d.img_slug ? { slug: d.img_slug, alt: d.img_alt || '', title: d.img_title || '' } : null;
+                    var pv = document.getElementById('imagePreviewInline');
+                    if (pv) { pv.src = d.thumb_url || d.image_url; pv.style.display = 'block'; }
+                }
+                if (d.client_ref) currentSubmitRef = d.client_ref;
+                showToast('Restored your unsent comment (text & photo kept) — just tap "Submit" again.', '');
+            } catch (e) {}
+        }
+        restoreCommentDraft();
 
         function saveLocalPendingComment(comment) {
             var pending = getLocalPendingComments();

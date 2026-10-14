@@ -4,6 +4,11 @@
  * v5.0 升級亮點（苦主討論區「即時公開」制）：
  * 🚀 留言直出：通過數學驗證＋防護檢查後即時公開（approved: 1），取消人工審核
  * 🛡️ IP 發言配額：同一 IP 每小時限發 1 則（冷卻 3600 秒）＋每日限 3 則（香港時區日重置）
+ *
+ * 🩹 v6.1（2026-10-14）留言丟失修復：
+ * ①每則留言寫獨立備份鍵 c:<pageId>:<id>，GET 以 kv.list 合併救援被 lost-update 覆蓋嘅留言
+ * ②client_ref 冪等：同一 ref 重發直接返回原結果（重發唔會被冷卻誤傷／唔會重複出帖）
+ * ③admin 刪除／封鎖同步剷備份鍵，已刪留言唔會復活
  * 🚫 IP 封鎖名單：管理員一鍵「刪除並封鎖 IP」；被封鎖 IP 無法發言，前台表單自動隱藏
  *    新端點：POST /api/admin/banip ／ /api/admin/unbanip ／ /api/admin/banlist
  * 🌐 雙語化：錯誤訊息支援 HK 中文 + English
@@ -35,6 +40,7 @@ const COMMENT_TTL_SEC   = 15_552_000;
 
 /* ===== v5.0: 發言配額 — 同一 IP 每小時 1 則 ＋ 每日 3 則 ===== */
 const POST_COOLDOWN_SEC = 3600;   // 兩次發言至少相隔 1 小時
+const CLIENT_REF_TTL_SEC = 604800; // v6.1: 冪等 ref 保存 7 日（重發確認用）
 const POST_DAILY_MAX    = 3;      // 每日上限 3 則（香港時區日重置）
 const DAILY_TTL_SEC     = 86400;  // 日計數 key 保留 24 小時（key 含日期自動輪換）
 const IP_BLACKLIST_KEY  = 'ipblacklist';  // KV 黑名單（無 TTL，永久生效直至解除）
@@ -122,10 +128,10 @@ export default {
           status: kv ? 'ok' : 'degraded',
           kv_bound: !!kv,
           admin_secret_set: !!env.ADMIN_SECRET,
-          version: '6.0',
+          version: '6.1',
           turnstile_enforced: !!env.TURNSTILE_SECRET_KEY,
           blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
-          features: ['nested_reply', 'pin', 'captcha', 'recursive_delete', 'auto_publish', 'ip_blacklist', 'quota_1h_daily3', 'honeypot', 'vote_system', 'bilingual_errors', 'turnstile_verify', 'geo_block', 'comment_ttl_prune'],
+          features: ['nested_reply', 'pin', 'captcha', 'recursive_delete', 'auto_publish', 'ip_blacklist', 'quota_1h_daily3', 'honeypot', 'vote_system', 'bilingual_errors', 'turnstile_verify', 'geo_block', 'comment_ttl_prune', 'lost_update_recovery', 'client_ref_idempotent'],
           time: new Date().toISOString()
         }, 200, securityHeaders);
       }
@@ -324,6 +330,10 @@ async function handleGetComments(request, url, kv, headers) {
 
   const allComments = await readComments(kv, pageId);
 
+  /* v6.1: 救援被 lost-update 覆蓋嘅留言（備份鍵有、blob 冇 → 合併返入嚟） */
+  const lostComments = await recoverLostComments(kv, pageId, allComments);
+  if (lostComments.length) allComments.push(...lostComments);
+
   /* v5.0: 封鎖名單內嘅訪客 — 通知前台隱藏留言表單 */
   const clientIp = request.headers.get('CF-Connecting-IP') || '';
   const viewerBanned = clientIp ? await isIpBanned(kv, clientIp) : false;
@@ -353,7 +363,8 @@ async function handleGetComments(request, url, kv, headers) {
     comments: tree,
     total: parents.length,
     total_replies: replies.length,
-    viewer_banned: viewerBanned
+    viewer_banned: viewerBanned,
+    recovered: lostComments.length
   }, 200, headers);
 }
 
@@ -383,6 +394,8 @@ async function handlePostComment(request, kv, env, headers) {
   const nickname  = (body.nickname  || '').trim();
   const content   = (body.content   || '').trim();
   const imageUrl  = (body.image_url || '').trim();
+  const clientRef = String(body.client_ref || '').trim();   /* v6.1: 冪等重發 ref */
+  const refValid  = /^[A-Za-z0-9_-]{8,64}$/.test(clientRef);
   const thumbUrl  = (body.thumb_url || '').trim();
   const captchaA  = parseInt(body.captcha_a, 10);
   const captchaB  = parseInt(body.captcha_b, 10);
@@ -443,6 +456,20 @@ async function handlePostComment(request, kv, env, headers) {
         error_en: 'Bot verification failed or expired. Please retry the Turnstile challenge.',
         code: 'TURNSTILE_FAILED'
       }, 403, headers);
+    }
+  }
+
+  /* v6.1: 冪等重發確認 — ref 已有成功紀錄 → 直接返回原結果（喺配額之前：真重發唔會被冷卻誤傷） */
+  if (!isAdmin && refValid) {
+    const knownId = await kv.get('ref:' + pageId + ':' + clientRef);
+    if (knownId) {
+      return jsonResponse({
+        success: true,
+        message: '呢則留言其實已發佈成功（重發確認，不會重複出帖）。',
+        message_en: 'This comment was already published (duplicate submit ignored).',
+        comment_id: knownId,
+        duplicate: true
+      }, 200, headers);
     }
   }
 
@@ -509,6 +536,13 @@ async function handlePostComment(request, kv, env, headers) {
   const prunedComments = pruneExpiredComments(comments);
   prunedComments.push(newComment);
   await kv.put(key, JSON.stringify(prunedComments), { expirationTtl: COMMENT_TTL_SEC });
+
+  /* v6.1: 每則留言獨立備份鍵（防 lost-update 覆蓋）＋ 冪等 ref 紀錄 */
+  await putCommentBackup(kv, pageId, newComment);
+  if (refValid) {
+    try { await kv.put('ref:' + pageId + ':' + clientRef, newComment.id, { expirationTtl: CLIENT_REF_TTL_SEC }); }
+    catch (e) { /* ref 紀錄失敗唔影響留言本身 */ }
+  }
 
   /* v5.0: 發言成功 → 記錄配額（1 小時冷卻 ＋ 日計數 +1）；記錄失敗唔影響留言 */
   if (!isAdmin && quota) {
@@ -595,6 +629,8 @@ async function handleAdminDelete(request, kv, env, headers) {
 
   const remaining = comments.filter(c => !toDelete.has(c.id));
   await kv.put('comments:' + pageId, JSON.stringify(remaining), { expirationTtl: COMMENT_TTL_SEC });
+  /* v6.1: 同步剷備份鍵（防 GET 救援路徑復活已刪留言） */
+  await deleteCommentBackups(kv, pageId, toDelete);
   return jsonResponse({ success: true, deleted_ids: Array.from(toDelete) }, 200, headers);
 }
 
@@ -674,6 +710,8 @@ async function handleAdminBanIp(request, kv, env, headers) {
     const remaining = comments.filter(c => !toDelete.has(c.id));
     await kv.put('comments:' + pageId, JSON.stringify(remaining), { expirationTtl: COMMENT_TTL_SEC });
     deletedIds = Array.from(toDelete);
+    /* v6.1: 同步剷備份鍵（刪除並封鎖路徑） */
+    await deleteCommentBackups(kv, pageId, toDelete);
   } else {
     /* 手動封鎖：直接指定 IP */
     ip = String(v.body.ip || '').trim();
@@ -761,6 +799,44 @@ function safeCompare(a, b) {
 /* =========================================================================
  * v5.0: 讀取 / 配額 / 封鎖名單工具
  * ========================================================================= */
+/* ===== v6.1: 留言獨立備份鍵（防 lost-update 覆蓋吞留言）＋ GET 救援 =====
+ * 背景：留言存單一 KV blob（comments:<pageId>），POST 讀→改→寫。KV 讀取滯後時，
+ * 後寫入者會用舊陣列覆蓋前一人剛出嘅留言（實測 2026-10-14 兩則測試留言被吞）。
+ * 對策：每則留言同步寫獨立鍵 c:<pageId>:<id>（互不覆蓋）；GET 發現 blob 缺咗某鍵
+ * 就救援合併——內容永不流失。admin 刪除／封鎖同步剷備份鍵，已刪留言唔會復活。 */
+function backupKey(pageId, id) { return 'c:' + pageId + ':' + id; }
+
+async function putCommentBackup(kv, pageId, comment) {
+  try { await kv.put(backupKey(pageId, comment.id), JSON.stringify(comment), { expirationTtl: COMMENT_TTL_SEC }); }
+  catch (e) { console.warn('Failed to write comment backup:', e.message); }
+}
+
+async function deleteCommentBackups(kv, pageId, ids) {
+  try { await Promise.all(Array.from(ids).map(id => kv.delete(backupKey(pageId, id)))); }
+  catch (e) { console.warn('Failed to delete comment backups:', e.message); }
+}
+
+async function recoverLostComments(kv, pageId, blobComments) {
+  const known = new Set(blobComments.map(c => String(c.id)));
+  const lost = [];
+  try {
+    const list = await kv.list({ prefix: 'c:' + pageId + ':', limit: 200 });
+    const prefix = 'c:' + pageId + ':';
+    const missing = (list.keys || [])
+      .map(k => k.name.slice(prefix.length))
+      .filter(id => id && !known.has(id));
+    if (missing.length) {
+      const results = await Promise.all(missing.map(id =>
+        kv.get(backupKey(pageId, id), { type: 'json' }).catch(() => null)
+      ));
+      for (const c of results) {
+        if (c && c.id && !known.has(String(c.id))) lost.push(c);
+      }
+    }
+  } catch (e) { console.warn('Failed to recover lost comments:', e.message); }
+  return lost;
+}
+
 function readComments(kv, pageId) {
   return kv.get('comments:' + pageId, { type: 'json' }).then(raw =>
     Array.isArray(raw) ? raw : []

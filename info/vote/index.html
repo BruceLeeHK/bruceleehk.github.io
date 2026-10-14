@@ -1216,15 +1216,53 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             };
             if (tsToken) payload.turnstile_token = tsToken;
             if (currentReplyTo) payload.parent_id = currentReplyTo.id;
+            payload.client_ref = getClientRef();
 
-            fetch(WORKER_BASE + '/api/comments', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(function(res){ return res.json(); })
-            .then(function(data){
+                        /* ===== v9.53 冪等重發＋自動重試＋精準錯誤提示（同 ref 重發：Worker 返回原結果，唔會重複出帖／被冷卻誤傷） ===== */
+            var submitRef = getClientRef();
+            payload.client_ref = submitRef;
+
+            function sendAttempt() {
+                return fetch(WORKER_BASE + '/api/comments', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(function(res) {
+                    return res.text().then(function(txt) {
+                        try { return { status: res.status, data: JSON.parse(txt) }; }
+                        catch (e) { return { badResponse: true, status: res.status }; }
+                    });
+                });
+            }
+            function sendWithRetry(i) {
+                return sendAttempt().then(function(r) {
+                    if (r.badResponse && i < 2) {
+                        showToast('網絡回應異常，自動重試中（' + (i + 1) + '/2）…', 'warning');
+                        return new Promise(function(rs) { setTimeout(rs, 2500 + i * 3500); }).then(function() { return sendWithRetry(i + 1); });
+                    }
+                    return r;
+                }, function() {
+                    if (i < 2) {
+                        showToast('網絡唔穩定，自動重試中（', 'warning');
+                        return new Promise(function(rs) { setTimeout(rs, 2500 + i * 3500); }).then(function() { return sendWithRetry(i + 1); });
+                    }
+                    return { networkError: true };
+                });
+            }
+            sendWithRetry(0)
+            .then(function(r){
                 resetTurnstile();
+                if (r && r.networkError) {
+                    saveCommentDraft(nickname, content, submitRef);
+                    showToast('發送失敗（網絡中斷）。內容已保存，請稍後直接再按「提交留言」，唔使重新打過。', 'error');
+                    return;
+                }
+                if (r && r.badResponse) {
+                    saveCommentDraft(nickname, content, submitRef);
+                    showToast('提交被網絡防護攔截，內容已保存。建議切換網絡（WiFi⇄數據）後再按提交。', 'error');
+                    return;
+                }
+                var data = r.data;
                 if (!data.success) {
                     /* v5.0: 被封鎖 IP → 隱藏表單＋紅色提示 */
                     if (data.code === 'IP_BANNED') {
@@ -1233,27 +1271,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                         if (bn) bn.style.display = '';
                         showToast('你嘅 IP 已被封鎖，無法發佈留言。', 'error');
                     } else {
+                        if (data.code === 'COOLDOWN_ACTIVE' || data.code === 'DAILY_LIMIT_REACHED') saveCommentDraft(nickname, content, submitRef);
                         showToast('提交失敗：' + (data.error || '未知錯誤'), 'warning');
                     }
                     return;
                 }
-                
-                // 無論是新留言還是回覆，都寫入 LocalStorage 暫存（直出制：即時以已公開狀態渲染，伺服器同步後自動對帳）
-                saveLocalPendingComment({
-                    id: data.comment_id,
-                    nickname: nickname,
-                    content: content,
-                    image_url: currentReplyTo ? '' : uploadedImgUrl,
-                    thumb_url:  currentReplyTo ? '' : uploadedThumbUrl,
-                    img_slug:  uploadedImgSeo ? uploadedImgSeo.slug : '',
-                    img_alt:   uploadedImgSeo ? uploadedImgSeo.alt : '',
-                    img_title: uploadedImgSeo ? uploadedImgSeo.title : '',
-                    parent_id: currentReplyTo ? currentReplyTo.id : null,
-                    approved: 1,
-                    created_at: new Date().toISOString()
-                });
-
-                showToast('發佈成功！留言已即時公開顯示。', 'success');
+                if (data.duplicate) {
+                    showToast('呢則留言其實已發佈成功（重發確認），唔會重複出帖。', 'success');
+                } else {
+                    showToast('發佈成功！留言已即時公開顯示。', 'success');
+                }
+                clearCommentDraft();
+                currentSubmitRef = null;
                 document.getElementById('mainCommentForm').reset();
                 uploadedImgUrl = '';
                 uploadedThumbUrl = '';
@@ -1264,7 +1293,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
                 initCaptcha();
                 loadComments();
             })
-            .catch(function(err){ resetTurnstile(); showToast('發送失敗，請稍後再試。', 'error'); })
+            .catch(function(){ /* 最後防線：唔好令按鈕卡死 */ })
             .finally(function(){
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> 提交留言';
@@ -1287,6 +1316,51 @@ textarea.form-input { resize: vertical; min-height: 100px; }
             var contentInput = document.getElementById('inputContent');
             contentInput.setAttribute('maxlength', '2000');
         }
+
+        
+        /* ===== v9.53 冪等重發＋草稿保存（修復「發佈成功但留言被 KV 覆蓋消失」/「發送失敗內容全失」） ===== */
+        var currentSubmitRef = null;
+        function getClientRef() {
+            if (!currentSubmitRef) {
+                try { currentSubmitRef = (window.crypto && crypto.randomUUID) ? crypto.randomUUID().replace(/-/g, '') : ('r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12)); }
+                catch (e) { currentSubmitRef = 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 12); }
+            }
+            return currentSubmitRef;
+        }
+        function saveCommentDraft(nick, txt, ref) {
+            try {
+                localStorage.setItem('comment_draft', JSON.stringify({
+                    nickname: nick, content: txt,
+                    image_url: currentReplyTo ? '' : uploadedImgUrl,
+                    thumb_url: currentReplyTo ? '' : uploadedThumbUrl,
+                    img_slug: uploadedImgSeo ? uploadedImgSeo.slug : '',
+                    img_alt: uploadedImgSeo ? uploadedImgSeo.alt : '',
+                    img_title: uploadedImgSeo ? uploadedImgSeo.title : '',
+                    parent_id: currentReplyTo ? currentReplyTo.id : null,
+                    client_ref: ref, saved_at: new Date().toISOString()
+                }));
+            } catch (e) {}
+        }
+        function clearCommentDraft() { try { localStorage.removeItem('comment_draft'); } catch (e) {} }
+        function restoreCommentDraft() {
+            var d = null;
+            try { d = JSON.parse(localStorage.getItem('comment_draft') || 'null'); } catch (e) {}
+            if (!d || !d.content) return;
+            try {
+                var nickEl = document.getElementById('inputNickname'), contEl = document.getElementById('inputContent');
+                if (nickEl && !nickEl.value) nickEl.value = d.nickname || '';
+                if (contEl && !contEl.value) contEl.value = d.content || '';
+                if (d.image_url && !uploadedImgUrl) {
+                    uploadedImgUrl = d.image_url; uploadedThumbUrl = d.thumb_url || '';
+                    uploadedImgSeo = d.img_slug ? { slug: d.img_slug, alt: d.img_alt || '', title: d.img_title || '' } : null;
+                    var pv = document.getElementById('imagePreviewInline');
+                    if (pv) { pv.src = d.thumb_url || d.image_url; pv.style.display = 'block'; }
+                }
+                if (d.client_ref) currentSubmitRef = d.client_ref;
+                showToast('已回復上次未送出嘅留言（內容＋相片照舊），直接再按「提交留言」就得。', '');
+            } catch (e) {}
+        }
+        restoreCommentDraft();
 
         function saveLocalPendingComment(comment) {
             var pending = getLocalPendingComments();
