@@ -1,4 +1,20 @@
-# 修復日誌 (v9.53 — 2026-10-14)
+# 修復日誌 (v9.54 — 2026-10-16)
+
+# 修復日誌 (v9.54 — 2026-10-16)
+
+## v9.54《討論區 Schema 五缺失修復》— GSC 結構化資料 5 個非重大問題全面修復（ZH/EN 苦主討論區）
+
+依 Google Search Console 報告（DiscussionForumPosting / Comment）修復 5 個「主要非重大問題」——不影響收錄與排名，修正後留言可在搜尋結果有更完整嘅富文本（Rich Snippets）展示。此類問題源自靜態 JSON-LD 示範留言嘅時間/作者欄位寫法；前端動態代碼只更新 userInteractionCount，唔會改寫日期同作者欄位，故靜態手術即徹底修復。
+
+### 修復內容（/info/vote/ ＋ /en/info/vote/ 兩頁同步）
+- datePublished 補全 ISO 8601 含香港時區：主帖 2026-01-15T09:00:00+08:00；4 則留言 2026-02-03T14:30/15:10:00+08:00、2026-02-11T10:20/11:05:00+08:00（回覆時間戳晚於提問，敘事合理）——同時解決「datetime 值無效」與「缺少時區」兩類警告
+- comment.author.url 補預設頁址（文檔指定方案）：ZH 8 處 Person/Organization author 全部帶入 https://bruceleehk.com/info/vote/（EN 版帶入 /en/info/vote/），確保欄位唔會空值
+- 附帶衛生修復：EN 頁 head font-awesome preload 誤被 <noscript> 開標籤包裹（巢狀錯位、2 開 1 閉）→ 解開包裹並清理結尾錯位標籤，與 ZH 版 head 結構完全對齊
+- sitemap.xml：兩頁 lastmod → 2026-10-16；URL 集不變（125 條）
+
+### 驗證與用戶端待辦
+- v9_54_verify.py：JSON-LD parse、ISO 8601 regex、author.url、@id/headline/留言文本零變、回歸 v9.49-53 全過；agent-browser 雙語實測 schema 動態 parse＋console 零錯
+- 用戶端：GitHub Desktop 三步上傳後，返回 Search Console 該報告點擊右下角藍色按鈕【修正「討論區結構化資料」問題】讓 Google 重新抓取（數日後警告清零）
 
 ## v9.53《關注組留言丟失修復》— 全港滅蟲關注組（免登入版）手機發相＋文字留言失敗全面檢測與修復（前端雙語＋Worker v6.1）
 
