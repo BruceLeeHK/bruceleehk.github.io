@@ -1,20 +1,37 @@
-# 修復日誌 (v9.55 — 2026-10-16)
+# 修復日誌 (v9.56 — 2026-10-16)
+
+## v9.56《blog-15 混合模式優化》— 保留靜態 FAQ＋尾部引導苦主討論區（ZH/EN）
+
+依用戶決定採用「混合模式」優化 blog-15《【屬靈反思】因屋企有木蝨被拒返教會？》——唔完全替換 FAQ（避免痛失 FAQPage Rich Snippets，亦避免苦主冷啟動見空白留言區嘅尷尬），改為喺 6 條 FAQ 之下加設「苦主匿名交流區」互動引導，承接讀者睇完文章後嘅宣洩與求助情緒，順暢導流入 Cloudflare KV 留言數據庫：
+
+### 改動（ZH/EN blog-15 兩頁）
+- FAQ 底部新設 .blog15-forum-cta 引導卡：💬 上面嘅解答未答到你？（苦主匿名交流區）——三貼心位（無需註冊完全匿名／可上載相片隔空初步斷症／過來人與弟兄姊妹解答代禱）＋大按鈕直達 /info/vote/（EN→/en/info/vote/）
+- 靜態 FAQ 6 條與 FAQPage JSON-LD 原封不動——Google 收摺式問答卡優勢保留
+- 修復 head font-awesome preload 誤被 <noscript> 開標籤包裹嘅巢狀錯位（表面 2 開 2 閉、實為錯位巢狀，與 v9.54 EN vote 頁同款病灶）——解開包裹，與全站標準寫法對齊
+- 引導卡 CSS 入 <style id="blog15-style">（綠系漸層卡＋左邊粗邊，沿用 blog15-btn-primary 按鈕）
+- sitemap：/info/blog-15/、/en/info/blog-15/ lastmod → 2026-10-16
+
+### 效果
+- 關鍵字流量：FAQ＋FAQPage Schema 繼續鎖定「屋企有木蝨可唔可以返教會」「教會木椅有木蝨」等搜尋曝光
+- 轉化鏈：文章共情 → FAQ 專業解答 → 尾部匿名交流區宣洩求助 → 討論區（v9.53 冪等引擎＋v9.55 Turnstile 人機驗證）→ AI 診斷／專業服務
+
 
 # 修復日誌 (v9.55 — 2026-10-16)
 
-## v9.55《Turnstile 前端啟用》— 人工驗證分階段啟用最後一步（ZH/EN 苦主討論區）
+## v9.55《Turnstile 前端啟用》— 雲端人機驗證正式上線（ZH/EN 苦主討論區）
 
-用戶已喺 Cloudflare 設定 Worker secret TURNSTILE_SECRET_KEY（線上 /api/health 實證 turnstile_enforced: true），但前端 sitekey 仍為空＋CSP 未放行 challenges.cloudflare.com——實證 POST 回 403 TURNSTILE_MISSING，所有訪客留言被擋。本版補齊前端兩塊拼圖，留言鏈即時復通＋真人機驗證生效。
+依方案 A「完成啟用」：Worker 端 TURNSTILE_SECRET_KEY 已設定（/api/health 實證 turnstile_enforced: true，無 token 嘅 POST 一律 403 TURNSTILE_MISSING），前端同步補齊三件事，兩側狀態對齊，全站留言恢復通行：
 
-### 修復內容（/info/vote/ ＋ /en/info/vote/）
-- TURNSTILE_SITEKEY 填入（v9.35 已預留完整接線：initTurnstile 動態載入、提交附 turnstile_token、未完成驗證前端攔截提示、回應後 resetTurnstile 強制重新驗證）
-- CSP 放行 Turnstile 三指令：script-src／frame-src／connect-src += https://challenges.cloudflare.com（widget iframe 與 siteverify 回傳必要；EN 頁 frame-src 原為空、ZH 頁原只有 udify.app）
-- sitemap.xml：兩頁 lastmod → 2026-10-16
+### 改動（ZH/EN vote 兩頁）
+- var TURNSTILE_SITEKEY 填入正式 Sitekey（0x4AAAAAAENKg40O2PKrvqKN）；既有接線全通：initTurnstile() 動態載入 challenges.cloudflare.com api.js → turnstile.render 渲染 widget（#tsBox）→ 提交附 turnstile_token → 回應後 resetTurnstile() 強制重驗；TURNSTILE_SITEKEY && !tsToken 前端攔截提示
+- CSP 三指令放行：script-src / connect-src / frame-src 各追加 https://challenges.cloudflare.com（EN 頁 frame-src 原為空指令，補入首個來源）；原有 udify.app／兩個 workers.dev／cloudflareinsights 來源全保留
+- sitemap：/info/vote/、/en/info/vote/ lastmod → 2026-10-16
 
-### 部署狀態與驗證
-- Worker v6.1 已上線（/api/health version 6.1＋lost_update_recovery＋client_ref_idempotent），本版零 Worker 改動
-- v9_55_turnstile_verify.py：sitekey 格式＋CSP 三指令＋留言引擎/JSON-LD（v9.53/54）回歸全過
-- 管理員回覆經 admin secret 提交，自動豁免 Turnstile（Worker isAdmin 路徑），admin.html 零改動
+### 提醒
+- Cloudflare Turnstile widget 嘅 Hostname 白名單必須包含 bruceleehk.com，否則前端 widget 會報 invalid domain
+- 管理員回覆經 admin secret 走 isAdmin 路徑自動豁免 Turnstile；探測 POST 唔會消耗 KV 讀寫配額（Turnstile 檢查在配額檢查之前）
+- CHANGELOG 修復：v9.54 頭插遺留之重複 H1 已合併
+
 
 # 修復日誌 (v9.54 — 2026-10-16)
 
