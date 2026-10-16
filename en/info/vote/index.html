@@ -95,7 +95,7 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev; frame-src; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#10b981">
     <style>
@@ -396,7 +396,7 @@
            Fill in TURNSTILE_SITEKEY to activate: loads the widget dynamically,
            sends turnstile_token with the post for backend siteverify double-check.
            Empty = unchanged behaviour (math check + IP quota), zero impact. */
-        var TURNSTILE_SITEKEY = '';   /* ← paste your Turnstile Sitekey here (from Cloudflare Turnstile) */
+        var TURNSTILE_SITEKEY = '0x4AAAAAAENKg40O2PKrvqKN';   /* ← paste your Turnstile Sitekey here (from Cloudflare Turnstile) */
         var tsToken = '';
 
         function initTurnstile() {

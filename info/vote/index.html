@@ -602,12 +602,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com;
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://static.cloudflareinsights.com https://challenges.cloudflare.com;
       style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
       img-src 'self' data: https: blob:;
       font-src 'self' data: https://cdnjs.cloudflare.com;
-      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev;
-      frame-src https://udify.app;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://challenges.cloudflare.com;
+      frame-src https://udify.app https://challenges.cloudflare.com;
       object-src 'none';
       base-uri 'self';
       form-action 'self' https://formspree.io;
@@ -889,7 +889,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
            TURNSTILE_SITEKEY 貼上 sitekey 後即刻生效：動態載入 Turnstile 元件，
            提交時附帶 turnstile_token 交由 Worker 向 siteverify 後端二次核對。
            留空 = 維持現狀（數學驗證＋IP 配額），零影響。 */
-        var TURNSTILE_SITEKEY = '';   /* ← 喺呢度貼上 Turnstile Sitekey（Cloudflare Turnstile 建立後取得） */
+        var TURNSTILE_SITEKEY = '0x4AAAAAAENKg40O2PKrvqKN';   /* ← 喺呢度貼上 Turnstile Sitekey（Cloudflare Turnstile 建立後取得） */
         var tsToken = '';
 
         function initTurnstile() {

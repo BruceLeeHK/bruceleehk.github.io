@@ -1,4 +1,20 @@
-# 修復日誌 (v9.54 — 2026-10-16)
+# 修復日誌 (v9.55 — 2026-10-16)
+
+# 修復日誌 (v9.55 — 2026-10-16)
+
+## v9.55《Turnstile 前端啟用》— 人工驗證分階段啟用最後一步（ZH/EN 苦主討論區）
+
+用戶已喺 Cloudflare 設定 Worker secret TURNSTILE_SECRET_KEY（線上 /api/health 實證 turnstile_enforced: true），但前端 sitekey 仍為空＋CSP 未放行 challenges.cloudflare.com——實證 POST 回 403 TURNSTILE_MISSING，所有訪客留言被擋。本版補齊前端兩塊拼圖，留言鏈即時復通＋真人機驗證生效。
+
+### 修復內容（/info/vote/ ＋ /en/info/vote/）
+- TURNSTILE_SITEKEY 填入（v9.35 已預留完整接線：initTurnstile 動態載入、提交附 turnstile_token、未完成驗證前端攔截提示、回應後 resetTurnstile 強制重新驗證）
+- CSP 放行 Turnstile 三指令：script-src／frame-src／connect-src += https://challenges.cloudflare.com（widget iframe 與 siteverify 回傳必要；EN 頁 frame-src 原為空、ZH 頁原只有 udify.app）
+- sitemap.xml：兩頁 lastmod → 2026-10-16
+
+### 部署狀態與驗證
+- Worker v6.1 已上線（/api/health version 6.1＋lost_update_recovery＋client_ref_idempotent），本版零 Worker 改動
+- v9_55_turnstile_verify.py：sitekey 格式＋CSP 三指令＋留言引擎/JSON-LD（v9.53/54）回歸全過
+- 管理員回覆經 admin secret 提交，自動豁免 Turnstile（Worker isAdmin 路徑），admin.html 零改動
 
 # 修復日誌 (v9.54 — 2026-10-16)
 
