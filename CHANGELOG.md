@@ -1,4 +1,30 @@
-# 修復日誌 (v9.55 — 2026-10-17)
+# 修復日誌 (v9.56 — 2026-10-17)
+
+## v9.56《防踩坑優化——18 區文本逐區化＋CSP 審計＋錨文本自然化》
+
+依外部 SEO 審閱文檔《給網頁設計師的 3 個「防踩坑」溫馨提示》對 v9.55 滅馬蜂巢/黃蜂巢佈局做三項加固。
+
+### 一、18 區文本逐區客製化（防 Doorway Pages）
+- 十八區＋愉景灣 19 區頁 ZH/EN 蜂巢專區文本由「同一段照抄」改為逐區獨立撰寫：
+  - p1 正文按當區住屋場景分化——村屋型（西貢/大埔/北區/元朗/屯門/離島/愉景灣等）寫「村屋簷篷・花園樹叢・棚架」，市區型（油尖旺/深水埗/東區等）寫「冷氣機位・窗框・招牌後・天台簷篷」，混合型（中西區/灣仔/九龍城/黃大仙/觀塘/葵青/沙田等）兩者兼寫並加當區地標（獅子山山腳、九龍塘洋房、林村河畔、大澳棚屋、老圍/川龍等）
+  - h2 後綴逐區不同（— 窗棚蜂巢點算？/ — 村屋簷篷蜂巢點處理？/ — 招牌後蜂巢點算？等 19 款）
+  - FAQ 答案逐區開場＋按物業類型分工句（法團/管理處協調 vs 村屋私人範圍直接安排）
+  - 服務卡描述按 village/urban/mixed 三型分化
+  - 「滅馬蜂巢」「黃蜂巢」兩詞於每頁繼續並存（用戶指令不變）
+- EN 版同步逐區改寫（西貢 Sai Kung village canopies、元朗 orchards、旺角 behind signs 等），保留 "ma fung" 術語教育內容
+- 合規 v9.45 標準維持：零 即日/保證/根治/100%/最平
+
+### 二、CSP 全站審計（確認不阻 Googlebot 渲染）
+- 新增全站 CSP vs 實際資源匹配審計：64 頁有 CSP meta 逐頁核對 script-src/style-src/frame-src/connect-src（含 default-src fallback）與頁面實際載入之外部資源
+- 審計結論：零違規——cdnjs/udify/YouTube (youtube-nocookie)/challenges.cloudflare.com/workers.dev 全部正確放行；inline script/style 均有 unsafe-inline；67 頁無 CSP 不存在阻擋
+- robots.txt 複核：Googlebot 僅 Disallow /info/vote/admin.html，CSS/JS/圖片全放行
+- Turnstile 三指令回歸：vote ZH/EN script-src/frame-src/connect-src 均含 challenges.cloudflare.com
+
+### 三、內部連結 Anchor Text 自然化（防 100% 完全匹配）
+- footer 124 頁蜂巢錨由單一 exact-match 改為輪換：ZH「滅馬蜂巢/滅馬蜂巢專頁/黃蜂巢安全摘除/摘馬蜂巢・黃蜂巢」4 變體（16/16/15/15）；EN「Hornet Nest Removal/Wasp Nest Removal Guide/Wasp & Hornet Nest Removal」3 變體（21/21/20）
+- 19 區頁蜂專區兩條行內錨（專頁＋公司頁）各 3 變體錯位輪換
+- services SERVICE 06 錨與 districts index 錨文案區隔
+- FAQ 答案內錨隨逐區文案自然分化
 
 ## v9.55《滅馬蜂巢・黃蜂巢＋Turnstile 啟用＋blog-15 混合模式》
 
