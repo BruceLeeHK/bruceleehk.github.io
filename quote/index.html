@@ -204,6 +204,21 @@
         .channel-tag.hot  { background: #fef2f2; color: var(--danger); border: 1px solid #fca5a5; }
         .channel-tag.ai   { background: var(--primary-light); color: var(--primary-dark); border: 1px solid #6ee7b7; }
         .channel-tag.live { background: #fef2f2; color: var(--danger); border: 1px solid #fca5a5; }
+        .channel-tag.org  { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+        .form-b2b-email {
+            background: #eff6ff;
+            border: 1px solid #93c5fd;
+            border-left: 4px solid #1d4ed8;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 0 0 20px;
+            font-size: 0.93rem;
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+        .form-b2b-email a { color: #1d4ed8; font-weight: 700; text-decoration: underline; }
+        .form-b2b-email i { color: #1d4ed8; margin-right: 4px; }
+        .quote-form label .opt { color: var(--text-muted); font-weight: 600; font-size: 0.82rem; }
         .channel-btn {
             display: inline-flex;
             align-items: center;
@@ -341,7 +356,7 @@
         }
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
         }
         .contact-card {
@@ -493,17 +508,17 @@
             <div class="channels-grid">
                 <!-- Channel 1: Form (featured) -->
                 <div class="channel-card featured" style="--accent-color: var(--primary); --accent-bg: var(--primary-light);">
-                    <span class="channel-tag hot">👇 推薦</span>
+                    <span class="channel-tag org">🏢 商業・機構</span>
                     <div class="channel-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div>
                     <h3>專員報價表單</h3>
-                    <p>填寫蟲患詳情，由專員親自審閱並主動聯絡你提供精準報價。適合需要詳細描述情況的客戶。</p>
+                    <p>填寫蟲患詳情，由專員親自審閱並主動聯絡你提供精準報價。適合<strong>商業機構、物業管理</strong>或需要詳細描述情況的客戶。</p>
                     <a href="#quote-form" class="channel-btn green">
                         <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 立即填表
                     </a>
                 </div>
                 <!-- Channel 2: 工作時間即時 WhatsApp -->
                 <div class="channel-card" style="--accent-color: var(--tech-blue); --accent-bg: #e0f2fe;">
-                    <span class="channel-tag live">🕘 工作時間</span>
+                    <span class="channel-tag hot">👇 推薦</span>
                     <div class="channel-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
                     <h3>工作時間即時 WhatsApp</h3>
                     <p>工作時間內（9:00-18:00），專員即時回覆查詢、提供初步建議與緊急處理指引。非工作時間由 AI 助手協助。</p>
@@ -529,6 +544,7 @@
             <div class="form-wrapper">
                 <h2 id="form-title"><i class="fa-solid fa-clipboard-list" aria-hidden="true" style="color: var(--primary);"></i> 專員報價表單</h2>
                 <p>填妥以下資料，專員將於工作時間內主動聯絡你</p>
+                <div class="form-b2b-email"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 機構客戶如需索取正式報價單 (Quotation) 或投標資訊，可直接電郵至：<a href="mailto:master@bruceleehk.com">master@bruceleehk.com</a></div>
 
                 <form id="quote-form-element" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
                     <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
@@ -562,8 +578,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="premise-type">屋苑類型</label>
-                            <select id="premise-type" name="premise-type" required>
+                            <label for="premise-type">屋苑類型<span class="opt">（選填）</span></label>
+                            <select id="premise-type" name="premise-type">
                                 <option value="" disabled selected>請選擇</option>
                                 <option value="公屋">公屋</option>
                                 <option value="私人住宅">私人住宅</option>
@@ -576,12 +592,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="district">所在地區</label>
+                        <label for="district">所在地區<span class="opt">（選填）</span></label>
                         <input type="text" id="district" name="district" placeholder="例如：觀塘、沙田、中環">
                     </div>
 
                     <div class="form-group">
-                        <label for="details">詳細情況</label>
+                        <label for="details">詳細情況<span class="opt">（選填）</span></label>
                         <textarea id="details" name="details" rows="5" placeholder="請描述你嘅蟲患情況，例如：出現嘅害蟲種類、受影響嘅範圍、蟲患持續嘅時間等等"></textarea>
                     </div>
 
@@ -625,6 +641,14 @@
                         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 即時開始傾
                     </a>
                 </div>
+                <div class="contact-card" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #93c5fd;">
+                    <div class="contact-icon" style="background:#1d4ed8;color:#fff;"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+                    <h4>✉️ 電郵查詢</h4>
+                    <p>機構客戶・正式報價單</p>
+                    <a href="mailto:master@bruceleehk.com" style="display:inline-block;margin-top:8px;background:#1d4ed8;color:#fff;padding:9px 20px;border-radius:8px;font-weight:700;font-size:.92rem;text-decoration:none;transition:background .2s;">
+                        master@bruceleehk.com
+                    </a>
+                </div>
                 <div class="contact-card">
                     <div class="contact-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
                     <h4>地址</h4>
@@ -655,7 +679,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00</p>
+        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
         <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram">
@@ -669,7 +693,7 @@
             <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42" rel="noopener" aria-label="WhatsApp">
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
             </a>
-            <a href="mailto:Cedars5282@gmail.com" aria-label="Email">
+            <a href="mailto:master@bruceleehk.com" aria-label="Email">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
             <a href="https://www.youtube.com/@CEDARS_LTD" rel="noopener" aria-label="YouTube">

@@ -1,4 +1,31 @@
-# 修復日誌 (v9.57 — 2026-10-17)
+# 修復日誌 (v9.58 — 2026-10-17)
+
+## v9.58《聯絡渠道重定位＋master@bruceleehk.com 全站部署》
+
+依方案文檔《「專員報價表單」視覺降級與重新定位》＋用戶指令「表單接收信息的 email 改為 master@bruceleehk.com」。核心策略：B2C 住宅客導流 WhatsApp（轉化率最高），B2B 商業/政府機構行專屬域名郵箱＋報價表單專業通道。
+
+### 一、「專員報價表單」視覺降級與重新定位（/quote/）
+- 推薦標籤轉移：移除表單卡上方「👇 推薦」，改為藍色「🏢 商業・機構」標籤（B2B 定位）；「👇 推薦」轉移至「工作時間即時 WhatsApp」卡（工作時間資訊已含於卡標題，無資訊損失）
+- 表單卡描述：「適合需要詳細描述情況的客戶。」→「適合**商業機構、物業管理**或需要詳細描述情況的客戶。」
+- 新增 `.channel-tag.org` CSS（藍色 #eff6ff/#1d4ed8/#93c5fd）
+
+### 二、表單區塊電郵分流＋必填精簡（/quote/）
+- 表單介紹文字下方新增顯眼提示盒：「機構客戶如需索取正式報價單 (Quotation) 或投標資訊，可直接電郵至：master@bruceleehk.com」（`.form-b2b-email` 藍色提示盒）
+- 必填精簡：只剩「姓名、聯絡電話、服務類型」必填；「屋苑類型」由必填改選填，「所在地區」「詳細情況」本為選填，三欄均加「（選填）」標示（`.quote-form label .opt`），降低填寫門檻
+
+### 三、「即時聯絡我們」區塊升級（/quote/）
+- 新增第四張「✉️ 電郵查詢」卡（機構客戶・正式報價單 → mailto:master@bruceleehk.com），與 WhatsApp／地址／營業時間並列（contact-grid auto-fit 自適應四卡）
+
+### 四、master@bruceleehk.com 全站部署
+- 頁尾資訊行加電郵：ZH 版「地址｜服務區域｜營業時間」行尾追加「電郵：master@bruceleehk.com」（mailto 連結，color:inherit 下劃線）；EN 版「Address|Service Area|Hours」行追加「Email:」；sc 簡體版追加「邮箱：」
+- 全站郵件連結統一：所有頁尾社交 icon `mailto:Cedars5282@gmail.com` → `mailto:master@bruceleehk.com`；52 檔 JSON-LD LocalBusiness `"email"` 欄位同步更新（bruceleehk.com 域名郵箱對 Google 商家信號一致）
+- 404 頁：Gmail 圖示改 Font Awesome 信封 icon（配合品牌郵箱）
+- EN /en/quote/：「Or Contact Us Directly」區塊加機構電郵行（Corporate / property-management clients → Quotations & tenders）
+- 表單接收電郵：/quote/ 表單經 Formspree（formspree.io/f/xlgyylke）提交，收件電郵須於 Formspree Dashboard → Forms → xlgyylke → Settings 內改為 master@bruceleehk.com（靜態站 HTML 端無法改動收件人，屬平台設定）；EN 表單經 WhatsApp 深鏛提交，不涉及
+
+### 受影響範圍
+/quote/、/en/quote/ 主手術；全站頁尾＋mailto＋JSON-LD 電郵統一（ZH/EN/sc 全部頁面）；sitemap lastmod 同步刷新改動頁面
+
 
 ## v9.57《安全原則深色卡文字隱形修復》— /wasp-nest/「馬蜂巢處理安全原則」區塊文字睇唔到（12 頁同源修復）
 
