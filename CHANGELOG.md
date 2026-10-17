@@ -1,4 +1,29 @@
-# 修復日誌 (v9.58 — 2026-10-17)
+# 修復日誌 (v9.59 — 2026-10-18)
+
+## v9.59《專員報價表單「Failed to fetch」CSP 修復》
+
+依方案文檔《專員報價表單「Failed to fetch」修復與優化方案》三項排查執行。用戶 DevTools 截圖實證：/quote/ 表單 fetch POST https://formspree.io/f/xlgyylke 被瀏覽器 CSP 指令 connect-src 攔截（白名單僅 self／comment-handler／pest-vision-worker／cloudflareinsights），「Failed to fetch」由此而生——與 Formspree 後端綁定 master@bruceleehk.com（v9.58 已完成）無關。
+
+### ① CSP connect-src 放行 Formspree（核心修復）
+- ZH /quote/（全站唯一 Formspree AJAX 表單頁）：connect-src 加入 https://formspree.io，並按文檔修改範例同步加入 https://challenges.cloudflare.com（未來表單若接 Turnstile 即就緒；其餘指令零改動）
+- EN /en/quote/：connect-src 同步加入兩域（雙語對稱；該頁表單走 WhatsApp 深鏈不受影響，form-action 既有的 formspree 白名單維持）
+- form-action 指令本已含 https://formspree.io（ZH/EN 兩頁核實），無需改動；AJAX fetch 受 connect-src 約束——此即 v9.56 CSP 審計漏檢點（審計只核對了頁面靜態資源，未涵蓋表單 AJAX 提交目標）
+
+### ② Form Action URL 與 Fetch 邏輯校對（核實正確，零改動）
+- 表單提交目標精確為 https://formspree.io/f/xlgyylke（form action 屬性實證）
+- AJAX fetch 已帶 Accept: application/json JSON header（實證）——文檔要求兩項全部達標
+
+### ③ Turnstile 驗證碼衝突排查（結論：無衝突）
+- /quote/ 與 /en/quote/ 零 Turnstile 痕跡（grep 實證）→ 報價表單提交鏈路無驗證碼介入，不存在 Token 獲取失敗中斷 fetch 的風險
+- 討論區 Turnstile（vote ZH/EN）已於 v9.55 啟用（sitekey＋CSP 三指令），本次上線後以線上 E2E 複核 widget 渲染與提交
+
+### 附帶衛生修復（同步品質驗證時發現之線上真實缺陷，非本方案範圍）
+- 語言切換引擎 i18n.js 還原：線上版本誤退回舊版（僅映射 blog-1…blog-11），blog-12…blog-23 共 12 篇文章 ZH 頁的 EN 切換鈕錯誤降級到 /en/info/ 資訊中樞——已還原為 n≤23（blog-1…23 全部有 EN 對應版，逐一實證），切換直達對應 EN 文章
+- 雙 </body> 去重：/、/en/、/wasp-nest/、/en/wasp-nest/ 共 4 頁尾部連續兩個 </body>（wasp-nest 兩頁並有雙 </html>），已清理為單一收尾；Cloudflare RUM beacon 行原樣保留（線上實測每頁恰 1 個 beacon 且 token 正確，分析功能正常）
+### 最終上線測試（對應文檔流程）
+- 本地真瀏覽器 E2E：隨機測試資料填表→提交→「提交成功」提示出現、零 CSP 錯誤（Formspree HTTP 200）
+- 測試提交會寄出真實電郵至 master@bruceleehk.com——請登入郵箱確認收到 Formspree 測試資料（文檔第三步）
+- 上線後操作：GitHub Desktop 三步上傳 → Ctrl+F5 強刷 /quote/ → 再提交一次實測
 
 ## v9.58《聯絡渠道重定位＋master@bruceleehk.com 全站部署》
 
