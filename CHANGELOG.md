@@ -1,36 +1,22 @@
-# 修復日誌 (v9.56 — 2026-10-16)
+# 修復日誌 (v9.55 — 2026-10-17)
 
-## v9.56《blog-15 混合模式優化》— 保留靜態 FAQ＋尾部引導苦主討論區（ZH/EN）
+## v9.55《滅馬蜂巢・黃蜂巢＋Turnstile 啟用＋blog-15 混合模式》
 
-依用戶決定採用「混合模式」優化 blog-15《【屬靈反思】因屋企有木蝨被拒返教會？》——唔完全替換 FAQ（避免痛失 FAQPage Rich Snippets，亦避免苦主冷啟動見空白留言區嘅尷尬），改為喺 6 條 FAQ 之下加設「苦主匿名交流區」互動引導，承接讀者睇完文章後嘅宣洩與求助情緒，順暢導流入 Cloudflare KV 留言數據庫：
+依用戶指令「將香港十八區加入滅馬蜂巢（或黃蜂巢），兩個詞都保留，再設置滅馬蜂巢（或黃蜂巢）專頁，優化其他相關頁面（包括英文EN版）」，並兌現 v9.54 承諾完成 Turnstile 分階段啟用，同步落地 blog-15 混合模式優化。
 
-### 改動（ZH/EN blog-15 兩頁）
-- FAQ 底部新設 .blog15-forum-cta 引導卡：💬 上面嘅解答未答到你？（苦主匿名交流區）——三貼心位（無需註冊完全匿名／可上載相片隔空初步斷症／過來人與弟兄姊妹解答代禱）＋大按鈕直達 /info/vote/（EN→/en/info/vote/）
-- 靜態 FAQ 6 條與 FAQPage JSON-LD 原封不動——Google 收摺式問答卡優勢保留
-- 修復 head font-awesome preload 誤被 <noscript> 開標籤包裹嘅巢狀錯位（表面 2 開 2 閉、實為錯位巢狀，與 v9.54 EN vote 頁同款病灶）——解開包裹，與全站標準寫法對齊
-- 引導卡 CSS 入 <style id="blog15-style">（綠系漸層卡＋左邊粗邊，沿用 blog15-btn-primary 按鈕）
-- sitemap：/info/blog-15/、/en/info/blog-15/ lastmod → 2026-10-16
+### 一、滅馬蜂巢／黃蜂巢 SEO 佈局（兩詞並用）
+- 新增 /wasp-nest/＋/en/wasp-nest/ 專頁（事項型：馬蜂巢點算＋叫法拆解＋流程＋收費參考＋十八區覆蓋網 20 卡），與 /service/wasp/（公司型滅黃蜂公司 pillar）錯位互補互鏈；JSON-LD×4（Breadcrumb＋Service hasOfferCatalog＋FAQPage 6 問＋PestControl 同 @id）；EN 版含 "ma fung" 術語教育內容
+- 十八區＋愉景灣 20 區頁 ZH/EN 各 4 補丁：keywords 加詞、服務卡加「🐝 滅馬蜂巢／黃蜂巢」、新增蜂巢專區（h2 兩詞＋連專頁＋連 pillar）、FAQ 加一條（兩詞入 Q＋A）
+- footer 全站灌溉：「滅馬蜂巢」/「Hornet Nest Removal」exact-anchor 入駐全站 footer（sep/nosep 變體）
+- services ZH/EN 新增 SERVICE 06 wasp article（兩詞＋雙鏈）；service/wasp ZH/EN 互鏈專頁＋sub/keywords 加馬蜂詞；districts index ZH/EN 蜂巢提示行
 
-### 效果
-- 關鍵字流量：FAQ＋FAQPage Schema 繼續鎖定「屋企有木蝨可唔可以返教會」「教會木椅有木蝨」等搜尋曝光
-- 轉化鏈：文章共情 → FAQ 專業解答 → 尾部匿名交流區宣洩求助 → 討論區（v9.53 冪等引擎＋v9.55 Turnstile 人機驗證）→ AI 診斷／專業服務
+### 二、Cloudflare Turnstile 啟用（承 v9.54 承諾）
+- vote ZH/EN：TURNSTILE_SITEKEY 填入（0x4AAAAAAENKg40O2PKrvqKN）
+- CSP 三指令放行 https://challenges.cloudflare.com（ZH script/frame/connect＋EN script/connect＋EN frame-src 由空填值）——解除 Turnstile 中間態全站留言 403 封鎖
+- 上傳後前端 widget 自動渲染、提交附 turnstile_token、Worker siteverify 二次核對
 
-
-# 修復日誌 (v9.55 — 2026-10-16)
-
-## v9.55《Turnstile 前端啟用》— 雲端人機驗證正式上線（ZH/EN 苦主討論區）
-
-依方案 A「完成啟用」：Worker 端 TURNSTILE_SECRET_KEY 已設定（/api/health 實證 turnstile_enforced: true，無 token 嘅 POST 一律 403 TURNSTILE_MISSING），前端同步補齊三件事，兩側狀態對齊，全站留言恢復通行：
-
-### 改動（ZH/EN vote 兩頁）
-- var TURNSTILE_SITEKEY 填入正式 Sitekey（0x4AAAAAAENKg40O2PKrvqKN）；既有接線全通：initTurnstile() 動態載入 challenges.cloudflare.com api.js → turnstile.render 渲染 widget（#tsBox）→ 提交附 turnstile_token → 回應後 resetTurnstile() 強制重驗；TURNSTILE_SITEKEY && !tsToken 前端攔截提示
-- CSP 三指令放行：script-src / connect-src / frame-src 各追加 https://challenges.cloudflare.com（EN 頁 frame-src 原為空指令，補入首個來源）；原有 udify.app／兩個 workers.dev／cloudflareinsights 來源全保留
-- sitemap：/info/vote/、/en/info/vote/ lastmod → 2026-10-16
-
-### 提醒
-- Cloudflare Turnstile widget 嘅 Hostname 白名單必須包含 bruceleehk.com，否則前端 widget 會報 invalid domain
-- 管理員回覆經 admin secret 走 isAdmin 路徑自動豁免 Turnstile；探測 POST 唔會消耗 KV 讀寫配額（Turnstile 檢查在配額檢查之前）
-- CHANGELOG 修復：v9.54 頭插遺留之重複 H1 已合併
+### 三、blog-15 混合模式（保留靜態 FAQ＋尾部引導討論區）
+- ZH/EN 各插 vote-redirect-banner CTA（延伸閱讀前）：保留 5 條 FAQ 不動，尾部 banner 引導讀者匿名留言互動
 
 
 # 修復日誌 (v9.54 — 2026-10-16)
