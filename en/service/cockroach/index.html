@@ -252,6 +252,11 @@
 .hub-tech .fa-solid{color:#34d399;font-size:1.3rem;margin-top:2px}
 .hub-tech p{margin:0;font-size:.92rem;line-height:1.8}
 .hub-tech b{color:#34d399}
+/* v9.57 fix — hub-tech dark card: intro paragraph and card body text contrast fix + vertical layout */
+.dist-card.hub-tech{flex-direction:column;align-items:stretch;gap:0}
+.dist-card.hub-tech p{color:#e2e8f0}
+.dist-card.hub-tech .tech-list li{color:var(--text-main)}
+.dist-card.hub-tech .tech-list li b{color:#047857}
 /* ===== v9.29 蜘蛛網四大引流通道 Spider Web Navigation ===== */
 .web-net{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
 .web-card{display:flex;flex-direction:column;gap:7px;border:1px solid var(--border);border-radius:12px;padding:15px 16px 13px;text-decoration:none;background:var(--light-bg);transition:all .2s}
@@ -538,5 +543,6 @@
     });
     </script>
 <!-- v9.48 pillar page (service/cockroach) -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"9e3b28be05e7400cad966a47adefc87e","r":1,"spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>

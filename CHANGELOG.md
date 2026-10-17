@@ -1,4 +1,30 @@
-# 修復日誌 (v9.56 — 2026-10-17)
+# 修復日誌 (v9.57 — 2026-10-17)
+
+## v9.57《安全原則深色卡文字隱形修復》— /wasp-nest/「馬蜂巢處理安全原則」區塊文字睇唔到（12 頁同源修復）
+
+依用戶附截圖報告「https://bruceleehk.com/wasp-nest/ 呢個位置嘅文字睇唔到」，實證病因係 v9.48 以來五個蟲種 pillar＋wasp-nest 共 12 頁（ZH/EN）同模板嘅 CSS 疊加衝突——唔係 wasp-nest 獨有，rodent/termite/flea/cockroach 同樣中招。
+
+### 病因（CSS 疊加衝突，三重）
+- 簡介段落隱形：`.dist-card p{color:var(--text-main)}`（#334155 深灰，為白卡設計）直接命中深色卡（`.dist-card.hub-tech`，#0f172a→#1e293b 深藍漸變底）入面嘅簡介段落，壓過 `.hub-tech` 繼承嘅 #e2e8f0——深灰字落深藍底對比僅約 1.4:1
+- 卡內文隱形：`.tech-list li{background:var(--light-bg)}`（#f8fafc 近白）令四張卡喺深色卡內變白盒，但卡內文繼承 `.hub-tech` 嘅 #e2e8f0 淺灰——淺灰字落白底對比約 1.2:1；卡標題 b 沿用 #34d399 落白底僅約 1.9:1
+- 版式擠迫：`.hub-tech{display:flex}` 令 h2／簡介／卡片清單三家企柱——桌面版窄欄擠迫，手機 390px 標題被壓成一行一字
+
+### 修復（12 頁 inline CSS 追加四條規則，immutable cache 免疫）
+- `.dist-card.hub-tech{flex-direction:column;align-items:stretch;gap:0}` → 垂直排版，與頁面其他區塊一致
+- `.dist-card.hub-tech p{color:#e2e8f0}` → 簡介段落淺色（specificity 0,2,1 勝 `.dist-card p` 0,1,1）
+- `.dist-card.hub-tech .tech-list li{color:var(--text-main)}` → 卡內文 #334155 落 #f8fafc＝9.9:1
+- `.dist-card.hub-tech .tech-list li b{color:#047857}` → 卡標題深綠＝5.2:1（保留綠色主題）
+- 技術決策：改頁面 inline `<style>` 而非共用 bruceleehk.css——HTML 頁 max-age=0 must-revalidate 即刻生效；共用 CSS 檔被 max-age=31536000 immutable 長快取，改佢會令舊訪客最長一年睇唔到修復
+
+### 受影響頁面（12）
+/wasp-nest/、/en/wasp-nest/、/service/rodent/、/en/service/rodent/、/service/termite/、/en/service/termite/、/service/flea/、/en/service/flea/、/service/cockroach/、/en/service/cockroach/、/service/wasp/、/en/service/wasp/
+
+### 驗證（全 PASS）
+- WCAG 對比度數學驗證：簡介段落 11.9–14.5:1、卡內文 9.9:1、卡標題 5.2:1、卡圖示 3.9:1（門檻 4.5/4.5/4.5/3.0）
+- 真瀏覽器 12 頁循環驗證：flex-direction=column＋簡介/卡內文/卡標題三組計算樣色全部命中＝12/12 PASS
+- 截圖對比：桌面 1280px＋手機 390px、ZH＋EN 修復前後六圖；390px scrollWidth=390 零橫向溢出；頁面錯誤零
+- 影響範圍核實：全站僅 12 頁使用 `.dist-card.hub-tech` 組合；districts 中樞兩頁用純 `.hub-tech`（icon＋淺色字，本來正常）不受影響；其餘 50 頁僅定義未使用，不動
+
 
 ## v9.56《防踩坑優化——18 區文本逐區化＋CSP 審計＋錨文本自然化》
 
