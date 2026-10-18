@@ -1,4 +1,21 @@
-# 修復日誌 (v9.61 — 2026-10-18)
+# 修復日誌 (v9.62 — 2026-10-18)
+
+## v9.62《简体版隱私政策頁樣式修復（相對路徑深度錯）＋og:image 絕對化》
+
+依用戶回報「https://bruceleehk.com/sc/privacy/ 呢個頁面顯示有問題」（附截圖：全頁無 CSS、logo 爛圖、導航變原生 bullet list）：
+
+### 病源與修復
+- 病源：/sc/privacy/ 頁深度為二（/sc/privacy/），但 5 個 asset 引用沿用深度一寫法 ../assets/（bruceleehk.css／logo.png×2／i18n.js／bruceleehk.js）→ 實際解析去 /sc/assets/... 全 404 → 整頁樣式與腳本載入失敗；EN 版（../../assets/）與 ZH 版（深度一 ../assets/）本來正確，僅 SC 版漏改
+- 修復：SC 版 5 處 ../assets/ → ../../assets/，與 EN 版對齊
+- 同類 bug 延伸修復（og:image 相對路徑——社交平台爬蟲不解析相對路徑，分享卡會空白）：privacy 三版＋/quote/ 共 4 頁 og:image 改絕對 URL https://bruceleehk.com/assets/img/og-cover.jpg；/ai/ 頁 og:image（quote-hero-ai.webp）同改絕對
+- 全站掃描：所有 HTML 相對引用（href/src）解析存在性檢查，47 條相對引用零真實破損（8 條 flag 全屬 JS 模板字面量假陽性：escapeAttr/about:blank/$2）
+
+### 部署前置（關鍵防回退）
+- 本地 workspace 曾回滾至 v9.53 快照；已先執行線上基線同步（承 v9.58 模式）：sitemap 130 ∪ 本地 129 = 134 URL 全量抓線上 v9.61 覆蓋本地，0 miss、133 條 Cloudflare beacon 剝離；CHANGELOG／sitemap／i18n.js／404×2 同步更新；同步後驗證：GTM 132 頁／Turnstile sitekey 2 頁／privacy×3／wasp-nest×2／quote v9.61 條款全在——確保本次打包零回退
+
+### 驗證
+- agent-browser 實測本地 http.server：desktop 1366px（sticky header／logo naturalWidth 440／3 stylesheets／零 page errors）＋390px 手機（零水平溢出 scrollWidth=390／CSS 全載／簡體 cookie 橫幅正常）；截圖 2 張
+- og:image 相對路徑全站 rg 覆核歸零殘留
 
 ## v9.61《報價頁服務條款增補「服務地域與法律規管」聲明（ZH／EN 雙語）》
 
