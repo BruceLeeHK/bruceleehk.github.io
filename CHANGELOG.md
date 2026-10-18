@@ -1,4 +1,29 @@
-# 修復日誌 (v9.63 — 2026-10-18)
+# 修復日誌 (v9.64 — 2026-10-18)
+
+## v9.64《隱私政策成頁精簡（技術細節全隱藏）＋ 全站 Cookie 橫幅新文案》
+
+依用戶《優化隱私政策》精簡方案：/privacy/ 保留網址，main 內容全部清空，直接換入「精簡優化版」兩大區塊；並完成 v9.63 留尾巴的 sitewide 橫幅 GA 字眼清理。
+
+### A. 隱私政策三語成頁替換（/privacy/ ＋ /sc/privacy/ ＋ /en/privacy/）
+- 三版 main 內容全部清空，新內容＝兩大區塊：①服務條款與免責聲明（AI 診斷與報價說明／專員服務優先機制／科學綜合防治 (IPM) 理念）；②隱私與個人資料保護政策（地域與法規合規聲明／資料收集與保密／Cookie 與網站分析）
+- 技術細節全面隱藏：Formspree、Cloudflare Workers KV、Cloudflare Web Analytics、cdnjs、localStorage 代碼名 blh_cookie_consent_v1 等供應商／代碼名稱，一律不再出現於頁面可見文本；改以「安全的加密雲端系統」「標準的網站分析工具」代稱
+- 移除舊「一至七」長文結構（資料使用者與適用範圍、收集資料表格、Cookie 類別清單、資料用途、第三方服務供應商、資料保留期、你的權利、政策更新）
+- 保留不動：hero（h1＋subtitle＋badges）、header/footer、GTM 同意機制（head loader＋橫幅 script 原樣）、footer「Cookie 設定」錨點 id="cookie-settings"（移至隱私政策區塊）及 aria-labelledby="privacy-main"（移至新首個 h2）
+- meta description／og:description 三版同步重寫（零技術字眼）；title／canonical／hreflang／keywords 不動
+
+### B. 全站 Cookie 橫幅新文案（132 頁語言感知替換）
+- ZH（65 頁，用戶指定一字不差）：「本網站使用 Cookie 及相關基礎追蹤技術以優化網站體驗及統計互動（例如查詢點擊量）。繼續瀏覽本網站即表示您同意我們使用 Cookie。詳情請參閱我們的隱私政策。」
+- SC（2 頁）简体對應版；EN（65 頁）英文對應版
+- 按鈕照用戶字面更新：ZH「同意並繼續」／SC「同意并继续」／EN「Agree & Continue」（照字面移除原「✓ 」前綴）
+- 「僅必要 Cookie」副掣保留——v9.60 GDPR 事先同意機制完全不變（同意前 GTM 不載入）
+- 舊句「包括 Google Analytics 及 Google Tag Manager…GA／GTM 追蹤代碼唔會載入」132 頁零殘留
+
+### 驗證
+- 全站掃描：可見文本（去 head/script/style/註解）技術字眼 0 頁命中
+- agent-browser 三版實測：新 h2 在位、橫幅三語新文案正常；點擊「同意並繼續」橫幅收起＋GTM 載入機制照運作（__blhGtmLoaded=true）
+- 三版 div 平衡 12/12；橫幅新句 132 頁全在、舊句 0 殘留
+
+---
 
 ## v9.63《隱私政策精簡——移除 Google Analytics 表述（三語同步）》
 
