@@ -1,4 +1,22 @@
-# 修復日誌 (v9.62 — 2026-10-18)
+# 修復日誌 (v9.63 — 2026-10-18)
+
+## v9.63《隱私政策精簡——移除 Google Analytics 表述（三語同步）》
+
+依用戶四項修改清單（SC 頁為準，ZH／EN 語義同步，三版法律聲明保持一致）：
+
+### 四項清單落地
+- ① 副標題：「Cookie 与 Google Analytics 使用透明化」→「Cookie 与追踪技术使用透明化」（ZH：追蹤技術；EN：Tracking Technologies）
+- ② 刪除整段「三、Google Analytics 如何处理你的数据」（含頁面瀏覽/停留時間/Opt-out 外掛等全部內容，整個 privacy-box div 移除）；刪段後全頁重新編號（四→三、五→四、六→五、七→六、八→七；EN 4-8→3-7）
+- ③ 第二部分 GTM 段落改為用戶指定新文案：本网站使用 GTM 来管理网页互动追踪（例如 WhatsApp 咨询点击量统计），点「同意并继续」先载入、点「仅必要 Cookie」唔载入（ZH 繁中粵語語感版＋EN 版同步）
+- ④ 第四部分（原第五）第三方名單刪除 Google Analytics 項（GTM 原名單無列，按用戶「如果有嘅話」指示不另加）；第五部分（原第六）保留期刪除「GA 分析数据」條目
+
+### 附帶同步清理（同類 GA 表述）
+- meta description／keywords／og:description 三版全部移除 GA 字眼；EN 版 <title> 同步改為「Cookies, Tracking Technologies & Hong Kong PDPO Compliance」
+
+### 部署前置與驗證
+- 本地 workspace 再度回滾至 v9.53 快照；已先執行線上基線同步（v9_63_sync_live.py）：134 URL 全量抓線上 v9.62，0 miss、135 beacon 剝離；同步後驗證 GTM 132 頁/Turnstile 2 頁/SC 路徑修復/quote 條款全在——打包零回退
+- 程式化驗證 40 項編輯全過；三版 GA 殘留各僅餘 sitewide Cookie 橫幅一處（橫幅屬全站元件，不在用戶清單內，維持原樣）；段落編號連續；div 開合平衡（20/20）
+- agent-browser 實測三版：SC 副標題新文案＋h2 一至七連續＋新 GTM 段落在位＋3 stylesheets；ZH/EN 對稱通過；截圖存 screenshots/v963_sc_privacy_trimmed.png
 
 ## v9.62《简体版隱私政策頁樣式修復（相對路徑深度錯）＋og:image 絕對化》
 
