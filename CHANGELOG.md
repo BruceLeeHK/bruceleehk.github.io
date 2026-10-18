@@ -1,4 +1,31 @@
-# 修復日誌 (v9.59 — 2026-10-18)
+# 修復日誌 (v9.60 — 2026-10-18)
+
+## v9.60《GTM 全站安裝（GDPR 嚴格同意模式）＋Cookie 同意橫幅＋隱私政策三版＋電郵卡美化》
+
+依用戶兩項指令：①「呢個郵箱突著出來，請更新使其更美觀」②「按照【安裝 Google 代碼管理工具】文檔代碼優化網站，嚴謹照歐盟 GDPR 要求，做到符合香港私隱條例」。GTM 容器 ID：GTM-P5ZC5BLF。
+
+### ① 報價頁電郵卡美化（/quote/）
+- 原設計將 master@bruceleehk.com 整串地址直接塞入藍色按鈕，卡窄字長、視覺突兀兼手機易迫行——改為短按鈕「✈ 即時電郵查詢」＋按鈕下方細字實體地址（word-break:break-all，390px 零溢出）；h4 移除重複 ✉️ emoji（icon 已有信封），四卡節奏與 WhatsApp 卡統一
+- 表單區 .form-b2b-email 機構客戶資訊行（v9.58 上線）維持原樣
+
+### ② Google Tag Manager 全站安裝 — GDPR 嚴格「事先同意」模式（132 頁）
+- <head> 置入 consent-gated GTM loader：只有 localStorage 同意狀態 = granted 先注入 gtm.js；訪客未選擇或選「僅必要 Cookie」，一行追蹤代碼都唔會載入（歐盟 GDPR prior opt-in 標準，高於香港 PDPO 通知型橫幅要求；兩者同時滿足）
+- 依 GDPR 嚴格原則刻意不置入 <noscript> 版 GTM（JS 停用瀏覽器同樣不得未經同意載入追蹤）——<body> 開頭保留說明註釋，日後如部署同意管理平台可再啟用
+- Cookie 同意橫幅（ZH-HK / EN / zh-Hans 三語對應）：底部深色欄、綠色「同意並繼續」＋灰色「僅必要 Cookie」雙鍵、含隱私政策連結；選擇存 localStorage（blh_cookie_consent_v1，含時間戳）；頁尾「Cookie 設定」連結＋隱私政策頁按鈕可隨時重開橫幅改選
+- CSP append-only 放行（不動 Turnstile/Formspree 既有白名單）：script-src += https://www.googletagmanager.com；connect-src += googletagmanager.com／*.google-analytics.com／*.analytics.google.com；frame-src += googletagmanager.com（共 66 頁有 CSP meta 者全數處理；66 頁本無 CSP meta，維持原樣——無 CSP 即無限制，GTM 照常運作）
+
+### ③ 新增隱私政策頁（/privacy/、/en/privacy/、/sc/privacy/ 三語）
+- 頂部免責聲明（文檔指定文本）：本網站及相關服務僅面向香港特別行政區，不主動向歐盟/EEA 居民提供服務或收集個人資料，資料處理受 PCPD 及 PDPO 規管
+- 八節內容：資料使用者與適用範圍／收集資料類型一覽表（報價表單・討論區留言・AI 診斷・Cloudflare 匿名統計）／Cookie 與類似技術（必要 vs 分析類，含 #cookie-settings 錨點＋即場改選按鈕）／Google Analytics 數據處理與官方 opt-out／資料用途／第三方供應商／保留期／PDPO 查閱更正權利（master@bruceleehk.com）
+- 三版互設 canonical＋hreflang（zh-HK / zh-Hans / en / x-default）
+- sitemap 增 3 URL（127 → 130）＋全站 lastmod 統一 2026-10-18
+- 頁尾導航全站加「隱私政策／Cookie 設定」連結（ZH/EN/SC 對應版；vote 頁原無 footer-nav，補建；404 兩頁同補）
+
+### 附帶源碼修復（同輪品質檢查發現）
+- 缺 <body> 標籤 13 頁補回（privacy ×3、rat-control 區頁 ×10）——瀏覽器一直自動包容，源碼層面不規範
+- info/vote/admin.html（管理後台）零改動：後台不載 GTM、不設橫幅
+- Cloudflare RUM beacon 維持剝離（GitHub 源碼不含 CDN 注入行；線上由 Cloudflare 邊緣自動注入，每頁仍恰 1 個 beacon）
+- 保留線上 v9.55（Turnstile sitekey＋CSP）/ v9.58（master@ 電郵部署）/ v9.59（Formspree CSP＋i18n 還原）全部成果
 
 ## v9.59《專員報價表單「Failed to fetch」CSP 修復》
 
