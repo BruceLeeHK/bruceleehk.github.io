@@ -1,4 +1,32 @@
-# 修復日誌 (v9.64 — 2026-10-18)
+# 修復日誌 (v9.65 — 2026-10-18)
+
+## v9.65《SEO 更新升級——GSC 弱勢詞 × 三方案落地（FAQ/H2/Alt）》
+
+依用戶 GSC 數據（排名 82-118 弱勢詞）＋《SEO 優化執行指令》三方案執行，共改 8 頁（ZH/EN 同步）：
+
+### 方案一：FAQ 模塊擴充 + FAQPage JSON-LD
+- 三個服務專頁 FAQ 各加 1 條長尾詞 Q（FAQPage schema 同步，現 7 條）：termite「如何分辨白蟻與普通螞蟻？(How to tell the difference between ants and termites)」（文檔文案一字不差）、flea「香港床蝨點解特別難自己斷尾？」、cockroach「點樣揀一間可靠嘅滅蟑螂公司？」
+- services 總覽頁（ZH/EN）新加「滅蟲服務常見問題 FAQ」摺疊板塊（details/summary，＋展開收起符號 CSS）6 條 Q：揀滅蟲公司／收費行情／揀滅蟑螂公司／香港床蝨／蛀木蟲處理／滅蚊服務；新加 FAQPage JSON-LD（ZH/EN 各 6 Q）；答案自然覆蓋 GSC 地區詞（赤柱 Stanley、銅鑼灣 Causeway Bay）
+- EN 對應頁同步（termite/flea/cockroach FAQ +1，services FAQ×6）
+
+### 方案二：H2 長尾詞植入（配 AI 診斷/IPM 賣點）
+- termite（ZH/EN）新增「專業「蛀木蟲處理」與防護」H2 板塊（全站首個蛀木蟲內容；文檔文案一字不差＋T3i/IPM/AI 診斷賣點句）
+- flea（ZH/EN）新增「針對「香港床蝨」特性的專業滅蝨方案」H2 板塊（文檔文案一字不差，「星星之火計」＋AI 診斷/IPM 賣點句）
+
+### 方案三：Alt / 文字補強（誠實原則）
+- cockroach ZH 案例 alt「廚房曱甴防治實證」→「廚房曱甴（蟑螂）防治實證」——覆蓋「蟑螂」寫法，文對圖不堆砌
+- EN services 蚊板塊段首自然植入「Looking for pest control for mosquitoes in Hong Kong?」
+- 其餘案例圖 alt 原有長尾詞已精準（T3i/床蝨/IPM），不做文不對圖嘅硬塞
+
+### GSC 弱勢詞 → 頁面對應
+香港床蝨/床蝨 香港→/service/flea/；蛀木虫处理→/service/termite/；how to tell the difference between ants and termites→termite FAQ；滅蟲公司→services FAQ；滅蟑螂公司→cockroach FAQ+services FAQ；pest control for mosquitoes→/en/services/；stanley pest control/pest control causeway→services FAQ 地區答案（pest control broadmeadow 屬澳洲地名，無香港著落點，暫不處理）
+
+### 驗證
+- 8 頁 JSON-LD 全部 json.loads 合法（修復兩輪：schema_q 插入雙{錯誤→以 HTML faq-item 為事實來源整塊重生成 6 頁 schema）
+- div/section/details 全平衡；agent-browser 實測：services 摺疊 FAQ 6 條展開正常、termite 蛀木蟲 H2+新 FAQ 在位（7 條）、flea 香港床蝨 H2+新 FAQ 在位（7 條）
+- sitemap 免動（無新 URL）
+
+---
 
 ## v9.64《隱私政策成頁精簡（技術細節全隱藏）＋ 全站 Cookie 橫幅新文案》
 
