@@ -1,4 +1,28 @@
-# 修復日誌 (v9.65 — 2026-10-18)
+# 修復日誌 (v9.66 — 2026-10-18)
+
+## v9.66《全面搶佔 Google 傳統搜尋排名與 AI 摘要（GEO）》— 語言三黃金分割戰略落地
+
+依用戶《全面搶佔 Google 傳統搜尋排名與 AI 摘要.docx》三大戰略執行，共改 12 頁（5 服務專頁 ZH/EN ＋ services ZH/EN）：
+
+### 戰略一：純中文基石市場（GEO 直接回答句＋長尾詞）
+- 10 個服務專頁第一板塊開頭新增「直接回答式」段落（AI 摘要可獨立引用）：termite「白蟻點樣先滅得徹底？」、flea「床蝨怕什麼？床蝨最怕極高溫同特定化學殘留藥劑…」（文檔示例落地）、cockroach「曱甴點解殺完又嚟？」、wasp「發現蜂巢可以自己摘嗎？」、rodent「老鼠點解趕完又返嚟？」；EN 對應翻譯
+- Why 板塊引言前融入長尾問句（strong 標示）：「白蟻公司推薦香港邊間好？」「滅蝨／滅曱甴／滅黃蜂／滅鼠公司邊間好？」＋EN 對應（Which ... company ...?）
+- services 總覽頁導言改寫為正面回答式：「香港滅蟲公司邊間好？收費幾多？各蟲種點處理？…」（ZH/EN）
+
+### 戰略二：中英混合藍海（中英夾雜 H2＋數據化呈現）
+- 5 對 tech/iot 板塊 H2 中英夾雜改造（文檔「精準佈局」格式）：termite「香港滅白蟻 — Termatrac T3i 微波探測流程與數據」、rodent「餐廳廚房滅老鼠 — IoT 智慧鼠盒監測與 IPM 綜合防治」（文檔原文示例）、flea「Steam 高溫蒸氣＋殘留藥劑組合拳」、cockroach「Gel 藥餌巢群處理」、wasp「辨種優先・IPM 環境友善」；EN 同步
+- 10 頁 Why 板塊新增「📊 科技滅蟲・用數據話事」數據卡（tech-data-note）：AI 圖像診斷 1–2 秒辨識／30–90 秒深度報告（對齊 /ai/ 頁真實數據）＋每蟲種兩條數據（T3i 免拆牆／IoT 24 小時監測／Steam 雙重處理／Gel 藥餌帶返巢／蜜蜂保護原則等）
+
+### 戰略三：純英文高端市場（E-E-A-T 強化）
+- EN 5 頁新增「🛡️ Compliance & Credentials」段（eeat-note）：註冊公司＋AFCD-registered pesticides only＋書面報價條款＋TDO 合規表述，另每頁兩句真實素材（termite 禁區金行/半山實錄、flea 酒店賓館個案、cockroach F&B kitchens、wasp 蜜蜂保護轉介、rodent 18 區覆蓋＋IoT 數據）
+
+### 避坑指南落地
+- FAQPage JSON-LD 全部保留（Google 已於 2026-05-07 停顯 FAQ rich result，但 schema 無害且 Bing 等仍用）；優化重心按文檔轉向「網頁上實質文字結構」——本版 GEO 直接回答句正正把答案搬上正文可見
+- 不建 llms.txt（文檔確認 Google 不使用）；GBP 評論經營屬站外（用戶端待辦）
+
+### 驗證
+- scripts/v9_66_verify.py 115/115 PASS：新內容在位 47 項／舊 H2 殘留歸零／標籤 delta 與 v9.65 基線一致（插入完全平衡）／JSON-LD×4×12 頁全合法／新增區塊風險詞零（保證/根除/100%/斷尾/即日上門等）／EN 新增區塊零 CJK／hreflang ×3 記錄
+- agent-browser 390px 實測：ZH termite（GEO strong 句/新 H2/數據卡 3 li/Why 長尾）、EN termite（lang=en/eeat-note＋AFCD 句）、EN rodent（新 H2 F&B Kitchen）、services（新導言＋FAQ 6 條）、ZH rodent 零溢出（390=390）；console 零錯誤
 
 ## v9.65《SEO 更新升級——GSC 弱勢詞 × 三方案落地（FAQ/H2/Alt）》
 
