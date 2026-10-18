@@ -1,4 +1,12 @@
-# 修復日誌 (v9.60 — 2026-10-18)
+# 修復日誌 (v9.61 — 2026-10-18)
+
+## v9.61《報價頁服務條款增補「服務地域與法律規管」聲明（ZH／EN 雙語）》
+
+依用戶指令，將指定管轄權免責聲明增補至「有蟲話我知」頁（/quote/）【服務條款與免責聲明】板塊，與 v9.60 隱私政策 EEA 聲明互為呼應：
+
+- 繁中版（/quote/）：條款清單新增第 4 項「服務地域與法律規管」——本網站及相關服務僅面向香港特別行政區地區；不主動向歐盟/歐洲經濟區（EEA）居民提供服務或收集其個人資料；歐盟境內用戶資料處理受香港個人資料私隱專員公署（PCPD）及《個人資料（私隱）條例》（PDPO）規管（用戶指定文本一字不差收錄）
+- EN 版（/en/quote/）：該頁原無條款板塊，新增「Terms of Service & Disclaimer」橙色卡板塊（樣式與繁中版一致），收錄 AI Diagnosis & Quote Disclaimer 與 Service Territory & Governing Law 英文對應條款，站內法律聲明雙語同步
+- 版面：繁中版沿用 .disclaimer-section/.disclaimer-card 既有樣式零新 CSS；EN 版 inline 自包含不依賴頁面級 CSS；無 URL 變更，sitemap 免動
 
 ## v9.60《GTM 全站安裝（GDPR 嚴格同意模式）＋Cookie 同意橫幅＋隱私政策三版＋電郵卡美化》
 
