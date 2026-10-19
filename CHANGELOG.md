@@ -1,28 +1,29 @@
-# 修復日誌 (v9.66 — 2026-10-18)
+# 修復日誌 (v9.66 — 2026-10-19)
 
-## v9.66《全面搶佔 Google 傳統搜尋排名與 AI 摘要（GEO）》— 語言三黃金分割戰略落地
+## v9.66《B2B 商業滅蟲方案矩陣＋專員報價表單無縫整合》— 依兩份文檔落地：①《建立獨立的「商業滅蟲方案」專頁矩陣》②《B2B 商業滅蟲方案與「專員報價表單」無縫整合藍圖》
 
-依用戶《全面搶佔 Google 傳統搜尋排名與 AI 摘要.docx》三大戰略執行，共改 12 頁（5 服務專頁 ZH/EN ＋ services ZH/EN）：
+### 全新商業專頁矩陣（+8 頁：ZH 4＋EN 4，sitemap 130→138）
+- **/commercial/ 商業滅蟲方案中樞**（ZH/EN）：B2B 定位（合規・長效・可追溯）、四大可驗證信任訊號（報告制度／IoT 智慧鼠盒 24/7／IPM＋漁護署註冊除害劑／夜間施工）、三大方案卡、四步商業服務流程、FAQ×6；資歷表述如實（正申請列入政府物流服務署供應商名單及康文署承辦商名單，以政府審批為準）
+- **/commercial/property/ 物業管理與商業大廈**（ZH/EN）：公用地方六大高風險位（垃圾房／電梯槽／大堂／停車場／天台／商場）、不鏽鋼防鼠網封堵四板斧、IoT 數據報告（向法團交代）、電子報告＋IPM 處方單、第 132 章職責分工須知、法團招標文件支援、實證個案（美孚新邨＋荃灣安裕）、FAQ×7
+- **/commercial/hotel/ 酒店及賓館**（ZH/EN）：客房到後勤六區部署、床蝨專項（極速應召／相鄰房檢查／高溫蒸氣／覆查監測）＋隱蔽服務、Termatrac T3i 無損探測（高檔裝修零破壞）、房務員工床蝨識別培訓、合約報告制度、FAQ×7
+- **/commercial/restaurant/ 餐飲與食品工場**（ZH/EN）：廚房到後巷六區、食環署文件支援（如實表述：報告協助應對查閱，具體以巡查部門要求為準）、對標 HACCP 監察閉環、夜間收舖後施工、中環餐飲＋沙頭角金行實證個案、FAQ×7
+- 8 頁全配：JSON-LD×4（Breadcrumb／Service hasOfferCatalog／FAQPage／PestControl 同 @id）、canonical＋hreflang×3、og/twitter、快速估價表單（商業場地類型選單）、底部 CTA band（索取商業報價→專員報價表單帶 ?biz=1&venue= 預填參數）
 
-### 戰略一：純中文基石市場（GEO 直接回答句＋長尾詞）
-- 10 個服務專頁第一板塊開頭新增「直接回答式」段落（AI 摘要可獨立引用）：termite「白蟻點樣先滅得徹底？」、flea「床蝨怕什麼？床蝨最怕極高溫同特定化學殘留藥劑…」（文檔示例落地）、cockroach「曱甴點解殺完又嚟？」、wasp「發現蜂巢可以自己摘嗎？」、rodent「老鼠點解趕完又返嚟？」；EN 對應翻譯
-- Why 板塊引言前融入長尾問句（strong 標示）：「白蟻公司推薦香港邊間好？」「滅蝨／滅曱甴／滅黃蜂／滅鼠公司邊間好？」＋EN 對應（Which ... company ...?）
-- services 總覽頁導言改寫為正面回答式：「香港滅蟲公司邊間好？收費幾多？各蟲種點處理？…」（ZH/EN）
+### 專員報價表單 B2B 整合（/quote/＋/en/quote/）
+- 第一階段：表單文案升級【企業與商業專屬報價通道】（B2B 專責專員、一般一個工作天內聯絡、IoT＋IPM、食環署發牌要求及 HACCP 文件支援；個人／家庭客戶照常填寫）
+- 第二階段：新欄位——客戶身分 radio（個人／家庭｜商業／機構，預設個人）＋商業選擇時展開：公司／機構名稱、商業場地類型下拉（寫字樓／物業公用空間／餐廳及食品工場／酒店及賓館／學校或院舍／倉庫及工廈）、特別文件需求多選（正式報價單 Quotation／投標招標資訊／行業合規證明文件）；ZH 另加 Formspree _subject 動態分流（商業查詢獨立標題）
+- 第三階段：`?biz=1&venue=property|hotel|restaurant|office|school|warehouse` 到站預填（自動選商業客戶＋展開企業欄位＋預選場地類型）；商業專頁 CTA 全部帶參數跳轉
+- EN 表單同步（Customer Type／Corporate Client Details／Document Requirements；WhatsApp 訊息自動附帶客戶類別／公司／場地／文件需求）
 
-### 戰略二：中英混合藍海（中英夾雜 H2＋數據化呈現）
-- 5 對 tech/iot 板塊 H2 中英夾雜改造（文檔「精準佈局」格式）：termite「香港滅白蟻 — Termatrac T3i 微波探測流程與數據」、rodent「餐廳廚房滅老鼠 — IoT 智慧鼠盒監測與 IPM 綜合防治」（文檔原文示例）、flea「Steam 高溫蒸氣＋殘留藥劑組合拳」、cockroach「Gel 藥餌巢群處理」、wasp「辨種優先・IPM 環境友善」；EN 同步
-- 10 頁 Why 板塊新增「📊 科技滅蟲・用數據話事」數據卡（tech-data-note）：AI 圖像診斷 1–2 秒辨識／30–90 秒深度報告（對齊 /ai/ 頁真實數據）＋每蟲種兩條數據（T3i 免拆牆／IoT 24 小時監測／Steam 雙重處理／Gel 藥餌帶返巢／蜜蜂保護原則等）
+### 全站灌溉與整合
+- 導航列 134 頁：ZH「商業方案」／EN「Commercial」插喺「蟲類服務／Services」之後
+- 頁尾 footer-nav 4 條 B2B 錨文本（商業滅蟲方案／物業管理滅蟲／酒店滅蟲／餐廳滅蟲），sep／nosep 兩變體自適應，區段限定注入
+- /services/ ZH/EN 商業客戶專區 band（三大方案＋索取報價）；首頁 ZH/EN 商業入口 band（插喺「有蟲就有計」之前）
+- rodent pillar 服務網絡卡新增「商業滅蟲方案」回鏈（ZH/EN）
+- i18n.js 語言切換 blog 上限 11→23（修復 blog-12~23 切換跌去 info 中樞嘅舊問題）
 
-### 戰略三：純英文高端市場（E-E-A-T 強化）
-- EN 5 頁新增「🛡️ Compliance & Credentials」段（eeat-note）：註冊公司＋AFCD-registered pesticides only＋書面報價條款＋TDO 合規表述，另每頁兩句真實素材（termite 禁區金行/半山實錄、flea 酒店賓館個案、cockroach F&B kitchens、wasp 蜜蜂保護轉介、rodent 18 區覆蓋＋IoT 數據）
-
-### 避坑指南落地
-- FAQPage JSON-LD 全部保留（Google 已於 2026-05-07 停顯 FAQ rich result，但 schema 無害且 Bing 等仍用）；優化重心按文檔轉向「網頁上實質文字結構」——本版 GEO 直接回答句正正把答案搬上正文可見
-- 不建 llms.txt（文檔確認 Google 不使用）；GBP 評論經營屬站外（用戶端待辦）
-
-### 驗證
-- scripts/v9_66_verify.py 115/115 PASS：新內容在位 47 項／舊 H2 殘留歸零／標籤 delta 與 v9.65 基線一致（插入完全平衡）／JSON-LD×4×12 頁全合法／新增區塊風險詞零（保證/根除/100%/斷尾/即日上門等）／EN 新增區塊零 CJK／hreflang ×3 記錄
-- agent-browser 390px 實測：ZH termite（GEO strong 句/新 H2/數據卡 3 li/Why 長尾）、EN termite（lang=en/eeat-note＋AFCD 句）、EN rodent（新 H2 F&B Kitchen）、services（新導言＋FAQ 6 條）、ZH rodent 零溢出（390=390）；console 零錯誤
+### 合規要點
+- 零「保證／根治／100%／最平／全港首創」；收費一律先勘察後書面報價；食環署表述為「提供記錄文件協助應對查閱，具體以巡查部門要求為準」；第 132 章公用地方職責分工如實交代；供應商名單資格以「正申請（以政府審批為準）」表述
 
 ## v9.65《SEO 更新升級——GSC 弱勢詞 × 三方案落地（FAQ/H2/Alt）》
 

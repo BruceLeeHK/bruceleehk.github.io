@@ -433,6 +433,23 @@
             color: var(--dark-bg);
         }
 
+
+        /* ===== v9.66 B2B quote channel ===== */
+        .form-b2b-intro { background: #f0fdf4; border: 1px solid #86efac; border-left: 4px solid var(--primary); border-radius: 10px; padding: 14px 16px; font-size: .93rem; line-height: 1.8; color: var(--text-main); margin: 0 0 18px; }
+        .form-b2b-intro strong { color: var(--primary-dark); }
+        .form-b2b-intro .form-b2b-note { font-size: .85rem; color: var(--text-muted); }
+        .cust-fieldset, .biz-fieldset { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px 16px; margin: 0 0 16px; }
+        .cust-fieldset legend, .biz-fieldset legend { font-weight: 700; color: var(--dark-bg); font-size: .95rem; padding: 0 8px; }
+        .cust-type-row { display: flex; flex-wrap: wrap; gap: 10px; }
+        .cust-type { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text-main); cursor: pointer; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+        .cust-type:has(input:checked) { border-color: var(--primary); background: var(--primary-light); }
+        .biz-fieldset { display: none; background: #f8fafc; }
+        .biz-fieldset.open { display: block; }
+        .biz-docs { display: flex; flex-direction: column; gap: 8px; }
+        .biz-docs-label { font-weight: 700; color: var(--dark-bg); font-size: .92rem; margin-bottom: 2px; }
+        .biz-doc { display: flex; align-items: flex-start; gap: 8px; font-size: .9rem; color: var(--text-main); line-height: 1.6; cursor: pointer; }
+        @media (max-width: 768px) { .cust-type-row { flex-direction: column; } }
+
         /* ============ Responsive ============ */
         @media (max-width: 768px) {
             .page-hero h1 { font-size: 1.6rem; }
@@ -476,7 +493,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <nav aria-label="主導航 Main Navigation">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/">首頁</a></li>
-                    <li><a href="/services/">蟲類服務</a></li>
+                    <li><a href="/services/">蟲類服務</a></li><li><a href="/commercial/">商業方案</a></li>
                     <li><a href="/districts/">覆蓋十八區</a></li>
                     <li><a href="/strategy/">有蟲就有計</a></li>
                     <li><a href="/info/">蟲類資訊</a></li>
@@ -516,7 +533,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <span class="channel-tag org">🏢 商業・機構</span>
                     <div class="channel-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div>
                     <h3>專員報價表單</h3>
-                    <p>填寫蟲患詳情，由專員親自審閱並主動聯絡你提供精準報價。適合<strong>商業機構、物業管理</strong>或需要詳細描述情況的客戶。</p>
+                    <p>【企業與商業專屬報價通道】填寫場地資訊與蟲害現況，B2B 專責專員親自審閱，一般於一個工作天內主動聯絡你，提供正式報價單 (Quotation) 與合規文件支援。適合<strong>商業機構、物業管理、酒店及餐飲業</strong>；個人／家庭客戶同樣歡迎。</p>
                     <a href="#quote-form" class="channel-btn green">
                         <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 立即填表
                     </a>
@@ -548,12 +565,48 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <section class="form-section" id="quote-form" aria-labelledby="form-title">
             <div class="form-wrapper">
                 <h2 id="form-title"><i class="fa-solid fa-clipboard-list" aria-hidden="true" style="color: var(--primary);"></i> 專員報價表單</h2>
-                <p>填妥以下資料，專員將於工作時間內主動聯絡你</p>
+                <p class="form-b2b-intro"><strong>【企業與商業專屬報價通道】</strong>專為商業機構、物業管理、酒店及餐飲業而設。請填寫你的場地資訊與蟲害現況，商業客戶專責專員將親自審閱你的需求，一般於一個工作天內主動聯絡你，提供結合 IoT 監測與 IPM 綜合防治理念的初步評估及正式報價單 (Quotation)，並可按食環署發牌要求及 HACCP 食品安全管理需要準備相關文件。<br><span class="form-b2b-note">（如需邀請投標、索取報價單樣本或查詢政府採購相關資格文件，亦可透過此表單提交；個人／家庭客戶照常填寫即可。）</span></p>
                 <div class="form-b2b-email"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 機構客戶如需索取正式報價單 (Quotation) 或投標資訊，可直接電郵至：<a href="mailto:master@bruceleehk.com">master@bruceleehk.com</a></div>
 
                 <form id="quote-form-element" class="quote-form" action="https://formspree.io/f/xlgyylke" method="POST">
                     <input type="hidden" name="_subject" value="【滅蟲師傅】新嘅免費估價申請">
                     <input type="hidden" name="_captcha" value="true">
+
+                    <fieldset class="cust-fieldset">
+                        <legend>客戶身分</legend>
+                        <div class="cust-type-row">
+                            <label class="cust-type"><input type="radio" name="customer-type" value="個人／家庭客戶" checked> 🏠 個人／家庭客戶</label>
+                            <label class="cust-type"><input type="radio" name="customer-type" value="商業／機構客戶"> 🏢 商業／機構客戶</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="biz-fieldset" id="biz-fields">
+                        <legend><i class="fa-solid fa-building" aria-hidden="true"></i> 企業客戶資料</legend>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">公司／機構名稱</label>
+                                <input type="text" id="company" name="company" placeholder="例如：XX物業管理有限公司">
+                            </div>
+                            <div class="form-group">
+                                <label for="venue-type">商業場地類型</label>
+                                <select id="venue-type" name="venue-type">
+                                    <option value="" selected>請選擇</option>
+                                    <option value="寫字樓">寫字樓</option>
+                                    <option value="物業公用空間">物業公用空間（屋苑／商場／大廈）</option>
+                                    <option value="餐廳及食品工場">餐廳及食品工場</option>
+                                    <option value="酒店及賓館">酒店及賓館</option>
+                                    <option value="學校或院舍">學校或院舍</option>
+                                    <option value="倉庫及工廈">倉庫及工廈</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group biz-docs">
+                            <span class="biz-docs-label">特別文件需求（可多選）</span>
+                            <label class="biz-doc"><input type="checkbox" name="doc-needs" value="需要正式報價單 (Quotation) 作審批用途"> 需要正式報價單 (Quotation) 作審批用途</label>
+                            <label class="biz-doc"><input type="checkbox" name="doc-needs" value="需要投標／招標相關資訊"> 需要投標／招標相關資訊</label>
+                            <label class="biz-doc"><input type="checkbox" name="doc-needs" value="需要行業合規證明文件（如 HACCP／漁護署註冊除害劑清單）"> 需要符合特定行業合規證明（如 HACCP／漁護署註冊除害劑清單）</label>
+                        </div>
+                    </fieldset>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -687,7 +740,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     <!-- Footer -->
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
+        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/commercial/">商業滅蟲方案</a><a href="/commercial/property/">物業管理滅蟲</a><a href="/commercial/hotel/">酒店滅蟲</a><a href="/commercial/restaurant/">餐廳滅蟲</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
@@ -765,6 +818,57 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     submitBtn.disabled = false;
                 });
             });
+        })();
+    </script>
+    <script>
+        // ===== v9.66 B2B 客戶分流與到站預填 =====
+        (function () {
+            var radios = document.querySelectorAll('input[name="customer-type"]');
+            var bizFields = document.getElementById('biz-fields');
+            if (!radios.length || !bizFields) return;
+            var subject = document.querySelector('input[name="_subject"]');
+
+            function syncBiz(on) {
+                bizFields.classList.toggle('open', on);
+                ['company', 'venue-type'].forEach(function (id) {
+                    var el = document.getElementById(id);
+                    if (!el) return;
+                    if (on) { el.setAttribute('required', 'required'); }
+                    else {
+                        el.removeAttribute('required');
+                        if (el.tagName === 'SELECT' && !el.value) el.selectedIndex = 0;
+                    }
+                });
+                if (!on) {
+                    bizFields.querySelectorAll('input[type="checkbox"]').forEach(function (c) { c.checked = false; });
+                }
+                if (subject) {
+                    subject.value = on ? '【滅蟲師傅】商業機構查詢 — 專員報價表單' : '【滅蟲師傅】新嘅免費估價申請';
+                }
+            }
+
+            radios.forEach(function (r) {
+                r.addEventListener('change', function () {
+                    syncBiz(r.checked && r.value.indexOf('商業') === 0);
+                });
+            });
+            var cur = document.querySelector('input[name="customer-type"]:checked');
+            if (cur) syncBiz(cur.value.indexOf('商業') === 0);
+
+            // 到站預填：/quote/?biz=1&venue=property|hotel|restaurant|office|school|warehouse
+            try {
+                var q = new URLSearchParams(window.location.search);
+                var vMap = { office: '寫字樓', property: '物業公用空間', restaurant: '餐廳及食品工場', hotel: '酒店及賓館', school: '學校或院舍', warehouse: '倉庫及工廈' };
+                var venue = vMap[(q.get('venue') || '').toLowerCase()];
+                if (q.get('biz') === '1' || venue) {
+                    var bizRadio = document.querySelector('input[name="customer-type"][value="商業／機構客戶"]');
+                    if (bizRadio) { bizRadio.checked = true; syncBiz(true); }
+                    if (venue) {
+                        var sel = document.getElementById('venue-type');
+                        if (sel) sel.value = venue;
+                    }
+                }
+            } catch (e) {}
         })();
     </script>
     <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->
