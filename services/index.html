@@ -764,11 +764,15 @@ footer {
             .cta-box { padding: 24px; margin-top: 35px; }
             .cta-box h3 { font-size: 1.2rem; }
         }
-    .svc-faq{border:1px solid var(--border);border-radius:12px;padding:0 18px;margin-bottom:10px;background:#fff}
-.svc-faq summary{cursor:pointer;font-weight:700;padding:14px 0;color:var(--dark-bg);font-size:.98rem;list-style:none;display:flex;align-items:center;gap:8px}
-.svc-faq summary::before{content:"+";font-weight:900;color:var(--primary);}
-.svc-faq[open] summary::before{content:"\2212"}
-.svc-faq p{color:var(--text-main);line-height:1.8;font-size:.92rem;padding:0 0 14px;margin:0}
+    
+        /* v9.66 services FAQ */
+        .svc-faq details{border:1px solid var(--border);border-radius:12px;background:#fff;margin-bottom:12px;overflow:hidden}
+        .svc-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 18px;font-weight:700;color:var(--dark-bg);font-size:.98rem}
+        .svc-faq summary::-webkit-details-marker{display:none}
+        .svc-faq summary .faq-arrow{color:var(--primary);transition:transform .2s;flex-shrink:0}
+        .svc-faq details[open] summary .faq-arrow{transform:rotate(180deg)}
+        .svc-faq .faq-answer{padding:0 18px 15px}
+        .svc-faq .faq-answer p{margin:0;font-size:.92rem;line-height:1.8;color:var(--text-main)}
 </style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
@@ -789,63 +793,6 @@ footer {
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
 if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}})();</script>
     <!-- End Google Tag Manager -->
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "點樣揀一間可靠嘅滅蟲公司？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "可以留意四點：①先勘察後出書面報價，列明治理範圍同保養期；②針對蟲種習性治理（例如曱甴巢群處理、白蟻 T3i 探測），而唔係見一隻噴一隻；③使用漁護署註冊除害劑；④有保養覆查同個案紀錄。我哋四項當場驗證，全港十八區都上門——港島（包括赤柱、銅鑼灣）、九龍、新界以至離島都有實戰個案紀錄。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "香港滅蟲公司收費幾多？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "視乎蟲種同蟲患程度：曱甴、老鼠一般個案幾百至千餘起；白蟻、床蝨按範圍同工程量計，個案綜合參考由 HK$900 至 HK$8,000 不等。一律免費勘察後出書面報價，先報價後開工，明碼實價；即時行情可睇我哋嘅 2026 滅蟲收費指南。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "點樣揀滅蟑螂公司？曱甴點解殺完又嚟？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "德國曱甴繁殖極快而且有抗藥性，淨係噴藥只殺到表面。揀滅蟑螂公司要睇係咪針對巢群：膠餌點布帶返巢、縫隙注藥直搗藏匿位，配合環境改善先可以斷尾。我哋個案實證以藥餌凝膠點注 IPM 治理，兒童寵物家居照做得安全。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "香港床蝨點解好難自行斷尾？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "香港氣候潮濕炎熱，床蝨全年活躍繁殖快，匿藏床縫、床板、牆腳等隱閉位，蟲卵有孵化窗口，DIY 噴劑好難觸及蟲巢。建議用高溫蒸氣配合殘留藥劑嘅「星星之火」策略雙重處理，直擊蝨卵，配合 60 日覆檢覆蓋孵化週期。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "蛀木蟲處理要做啲乜？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "木傢俬見細孔同木粉，多數係蛀木蟲（粉蠹蟲）。專業蛀木蟲處理係針對性施放持效保護劑，深入木材內部消滅幼蟲並防止再次入侵；同白蟻一樣建議先勘察確認蟲種，可以先用免費 AI 害蟲診斷初步分辨。"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "你哋有冇滅蚊服務？",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "有。針對白紋伊蚊等本地蚊種，以生物劑阻斷幼蟲滋生源頭為主，配合環境改善建議，住宅個案 HK$900 起。蚊患同積水源頭有直接關係，勘察時會一併提供源頭封堵建議。"
-      }
-    }
-  ]
-}
-    </script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript)：依 GDPR 嚴格「事先同意」原則，本站刻意不置入 <noscript> 版 GTM 代碼——JS 停用嘅瀏覽器同樣不得在未經同意下載入追蹤。如日後部署同意管理平台可重新啟用。 -->
@@ -864,7 +811,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <nav aria-label="主導航 Main Navigation">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/">首頁</a></li>
-                    <li><a href="/services/" class="active" aria-current="page">蟲類服務</a></li><li><a href="/commercial/">商業方案</a></li>
+                    <li><a href="/services/" class="active" aria-current="page">蟲類服務</a></li>
                     <li><a href="/districts/">覆蓋十八區</a></li>
                     <li><a href="/strategy/">有蟲就有計</a></li>
                     <li><a href="/info/">蟲類資訊</a></li>
@@ -901,34 +848,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         </section>
 
         <!-- Services Quick Nav -->
-                <section class="container" style="padding:34px 20px 6px;" aria-labelledby="biz-band-title">
-                    <div style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:14px;padding:26px 22px;text-align:center;color:#fff;">
-                        <h2 id="biz-band-title" style="color:#fff;font-size:1.25rem;margin:0 0 8px;"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> 商業客戶專區 — 物業管理・酒店・餐飲 B2B 滅蟲方案</h2>
-                        <p style="max-width:760px;margin:0 auto 14px;font-size:.93rem;line-height:1.75;color:rgba(255,255,255,.92);">商業客戶要嘅係合規、長效、可追溯嘅蟲害管理：IoT 智慧鼠盒 24 小時監測、AI 輔助診斷報告、IPM 處方單，配合食環署發牌要求與 HACCP 食品安全管理需要。三大行業方案專頁：</p>
-                        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
-                            <a href="/commercial/property/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🏢 物業管理與商業大廈</a>
-                            <a href="/commercial/hotel/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🏨 酒店及賓館</a>
-                            <a href="/commercial/restaurant/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🍽️ 餐飲與食品工場</a>
-                            <a href="/quote/?biz=1" style="background:#fff;color:#065f46;padding:9px 16px;border-radius:999px;font-weight:800;font-size:.9rem;text-decoration:none;">📋 索取商業報價單</a>
-                        </div>
-                    </div>
-                </section>
-                <section class="services-section" id="faq" aria-labelledby="svc-faq-title">
-            <div class="container">
-                <div class="section-title">
-                    <h2 id="svc-faq-title"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> 滅蟲服務常見問題 FAQ</h2>
-                    <p>香港滅蟲公司揀選、收費與各蟲種處理常見問題（點一下題目即展開）</p>
-                </div>
-                <details class="svc-faq"><summary>點樣揀一間可靠嘅滅蟲公司？</summary><p>可以留意四點：①先勘察後出書面報價，列明治理範圍同保養期；②針對蟲種習性治理（例如曱甴巢群處理、白蟻 T3i 探測），而唔係見一隻噴一隻；③使用漁護署註冊除害劑；④有保養覆查同個案紀錄。我哋四項當場驗證，全港十八區都上門——港島（包括赤柱、銅鑼灣）、九龍、新界以至離島都有實戰個案紀錄。</p></details>
-                <details class="svc-faq"><summary>香港滅蟲公司收費幾多？</summary><p>視乎蟲種同蟲患程度：曱甴、老鼠一般個案幾百至千餘起；白蟻、床蝨按範圍同工程量計，個案綜合參考由 HK$900 至 HK$8,000 不等。一律免費勘察後出書面報價，先報價後開工，明碼實價；即時行情可睇我哋嘅 2026 滅蟲收費指南。</p></details>
-                <details class="svc-faq"><summary>點樣揀滅蟑螂公司？曱甴點解殺完又嚟？</summary><p>德國曱甴繁殖極快而且有抗藥性，淨係噴藥只殺到表面。揀滅蟑螂公司要睇係咪針對巢群：膠餌點布帶返巢、縫隙注藥直搗藏匿位，配合環境改善先可以斷尾。我哋個案實證以藥餌凝膠點注 IPM 治理，兒童寵物家居照做得安全。</p></details>
-                <details class="svc-faq"><summary>香港床蝨點解好難自行斷尾？</summary><p>香港氣候潮濕炎熱，床蝨全年活躍繁殖快，匿藏床縫、床板、牆腳等隱閉位，蟲卵有孵化窗口，DIY 噴劑好難觸及蟲巢。建議用高溫蒸氣配合殘留藥劑嘅「星星之火」策略雙重處理，直擊蝨卵，配合 60 日覆檢覆蓋孵化週期。</p></details>
-                <details class="svc-faq"><summary>蛀木蟲處理要做啲乜？</summary><p>木傢俬見細孔同木粉，多數係蛀木蟲（粉蠹蟲）。專業蛀木蟲處理係針對性施放持效保護劑，深入木材內部消滅幼蟲並防止再次入侵；同白蟻一樣建議先勘察確認蟲種，可以先用免費 AI 害蟲診斷初步分辨。</p></details>
-                <details class="svc-faq"><summary>你哋有冇滅蚊服務？</summary><p>有。針對白紋伊蚊等本地蚊種，以生物劑阻斷幼蟲滋生源頭為主，配合環境改善建議，住宅個案 HK$900 起。蚊患同積水源頭有直接關係，勘察時會一併提供源頭封堵建議。</p></details>
-            </div>
-        </section>
-
-<section class="services-section">
+        <section class="services-section">
             <div class="container">
                 <div class="section-title">
                     <h2><i class="fa-solid fa-bug-slash" aria-hidden="true" style="color: var(--primary);"></i> 我哋嘅專業服務</h2>
@@ -941,6 +861,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <a href="#bedbug" class="service-icon-pill"><i class="fa-solid fa-bed" aria-hidden="true"></i> 床蝨防治</a>
                     <a href="#termite" class="service-icon-pill"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i> 白蟻防治</a>
                     <a href="#remote" class="service-icon-pill"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i> 遙距滅蟲</a>
+                    <a href="#faq" class="service-icon-pill"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> 常見問題</a>
                 </div>
 
                 <!-- Service 1: Cockroach -->
@@ -1112,6 +1033,38 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
                 </article>
 
+                <!-- v9.66 Service FAQ -->
+                <article id="faq" class="modern-card service-anchor svc-faq">
+                    <span class="number-badge">SERVICE FAQ</span>
+                    <div class="service-card-icon"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></div>
+                    <h2>滅蟲服務常見問題 FAQ</h2>
+                    <details>
+                        <summary><span>滅蟲公司邊間好？點揀先穩陣？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>揀滅蟲公司最緊要核實四樣嘢：①用嘅係咪漁護署註冊除害劑；②係咪先勘察、後出書面報價；③治理有冇紀錄有相為證；④有冇保養期覆查安排。我哋四樣齊備，仲將個案紀錄公開畀客戶查證。</p></div>
+                    </details>
+                    <details>
+                        <summary><span>你哋服務邊啲地區？赤柱、銅鑼灣會唔會去？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>全港十八區都做——港島由赤柱、銅鑼灣到堅尼地城，九龍、新界照樣覆蓋，愉景灣等離島以至沙頭角禁區（需禁區紙個案）都有實戰紀錄。偏遠位置請喺 WhatsApp 講明地址，方便安排檔期。</p></div>
+                    </details>
+                    <details>
+                        <summary><span>滅蟲收費點計？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>過往個案綜合參考：白蟻約 HK$2,800–$8,000、床蝨約 HK$3,000–$5,800、曱甴約 HK$900–$1,800，實際視乎蟲患範圍同工程量。一律先勘察後出書面報價，合約列明治理範圍同保養期。全蟲種行情可睇<a href="/info/blog-12/" style="color:var(--primary-dark);font-weight:700;">2026 滅蟲收費指南</a>。</p></div>
+                    </details>
+                    <details>
+                        <summary><span>屋企有小朋友同寵物，用藥安全嗎？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>使用漁護署註冊除害劑，以藥餌凝膠、縫隙灌注等針對性方式落藥喺目標位置，減低接觸風險；治理前會講明用藥位置同注意事項。</p></div>
+                    </details>
+                    <details>
+                        <summary><span>治理之後會唔會復發？有冇保養？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>蟲患受環境濕度、衛生條件同鄰近蟲源影響，個別情況有機會再度出現。我哋以保養期覆查跟進——保養期內同一位置再度發現活動，免費覆查處理，並提供防蟲改善建議。</p></div>
+                    </details>
+                    <details>
+                        <summary><span>點開始？可以點報價？</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>WhatsApp 影相講明情況，師傅會初步評估；亦可以先用免費 AI 蟲害初步診斷即刻分辨蟲種。確認方案後安排上門勘察，再出書面報價。急切個案請喺訊息註明，會盡量優先安排。</p></div>
+                    </details>
+                </article>
+
+
                 <!-- CTA Box -->
                 <div class="cta-box">
                     <h3><i class="fa-solid fa-bolt" aria-hidden="true"></i> 即刻預約免費上門估價</h3>
@@ -1133,7 +1086,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     <!-- Footer -->
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/commercial/">商業滅蟲方案</a><a href="/commercial/property/">物業管理滅蟲</a><a href="/commercial/hotel/">酒店滅蟲</a><a href="/commercial/restaurant/">餐廳滅蟲</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
+        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
@@ -1283,6 +1236,61 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     if(!getC()){b.style.display='block';}else if(getC().v==='granted'){loadGTM();}})();</script>
     <!-- End v9.60 Cookie Consent Banner -->
 
+
+    <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "滅蟲公司邊間好？點揀先穩陣？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "揀滅蟲公司最緊要核實四樣嘢：①用嘅係咪漁護署註冊除害劑；②係咪先勘察、後出書面報價；③治理有冇紀錄有相為證；④有冇保養期覆查安排。我哋四樣齊備，仲將個案紀錄公開畀客戶查證。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "你哋服務邊啲地區？赤柱、銅鑼灣會唔會去？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "全港十八區都做——港島由赤柱、銅鑼灣到堅尼地城，九龍、新界照樣覆蓋，愉景灣等離島以至沙頭角禁區（需禁區紙個案）都有實戰紀錄。偏遠位置請喺 WhatsApp 講明地址，方便安排檔期。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "滅蟲收費點計？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "過往個案綜合參考：白蟻約 HK$2,800–$8,000、床蝨約 HK$3,000–$5,800、曱甴約 HK$900–$1,800，實際視乎蟲患範圍同工程量。一律先勘察後出書面報價，合約列明治理範圍同保養期。全蟲種行情可睇我哋嘅 2026 滅蟲收費指南。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "屋企有小朋友同寵物，用藥安全嗎？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "使用漁護署註冊除害劑，以藥餌凝膠、縫隙灌注等針對性方式落藥喺目標位置，減低接觸風險；治理前會講明用藥位置同注意事項。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "治理之後會唔會復發？有冇保養？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "蟲患受環境濕度、衛生條件同鄰近蟲源影響，個別情況有機會再度出現。我哋以保養期覆查跟進——保養期內同一位置再度發現活動，免費覆查處理，並提供防蟲改善建議。"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "點開始？可以點報價？",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "WhatsApp 影相講明情況，師傅會初步評估；亦可以先用免費 AI 蟲害初步診斷即刻分辨蟲種。確認方案後安排上門勘察，再出書面報價。急切個案請喺訊息註明，會盡量優先安排。"
+            }
+        }
+    ]
+}</script>
 
 </body>
 </html>

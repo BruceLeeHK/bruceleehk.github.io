@@ -30,73 +30,20 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' data: https://cdnjs.cloudflare.com; connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; frame-src https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#10b981">
-    <style>html{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}.svc-faq{border:1px solid var(--border);border-radius:12px;padding:0 18px;margin-bottom:10px;background:#fff}
-.svc-faq summary{cursor:pointer;font-weight:700;padding:14px 0;color:var(--dark-bg);font-size:.98rem;list-style:none;display:flex;align-items:center;gap:8px}
-.svc-faq summary::before{content:"+";font-weight:900;color:var(--primary);}
-.svc-faq[open] summary::before{content:"\2212"}
-.svc-faq p{color:var(--text-main);line-height:1.8;font-size:.92rem;padding:0 0 14px;margin:0}
+    <style>html{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}
+        /* v9.66 services FAQ */
+        .svc-faq details{border:1px solid var(--border);border-radius:12px;background:#fff;margin-bottom:12px;overflow:hidden}
+        .svc-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:15px 18px;font-weight:700;color:var(--dark-bg);font-size:.98rem}
+        .svc-faq summary::-webkit-details-marker{display:none}
+        .svc-faq summary .faq-arrow{color:var(--primary);transition:transform .2s;flex-shrink:0}
+        .svc-faq details[open] summary .faq-arrow{transform:rotate(180deg)}
+        .svc-faq .faq-answer{padding:0 18px 15px}
+        .svc-faq .faq-answer p{margin:0;font-size:.92rem;line-height:1.8;color:var(--text-main)}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
 if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}})();</script>
     <!-- End Google Tag Manager -->
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How do I choose a reliable pest control company in Hong Kong?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Look for four things: a written quote after an on-site survey with scope and warranty stated; pest-specific treatment (gel baiting for cockroaches, T3i radar for termites) rather than blanket spraying; registered pesticides; and warranty re-inspections with documented case records. We cover all 18 districts — Hong Kong Island (including Stanley and Causeway Bay), Kowloon, the New Territories and outlying islands."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much do pest control services in Hong Kong cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It depends on the pest and the severity: cockroach and rodent jobs usually start from a few hundred HK dollars; termite and bed bug treatments range from around HK$900 to HK$8,000 depending on scope. We always survey first and provide a written quote before any work begins. See our 2026 pest control pricing guide for the full breakdown."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I choose a cockroach exterminator? Why do cockroaches keep coming back?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "German cockroaches breed fast and resist common sprays, so surface spraying alone never works. Choose a company that treats the colony: gel bait carried back to the nest, crack-and-crevice injection into harbourages, plus sanitation advice. Our documented cases use gel-bait IPM treatment that is safe for homes with kids and pets."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why are bed bugs in Hong Kong so hard to eliminate on your own?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Hong Kong's humid, hot climate keeps bed bugs breeding all year. They hide in mattress seams, bed frames and skirting boards, and eggs hatch on a rolling window that DIY sprays never fully cover. Professional steam + residual insecticide dual treatment, with a 60-day re-inspection covering the hatch cycle, is the reliable route."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does wood borer treatment involve?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tiny holes and fine wood powder on furniture usually mean wood borers (powderpost beetles). Professional treatment applies long-lasting protective agents deep into the timber to kill larvae and stop re-infestation. As with termites, survey first — our free AI pest diagnosis can help identify the species."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you offer mosquito control?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Targeting local species such as Aedes albopictus, we focus on biological larvicide to block breeding sources, backed by environmental improvement advice. Residential jobs start from HK$900; standing water source control is assessed during the survey."
-      }
-    }
-  ]
-}
-    </script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript)：依 GDPR 嚴格「事先同意」原則，本站刻意不置入 <noscript> 版 GTM 代碼——JS 停用嘅瀏覽器同樣不得在未經同意下載入追蹤。如日後部署同意管理平台可重新啟用。 -->
@@ -113,7 +60,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <nav aria-label="Main Navigation">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/en/">Home</a></li>
-                    <li><a href="/en/services/" class="active" aria-current="page">Services</a></li><li><a href="/en/commercial/">Commercial</a></li>
+                    <li><a href="/en/services/" class="active" aria-current="page">Services</a></li>
                     <li><a href="/en/districts/">18 Districts</a></li>
                     <li><a href="/en/strategy/">Strategies</a></li>
                     <li><a href="/en/info/">Info</a></li>
@@ -142,32 +89,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
         </section>
 
-                <section class="container" style="padding:34px 20px 6px;" aria-labelledby="biz-band-title">
-                    <div style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:14px;padding:26px 22px;text-align:center;color:#fff;">
-                        <h2 id="biz-band-title" style="color:#fff;font-size:1.25rem;margin:0 0 8px;"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> For Business Clients — Property, Hotel &amp; F&amp;B Pest Programmes</h2>
-                        <p style="max-width:760px;margin:0 auto 14px;font-size:.93rem;line-height:1.75;color:rgba(255,255,255,.92);">Businesses need compliant, long-lasting, traceable pest management: IoT smart rat box 24/7 monitoring, AI-assisted diagnostic reports and IPM treatment records aligned with FEHD licensing requirements and HACCP food-safety needs. Three industry programmes:</p>
-                        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
-                            <a href="/en/commercial/property/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🏢 Property Management &amp; Buildings</a>
-                            <a href="/en/commercial/hotel/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🏨 Hotels &amp; Guesthouses</a>
-                            <a href="/en/commercial/restaurant/" style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;text-decoration:none;">🍽️ Restaurants &amp; Food Factories</a>
-                            <a href="/en/quote/?biz=1" style="background:#fff;color:#065f46;padding:9px 16px;border-radius:999px;font-weight:800;font-size:.9rem;text-decoration:none;">📋 Request a Commercial Quote</a>
-                        </div>
-                    </div>
-                </section>
-                <section class="container" style="padding:40px 20px;" id="faq" aria-labelledby="svc-faq-title">
-            <div class="section-title">
-                <h2 id="svc-faq-title"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> Pest Control FAQ</h2>
-                <p>Common questions about choosing a pest control company in Hong Kong, pricing and specific treatments (tap a question to expand)</p>
-            </div>
-                <details class="svc-faq"><summary>How do I choose a reliable pest control company in Hong Kong?</summary><p>Look for four things: a written quote after an on-site survey with scope and warranty stated; pest-specific treatment (gel baiting for cockroaches, T3i radar for termites) rather than blanket spraying; registered pesticides; and warranty re-inspections with documented case records. We cover all 18 districts — Hong Kong Island (including Stanley and Causeway Bay), Kowloon, the New Territories and outlying islands.</p></details>
-                <details class="svc-faq"><summary>How much do pest control services in Hong Kong cost?</summary><p>It depends on the pest and the severity: cockroach and rodent jobs usually start from a few hundred HK dollars; termite and bed bug treatments range from around HK$900 to HK$8,000 depending on scope. We always survey first and provide a written quote before any work begins. See our 2026 pest control pricing guide for the full breakdown.</p></details>
-                <details class="svc-faq"><summary>How do I choose a cockroach exterminator? Why do cockroaches keep coming back?</summary><p>German cockroaches breed fast and resist common sprays, so surface spraying alone never works. Choose a company that treats the colony: gel bait carried back to the nest, crack-and-crevice injection into harbourages, plus sanitation advice. Our documented cases use gel-bait IPM treatment that is safe for homes with kids and pets.</p></details>
-                <details class="svc-faq"><summary>Why are bed bugs in Hong Kong so hard to eliminate on your own?</summary><p>Hong Kong's humid, hot climate keeps bed bugs breeding all year. They hide in mattress seams, bed frames and skirting boards, and eggs hatch on a rolling window that DIY sprays never fully cover. Professional steam + residual insecticide dual treatment, with a 60-day re-inspection covering the hatch cycle, is the reliable route.</p></details>
-                <details class="svc-faq"><summary>What does wood borer treatment involve?</summary><p>Tiny holes and fine wood powder on furniture usually mean wood borers (powderpost beetles). Professional treatment applies long-lasting protective agents deep into the timber to kill larvae and stop re-infestation. As with termites, survey first — our free AI pest diagnosis can help identify the species.</p></details>
-                <details class="svc-faq"><summary>Do you offer mosquito control?</summary><p>Yes. Targeting local species such as Aedes albopictus, we focus on biological larvicide to block breeding sources, backed by environmental improvement advice. Residential jobs start from HK$900; standing water source control is assessed during the survey.</p></details>
-        </section>
-
-<section class="container" style="padding:40px 20px;">
+        <section class="container" style="padding:40px 20px;">
             <div class="section-title">
                 <h2><i class="fa-solid fa-bug-slash" aria-hidden="true" style="color:var(--primary);"></i> Our Professional Services</h2>
                 <p>Targeting common HK pests with IPM integrated pest management — solving pest problems at the source</p>
@@ -193,7 +115,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <article id="mosquito-mouse" style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow-md);">
                 <h2 style="color:var(--dark-bg);margin:0 0 14px;">🦟🐭 Mosquito & Rodent Control</h2>
                 <p style="color:var(--text-main);line-height:1.7;margin:0 0 14px;">Hong Kong's humid climate makes it a high-incidence area for mosquitoes and rodents. We use biological agents to block larvae breeding and pair with IoT smart rodent boxes for 24-hour remote monitoring of rodent activity, achieving precise trapping. Our rodent control services add professional trapping and entry-point sealing for lasting results.</p>
-                <p style="color:var(--text-main);line-height:1.7;margin:0 0 14px;">Looking for pest control for mosquitoes in Hong Kong? Our mosquito control mainly targets Aedes albopictus (white-striped black mosquito) and Aedes aegypti, both of which can transmit dengue fever. For rodent control, we focus on source management — sealing entry points, removing food sources, and using smart monitoring to track activity patterns.</p>
+                <p style="color:var(--text-main);line-height:1.7;margin:0 0 14px;">Our mosquito control mainly targets Aedes albopictus (white-striped black mosquito) and Aedes aegypti, both of which can transmit dengue fever. For rodent control, we focus on source management — sealing entry points, removing food sources, and using smart monitoring to track activity patterns.</p>
+                <p style="color:var(--text-main);line-height:1.7;margin:0 0 14px;">For pest control for mosquitoes in Hong Kong, our approach combines breeding-source inspection with targeted treatment to break the breeding cycle before adults emerge — suitable for estates, village houses and commercial premises.</p>
                 <h3 style="color:var(--primary-dark);margin:18px 0 10px;"><i class="fa-solid fa-tag" aria-hidden="true"></i> Pricing Reference</h3>
                 <ul style="padding-left:20px;line-height:1.8;color:var(--text-main);">
                     <li>Mosquito control (residential): from HK$900</li>
@@ -258,6 +181,36 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:16px 0 0;padding:12px 14px;background:var(--primary-light);border:1px solid #a7f3d0;border-radius:10px;font-size:.9rem;line-height:1.7;">🐝 Found a hornet nest and don't know what to do? Open the <a href="/en/wasp-nest/" style="color:var(--primary-dark);font-weight:700;">the hornet & wasp nest removal topic page</a> — naming explained + process + cost guide + 18 districts; or visit the <a href="/en/service/wasp/" style="color:var(--primary-dark);font-weight:700;">Wasp Nest Removal Company</a> page.</p>
                 </article>
 
+                <!-- v9.66 Service FAQ -->
+                <article id="faq" class="svc-faq" style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:var(--shadow-md);">
+                <h2 style="color:var(--dark-bg);margin:0 0 14px;">Pest Control Services FAQ</h2>
+                    <details>
+                        <summary><span>How do I choose a good pest control company in Hong Kong?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>Verify four things: whether the pesticides are AFCD-registered; whether they survey first and issue a written quotation; whether treatment comes with photo records; and whether a warranty-period follow-up is included. We do all four — and make case records available for verification.</p></div>
+                    </details>
+                    <details>
+                        <summary><span>Which areas do you cover? Do you serve Stanley and Causeway Bay?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>All 18 districts of Hong Kong — from Stanley and Causeway Bay to Kennedy Town on Hong Kong Island, across Kowloon and the New Territories, plus outlying islands such as Discovery Bay and even Sha Tau Kok Frontier Closed Area cases (Closed Area Permit required). For remote spots, send us your address on WhatsApp for scheduling.</p></div>
+                    </details>
+                    <details>
+                        <summary><span>How is pest control priced?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>Past-case reference ranges: termite ~HK$2,800–$8,000; bed bugs ~HK$3,000–$5,800; cockroaches ~HK$900–$1,800, depending on scale and workload. We survey first and issue a written quotation stating scope and warranty. See our <a href="/en/info/blog-12/" style="color:var(--primary-dark);font-weight:700;">2026 pest control pricing guide</a> for the full picture.</p></div>
+                    </details>
+                    <details>
+                        <summary><span>Are treatments safe for children and pets?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>We use AFCD-registered pesticides applied in targeted ways — gel baiting, crack-and-crevice injection — to minimise contact risk; application points and precautions are explained before treatment.</p></div>
+                    </details>
+                    <details>
+                        <summary><span>Will pests come back? Is there a warranty?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>Pest activity depends on humidity, hygiene and nearby sources, so recurrence is possible. We follow up within the warranty period — if activity reappears at the same spot, re-inspection and treatment are free, with prevention advice provided.</p></div>
+                    </details>
+                    <details>
+                        <summary><span>How do I get started?</span><i class="fas fa-chevron-down faq-arrow" aria-hidden="true"></i></summary>
+                        <div class="faq-answer"><p>Send photos via WhatsApp for a preliminary assessment, or use our free AI pest diagnosis to identify the pest instantly. After confirming the approach, we schedule a survey and issue a written quotation. For urgent cases, mention it in your message and we will prioritise where we can.</p></div>
+                    </details>
+                </article>
+
+
 
 
             <div style="background:linear-gradient(135deg,var(--primary-light) 0%,#f0f9ff 100%);border:1px solid #6ee7b7;border-radius:var(--radius);padding:28px 24px;margin:30px 0;">
@@ -273,7 +226,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
     <footer>
         <p>Address: Lai King Estate Factory Building, N.T. | Service Area: All 18 Districts of Hong Kong | Hours: 9:00 - 18:00 | Email: <a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/commercial/">Commercial Pest Control</a><a href="/en/commercial/property/">Property Management</a><a href="/en/commercial/hotel/">Hotels &amp; Guesthouses</a><a href="/en/commercial/restaurant/">Restaurants &amp; F&amp;B</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
+        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
             <a href="https://x.com/CEDARS_LTD" rel="noopener" aria-label="X (Twitter)" title="X"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" style="display:inline-block;vertical-align:middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
@@ -310,6 +263,61 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     if(!getC()){b.style.display='block';}else if(getC().v==='granted'){loadGTM();}})();</script>
     <!-- End v9.60 Cookie Consent Banner -->
 
+
+    <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How do I choose a good pest control company in Hong Kong?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Verify four things: whether the pesticides are AFCD-registered; whether they survey first and issue a written quotation; whether treatment comes with photo records; and whether a warranty-period follow-up is included. We do all four — and make case records available for verification."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which areas do you cover? Do you serve Stanley and Causeway Bay?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All 18 districts of Hong Kong — from Stanley and Causeway Bay to Kennedy Town on Hong Kong Island, across Kowloon and the New Territories, plus outlying islands such as Discovery Bay and even Sha Tau Kok Frontier Closed Area cases (Closed Area Permit required). For remote spots, send us your address on WhatsApp for scheduling."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How is pest control priced?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Past-case reference ranges: termite ~HK$2,800–$8,000; bed bugs ~HK$3,000–$5,800; cockroaches ~HK$900–$1,800, depending on scale and workload. We survey first and issue a written quotation stating scope and warranty. See our 2026 pest control pricing guide for the full picture."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are treatments safe for children and pets?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We use AFCD-registered pesticides applied in targeted ways — gel baiting, crack-and-crevice injection — to minimise contact risk; application points and precautions are explained before treatment."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Will pests come back? Is there a warranty?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pest activity depends on humidity, hygiene and nearby sources, so recurrence is possible. We follow up within the warranty period — if activity reappears at the same spot, re-inspection and treatment are free, with prevention advice provided."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I get started?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Send photos via WhatsApp for a preliminary assessment, or use our free AI pest diagnosis to identify the pest instantly. After confirming the approach, we schedule a survey and issue a written quotation. For urgent cases, mention it in your message and we will prioritise where we can."
+            }
+        }
+    ]
+}</script>
 
 </body>
 </html>

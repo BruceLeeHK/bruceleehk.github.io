@@ -43,7 +43,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <nav aria-label="Main Navigation">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/en/">Home</a></li>
-                    <li><a href="/en/services/">Services</a></li><li><a href="/en/commercial/">Commercial</a></li>
+                    <li><a href="/en/services/">Services</a></li>
                     <li><a href="/en/districts/">18 Districts</a></li>
                     <li><a href="/en/strategy/">Strategies</a></li>
                     <li><a href="/en/info/">Info</a></li>
@@ -71,40 +71,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <section class="container" style="padding:40px 20px;">
             <div style="max-width:700px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-md);">
                 <h2 style="color:var(--dark-bg);margin:0 0 20px;"><i class="fa-solid fa-clipboard-list" aria-hidden="true" style="color:var(--primary);"></i> Online Quote Form</h2>
-                <p style="background:#f0fdf4;border:1px solid #86efac;border-left:4px solid var(--primary);border-radius:10px;padding:14px 16px;font-size:.93rem;line-height:1.8;color:var(--text-main);margin:0 0 18px;"><strong>Corporate &amp; Commercial Quote Channel</strong> — built for businesses, property management, hotels and F&amp;B operators. Fill in your venue details and pest situation: our dedicated B2B specialist will personally review your enquiry and typically contact you within one business day with an initial assessment and a formal Quotation, combining IoT monitoring and IPM (Integrated Pest Management) principles. We can also prepare supporting documents aligned with FEHD licensing requirements and HACCP food-safety needs.<br><span style="font-size:.85rem;color:var(--text-muted);">(Tender invitations, sample quotations and government procurement document enquiries are also welcome via this form. Household customers are equally welcome.)</span></p>
                 <form id="quoteForm">
-                    <fieldset style="border:1px solid var(--border);border-radius:10px;padding:12px 14px 14px;margin:0 0 16px;">
-                        <legend style="font-weight:700;color:var(--dark-bg);font-size:.95rem;padding:0 6px;">Customer Type</legend>
-                        <div style="display:flex;flex-wrap:wrap;gap:10px;">
-                            <label style="display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--text-main);cursor:pointer;padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;"><input type="radio" name="customer-type" value="Individual / Household" checked> 🏠 Individual / Household</label>
-                            <label style="display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--text-main);cursor:pointer;padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;"><input type="radio" name="customer-type" value="Business / Corporate"> 🏢 Business / Corporate</label>
-                        </div>
-                    </fieldset>
-                    <fieldset id="biz-fields" style="display:none;border:1px solid var(--border);border-radius:10px;padding:12px 14px 14px;margin:0 0 16px;background:#f8fafc;">
-                        <legend style="font-weight:700;color:var(--dark-bg);font-size:.95rem;padding:0 6px;">Corporate Client Details</legend>
-                        <div style="margin-bottom:14px;">
-                            <label for="qf-company" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Company / Organisation Name</label>
-                            <input type="text" id="qf-company" name="company" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;" placeholder="e.g. ABC Property Management Ltd.">
-                        </div>
-                        <div style="margin-bottom:14px;">
-                            <label for="qf-venue" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Commercial Venue Type</label>
-                            <select id="qf-venue" name="venue-type" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;background:#fff;">
-                                <option value="">Select…</option>
-                                <option value="Office">Office</option>
-                                <option value="Property Common Areas">Property Common Areas</option>
-                                <option value="Restaurants &amp; Food Factories">Restaurants &amp; Food Factories</option>
-                                <option value="Hotels &amp; Guesthouses">Hotels &amp; Guesthouses</option>
-                                <option value="Schools or Residential Care Homes">Schools or Residential Care Homes</option>
-                                <option value="Warehouses &amp; Industrial Buildings">Warehouses &amp; Industrial Buildings</option>
-                            </select>
-                        </div>
-                        <div>
-                            <span style="display:block;font-weight:700;color:var(--dark-bg);font-size:.92rem;margin-bottom:6px;">Document Requirements (optional, multi-select)</span>
-                            <label style="display:flex;align-items:flex-start;gap:8px;font-size:.9rem;color:var(--text-main);line-height:1.6;cursor:pointer;margin-bottom:6px;"><input type="checkbox" name="doc-needs" value="Formal Quotation for internal approval"> Formal Quotation for internal approval</label>
-                            <label style="display:flex;align-items:flex-start;gap:8px;font-size:.9rem;color:var(--text-main);line-height:1.6;cursor:pointer;margin-bottom:6px;"><input type="checkbox" name="doc-needs" value="Tender / bidding information"> Tender / bidding information</label>
-                            <label style="display:flex;align-items:flex-start;gap:8px;font-size:.9rem;color:var(--text-main);line-height:1.6;cursor:pointer;"><input type="checkbox" name="doc-needs" value="Industry compliance documents (e.g. HACCP / AFCD-registered pesticide list)"> Industry compliance documents (e.g. HACCP / AFCD-registered pesticide list)</label>
-                        </div>
-                    </fieldset>
                     <div style="margin-bottom:16px;">
                         <label for="qf-name" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Name *</label>
                         <input type="text" id="qf-name" name="name" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;" required>
@@ -182,7 +149,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
     <footer>
         <p>Address: Lai King Estate Factory Building, N.T. | Service Area: All 18 Districts of Hong Kong | Hours: 9:00 - 18:00 | Email: <a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/commercial/">Commercial Pest Control</a><a href="/en/commercial/property/">Property Management</a><a href="/en/commercial/hotel/">Hotels &amp; Guesthouses</a><a href="/en/commercial/restaurant/">Restaurants &amp; F&amp;B</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
+        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
             <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
@@ -206,64 +173,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             const premise = document.getElementById('qf-premise').value;
             const area = document.getElementById('qf-area').value;
             const desc = document.getElementById('qf-desc').value;
-            const ctype = (document.querySelector('input[name="customer-type"]:checked') || {}).value || '';
-            const company = (document.getElementById('qf-company') || {}).value || '';
-            const venue = (document.getElementById('qf-venue') || {}).value || '';
-            const docs = Array.prototype.map.call(document.querySelectorAll('input[name="doc-needs"]:checked'), function (c) { return c.value; }).join('; ');
-            let msg = `Hi, I would like a pest control quote:\n• Name: ${name}\n• Phone: ${phone}\n• Customer Type: ${ctype}`;
-            if (company) msg += `\n• Company: ${company}`;
-            if (venue) msg += `\n• Venue Type: ${venue}`;
-            if (docs) msg += `\n• Documents Needed: ${docs}`;
-            msg += `\n• Pest Type: ${pest}\n• Premise: ${premise}\n• Area: ${area} sq ft\n• Description: ${desc}`;
+            const msg = `Hi, I would like a pest control quote:\n• Name: ${name}\n• Phone: ${phone}\n• Pest Type: ${pest}\n• Premise: ${premise}\n• Area: ${area} sq ft\n• Description: ${desc}`;
             window.open(`https://wa.me/85252821552?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
         });
-    </script>
-    <script>
-        // ===== v9.66 B2B customer routing & URL prefill =====
-        (function () {
-            var radios = document.querySelectorAll('input[name="customer-type"]');
-            var bizFields = document.getElementById('biz-fields');
-            if (!radios.length || !bizFields) return;
-
-            function syncBiz(on) {
-                bizFields.style.display = on ? 'block' : 'none';
-                ['qf-company', 'qf-venue'].forEach(function (id) {
-                    var el = document.getElementById(id);
-                    if (!el) return;
-                    if (on) { el.setAttribute('required', 'required'); }
-                    else {
-                        el.removeAttribute('required');
-                        if (el.tagName === 'SELECT' && !el.value) el.selectedIndex = 0;
-                    }
-                });
-                if (!on) {
-                    bizFields.querySelectorAll('input[type="checkbox"]').forEach(function (c) { c.checked = false; });
-                }
-            }
-
-            radios.forEach(function (r) {
-                r.addEventListener('change', function () {
-                    syncBiz(r.checked && r.value.indexOf('Business') === 0);
-                });
-            });
-            var cur = document.querySelector('input[name="customer-type"]:checked');
-            if (cur) syncBiz(cur.value.indexOf('Business') === 0);
-
-            // URL prefill: /en/quote/?biz=1&venue=property|hotel|restaurant|office|school|warehouse
-            try {
-                var q = new URLSearchParams(window.location.search);
-                var vMap = { office: 'Office', property: 'Property Common Areas', restaurant: 'Restaurants & Food Factories', hotel: 'Hotels & Guesthouses', school: 'Schools or Residential Care Homes', warehouse: 'Warehouses & Industrial Buildings' };
-                var venue = vMap[(q.get('venue') || '').toLowerCase()];
-                if (q.get('biz') === '1' || venue) {
-                    var bizRadio = document.querySelector('input[name="customer-type"][value="Business / Corporate"]');
-                    if (bizRadio) { bizRadio.checked = true; syncBiz(true); }
-                    if (venue) {
-                        var sel = document.getElementById('qf-venue');
-                        if (sel) sel.value = venue;
-                    }
-                }
-            } catch (e) {}
-        })();
     </script>
     <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->
     <div id="cc-banner" role="dialog" aria-modal="false" aria-label="Cookie 使用同意 Cookie Consent" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0f172a;border-top:2px solid #25d366;box-shadow:0 -6px 24px rgba(0,0,0,.35);">

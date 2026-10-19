@@ -1,57 +1,37 @@
 # 修復日誌 (v9.66 — 2026-10-19)
 
-## v9.66《B2B 商業滅蟲方案矩陣＋專員報價表單無縫整合》— 依兩份文檔落地：①《建立獨立的「商業滅蟲方案」專頁矩陣》②《B2B 商業滅蟲方案與「專員報價表單」無縫整合藍圖》
+## v9.66《傳統搜尋＋AI 摘要雙線搶佔》— 依《全面搶佔 Google 傳統搜尋排名與 AI 摘要》戰略文檔，落實「傳統 Google 排名」＋「AI 摘要（AI Overviews/GEO）」兩條戰略線
 
-### 全新商業專頁矩陣（+8 頁：ZH 4＋EN 4，sitemap 130→138）
-- **/commercial/ 商業滅蟲方案中樞**（ZH/EN）：B2B 定位（合規・長效・可追溯）、四大可驗證信任訊號（報告制度／IoT 智慧鼠盒 24/7／IPM＋漁護署註冊除害劑／夜間施工）、三大方案卡、四步商業服務流程、FAQ×6；資歷表述如實（正申請列入政府物流服務署供應商名單及康文署承辦商名單，以政府審批為準）
-- **/commercial/property/ 物業管理與商業大廈**（ZH/EN）：公用地方六大高風險位（垃圾房／電梯槽／大堂／停車場／天台／商場）、不鏽鋼防鼠網封堵四板斧、IoT 數據報告（向法團交代）、電子報告＋IPM 處方單、第 132 章職責分工須知、法團招標文件支援、實證個案（美孚新邨＋荃灣安裕）、FAQ×7
-- **/commercial/hotel/ 酒店及賓館**（ZH/EN）：客房到後勤六區部署、床蝨專項（極速應召／相鄰房檢查／高溫蒸氣／覆查監測）＋隱蔽服務、Termatrac T3i 無損探測（高檔裝修零破壞）、房務員工床蝨識別培訓、合約報告制度、FAQ×7
-- **/commercial/restaurant/ 餐飲與食品工場**（ZH/EN）：廚房到後巷六區、食環署文件支援（如實表述：報告協助應對查閱，具體以巡查部門要求為準）、對標 HACCP 監察閉環、夜間收舖後施工、中環餐飲＋沙頭角金行實證個案、FAQ×7
-- 8 頁全配：JSON-LD×4（Breadcrumb／Service hasOfferCatalog／FAQPage／PestControl 同 @id）、canonical＋hreflang×3、og/twitter、快速估價表單（商業場地類型選單）、底部 CTA band（索取商業報價→專員報價表單帶 ?biz=1&venue= 預填參數）
+⚠️ 環境事故復原：本次開工前偵測到本地 workspace 回退至 v9.53 快照（同 v9.49 回退事故同型）。已從 filebin 拉回 v9.64 交付包（MD5 b5febcd519d15b4c34ab47b4858b6ea6 位元組級驗證一致）還原 website/ 至 v9.64 基準，再於乾淨基準上重建 v9.65 改動＋實施本版本。v9.54–v9.64 各版說明詳見下方歷史條目；v9.65 改動細節見下一段。
 
-### 專員報價表單 B2B 整合（/quote/＋/en/quote/）
-- 第一階段：表單文案升級【企業與商業專屬報價通道】（B2B 專責專員、一般一個工作天內聯絡、IoT＋IPM、食環署發牌要求及 HACCP 文件支援；個人／家庭客戶照常填寫）
-- 第二階段：新欄位——客戶身分 radio（個人／家庭｜商業／機構，預設個人）＋商業選擇時展開：公司／機構名稱、商業場地類型下拉（寫字樓／物業公用空間／餐廳及食品工場／酒店及賓館／學校或院舍／倉庫及工廈）、特別文件需求多選（正式報價單 Quotation／投標招標資訊／行業合規證明文件）；ZH 另加 Formspree _subject 動態分流（商業查詢獨立標題）
-- 第三階段：`?biz=1&venue=property|hotel|restaurant|office|school|warehouse` 到站預填（自動選商業客戶＋展開企業欄位＋預選場地類型）；商業專頁 CTA 全部帶參數跳轉
-- EN 表單同步（Customer Type／Corporate Client Details／Document Requirements；WhatsApp 訊息自動附帶客戶類別／公司／場地／文件需求）
+### 戰略一：純中文市場（50–60%）— GEO 直接答案＋長尾詞
+- 四大蟲種 pillar 頁（白蟻／床蝨／曱甴／老鼠，雙語 8 頁）hero 區新增「AI 摘要答案箱」（geo-answer）：每頁一句可被 AI 摘要直接引用嘅定義式答案——「白蟻點解要免拆牆探測？」「床蝨怕什麼？」「德國小蠊有幾難搞？」「屋企有老鼠，第一步係咩？」（EN 對應）。依戰略文檔避坑指南：FAQ rich result 已於 2026 年 5 月起停顯，重心放喺頁面實質文字結構，答案直接寫喺版面。
+- /services/＋EN 新增 6 題摺疊 FAQ（details/summary）＋FAQPage schema：首題直接回應長尾詞「滅蟲公司邊間好？」；地區題答案覆蓋赤柱、銅鑼灣（EN 對應 Stanley／Causeway Bay）；收費題連結 2026 滅蟲收費指南（blog-12）。
+- EN services 蚊段植入「pest control for mosquitoes」精準句（ breeding-source inspection + targeted treatment 表述）。
 
-### 全站灌溉與整合
-- 導航列 134 頁：ZH「商業方案」／EN「Commercial」插喺「蟲類服務／Services」之後
-- 頁尾 footer-nav 4 條 B2B 錨文本（商業滅蟲方案／物業管理滅蟲／酒店滅蟲／餐廳滅蟲），sep／nosep 兩變體自適應，區段限定注入
-- /services/ ZH/EN 商業客戶專區 band（三大方案＋索取報價）；首頁 ZH/EN 商業入口 band（插喺「有蟲就有計」之前）
-- rodent pillar 服務網絡卡新增「商業滅蟲方案」回鏈（ZH/EN）
-- i18n.js 語言切換 blog 上限 11→23（修復 blog-12~23 切換跌去 info 中樞嘅舊問題）
+### 戰略二：中英混合市場（20–25%）— 中英夾雜 H2＋數據化表述
+- 白蟻頁＋EN 新增「蛀木蟲處理 — 同白蟻有咩分別？」／「Wood Borer Treatment — How It Differs from Termites」板塊（全站首個蛀木蟲主題 H2，連結免費 AI 診斷）。
+- 床蝨頁＋EN 新增「香港床蝨實況 — 點解近年在港反彈？」／「Bed Bugs in Hong Kong — Why Cases Are Rising Again」板塊（澳航事件「據報道」歸因＋連結 blog-22）。
+- 老鼠頁＋EN 新增「餐廳廚房滅老鼠：IoT 智慧鼠盒監測與 IPM 綜合防治」／「Restaurant & Kitchen Rat Control: IoT Smart Monitoring + IPM」B2B 板塊（戰略文檔精準佈局句式直接落地，指向餐飲集團／外賣廚房／食品倉）。
+- 曱甴頁主圖 alt 加入「（蟑螂）」雙詞：「廚房曱甴（蟑螂）防治實證——香港滅曱甴公司藥餌凝膠點注IPM治理」。
 
-### 合規要點
-- 零「保證／根治／100%／最平／全港首創」；收費一律先勘察後書面報價；食環署表述為「提供記錄文件協助應對查閱，具體以巡查部門要求為準」；第 132 章公用地方職責分工如實交代；供應商名單資格以「正申請（以政府審批為準）」表述
+### 戰略三：純英文市場（15–20%）— E-E-A-T 核實
+- EN 四個 pillar 頁 AFCD 註冊表述核實齊備（termite 5／flea 3／cockroach 4／rodent 4 處），hreflang 三語互指完好，無需改動；新 EN 板塊以 IPM／AFCD／documented records 等高信任詞彙寫作。
 
-## v9.65《SEO 更新升級——GSC 弱勢詞 × 三方案落地（FAQ/H2/Alt）》
+### FAQ 結構強化（visible text 為主、schema 為輔）
+- termite／flea／cockroach ZH+EN FAQ 由 6 題加至 7 題：白蟻加「你哋有冇處理蛀木蟲／粉蠹？」、床蝨加「床蝨怕什麼？自己處理得唔得？」、曱甴加「德國小蠊同美國曱甴處理方法有咩唔同？」；FAQPage schema 同步加至 7 題（JSON-LD 解析驗證通過）。
 
-依用戶 GSC 數據（排名 82-118 弱勢詞）＋《SEO 優化執行指令》三方案執行，共改 8 頁（ZH/EN 同步）：
+### 合規（第 362 章 v9.45 標準全程）
+- 高溫殺蝨表述用「一般喺攝氏 50 度以上持續高溫」，不設絕對承諾；澳航事件「據報道」歸因；收費一律「過往個案綜合參考＋先勘察後書面報價」；無「保證／根治／斷尾／100%／即日上門」字眼。
+- 戰略文檔建議「15-30 秒即出 AI 診斷報告」與站內 /ai/ 既有聲稱（深度報告 30–90 秒）不符——為如實陳述，採用站內既有數據，未新增時間聲稱。
+- sitemap 10 頁 lastmod 更新至 2026-10-19；零新頁面（URL 集不變，i18n.js 免動）。
 
-### 方案一：FAQ 模塊擴充 + FAQPage JSON-LD
-- 三個服務專頁 FAQ 各加 1 條長尾詞 Q（FAQPage schema 同步，現 7 條）：termite「如何分辨白蟻與普通螞蟻？(How to tell the difference between ants and termites)」（文檔文案一字不差）、flea「香港床蝨點解特別難自己斷尾？」、cockroach「點樣揀一間可靠嘅滅蟑螂公司？」
-- services 總覽頁（ZH/EN）新加「滅蟲服務常見問題 FAQ」摺疊板塊（details/summary，＋展開收起符號 CSS）6 條 Q：揀滅蟲公司／收費行情／揀滅蟑螂公司／香港床蝨／蛀木蟲處理／滅蚊服務；新加 FAQPage JSON-LD（ZH/EN 各 6 Q）；答案自然覆蓋 GSC 地區詞（赤柱 Stanley、銅鑼灣 Causeway Bay）
-- EN 對應頁同步（termite/flea/cockroach FAQ +1，services FAQ×6）
-
-### 方案二：H2 長尾詞植入（配 AI 診斷/IPM 賣點）
-- termite（ZH/EN）新增「專業「蛀木蟲處理」與防護」H2 板塊（全站首個蛀木蟲內容；文檔文案一字不差＋T3i/IPM/AI 診斷賣點句）
-- flea（ZH/EN）新增「針對「香港床蝨」特性的專業滅蝨方案」H2 板塊（文檔文案一字不差，「星星之火計」＋AI 診斷/IPM 賣點句）
-
-### 方案三：Alt / 文字補強（誠實原則）
-- cockroach ZH 案例 alt「廚房曱甴防治實證」→「廚房曱甴（蟑螂）防治實證」——覆蓋「蟑螂」寫法，文對圖不堆砌
-- EN services 蚊板塊段首自然植入「Looking for pest control for mosquitoes in Hong Kong?」
-- 其餘案例圖 alt 原有長尾詞已精準（T3i/床蝨/IPM），不做文不對圖嘅硬塞
-
-### GSC 弱勢詞 → 頁面對應
-香港床蝨/床蝨 香港→/service/flea/；蛀木虫处理→/service/termite/；how to tell the difference between ants and termites→termite FAQ；滅蟲公司→services FAQ；滅蟑螂公司→cockroach FAQ+services FAQ；pest control for mosquitoes→/en/services/；stanley pest control/pest control causeway→services FAQ 地區答案（pest control broadmeadow 屬澳洲地名，無香港著落點，暫不處理）
-
-### 驗證
-- 8 頁 JSON-LD 全部 json.loads 合法（修復兩輪：schema_q 插入雙{錯誤→以 HTML faq-item 為事實來源整塊重生成 6 頁 schema）
-- div/section/details 全平衡；agent-browser 實測：services 摺疊 FAQ 6 條展開正常、termite 蛀木蟲 H2+新 FAQ 在位（7 條）、flea 香港床蝨 H2+新 FAQ 在位（7 條）
-- sitemap 免動（無新 URL）
-
----
+## v9.65《服務頁本地 SEO 強化》（重建版）— 上個工作階段已實作、因環境回退流失，本次隨 v9.66 交付包一併重建交付
+- /services/＋EN：6 題摺疊 FAQ＋FAQPage schema（赤柱／銅鑼灣地區詞）＝已併入 v9.66 戰略一交付
+- /service/termite/＋EN：蛀木蟲處理 H2 板塊＝已併入 v9.66 戰略二交付
+- /service/flea/＋EN：香港床蝨 H2 板塊＝已併入 v9.66 戰略二交付
+- termite／flea／cockroach FAQ 加至 7 題＋曱甴主圖 alt（蟑螂）＝已併入 v9.66 交付
+- 版本號保留，以銜接此前 GSC 提交建議（8 條 URL 清單不變，先上傳後提交）
 
 ## v9.64《隱私政策成頁精簡（技術細節全隱藏）＋ 全站 Cookie 橫幅新文案》
 
