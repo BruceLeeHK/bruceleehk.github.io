@@ -477,6 +477,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/">首頁</a></li>
                     <li><a href="/services/">蟲類服務</a></li>
+                    <li><a href="/commercial/">商業方案</a></li>
                     <li><a href="/districts/">覆蓋十八區</a></li>
                     <li><a href="/strategy/">有蟲就有計</a></li>
                     <li><a href="/info/">蟲類資訊</a></li>
@@ -516,7 +517,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <span class="channel-tag org">🏢 商業・機構</span>
                     <div class="channel-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div>
                     <h3>專員報價表單</h3>
-                    <p>填寫蟲患詳情，由專員親自審閱並主動聯絡你提供精準報價。適合<strong>商業機構、物業管理</strong>或需要詳細描述情況的客戶。</p>
+                    <p><b>【企業與商業專屬報價通道】</b>專為商業機構、物業管理、酒店及餐飲業設立的快速報價通道。請填寫您的場地資訊與蟲害現況，我們的 B2B 專責專員將親自審閱您的需求，並於一個工作天內主動聯絡您，提供符合食環署/HACCP 合規標準、結合 IoT 監測與 IPM 理念的初步評估及正式報價單 (Quotation)。<span style="font-size:.85rem;color:#64748b;display:block;margin-top:4px;">(如需邀請投標或索取政府採購註冊文件，亦可透過此表單提交)</span></p>
                     <a href="#quote-form" class="channel-btn green">
                         <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 立即填表
                     </a>
@@ -563,6 +564,43 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                         <div class="form-group">
                             <label for="phone">聯絡電話</label>
                             <input type="tel" id="phone" name="phone" placeholder="例如：9123 4567" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label>客戶身分<span class="opt">（選填）</span></label>
+                        <div style="display:flex;gap:18px;flex-wrap:wrap;padding:4px 0;">
+                            <label style="font-weight:400;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="radio" name="customer-type" value="personal"> 個人／家庭客戶</label>
+                            <label style="font-weight:400;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="radio" name="customer-type" value="commercial"> 商業／機構客戶</label>
+                        </div>
+                    </div>
+
+                    <div id="biz-fields" style="display:none;border:1px dashed #cbd5e1;border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company-name">公司／機構名稱</label>
+                                <input type="text" id="company-name" name="company-name" placeholder="例如：XX 物業管理有限公司">
+                            </div>
+                            <div class="form-group">
+                                <label for="venue-type">商業場地類型</label>
+                                <select id="venue-type" name="venue-type">
+                                    <option value="" disabled selected>請選擇</option>
+                                    <option value="寫字樓">寫字樓</option>
+                                    <option value="物業公用空間">物業公用空間</option>
+                                    <option value="餐廳及食品工場">餐廳及食品工場</option>
+                                    <option value="酒店及賓館">酒店及賓館</option>
+                                    <option value="學校或院舍">學校或院舍</option>
+                                    <option value="倉庫及工廈">倉庫及工廈</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>特別文件需求<span class="opt">（可多選）</span></label>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-quotation" value="需要"> 需要正式報價單 (Quotation) 作審批用途</label>
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-tender" value="需要"> 需要投標／招標相關資訊</label>
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-compliance" value="需要"> 需要行業合規證明（如 HACCP／漁護署註冊藥劑清單）</label>
+                            </div>
                         </div>
                     </div>
 
@@ -687,7 +725,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     <!-- Footer -->
     <footer>
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
+        <nav class="footer-nav" aria-label="頁尾導航 Footer Navigation"><a href="/">首頁</a><a href="/services/">蟲類服務</a><a href="/districts/">覆蓋十八區</a><a href="/service/rodent/">滅鼠公司</a><a href="/service/termite/">滅白蟻公司</a><a href="/service/flea/">滅蝨公司</a><a href="/service/cockroach/">滅曱甴公司</a><a href="/commercial/property/">物業管理滅蟲</a><a href="/commercial/hotel/">酒店滅蟲</a><a href="/commercial/fnb/">餐廳滅蟲</a><a href="/wasp-nest/">摘馬蜂巢・黃蜂巢</a><a href="/strategy/">有蟲就有計</a><a href="/info/">蟲類資訊</a><a href="/quote/">有蟲話我知</a><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram">
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
@@ -765,6 +803,32 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     submitBtn.disabled = false;
                 });
             });
+        })();
+    </script>
+    <script>
+        // v9.67 B2B: customer-type toggle + ?biz= pre-fill + dynamic subject
+        (function () {
+            var form = document.getElementById('quote-form-element');
+            if (!form) return;
+            var biz = document.getElementById('biz-fields');
+            var subj = form.querySelector('input[name="_subject"]');
+            function sync() {
+                var sel = form.querySelector('input[name="customer-type"]:checked');
+                var isBiz = sel && sel.value === 'commercial';
+                if (biz) biz.style.display = isBiz ? 'block' : 'none';
+                if (subj) subj.value = isBiz ? '【滅蟲師傅】B2B 商業滅蟲查詢' : '【滅蟲師傅】新嘅免費估價申請';
+            }
+            document.querySelectorAll('input[name="customer-type"]').forEach(function (r) { r.addEventListener('change', sync); });
+            var sp = new URLSearchParams(location.search).get('biz');
+            if (sp) {
+                var map = { property: '物業公用空間', hotel: '酒店及賓館', fnb: '餐廳及食品工場' };
+                var v = map[sp];
+                if (v) {
+                    var cb = form.querySelector('input[name="customer-type"][value="commercial"]');
+                    if (cb) { cb.checked = true; sync(); }
+                    var s = document.getElementById('venue-type'); if (s) s.value = v;
+                }
+            }
         })();
     </script>
     <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->

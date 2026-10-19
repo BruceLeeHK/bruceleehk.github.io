@@ -44,6 +44,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <ul class="nav-links" id="nav-links">
                     <li><a href="/en/">Home</a></li>
                     <li><a href="/en/services/">Services</a></li>
+                    <li><a href="/en/commercial/">Commercial</a></li>
                     <li><a href="/en/districts/">18 Districts</a></li>
                     <li><a href="/en/strategy/">Strategies</a></li>
                     <li><a href="/en/info/">Info</a></li>
@@ -79,6 +80,41 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <div style="margin-bottom:16px;">
                         <label for="qf-phone" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Phone / WhatsApp *</label>
                         <input type="tel" id="qf-phone" name="phone" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;" required>
+                    </div>
+
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Customer Type</label>
+                        <div style="display:flex;gap:18px;flex-wrap:wrap;padding:4px 0;">
+                            <label style="font-weight:400;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="radio" name="customer-type" value="personal"> Personal / Household</label>
+                            <label style="font-weight:400;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="radio" name="customer-type" value="commercial"> Business / Organisation</label>
+                        </div>
+                    </div>
+
+                    <div id="eq-biz-fields" style="display:none;border:1px dashed #cbd5e1;border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+                        <div style="margin-bottom:16px;">
+                            <label for="eq-company" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Company / Organisation</label>
+                            <input type="text" id="eq-company" name="company-name" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;">
+                        </div>
+                        <div style="margin-bottom:16px;">
+                            <label for="eq-venue" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Business Premises Type</label>
+                            <select id="eq-venue" name="venue-type" style="width:100%;padding:11px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:0.95rem;background:#fff;">
+                                <option value="">Select…</option>
+                                <option value="Office">Office</option>
+                                <option value="Property Common Areas">Property Common Areas</option>
+                                <option value="Restaurants &amp; Food Factories">Restaurants &amp; Food Factories</option>
+                                <option value="Hotels &amp; Guesthouses">Hotels &amp; Guesthouses</option>
+                                <option value="Schools &amp; Care Homes">Schools &amp; Care Homes</option>
+                                <option value="Warehouses &amp; Industrial Buildings">Warehouses &amp; Industrial Buildings</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Document Requirements</label>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-quotation" value="needed"> Formal quotation for approval</label>
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-tender" value="needed"> Tender / RFP information</label>
+                                <label style="font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;"><input type="checkbox" name="doc-compliance" value="needed"> Compliance documents (HACCP / AFCD list)</label>
+                            </div>
+                        </div>
                     </div>
                     <div style="margin-bottom:16px;">
                         <label for="qf-pest" style="display:block;font-weight:700;color:var(--dark-bg);margin-bottom:6px;">Pest Type *</label>
@@ -149,7 +185,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
     <footer>
         <p>Address: Lai King Estate Factory Building, N.T. | Service Area: All 18 Districts of Hong Kong | Hours: 9:00 - 18:00 | Email: <a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
-        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
+        <nav class="footer-nav" aria-label="Footer Navigation"><a href="/en/">Home</a><a href="/en/services/">Services</a><a href="/en/districts/">18 Districts</a><a href="/en/service/rodent/">Rat Control Company</a><a href="/en/service/termite/">Termite Control Company</a><a href="/en/service/flea/">Bed Bug Control Company</a><a href="/en/service/cockroach/">Cockroach Control Company</a><a href="/en/commercial/property/">Property Pest Control</a><a href="/en/commercial/hotel/">Hotel Pest Control</a><a href="/en/commercial/fnb/">Restaurant Pest Control</a><a href="/en/wasp-nest/">Wasp & Hornet Nest Removal</a><a href="/en/strategy/">Strategies</a><a href="/en/info/">Info</a><a href="/en/quote/">Get Quote</a><a href="/en/about/">About Us</a><a href="/sc/" lang="zh-Hans">简体中文</a><a href="/en/privacy/">Privacy Policy</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie Settings</a></nav>
         <div class="footer-social">
             <a href="https://www.instagram.com/CEDARS_LTD" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
             <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
@@ -173,9 +209,42 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             const premise = document.getElementById('qf-premise').value;
             const area = document.getElementById('qf-area').value;
             const desc = document.getElementById('qf-desc').value;
-            const msg = `Hi, I would like a pest control quote:\n• Name: ${name}\n• Phone: ${phone}\n• Pest Type: ${pest}\n• Premise: ${premise}\n• Area: ${area} sq ft\n• Description: ${desc}`;
+            const cSel = document.querySelector('input[name="customer-type"]:checked');
+            const ctype = cSel ? cSel.value : '';
+            const compEl = document.getElementById('eq-company');
+            const venEl = document.getElementById('eq-venue');
+            const comp = compEl ? compEl.value : '';
+            const venue = venEl ? venEl.value : '';
+            const bizDocs = Array.prototype.slice.call(document.querySelectorAll('#eq-biz-fields input[type="checkbox"]:checked')).map(function (c) { return c.parentElement.textContent.trim(); }).join('; ');
+            const isBiz = ctype === 'commercial';
+            const bizLines = isBiz ? `\n• Customer Type: Business/Organisation\n• Company: ${comp}\n• Premises Type: ${venue}\n• Documents: ${bizDocs}` : '';
+            const msg = `Hi, I would like a pest control quote:\n• Name: ${name}\n• Phone: ${phone}${bizLines}\n• Pest Type: ${pest}\n• Premise: ${premise}\n• Area: ${area} sq ft\n• Description: ${desc}`;
             window.open(`https://wa.me/85252821552?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
         });
+    </script>
+    <script>
+        // v9.67 B2B: customer-type toggle + ?biz= pre-fill
+        (function () {
+            var f = document.getElementById('quoteForm');
+            if (!f) return;
+            var biz = document.getElementById('eq-biz-fields');
+            function sync() {
+                var sel = f.querySelector('input[name="customer-type"]:checked');
+                var isBiz = sel && sel.value === 'commercial';
+                if (biz) biz.style.display = isBiz ? 'block' : 'none';
+            }
+            document.querySelectorAll('input[name="customer-type"]').forEach(function (r) { r.addEventListener('change', sync); });
+            var sp = new URLSearchParams(location.search).get('biz');
+            if (sp) {
+                var map = { property: 'Property Common Areas', hotel: 'Hotels & Guesthouses', fnb: 'Restaurants & Food Factories' };
+                var v = map[sp];
+                if (v) {
+                    var cb = f.querySelector('input[name="customer-type"][value="commercial"]');
+                    if (cb) { cb.checked = true; sync(); }
+                    var s = document.getElementById('eq-venue'); if (s) s.value = v;
+                }
+            }
+        })();
     </script>
     <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->
     <div id="cc-banner" role="dialog" aria-modal="false" aria-label="Cookie 使用同意 Cookie Consent" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0f172a;border-top:2px solid #25d366;box-shadow:0 -6px 24px rgba(0,0,0,.35);">

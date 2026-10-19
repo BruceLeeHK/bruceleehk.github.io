@@ -3,6 +3,78 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <!-- ===== Chinese (HK Traditional) — Primary ===== -->
   <url>
+    <loc>https://bruceleehk.com/commercial/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/commercial/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/commercial/property/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/property/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/property/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/property/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/commercial/property/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/property/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/property/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/property/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/commercial/hotel/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/hotel/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/hotel/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/commercial/hotel/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/hotel/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/hotel/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/commercial/fnb/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/fnb/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/fnb/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/fnb/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/commercial/fnb/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/commercial/fnb/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/commercial/fnb/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/commercial/fnb/"/>
+  </url>
+  <url>
     <loc>https://bruceleehk.com/</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
