@@ -1,4 +1,15 @@
-# 修復日誌 (v9.70 — 2026-10-21)
+# 修復日誌 (v9.71 — 2026-10-21)
+
+## v9.71《【師傅出更】蜂巢文章改用用戶真實原圖》— 應用戶提供 3 張個案原圖：blog-24 配圖由實錄短片截圖改為真實原圖（相片與相片名稱按原圖不變，放喺合適位置並配適當描述）
+
+### 真實原圖替換（ZH info/blog-24 ＋ EN en/info/blog-24）
+- 新增 3 幅用戶提供之個案真實原圖 assets/img/（按原圖名稱命名，648px 闊 LANCZOS 重採樣＋JPEG 優化）：
+  - shatin-may-shing-court-hornet-nest-removal-video.jpg（648×1007）：住戶 WhatsApp「報案」對話實錄（「只係陽台仔」＋開窗接觸評估＋大圍美城苑地址確認＋報價跟進）→ 開場接報段
+  - shatin-may-shing-court-hornet-removal-pest-control-master.jpg（648×1149）：摘下嘅「燒賣粒」蜂巢特寫（筷子夾起巢室切面＋六角形巢室＋乳白色幼蟲）→ 摘巢四步後特寫段
+  - 沙田美城苑-滅馬蜂巢與黃蜂防治實戰案例-滅蟲師傅.jpg（648×1149）：美城苑高層露台實景（窗台量天尺、虎尾蘭盆栽＋窗外綠化環境）→ IPM 高危築巢位檢查段
+- 移除 4 幅實錄短片截圖資產 blog24-{whatsapp-report,full-gear-spray,nest-removed,site-inspect}.{webp,jpg}（8 檔）；「防蜂裝備噴劑」位置無對應原圖，按用戶「用呢3張」指示整個 figure 移除（摘巢四步文案不變），文章配圖 4→3
+- alt／figcaption 按真實相片內容重寫（標註「個案對話實錄／個案實錄相片」／"Case chat record"/"Case photo"）；blog21-legalbox 圖片來源聲明由「實錄短片截圖」改為「個案真實相片及對話紀錄，由滅蟲師傅團隊提供」
+- BlogPosting JSON-LD image 陣列 5→4（video-wasp-nest＋3 幅原圖），ZH/EN 同步；全部 figure lazy＋width/height 屬性按新圖實際尺寸更新（1007／1149）
 
 ## v9.70《【師傅出更】蜂巢文章改用真實原圖》— 應用戶澄清：blog-24 配圖改用個案真實原圖（非 AI 示意圖），放喺合適位置並配以適當描述
 
