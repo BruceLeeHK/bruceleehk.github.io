@@ -1,4 +1,17 @@
-# 修復日誌 (v9.69 — 2026-10-21)
+# 修復日誌 (v9.70 — 2026-10-21)
+
+## v9.70《【師傅出更】蜂巢文章改用真實原圖》— 應用戶澄清：blog-24 配圖改用個案真實原圖（非 AI 示意圖），放喺合適位置並配以適當描述
+
+### 真實原圖替換（ZH info/blog-24 ＋ EN en/info/blog-24）
+- 圖片來源：官方 YouTube 實錄短片（2q98dIGC_2U【大圍美城苑直擊】）真實幀——maxres1/2/3 中央直式畫面裁切（405×720→648×1152 LANCZOS＋輕度銳化）＋ oardefault（1080×1920）裁 3:4，全部 webp(q80)＋jpg(q85) 雙格式
+- 新增 4 幅真實截圖 assets/img/：blog24-whatsapp-report（住戶 WhatsApp 報案＋現場環境核對）、blog24-full-gear-spray（師傅全副防蜂裝備噴劑封鎖巢口）、blog24-nest-removed（摘下嘅「燒賣粒」蜂巢特寫）、blog24-site-inspect（摘巢後視察周邊環境）
+- 移除全部 5 幅 AI 示意圖（webp＋jpg 共 10 檔）；黃蜂 vs 馬蜂章節無實景對應，改為純文字三特徵清單（其餘章節圖文位置不變）
+- 新增 .blog24-fig--v 直式圖樣式（max-width:500px 置中，避免 9:16 實拍截圖撑爆版面）；四幅圖全部 lazy＋width/height 屬性
+- caption／alt 重寫為真實場景描述（標註「實錄短片截圖」／"Live video still"）；legalbox AI 配圖聲明改為實錄截圖來源聲明
+- BlogPosting JSON-LD image 陣列更新為 5 張真實圖（video-wasp-nest＋四幅新圖），ZH/EN 同步
+
+### 影片標題同步
+- YouTube 官方已將影片改名為「呢粒唔係燒賣！蜂巢真身大揭秘🐝🔥」（原「呢粒咩係燒賣？」），同步更新：首頁 VideoObject JSON-LD name、waspNestCard facade aria-label／attachFacade 標題、blog-24 內嵌 VideoObject name／facade aria-label／figcaption／iframe title
 
 ## v9.69《【師傅出更】美城苑蜂巢文章圖文並茂重寫》— 應用戶要求：info/blog-24（含英文版）加入配圖並重新撰寫
 
