@@ -1,4 +1,21 @@
-# 修復日誌 (v9.67 — 2026-10-19)
+# 修復日誌 (v9.68 — 2026-10-21)
+
+## v9.68《大圍摘馬蜂巢短片登陸首頁＋【師傅出更】蜂巢個案新文章》— 應用戶要求：YouTube Shorts 2q98dIGC_2U 取代首頁「實戰案例短片」之曱甴系統防治實戰卡；新增【師傅出更】大圍美城苑直擊摘馬蜂巢文章（ZH＋EN 雙語）
+
+### 首頁「實戰案例短片」區塊更新（index.html＋en/index.html）
+- 曱甴系統防治實戰卡（roachCard，外鏈 YouTube 頻道）整卡移除，原位置改為「大圍直擊摘馬蜂巢」卡（waspNestCard，2q98dIGC_2U），沿用同款頁內播放 facade（attachFacade，點擊海報先載入 iframe）
+- 區塊標題由「榮仔智鬥過萬隻曱甴」改為「榮仔直擊大圍摘馬蜂巢」（EN 對應 Hornet Nest Removal at Mei Shing Court）；卡片文案（badge／標題／描述）與 WhatsApp CTA（摘蜂巢／黃蜂巢防治查詢）全部換新
+- 新增縮圖素材 assets/img/video-wasp-nest.webp（52KB）＋video-wasp-nest.jpg（114KB），由 YouTube oardefault 縮圖（1080×1920）重採樣至 768×1344
+- 首頁新增 VideoObject JSON-LD（contentUrl／embedUrl 2q98dIGC_2U，uploadDate 2026-10-21）；facade 註解升版 v9.68
+
+### 新增【師傅出更】蜂巢個案文章（ZH info/blog-24 ＋ EN en/info/blog-24）
+- 依 docx 供稿《大圍美城苑直擊摘馬蜂巢，網友笑稱「蜂巢似燒焦嘅燒賣粒」》撰寫：個案性質／晨早摘巢四步（防蜂衣→速效噴劑封鎖→連根摘除密封包裝→殘留藥劑破壞費洛蒙）／落單馬蜂兜圈飛走小插曲／黃蜂與馬蜂分別＋切勿自行處理警示／IPM 防治方案（防蟲網＋冷氣機底座、露台假天花高危點）／WhatsApp 遠程鑑定 CTA
+- 文內嵌同款 Shorts facade（2q98dIGC_2U，youtube-nocookie，blog24-yt）；JSON-LD×3（BreadcrumbList＋BlogPosting＋VideoObject）；分類「師傅出更」，發佈日 2026-10-21；CTA 直達 /wasp-nest/ 黃蜂巢安全摘除服務頁
+- 合規（第 362 章 v9.45 標準）：明確「切勿自行處理」安全警示；收費一律「勘察／遠程鑑定後書面報價」；無「保證／根治／100%／即日上門」字眼
+
+### 列表與索引
+- /info/（ZH）blog-grid 尾部新增 blog-24 卡（師傅出更分類，2026年10月21日）；/en/info/ 新增 blog-24 卡（MASTER ON DUTY · NEW）
+- sitemap 138→140 URLs（blog-24 ZH＋EN hreflang 三語互指，lastmod 2026-10-21）；首頁（ZH/EN）＋/info/＋/en/info/ lastmod 同步 2026-10-21
 
 ## v9.67《B2B 商業滅蟲方案矩陣＋專員報價表單無縫整合》— 依《建立獨立的「商業滅蟲方案」專頁矩陣》＋《B2B 商業滅蟲方案與「專員報價表單」無縫整合藍圖》兩份文檔，將商業客戶（B2B）從住宅服務獨立出來：三大行業登陸頁矩陣＋企業專屬報價通道
 

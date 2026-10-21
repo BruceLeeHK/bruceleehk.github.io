@@ -866,25 +866,25 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p>Real on-site footage — before-and-after comparison</p>
             </div>
             <div class="video-section">
-                <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> Master vs 10,000+ Cockroaches</h3>
-                <p>Real case: heavy infestation in a restaurant kitchen — watch our master demonstrate smart bait systemic control.</p>
+                <h3><i class="fa-solid fa-fire" aria-hidden="true" style="color: #fbbf24;"></i> Live: Hornet Nest Removal at Mei Shing Court, Tai Wai</h3>
+                <p>Real case: a hornet nest that looked like "a burnt siu mai" appeared on a balcony at Mei Shing Court, Tai Wai — watch our fully-geared master remove it on site.</p>
                 <div class="video-grid">
                     
-                    <div class="video-card video-feature" id="roachCard">
+                    <div class="video-card video-feature" id="waspNestCard">
                         <div class="video-thumb">
-                            <picture><source srcset="/assets/img/video-cockroach.webp" type="image/webp"><img src="/assets/img/video-cockroach.jpg" alt="Cockroach systemic control case" loading="lazy" decoding="async" width="768" height="1344"></picture>
-                            <span class="video-case-badge">📍 Central Restaurant Case · Smart Baiting System</span>
+                            <picture><source srcset="/assets/img/video-wasp-nest.webp" type="image/webp"><img src="/assets/img/video-wasp-nest.jpg" alt="Hornet nest removal live at Mei Shing Court, Tai Wai — our master in full protective gear" loading="lazy" decoding="async" width="768" height="1344"></picture>
+                            <span class="video-case-badge">📍 Mei Shing Court, Tai Wai · Hornet Nest Removal</span>
                             <span class="video-play"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
-                            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener" class="video-facade-hit" aria-label="Watch: Cockroach Systemic Control (opens YouTube channel)"></a>
+                            <button type="button" class="video-facade-hit" id="waspNestPlay" aria-label="Play video: Hornet nest removal live at Mei Shing Court, Tai Wai"></button>
                         </div>
                         <div class="video-info">
-                            <p class="video-title">Cockroach Systemic Control</p>
-                            <p class="video-meta">📍 Central HK • Before & After</p>
+                            <p class="video-title">Hornet Nest Removal</p>
+                            <p class="video-meta">📍 Mei Shing Court, Tai Wai • Live Case</p>
                         </div>
-                        <p class="video-desc">A real Central restaurant kitchen case: severe cockroach infestation. Our master demonstrates the full smart-baiting process on site — treating cabinet gaps and appliance spots one by one, with a clear before-and-after.</p>
+                        <p class="video-desc">A hornet nest that looked like "a burnt siu mai" appeared on a balcony in Mei Shing Court, Tai Wai. Our master in full protective gear knocked it down with fast-acting spray, removed the whole nest, and applied residual insecticide to erase the pheromone trail so hornets won't rebuild.</p>
                         <div class="video-cta-row">
                             <a href="/en/ai/" class="btn-mini btn-mini-ai">🔬 Free AI Pest Diagnosis</a>
-                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20book%20a%20cockroach%20treatment" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp Booking · Cockroach</a>
+                            <a href="https://wa.me/85252821552?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20wasp%20%2F%20hornet%20nest%20removal" target="_blank" rel="noopener" class="btn-mini btn-mini-wa">💬 WhatsApp Booking · Wasp Nest Removal</a>
                         </div>
                     </div>
                     
@@ -1205,7 +1205,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     })();
     </script>
     <script>
-    /* v9.51 Facade 擴展：鼠餌盒＋沙頭角卡同款頁內播放 */
+    /* v9.68 Facade 擴展：大圍摘馬蜂巢卡加入同款頁內播放 */
     (function () {
         function attachFacade(cardId, btnId, embedUrl, title) {
             var btn = document.getElementById(btnId);
@@ -1226,6 +1226,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 btn.style.display = 'none';
             });
         }
+        attachFacade('waspNestCard', 'waspNestPlay', 'https://www.youtube.com/embed/2q98dIGC_2U?autoplay=1&rel=0&modestbranding=1&playsinline=1', 'Hornet nest removal live at Mei Shing Court, Tai Wai');
         attachFacade('ratBaitBoxCard', 'ratBaitBoxPlay', 'https://www.youtube.com/embed/7sbS9n_HW8g?autoplay=1&rel=0&modestbranding=1&playsinline=1', 'Glue board to rat bait box — rat control DIY live demo');
         attachFacade('shataukokCard', 'shataukokPlay', 'https://www.youtube.com/embed/UGsqF-hFcK8?autoplay=1&rel=0&modestbranding=1&playsinline=1', 'Sha Tau Kok Closed Area termite treatment live');
     })();
