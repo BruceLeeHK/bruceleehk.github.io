@@ -1,4 +1,17 @@
-# 修復日誌 (v9.71 — 2026-10-21)
+# 修復日誌 (v9.72 — 2026-10-22)
+
+## v9.72《blog-24 露台相 404 修復＋CSP Console 錯誤清理》— 應用戶回報「呢張相片在網頁顯示唔到」並附 DevTools 截圖：blog-24 露台實景相 404，Console 另有 CSP 兩項錯誤
+
+### 露台相 404 根本修復（中文檔名 → ASCII 檔名）
+- 根本原因確診：assets/img/沙田美城苑-滅馬蜂巢與黃蜂防治實戰案例-滅蟲師傅.jpg 全中文檔名，經「解壓 → GitHub Desktop → GitHub Pages」部署鏈後與線上 URL 無法對應（percent-encoded 請求實測 404；同頁兩張 ASCII 檔名相 200 正常）
+- 修復：相片重新命名為 shatin-may-shing-court-balcony-hornet-case.jpg（648×1149，影像內容不變），全站資產檔名現已 100% ASCII，杜絕同類問題
+- 更新引用 4 處：info/blog-24/index.html figure src＋BlogPosting JSON-LD image[]；en/info/blog-24/index.html 同步兩處（alt／figcaption／width/height 屬性不變）
+- 移除 assets/img/ 中文檔名原檔；註：本地 repo 如殘留舊中文檔名檔案可順手刪除（不影響運作）
+
+### CSP Console 錯誤清理（全站 69 頁 meta CSP）
+- 移除 frame-ancestors 指令（55 頁）：經 meta 傳遞嘅 CSP 一律忽略 frame-ancestors（僅 HTTP header 有效），瀏覽器因而持續報錯；移除後警告消失，實際安全行為無改變
+- script-src 補上 https://static.cloudflareinsights.com（57 頁加入、12 頁早前已有）：解除 Cloudflare Web Analytics beacon 被 CSP 阻擋問題，統計數據恢復收集
+- scripts/validate_v972.py 22 項檢查全部通過（引用數、JSON-LD×3×2 解析、BlogPosting image 陣列、CSP 全站掃描、html.parser 標籤平衡、sitemap、全站 ASCII 檔名）
 
 ## v9.71《【師傅出更】蜂巢文章改用用戶真實原圖》— 應用戶提供 3 張個案原圖：blog-24 配圖由實錄短片截圖改為真實原圖（相片與相片名稱按原圖不變，放喺合適位置並配適當描述）
 
