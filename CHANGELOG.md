@@ -1,4 +1,26 @@
-# 修復日誌 (v9.73 — 2026-10-22)
+# 修復日誌 (v9.74 — 2026-10-22)
+
+## v9.74《VideoObject uploadDate ISO 8601 修復》— 按 Search Console「影片」報表兩項警告修復：Datetime 屬性「uploadDate」缺少時區＋「uploadDate」的 datetime 值無效
+
+### 問題診斷
+- 根因：blog-23（粘鼠板變身鼠餌盒）與 blog-24（大圍美城苑馬蜂巢）影片結構化資料 uploadDate 只填日期（如「2026-10-14」），缺少時間與時區，不符合 Google 要求嘅 W3C / ISO 8601 標準 YYYY-MM-DDThh:mm:ss+TZD
+- 全站掃描：9 個 VideoObject 中 4 處 date-only（blog-23/blog-24 各 ZH+EN），其餘 5 處（首頁×2＋blog-14 ZH/EN＋en 首頁）原本已合規
+
+### 修復內容（4 處）
+- info/blog-23/index.html：「2026-10-14」→「2026-10-14T10:00:00+08:00」（香港時區 UTC+8）
+- info/blog-24/index.html：「2026-10-21」→「2026-10-21T09:00:00+08:00」（與首頁同一條馬蜂巢影片 2q98dIGC_2U 嘅 uploadDate 完全一致）
+- en/info/blog-23/index.html、en/info/blog-24/index.html：同步上述兩項（中英版數據一致）
+
+### 驗證
+- scripts/validate_v974.py 18 項全過：全站 uploadDate regex 格式掃描（9/9 合規、零 date-only 殘留）、8 頁 JSON-LD 逐一解析（9 個 VideoObject 必填欄位齊全）、同片同日期一致性核對（2q98dIGC_2U 三處一致；7sbS9n_HW8g 兩處一致）、4 頁 html.parser 標籤平衡、sitemap well-formed
+- 註：blog-14 VideoObject 只有 embedUrl 無 contentUrl — Google 必填要求為二擇一，合規無需改動
+
+### 部署後驗證 SOP（按文檔三步）
+1. GitHub Desktop commit + push，等待 GitHub Pages 重新建置
+2. Rich Results Test（search.google.com/test/rich-results）輸入 https://bruceleehk.com/info/blog-23/ 與 /info/blog-24/，展開「影片 (VideoObject)」確認 uploadDate 帶 +08:00 且無黃色警告
+3. Search Console「影片」報表 → 分別點擊兩項 uploadDate 警告 → 按「驗證修正」，Google 數天內重新爬取後清除標籤
+
+
 
 ## v9.73《AI 害蟲分析系統優化：合規免責＋界面簡化＋60–70 秒時效》— 按用戶《AI 害蟲分析系統》文檔執行（網站整體架構不變）
 
