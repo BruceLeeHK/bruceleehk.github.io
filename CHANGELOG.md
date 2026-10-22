@@ -1,4 +1,38 @@
-# 修復日誌 (v9.74 — 2026-10-22)
+# 修復日誌 (v9.75 — 2026-10-22)
+
+## v9.75《地圖聯動＋CTR/CVR 流量轉化優化》— 按用戶《地圖聯動與CTR和CVR流量轉化全面優化方案.docx》執行（網站整體架構不變）
+
+### 官網 × Google 地圖（GBP）訊號綁定
+- 首頁 ZH/EN PestControl 結構化資料補「geo」坐標（22.3527242, 114.1394）＋「hasMap」Google 地圖商家連結 — 主動向 Google 宣告實體地理位置（文檔第一項核心）
+- rat-control ZH/EN 頁 PestControl schema 同步補 geo＋hasMap（服務頁底層植入）
+- 區域落地頁盤點：districts/ 十八區專頁＋rat-control 五大黑點區專頁已存在（無需新建，架構不變）
+
+### Google 好評雙向引用（E-E-A-T 信任區）
+- 首頁 ZH/EN 新增「Google 地圖真人好評」區（位於實戰影片與滅鼠通道之間）：Winnie Ng（村屋滅鼠中英雙語報告好評）＋Eric CK Lee（收費合理好評）兩張五星評論卡，去識別化引用＋標明「Google 評論」來源
+- 「前往 Google 地圖查看更多真實評價」按鈕（GBP 商家連結）— 官網⇄地圖評價訊號互通
+- 信任標籤行：註冊除蟲公司 · 已申請列入政府物流服務署及康文署供應商名單 · Termatrac T3i 認證操作 · 10,000+ 戶實證
+
+### CTR 提升（SERP 黃金詞攻堅）
+- rat-control ZH meta 重構（文檔範本採用）：title→「【2026 滅鼠公司收費透明公開】透明報價＋IoT 智慧鼠盒監測｜滅蟲師傅」；description 加入「想知滅鼠公司邊間好？…專員 1 小時內提供免費評估」（meta+og+twitter 共 3 處同步）；EN title→「Rat Control Company Prices 2026 HK…」
+- wasp-nest ZH meta 重構：title→「【滅蜂巢公司】馬蜂巢・黃蜂巢處理收費｜安全移除＋十八區即日上門」；keywords 加「滅蜂巢公司／滅蜂巢收費」；desc 加急件詞（meta+og+twitter 3 處）；EN title→「Hornet Nest Removal Company HK…」
+- 內部連結盤點：blog-24 美城苑案例→wasp-nest 服務頁大按鈕 ✓、blog-23 粘鼠板→rat-control＋service/rodent ✓（v9.4x 已部署，本次核對確認）
+- FAQ Schema 盤點：rat-control ✓、wasp-nest ✓ 已有 FAQPage；Video Schema uploadDate 已於 v9.74 修復 ✓
+
+### CVR 提升（轉化路徑）
+- wasp-nest ZH/EN hero 頁首新增醒目急件提示條：「📷 急件處理？請拍下蜂巢照片傳 WhatsApp，專員即時免費鑑定與報價」（amber 警示配色＋綠色 WhatsApp 圓角按鈕，預填文字「急件！我屋企發現蜂巢…」）
+- 全站浮動 WhatsApp 按鈕文案升級 54 處：ZH 46 頁「WhatsApp 即時諮詢」→「拍照傳圖・免費 AI 鑑定報價」；EN 8 頁「WhatsApp Instant」→「Photo ID + Free Quote」（按鈕 flex:1 彈性安全）
+- 落地頁分流盤點：quote 頁 B2B【企業與商業專屬報價通道】（Quotation/招標/食環署合規 checkbox）✓、B2C 拍照上傳 ✓ 已有
+
+### 驗證
+- scripts/validate_v975.py 42 項全過：JSON-LD 全解析（首頁 PestControl geo/hasMap、VideoObject×2 保留）、6 頁標籤平衡、黃金詞 title/desc 覆蓋、急件條存在、浮動按鈕舊文案零殘留
+- 盤點記錄：wasp-nest 本無 VideoObject（僅 FAQPage）屬正常架構；blog-18/20/21/22 正文「WhatsApp 即時諮詢」內文連結非按鈕，不需改動
+- sitemap 6 頁 lastmod → 2026-10-22
+
+### 後續建議（非本次代碼範圍）
+- GBP 商家檔案發佈 Posts 連結至官網 blog-24 美城苑馬蜂巢實錄（地圖→官網方向，需用戶於 Google 後台操作）
+- Search Console 觀察 2-4 週：黃金詞「滅鼠公司收費」「滅蜂巢公司」「滅鼠公司邊間好」排名與 CTR 變化
+
+
 
 ## v9.74《VideoObject uploadDate ISO 8601 修復》— 按 Search Console「影片」報表兩項警告修復：Datetime 屬性「uploadDate」缺少時區＋「uploadDate」的 datetime 值無效
 
