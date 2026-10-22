@@ -2,6 +2,11 @@
  * Cloudflare Worker — 滅蟲師傅 AI (v9.3 安全強化版)
  * 基於生產版 v9.2 (MoE 雙腦 + Contextual Prior + Auto-Retry) 升級：
  *
+ * v9.4 升級亮點（FastTrack 時效優化 — 2026-10-22）：
+ *   ⏱ CHAT_TIMEOUT_MS 100s → 63s：配合前端 68 秒總預算，60–70 秒內必完成或明確報錯
+ *   ⏱ UPLOAD_TIMEOUT_MS 30s → 20s（前端已預壓 ≤420KB）
+ *   ✂️ compact query 加精簡輸出指引，縮短 DeepSeek 報告生成時間
+ *
  * v9.3 升級亮點（「封殺藏在細節裡魔鬼」安全強化 — 2026-10-08）：
  *   🔐 金鑰清庫：移除代碼內明碼 DIFY_API_KEY 預設值（舊金鑰已隨代碼庫外洩，
  *      必須喺 Dify 後台輪換新金鑰，再用 wrangler secret / dashboard Secret 設定）。
@@ -58,8 +63,8 @@ const ALLOWED_ORIGINS = new Set([
 const DEFAULTS = {
   DIFY_API_URL: 'https://api.dify.ai/v1',
   DIFY_API_KEY: '',   // v9.3 安全升級：金鑰一律用 secret 設定（wrangler secret put DIFY_API_KEY），代碼零明碼
-  UPLOAD_TIMEOUT_MS: '30000',
-  CHAT_TIMEOUT_MS: '100000',
+  UPLOAD_TIMEOUT_MS: '20000',   // v9.4: 前端已預壓 ≤420KB，20 秒充裕
+  CHAT_TIMEOUT_MS: '63000',     // v9.4: 63 秒（配合前端 68 秒總預算，分析 60–70 秒內必完成或報錯）
   MAX_IMAGE_BYTES: String(8 * 1024 * 1024),
   CACHE_TTL_SECONDS: '86400',
   RATE_LIMIT_MAX: '8',
@@ -79,7 +84,7 @@ const DEFAULTS = {
 
 /* 精簡版（預設）：約 30 字。慳約 200 GPT input tokens／次，
    並消除「query 要求完整報告 vs LLM2 系統提示詞只准輸出四點」嘅指令衝突。 */
-const COMPACT_ANALYSIS_PROMPT = '請化驗這張在香港拍攝的害蟲相片，並判定最可能的害蟲物種及判斷可靠度。';
+const COMPACT_ANALYSIS_PROMPT = '請化驗這張在香港拍攝的害蟲相片，並判定最可能的害蟲物種及判斷可靠度。請以精簡易讀方式輸出，避免冗長鋪陳，縮短客人等待時間。';
 
 /* 完整版（QUERY_MODE=full 時啟用）：v8.1 原版提示詞，一條 query 搞掂晒。
    適用於 Dify 仍係單 LLM App（未升級雙腦 Chatflow）嘅應急場景。 */
@@ -345,10 +350,10 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '9.3-MoE-Hardened',
+        version: '9.4-FastTrack',
         dify_key_set: !!(env.DIFY_API_KEY),
         blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
-        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Auto-Retry',
+        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Auto-Retry + FastTrack ≤70s',
         contextual_prior: true,
         max_desc_chars: Number(env.DESC_MAX_CHARS || DEFAULTS.DESC_MAX_CHARS),
         desc_channel: env.DESC_CHANNEL || DEFAULTS.DESC_CHANNEL,
@@ -430,7 +435,7 @@ export default {
       const payload = {
         success: true,
         diagnosis: answer,
-        version: '9.2 (MoE Dual-Brain + Contextual Prior + Auto-Retry)',
+        version: '9.4 (MoE Dual-Brain + Contextual Prior + FastTrack ≤70s)',
         engine: 'MoE-GPT+DeepSeek',
         user_desc_used: !!userDesc,
         cached: false,

@@ -431,20 +431,6 @@
             color: #94a3b8;
             font-size: 0.92rem;
         }
-        .arch-image-wrap {
-            padding: 0 24px 24px;
-        }
-        .arch-image-wrap img {
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius);
-        }
-        .arch-image-wrap svg {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: var(--radius);
-        }
         .arch-flow {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -529,13 +515,19 @@
     .privacy-notice-box h2{font-size:1.02rem;margin:0 0 10px;color:#075985;}
     .privacy-notice-box ul{margin:8px 0 0;padding-left:20px;}
     .privacy-notice-box li{margin-bottom:6px;}
-    .sister-chat-section{padding:56px 20px;background:var(--light-bg,#f5f7fa);}
-    .sister-chat-section .section-title{max-width:820px;margin:0 auto 26px;text-align:center;}
-    .sister-chat-section h2{font-size:1.6rem;margin-bottom:10px;}
-    .sister-chat-section .section-title p{color:var(--text-muted,#8a93a3);line-height:1.8;}
-    .sister-chat-frame{max-width:860px;margin:0 auto;border:1px solid var(--border,#e2e8f0);border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);background:#fff;}
-    .sister-chat-frame iframe{display:block;width:100%;height:700px;border:0;}
-    @media (max-width:768px){.sister-chat-frame iframe{height:620px;}.sister-chat-section h2{font-size:1.3rem;}}
+    /* v9.73：師姐對話區樣式已隨 section 移除；全站師妹浮動助手樣式喺 bruceleehk.css */
+    /* v9.73 等候計時＋合規免責聲明＋聲明摺疊 */
+    .ai-loading .ai-elapsed{font-size:.85rem;color:var(--text-muted,#8a93a3);margin:-6px 0 16px;font-variant-numeric:tabular-nums;}
+    .ai-compliance-note{max-width:900px;margin:14px auto 0;padding:0 15px;}
+    .compliance-box{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #d97706;border-radius:12px;padding:14px 18px;font-size:.85rem;line-height:1.8;color:#78350f;}
+    .compliance-box p{margin:0;}
+    .compliance-box i{color:#d97706;margin-right:4px;}
+    .privacy-notice-box summary{cursor:pointer;font-size:1.02rem;color:#075985;font-weight:700;list-style:none;display:flex;align-items:center;gap:8px;}
+    .privacy-notice-box summary::-webkit-details-marker{display:none;}
+    .privacy-notice-box summary i{color:#0284c7;}
+    .privacy-notice-box summary::after{content:"▼";font-size:.68rem;margin-left:auto;color:#94a3b8;}
+    .privacy-notice-box details[open] summary::after{content:"▲";}
+    .privacy-notice-box details[open] summary{margin-bottom:10px;}
     </style>
     <!-- ⚠️ 關鍵：加入 whatsapp-bot 的 CSP 白名單 -->
     <meta http-equiv="Content-Security-Policy" content="
@@ -597,7 +589,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <div class="hero-slogan-tag">✨ 智慧滅蟲梗喺滅蟲師傅啦</div>
                 <div class="hero-badge-row">
                     <span class="tech-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> AI 圖像辨識</span>
-                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 30-90 秒深度報告</span>
+                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 60–70 秒深度報告</span>
                     <span class="tech-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 免費診斷</span>
                     <span class="service-247"><span class="dot" aria-hidden="true"></span> 7×24 全天候服務</span>
                 </div>
@@ -638,32 +630,15 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                         <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                                         <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，上載前系統自動抹除 GPS 定位；為持續改善診斷質量，相片同對話紀錄會以匿名方式留存約 24 個月後自動刪除（詳見下方「數據收集聲明」）。
                                     </div>
-                            <div class="upload-features">
-                                <div class="upload-feature">
-                                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                                    <span>相片不公開儲存</span>
-                                </div>
-                                <div class="upload-feature">
-                                    <i class="fa-solid fa-mobile-screen" aria-hidden="true"></i>
-                                    <span>可拍照或從相簿選擇</span>
-                                </div>
-                                <div class="upload-feature">
-                                    <i class="fa-solid fa-brain" aria-hidden="true"></i>
-                                    <span>多模態視覺引擎</span>
-                                </div>
-                                <div class="upload-feature">
-                                    <i class="fa-solid fa-coins" aria-hidden="true"></i>
-                                    <span>免費即時估價</span>
-                                </div>
-                            </div>
-                        </div>
+                                                    </div>
 
                         <!-- State 2: Analyzing -->
                         <div id="ai-analyzing">
                             <div class="ai-loading">
                                 <div class="ai-loading-spinner" aria-hidden="true"></div>
-                                <h3>滅蟲師妹 AI 視覺模型分析中…</h3>
-                                <p>正在結合食環署資料庫，深度報告預計 30–90 秒完成，請勿關閉頁面</p>
+                                <h3>滅蟲師傅 AI 深度分析中…</h3>
+                                <p>正在結合防治智庫深度推演，目標 60 秒內完成（上限 70 秒），請勿關閉頁面</p>
+                                <p class="ai-elapsed" id="ai-elapsed" role="status" aria-live="polite">已分析 0 秒</p>
                                 <div class="ai-loading-steps">
                                     <div class="ai-loading-step active" id="step-1">
                                         <i class="fa-solid fa-circle-check" aria-hidden="true"></i> 邊緣運算網絡圖像預處理
@@ -703,7 +678,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                 <!-- 右側智能診斷結果 -->
                                 <div class="result-card">
                                     <h4 style="color: var(--primary-dark); margin: 0 0 15px 0; font-size: 1.15rem;">
-                                        <i class="fa-solid fa-clipboard-check"></i> 滅蟲師妹 AI 診斷報告
+                                        <i class="fa-solid fa-clipboard-check"></i> AI 害蟲分析報告
                                     </h4>
                                     <!-- Markdown 渲染區 -->
                                     <div id="diagnosisText" style="line-height: 1.8; color: var(--text-main); font-size: 0.95rem;">
@@ -736,10 +711,18 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
         </section>
 
+        <!-- v9.73 合規免責聲明（政府公開文獻檢索 —《版權條例》/《商品說明條例》風險管理） -->
+        <section class="ai-compliance-note" aria-label="免責聲明">
+            <div class="compliance-box">
+                <p><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <strong>免責聲明：</strong>本系統檢索及整合之政府公開文獻與指引僅供參考用途。系統輸出的初步方案不代表政府部門之官方立場。所有蟲害治理工程應以本公司專員最終的現場評估及正式報價單為準。</p>
+            </div>
+        </section>
+
         <!-- v9.47 PDPO 數據收集聲明（方案二 AI 數據留存合規） -->
         <section class="ai-privacy-notice" aria-labelledby="ai-privacy-title">
             <div class="privacy-notice-box">
-                <h2 id="ai-privacy-title"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 數據收集聲明（使用 AI 診斷前請細閱）</h2>
+                <details>
+                    <summary id="ai-privacy-title"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 數據收集聲明（使用 AI 診斷前請細閱）</summary>
                 <p>為提供蟲害診斷、質量控制同持續改善服務，您使用本 AI 診斷系統時上載嘅相片、描述文字、對話紀錄，連同一個經單向雜湊（SHA-256）匿名化處理嘅網絡地址識別碼，會以匿名方式留存約 24 個月，作診斷紀錄同系統改善用途，到期自動刪除。</p>
                 <ul>
                     <li><b>唔會收集直接識別身份嘅資料：</b>我哋唔會要求或儲存您嘅真實姓名、電話號碼或其他個人識別資料；描述文字中偵測到嘅電話號碼或電郵地址會自動遮蔽處理。</li>
@@ -747,20 +730,11 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <li><b>法規依據：</b>本聲明按香港《個人資料（私隱）條例》（第486章）規定作出；如日後數據用途有變，會喺本頁更新告知。</li>
                     <li><b>您嘅權利：</b>根據第486章，您有權查閱及更正涉及您嘅個人資料。如有查詢，歡迎透過 <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E7%A7%81%E9%9A%B1%EF%BC%8F%E5%80%8B%E4%BA%BA%E8%B3%87%E6%96%99%E4%BA%8B%E5%AE%9C" target="_blank" rel="noopener">WhatsApp 聯絡我哋</a>。</li>
                 </ul>
+                </details>
             </div>
         </section>
 
-        <!-- v9.43 滅蟲師姐 AI 專頁對話區（分流：全站師妹照舊，本頁專用師姐） -->
-        <section class="sister-chat-section" aria-labelledby="sister-chat-title">
-            <div class="section-title">
-                <h2 id="sister-chat-title"><i class="fa-solid fa-comments" aria-hidden="true"></i> 即刻同滅蟲師姐 AI 傾兩句</h2>
-                <p>呢位係<b>滅蟲師姐</b>——本頁專屬 AI 顧問，7×24 小時在線：即刻查蟲患、問收費、約上門，唔使等回覆。</p>
-            </div>
-            <div class="sister-chat-frame">
-                <iframe src="https://udify.app/chatbot/DKKeV6Vb9y16r6HL" style="width:100%;height:700px;border:0;" allow="microphone;clipboard-write" loading="lazy" title="滅蟲師姐 AI 對話框"></iframe>
-            </div>
-        </section>
-
+        <!-- v9.73：本頁師姐/師妹聊天界面已移除（只保留 AI 害蟲分析系統）；全站其他位置之滅蟲師妹浮動助手照舊 -->
         <!-- Features Section -->
         <section class="features-section" aria-labelledby="features-title">
             <div class="section-title">
@@ -798,148 +772,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <h3 id="arch-title"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> 企業級 AI 害蟲分析系統架構</h3>
                     <p>結合邊緣運算網絡 × 多模態視覺引擎 × 獨家 IPM 綜合防治智庫 — 全港首創智慧滅蟲閉環系統</p>
                 </div>
-                <div class="arch-image-wrap">
-                    <svg viewBox="0 0 1200 620" role="img" aria-label="AI 害蟲分析系統架構示意圖：全渠道智能入口 → 邊緣運算網絡 → 多模態視覺引擎 → 獨家 IPM 綜合防治智庫 → 動態策略矩陣與自動化診斷報價" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang TC','Microsoft JhengHei',sans-serif">
-                        <defs>
-                            <linearGradient id="archBg" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stop-color="#0d1b2e"/>
-                                <stop offset="1" stop-color="#0a1422"/>
-                            </linearGradient>
-                            <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
-                                <stop offset="0" stop-color="#0ea5e9" stop-opacity=".25"/>
-                                <stop offset=".5" stop-color="#38bdf8"/>
-                                <stop offset="1" stop-color="#0ea5e9" stop-opacity=".25"/>
-                            </linearGradient>
-                            <radialGradient id="glowCyan" cx=".5" cy=".5" r=".5">
-                                <stop offset="0" stop-color="#0284c7" stop-opacity=".28"/>
-                                <stop offset="1" stop-color="#0284c7" stop-opacity="0"/>
-                            </radialGradient>
-                            <radialGradient id="glowGreen" cx=".5" cy=".5" r=".5">
-                                <stop offset="0" stop-color="#10b981" stop-opacity=".30"/>
-                                <stop offset="1" stop-color="#10b981" stop-opacity="0"/>
-                            </radialGradient>
-                            <linearGradient id="aiText" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stop-color="#6ee7b7"/>
-                                <stop offset="1" stop-color="#34d399"/>
-                            </linearGradient>
-                            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                                <path d="M0,0 L10,5 L0,10 z" fill="#38bdf8"/>
-                            </marker>
-                        </defs>
-                        <rect width="1200" height="620" fill="url(#archBg)"/>
-                        <!-- 電路板紋理（低調裝飾） -->
-                        <g stroke="#38bdf8" stroke-width="2" fill="none" opacity=".08">
-                            <path d="M40,520 h150 l36,36 h130"/>
-                            <path d="M1160,80 h-160 l-30,30 h-90"/>
-                            <path d="M60,130 h100 l26,26 v40"/>
-                            <path d="M1150,560 h-130 l-34,-34 h-80"/>
-                            <path d="M40,300 h60 l20,20"/>
-                            <path d="M1160,360 h-70 l-24,-24"/>
-                        </g>
-                        <g fill="#38bdf8" opacity=".12">
-                            <circle cx="356" cy="556" r="4"/>
-                            <circle cx="880" cy="110" r="4"/>
-                            <circle cx="186" cy="196" r="4"/>
-                            <circle cx="906" cy="526" r="4"/>
-                            <circle cx="120" cy="320" r="4"/>
-                            <circle cx="1066" cy="336" r="4"/>
-                        </g>
-                        <text x="42" y="52" font-size="13" letter-spacing="4" fill="#475569" font-weight="600">AI DIAGNOSTIC PIPELINE · 系統架構</text>
-                        <ellipse cx="600" cy="280" rx="430" ry="190" fill="url(#glowCyan)" opacity=".35"/>
-
-                        <!-- 連接流程線 -->
-                        <g stroke="url(#flowGrad)" stroke-width="2.5" fill="none">
-                            <line x1="204" y1="280" x2="278" y2="280" marker-end="url(#arrow)"/>
-                            <line x1="429" y1="280" x2="508" y2="280" marker-end="url(#arrow)"/>
-                            <line x1="692" y1="280" x2="768" y2="280" marker-end="url(#arrow)"/>
-                            <line x1="919" y1="280" x2="994" y2="280" marker-end="url(#arrow)"/>
-                        </g>
-                        <g fill="#38bdf8" opacity=".7">
-                            <circle cx="241" cy="280" r="3"/>
-                            <circle cx="468" cy="280" r="3"/>
-                            <circle cx="730" cy="280" r="3"/>
-                            <circle cx="956" cy="280" r="3"/>
-                        </g>
-
-                        <!-- 站點 01：全渠道智能入口 -->
-                        <ellipse cx="130" cy="280" rx="115" ry="95" fill="url(#glowCyan)" opacity=".5"/>
-                        <rect x="88" y="168" width="84" height="26" rx="13" fill="rgba(56,189,248,.10)" stroke="rgba(56,189,248,.4)"/>
-                        <text x="130" y="186" font-size="13" font-weight="700" fill="#7dd3fc" text-anchor="middle">01</text>
-                        <rect x="60" y="210" width="140" height="140" rx="18" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.45)" stroke-width="1.5"/>
-                        <g transform="translate(88,244) scale(3.4)" stroke="#67e8f9" stroke-width=".8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="-1" y="3" width="18" height="12" rx="2"/>
-                            <path d="M7 21h6"/>
-                            <path d="M8 15v6"/>
-                            <rect x="16.5" y="9" width="6" height="11" rx="1.5"/>
-                            <path d="M18.5 17.5h2"/>
-                        </g>
-                        <text x="130" y="398" font-size="21" font-weight="700" fill="#f1f5f9" text-anchor="middle">全渠道智能入口</text>
-                        <text x="130" y="426" font-size="14" fill="#7dd3fc" text-anchor="middle" letter-spacing=".5">Omnichannel Smart Portal</text>
-                        <text x="130" y="450" font-size="13" fill="#94a3b8" text-anchor="middle">Client Interface</text>
-
-                        <!-- 站點 02：邊緣運算網絡 -->
-                        <ellipse cx="355" cy="280" rx="115" ry="95" fill="url(#glowCyan)" opacity=".5"/>
-                        <rect x="313" y="168" width="84" height="26" rx="13" fill="rgba(56,189,248,.10)" stroke="rgba(56,189,248,.4)"/>
-                        <text x="355" y="186" font-size="13" font-weight="700" fill="#7dd3fc" text-anchor="middle">02</text>
-                        <rect x="285" y="210" width="140" height="140" rx="18" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.45)" stroke-width="1.5"/>
-                        <g transform="translate(309,236) scale(3.8)" stroke="#67e8f9" stroke-width=".75" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-                            <path d="M12 6v5"/>
-                            <path d="M9.5 8.5L12 6l2.5 2.5"/>
-                        </g>
-                        <text x="355" y="398" font-size="21" font-weight="700" fill="#f1f5f9" text-anchor="middle">邊緣運算網絡</text>
-                        <text x="355" y="426" font-size="14" fill="#7dd3fc" text-anchor="middle" letter-spacing=".5">Edge Computing Network</text>
-
-                        <!-- 站點 03（核心）：多模態視覺引擎 -->
-                        <ellipse cx="600" cy="280" rx="150" ry="125" fill="url(#glowGreen)"/>
-                        <rect x="558" y="162" width="84" height="26" rx="13" fill="rgba(16,185,129,.12)" stroke="rgba(52,211,153,.5)"/>
-                        <text x="600" y="180" font-size="13" font-weight="700" fill="#6ee7b7" text-anchor="middle">03</text>
-                        <rect x="515" y="195" width="170" height="170" rx="20" fill="rgba(16,185,129,.07)" stroke="rgba(52,211,153,.55)" stroke-width="1.8"/>
-                        <g stroke="#5eead4" stroke-width="3.2" stroke-linecap="round" fill="none">
-                            <rect x="556" y="236" width="88" height="88" rx="10"/>
-                            <path d="M571,236 v-11 M600,236 v-11 M629,236 v-11"/>
-                            <path d="M571,324 v11 M600,324 v11 M629,324 v11"/>
-                            <path d="M556,251 h-11 M556,280 h-11 M556,309 h-11"/>
-                            <path d="M644,251 h11 M644,280 h11 M644,309 h11"/>
-                        </g>
-                        <text x="600" y="293" font-size="34" font-weight="800" fill="url(#aiText)" text-anchor="middle">AI</text>
-                        <text x="600" y="408" font-size="22" font-weight="800" fill="#ffffff" text-anchor="middle">多模態視覺引擎</text>
-                        <text x="600" y="436" font-size="14" fill="#6ee7b7" text-anchor="middle" letter-spacing=".5">Multimodal Vision Engine</text>
-
-                        <!-- 站點 04：獨家 IPM 綜合防治智庫 -->
-                        <ellipse cx="845" cy="280" rx="115" ry="95" fill="url(#glowCyan)" opacity=".5"/>
-                        <rect x="803" y="168" width="84" height="26" rx="13" fill="rgba(56,189,248,.10)" stroke="rgba(56,189,248,.4)"/>
-                        <text x="845" y="186" font-size="13" font-weight="700" fill="#7dd3fc" text-anchor="middle">04</text>
-                        <rect x="775" y="210" width="140" height="140" rx="18" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.45)" stroke-width="1.5"/>
-                        <g transform="translate(799,234) scale(3.8)" stroke="#67e8f9" stroke-width=".75" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                            <path d="M21 5v14a9 3 0 0 1-18 0V5"/>
-                            <path d="M3 12a9 3 0 0 0 18 0"/>
-                        </g>
-                        <text x="845" y="398" font-size="20" font-weight="700" fill="#f1f5f9" text-anchor="middle">獨家 IPM 綜合防治智庫</text>
-                        <text x="845" y="426" font-size="13.5" fill="#7dd3fc" text-anchor="middle" letter-spacing=".3">Proprietary IPM Knowledge Base</text>
-
-                        <!-- 站點 05：動態策略矩陣 -->
-                        <ellipse cx="1070" cy="280" rx="115" ry="95" fill="url(#glowCyan)" opacity=".5"/>
-                        <rect x="1028" y="168" width="84" height="26" rx="13" fill="rgba(56,189,248,.10)" stroke="rgba(56,189,248,.4)"/>
-                        <text x="1070" y="186" font-size="13" font-weight="700" fill="#7dd3fc" text-anchor="middle">05</text>
-                        <rect x="1000" y="210" width="140" height="140" rx="18" fill="rgba(56,189,248,.06)" stroke="rgba(56,189,248,.45)" stroke-width="1.5"/>
-                        <g transform="translate(1028,234) scale(3.5)" stroke="#67e8f9" stroke-width=".8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <path d="M14 2v6h6"/>
-                            <path d="M9 13h6"/>
-                            <path d="M9 17h4"/>
-                        </g>
-                        <circle cx="1102" cy="322" r="15" fill="#10b981"/>
-                        <path d="M1094,322 l5,5 l10,-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <text x="1070" y="398" font-size="21" font-weight="700" fill="#f1f5f9" text-anchor="middle">動態策略矩陣</text>
-                        <text x="1070" y="426" font-size="14" fill="#7dd3fc" text-anchor="middle" letter-spacing=".5">Dynamic Strategy Matrix</text>
-                        <text x="1070" y="450" font-size="13" fill="#94a3b8" text-anchor="middle">Automated Diagnostic &amp; Quote</text>
-
-                        <!-- 底部說明 -->
-                        <text x="600" y="560" font-size="13" fill="#64748b" text-anchor="middle" letter-spacing="1">Client Interface → Edge Computing → Multimodal Vision → IPM Knowledge → Strategy Matrix</text>
-                    </svg>
-                </div>
+                                <!-- v9.73 簡化：移除大型 SVG 架構圖（同樣資訊由以下六步驟卡保留），頁面更輕更快 -->
                 <div class="arch-flow">
                     <div class="arch-step">
                         <span class="step-num">1</span>
@@ -959,7 +792,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <div class="arch-step">
                         <span class="step-num">4</span>
                         <h4>獨家 IPM 防治智庫</h4>
-                        <p>Proprietary IPM Knowledge Base 自動檢索政府官方文獻與指引</p>
+                        <p>Proprietary IPM Knowledge Base 自動檢索並整合本港公開之政府防蟲文獻與指引</p>
                     </div>
                     <div class="arch-step">
                         <span class="step-num">5</span>
@@ -1107,11 +940,10 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                         ctx.fillStyle = '#ffffff';
                         ctx.fillRect(0, 0, canvas.width, canvas.height);
                         ctx.drawImage(img, 0, 0, width, height);
-                        /* v9.7 自適應降質：目標 ≤ 700KB（1024px @ 4G 上載約 1-2 秒，
-                           上載+AI思考+回傳 < 20 秒，徹底避開 30 秒逾時死線，
-                           同時大幅節省 AI Token 費用） */
-                        const TARGET_BYTES = 700 * 1024;
-                        const QUALITIES = [0.82, 0.7, 0.6, 0.5];
+                        /* v9.73 自適應降質：目標 ≤ 420KB（1024px 解析度不變，AI 辨識能力不受影響；
+                           上載再快一截，並節省視覺 Token 與處理時間，配合 60–70 秒總預算） */
+                        const TARGET_BYTES = 420 * 1024;
+                        const QUALITIES = [0.8, 0.68, 0.56, 0.45];
                         const self = this;
                         function emitAt(qualityIdx) {
                             canvas.toBlob(function(blob) {
@@ -1129,6 +961,25 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     img.src = evt.target.result;
                 };
                 reader.readAsDataURL(file);
+            }
+
+            /* v9.73 即時等候計時：等客人知道系統運作中；45 秒後加安撫文案 */
+            var elapsedTimer = null;
+            var elapsedEl = document.getElementById('ai-elapsed');
+            function startElapsed() {
+                stopElapsed();
+                var es = 0;
+                if (elapsedEl) elapsedEl.textContent = '已分析 0 秒（目標 60 秒內完成）';
+                elapsedTimer = setInterval(function () {
+                    es++;
+                    if (!elapsedEl) return;
+                    elapsedEl.textContent = es < 45
+                        ? '已分析 ' + es + ' 秒（目標 60 秒內完成）'
+                        : '已分析 ' + es + ' 秒，仍喺深度推演，請繼續等候…';
+                }, 1000);
+            }
+            function stopElapsed() {
+                if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; }
             }
 
             // 模擬分析進度動畫
@@ -1164,6 +1015,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                         resultState.classList.remove('active');
                         hideInlineError();
                         animateSteps();
+                        startElapsed();
 
                         /* ============================================================
                            v9.14 AI 診斷穩定性升級（配合 Worker v9.2）：
@@ -1177,8 +1029,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                               而家正確顯示
                            ============================================================ */
                         var AI_ENDPOINT = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
-                        var AI_TIMEOUT_MS = 100000;   // 100 秒（配合 Worker CHAT_TIMEOUT_MS 100s）
-                        var AI_MAX_AUTO_RETRY = 1;    // 自動重試 1 次
+                        var AI_TIMEOUT_MS = 68000;    // v9.73: 68 秒總預算（配合 Worker v9.4 CHAT_TIMEOUT_MS 63s），60–70 秒內必完成或明確報錯
+                        var AI_MAX_AUTO_RETRY = 1;    // 自動重試 1 次（v9.73: 僅限 30 秒內返回嘅快速失敗，確保重試都喺 70 秒預算內）
                         var aiErrorShown = false;
 
                         function buildFormData() {
@@ -1192,6 +1044,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
                         function showInlineError(msg) {
                             aiErrorShown = true;
+                            stopElapsed();
                             var box = document.getElementById('ai-error-box');
                             var loading = document.querySelector('#ai-analyzing .ai-loading');
                             if (!box) { alert('⚠️ 系統提示：\n' + msg); return; }
@@ -1207,12 +1060,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             if (box) box.style.display = 'none';
                             if (loading) loading.style.display = '';
                             var title = document.querySelector('#ai-analyzing h3');
-                            if (title) title.textContent = '滅蟲師妹 AI 視覺模型分析中…';
+                            if (title) title.textContent = '滅蟲師傅 AI 深度分析中…';
                         }
 
                         function friendlyMsg(error) {
                             if (error.name === 'AbortError') {
-                                return 'AI 深度分析超過 100 秒仍未完成（網絡可能不穩），請重新分析一次，或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                                return 'AI 深度分析已達 68 秒上限仍未完成（網絡可能不穩），請重新分析一次，或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
                             }
                             var m = error.message || '';
                             if (m.indexOf('Failed to fetch') !== -1) {
@@ -1222,7 +1075,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                 return 'AI 系統暫時繁忙（每人每小時 8 次上限），請約 1 分鐘後重新分析，或直接用 WhatsApp 搵師傅。';
                             }
                             if (m.indexOf('504') !== -1 || m.indexOf('逾時') !== -1 || m.indexOf('超時') !== -1) {
-                                return 'AI 分析時間過長而中止（深度報告需 30–90 秒），請重新分析一次；或直接用 WhatsApp 搵師傅。';
+                                return 'AI 分析超過 70 秒上限而中止，請重新分析一次；或直接用 WhatsApp 搵師傅。';
                             }
                             if (m.indexOf('502') !== -1 || m.indexOf('503') !== -1) {
                                 return 'AI 伺服器暫時波動，已自動重試仍未成功。請稍等片刻再撳「重新分析」，或直接用 WhatsApp 搵師傅即時跟進。';
@@ -1232,6 +1085,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
                         function runAnalysis(remainingRetries) {
                             if (!selectedFile) return;
+                            var attemptStart = Date.now();   // v9.73: 重試只限快速失敗
                             var aiController = new AbortController();
                             var aiTimeoutId = setTimeout(function () { aiController.abort(); }, AI_TIMEOUT_MS);
 
@@ -1272,13 +1126,16 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                     diagnosisText.innerHTML = formattedHtml;
                                     analyzingState.classList.remove('active');
                                     resultState.classList.add('active');
+                                    stopElapsed();
                                 })
                                 .catch(function (error) {
                                     clearTimeout(aiTimeoutId);
                                     console.error('AI 診斷錯誤:', error);
                                     // v9.14 自動重試：僅 5xx 伺服器波動／網絡斷線；逾時（AbortError）、429、客戶端錯誤唔重試
                                     var status = error.httpStatus || 0;
+                                    var elapsedSec = (Date.now() - attemptStart) / 1000;
                                     var retryable = error.name !== 'AbortError' && status !== 429
+                                        && elapsedSec < 30   // v9.73: 只重試快速失敗，避免超出 70 秒預算
                                         && (status === 502 || status === 503 || status === 504 || status === 0);
                                     if (remainingRetries > 0 && retryable && !aiErrorShown) {
                                         var title = document.querySelector('#ai-analyzing h3');
@@ -1296,6 +1153,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             aiRetryBtn.addEventListener('click', function () {
                                 hideInlineError();
                                 animateSteps();
+                                startElapsed();
                                 runAnalysis(AI_MAX_AUTO_RETRY);
                             });
                         }

@@ -1,4 +1,36 @@
-# 修復日誌 (v9.72 — 2026-10-22)
+# 修復日誌 (v9.73 — 2026-10-22)
+
+## v9.73《AI 害蟲分析系統優化：合規免責＋界面簡化＋60–70 秒時效》— 按用戶《AI 害蟲分析系統》文檔執行（網站整體架構不變）
+
+### 法律風險規避（文檔三大風險點）
+- 《商品說明條例》風險：「獨家 IPM 防治智庫 — 自動檢索政府官方文獻與指引」改為「自動檢索並整合本港公開之政府防蟲文獻與指引」，強調「公開」文獻，避免「政府授權／內部機密指引」誤導聯想；全站掃描確認無殘留「政府官方文獻」字眼
+- AI 專業責任（Liability）風險：AI 工具 section 後新增合規免責聲明框（ai-compliance-note，amber 警示配色）：「免責聲明：本系統檢索及整合之政府公開文獻與指引僅供參考用途。系統輸出的初步方案不代表政府部門之官方立場。所有蟲害治理工程應以本公司專員最終的現場評估及正式報價單為準。」（按文檔建議逐字採用）
+- EN 版 Service Terms 區新增 🏛 Government Sources Disclaimer（retrieves and integrates publicly available Hong Kong government pest-control publications…subject to our specialist\'s final on-site assessment and formal quotation）
+- 《版權條例》風險：頁面維持「檢索／整合」公開文獻描述（文檔確認此為安全做法），無整份轉載政府文件，無需額外改動
+
+### 界面簡化（更簡潔美觀）
+- 應文檔要求刪除本頁「滅蟲師姐/師妹」聊天界面 section（ZH udify iframe＋EN 同步），只保留 AI 害蟲分析系統；全站其他位置之滅蟲師妹浮動助手照舊保留（文檔：「其他位置繼續保留」）
+- 移除大型 SVG 架構圖（arch-image-wrap），同樣資訊由六步驟卡（arch-flow）完整保留，頁面更輕更快
+- 刪除上載區冗餘 upload-features 圖標列；PDPO 數據收集聲明改 details/summary 摺疊（預設收起、點開細閱，頁面更清爽）
+- 品牌統一：「滅蟲師妹 AI 視覺模型分析中…」→「滅蟲師傅 AI 深度分析中…」；「滅蟲師妹 AI 診斷報告」→「AI 害蟲分析報告」
+
+### 分析能力與時效（60–70 秒穩定完成）
+- 前端圖片預壓縮 700KB → 420KB（1024px 解析度不變，AI 辨識能力不受影響；上載更快、視覺 Token 更慳），QUALITIES 降質階梯同步調整
+- 前端總預算 AI_TIMEOUT_MS 100s → 68s：60–70 秒內必完成或明確報錯，杜絕「分析時間過長／暫時未能完成」無了期等候
+- 自動重試只限 30 秒內返回嘅快速失敗（elapsedSec < 30），確保重試都喺 70 秒總預算內
+- 新增即時等候計時「已分析 X 秒（目標 60 秒內完成）」（45 秒後轉安撫文案「仍喺深度推演，請繼續等候…」），aria-live polite 無障礙播報
+- Worker v9.4 FastTrack（worker/pest-vision-worker.js）：CHAT_TIMEOUT_MS 100s→63s、UPLOAD_TIMEOUT_MS 30s→20s、compact 查詢加「請以精簡易讀方式輸出，避免冗長鋪陳」縮短 DeepSeek 廣東話報告生成；/health 版本 9.4-FastTrack
+- hero badge「30-90 秒深度報告」→「60–70 秒深度報告」（EN 同步 60–70 sec）；分析中文案同步目標 60 秒（上限 70 秒）
+
+### 驗證與收尾
+- scripts/validate_v973.py 28 項全過（合規字眼、section 刪除、摺疊、逾時參數、品牌統一、html.parser 標籤平衡 ZH/EN、首頁師妹浮動助手不受影響抽查）
+- scripts/check_v973_js.py 17 項全過（內联 script node --check ×3、Worker 語法、startElapsed/stopElapsed 配對與調用點、attempStart 重試預算、合規框位置、EN disclaimer 位置）
+- sitemap /ai/ 與 /en/ai/ lastmod → 2026-10-22；全站掃描確認「政府官方文獻」零殘留
+
+### ⚠️ 部署注意（重要）
+- worker/pest-vision-worker.js 唔會經 GitHub Pages 生效 — 需另行到 Cloudflare Dashboard → Workers → pest-vision-worker → 貼上新版代碼 → Deploy；否則前端 68 秒預算會對上舊 Worker 100 秒逾時（行為仍安全，但 60–70 秒目標打折扣）
+
+
 
 ## v9.72《blog-24 露台相 404 修復＋CSP Console 錯誤清理》— 應用戶回報「呢張相片在網頁顯示唔到」並附 DevTools 截圖：blog-24 露台實景相 404，Console 另有 CSP 兩項錯誤
 

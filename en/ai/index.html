@@ -96,13 +96,7 @@
     .privacy-notice-box h2{font-size:1.02rem;margin:0 0 10px;color:#075985;}
     .privacy-notice-box ul{margin:8px 0 0;padding-left:20px;}
     .privacy-notice-box li{margin-bottom:6px;}
-    .sister-chat-section{padding:56px 20px;background:var(--light-bg,#f5f7fa);}
-    .sister-chat-section .section-title{max-width:820px;margin:0 auto 26px;text-align:center;}
-    .sister-chat-section h2{font-size:1.6rem;margin-bottom:10px;}
-    .sister-chat-section .section-title p{color:var(--text-muted,#8a93a3);line-height:1.8;}
-    .sister-chat-frame{max-width:860px;margin:0 auto;border:1px solid var(--border,#e2e8f0);border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);background:#fff;}
-    .sister-chat-frame iframe{display:block;width:100%;height:700px;border:0;}
-    @media (max-width:768px){.sister-chat-frame iframe{height:620px;}.sister-chat-section h2{font-size:1.3rem;}}
+    /* v9.73: sister chat styles removed with the section */
     </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -142,7 +136,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <div class="hero-slogan-tag">✨ Smart Pest Control — Master Pest</div>
                 <div class="hero-badge-row" style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:18px;">
                     <span class="tech-badge"><i class="fa-solid fa-robot" aria-hidden="true"></i> Multimodal Vision Recognition</span>
-                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 30–90 sec In-Depth Report</span>
+                    <span class="tech-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> 60–70 sec In-Depth Report</span>
                     <span class="tech-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Free Diagnosis</span>
                     <span class="service-247"><span class="dot" aria-hidden="true"></span> 7×24 Always-on</span>
                 </div>
@@ -212,24 +206,15 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
         </section>
 
-        <!-- v9.43 AI Pest Expert Assistant chat (sister-split: global assistant unchanged; this page has its own AI) -->
-        <section class="sister-chat-section" aria-labelledby="sister-chat-title">
-            <div class="section-title">
-                <h2 id="sister-chat-title"><i class="fa-solid fa-comments" aria-hidden="true"></i> Chat with Our AI Pest Expert Assistant</h2>
-                <p>This page has its own <b>AI Pest Expert Assistant</b> — online 24/7 for instant pest identification, pricing guidance and booking. No waiting, no phone number needed.</p>
-            </div>
-            <div class="sister-chat-frame">
-                <iframe src="https://udify.app/chatbot/DKKeV6Vb9y16r6HL" style="width:100%;height:700px;border:0;" allow="microphone;clipboard-write" loading="lazy" title="AI Pest Expert Assistant chat"></iframe>
-            </div>
-        </section>
-
+        <!-- v9.73: sister AI chat removed from this page (AI analysis system only); the global floating assistant elsewhere is unchanged -->
         <!-- Service Terms & Privacy Section -->
         <section class="container" style="padding:30px 20px;">
             <div style="background:linear-gradient(135deg,var(--primary-light) 0%,#f0f9ff 100%);border:1px solid #6ee7b7;border-radius:var(--radius);padding:28px 24px;">
                 <h3 style="margin:0 0 14px;color:var(--dark-bg);"><i class="fa-solid fa-shield-halved" aria-hidden="true" style="color:var(--primary);"></i> Service Terms & Privacy Protection</h3>
                 <ul style="list-style:none;padding:0;margin:0;line-height:1.7;font-size:0.92rem;color:var(--text-main);">
                     <li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🔒 Privacy Protection</strong> — Photos used for instant AI recognition; auto-strips GPS/EXIF before upload; to keep improving diagnosis quality, photos and chat records are retained anonymously for about 24 months, then deleted automatically (see the Data Collection Notice below).</li>
-                    <li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🤖 AI Diagnosis Disclaimer</strong> — Results are preliminary; final service quote subject to on-site inspection.</li>
+                                        <li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🏛 Government Sources Disclaimer</strong> — This system retrieves and integrates publicly available Hong Kong government pest-control publications and guidelines, for reference only. AI outputs do not represent the official position of any government department; all treatment works are subject to our specialist's final on-site assessment and formal quotation.</li>
+<li style="padding:8px 0;border-bottom:1px solid rgba(16,185,129,0.15);"><strong>🤖 AI Diagnosis Disclaimer</strong> — Results are preliminary; final service quote subject to on-site inspection.</li>
                     <li style="padding:8px 0;"><strong>👨🏻‍🔧 English Support</strong> — Click the WhatsApp button for English-speaking specialist assistance.</li>
                 </ul>
             </div>
