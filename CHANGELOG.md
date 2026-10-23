@@ -1,4 +1,45 @@
-# 修復日誌 (v9.75 — 2026-10-22)
+# 修復日誌 (v9.76 — 2026-10-23)
+
+## v9.76《B2B 商業矩陣：商業滅蟲主專頁＋十大行業子頁》— 按用戶《全站 SEO、B2B 商業矩陣與地圖聯動全方位升級方案.docx》＋《超級市場及生鮮零售・IPM 蟲害綜合管理方案.docx》執行（參考方案頁尾架構圖）
+
+### 商業滅蟲主專頁（Hub）升級 — /commercial/（ZH/EN）
+- H1 按文檔改為「香港商業滅蟲公司｜企業與物業管理 IPM 綜合蟲害管理方案」
+- 頁頭四大信任標籤（文檔規格）：符合食環署/HACCP 查牌標準 ｜ IoT 智慧鼠盒 24/7 監測 ｜ 中英雙語合規報告 ｜ 專人 1 個工作天內提交 Quotation
+- 「三大行業」網格升級為「十大行業」：物業管理／餐飲／超級市場及生鮮零售／食品工場及倉庫／物流及倉儲／酒店／商務辦公樓／休閒及娛樂場所／醫療及護理院舍／學校及教育機構
+- Meta Title 採用文檔 CTR 範本：【2026 商業滅蟲公司收費】透明報價＋IoT 智慧監測｜滅蟲師傅
+- Service JSON-LD OfferCatalog 3→10 項；PestControl schema 補 geo 坐標（22.3527242, 114.1394）＋hasMap Google 地圖連結（文檔第四節 GBP 訊號）
+- 企業報價通道表單「商業場地類型」6→10 行業選項；?biz= 深鏈預選參數同步擴充（10 keys）
+
+### 十大行業子頁 — 新建 7 頁 × ZH/EN = 14 檔（沿用現有商業專頁同構模板）
+- 超級市場及生鮮零售 /commercial/supermarket-retail/ — 按《超級市場及生鮮零售・IPM 蟲害綜合管理方案》完整轉化：賣場環境挑戰、四大蟲患黑點・精準擊破（熟食檔烘焙區／蔬果生鮮區／魚鮮肉區垃圾房／後勤倉儲卸貨區，每點「環境挑戰＋科學解法」）、CEDARS 科技化 IPM 八步 SOP（勘察 AI 診斷→密度調查→監測點位圖→防治計劃→安全施作→中英雙語 IPM 報告→QC 質檢回訪→滿意保證承諾）
+- 食品工場及倉庫 /commercial/food-factory/ — HACCP／ISO22000 對標＋飛蠅誘控（粘捕式滅蠅燈位置圖）＋數據化 IPM 追蹤
+- 物流及倉儲 /commercial/logistics/ — 貨櫃卡板帶蟲截擊＋IoT 智慧鼠盒 24/7＋防鼠防鳥工程
+- 商務辦公樓 /commercial/office/ — 暗線管道封堵＋隱蔽式防鼠＋員工健康低敏藥劑
+- 休閒及娛樂場所 /commercial/leisure/ — 營業時間外極速處理＋氣味管理＋顧客體驗保護
+- 醫療及護理院舍 /commercial/healthcare/ — 高敏感環境零氣味物理防治＋菌蟲雙防＋社署/衞生署巡查級紀錄
+- 學校及教育機構 /commercial/school/ — 漁護署註冊低毒藥劑＋假期課後無痕施工＋教育局安全指引
+- 每頁同構配置：BreadcrumbList／Service(OfferCatalog×3)／FAQPage(6 題行業 FAQ)／PestControl 四組 JSON-LD、行業黑點紅卡×4、合約流程、價目表、實戰案例內鏈、B2B 報價表單（lead-source 逐行業追蹤）＋行業 WhatsApp 預填文案
+
+### 現有 3 子頁對齊文檔
+- 餐飲 fnb：keywords＋服務描述補「智慧曱甴誘餌系統」「夜間無痕施工」（文檔餐飲行業解法）
+- 酒店 hotel：keywords 補「高溫蒸氣處理」「極速恢復房態」（文檔酒店行業解法）
+- 物業 property：文檔解法（不鏽鋼防鼠網源頭封堵＋IoT 鼠盒＋法團報告）原有內容已覆蓋，核對通過
+
+### 頁尾 (Footer) Silo Mega Footer 全站升級（參考方案架構圖四欄）
+- 全站 153 頁 footer-nav 升級四欄 Silo 結構：商業滅蟲方案（11 連結）｜家居滅蟲服務（9）｜全港十八區據點（7）｜蟲害知識與 IPM 智庫（7），打通全站內部連結權重
+- bruceleehk.css 新增 .footer-cols 響應式四欄網格（860px 兩欄／480px 單欄）；原 about/简体/隱私政策/Cookie 設定保留於 footer-legal 行
+
+### Bug 修復（本次範圍內順手）
+- 4 個 ZH commercial 頁 hreflang="en" 壞鏈（"/enhttps://..." 拼接錯誤）修復，EN hreflang 訊號恢復正常
+
+### 驗證
+- scripts/validate_v976.py 64 項全過：全站 154 頁 html.parser 標籤平衡、hreflang bug 清零、22 商業頁 JSON-LD 解析（offer 數核對）、新頁內部連結存在性、全站 ASCII 檔名、wa.me 預填 decode、文檔要點覆蓋 G1-G12（hub H1/四大信任標籤/十行業卡/超市四黑點/八步 SOP/各行業關鍵詞）、footer 四欄全站覆蓋 153/153、新頁內联 JS node --check
+- sitemap.xml 140→154 URLs；商業體系 22 頁＋首頁 ZH/EN lastmod → 2026-10-23
+
+### 部署後建議（需用戶操作）
+1. GitHub Desktop commit + push，等待 GitHub Pages 重新建置後 Ctrl+F5 強刷
+2. Search Console 提交更新後 sitemap；2-4 週觀察「商業滅蟲公司」「超市滅蟲」「食品工場滅蟲」等行業詞收錄與排名
+3. 文檔第四節 GBP 部分（地圖商家回覆升華社區責任感、Posts 引用官網）需於 Google 商家後台人工操作
 
 ## v9.75《地圖聯動＋CTR/CVR 流量轉化優化》— 按用戶《地圖聯動與CTR和CVR流量轉化全面優化方案.docx》執行（網站整體架構不變）
 
