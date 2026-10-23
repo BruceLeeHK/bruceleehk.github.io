@@ -1,3 +1,20 @@
+# 修復日誌 (v9.79 — 2026-10-23)
+
+## v9.79《EN 九行業子頁文案翻譯補齊》— 對應 v9.77 ZH 注入 1:1 英文化
+
+### 九大行業 EN 子頁全面補翻譯（9 頁：en/commercial/{fnb,food-factory,hotel,logistics,office,property,leisure,healthcare,school}）
+- Hero：H1 主標題＋副標題全新專業英文（茶餐廳 Cha Chaan Tengs & Bing Sutt／食品工場 Food Factories／酒店 Hotels／物流 Logistics／甲級寫字樓 Grade-A Offices／物業管理 Property Management／休閒娛樂 Entertainment Venues／醫療 Healthcare & Care Homes／學校 Schools）
+- 「行業黑點」紅卡區（#spots）：6 頁重建舊英文＋3 頁全新插入（fnb/hotel/property 原缺），與 ZH 版 4–5 卡逐卡對應（Challenge + Solution 格式）；新插入頁補 .spots-grid CSS
+- 「CEDARS 科技化 IPM SOP」區（#flow）：9 頁整段重建——8 步英文 SOP 卡（Step 1–8）＋ 7 頁「三道防線 Three Lines of Defence」體系（fnb/hotel 按文檔無此區）
+- Hero WhatsApp 按鈕：CTA 文案英文化＋行業專屬英文預填文字（wa.me URL 同步更新）
+- TOC 膠囊 pills：#spots「Pest Points」補齊、flow pill 統一「IPM SOP」（兼容 Contract Flow／Contract Process 兩種舊標籤）
+
+### ZH 一致性補強（3 頁）
+- commercial/fnb、hotel、property：TOC pills 補「行業黑點」#spots 膠囊（v9.77 遺留缺口）
+
+### 驗證
+- validate_v979.py：45+ 檢查項全過（H1/sub/WA 預填/CTA/黑點卡逐卡/Step 卡/三道防線/pills/標籤平衡/正文零中文泄漏——head CSS 註釋除外）
+
 # 修復日誌 (v9.78 — 2026-10-23)
 
 ## v9.78《導航欄標籤更名：商業方案 → 商業滅蟲》— 按用戶導航欄截圖指示執行
