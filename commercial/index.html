@@ -386,6 +386,51 @@
 .biz-check{display:flex;flex-wrap:wrap;gap:10px}
 .biz-check label{font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;margin:0}
 @media (max-width:640px){.biz-form .bf-row{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ 展開"}
+.sop-card[open] .sop-x::after{content:"▴ 收起"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -428,8 +473,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
             <h1>香港商業滅蟲公司｜企業與物業管理 IPM 綜合蟲害管理方案</h1>
             <p class="dist-sub">商業客戶要嘅唔止係消滅眼前蟲患，仲要向法團、老闆同政府巡查交代。滅蟲師傅 B2B 商業滅蟲方案覆蓋十大行業——物業管理、餐飲、超級市場及生鮮零售、食品工場、物流倉儲、酒店、商務辦公樓、休閒娛樂、醫療院舍、學校：IoT 智慧鼠盒 24/7 監測＋中英雙語合規報告＋IPM 有害生物治理處方單，專人 1 個工作天內提交 Quotation——先勘察、後書面報價。</p>
-            <div class="geo-answer"><p><b>商業滅蟲公司點揀？收費點計？</b>揀供應商最緊要「有紀錄、有報告、合規」：我哋每次服務出中英雙語報告，IoT 監測數據令防治效果可以量度；收費按場地規模、風險同頻率度身報價，唔設劃一價目——先勘察、後書面報價，分項列明方便審批。十大行業各有專頁，對號入座睇詳細方案。</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">本頁目錄：<a href="#industries" style="color:#fbbf24;">十大行業方案</a> ｜ <a href="#tech" style="color:#fbbf24;">科技與合規</a> ｜ <a href="#flow" style="color:#fbbf24;">合約流程</a> ｜ <a href="#price" style="color:#fbbf24;">合約模式</a> ｜ <a href="#case" style="color:#fbbf24;">企業案例</a> ｜ <a href="#faq" style="color:#fbbf24;">常見問題</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">商業報價表單</a></p>
+            <details class="geo-fold"><summary><span>📋 商業滅蟲公司點揀？收費點計？</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>商業滅蟲公司點揀？收費點計？</b>揀供應商最緊要「有紀錄、有報告、合規」：我哋每次服務出中英雙語報告，IoT 監測數據令防治效果可以量度；收費按場地規模、風險同頻率度身報價，唔設劃一價目——先勘察、後書面報價，分項列明方便審批。十大行業各有專頁，對號入座睇詳細方案。</p></div></details>
+            <nav class="toc-pills" aria-label="本頁目錄"><a class="toc-pill" href="#industries">十大行業方案</a><a class="toc-pill" href="#tech">科技與合規</a><a class="toc-pill" href="#flow">合約流程</a><a class="toc-pill" href="#price">合約模式</a><a class="toc-pill" href="#case">企業案例</a><a class="toc-pill" href="#faq">常見問題</a><a class="toc-pill" href="#biz-quote">商業報價表單</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 索取商業滅蟲報價單</a>
                 <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%80%91%E4%BF%82%E5%95%86%E6%A5%AD%E6%A9%9F%E6%A7%8B%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp 商業查詢</a>
@@ -441,7 +486,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <a class="web-card web-vote" href="/services/"><span class="web-tag">🏠 住宅客戶</span><span class="web-q">屋企有蟲患問題？</span><span class="web-btn">睇住宅滅蟲服務總覽 →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="industries-title">
+<section id="industries" class="dist-section" aria-labelledby="industries-title">
             <div class="dist-card">
                 <h2 id="industries-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> 十大行業商業滅蟲方案 — 唔同行業唔同打法</h2>
                 <p>商業客戶嘅搜尋意圖同家庭客完全唔同：物管經理搜「物業管理蟲害防治」，採購搜「商業滅蟲公司收費」，食品廠品控搜「HACCP 滅蟲」——十大行業、十套方案，我哋逐個行業開專頁詳細交代，唔會同住宅服務混埋一齊，對號入座：</p>
@@ -459,7 +504,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> 科技與合規 — 企業客戶最需要嘅信任訊號</h2>
                 <ul class="tech-list">
@@ -469,20 +514,20 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> 商業滅蟲合約流程 — 由勘察到報告五步走</h2>
                 <p>商業合約唔係「見蟲噴蟲」。我哋嘅 B2B 流程五步走，每一步都有文件紀錄：</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>步驟 1｜📱 初步查詢</b> — 經商業報價表單或 WhatsApp 提交場地資訊，B2B 專責專員親自審閱，一個工作天內回覆。</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>步驟 2｜🔍 免費現場勘察與投標評估</b> — 按管理處安排時段實地勘察：蟲患風險位、公用地方結構、監測布防點逐一記錄。</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>步驟 3｜📋 書面方案＋報價單</b> — 出正式報價單（Quotation）：服務範圍、頻率、監測配置、報告安排分項列明，方便審批同招標比對。</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>步驟 4｜🤝 簽訂合約＋定期服務</b> — 合約列明項目同覆查安排；定期服務按計劃執行，唔會「突然加項」。</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>步驟 5｜📊 電子服務報告＋年檢覆核</b> — 每次服務出電子報告（IoT 數據＋處理紀錄＋跟進建議），年度覆核監測布局同防治策略。</span></li>
-                </ul>
+                <div class="sop-grid cols-5">
+                    <details class="sop-card"><summary><span class="sop-n">步驟 1</span><span class="sop-t"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i>初步查詢</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>經商業報價表單或 WhatsApp 提交場地資訊，B2B 專責專員親自審閱，一個工作天內回覆。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 2</span><span class="sop-t"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>免費現場勘察與投標評估</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>按管理處安排時段實地勘察：蟲患風險位、公用地方結構、監測布防點逐一記錄。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 3</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>書面方案＋報價單</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>出正式報價單（Quotation）：服務範圍、頻率、監測配置、報告安排分項列明，方便審批同招標比對。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 4</span><span class="sop-t"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>簽訂合約＋定期服務</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>合約列明項目同覆查安排；定期服務按計劃執行，唔會「突然加項」。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 5</span><span class="sop-t"><i class="fa-solid fa-chart-line" aria-hidden="true"></i>電子服務報告＋年檢覆核</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每次服務出電子報告（IoT 數據＋處理紀錄＋跟進建議），年度覆核監測布局同防治策略。</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> 商業滅蟲合約模式 — 先勘察後書面報價</h2>
                 <p>商業滅蟲合約按場地面積、蟲患風險、服務頻率同監測配置度身報價，唔設劃一價目。兩種常見模式：</p>
@@ -493,7 +538,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">所有商業報價一律<b>先勘察、後書面報價</b>，實際收費以書面報價單為準；全蟲種住宅行情可參考 <a href="/info/blog-12/" style="color:var(--primary-dark);font-weight:700;text-decoration:none;">【2026 香港滅蟲公司收費標準與揀選指南】</a>。</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> 企業與商業實戰案例</h2>
                 <p>我哋有處理商業場所嘅實戰經驗，以下係站內完整實錄文章（真實個案、現場影片）：</p>
@@ -508,12 +553,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 商業滅蟲常見問題 FAQ</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 商業滅蟲合約點樣計價？</h3><p>商業滅蟲合約按場地面積、蟲患風險、服務頻率同監測配置度身報價，唔設劃一價目。所有商業報價一律先勘察、後出書面報價單（Quotation），合約列明服務範圍、頻率、保養同報告安排，之後唔會「突然加項」，實際以書面報價為準。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 可以支援招標／投標文件嗎？</h3><p>可以。透過本頁商業報價表單選「需要投標／招標相關資訊」，我哋會提供公司資料、服務方案、保險及資歷文件。我們已申請列入政府物流服務署及康文署供應商名單，亦歡迎企業機構索取相關註冊文件作採購評估。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 每次服務有冇報告？</h3><p>有。每次服務提供電子服務報告：檢查點、處理位置、IoT 智慧鼠盒監測數據、跟進建議逐一列明，配合 AI 輔助蟲害診斷報告同 IPM 有害生物治理處方單，方便企業存檔及應付政府巡查。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋用嘅藥劑安全嗎？</h3><p>採用漁農自然護理署註冊除害劑；餐飲環境可用食品安全級無毒誘餌系統。IPM 綜合防治以源頭封堵優先，減少藥劑依賴——呢個正正係企業客戶同 HACCP 審核最重視嘅方向。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 公用地方同個別單位嘅防治責任點分？</h3><p>按《公眾衞生及市政條例》（第 132 章）框架：大廈公用地方（垃圾房、電梯槽、天井、走廊、外牆喉管）一般由業主立案法團或管理處負責防治；個別單位內部由業主或租戶處理。我哋可為法團提供公用地方方案，並向個別單位住戶提供跟進安排。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 服務覆蓋邊啲區？</h3><p>全港十八區以至邊境禁區——我哋有持禁區紙出更沙頭角百年金行嘅實錄（<a href='/info/blog-19/'>睇個案</a>）。中環、金鐘、尖沙咀、觀塘、荃灣等商業區均可安排免費現場勘察。</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 商業滅蟲合約點樣計價？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>商業滅蟲合約按場地面積、蟲患風險、服務頻率同監測配置度身報價，唔設劃一價目。所有商業報價一律先勘察、後出書面報價單（Quotation），合約列明服務範圍、頻率、保養同報告安排，之後唔會「突然加項」，實際以書面報價為準。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 可以支援招標／投標文件嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>可以。透過本頁商業報價表單選「需要投標／招標相關資訊」，我哋會提供公司資料、服務方案、保險及資歷文件。我們已申請列入政府物流服務署及康文署供應商名單，亦歡迎企業機構索取相關註冊文件作採購評估。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 每次服務有冇報告？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>有。每次服務提供電子服務報告：檢查點、處理位置、IoT 智慧鼠盒監測數據、跟進建議逐一列明，配合 AI 輔助蟲害診斷報告同 IPM 有害生物治理處方單，方便企業存檔及應付政府巡查。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋用嘅藥劑安全嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>採用漁農自然護理署註冊除害劑；餐飲環境可用食品安全級無毒誘餌系統。IPM 綜合防治以源頭封堵優先，減少藥劑依賴——呢個正正係企業客戶同 HACCP 審核最重視嘅方向。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 公用地方同個別單位嘅防治責任點分？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>按《公眾衞生及市政條例》（第 132 章）框架：大廈公用地方（垃圾房、電梯槽、天井、走廊、外牆喉管）一般由業主立案法團或管理處負責防治；個別單位內部由業主或租戶處理。我哋可為法團提供公用地方方案，並向個別單位住戶提供跟進安排。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 服務覆蓋邊啲區？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>全港十八區以至邊境禁區——我哋有持禁區紙出更沙頭角百年金行嘅實錄（<a href='/info/blog-19/'>睇個案</a>）。中環、金鐘、尖沙咀、觀塘、荃灣等商業區均可安排免費現場勘察。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">

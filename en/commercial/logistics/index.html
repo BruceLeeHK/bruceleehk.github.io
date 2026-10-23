@@ -338,6 +338,51 @@
 .spot p{font-size:.86rem;color:var(--text-main);line-height:1.7;margin:0}
 .spot p b{color:#b91c1c}
 @media (max-width:768px){.spots-grid{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ More"}
+.sop-card[open] .sop-x::after{content:"▴ Less"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -380,8 +425,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
             <h1>Logistics & Warehousing Pest Control｜Stock Protection + IoT Monitoring</h1>
             <p class="dist-sub">Looking for a dependable warehouse pest control partner? Our team specialises in logistics centres, distribution warehouses, cargo stores and cold chain facilities: intercepting pest hitch-hikers at receiving docks, IoT smart rat stations with 24-hour monitoring, stainless steel mesh and rodent-proof board structural proofing, and bird-proofing installations — stock integrity protected, bilingual reports ready for client and insurance audits. Survey first, written quotation after, covering all 18 districts.</p>
-            <div class="geo-answer"><p><b>Stock gnawed by rats — who pays and how do you prove innocence?</b>Storage contracts usually hold the warehouse responsible for pest-related stock damage. Rather than argue after the fact, build the evidence trail beforehand: IoT smart rat stations keep a continuous data record of rodent status — after an incident you have data to review, without one you have proof of diligence; paired with rodent-proof boards and stainless steel mesh proofing, the gnawing risk is cut at the source.</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">On this page: <a href="#scope" style="color:#fbbf24;">Scope</a> ｜ <a href="#spots" style="color:#fbbf24;">Pest Points</a> ｜ <a href="#flow" style="color:#fbbf24;">Contract Flow</a> ｜ <a href="#tech" style="color:#fbbf24;">Tech & Compliance</a> ｜ <a href="#price" style="color:#fbbf24;">Pricing</a> ｜ <a href="#case" style="color:#fbbf24;">Case References</a> ｜ <a href="#faq" style="color:#fbbf24;">FAQ</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">Business Quote Form</a></p>
+            <details class="geo-fold"><summary><span>📋 Stock gnawed by rats — who pays and how do you prove innocence?</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>Stock gnawed by rats — who pays and how do you prove innocence?</b>Storage contracts usually hold the warehouse responsible for pest-related stock damage. Rather than argue after the fact, build the evidence trail beforehand: IoT smart rat stations keep a continuous data record of rodent status — after an incident you have data to review, without one you have proof of diligence; paired with rodent-proof boards and stainless steel mesh proofing, the gnawing risk is cut at the source.</p></div></details>
+            <nav class="toc-pills" aria-label="On this page"><a class="toc-pill" href="#scope">Scope</a><a class="toc-pill" href="#spots">Pest Points</a><a class="toc-pill" href="#flow">Contract Flow</a><a class="toc-pill" href="#tech">Tech & Compliance</a><a class="toc-pill" href="#price">Pricing</a><a class="toc-pill" href="#case">Case References</a><a class="toc-pill" href="#faq">FAQ</a><a class="toc-pill" href="#biz-quote">Business Quote Form</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 Request a dedicated logistics & warehousing pest control proposal</a>
                 <a href="https://wa.me/85252821552?text=Hello%2C%20we%20are%20a%20cargo%20warehouse%20/%20logistics%20centre%20and%20would%20like%20a%20commercial%20pest%20control%20proposal%20and%20quotation." target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp Business Enquiry</a>
@@ -393,7 +438,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <a class="web-card web-vote" href="/en/service/rodent/"><span class="web-tag">🐭 Residential Rat Control</span><span class="web-q">Rats at home?</span><span class="web-btn">Visit the residential rat control page →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> Warehouse Pest Control Scope — From Gate to High Racking</h2>
                 <p>Warehouse pest risk is fundamentally different from offices: hundreds of movements daily, pallets and cartons churning, docks open for hours — pests do not "arise" here, they arrive by hitch-hiking on goods and packaging. The strategy: intercept entry + long-term monitoring + structural proofing, three lines running in parallel. Six core services for warehousing environments:</p>
@@ -407,7 +452,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="spots-title">
+<section id="spots" class="dist-section" aria-labelledby="spots-title">
             <div class="dist-card">
                 <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> Four Major Warehouse Pest Points — Precisely Targeted</h2>
                 <p>Warehouse infestations are "invasion-driven, breeding-assisted". We survey along the logistics flow and strike the four highest-risk areas:</p>
@@ -419,20 +464,20 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> Warehousing IPM Contract Flow — Built Around Logistics Rhythm</h2>
                 <p>Logistics runs 24/7 with sharp peak seasons, so our contract flow is designed around one principle: never block the goods:</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>Step 1｜📱 Initial enquiry</b> — Submit warehouse details via form or WhatsApp (area, stock category, docking hours); our B2B specialist replies within one working day.</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>Step 2｜🔍 Free site survey</b> — Docks, racking, perimeter and offices surveyed: entry points, risk points and monitoring deployment positions recorded.</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>Step 3｜📋 Written proposal + quotation</b> — Proofing works itemised (location, material, maintenance period); monitoring deployment and service frequency specified for tender comparison or direct approval.</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>Step 4｜🤝 Signing + scheduled service</b> — Service windows arranged around docking schedules (night shifts possible); IoT stations monitor continuously — issues flagged before stock is touched.</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>Step 5｜📊 Electronic reports + annual review</b> — Electronic report per visit, annual review report — ready for client audits, insurance inspections and lease discussions.</span></li>
-                    </ul>
+                <div class="sop-grid cols-5">
+                    <details class="sop-card"><summary><span class="sop-n">Step 1</span><span class="sop-t"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i>Initial enquiry</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Submit warehouse details via form or WhatsApp (area, stock category, docking hours); our B2B specialist replies within one working day.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 2</span><span class="sop-t"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Free site survey</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Docks, racking, perimeter and offices surveyed: entry points, risk points and monitoring deployment positions recorded.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 3</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>Written proposal + quotation</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Proofing works itemised (location, material, maintenance period); monitoring deployment and service frequency specified for tender comparison or direct approval.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 4</span><span class="sop-t"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>Signing + scheduled service</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Service windows arranged around docking schedules (night shifts possible); IoT stations monitor continuously — issues flagged before stock is touched.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 5</span><span class="sop-t"><i class="fa-solid fa-chart-line" aria-hidden="true"></i>Electronic reports + annual review</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Electronic report per visit, annual review report — ready for client audits, insurance inspections and lease discussions.</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> Technology & Compliance — Warehousing IPM</h2>
                 <ul class="tech-list">
@@ -442,7 +487,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> Warehouse Pest Control Pricing — Quoted by Area & Deployment Density</h2>
                 <p>Warehouse pest control is quoted by floor area, floors, stock category and monitoring density — no one-size price list. Typical arrangements:</p>
@@ -458,7 +503,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">All quotations are <b>survey first, written quotation after</b>; final pricing per written quotation. Multi-warehouse groups can consolidate contracts and reporting platforms.</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> Related Warehousing & Commercial Case References</h2>
                 <div class="svc-grid">
@@ -472,12 +517,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Frequently Asked Questions</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do you guarantee monitoring coverage in such a big warehouse?</h3><p>Two ways: first, the monitoring point map is planned off the warehouse floor plan — racking aisles, docks, offices and perimeter all covered and marked; second, patrol corridors along walls plus IoT stations logging 24/7 — where eyes cannot patrol, sensors watch, and activity uploads instantly.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do all pallets and cartons need to be discarded?</h3><p>No. For reused pallets we recommend "check before entry": inspect for borer holes, insect carcasses and urine stains; cartons are best unpacked at dock buffer zones or turned over faster. We provide the receiving inspection workflow, and dock trap monitoring catches the risk before goods enter the racking.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do cold chain warehouses have pest problems too?</h3><p>Yes. Low temperatures suppress most insects but not rats (they prioritise food and nesting); besides, buffer zones, docks and packing areas in cold chain facilities are ambient-temperature zones where pests thrive. Our cold chain plans map monitoring deployment by temperature zone, holding the ambient belt and buffer belt as priorities.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What is bird-proofing for? Birds are not pests, are they?</h3><p>Pigeons and sparrows on dock canopies and rooftops carry pathogens like Salmonella in droppings that contaminate stock and docks; nests block drains and cause leaks. Spikes and netting are physical deterrents that harm no birds, paired with droppings cleaning and disinfection advice — an important compliance layer for warehousing.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is it priced?</h3><p>By area, floors, stock category and deployment density — survey first, written quotation after, itemised. Long-term contracts include routine patrol, IoT monitoring, proofing maintenance and reporting; emergencies quoted case by case.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How often is service provided?</h3><p>Typically monthly; high-turnover or food-grade warehouses may move to fortnightly; IoT stations monitor 24/7. Extra patrols can be arranged before peak seasons (e.g. Double Eleven) — final frequency follows the post-survey recommendation.</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do you guarantee monitoring coverage in such a big warehouse?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Two ways: first, the monitoring point map is planned off the warehouse floor plan — racking aisles, docks, offices and perimeter all covered and marked; second, patrol corridors along walls plus IoT stations logging 24/7 — where eyes cannot patrol, sensors watch, and activity uploads instantly.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do all pallets and cartons need to be discarded?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>No. For reused pallets we recommend "check before entry": inspect for borer holes, insect carcasses and urine stains; cartons are best unpacked at dock buffer zones or turned over faster. We provide the receiving inspection workflow, and dock trap monitoring catches the risk before goods enter the racking.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do cold chain warehouses have pest problems too?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Yes. Low temperatures suppress most insects but not rats (they prioritise food and nesting); besides, buffer zones, docks and packing areas in cold chain facilities are ambient-temperature zones where pests thrive. Our cold chain plans map monitoring deployment by temperature zone, holding the ambient belt and buffer belt as priorities.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What is bird-proofing for? Birds are not pests, are they?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Pigeons and sparrows on dock canopies and rooftops carry pathogens like Salmonella in droppings that contaminate stock and docks; nests block drains and cause leaks. Spikes and netting are physical deterrents that harm no birds, paired with droppings cleaning and disinfection advice — an important compliance layer for warehousing.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is it priced?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>By area, floors, stock category and deployment density — survey first, written quotation after, itemised. Long-term contracts include routine patrol, IoT monitoring, proofing maintenance and reporting; emergencies quoted case by case.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How often is service provided?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Typically monthly; high-turnover or food-grade warehouses may move to fortnightly; IoT stations monitor 24/7. Extra patrols can be arranged before peak seasons (e.g. Double Eleven) — final frequency follows the post-survey recommendation.</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -510,9 +555,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
                     <div><label>Document Requirements<span style="font-weight:400;color:#64748b;">(select all that apply)</span></label>
                         <div class="biz-check">
-                        <label><input type="checkbox" name="doc-quotation" value="需要"> Need a formal quotation (Quotation) for approval</label>
-                        <label><input type="checkbox" name="doc-tender" value="需要"> Need tender / RFP related information</label>
-                        <label><input type="checkbox" name="doc-compliance" value="需要"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
+                        <label><input type="checkbox" name="doc-quotation" value="Yes"> Need a formal quotation (Quotation) for approval</label>
+                        <label><input type="checkbox" name="doc-tender" value="Yes"> Need tender / RFP related information</label>
+                        <label><input type="checkbox" name="doc-compliance" value="Yes"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
                         </div>
                     </div>
                     <div><label for="bf-details">Pest Situation / Requirements</label><textarea id="bf-details" name="details" rows="4" placeholder="e.g. rodent activity near refuse room, bed bug case in guest room, FEHD inspection requirements..."></textarea></div>

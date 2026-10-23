@@ -338,6 +338,51 @@
 .spot p{font-size:.86rem;color:var(--text-main);line-height:1.7;margin:0}
 .spot p b{color:#b91c1c}
 @media (max-width:768px){.spots-grid{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ 展開"}
+.sop-card[open] .sop-x::after{content:"▴ 收起"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -378,22 +423,22 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <span class="dist-badge">💡 飛蠅誘控系統</span>
             <span class="dist-badge">📊 數據化 IPM 追蹤</span>
             </div>
-            <h1>食品工場及倉庫滅蟲公司｜HACCP・ISO22000 合規 IPM 方案</h1>
-            <p class="dist-sub">搵緊合規嘅食品工場滅蟲公司？滅蟲師傅團隊專責食物製造廠、中央廚房、食品包裝廠及食品倉庫：對標 HACCP／ISO22000 驗證要求嘅文件體系、飛蠅誘控系統、IoT 智慧鼠盒 24 小時監測、數據化 IPM 追蹤——每次服務出中英雙語報告，審核稽查有文件交代，先勘察、後書面報價。</p>
-            <div class="geo-answer"><p><b>食品工場過 HACCP／ISO22000 審核，蟲害管理要有啲咩？</b>審核員會查三樣嘢：防治計劃（有冇 IPM 方案同點位圖）、執行紀錄（有冇每次服務報告同監測數據）、糾正措施（出事之後有冇跟進改善）。我哋嘅服務體系就係按呢三樣設計：蟲害監測點位圖＋每次中英雙語服務報告＋數據化追蹤同年度總結——審核時逐項有文件對應。</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">本頁目錄：<a href="#scope" style="color:#fbbf24;">服務範圍</a> ｜ <a href="#spots" style="color:#fbbf24;">行業黑點</a> ｜ <a href="#flow" style="color:#fbbf24;">合約流程</a> ｜ <a href="#tech" style="color:#fbbf24;">科技與合規</a> ｜ <a href="#price" style="color:#fbbf24;">合約模式</a> ｜ <a href="#case" style="color:#fbbf24;">實戰案例</a> ｜ <a href="#faq" style="color:#fbbf24;">常見問題</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">商業報價表單</a></p>
+            <h1>食品工場及倉庫滅蟲與蟲害防治方案</h1>
+            <p class="dist-sub">助您輕鬆通過 HACCP／ISO 22000／BRC 食品安全審計 ｜ 綠色物理防護 0 化學污染風險 ｜ IoT 智慧鼠盒三道防線 ｜ 專人 1 工作天內提交中英雙語合規 IPM 報告。</p>
+            <details class="geo-fold"><summary><span>📋 食品工場過 HACCP／ISO22000 審核，蟲害管理要有啲咩？</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>食品工場過 HACCP／ISO22000 審核，蟲害管理要有啲咩？</b>審核員會查三樣嘢：防治計劃（有冇 IPM 方案同點位圖）、執行紀錄（有冇每次服務報告同監測數據）、糾正措施（出事之後有冇跟進改善）。我哋嘅服務體系就係按呢三樣設計：蟲害監測點位圖＋每次中英雙語服務報告＋數據化追蹤同年度總結——審核時逐項有文件對應。</p></div></details>
+            <nav class="toc-pills" aria-label="本頁目錄"><a class="toc-pill" href="#scope">服務範圍</a><a class="toc-pill" href="#spots">行業黑點</a><a class="toc-pill" href="#flow">服務流程</a><a class="toc-pill" href="#tech">科技與合規</a><a class="toc-pill" href="#price">合約模式</a><a class="toc-pill" href="#case">實戰案例</a><a class="toc-pill" href="#faq">常見問題</a><a class="toc-pill" href="#biz-quote">商業報價表單</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 索取食品工場專屬滅蟲方案與報價</a>
-                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E9%A3%9F%E5%93%81%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp 商業查詢</a>
+                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%20IPM%20%E8%9F%B2%E5%AE%B3%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 📷 上載現場環境／蟲患照片，即時 WhatsApp 獲取食品工場 IPM 專案與免費現場勘察預約</a>
             </div>
         </section>
         <nav class="dist-breadcrumb" aria-label="Breadcrumb"><a href="https://bruceleehk.com/">首頁</a><span class="sep">›</span><a href="/commercial/">商業滅蟲方案</a><span class="sep">›</span><span aria-current="page">食品工場及倉庫</span></nav>
         <div class="web-net">
-<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E9%A3%9F%E5%93%81%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">食品工場及倉庫有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
+<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%20IPM%20%E8%9F%B2%E5%AE%B3%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">食品工場及倉庫有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
 <a class="web-card web-vote" href="/service/rodent/"><span class="web-tag">🐭 住宅滅鼠</span><span class="web-q">屋企有老鼠？</span><span class="web-btn">睇滅鼠公司專頁（住宅版） →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> 食品工場滅蟲服務範圍 — 由生產線到原料倉</h2>
                 <p>食品工場嘅蟲患風險直接連住產品安全同驗證資格：一個昆蟲殘體、一粒鼠糞，隨時令整批貨報廢甚至被取消驗證。防治核心係「預防為主、監測為據、文件為證」。滅蟲師傅針對食品工場場景六大服務：</p>
@@ -407,32 +452,40 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="spots-title">
+<section id="spots" class="dist-section" aria-labelledby="spots-title">
             <div class="dist-card">
-                <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> 食品廠四大蟲患黑點・精準擊破</h2>
-                <p>食品工場水、熱、食物殘渣三者齊備，蟲害一旦落地就高速繁殖。按廠房分區勘察，四大高風險位逐一擊破：</p>
+                <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> 四大區域黑點・精準擊破</h2>
+                <p>從原料進貨、生產加工到成品倉儲與物流，每個環節均嚴格牽涉食品安全。食品工場環境溫濕度穩定，食物與水源豐富，加上大量的通風管道、暗渠、裝卸貨平台縫隙及堆疊的貨物紙箱，極易形成蟲害隱蔽與繁殖的溫床。在嚴格的食品安全審計（如 HACCP、ISO 22000、BRC）體系下，化學藥劑的使用受到極嚴格限制。蟲害防治方案必須前置融入工廠的生產與營運管理之中，以「預防為主、物理阻斷」為核心，確保各項防護紀錄能完美銜接審計標準。</p>
                 <div class="spots-grid">
-                    <div class="spot"><span class="svc-t">🔴 A. 混料及包裝區（曱甴高風險帶）</span><p><b>環境挑戰：</b>生產設備底部、傳送帶接口、包裝機台縫隙積聚物料殘渣，德國曱甴同儲糧甲蟲極易落地繁殖；噴藥又怕污染產品。</p><p><b>科學解法：</b>以 IPM 為綱：縫隙膠餌點注（藥劑唔接觸食品面）、物理誘捕監測、設備底部殘渣清理建議三線並行，密度數據每期追蹤。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 B. 原料及成品倉（鼠患與儲糧害蟲）</span><p><b>環境挑戰：</b>高架貨架、卡板堆疊區係老鼠通道；穀粉、堅果、糖類原料易孳生儲糧害蟲，一箱受污染隨時波及整批。</p><p><b>科學解法：</b>IoT 智慧鼠盒 24/7 監測＋防鼠板及門底封堵；儲糧害蟲誘捕器定期檢查，發現即時隔離受影響批次並提交報告。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 C. 生產線上方及管道區（飛蠅問題）</span><p><b>環境挑戰：</b>飛蟲一旦跌落裸露產品或設備面，即成食品安全事故；普通電擊式滅蠅燈更有昆蟲殘體飛散風險。</p><p><b>科學解法：</b>統一採用粘捕式 UV 滅蠅燈（無爆碎風險），配置位置按氣流及光源規劃並出位置圖；出入口風閘、膠簾配置建議一併提供。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 D. 廠房外圍、垃圾房及渠位（源頭帶）</span><p><b>環境挑戰：</b>垃圾暫存區、地渠、化糞位係老鼠同蒼蠅嘅源頭：內圍做得幾好，源頭唔理都會捲土重來。</p><p><b>科學解法：</b>外圍餌站布防＋垃圾房滯留噴灑＋水渠生物處理三層防線，配合廠方垃圾清運流程建議，源頭壓低入侵壓力。</p></div>
-                    </div>
+                    <div class="spot"><span class="svc-t">🔴 A. 生產加工區及出入口（飛蟲與交叉污染防範）</span><p><b>環境挑戰：</b>生產線、包裝區及人員進出通道是蒼蠅、果蠅等飛蟲入侵高危區，任何蟲屍落入生產線均會引致嚴重的食品安全危機。</p><p><b>科學解法：</b>遵循「零化學污染」原則，於出入口及生產區關鍵點位安裝防爆粘捕式 UV 滅蠅燈（避免傳統電擊式飛蟲碎屑飛濺），配合水渠源頭生物處理與氣幕機／軟門簾聯動，阻斷飛蟲入侵。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 B. 原料及成品倉儲區（鼠患與包裝破壞重災區）</span><p><b>環境挑戰：</b>高位貨架、棧板及棧板紙箱是老鼠極佳的隱蔽場所，老鼠咬破食品包裝會造成直接經濟損失、環境污染及審計不合格。</p><p><b>科學解法：</b>建立「鼠患三道防線」系統；室內倉儲區 100% 採用無毒物理黏捕與不銹鋼網結構封堵，關鍵區域架設 IoT 智慧鼠盒 24/7 雲端感知監測，實時追蹤老鼠活動路徑，杜絕藥餌污染食品的風險。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 C. 員工食堂、更衣室及垃圾房（蚊蠅與曱甴孳生源頭）</span><p><b>環境挑戰：</b>更衣室櫃底、食堂廚房及垃圾房積聚殘餘食物與水分，極易成為德國曱甴及蚊蠅的孳生基地。</p><p><b>科學解法：</b>於非生產區採用漁護署註冊低毒點狀滅蟑膠餌；對排水溝及垃圾房實施水渠源頭生物處理及定期殘留噴灑，從源頭切斷害蟲繁衍鏈。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 D. 裝卸貨平台與管道縫隙（外圍源頭入侵）</span><p><b>環境挑戰：</b>貨車裝卸貨物時，害蟲極易隨外包裝箱或開門瞬間侵入工場；建築物結構縫隙也是老鼠入侵的隱蔽通道。</p><p><b>科學解法：</b>針對廠房外圍電線孔、管道縫隙及裝卸口進行不銹鋼防鼠網與抗咬密封膠源頭物理封堵，並於外圍防線布放安全監測站。</p></div>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
-                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> 食品廠 IPM 合約流程 — 對標審核體系設計</h2>
-                <p>食品廠合約流程按「審核可通過」為設計目標，每一步都留文件：</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>步驟 1｜📱 初步查詢</b> — 表單或 WhatsApp 提交廠房資訊（產品類別、廠房面積、驗證要求），B2B 專責專員一個工作天內回覆。</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>步驟 2｜🔍 免費現場勘察</b> — 生產區、倉儲區、外圍、渠位逐一勘察：風險位、入侵位、監測布防點記錄。</span></li>
-                    <li><i class="fa-solid fa-map" aria-hidden="true"></i><span><b>步驟 3｜🗺️ 蟲害監測點位圖＋書面方案</b> — 繪製專屬點位圖（鼠盒、膠餌站、滅蠅燈、誘捕器位置），方案及報價分項列明，方便審批或比對。</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>步驟 4｜🤝 簽約＋定期服務</b> — 按合約頻率執行；生產時段用低干擾方式，深層治理安排停產時段。</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>步驟 5｜📊 數據化報告＋年度總結</b> — 每次服務出中英雙語報告，監測數據逐期追蹤；年度出防治總結報告，HACCP／ISO22000 審核直接引用。</span></li>
-                    </ul>
+                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> CEDARS 科技化 IPM 三道防線與審計 SOP</h2>
+                <p>鼠患防控「三道防線」由最外圍層層設防到生產核心，再以八步服務流程令每一步都可審計、可追溯：</p>
+                <div class="lines-grid">
+                    <div class="line"><b>🛡️ 第一道防線（建築物外圍／綠化帶）</b><span>布放防雨防破壞鼠餌監測站，於最外圍降低區域鼠群密度。</span></div>
+                    <div class="line"><b>🛡️ 第二道防線（裝卸平台／建築出入口）</b><span>實施不銹鋼防鼠網結構封堵，架設 IoT 智慧鼠盒 24/7 雲端感知監測，形成物理與科技屏障。</span></div>
+                    <div class="line"><b>🛡️ 第三道防線（室內生產及倉儲區）</b><span>嚴禁使用化學鼠藥，100% 採用物理黏捕與暗處監測點位，確保食品零污染。</span></div>
+                </div>
+                <div class="sop-grid">
+                    <details class="sop-card"><summary><span class="sop-n">步驟 1</span><span class="sop-t"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>現場免費勘察與風險評估</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專員親臨工場，結合生產流程與環境結構進行風險鑑別。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 2</span><span class="sop-t"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>害蟲密度與種類調查</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>施工前進行細緻調查，明確害蟲種類、侵害位置與種群數量。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 3</span><span class="sop-t"><i class="fa-solid fa-map" aria-hidden="true"></i>制定 IPM 監測點位圖</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>製作專屬「蟲害監測點位圖」（標註鼠盒、膠餌站、滅蠅燈編號與位置），方便 QA 審計核查。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 4</span><span class="sop-t"><i class="fa-solid fa-file-pen" aria-hidden="true"></i>制定與動態調整計劃</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每月根據現場蟲情數據與質檢結果調整防治方案。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 5</span><span class="sop-t"><i class="fa-solid fa-spray-can-sparkles" aria-hidden="true"></i>安全、合規施用</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>堅持物理防治為主，使用安全高效滅蟑膠餌、IoT 智慧鼠盒、粘捕式滅蠅燈及源頭封堵。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 6</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>中英雙語合規 IPM 報告</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每次服務後即時提供符合 HACCP／ISO 22000／BRC 審計標準的詳細中英雙語報告，包含蟲患評估及改善建議，大幅提高食品安全審計通過率。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 7</span><span class="sop-t"><i class="fa-solid fa-user-check" aria-hidden="true"></i>技術主管與 QC 質檢回訪</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專責質檢人員定期回訪，複查服務質量與設施完好率。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 8</span><span class="sop-t"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>完全滿意保證承諾</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>提供「完全滿意保證」服務承諾。如合約期內服務效果有任何不滿意，我們將免費跟進直至效果改善（不適用於單次服務；保留最終決定權）。</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> 科技與合規 — 食品工場 IPM 蟲害管理</h2>
                 <ul class="tech-list">
@@ -442,7 +495,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> 食品工場滅蟲收費 — 按廠房規模與驗證要求報價</h2>
                 <p>食品廠滅蟲收費按廠房面積、生產區域數量、驗證等級同監測配置報價，唔設劃一價目。常見安排：</p>
@@ -458,7 +511,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">所有報價一律<b>先勘察、後書面報價</b>，實際收費以書面報價單為準；驗證機構審核前可安排預檢及文件覆核。</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> 食品及商業場所防治實戰參考</h2>
                 <div class="svc-grid">
@@ -472,12 +525,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 常見問題 FAQ</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 食品廠滅蟲同一般商業滅蟲有咩唔同？</h3><p>最大分別係「文件」同「藥劑選擇」：食品廠要用遠離裸露食品嘅施藥方式（膠餌點注、物理誘捕優先），而且每一步都要有紀錄可以審計。一般商業場所可能一句「已處理」就夠，食品廠就要點位圖、監測數據、處方單齊備——我哋嘅體係就係按呢個標準設計。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 審核前可以幫我哋做預檢嗎？</h3><p>可以。我哋提供審核前預檢：按 HACCP／ISO22000 蟲害管理條目逐項自查——點位圖有冇更新、監測紀錄有冇缺漏、現場有冇風險位未處理，並提交改善建議清單。審核員嚴格，我哋就要比佢更嚴格。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 電擊式滅蠅燈係咪唔可以用？</h3><p>食品處理區唔建議：電擊式滅蠅燈會令昆蟲殘體爆碎飛散，有污染產品風險，審核時經常被開不符合項。國際慣例係食品區用粘捕式 UV 滅蠅燈——昆蟲粘喺板上唔會飛散，粘板仲可以留紀錄統計蟲種密度。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 生產緊可以施工嗎？</h3><p>生產時段可以做低干擾處理：膠餌點注、誘捕器檢查、監測數據收集都唔影響生產。需要滯留噴灑或者大範圍封堵工程，就安排停產時段或者休息日，我哋配合廠房排程，施工後清理還原。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 儲糧害蟲係咩？點處理？</h3><p>儲糧害蟲係指喺穀物、麵粉、堅果、乾貨入面繁殖嘅甲蟲同蛾類（如米象、煙草甲、印度穀螟）。處理方法：誘捕器監測＋受影響批次隔離＋倉儲環境治理（溫濕度管理建議、殘渣清理）＋必要時針對性藥劑處理，全部過程有報告交代。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費點計？</h3><p>按廠房面積、區域數量、驗證要求同監測配置報價，先勘察、後書面報價，分項列明。合約會列明服務頻率、報告安排同審核支援細節，方便比對同審批。</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 食品廠滅蟲同一般商業滅蟲有咩唔同？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>最大分別係「文件」同「藥劑選擇」：食品廠要用遠離裸露食品嘅施藥方式（膠餌點注、物理誘捕優先），而且每一步都要有紀錄可以審計。一般商業場所可能一句「已處理」就夠，食品廠就要點位圖、監測數據、處方單齊備——我哋嘅體係就係按呢個標準設計。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 審核前可以幫我哋做預檢嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>可以。我哋提供審核前預檢：按 HACCP／ISO22000 蟲害管理條目逐項自查——點位圖有冇更新、監測紀錄有冇缺漏、現場有冇風險位未處理，並提交改善建議清單。審核員嚴格，我哋就要比佢更嚴格。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 電擊式滅蠅燈係咪唔可以用？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>食品處理區唔建議：電擊式滅蠅燈會令昆蟲殘體爆碎飛散，有污染產品風險，審核時經常被開不符合項。國際慣例係食品區用粘捕式 UV 滅蠅燈——昆蟲粘喺板上唔會飛散，粘板仲可以留紀錄統計蟲種密度。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 生產緊可以施工嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>生產時段可以做低干擾處理：膠餌點注、誘捕器檢查、監測數據收集都唔影響生產。需要滯留噴灑或者大範圍封堵工程，就安排停產時段或者休息日，我哋配合廠房排程，施工後清理還原。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 儲糧害蟲係咩？點處理？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>儲糧害蟲係指喺穀物、麵粉、堅果、乾貨入面繁殖嘅甲蟲同蛾類（如米象、煙草甲、印度穀螟）。處理方法：誘捕器監測＋受影響批次隔離＋倉儲環境治理（溫濕度管理建議、殘渣清理）＋必要時針對性藥劑處理，全部過程有報告交代。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費點計？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>按廠房面積、區域數量、驗證要求同監測配置報價，先勘察、後書面報價，分項列明。合約會列明服務頻率、報告安排同審核支援細節，方便比對同審批。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -519,7 +572,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.85rem;color:#475569;"><p style="margin:0;"><i class="fas fa-lock" aria-hidden="true"></i> 你嘅個人資料將嚴格保密，僅用於提供商業滅蟲報價服務。</p></div>
                     <div id="biz-error" role="alert" style="display:none;color:#dc2626;font-weight:700;"></div>
                     <button type="submit" id="bf-submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 提交商業報價申請</button>
-                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E9%A3%9F%E5%93%81%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
+                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%20IPM%20%E8%9F%B2%E5%AE%B3%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
                 </form>
             </div>
         </section>
@@ -621,7 +674,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <p class="footer-authenticity" style="max-width:900px;margin:10px auto 0;font-size:0.78rem;line-height:1.75;color:var(--text-muted,#8a93a3);text-align:center;">「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店。敬請認清具備 AI 智能診斷及三十六計實戰策略之正宗官網，提防假冒。本品牌是全港領先的高科技專業滅蟲公司，致力提供最優質的害蟲防治服務。</p>
     </footer>
     <div class="mobile-thumb-zone" role="navigation" aria-label="快速聯絡 Quick Contact">
-        <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E9%A3%9F%E5%93%81%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);">
+        <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E9%A3%9F%E5%93%81%E5%B7%A5%E5%A0%B4%EF%BC%8F%E5%80%89%E5%BA%AB%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%20IPM%20%E8%9F%B2%E5%AE%B3%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 拍照傳圖・免費 AI 鑑定報價
         </a>
     </div>

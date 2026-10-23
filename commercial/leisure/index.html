@@ -338,6 +338,51 @@
 .spot p{font-size:.86rem;color:var(--text-main);line-height:1.7;margin:0}
 .spot p b{color:#b91c1c}
 @media (max-width:768px){.spots-grid{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ 展開"}
+.sop-card[open] .sop-x::after{content:"▴ 收起"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -378,22 +423,22 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <span class="dist-badge">🌸 氣味管理保護體驗</span>
             <span class="dist-badge">🤫 隱蔽服務唔影響聲譽</span>
             </div>
-            <h1>商業會所及娛樂場所滅蟲方案｜極速施工・顧客體驗保護</h1>
-            <p class="dist-sub">搵緊唔影響營業嘅娛樂場所滅蟲公司？滅蟲師傅團隊專責住戶會所、卡拉OK、影院、健身室、桌球室同遊戲機中心：營業時間外極速處理、低氣味藥劑及氣味管理保護顧客體驗、蟑螂蚊蟲床蝨綜合防治——隱蔽服務唔影響營業聲譽，定期報告向管理處及品牌方交代，先勘察、後書面報價。</p>
-            <div class="geo-answer"><p><b>娛樂場所撞正蟲患投訴，點樣做到「客人零感知」？</b>兩個關鍵：時間同氣味。時間上，我哋喺營業時間外（收舖後或開舖前）極速進場處理，重點位置膠餌點注等低干擾操作可以營業中進行；氣味上，全面採用低氣味藥劑同物理誘捕，配合通風還原，開門營業前無異味、無殘留痕跡——顧客唔會知道夜晚發生過咩，只會覺得環境一直咁乾淨。</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">本頁目錄：<a href="#scope" style="color:#fbbf24;">服務範圍</a> ｜ <a href="#spots" style="color:#fbbf24;">行業黑點</a> ｜ <a href="#flow" style="color:#fbbf24;">合約流程</a> ｜ <a href="#tech" style="color:#fbbf24;">科技與合規</a> ｜ <a href="#price" style="color:#fbbf24;">合約模式</a> ｜ <a href="#case" style="color:#fbbf24;">實戰案例</a> ｜ <a href="#faq" style="color:#fbbf24;">常見問題</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">商業報價表單</a></p>
+            <h1>戲院、KTV、酒吧及娛樂場所滅蟲與蟲害防治方案</h1>
+            <p class="dist-sub">專為休閒娛樂場所設計 ｜ 夜間及非營業時間無痕施工 ｜ IoT 智慧鼠盒機房 24/7 監測 ｜ 不銹鋼網線路防鼠封堵，預防停電與火災 ｜ 專人 1 工作天內提交中英雙語合規 IPM 報告。</p>
+            <details class="geo-fold"><summary><span>📋 娛樂場所撞正蟲患投訴，點樣做到「客人零感知」？</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>娛樂場所撞正蟲患投訴，點樣做到「客人零感知」？</b>兩個關鍵：時間同氣味。時間上，我哋喺營業時間外（收舖後或開舖前）極速進場處理，重點位置膠餌點注等低干擾操作可以營業中進行；氣味上，全面採用低氣味藥劑同物理誘捕，配合通風還原，開門營業前無異味、無殘留痕跡——顧客唔會知道夜晚發生過咩，只會覺得環境一直咁乾淨。</p></div></details>
+            <nav class="toc-pills" aria-label="本頁目錄"><a class="toc-pill" href="#scope">服務範圍</a><a class="toc-pill" href="#spots">行業黑點</a><a class="toc-pill" href="#flow">服務流程</a><a class="toc-pill" href="#tech">科技與合規</a><a class="toc-pill" href="#price">合約模式</a><a class="toc-pill" href="#case">實戰案例</a><a class="toc-pill" href="#faq">常見問題</a><a class="toc-pill" href="#biz-quote">商業報價表單</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 索取娛樂場所專屬滅蟲方案與報價</a>
-                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E6%9C%83%E6%89%80%EF%BC%8F%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp 商業查詢</a>
+                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E4%BC%91%E9%96%92%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 📷 上載娛樂場所／水吧／機房環境照片，即時 WhatsApp 獲取專屬方案與免費現場勘察預約</a>
             </div>
         </section>
         <nav class="dist-breadcrumb" aria-label="Breadcrumb"><a href="https://bruceleehk.com/">首頁</a><span class="sep">›</span><a href="/commercial/">商業滅蟲方案</a><span class="sep">›</span><span aria-current="page">休閒及娛樂場所</span></nav>
         <div class="web-net">
-<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E6%9C%83%E6%89%80%EF%BC%8F%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">休閒及娛樂場所有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
+<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E4%BC%91%E9%96%92%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">休閒及娛樂場所有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
 <a class="web-card web-vote" href="/service/rodent/"><span class="web-tag">🐭 住宅滅鼠</span><span class="web-q">屋企有老鼠？</span><span class="web-btn">睇滅鼠公司專頁（住宅版） →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> 娛樂場所滅蟲服務範圍 — 由卡啦房到機房</h2>
                 <p>娛樂場所嘅蟲患風險同營業聲譽直接掛鉤：客人喺卡啦房見到一隻曱甴，社交媒體一發布，品牌形象即時受損。防治重點係「快、靜、無味」。滅蟲師傅針對娛樂場所場景六大服務：</p>
@@ -407,32 +452,40 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="spots-title">
+<section id="spots" class="dist-section" aria-labelledby="spots-title">
             <div class="dist-card">
-                <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> 娛樂場所四大蟲患黑點・精準擊破</h2>
-                <p>娛樂場所「深夜營業＋食物飲品＋軟裝密集」三重疊加，蟲患特點係隱蔽同擴散快。按營業功能區勘察，四大高風險位逐一擊破：</p>
+                <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> 四大娛樂黑點・精準擊破</h2>
+                <p>影城、KTV、酒吧、網吧及電玩中心等消費場所，室內經過複雜裝修後存在大量結構漏洞，假天花、牆角暗渠及強弱電線路錯綜複雜。加上現場光線普遍較暗，極易吸引外圍害蟲入侵並隱蔽棲息。此外，此類場所大多設有酒吧水吧、輕食小食區及水果飲料供應，為老鼠、曱甴及果蠅提供了極佳的藏匿與繁殖條件。老鼠咬破機房電線更會引致營業停電甚至火災風險；而曱甴或飛蟲爬過包廂沙發、網吧電腦主機或吧台，更會立刻引發顧客現場投訴與網上劣評，嚴重打擊營業額與商譽。</p>
                 <div class="spots-grid">
-                    <div class="spot"><span class="svc-t">🔴 A. 卡啦房及包廂（曱甴隨食物殘渣落地）</span><p><b>環境挑戰：</b>房客帶入嘅食物碎屑、飲品漬卡喺梳化底、茶几罅同音響設備縫隙，德國曱甴一夜之間已經落地生根；房與房之間經假天花同管道互相擴散。</p><p><b>科學解法：</b>收舖後每房膠餌點注＋梳化底誘捕監測＋深度清潔建議；發現種群即刻全層排查，堵住假天花擴散路線。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 B. 廚房、酒吧及小食區（果蠅同曱甴雙重風險）</span><p><b>環境挑戰：</b>啤酒漬、果汁機、凍櫃膠邊嘅糖分殘渣係果蠅溫床；廚房油煙位同垃圾暫存區係曱甴基地——客人吧枱坐低，果蠅圍住杯面飛。</p><p><b>科學解法：</b>果蠅誘捕裝置布防＋排水口生物處理＋德國曱甴膠餌點注；調酒區同小食檯糖漬殘渣日清流程建議一併提供。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 C. 影院座位區及休息梳化（床蝨及跳蝨）</span><p><b>環境挑戰：</b>影院、健身室同酒店式會所嘅軟裝座位人流極大：床蝨可以經客人物品「搭車」落地，跳蝨喺地氈藏身——客人被咬一單，投訴唔止一單。</p><p><b>科學解法：</b>高溫蒸氣處理（無化學殘留、無異味）＋粘捕式監測站沿座位底布放＋地氈定期處理；個案即刻隔離處理，極速恢復使用。</p></div>
-                    <div class="spot"><span class="svc-t">🔴 D. 假天花、機房及雜物房（鼠患同白蟻）</span><p><b>環境挑戰：</b>音響線、燈光線穿牆位係老鼠通道；機房同儲物房少人打擾，老鼠築巢、白蟻蛀電線槽——隨時令整套音響系統報廢。</p><p><b>科學解法：</b>線槽穿牆位封堵＋IoT 鼠盒監測＋T3i 白蟻探測納入年檢；雜物房存量管理建議，結構風險提前拆彈。</p></div>
-                    </div>
+                    <div class="spot"><span class="svc-t">🔴 A. 酒吧吧台、水吧及輕食區（曱甴與果蠅重災區）</span><p><b>環境挑戰：</b>吧台切開的水果、甜味飲料殘渣是果蠅（Fruit Flies）的主要孳生地；水吧設備發熱縫隙與簡約廚房則是德國曱甴棲息活動的核心位置。</p><p><b>科學解法：</b>於飛蟲活動熱點布放專用果蠅誘捕裝置，配合粘捕式 UV 滅蠅燈（無電擊噪音與蟲屍飛濺）；於設備縫隙施放漁護署註冊低毒滅蟑膠餌及顆粒劑，連環滅巢而不污染飲品與食物。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 B. KTV 包廂、網吧主機箱及沙發茶幾（夾縫隱蔽棲息地）</span><p><b>環境挑戰：</b>KTV 包廂沙發底、茶幾下方、電腦操控台、牆角地縫及網吧主機箱內，食物碎屑多、光線昏暗，是曱甴極喜藏匿繁殖的死角。</p><p><b>科學解法：</b>利用非營業時間於夾縫施放低敏無味膠餌；協助商家評估清掃死角，並布放無毒物理黏捕裝置，從根本上破壞曱甴生存環境。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 C. 配電機房、強弱電井及假天花暗渠（老鼠咬線與火災隱患）</span><p><b>環境挑戰：</b>配電機房、各樓層強弱電管道井及公共區域假天花線路縱橫交錯，是老鼠活動的主要區域。老鼠咬破電路會造成停電，嚴重時甚至存在引發火災的風險。</p><p><b>科學解法：</b>室內老鼠 100% 採用物理方法控制，針對管道穿牆漏洞進行不銹鋼防鼠網與抗咬密封膠源頭物理封堵；於機房及管道井架設 IoT 智慧鼠盒 24/7 雲端感知監測，實時追蹤老鼠活動路徑並精準誘捕。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 D. 戲院影廳、電玩中心及後勤通道（暗環境與外圍入侵防範）</span><p><b>環境挑戰：</b>戲院影廳及電玩中心空間大、光線暗，外圍害蟲極易經由後勤通道、地溝或安全出口侵入。</p><p><b>科學解法：</b>於出入口及後勤通道安裝隱蔽式滅蠅燈；於地下溝渠進行水渠源頭生物處理及專業殘留噴灑，阻斷外圍害蟲侵入與飛蟲孳生。</p></div>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
-                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> 娛樂場所滅蟲合約流程 — 配合營業節奏</h2>
-                <p>娛樂場所營業時段特別（晏晝開到深夜、週末最旺），我哋嘅合約流程以「極速、隱蔽、零營業影響」為設計原則：</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>步驟 1｜📱 初步查詢</b> — 表單或 WhatsApp 提交場所資訊（類型、面積、營業時段、關注蟲種），B2B 專責專員一個工作天內回覆。</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>步驟 2｜🔍 免費現場勘察</b> — 配合場所作息勘察：包廂、廚房、座位區、機房逐一檢查記錄。</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>步驟 3｜📋 書面方案＋報價單</b> — 服務頻率、施工時段、氣味管理安排分項列明，方便品牌方及管理處審批。</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>步驟 4｜🤝 簽約＋定期服務</b> — 營業時間外極速施工；突發個案（投訴、發現蟲跡）優先調度即場處理。</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>步驟 5｜📊 電子報告＋覆核</b> — 每次服務出電子報告；旺季前加強處理；年度出防治總結報告交代各方。</span></li>
-                    </ul>
+                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> CEDARS 科技化 IPM 娛樂場所治理 SOP</h2>
+                <p>鼠患防控「三道防線」守住用電與消防安全，八步流程全部於非營業時間無痕施工：</p>
+                <div class="lines-grid">
+                    <div class="line"><b>🛡️ 第一道防線（建築外圍及後勤垃圾房）</b><span>布放外圍鼠餌監測站，於最外圍降低區域鼠群密度。</span></div>
+                    <div class="line"><b>🛡️ 第二道防線（配電機房、強弱電井及假天花）</b><span>不銹鋼防鼠網結構封堵，架設 IoT 智慧鼠盒 24/7 雲端感知監測，阻斷線路咬破風險。</span></div>
+                    <div class="line"><b>🛡️ 第三道防線（KTV 包廂、網吧區及酒吧內圍）</b><span>採用 100% 無毒物理黏捕與低敏點狀膠餌，杜絕化學藥劑影響顧客體驗與健康。</span></div>
+                </div>
+                <div class="sop-grid">
+                    <details class="sop-card"><summary><span class="sop-n">步驟 1</span><span class="sop-t"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>現場免費勘察與風險評估</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專員親臨現場，與場所負責人溝通營業時間與環境特點。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 2</span><span class="sop-t"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>害蟲密度與種群調查</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>施工前進行細緻調查，明確水吧、機房、包廂及線路的害蟲種類與數量。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 3</span><span class="sop-t"><i class="fa-solid fa-map" aria-hidden="true"></i>制定 IPM 蟲害監測點位圖</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>繪製專屬「蟲害監測點位圖」（標註鼠盒、膠餌站、滅蠅燈編號與位置，商戶需提供現場平面圖）。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 4</span><span class="sop-t"><i class="fa-solid fa-file-pen" aria-hidden="true"></i>月度動態調整計劃</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每月根據現場實際蟲情數據動態調整防治方案。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 5</span><span class="sop-t"><i class="fa-solid fa-moon" aria-hidden="true"></i>非營業時間無痕施工</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>靈活配合娛樂場所落閘或清場後的休息時段施工，絕不影響日常營業與顧客體驗。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 6</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>中英雙語合規 IPM 報告</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每次服務後即時提供符合食環署查牌／消防安全／衛生審計標準的詳細中英雙語報告，評估蟲患情況並提出改善建議。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 7</span><span class="sop-t"><i class="fa-solid fa-user-check" aria-hidden="true"></i>技術主管與 QC 質檢回訪</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專責質檢人員定期回訪複查，確保防護網無破綻。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 8</span><span class="sop-t"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>完全滿意保證承諾</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>提供「完全滿意保證」服務承諾。如合約期內服務效果有任何不滿意，我們將免費跟進直至效果改善（不適用於單次服務；保留最終決定權）。</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> 科技與合規 — 娛樂場所 IPM 蟲害管理</h2>
                 <ul class="tech-list">
@@ -442,7 +495,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> 娛樂場所滅蟲收費 — 按場所規模與營業時段報價</h2>
                 <p>娛樂場所滅蟲收費按場所面積、包廂數量、營業時段同服務頻率報價，唔設劃一價目。常見安排：</p>
@@ -458,7 +511,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">所有報價一律<b>先勘察、後書面報價</b>，實際收費以書面報價單為準；連鎖品牌多分店可安排統一合約。</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> 商業場所防治實戰參考</h2>
                 <div class="svc-grid">
@@ -472,12 +525,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 常見問題 FAQ</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 營業時間做到幾夜？會唔會影響第二日開門？</h3><p>配合場所收舖時間進場，一般兩至三小時完成全面處理＋清理還原；處理程序按「開門前無味、無痕、無濕面」標準執行，通風還原完成先收工。第二日開門照常營業，顧客唔會察覺。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 客人喺房入面見到曱甴，點應急？</h3><p>即刻聯絡我哋 WhatsApp 熱線，應急團隊優先調度：即場局部處理（膠餌點注＋誘捕）＋該房暫停出租深度處理＋同層排查擴散路線；處理後出報告交代位置同跟進建議。應急個案按個案報價，合約客戶有優先排程。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨處理會唔會有化學味？影響客人嗎？</h3><p>軟裝座位區我哋優先用高溫蒸氣物理處理：無化學殘留、無異味，處理完通風一至兩小時即可恢復使用；配合粘捕式監測站持續追蹤。如需輔助藥劑，選用低氣味註冊藥劑並喺非營業時段施放。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 會所花園同泳池區有蚊問題，點處理？</h3><p>園林蚊患要由幼蟲入手：集水明渠、雨水罐、植物托盤逐一巡查蚊幼蟲＋處理；成蚊用低毒空間噴灑或者冷霧處理（非營業時段）；對標食環署誘蚊產卵器指數防控思路，定期監測數據呈報。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費點計？</h3><p>按場所面積、包廂數、營業時段同頻率報價，先勘察、後書面報價，分項列明。會所類合約通常包含定期處理＋突發個案優先調度；連鎖品牌多分店統一合約另有安排。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾耐服務一次？</h3><p>一般每月一次定期服務；餐飲比重高或者 24 小時營業場所可能加密至每兩週一次；包廂類場所建議每季一次深度處理（梳化底、機房、假天花）。實際頻率按勘察後建議。</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 營業時間做到幾夜？會唔會影響第二日開門？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>配合場所收舖時間進場，一般兩至三小時完成全面處理＋清理還原；處理程序按「開門前無味、無痕、無濕面」標準執行，通風還原完成先收工。第二日開門照常營業，顧客唔會察覺。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 客人喺房入面見到曱甴，點應急？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>即刻聯絡我哋 WhatsApp 熱線，應急團隊優先調度：即場局部處理（膠餌點注＋誘捕）＋該房暫停出租深度處理＋同層排查擴散路線；處理後出報告交代位置同跟進建議。應急個案按個案報價，合約客戶有優先排程。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨處理會唔會有化學味？影響客人嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>軟裝座位區我哋優先用高溫蒸氣物理處理：無化學殘留、無異味，處理完通風一至兩小時即可恢復使用；配合粘捕式監測站持續追蹤。如需輔助藥劑，選用低氣味註冊藥劑並喺非營業時段施放。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 會所花園同泳池區有蚊問題，點處理？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>園林蚊患要由幼蟲入手：集水明渠、雨水罐、植物托盤逐一巡查蚊幼蟲＋處理；成蚊用低毒空間噴灑或者冷霧處理（非營業時段）；對標食環署誘蚊產卵器指數防控思路，定期監測數據呈報。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費點計？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>按場所面積、包廂數、營業時段同頻率報價，先勘察、後書面報價，分項列明。會所類合約通常包含定期處理＋突發個案優先調度；連鎖品牌多分店統一合約另有安排。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾耐服務一次？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>一般每月一次定期服務；餐飲比重高或者 24 小時營業場所可能加密至每兩週一次；包廂類場所建議每季一次深度處理（梳化底、機房、假天花）。實際頻率按勘察後建議。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -519,7 +572,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.85rem;color:#475569;"><p style="margin:0;"><i class="fas fa-lock" aria-hidden="true"></i> 你嘅個人資料將嚴格保密，僅用於提供商業滅蟲報價服務。</p></div>
                     <div id="biz-error" role="alert" style="display:none;color:#dc2626;font-weight:700;"></div>
                     <button type="submit" id="bf-submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 提交商業報價申請</button>
-                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E6%9C%83%E6%89%80%EF%BC%8F%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
+                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E4%BC%91%E9%96%92%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
                 </form>
             </div>
         </section>
@@ -621,7 +674,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <p class="footer-authenticity" style="max-width:900px;margin:10px auto 0;font-size:0.78rem;line-height:1.75;color:var(--text-muted,#8a93a3);text-align:center;">「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店。敬請認清具備 AI 智能診斷及三十六計實戰策略之正宗官網，提防假冒。本品牌是全港領先的高科技專業滅蟲公司，致力提供最優質的害蟲防治服務。</p>
     </footer>
     <div class="mobile-thumb-zone" role="navigation" aria-label="快速聯絡 Quick Contact">
-        <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E6%9C%83%E6%89%80%EF%BC%8F%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);">
+        <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E4%BC%91%E9%96%92%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%A8%9B%E6%A8%82%E5%A0%B4%E6%89%80%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener noreferrer" class="thumb-btn thumb-wa" style="background:linear-gradient(135deg,#25d366,#1eb954);">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 拍照傳圖・免費 AI 鑑定報價
         </a>
     </div>

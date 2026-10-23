@@ -338,6 +338,51 @@
 .spot p{font-size:.86rem;color:var(--text-main);line-height:1.7;margin:0}
 .spot p b{color:#b91c1c}
 @media (max-width:768px){.spots-grid{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ More"}
+.sop-card[open] .sop-x::after{content:"▴ Less"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -380,8 +425,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
             <h1>Office & Commercial Building Pest Control｜Discreet Proofing + Employee Health First</h1>
             <p class="dist-sub">Looking for discreet pest control for your office tower? Our team specialises in grade A towers, office floors and commercial buildings: concealed ducting and false ceiling proofing, rodent control that never disturbs staff, low-sensitivity low-odour agents protecting employee health, and German cockroach control in pantries — out-of-hours service with zero disruption, reports for management offices and tenants. Survey first, written quotation after.</p>
-            <div class="geo-answer"><p><b>There are rats in the office — why is proofing more important than poisoning?</b>Office rats enter through false ceilings, concealed ducts and AC pipe penetrations — however many you poison, the hole stays open and the next batch comes. We go IPM source-first: duct openings, ceiling entry points and riser shafts are inspected and sealed, paired with low-sensitivity precision baiting and IoT monitoring for a lasting fix — and no risk of carcasses stuck above the ceiling causing odour complaints.</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">On this page: <a href="#scope" style="color:#fbbf24;">Scope</a> ｜ <a href="#spots" style="color:#fbbf24;">Pest Points</a> ｜ <a href="#flow" style="color:#fbbf24;">Contract Flow</a> ｜ <a href="#tech" style="color:#fbbf24;">Tech & Compliance</a> ｜ <a href="#price" style="color:#fbbf24;">Pricing</a> ｜ <a href="#case" style="color:#fbbf24;">Case References</a> ｜ <a href="#faq" style="color:#fbbf24;">FAQ</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">Business Quote Form</a></p>
+            <details class="geo-fold"><summary><span>📋 There are rats in the office — why is proofing more important than poisoning?</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>There are rats in the office — why is proofing more important than poisoning?</b>Office rats enter through false ceilings, concealed ducts and AC pipe penetrations — however many you poison, the hole stays open and the next batch comes. We go IPM source-first: duct openings, ceiling entry points and riser shafts are inspected and sealed, paired with low-sensitivity precision baiting and IoT monitoring for a lasting fix — and no risk of carcasses stuck above the ceiling causing odour complaints.</p></div></details>
+            <nav class="toc-pills" aria-label="On this page"><a class="toc-pill" href="#scope">Scope</a><a class="toc-pill" href="#spots">Pest Points</a><a class="toc-pill" href="#flow">Contract Flow</a><a class="toc-pill" href="#tech">Tech & Compliance</a><a class="toc-pill" href="#price">Pricing</a><a class="toc-pill" href="#case">Case References</a><a class="toc-pill" href="#faq">FAQ</a><a class="toc-pill" href="#biz-quote">Business Quote Form</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 Request a dedicated office building pest control proposal</a>
                 <a href="https://wa.me/85252821552?text=Hello%2C%20we%20are%20an%20office%20building%20management%20office%20and%20would%20like%20a%20commercial%20pest%20control%20proposal%20and%20quotation." target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp Business Enquiry</a>
@@ -393,7 +438,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <a class="web-card web-vote" href="/en/service/rodent/"><span class="web-tag">🐭 Residential Rat Control</span><span class="web-q">Rats at home?</span><span class="web-btn">Visit the residential rat control page →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> Office Building Pest Control Scope — From Pantry to Riser Shafts</h2>
                 <p>The hardest part of office pest control is not the pests — it is "not alarming the tenants": one rat across an open office and the management phone runs hot next morning. The strategy: discreet, low-sensitivity, zero operational impact. Six core services for office environments:</p>
@@ -407,7 +452,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="spots-title">
+<section id="spots" class="dist-section" aria-labelledby="spots-title">
             <div class="dist-card">
                 <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> Four Major Office Building Pest Points — Precisely Targeted</h2>
                 <p>Office pests concentrate where "food, water and dark voids" meet. We survey by floor function and strike the four highest-risk areas:</p>
@@ -419,20 +464,20 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> Office Building Contract Flow — Easy for Management Offices</h2>
                 <p>Management offices are busy, so our contract flow is designed around "no hassle for the office, no complaints from tenants":</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>Step 1｜📱 Initial enquiry</b> — Submit building details via form or WhatsApp (floors, tenant mix, pest concerns); our B2B specialist replies within one working day.</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>Step 2｜🔍 Free site survey</b> — Surveyed at management-arranged times: pantries, riser shafts, ceiling voids and plant rooms checked and recorded.</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>Step 3｜📋 Written proposal + quotation</b> — Proofing works itemised (location, material, maintenance period); service frequency and reporting arrangements specified for tender comparison or direct approval.</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>Step 4｜🤝 Signing + scheduled service</b> — Work outside office hours (evenings or weekends); tenant notice drafts provided to the management office before each visit.</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>Step 5｜📊 Electronic reports + annual inspection</b> — Electronic report per visit, annual review report — the management office takes it straight to the owners’ committee.</span></li>
-                    </ul>
+                <div class="sop-grid cols-5">
+                    <details class="sop-card"><summary><span class="sop-n">Step 1</span><span class="sop-t"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i>Initial enquiry</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Submit building details via form or WhatsApp (floors, tenant mix, pest concerns); our B2B specialist replies within one working day.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 2</span><span class="sop-t"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Free site survey</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Surveyed at management-arranged times: pantries, riser shafts, ceiling voids and plant rooms checked and recorded.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 3</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>Written proposal + quotation</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Proofing works itemised (location, material, maintenance period); service frequency and reporting arrangements specified for tender comparison or direct approval.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 4</span><span class="sop-t"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>Signing + scheduled service</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Work outside office hours (evenings or weekends); tenant notice drafts provided to the management office before each visit.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 5</span><span class="sop-t"><i class="fa-solid fa-chart-line" aria-hidden="true"></i>Electronic reports + annual inspection</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>Electronic report per visit, annual review report — the management office takes it straight to the owners’ committee.</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> Technology & Compliance — Office Building IPM</h2>
                 <ul class="tech-list">
@@ -442,7 +487,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> Office Building Pest Control Pricing — Quoted by Floor Area & Frequency</h2>
                 <p>Office pest control is quoted by floor area, storeys, tenant density and service frequency — no one-size price list. Typical models:</p>
@@ -458,7 +503,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">All quotations are <b>survey first, written quotation after</b>; final pricing per written quotation. Residential market rates are available in our pest control pricing guide.</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> Related Commercial Case References</h2>
                 <div class="svc-grid">
@@ -472,12 +517,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Frequently Asked Questions</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can pest control be done during office hours?</h3><p>Full treatments run outside office hours (after work or weekends); during office hours only zero-contact operations happen — gel bait injection, trap checks and data collection never require clearing workstations. For emergencies (a rat sighting) we respond immediately using discreet methods to avoid panic.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Will the agents affect employee health?</h3><p>Employee health comes first: low-sensitivity, low-odour AFCD-registered agents; IPM source-proofing first keeps volumes minimal; floors with pregnant or sensitive staff get advance notice and adjusted methods (physical trapping instead). Every application location and agent detail is listed in the report.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Tenants buy their own sprays — is a contract still needed?</h3><p>Retail sprays only kill what you can see, never the colony or the source: sprayed German cockroaches scatter into other rooms, and an unsealed rat hole always has a next batch. A contract delivers what DIY cannot: systematic surveying + source proofing + continuous monitoring + a documentation system.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Rats are in the false ceiling — will they die up there?</h3><p>That is exactly why we insist on proofing first, monitoring second: seal the entries so no new rats enter, monitor to confirm activity stops; we never mass-poison inside ceilings (avoiding carcass odour complaints). Where capture is needed, safe trapping is used with locations and follow-ups documented.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How different is commercial pricing from residential?</h3><p>Commercial contracts are quoted by floor area, frequency and monitoring configuration — a different logic from one-off residential jobs, so no uniform price list. The principle is the same: survey first, written quotation after, itemised. Residential market rates are in our pricing guide.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How often is service provided?</h3><p>Typically monthly; towers with restaurants or heavy footfall may need more; IoT stations monitor 24/7 — issues are flagged before tenants complain. Final frequency follows the post-survey recommendation.</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can pest control be done during office hours?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Full treatments run outside office hours (after work or weekends); during office hours only zero-contact operations happen — gel bait injection, trap checks and data collection never require clearing workstations. For emergencies (a rat sighting) we respond immediately using discreet methods to avoid panic.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Will the agents affect employee health?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Employee health comes first: low-sensitivity, low-odour AFCD-registered agents; IPM source-proofing first keeps volumes minimal; floors with pregnant or sensitive staff get advance notice and adjusted methods (physical trapping instead). Every application location and agent detail is listed in the report.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Tenants buy their own sprays — is a contract still needed?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Retail sprays only kill what you can see, never the colony or the source: sprayed German cockroaches scatter into other rooms, and an unsealed rat hole always has a next batch. A contract delivers what DIY cannot: systematic surveying + source proofing + continuous monitoring + a documentation system.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Rats are in the false ceiling — will they die up there?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>That is exactly why we insist on proofing first, monitoring second: seal the entries so no new rats enter, monitor to confirm activity stops; we never mass-poison inside ceilings (avoiding carcass odour complaints). Where capture is needed, safe trapping is used with locations and follow-ups documented.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How different is commercial pricing from residential?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Commercial contracts are quoted by floor area, frequency and monitoring configuration — a different logic from one-off residential jobs, so no uniform price list. The principle is the same: survey first, written quotation after, itemised. Residential market rates are in our pricing guide.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How often is service provided?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Typically monthly; towers with restaurants or heavy footfall may need more; IoT stations monitor 24/7 — issues are flagged before tenants complain. Final frequency follows the post-survey recommendation.</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -510,9 +555,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
                     <div><label>Document Requirements<span style="font-weight:400;color:#64748b;">(select all that apply)</span></label>
                         <div class="biz-check">
-                        <label><input type="checkbox" name="doc-quotation" value="需要"> Need a formal quotation (Quotation) for approval</label>
-                        <label><input type="checkbox" name="doc-tender" value="需要"> Need tender / RFP related information</label>
-                        <label><input type="checkbox" name="doc-compliance" value="需要"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
+                        <label><input type="checkbox" name="doc-quotation" value="Yes"> Need a formal quotation (Quotation) for approval</label>
+                        <label><input type="checkbox" name="doc-tender" value="Yes"> Need tender / RFP related information</label>
+                        <label><input type="checkbox" name="doc-compliance" value="Yes"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
                         </div>
                     </div>
                     <div><label for="bf-details">Pest Situation / Requirements</label><textarea id="bf-details" name="details" rows="4" placeholder="e.g. rodent activity near refuse room, bed bug case in guest room, FEHD inspection requirements..."></textarea></div>

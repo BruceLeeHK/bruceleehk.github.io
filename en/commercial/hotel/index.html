@@ -330,6 +330,51 @@
 .biz-check{display:flex;flex-wrap:wrap;gap:10px}
 .biz-check label{font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;margin:0}
 @media (max-width:640px){.biz-form .bf-row{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ More"}
+.sop-card[open] .sop-x::after{content:"▴ Less"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -372,8 +417,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
             <h1>Hotel Pest Control Company｜Bed Bug Treatment・Discreet Service・Premium Interiors Protected</h1>
             <p class="dist-sub">Looking for a specialist hotel pest control partner? We serve hotels, guesthouses and serviced apartments: guest-room bed bug treatment with steam and crack-and-crevice work plus bed-leg monitors; rapid response and discreet service (off-peak access, no visible branding) that never disturbs guests; suspected termite cases scanned with Termatrac T3i radar — no wall removal, premium finishes protected. Housekeeping training and F&B/back-of-house programmes included; survey first, written quotation to follow.</p>
-            <div class="geo-answer"><p><b>A guest room shows bed bugs — how do you treat it without disturbing guests?</b>Keep it quiet. We access rooms off-peak with no visible works signage, treat bed bugs with high-temperature steam plus crack-and-crevice treatment, and scan suspected termite cases with Termatrac T3i radar — no wall removal, premium interiors untouched. Records are handed to housekeeping for room-status follow-up.</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">On this page: <a href="#scope" style="color:#fbbf24;">Service Scope</a> ｜ <a href="#flow" style="color:#fbbf24;">Contract Process</a> ｜ <a href="#tech" style="color:#fbbf24;">Technology & Compliance</a> ｜ <a href="#price" style="color:#fbbf24;">Contract Models</a> ｜ <a href="#case" style="color:#fbbf24;">Case Studies</a> ｜ <a href="#faq" style="color:#fbbf24;">FAQ</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">Quote Form</a></p>
+            <details class="geo-fold"><summary><span>📋 A guest room shows bed bugs — how do you treat it without disturbing guests?</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>A guest room shows bed bugs — how do you treat it without disturbing guests?</b>Keep it quiet. We access rooms off-peak with no visible works signage, treat bed bugs with high-temperature steam plus crack-and-crevice treatment, and scan suspected termite cases with Termatrac T3i radar — no wall removal, premium interiors untouched. Records are handed to housekeeping for room-status follow-up.</p></div></details>
+            <nav class="toc-pills" aria-label="On this page"><a class="toc-pill" href="#scope">Service Scope</a><a class="toc-pill" href="#flow">Contract Process</a><a class="toc-pill" href="#tech">Technology & Compliance</a><a class="toc-pill" href="#price">Contract Models</a><a class="toc-pill" href="#case">Case Studies</a><a class="toc-pill" href="#faq">FAQ</a><a class="toc-pill" href="#biz-quote">Quote Form</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 Request Hotel Pest Proposal</a>
                 <a href="https://wa.me/85252821552?text=Hi%2C%20we%20are%20a%20hotel%2Fguesthouse%20and%20would%20like%20to%20enquire%20about%20your%20hospitality%20pest%20control%20programme" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp Business Enquiry</a>
@@ -385,7 +430,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <a class="web-card web-vote" href="/en/service/flea/"><span class="web-tag">🛏️ Bed Bug Page</span><span class="web-q">Want bed bug treatment pricing?</span><span class="web-btn">See Bed Bug Control Company page →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> Hotel Pest Control Scope — From Guest Rooms to Back of House</h2>
                 <p>Hotels fear two things: guest complaints and online reviews. One mishandled bed bug case can dent the whole brand. Six services built for hotel scenarios:</p>
@@ -399,19 +444,19 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="flow" class="dist-section" aria-labelledby="flow-title">
             <div class="dist-card">
                 <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> Hotel Contract Process — Easy for Housekeeping to Run</h2>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>Step 1｜📱 Initial Enquiry</b> — submit hotel details (room count, F&B facilities, pest concerns) via form or WhatsApp; a B2B specialist replies within one working day.</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>Step 2｜🔍 Free Site Survey</b> — a discreet joint survey with housekeeping/engineering: sampled rooms, F&B and back-of-house.</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>Step 3｜📋 Written Proposal + Quotation</b> — scope stated (rooms / F&B / back-of-house), frequency and emergency-response arrangements (how fast we attend complaint cases).</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>Step 4｜🤝 Contract + Scheduled Service</b> — preventive inspections + rapid response for incidents; records kept per visit for room-status follow-up.</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>Step 5｜📊 E-Reports + Staff Training</b> — electronic reports filed per visit; periodic housekeeping training builds in-house detection capability.</span></li>
-                </ul>
+                <div class="sop-grid cols-5">
+                    <details class="sop-card"><summary><span class="sop-n">Step 1</span><span class="sop-t"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i>Initial Enquiry</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>submit hotel details (room count, F&B facilities, pest concerns) via form or WhatsApp; a B2B specialist replies within one working day.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 2</span><span class="sop-t"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Free Site Survey</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>a discreet joint survey with housekeeping/engineering: sampled rooms, F&B and back-of-house.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 3</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>Written Proposal + Quotation</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>scope stated (rooms / F&B / back-of-house), frequency and emergency-response arrangements (how fast we attend complaint cases).</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 4</span><span class="sop-t"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>Contract + Scheduled Service</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>preventive inspections + rapid response for incidents; records kept per visit for room-status follow-up.</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">Step 5</span><span class="sop-t"><i class="fa-solid fa-chart-line" aria-hidden="true"></i>E-Reports + Staff Training</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>electronic reports filed per visit; periodic housekeeping training builds in-house detection capability.</p></div></details>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> Technology & Compliance — Discreet, Non-Destructive, Documented</h2>
                 <ul class="tech-list">
@@ -421,7 +466,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> Hotel Contract Pricing — Quoted by Rooms & Facilities</h2>
                 <p>Hotel contracts are priced on room count, F&B facilities, back-of-house scope and frequency — no one-size rate card. Reference structure:</p>
@@ -437,7 +482,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">All quotations are <b>survey first, written quotation to follow</b>.</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> Bed Bug Issues — Industry Reference</h2>
                 <div class="svc-grid">
@@ -451,12 +496,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Hotel Pest Control FAQ</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do you prevent bed bugs in hotels?</h3><p>Bed bug control needs both treatment and prevention: treatment relies on high-temperature steam (generally sustained heat above 50°C) plus crack-and-crevice work with bed-leg monitors; prevention relies on housekeeping training (recognising cast skins, blood spots and eggshells) plus luggage and linen workflows. We provide treatment and staff training as one programme.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does one guest room take? Will it affect occupancy?</h3><p>A typical room takes hours including ventilation, depending on severity; housekeeping can reset and resell the room afterwards. We schedule off-peak, discreet access and hand records to housekeeping for room-status follow-up.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> A guest complained about bed bugs — what now?</h3><p>Isolate the room immediately (do not move linen to other rooms) and call our emergency channel; a technician attends promptly to confirm and treat. Contract clients get priority response, and full records follow for housekeeping.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Will you damage our interiors?</h3><p>Bed bug treatment uses steam and crack-and-crevice methods — no wall removal. Termite cases use Termatrac T3i radar — no wall removal, no drilling — designed to protect premium finishes. Works scope is agreed with engineering beforehand.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is a hotel contract priced?</h3><p>By room count, F&B facilities, back-of-house scope and frequency — no flat rate card; survey first, written quotation, with emergency-response arrangements stated. Room-level reference pricing is in our bed bug guide.</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is staff training arranged?</h3><p>By session (about an hour): bed bug biology, sign recognition (cast skins / blood spots / eggshells / black spots), room inspection points, luggage and linen workflows, and the reporting mechanism. Handouts are provided for filing.</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do you prevent bed bugs in hotels?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Bed bug control needs both treatment and prevention: treatment relies on high-temperature steam (generally sustained heat above 50°C) plus crack-and-crevice work with bed-leg monitors; prevention relies on housekeeping training (recognising cast skins, blood spots and eggshells) plus luggage and linen workflows. We provide treatment and staff training as one programme.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does one guest room take? Will it affect occupancy?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>A typical room takes hours including ventilation, depending on severity; housekeeping can reset and resell the room afterwards. We schedule off-peak, discreet access and hand records to housekeeping for room-status follow-up.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> A guest complained about bed bugs — what now?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Isolate the room immediately (do not move linen to other rooms) and call our emergency channel; a technician attends promptly to confirm and treat. Contract clients get priority response, and full records follow for housekeeping.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Will you damage our interiors?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>Bed bug treatment uses steam and crack-and-crevice methods — no wall removal. Termite cases use Termatrac T3i radar — no wall removal, no drilling — designed to protect premium finishes. Works scope is agreed with engineering beforehand.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is a hotel contract priced?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>By room count, F&B facilities, back-of-house scope and frequency — no flat rate card; survey first, written quotation, with emergency-response arrangements stated. Room-level reference pricing is in our bed bug guide.</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is staff training arranged?</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>By session (about an hour): bed bug biology, sign recognition (cast skins / blood spots / eggshells / black spots), room inspection points, luggage and linen workflows, and the reporting mechanism. Handouts are provided for filing.</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -485,9 +530,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     </div>
                     <div><label>Document Requirements<span style="font-weight:400;color:#64748b;">(select all that apply)</span></label>
                         <div class="biz-check">
-                        <label><input type="checkbox" name="doc-quotation" value="需要"> Need a formal quotation (Quotation) for approval</label>
-                        <label><input type="checkbox" name="doc-tender" value="需要"> Need tender / RFP related information</label>
-                        <label><input type="checkbox" name="doc-compliance" value="需要"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
+                        <label><input type="checkbox" name="doc-quotation" value="Yes"> Need a formal quotation (Quotation) for approval</label>
+                        <label><input type="checkbox" name="doc-tender" value="Yes"> Need tender / RFP related information</label>
+                        <label><input type="checkbox" name="doc-compliance" value="Yes"> Need industry compliance documents (e.g. HACCP / AFCD pesticide list)</label>
                         </div>
                     </div>
                     <div><label for="bf-details">Pest Situation / Requirements</label><textarea id="bf-details" name="details" rows="4" placeholder="e.g. rodent activity near refuse room, bed bug case in guest room, FEHD inspection requirements..."></textarea></div>

@@ -330,6 +330,57 @@
 .biz-check{display:flex;flex-wrap:wrap;gap:10px}
 .biz-check label{font-weight:400;font-size:.88rem;display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;cursor:pointer;margin:0}
 @media (max-width:640px){.biz-form .bf-row{grid-template-columns:1fr}}
+.spots-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+.spot{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-left:4px solid #dc2626;border-radius:12px;padding:14px 16px}
+.spot .svc-t{font-weight:800;color:var(--dark-bg);font-size:.95rem;line-height:1.5}
+.spot p{font-size:.86rem;color:var(--text-main);line-height:1.7;margin:0}
+.spot p b{color:#b91c1c}
+@media (max-width:768px){.spots-grid{grid-template-columns:1fr}}
+
+/* ===== v9.77 visual simplification: pill TOC / fold / SOP grid / accordion ===== */
+.toc-pills{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 2px 8px;margin:0 auto 14px;max-width:860px;scrollbar-width:none}
+.toc-pills::-webkit-scrollbar{display:none}
+.toc-pill{flex:0 0 auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-pill:hover{background:rgba(255,255,255,.32)}
+details.geo-fold{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.30);border-left:4px solid #fbbf24;border-radius:10px;max-width:760px;margin:0 auto 16px;text-align:left;overflow:hidden}
+details.geo-fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:.9rem;font-weight:700;color:#fff}
+details.geo-fold summary::-webkit-details-marker{display:none}
+.geo-fold .fold-ico{margin-left:auto;font-style:normal;font-size:.72rem;transition:transform .2s;color:#fbbf24}
+.geo-fold[open] .fold-ico{transform:rotate(180deg)}
+.geo-fold .geo-body{padding:0 14px 12px;font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.95)}
+.geo-fold .geo-body p{margin:0}
+.sop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0}
+.sop-grid.cols-5{grid-template-columns:repeat(5,1fr)}
+details.sop-card{background:var(--light-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sop-card summary{list-style:none;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px}
+.sop-card summary::-webkit-details-marker{display:none}
+.sop-card .sop-n{font-size:.72rem;font-weight:800;color:var(--primary);letter-spacing:.4px}
+.sop-card .sop-t{font-size:.88rem;font-weight:700;color:var(--dark-bg);line-height:1.45;display:flex;gap:7px;align-items:flex-start}
+.sop-card .sop-t .fa-solid{color:var(--tech-blue);margin-top:2px}
+.sop-card .sop-x{font-size:.7rem;color:#94a3b8}
+.sop-card .sop-x::after{content:"▾ 展開"}
+.sop-card[open] .sop-x::after{content:"▴ 收起"}
+.sop-card[open] summary{border-bottom:1px dashed var(--border)}
+.sop-card .sop-b{padding:10px 12px;font-size:.85rem;line-height:1.7;color:var(--text-main)}
+.sop-card .sop-b p{margin:0}
+.lines-grid{display:grid;gap:10px;margin:14px 0 2px}
+.lines-grid .line{background:#fff;border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:10px;padding:10px 14px;font-size:.9rem;line-height:1.7;color:var(--text-main)}
+.lines-grid .line b{color:var(--dark-bg);display:block;margin-bottom:2px}
+details.faq-item{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;background:#fff;padding:0;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0;font-size:.95rem;display:flex;align-items:center;gap:8px;flex:1;line-height:1.5}
+.faq-item summary h3 .fa-solid{color:var(--primary)}
+.faq-item summary .faq-x{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--primary-light);color:#065f46;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;line-height:1}
+.faq-item summary .faq-x::before{content:"+"}
+.faq-item[open] summary .faq-x::before{content:"−"}
+.faq-item .faq-a{padding:0 16px 14px;font-size:.9rem;line-height:1.8;color:var(--text-main)}
+.faq-item .faq-a p{margin:0}
+.sop-photo{margin:0}
+.sop-photo img{width:100%;height:auto;border-radius:12px;display:block;box-shadow:var(--shadow-sm)}
+.sop-photo figcaption{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;text-align:center}
+@media(max-width:960px){.sop-grid,.sop-grid.cols-5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sop-grid,.sop-grid.cols-5{grid-template-columns:1fr 1fr;gap:8px}.sop-card .sop-t{font-size:.82rem}}
 </style>
     <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
     <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
@@ -370,22 +421,22 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <span class="dist-badge">📊 IoT 數據報告交代法團</span>
             <span class="dist-badge">📋 招標文件支援</span>
             </div>
-            <h1>物業管理滅蟲公司｜商業大廈防鼠封堵・IoT 智慧鼠盒監測報告</h1>
-            <p class="dist-sub">搵緊可靠嘅物業管理滅蟲公司？滅蟲師傅團隊專責屋苑、商場、寫字樓同商業大廈：垃圾房、電梯槽、天井、走廊等公用地方防鼠封堵工程先勘察後出書面報價；IoT 智慧鼠盒 24 小時監測，每次服務出電子服務報告，管理處可以直接攞去法團會議交代。大面積定期巡查、招標文件支援，服務覆蓋全港十八區。</p>
-            <div class="geo-answer"><p><b>物業管理滅蟲要向法團交代，點揀供應商？</b>揀供應商最緊要係「有紀錄、有報告」：我哋每次服務都出電子服務報告，配合 IoT 智慧鼠盒 24 小時監測數據，管理處可以直接攞去法團會議交代；防鼠封堵工程先勘察後出書面報價，合約列明服務範圍同保養期。</p></div>
-            <p class="dist-sub" style="margin:-6px auto 16px;font-size:.85rem;">本頁目錄：<a href="#scope" style="color:#fbbf24;">服務範圍</a> ｜ <a href="#flow" style="color:#fbbf24;">合約流程</a> ｜ <a href="#tech" style="color:#fbbf24;">科技與合規</a> ｜ <a href="#price" style="color:#fbbf24;">合約模式</a> ｜ <a href="#case" style="color:#fbbf24;">實戰案例</a> ｜ <a href="#faq" style="color:#fbbf24;">常見問題</a> ｜ <a href="#biz-quote" style="color:#fbbf24;">商業報價表單</a></p>
+            <h1>物業管理及住宅屋苑滅蟲與蟲害防治方案</h1>
+            <p class="dist-sub">協助物管團隊輕鬆應對法團與業主質詢 ｜ IoT 智慧鼠盒 24/7 地下車庫及管道井監測 ｜ 不銹鋼網結構源頭封堵 ｜ 專人 1 工作天內提交中英雙語合規 IPM 報告。</p>
+            <details class="geo-fold"><summary><span>📋 物業管理滅蟲要向法團交代，點揀供應商？</span><i class="fold-ico" aria-hidden="true">▼</i></summary><div class="geo-body"><p><b>物業管理滅蟲要向法團交代，點揀供應商？</b>揀供應商最緊要係「有紀錄、有報告」：我哋每次服務都出電子服務報告，配合 IoT 智慧鼠盒 24 小時監測數據，管理處可以直接攞去法團會議交代；防鼠封堵工程先勘察後出書面報價，合約列明服務範圍同保養期。</p></div></details>
+            <nav class="toc-pills" aria-label="本頁目錄"><a class="toc-pill" href="#scope">服務範圍</a><a class="toc-pill" href="#flow">服務流程</a><a class="toc-pill" href="#tech">科技與合規</a><a class="toc-pill" href="#price">合約模式</a><a class="toc-pill" href="#case">實戰案例</a><a class="toc-pill" href="#faq">常見問題</a><a class="toc-pill" href="#biz-quote">商業報價表單</a></nav>
             <div class="dist-cta">
                 <a href="#biz-quote" class="btn btn-primary"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> 📄 索取物業管理專屬滅蟲方案與報價</a>
-                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%80%91%E4%BF%82%E5%95%86%E6%A5%AD%E6%A9%9F%E6%A7%8B%EF%BC%88%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%2F%E9%85%92%E5%BA%97%2F%E9%A4%90%E9%A3%B2%EF%BC%89%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 💬 WhatsApp 商業查詢</a>
+                <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%B1%8B%E8%8B%91%E6%BB%85%E8%9F%B2%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 📷 上載屋苑公區／蟲患照片，即時 WhatsApp 獲取物業管理專案與免費現場勘察預約</a>
             </div>
         </section>
         <nav class="dist-breadcrumb" aria-label="Breadcrumb"><a href="https://bruceleehk.com/">首頁</a><span class="sep">›</span><a href="/commercial/">商業滅蟲方案</a><span class="sep">›</span><span aria-current="page">物業管理滅蟲</span></nav>
         <div class="web-net">
-<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%80%91%E4%BF%82%E5%95%86%E6%A5%AD%E6%A9%9F%E6%A7%8B%EF%BC%88%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%2F%E9%85%92%E5%BA%97%2F%E9%A4%90%E9%A3%B2%EF%BC%89%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">物業／酒店／餐廳有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
+<a class="web-card web-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%B1%8B%E8%8B%91%E6%BB%85%E8%9F%B2%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener"><span class="web-tag">🏢 企業客戶急查詢</span><span class="web-q">物業／酒店／餐廳有蟲患問題？</span><span class="web-btn">📲 WhatsApp 聯絡 B2B 專員，盡快回覆</span></a>
 <a class="web-card web-vote" href="/service/rodent/"><span class="web-tag">🐭 住宅滅鼠</span><span class="web-q">屋苑單位有老鼠？</span><span class="web-btn">睇滅鼠公司專頁（住宅版） →</span></a>
         </div>
 
-<section class="dist-section" aria-labelledby="scope-title">
+<section id="scope" class="dist-section" aria-labelledby="scope-title">
             <div class="dist-card">
                 <h2 id="scope-title"><i class="fa-solid fa-building ic" aria-hidden="true"></i> 物業管理滅蟲服務範圍 — 由垃圾房到法團會議室</h2>
                 <p>屋苑、商場、寫字樓嘅蟲患風險集中喺公用地方：垃圾房有食物殘渣、電梯槽陰暗潮濕、天井雜物堆積、外牆喉管係老鼠通道。滅蟲師傅團隊針對物業管理場景六大服務：</p>
@@ -399,20 +450,40 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="flow-title">
+<section id="spots" class="dist-section" aria-labelledby="spots-title">
             <div class="dist-card">
-                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> 物業滅蟲合約流程 — 管理處好易配合</h2>
-                <p>物業管理日常事務繁忙，我哋嘅合約流程以「唔使管理處煩」為設計原則：</p>
-                <ul class="tech-list">
-                    <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span><b>步驟 1｜📱 初步查詢</b> — 表單或 WhatsApp 提交物業資訊（類型、面積、公用地方概況），B2B 專責專員一個工作天內回覆。</span></li>
-                    <li><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span><b>步驟 2｜🔍 免費現場勘察</b> — 按管理處時段實地勘察：垃圾房、電梯槽、天井、外牆入屋位逐一檢查記錄。</span></li>
-                    <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span><b>步驟 3｜📋 書面方案＋報價單</b> — 封堵工程分項列明（位置、物料、保養期），定期服務列明頻率同報告安排，方便招標比對或直接審批。</span></li>
-                    <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span><b>步驟 4｜🤝 簽約＋定期服務</b> — 按合約頻率執行；IoT 智慧鼠盒持續監測，出事先知、唔使等住客投訴。</span></li>
-                    <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span><b>步驟 5｜📊 電子報告＋年檢</b> — 每次服務出電子報告，年度出防治總結報告；管理處可以直接攞去法團會議交代。</span></li>
-                </ul>
+                <h2 id="spots-title"><i class="fa-solid fa-crosshairs ic" aria-hidden="true"></i> 四大屋苑公區黑點・精準擊破</h2>
+                <p>住宅屋苑一般綠化覆蓋率高，設有地下車庫、垃圾房（桶）及住戶寵物活動區等設施。屋苑各座樓宇之間的電線溝、網線槽、下水道及雨水管道縱橫交錯、轉接相通，形成了極適合老鼠躲藏與跨座竄流的地下網路。此外，部分業主搬遷或購物時易被動攜帶曱甴入屋，而寵物排泄物與垃圾房殘渣則是蒼蠅與蚊子的主要孳生源頭。蟲害一旦沿下水道或電纜溝由公區侵入業主單位，極易引發業主投訴、業主立案法團質詢甚至影響物管公司的服務評級。</p>
+                <div class="spots-grid">
+                    <div class="spot"><span class="svc-t">🔴 A. 地下車庫、管道井及電纜溝（老鼠橫向與豎向橫行通廊）</span><p><b>環境挑戰：</b>地下車庫排水溝、高壓電纜房及貫穿各座樓宇的管道井，是老鼠跨座竄流與入侵住戶單位的「地下高速公路」。</p><p><b>科學解法：</b>針對管道穿牆孔洞及水電溝進行不銹鋼防鼠網與抗咬密封膠源頭物理封堵；於地下車庫及公區管道井架設 IoT 智慧鼠盒 24/7 雲端感知監測，實時追蹤老鼠活動路徑並精準誘捕。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 B. 垃圾房、廚餘堆放區及寵物公區（蒼蠅與臭味孳生源）</span><p><b>環境挑戰：</b>屋苑垃圾房與廚餘桶易積聚有機殘渣，加上寵物排泄物，是蒼蠅與水渠蠅的主要孳生溫床，極易產生異味與衛生問題。</p><p><b>科學解法：</b>對垃圾房及周邊公區實施專業殘留噴灑與水渠源頭生物處理；於垃圾房附近設置專用防蠅誘捕裝置，監控並壓制蒼蠅密度。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 C. 各座大堂、升降機機房及公共配電房（隱蔽棲息與安全防線）</span><p><b>環境挑戰：</b>公共配電房、升降機機房及大堂假天花溫度適宜且隱蔽，易成為德國曱甴及老鼠的棲息地，老鼠咬破電線更有機會引致升降機或供電故障。</p><p><b>科學解法：</b>採用低敏無味低毒滅蟑膠餌進行點狀精準施放；於配電房及機房布放無毒物理黏捕裝置，杜絕化學藥劑影響公共設施安全。</p></div>
+                    <div class="spot"><span class="svc-t">🔴 D. 綠化帶、景觀池及集水井（蚊子孳生與蚊幼蟲阻斷）</span><p><b>環境挑戰：</b>綠化帶草叢是成蚊棲息地，地下車庫集水井（Sump Pit）及景觀池積水則極易孳生蚊幼蟲（孑孓），引致白紋伊蚊滋擾住戶。</p><p><b>科學解法：</b>定期於集水井及積水處投放滅蚊幼蟲（孑孓）生物劑阻斷蚊子繁殖；於綠化帶實施綠籬防蚊噴霧工程，並安裝戶外粘捕式滅蠅燈，大幅降低屋苑成蚊密度。</p></div>
+                </div>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="tech-title">
+        <section id="flow" class="dist-section" aria-labelledby="flow-title">
+            <div class="dist-card">
+                <h2 id="flow-title"><i class="fa-solid fa-list-check ic" aria-hidden="true"></i> CEDARS 科技化 IPM 屋苑物管治理 SOP</h2>
+                <p>鼠患防控「三道防線」覆蓋屋苑地下網路，八步流程協助物管團隊向法團與業主清晰交代：</p>
+                <div class="lines-grid">
+                    <div class="line"><b>🛡️ 第一道防線（屋苑外圍及綠化帶）</b><span>布放防雨防破壞外圍鼠餌監測站，於最外圍降低區域鼠群密度。</span></div>
+                    <div class="line"><b>🛡️ 第二道防線（地下車庫、垃圾房及公區管道井）</b><span>不銹鋼防鼠網結構封堵，架設 IoT 智慧鼠盒 24/7 雲端感知監測，阻斷跨座竄流。</span></div>
+                    <div class="line"><b>🛡️ 第三道防線（住宅大堂及各座公共配電房）</b><span>採用 100% 無毒物理黏捕與低敏膠餌，杜絕藥劑影響住戶與寵物健康。</span></div>
+                </div>
+                <div class="sop-grid">
+                    <details class="sop-card"><summary><span class="sop-n">步驟 1</span><span class="sop-t"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>現場免費勘察與風險評估</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專員親臨屋苑，與物管經理及工程部負責人溝通環境與管理需求。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 2</span><span class="sop-t"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>害蟲密度與種群調查</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>施工前進行細緻調查，明確車庫、管道井、綠化帶及垃圾房的害蟲種類與數量。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 3</span><span class="sop-t"><i class="fa-solid fa-map" aria-hidden="true"></i>制定 IPM 蟲害監測點位圖</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>繪製專屬「屋苑蟲害監測點位圖」（標註鼠盒、膠餌站、滅蠅燈編號與位置，物管需提供現場平面圖）。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 4</span><span class="sop-t"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>月度／季度動態調整計劃</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每月根據現場蟲情數據與業主意見動態調整防治方案。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 5</span><span class="sop-t"><i class="fa-solid fa-spray-can-sparkles" aria-hidden="true"></i>安全、低敏施工</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>採用漁護署註冊低毒藥劑、IoT 智慧鼠盒、綠化帶滅蚊及集水井滅孑孓處理。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 6</span><span class="sop-t"><i class="fa-solid fa-file-lines" aria-hidden="true"></i>中英雙語合規 IPM 報告</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>每次服務後即時提供符合物管審計／業主立案法團匯報／食環署標準的詳細中英雙語報告，協助物管團隊向法團與業主交代。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 7</span><span class="sop-t"><i class="fa-solid fa-user-check" aria-hidden="true"></i>技術主管與 QC 質檢回訪</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>專責質檢人員定期回訪，檢查設施完好率與防護效果。</p></div></details>
+                    <details class="sop-card"><summary><span class="sop-n">步驟 8</span><span class="sop-t"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>完全滿意保證承諾</span><span class="sop-x" aria-hidden="true"></span></summary><div class="sop-b"><p>提供「完全滿意保證」服務承諾。如合約期內服務效果有任何不滿意，我們將免費跟進直至效果改善（不適用於單次服務；保留最終決定權）。</p></div></details>
+                </div>
+            </div>
+        </section>
+<section id="tech" class="dist-section" aria-labelledby="tech-title">
             <div class="dist-card hub-tech">
                 <h2 id="tech-title" style="color:#34d399;display:flex;align-items:center;gap:9px;font-size:1.18rem;margin:0 0 12px;"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> 科技與合規 — 物業管理 IPM 蟲害管理</h2>
                 <ul class="tech-list">
@@ -422,7 +493,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 </ul>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="price-title">
+<section id="price" class="dist-section" aria-labelledby="price-title">
             <div class="dist-card">
                 <h2 id="price-title"><i class="fa-solid fa-hand-holding-dollar ic" aria-hidden="true"></i> 物業管理滅蟲收費 — 按物業規模度身報價</h2>
                 <p>物業管理滅蟲收費視乎物業類型（屋苑／商場／寫字樓）、公用地方面積、蟲患風險同服務頻率，唔設劃一價目。常見模式：</p>
@@ -437,7 +508,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 <p style="margin:14px 0 0;">所有報價一律<b>先勘察、後書面報價</b>，實際收費以書面報價單為準；家居住宅行情可參考 <a href="/info/blog-12/" style="color:var(--primary-dark);font-weight:700;text-decoration:none;">滅蟲收費指南</a>。</p>
             </div>
         </section>
-<section class="dist-section" aria-labelledby="case-title">
+<section id="case" class="dist-section" aria-labelledby="case-title">
             <div class="dist-card">
                 <h2 id="case-title"><i class="fa-solid fa-briefcase ic" aria-hidden="true"></i> 物業與商業場所實戰案例</h2>
                 <div class="svc-grid">
@@ -451,12 +522,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 物業管理滅蟲常見問題</h2>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 物業管理滅蟲合約一般包括乜嘢？</h3><p>一般包括：公用地方定期巡查（垃圾房、電梯槽、天井、走廊）、防鼠封堵工程、IoT 智慧鼠盒監測、蚊患及白蟻防治、每次服務電子報告同年度總結。合約會列明服務範圍、頻率、保養期同報告安排，實際以書面報價為準。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 垃圾房鼠患點樣治本？</h3><p>垃圾房係老鼠「食堂」——治理要三步：①環境治理（垃圾清運流程建議、門縫封堵）②不鏽鋼防鼠網結構性封堵入屋位③IoT 智慧鼠盒持續監測。淨係放藥唔治本，我哋以 IPM 源頭封堵優先。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> IoT 智慧鼠盒係點運作？</h3><p>鼠盒內置感應裝置，老鼠活動即時記錄並自動上載數據。管理處可以定期收到監測報告：邊個位置有活動、活動頻率幾多、封堵位有冇復發——全部有數據支持，向法團交代唔使憑感覺。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 公用地方同住戶單位嘅責任點分？</h3><p>按《公眾衞生及市政條例》（第 132 章）框架：大廈公用地方一般由法團或管理處負責；個別單位內部由業主或租戶處理。我哋可以同時為法團（公用地方方案）同個別住戶（單位內防治）提供服務，並喺報告分開列明。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 可以喺法團大會／業主大會簡介方案嗎？</h3><p>可以。我哋可提供書面服務方案、報價單同資歷文件供會議傳閱；需要嘅話亦有專員出席講解服務細節。招標／投標文件經表單提交申請即可。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費同住宅滅蟲差幾遠？</h3><p>商業合約按物業規模、頻率、監測配置度身報價，同住宅單次收費邏輯唔同，所以唔設劃一價目。原則一樣：先勘察、後書面報價，分項列明。住宅行情可參考 <a href='/info/blog-12/'>滅蟲收費指南</a>。</p></div>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 物業管理滅蟲合約一般包括乜嘢？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>一般包括：公用地方定期巡查（垃圾房、電梯槽、天井、走廊）、防鼠封堵工程、IoT 智慧鼠盒監測、蚊患及白蟻防治、每次服務電子報告同年度總結。合約會列明服務範圍、頻率、保養期同報告安排，實際以書面報價為準。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 垃圾房鼠患點樣治本？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>垃圾房係老鼠「食堂」——治理要三步：①環境治理（垃圾清運流程建議、門縫封堵）②不鏽鋼防鼠網結構性封堵入屋位③IoT 智慧鼠盒持續監測。淨係放藥唔治本，我哋以 IPM 源頭封堵優先。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> IoT 智慧鼠盒係點運作？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>鼠盒內置感應裝置，老鼠活動即時記錄並自動上載數據。管理處可以定期收到監測報告：邊個位置有活動、活動頻率幾多、封堵位有冇復發——全部有數據支持，向法團交代唔使憑感覺。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 公用地方同住戶單位嘅責任點分？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>按《公眾衞生及市政條例》（第 132 章）框架：大廈公用地方一般由法團或管理處負責；個別單位內部由業主或租戶處理。我哋可以同時為法團（公用地方方案）同個別住戶（單位內防治）提供服務，並喺報告分開列明。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 可以喺法團大會／業主大會簡介方案嗎？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>可以。我哋可提供書面服務方案、報價單同資歷文件供會議傳閱；需要嘅話亦有專員出席講解服務細節。招標／投標文件經表單提交申請即可。</p></div></details>
+            <details class="faq-item"><summary><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 收費同住宅滅蟲差幾遠？</h3><span class="faq-x" aria-hidden="true"></span></summary><div class="faq-a"><p>商業合約按物業規模、頻率、監測配置度身報價，同住宅單次收費邏輯唔同，所以唔設劃一價目。原則一樣：先勘察、後書面報價，分項列明。住宅行情可參考 <a href='/info/blog-12/'>滅蟲收費指南</a>。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="bizq-title" id="biz-quote">
@@ -494,7 +565,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.85rem;color:#475569;"><p style="margin:0;"><i class="fas fa-lock" aria-hidden="true"></i> 你嘅個人資料將嚴格保密，僅用於提供商業滅蟲報價服務。</p></div>
                     <div id="biz-error" role="alert" style="display:none;color:#dc2626;font-weight:700;"></div>
                     <button type="submit" id="bf-submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 提交商業報價申請</button>
-                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%80%91%E4%BF%82%E5%95%86%E6%A5%AD%E6%A9%9F%E6%A7%8B%EF%BC%88%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%2F%E9%85%92%E5%BA%97%2F%E9%A4%90%E9%A3%B2%EF%BC%89%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%95%86%E6%A5%AD%E6%BB%85%E8%9F%B2%E6%96%B9%E6%A1%88%E5%8F%8A%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
+                    <div id="biz-success" style="display:none;background:#ecfdf5;border:1px solid #34d399;border-radius:10px;padding:16px 18px;margin-top:6px;"><b>✅ 已收到你嘅商業查詢</b><br><span style="font-size:.9rem;">B2B 專責專員會喺一個工作天內聯絡你。急個案？ <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E5%93%8B%E4%BF%82%E7%89%A9%E6%A5%AD%E7%AE%A1%E7%90%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%B1%8B%E8%8B%91%E6%BB%85%E8%9F%B2%E5%B0%88%E6%A1%88%E5%8F%8A%E5%85%8D%E8%B2%BB%E7%8F%BE%E5%A0%B4%E5%8B%98%E5%AF%9F" target="_blank" rel="noopener" style="color:#059669;font-weight:700;">WhatsApp 即時聯絡</a></span></div>
                 </form>
             </div>
         </section>
