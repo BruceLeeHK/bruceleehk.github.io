@@ -1,3 +1,30 @@
+# 修復日誌 (v9.81 — 2026-10-24)
+
+## v9.81《AI 診斷防彈級穩定性修復：徹底消滅 502 風暴＋地鐵弱網都救到》— 按用戶《徹底解決AI診斷失敗的問題.docx》執行
+
+### 根因（文檔剖析完全吻合）
+- 直接死因：Cloudflare 線上 Worker 於手改時引入 `Unexpected token '||'` 語法錯誤 → 整個 Worker 編譯失敗 → 所有 /api/analyze-pest 請求無條件 502 Bad Gateway
+- 深層死因：對 Dify 輸出「盲目信任」——answer 為 null / undefined / Object 時直接呼叫 .includes() → TypeError → Worker 崩潰 502 → 前端紅色「系統異常」
+
+### Worker v9.5-Bulletproof（worker/pest-vision-worker.js 全檔重寫，需另行 Cloudflare 部署）
+- 消滅 SyntaxError：全檔語法重新整理，禁止斷行開頭 ||／&& 寫法（地區封鎖改具名 isGeoBlocked），任何手改都唔會再令整個 Worker 編譯失敗
+- 消滅 TypeError：新增 extractDifyAnswer() —— answer / text / outputs.result / data.answer 多路安全挖字＋String() 強制轉換＋「[object Object]」防護，Dify 回傳任何垃圾數據都唔會炸
+- 優雅降級（Graceful Degradation）：假死報告／空白回應 → HTTP 200 + success:false + code:AI_RECOGNITION_FAILED 溫和回傳，絕不 502；並拒入 KV 快取（重試先有機會成功）
+- 上游解析防彈：Dify 意外回傳非 JSON（WAF 攔截頁／HTML 錯誤頁）→ parseJsonSafe() 轉為可重試 UPSTREAM_ERROR，唔會裸奔崩潰
+- Deadline 護衛：chat 重試前檢查剩餘時間預算，唔會開展趕唔切嘅「殭屍重試」白燒上游配額
+- 完整保留：v9.3 金鑰 fail-closed／地區封鎖／CORS 白名單、v9.4 FastTrack（63s 分析＋20s 上傳時限）、KV 智慧快取（前端放棄後 Worker 跑完寫快取，用戶重試即中快取——地鐵弱網救星）、/health 版本號升至 9.5-Bulletproof
+
+### 前端 v9.81 弱網韌性引擎（/ai/ 頁整塊替換；EN 頁設計上無引擎不變）
+- 三級自動重試：快速失敗（5xx／斷線）×2（退避 2.5s→5s）＋ 68 秒逾時 ×1（弱網最常見）＋ AI 判讀未明確溫和再驗 ×1；總預算 ~2.6 分鐘封頂（canAffordRetry 護衛），超過先彈錯誤卡
+- 離線智慧等候（地鐵／電梯場景）：偵測 navigator.onLine = false 唔會即場燒重試次數，改為等候 'online' 事件（最多 25 秒）自動繼續，全程唔使撳任何嘢
+- AI 判讀未明確（AI_RECOGNITION_FAILED）→ 溫和提示卡：「AI 睇唔清呢張相」＋相機圖示＋新增「換一張相」按鈕，唔再當系統爆炸
+- 重試全程唔使重新選相：相片保留喺記憶體（v9.73 Canvas EXIF 閹割＋420KB 自適應壓縮不變），自動／手動重試都用同一張
+- 分級進度標題：每次自動重試都話畀用戶知發生緊咩（「AI 伺服器波動，2.5 秒後自動重試（尚餘 1 次）…」等）；錯誤卡備「重新分析」＋「直接問師傅」雙出路
+
+### 驗證
+- test_v981_worker.js（vm sandbox＋mock Dify 上游）30/30 通過：answer=null／Object → 優雅 200、chat 500 自動重試成功、非 JSON 防彈、快取命中即回、fail-closed 保留、全檔無行首 ||／&&
+- validate_v981.py 38/38 通過：/ai/ 標籤平衡、inline JS node --check、前後端合約（溫和卡／離線等候／三級重試／ID 對應）、Worker 靜態防彈風格、EN 頁零誤改
+
 # 修復日誌 (v9.80 — 2026-10-23)
 
 ## v9.80《雙軌分流 CTA＋DIY 工具指南頁：海外流量與 GEO 鋪墊》— 按用戶《雙軌分流邏輯設計.docx》執行

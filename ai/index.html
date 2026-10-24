@@ -637,7 +637,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             <div class="ai-loading">
                                 <div class="ai-loading-spinner" aria-hidden="true"></div>
                                 <h3>滅蟲師傅 AI 深度分析中…</h3>
-                                <p>正在結合防治智庫深度推演，目標 60 秒內完成（上限 70 秒），請勿關閉頁面</p>
+                                <p>正在結合防治智庫深度推演，目標 60 秒內完成；網絡不穩（地鐵／電梯）系統會自動重試，請勿關閉頁面</p>
                                 <p class="ai-elapsed" id="ai-elapsed" role="status" aria-live="polite">已分析 0 秒</p>
                                 <div class="ai-loading-steps">
                                     <div class="ai-loading-step active" id="step-1">
@@ -657,13 +657,14 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             <!-- v9.14 inline 錯誤卡（取代 alert 彈窗：失敗時用戶唔會迷失，可以直接重試或 WhatsApp） -->
                             <div id="ai-error-box" style="display:none;text-align:center;padding:26px 20px;">
                                 <div style="width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;">
-                                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true" style="font-size:1.6rem;color:#dc2626;"></i>
+                                    <i id="ai-err-icon" class="fa-solid fa-triangle-exclamation" aria-hidden="true" style="font-size:1.6rem;color:#dc2626;"></i>
                                 </div>
-                                <h3 style="color:var(--dark-bg);margin:0 0 8px;">AI 診斷暫時未能完成</h3>
+                                <h3 id="ai-err-title" style="color:var(--dark-bg);margin:0 0 8px;">AI 診斷暫時未能完成</h3>
                                 <p class="ai-err-msg" style="font-size:.92rem;line-height:1.8;color:var(--text-muted);max-width:420px;margin:0 auto 18px;"></p>
                                 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
                                     <button type="button" id="ai-retry-btn" class="btn btn-primary"><i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 重新分析</button>
                                     <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8CAI%E8%A8%BA%E6%96%B7%E5%87%BA%E9%8C%AF%EF%BC%8C%E6%83%B3%E7%9B%B4%E6%8E%A5%E5%95%8F%E5%B8%AB%E5%82%85" target="_blank" rel="noopener" class="btn btn-secondary"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> 直接問師傅</a>
+                                    <button type="button" id="ai-change-photo" class="btn btn-secondary" style="display:none;"><i class="fa-solid fa-image" aria-hidden="true"></i> 換一張相</button>
                                 </div>
                             </div>
                         </div>
@@ -925,9 +926,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     <script src="../assets/js/i18n.js" defer></script>
     <script src="../assets/js/bruceleehk.js" defer></script>
     
-    <!-- 🚀 獨立 AI 診斷引擎前端邏輯 -->
+    <!-- 🚀 v9.81 獨立 AI 診斷引擎前端邏輯（弱網韌性版：三級自動重試＋離線智慧等候＋溫和提示卡） -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
             const pestPhotoInput = document.getElementById('pest-photo');
             const uploadState = document.getElementById('ai-upload');
             const analyzingState = document.getElementById('ai-analyzing');
@@ -988,11 +989,9 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                         ctx.fillStyle = '#ffffff';
                         ctx.fillRect(0, 0, canvas.width, canvas.height);
                         ctx.drawImage(img, 0, 0, width, height);
-                        /* v9.73 自適應降質：目標 ≤ 420KB（1024px 解析度不變，AI 辨識能力不受影響；
-                           上載再快一截，並節省視覺 Token 與處理時間，配合 60–70 秒總預算） */
+                        /* v9.73 自適應降質：目標 ≤ 420KB（1024px 解析度不變，AI 辨識能力不受影響） */
                         const TARGET_BYTES = 420 * 1024;
                         const QUALITIES = [0.8, 0.68, 0.56, 0.45];
-                        const self = this;
                         function emitAt(qualityIdx) {
                             canvas.toBlob(function(blob) {
                                 if (!blob) { alert('相片處理失敗，請重新選擇！'); return; }
@@ -1039,6 +1038,262 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                 setTimeout(() => { if (steps[3]) steps[3].classList.add('active'); }, 5000);
             }
 
+            /* ============================================================
+               v9.81 弱網韌性引擎（地鐵／電梯／流動網絡都救到）
+               ① 三級自動重試：快速失敗（5xx／斷線）×2 ＋ 逾時 ×1 ＋ AI 判讀未明確 ×1，
+                  退避式等待（2.5s → 5s），總預算 ~2.6 分鐘封頂
+               ② 離線智慧等候：地鐵隧道斷線唔會即場燒晒重試次數 — 偵測到離線就等
+                  'online' 事件（最多 25 秒），網絡一恢復自動繼續，唔使撳任何嘢
+               ③ AI 判讀未明確（Worker 回 200 + AI_RECOGNITION_FAILED）→ 溫和提示卡
+                  （相機圖示＋「換一張相」按鈕），唔再當系統爆炸
+               ④ 重試全程唔使重新選相：相片保留喺記憶體，自動／手動重試都用同一張
+               ⑤ 分級進度標題：每次自動重試都話畀用戶知而家發生緊咩事
+               ============================================================ */
+            var AI_ENDPOINT = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
+            var AI_TIMEOUT_MS = 68000;          // 單次嘗試上限 68 秒（配合 Worker 63 秒 AI 分析時限）
+            var AI_TOTAL_BUDGET_MS = 155000;    // 自動重試總預算 ~2.6 分鐘，超過先彈錯誤卡
+            var AI_MAX_FAST_RETRIES = 2;        // 快速失敗（5xx 伺服器波動／網絡斷線）
+            var AI_MAX_TIMEOUT_RETRIES = 1;     // 68 秒逾時（弱網最常見）
+            var AI_MAX_RECOG_RETRIES = 1;       // AI 判讀未明確（溫和再驗一次）
+            var aiErrorShown = false;
+            var analysisStart = 0;
+
+            function buildFormData() {
+                var fd = new FormData();
+                fd.append('image', selectedFile);
+                // v9.7 附加可選補充描述（環境線索助 AI 收窄判定範圍）
+                var desc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
+                if (desc) fd.append('user_desc', desc);
+                return fd;
+            }
+
+            function setRetryTitle(text) {
+                var title = document.querySelector('#ai-analyzing h3');
+                if (title) title.textContent = text;
+            }
+
+            /* 錯誤卡：opts.gentle = AI 判讀未明確（溫和模式：相機圖示＋換相按鈕） */
+            function showInlineError(msg, opts) {
+                opts = opts || {};
+                aiErrorShown = true;
+                stopElapsed();
+                var box = document.getElementById('ai-error-box');
+                var loading = document.querySelector('#ai-analyzing .ai-loading');
+                var title = document.getElementById('ai-err-title');
+                var icon = document.getElementById('ai-err-icon');
+                var changeBtn = document.getElementById('ai-change-photo');
+                if (!box) { alert('⚠️ 系統提示：\n' + msg); return; }
+                box.querySelector('.ai-err-msg').textContent = msg;
+                if (title) title.textContent = opts.gentle ? 'AI 睇唔清呢張相' : 'AI 診斷暫時未能完成';
+                if (icon) {
+                    icon.className = opts.gentle ? 'fa-solid fa-camera-retro' : 'fa-solid fa-triangle-exclamation';
+                    icon.style.color = opts.gentle ? '#b45309' : '#dc2626';
+                }
+                if (changeBtn) changeBtn.style.display = opts.gentle ? '' : 'none';
+                box.style.display = 'block';
+                if (loading) loading.style.display = 'none';
+            }
+
+            function hideInlineError() {
+                aiErrorShown = false;
+                var box = document.getElementById('ai-error-box');
+                var loading = document.querySelector('#ai-analyzing .ai-loading');
+                if (box) box.style.display = 'none';
+                if (loading) loading.style.display = '';
+                var title = document.querySelector('#ai-analyzing h3');
+                if (title) title.textContent = '滅蟲師傅 AI 深度分析中…';
+            }
+
+            function friendlyMsg(error, budgetExhausted) {
+                var m = error.message || '';
+                if (error.name === 'AbortError') {
+                    return budgetExhausted
+                        ? '網絡可能不穩定，已自動重試仍未完成。建議去到訊號較好嘅地方再撳「重新分析」（相片已保留，唔使重新上載），或直接 WhatsApp 撳師傅即時跟進。'
+                        : 'AI 深度分析已達 68 秒上限仍未完成（網絡可能不穩），請重新分析一次，或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
+                }
+                if (m.indexOf('Failed to fetch') !== -1 || m.indexOf('NetworkError') !== -1 || m.indexOf('Load failed') !== -1) {
+                    return budgetExhausted
+                        ? '網絡連線唔穩定，已自動重試多次仍未成功。建議去到訊號較好嘅地方再撳「重新分析」（相片已保留），或直接用 WhatsApp 撳師傅即時跟進。'
+                        : '無法連線至 AI 伺服器，請檢查網絡後重新分析；或直接用 WhatsApp 撳師傅即時跟進。';
+                }
+                if (m.indexOf('429') !== -1 || m.indexOf('上限') !== -1) {
+                    return 'AI 系統暫時繁忙（每人每小時 8 次上限），請約 1 分鐘後重新分析，或直接用 WhatsApp 撳師傅。';
+                }
+                if (m.indexOf('504') !== -1 || m.indexOf('逾時') !== -1 || m.indexOf('超時') !== -1) {
+                    return 'AI 分析超過時間上限而中止，請重新分析一次；或直接用 WhatsApp 撳師傅。';
+                }
+                if (m.indexOf('502') !== -1 || m.indexOf('503') !== -1) {
+                    return 'AI 伺服器暫時波動，已自動重試仍未成功。請稍等片刻再撳「重新分析」，或直接用 WhatsApp 撳師傅即時跟進。';
+                }
+                return (m || '系統繁忙或網絡不穩，請重新分析一次，或直接用 WhatsApp 撳師傅。');
+            }
+
+            /* 離線智慧等候：等 'online' 事件或 maxWaitMs 超時（以先到者為準）後執行 cb */
+            function waitForOnline(cb, maxWaitMs) {
+                if (navigator.onLine) { cb(); return; }
+                var settled = false;
+                function finish() {
+                    if (settled) return;
+                    settled = true;
+                    window.removeEventListener('online', finish);
+                    cb();
+                }
+                window.addEventListener('online', finish);
+                setTimeout(finish, maxWaitMs || 25000);   // 等 25 秒都未恢復 → 照試一次
+            }
+
+            /* 總預算護衛：開展新一輪 68 秒嘗試之前，確認預算仍然足夠 */
+            function canAffordRetry() {
+                return (Date.now() - analysisStart + AI_TIMEOUT_MS + 5000) <= AI_TOTAL_BUDGET_MS;
+            }
+
+            function renderReport(markdown) {
+                var formattedHtml = String(markdown || '');
+                // 將 Markdown 的 WhatsApp 連結轉為華麗的按鈕
+                formattedHtml = formattedHtml.replace(
+                    /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
+                    '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
+                );
+                // 粗體文字處理
+                formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                // 換行處理
+                formattedHtml = formattedHtml.replace(/\n/g, '<br>');
+                // 填寫內容並顯示結果
+                diagnosisText.innerHTML = formattedHtml;
+                analyzingState.classList.remove('active');
+                resultState.classList.add('active');
+                stopElapsed();
+            }
+
+            /* 三級狀態機：fastLeft（快速失敗）/ slowLeft（逾時）/ recogLeft（判讀未明確） */
+            function runAnalysis(fastLeft, slowLeft, recogLeft) {
+                if (!selectedFile) return;
+                var attemptStart = Date.now();
+                var aiController = new AbortController();
+                var aiTimeoutId = setTimeout(function () { aiController.abort(); }, AI_TIMEOUT_MS);
+
+                fetch(AI_ENDPOINT, {
+                    method: 'POST',
+                    body: buildFormData(),
+                    signal: aiController.signal
+                })
+                    .then(function (res) {
+                        clearTimeout(aiTimeoutId);
+                        if (!res.ok) {
+                            // 優先讀取 worker 返回嘅友善錯誤文案（v9.14 修正）
+                            return res.json().catch(function () { return null; }).then(function (errData) {
+                                var err = new Error((errData && errData.error) || ('HTTP ' + res.status));
+                                err.httpStatus = res.status;
+                                if (errData && errData.code) err.workerCode = errData.code;
+                                throw err;
+                            });
+                        }
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        if (!data || !data.success) {
+                            var err = new Error((data && data.error) || '分析失敗');
+                            if (data && data.code) err.workerCode = data.code;
+                            err.httpStatus = (data && data.code === 'RATE_LIMITED') ? 429 : 0;
+                            throw err;
+                        }
+                        renderReport(data.diagnosis);
+                    })
+                    .catch(function (error) {
+                        clearTimeout(aiTimeoutId);
+                        console.error('AI 診斷錯誤:', error);
+                        handleAnalysisError(error, {
+                            fastLeft: fastLeft, slowLeft: slowLeft, recogLeft: recogLeft
+                        });
+                    });
+            }
+
+            function handleAnalysisError(error, s) {
+                if (aiErrorShown) return;   // 錯誤卡已彈出（防止 race 重複觸發）
+                var status = error.httpStatus || 0;
+                var code = error.workerCode || '';
+                var isAbort = error.name === 'AbortError';
+                var isRecog = code === 'AI_RECOGNITION_FAILED';
+
+                /* 0) 總預算用完／唔夠再開一輪 68 秒嘗試：停自動重試，彈錯誤卡
+                      （相片仍保留喺記憶體，用戶手動「重新分析」會重置預算再嚟） */
+                if (!canAffordRetry()) {
+                    showInlineError(friendlyMsg(error, true));
+                    return;
+                }
+
+                /* 1) AI 判讀未明確（Worker 優雅降級 200 + AI_RECOGNITION_FAILED）：
+                      溫和自動再驗 1 次 → 仍然失敗先出溫和提示卡（相機圖示＋換相） */
+                if (isRecog) {
+                    if (s.recogLeft > 0) {
+                        setRetryTitle('AI 判讀未夠明確，2 秒後自動再驗一次…');
+                        setTimeout(function () { runAnalysis(s.fastLeft, s.slowLeft, s.recogLeft - 1); }, 2000);
+                        return;
+                    }
+                    showInlineError(error.message ||
+                        'AI 暫時無法清晰辨識該相片，請確保相片清晰、光線充足，或換一張不同角度嘅相再試；亦可以 WhatsApp 撳師傅人手跟進。', { gentle: true });
+                    return;
+                }
+
+                /* 2) 離線（地鐵隧道／電梯／無訊號）：唔好即場燒重試次數，
+                      等 'online' 事件（最多 25 秒）自動繼續 — 唔使撳任何嘢 */
+                if (typeof navigator.onLine === 'boolean' && !navigator.onLine && status === 0 && s.fastLeft > 0) {
+                    setRetryTitle('偵測到網絡中斷，待恢復連線後自動繼續分析（唔使撳任何嘢）…');
+                    waitForOnline(function () {
+                        if (aiErrorShown) return;
+                        setRetryTitle('網絡已恢復，繼續分析…');
+                        runAnalysis(s.fastLeft - 1, s.slowLeft, s.recogLeft);
+                    }, 25000);
+                    return;
+                }
+
+                /* 3) 逾時（弱網最常見 — 68 秒都未跑完）：自動重新分析 1 次 */
+                if (isAbort) {
+                    if (s.slowLeft > 0) {
+                        setRetryTitle('網絡較慢，3 秒後自動重新分析（相片已保留，唔使重新上載）…');
+                        setTimeout(function () { runAnalysis(s.fastLeft, s.slowLeft - 1, s.recogLeft); }, 3000);
+                        return;
+                    }
+                    showInlineError(friendlyMsg(error));
+                    return;
+                }
+
+                /* 4) 快速失敗：5xx 伺服器波動／斷線 → 退避重試 2 次（2.5s → 5s）
+                      （AI_NOT_CONFIGURED 屬配置問題，重試都冇用 → 唔重試） */
+                var fastRetryable = status === 0 || status === 502 || status === 504
+                    || (status === 503 && code !== 'AI_NOT_CONFIGURED');
+                if (fastRetryable && s.fastLeft > 0) {
+                    var waitSec = (s.fastLeft === AI_MAX_FAST_RETRIES) ? 2.5 : 5;
+                    setRetryTitle('AI 伺服器波動，' + waitSec + ' 秒後自動重試（尚餘 ' + (s.fastLeft - 1) + ' 次）…');
+                    setTimeout(function () { runAnalysis(s.fastLeft - 1, s.slowLeft, s.recogLeft); }, waitSec * 1000);
+                    return;
+                }
+
+                /* 5) 其他（429 限流／4xx／重試次數用盡）：錯誤卡 */
+                showInlineError(friendlyMsg(error));
+            }
+
+            /* 全新一次分析流程（首次上載／手動「重新分析」共用）：重置三級重試＋總預算 */
+            function startFreshRun() {
+                hideInlineError();
+                animateSteps();
+                startElapsed();
+                analysisStart = Date.now();
+                runAnalysis(AI_MAX_FAST_RETRIES, AI_MAX_TIMEOUT_RETRIES, AI_MAX_RECOG_RETRIES);
+            }
+
+            /* 換一張相：返回上載狀態（AI 判讀未明確時嘅建議出路） */
+            function resetToUpload() {
+                selectedFile = null;
+                /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
+                if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
+                pestPhotoInput.value = '';
+                resultState.classList.remove('active');
+                analyzingState.classList.remove('active');
+                uploadState.classList.add('active');
+                hideInlineError();
+            }
+
             // 觸發相片選擇
             if (pestPhotoInput) {
                 pestPhotoInput.addEventListener('change', function(e) {
@@ -1057,170 +1312,30 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                         selectedFile = cleanFile;
                         resultImg.src = previewUrl;
 
-                        // 1. 切換至分析中狀態並播放動畫
+                        // 切換至分析中狀態並播放動畫，開始三級韌性分析
                         uploadState.classList.remove('active');
                         analyzingState.classList.add('active');
                         resultState.classList.remove('active');
-                        hideInlineError();
-                        animateSteps();
-                        startElapsed();
-
-                        /* ============================================================
-                           v9.14 AI 診斷穩定性升級（配合 Worker v9.2）：
-                           ① 逾時 60s → 100s（DeepSeek 深度報告實際需 30–90 秒，舊版 60s
-                              會誤殺正常報告）
-                           ② 502/503/504/網絡斷線自動重試 1 次（2.5 秒後），Dify 間歇過載
-                              唔會再一彈 502 就叫用戶自己再嚟
-                           ③ 最終失敗改用 inline 錯誤卡（有「重新分析」＋「直接問師傅」按鈕），
-                              取代舊版 alert 彈窗 — 客人唔會流失
-                           ④ 修正舊版 bug：worker 返回嘅友善錯誤文案被內層 catch 食咗，
-                              而家正確顯示
-                           ============================================================ */
-                        var AI_ENDPOINT = 'https://pest-vision-worker.cedars5282.workers.dev/api/analyze-pest';
-                        var AI_TIMEOUT_MS = 68000;    // v9.73: 68 秒總預算（配合 Worker v9.4 CHAT_TIMEOUT_MS 63s），60–70 秒內必完成或明確報錯
-                        var AI_MAX_AUTO_RETRY = 1;    // 自動重試 1 次（v9.73: 僅限 30 秒內返回嘅快速失敗，確保重試都喺 70 秒預算內）
-                        var aiErrorShown = false;
-
-                        function buildFormData() {
-                            var fd = new FormData();
-                            fd.append('image', selectedFile);
-                            // v9.7 附加可選補充描述（環境線索助 AI 收窄判定範圍）
-                            var desc = sanitizeDescForSubmit(pestDescInput ? pestDescInput.value : '');
-                            if (desc) fd.append('user_desc', desc);
-                            return fd;
-                        }
-
-                        function showInlineError(msg) {
-                            aiErrorShown = true;
-                            stopElapsed();
-                            var box = document.getElementById('ai-error-box');
-                            var loading = document.querySelector('#ai-analyzing .ai-loading');
-                            if (!box) { alert('⚠️ 系統提示：\n' + msg); return; }
-                            box.querySelector('.ai-err-msg').textContent = msg;
-                            box.style.display = 'block';
-                            if (loading) loading.style.display = 'none';
-                        }
-
-                        function hideInlineError() {
-                            aiErrorShown = false;
-                            var box = document.getElementById('ai-error-box');
-                            var loading = document.querySelector('#ai-analyzing .ai-loading');
-                            if (box) box.style.display = 'none';
-                            if (loading) loading.style.display = '';
-                            var title = document.querySelector('#ai-analyzing h3');
-                            if (title) title.textContent = '滅蟲師傅 AI 深度分析中…';
-                        }
-
-                        function friendlyMsg(error) {
-                            if (error.name === 'AbortError') {
-                                return 'AI 深度分析已達 68 秒上限仍未完成（網絡可能不穩），請重新分析一次，或直接點擊下方 WhatsApp 按鈕聯絡師傅。';
-                            }
-                            var m = error.message || '';
-                            if (m.indexOf('Failed to fetch') !== -1) {
-                                return '無法連線至 AI 伺服器，請檢查網絡後重新分析；或直接用 WhatsApp 搵師傅即時跟進。';
-                            }
-                            if (m.indexOf('429') !== -1 || m.indexOf('上限') !== -1) {
-                                return 'AI 系統暫時繁忙（每人每小時 8 次上限），請約 1 分鐘後重新分析，或直接用 WhatsApp 搵師傅。';
-                            }
-                            if (m.indexOf('504') !== -1 || m.indexOf('逾時') !== -1 || m.indexOf('超時') !== -1) {
-                                return 'AI 分析超過 70 秒上限而中止，請重新分析一次；或直接用 WhatsApp 搵師傅。';
-                            }
-                            if (m.indexOf('502') !== -1 || m.indexOf('503') !== -1) {
-                                return 'AI 伺服器暫時波動，已自動重試仍未成功。請稍等片刻再撳「重新分析」，或直接用 WhatsApp 搵師傅即時跟進。';
-                            }
-                            return (m || '系統繁忙或網絡不穩，請重新分析一次，或直接用 WhatsApp 搵師傅。');
-                        }
-
-                        function runAnalysis(remainingRetries) {
-                            if (!selectedFile) return;
-                            var attemptStart = Date.now();   // v9.73: 重試只限快速失敗
-                            var aiController = new AbortController();
-                            var aiTimeoutId = setTimeout(function () { aiController.abort(); }, AI_TIMEOUT_MS);
-
-                            fetch(AI_ENDPOINT, {
-                                method: 'POST',
-                                body: buildFormData(),
-                                signal: aiController.signal
-                            })
-                                .then(function (res) {
-                                    clearTimeout(aiTimeoutId);
-                                    if (!res.ok) {
-                                        // v9.14 修正：優先讀取 worker 返回嘅友善錯誤文案（舊版被內層 catch 食咗）
-                                        return res.json().catch(function () { return null; }).then(function (errData) {
-                                            var err = new Error((errData && errData.error) || ('HTTP ' + res.status));
-                                            err.httpStatus = res.status;
-                                            throw err;
-                                        });
-                                    }
-                                    return res.json();
-                                })
-                                .then(function (data) {
-                                    if (!data.success) {
-                                        var err = new Error(data.error || '分析失敗');
-                                        err.httpStatus = data.code === 'RATE_LIMITED' ? 429 : 0;
-                                        throw err;
-                                    }
-                                    var formattedHtml = data.diagnosis;
-                                    // 將 Markdown 的 WhatsApp 連結轉為華麗的按鈕
-                                    formattedHtml = formattedHtml.replace(
-                                        /\[([^\]]+)\]\((https:\/\/wa\.me[^\)]+)\)/g,
-                                        '<br><a href="$2" target="_blank" class="ai-wa-link" rel="noopener"><i class="fa-brands fa-whatsapp"></i> $1</a>'
-                                    );
-                                    // 粗體文字處理
-                                    formattedHtml = formattedHtml.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-                                    // 換行處理
-                                    formattedHtml = formattedHtml.replace(/\n/g, '<br>');
-                                    // 填寫內容並顯示結果
-                                    diagnosisText.innerHTML = formattedHtml;
-                                    analyzingState.classList.remove('active');
-                                    resultState.classList.add('active');
-                                    stopElapsed();
-                                })
-                                .catch(function (error) {
-                                    clearTimeout(aiTimeoutId);
-                                    console.error('AI 診斷錯誤:', error);
-                                    // v9.14 自動重試：僅 5xx 伺服器波動／網絡斷線；逾時（AbortError）、429、客戶端錯誤唔重試
-                                    var status = error.httpStatus || 0;
-                                    var elapsedSec = (Date.now() - attemptStart) / 1000;
-                                    var retryable = error.name !== 'AbortError' && status !== 429
-                                        && elapsedSec < 30   // v9.73: 只重試快速失敗，避免超出 70 秒預算
-                                        && (status === 502 || status === 503 || status === 504 || status === 0);
-                                    if (remainingRetries > 0 && retryable && !aiErrorShown) {
-                                        var title = document.querySelector('#ai-analyzing h3');
-                                        if (title) title.textContent = 'AI 伺服器波動，2.5 秒後自動重試…';
-                                        setTimeout(function () { runAnalysis(remainingRetries - 1); }, 2500);
-                                        return;
-                                    }
-                                    showInlineError(friendlyMsg(error));
-                                });
-                        }
-
-                        // 「重新分析」按鈕：清除錯誤卡 → 回到分析中狀態 → 重新送出
-                        var aiRetryBtn = document.getElementById('ai-retry-btn');
-                        if (aiRetryBtn) {
-                            aiRetryBtn.addEventListener('click', function () {
-                                hideInlineError();
-                                animateSteps();
-                                startElapsed();
-                                runAnalysis(AI_MAX_AUTO_RETRY);
-                            });
-                        }
-
-                        runAnalysis(AI_MAX_AUTO_RETRY);
+                        startFreshRun();
                     });
                 });
             }
 
-            // 重新上傳按鈕
+            // 「重新分析」按鈕：重置錯誤卡與預算 → 全新三級韌性流程
+            var aiRetryBtn = document.getElementById('ai-retry-btn');
+            if (aiRetryBtn) {
+                aiRetryBtn.addEventListener('click', startFreshRun);
+            }
+
+            // 「換一張相」按鈕（溫和提示卡）：返回上載狀態重選相片
+            var aiChangePhotoBtn = document.getElementById('ai-change-photo');
+            if (aiChangePhotoBtn) {
+                aiChangePhotoBtn.addEventListener('click', resetToUpload);
+            }
+
+            // 重新上載按鈕（結果頁）
             if (btnReupload) {
-                btnReupload.addEventListener('click', function() {
-                    selectedFile = null;
-                    /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
-                    if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
-                    pestPhotoInput.value = '';
-                    resultState.classList.remove('active');
-                    uploadState.classList.add('active');
-                });
+                btnReupload.addEventListener('click', resetToUpload);
             }
         });
     </script>
