@@ -366,7 +366,7 @@
   </url>
   <url>
     <loc>https://bruceleehk.com/info/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>
@@ -480,6 +480,15 @@
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/diy-pest-tools/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/diy-pest-tools/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/diy-pest-tools/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/info/whitepaper-2026/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/whitepaper-2026/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/whitepaper-2026/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/whitepaper-2026/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/info/blog-11/</loc>
@@ -813,7 +822,7 @@
   </url>
   <url>
     <loc>https://bruceleehk.com/en/info/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>
@@ -837,6 +846,24 @@
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/blog-10/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/blog-10/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/blog-10/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/diy-pest-tools/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/diy-pest-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/diy-pest-tools/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/diy-pest-tools/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/whitepaper-2026/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/whitepaper-2026/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/whitepaper-2026/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/whitepaper-2026/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/en/info/blog-11/</loc>
