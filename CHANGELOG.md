@@ -1,3 +1,25 @@
+# 修復日誌 (v9.80 — 2026-10-23)
+
+## v9.80《雙軌分流 CTA＋DIY 工具指南頁：海外流量與 GEO 鋪墊》— 按用戶《雙軌分流邏輯設計.docx》執行
+
+### blog-15／blog-11 文末雙軌分流 CTA 模組（ZH/EN 共 4 頁）
+- 「Dual-CTA Block」資訊卡片植入文章末端：走向 A＝海外港人業主 WhatsApp 直連（綠色按鈕）；走向 B＝美加／海外在地讀者 DIY 工具指南入口（深色按鈕）
+- 文章專屬 Hook 文案置於模組上方（blog-15：木蝨情緒與租務壓力視角；blog-11：預防管理與物業價值視角；EN 忠實採用文檔英文文案）
+- WhatsApp 預填文字按文檔第三部分逐篇精準標記來源（Blog-15 / Blog-11 專屬訊息，方便客服第一時間識別海外業主身份）
+- GTM GA4 事件追蹤：data-gtm-event（click_whatsapp_overseas_landlord／click_amazon_diy_tools）＋dataLayer push 腳本，銜接站點既有 GTM-P5ZC5BLF 容器（consent 後置載入機制不變）
+
+### 新頁：DIY 工具與產品選購指南（/info/diy-pest-tools/＋/en/info/diy-pest-tools/）
+- 純教育型著陸頁（不售賣、零購買連結、零聯盟標籤）：6 大蟲種工具類別（木蝨／老鼠／曱甴／螞蟻／飛蟲／預防工具包）逐一解說「針對階段、擺位、做唔到嘅嘢」
+- DIY vs 專業 IPM 老實對照表＋「DIY 已唔夠」紅旗清單＋no-sales 聲明（為未來 Amazon 產品推薦合法鋪墊，現階段只賺流量不做宣傳）
+- JSON-LD：Article＋FAQPage（4 題）＋BreadcrumbList；hreflang ZH/EN 互鏈；sitemap 新增 entry（154→155）
+
+### 內鏈與 GEO
+- blog-15 ↔ blog-11 ↔ diy 指南三角內鏈（屬靈反思系列＋海外讀者入口互相導流）
+- CTA 底註標明海外業主配套：中英雙語報告、租客鑰匙代管、視像現場彙報
+
+### 驗證
+- validate_v980.py 全過：CTA 4 頁（Hook/預填/GTM 事件/連結/標籤平衡）＋diy 2 頁（schema/canonical/零 Amazon 連結/骨架保留）＋sitemap XML 語法
+
 # 修復日誌 (v9.79 — 2026-10-23)
 
 ## v9.79《EN 九行業子頁文案翻譯補齊》— 對應 v9.77 ZH 注入 1:1 英文化
