@@ -366,7 +366,7 @@
   </url>
   <url>
     <loc>https://bruceleehk.com/info/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>
@@ -489,6 +489,24 @@
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/whitepaper-2026/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/whitepaper-2026/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/whitepaper-2026/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/info/rodent-spillover/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/rodent-spillover/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/rodent-spillover/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/rodent-spillover/"/>
+  </url>
+  <url>
+    <loc>https://bruceleehk.com/en/info/rodent-spillover/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/rodent-spillover/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/info/rodent-spillover/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/info/rodent-spillover/"/>
   </url>
   <url>
     <loc>https://bruceleehk.com/info/blog-11/</loc>
@@ -822,7 +840,7 @@
   </url>
   <url>
     <loc>https://bruceleehk.com/en/info/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/info/"/>

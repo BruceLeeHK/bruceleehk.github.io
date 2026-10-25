@@ -1,3 +1,22 @@
+# 修復日誌 (v9.84 — 2026-10-25)
+
+## v9.84《傳媒揭公共空間鼠患隱憂》時事分析文章：放置於【蟲類資訊】與白皮書遙相呼應 — 按用戶《傳媒揭公共空間鼠患隱憂.docx》執行
+
+### 新頁：時事分析（/info/rodent-spillover/ ＋ /en/info/rodent-spillover/，1:1 專業英文翻譯）
+- 文檔軟文全文落地：時事背景（引述東網 2026-10-25 評論，附真實報導連結，已驗證可達）→「溢出效應」與三維立體入侵 → 白皮書揭示室內盲區（剪刀差）→ 科技驅動 IPM（IoT 智慧監測＋結構封堵兩卡）→ FAQ×5 手風琴 → CTA（免費閱讀白皮書＋WhatsApp 技術顧問＋物業滅蟲方案）
+- 100% 規避版權及誹謗風險：僅客觀引述「監督未緊密配合則成效打折扣」的普遍現象，矛頭轉向私人企業風險管理；附「引註與編製聲明」框（時事引註用途＋CEDARS 原創觀點分界）
+- 頁面編號 CEDARS-NI-2026-10；CSS/header/footer/cookie 橫幅/AI 助手 100% 繼承白皮書模板（CSP 一致）
+
+### GEO 建構（與白皮書遙相呼應）
+- JSON-LD×3：Article（isBasedOn 東網報導、citation 東網＋白皮書、about 10 實體：鼠患外溢/溢出效應/三維立體入侵/鼠患參考指數/食環署/IPM/IoT 智慧鼠盒/結構封堵/不鏽鋼防鼠網/HACCP）＋ FAQPage（5 問答）＋ BreadcrumbList
+- 問句式 H2＋每節「直接答案」開頭段＋blockquote 可引用核心句（「公共防線一旦鬆動……責任邊界從來不等於風險邊界」）
+- 雙向內鏈：新文章 4+ 處鏈向白皮書；白皮書 ZH/EN 延伸閱讀首位互鏈新文章；另鏈 blog-20（食環署鼠患數據）、商業滅蟲物業頁、十八區
+
+### 全站推廣與索引
+- info hub ZH：blog-grid 頂部「時事分析」卡（白皮書卡之後）；EN hub：NEWS INSIGHT · NEW 卡（白皮書卡之後）
+- 新頁 footer 智庫欄補入白皮書連結（新頁自身 footer 亦導向權威頁）
+- sitemap 158→160：新增 rodent-spillover ZH/EN 兩條（lastmod 2026-10-25）；/info/ 與 /en/info/ hub lastmod → 2026-10-25；XML well-formed
+
 # 修復日誌 (v9.83 — 2026-10-25)
 
 ## v9.83《Dataset 結構化資料 license 欄位修復：Search Console 警告清零 ＋ CC BY 4.0 開放授權反向連結策略》— 按用戶《『license』欄位未填.docx》執行
