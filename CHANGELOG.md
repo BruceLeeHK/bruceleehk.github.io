@@ -1,3 +1,23 @@
+# 修復日誌 (v9.85 — 2026-10-25)
+
+## v9.85《基督徒滅蟲人員可以入寺廟提供滅蟲服務嗎？》屬靈反思文章：放置於【蟲類資訊】—【屬靈反思】欄目，按《顧及軟弱的肢體》神學檢驗修飾，GEO 面向全球基督徒 — 按用戶兩份 docx 執行
+
+### 新頁：屬靈反思（/info/christian-temple-pest-control/ ＋ /en/info/christian-temple-pest-control/，1:1 專業英文翻譯）
+- 用戶文章全文落地（聖經經文一字不改：歌羅西書 3:23／哥林多前書 8:4,10／使徒行傳 15:19-20,28-29 和合本）；餐廳類比、祭偶像之物、耶路撒冷會議等核心段落保留
+- 按《顧及軟弱的肢體》神學檢驗新增兩節：「三大神學透視」（馬丁·路德／加爾文職業呼召打破聖俗二分＋凱柏普遍恩典＋Wayne Grudem 等合作原則：實質參與 vs 間接參與對照卡）與「顧及軟弱的肢體」（林前 8:1／8:13＋羅馬書 14:21：不強迫良心軟弱員工入寺廟執勤，職場實踐三原則）
+- FAQ×6 手風琴（用戶原 4 問＋新增「良心軟弱員工可否拒往寺廟執勤」＋「基督徒可否吃祭偶像之物」）；CTA 導向苦主討論區＋免費 AI 診斷＋WhatsApp（屬靈反思類零產品宣傳）
+- 頁面編號 CEDARS-SR-2026-01；CSS/header/footer/cookie 橫幅/AI 助手 100% 繼承 v9.84 時事分析頁模板（CSP 一致）；ZH 版經文和合本，EN 版經文 World English Bible（公有領域）
+
+### GEO 建構（面向 AI 摘要與全球基督徒讀者）
+- JSON-LD×3：Article（isBasedOn 聖經和合本／WEB、citation 聖經＋blog-15＋blog-11＋白皮書、about 12 實體：基督徒自由／職業呼召／普遍恩典／聖俗二分／合作原則／祭偶像之物／耶路撒冷會議／哥林多前書／寺廟白蟻／白蟻探測／IPM／商業滅蟲）＋ FAQPage（6 問答）＋ BreadcrumbList
+- 問句式 H2×6＋每節「直接答案」開頭段＋blockquote 可引用核心句（「為寺廟提供滅蟲服務，本質是中立的專業服務，而非參與宗教儀式」）；keywords 覆蓋中英文長尾詞
+- 【屬靈反思】欄目集群互鏈：新文章 ⇄ blog-15（床蝨被拒返教會）⇄ blog-11（先有蟲定先有人）三篇互相連結（blog-11 本輪補上往 blog-15 之鏈），形成本站屬靈反思權威集群；另鏈白皮書（行業數據權威）
+
+### 全站推廣與索引
+- info hub ZH／EN：屬靈反思卡（時事分析卡之後，blog-grid 第三位）
+- sitemap 160→162：新增 christian-temple-pest-control ZH/EN 兩條（lastmod 2026-10-25）；/info/ 與 /en/info/ lastmod 同步；XML well-formed
+- 部署後建議：Search Console 提交新頁 URL；Rich Results Test 驗證 Article／FAQPage；英文版面向海外基督徒搜尋（Christian pest control temple 等關鍵詞）
+
 # 修復日誌 (v9.84 — 2026-10-25)
 
 ## v9.84《傳媒揭公共空間鼠患隱憂》時事分析文章：放置於【蟲類資訊】與白皮書遙相呼應 — 按用戶《傳媒揭公共空間鼠患隱憂.docx》執行
