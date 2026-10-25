@@ -1,3 +1,21 @@
+# 修復日誌 (v9.83 — 2026-10-25)
+
+## v9.83《Dataset 結構化資料 license 欄位修復：Search Console 警告清零 ＋ CC BY 4.0 開放授權反向連結策略》— 按用戶《『license』欄位未填.docx》執行
+
+### 修復內容（/info/whitepaper-2026/ ＋ /en/info/whitepaper-2026/）
+- Dataset JSON-LD 補 `"license": "https://creativecommons.org/licenses/by/4.0/"`——消除 Google Search Console「資料集結構化資料：license 欄位未填」警告（採文檔建議之 CC BY 4.0 開放授權路線）
+- Dataset JSON-LD 補 `"isBasedOn"` 官方數據來源陣列（文檔建議之透明度權威信號，兩個來源均已驗證真實存在）：
+  - 鼠患參考指數 → 食環署官網專頁（fehd.gov.hk/pestcontrol/rodent_infestation_rate.html，ZH/EN 分語言對應）
+  - 誘蚊器指數 → 資料一線通 DATA.GOV.HK 正式數據集（hk-fehd-fehddengue-fehd-dengue-surveillance，ZH/EN 分語言對應）
+- 方法論與數據來源聲明框新增第三段：
+  - 政府開放數據強制鳴謝聲明（「本報告部分數據包含了由香港特別行政區政府食物環境衞生署透過『資料一線通』(DATA.GOV.HK) 提供的開放數據。」）——滿足香港政府開放數據姓名標示要求
+  - CC BY 4.0 授權說明：明示媒體、學術研究及海外業主可自由引用，惟須標示「滅蟲師傅 (CEDARS_LTD)」出處並連回 bruceleehk.com——落實文檔「海外口碑裂變＋強制反向連結」策略
+- sitemap 白皮書 ZH/EN 兩條 lastmod → 2026-10-25（XML well-formed 驗證通過）
+
+### 部署後跟進（用戶側）
+- Search Console → 資料集報告 → 點擊「修正『資料集結構化資料』問題」按鈕提交重新驗證
+- Rich Results Test 驗證頁面：警告應消失、Dataset 顯示 license 與 isBasedOn 欄位
+
 # 修復日誌 (v9.82 — 2026-10-24)
 
 ## v9.82《2026 香港 18 區防蟲治鼠白皮書：蟲類資訊 × GEO AI 搜索權威》— 按用戶《2026 香港 18 區防蟲治鼠白皮書.docx》執行
