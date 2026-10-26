@@ -1,4 +1,17 @@
-# 修復日誌 (v9.90 — 2026-10-26)
+# 修復日誌 (v9.91 — 2026-10-26)
+
+## v9.91 《消除「關鍵字自相殘殺」》四維攻堅：滅鼠公司關鍵詞鎖定首頁前三甲（2026-10-26）
+
+**依《消除「關鍵字自相殘殺」.docx》執行：確立 /service/rodent/ 為「滅鼠公司」唯一主戰場，全站權重集中＋主題集群護城河＋GEO 結構化，穩定佔據首頁前三**
+
+- 維度一（消除關鍵字自相殘殺）：rat-control 首頁 ZH/EN 重定位——title 由「【2026 滅鼠公司收費透明公開】」改為「【2026 滅鼠收費】家居滅鼠價錢速查」（讓出「滅鼠公司」精確匹配，轉攻滅鼠收費長尾），meta description／og／twitter 三件套同步；收費區 H2 改「家居滅鼠價錢點計」，表後新增 exact-match 引流行「專業滅鼠公司服務主頁 →」；推薦區 H2 與 FAQ×2（HTML＋JSON-LD 同步）移除「滅鼠公司」措辭；EN 版同步去 "Rat Control Company" 精確匹配改 "Rodent Control Prices"。blog-12 hero 段補 exact-match「滅鼠公司收費」內鏈 → /service/rodent/，並修復 </p></p> 嵌套 bug
+- 維度二（Dwell Time 對比表）：/service/rodent/ ZH/EN 於 #ipm-title 與 #price-title 之間新增「傳統滅鼠 vs 滅蟲師傅 IoT 智慧滅鼠」六維對比表（活動監測／源頭追蹤／源頭封堵／透明度／跟進機制／安全性），頂部 GEO 直接答案框＋底部商業客戶提示，復用頁內 .rat-price-table 樣式（共用 CSS 零改動）
+- 維度三（主題集群）：新建三篇長尾文章 ZH+EN 共 6 頁——/info/blog-25/《2026 香港滅鼠公司收費指南：物管與食肆防伏必睇》、/info/blog-26/《食環署捉老鼠方法 vs 專業滅鼠公司 IoT 科技對比》、/info/blog-27/《餐廳廚房老鼠斷尾攻略：HACCP 合規滅鼠標準》；每篇 AI 摘要直接答案框＋問句 H3＋FAQ×6（HTML 與 JSON-LD 程式化同步）＋JSON-LD×3（BreadcrumbList／BlogPosting about 實體／FAQPage）＋文末「專業滅鼠公司服務主頁」exact-match CTA；info hub（ZH/EN）加三張新文章卡；blog-18/20/23 延伸閱讀互鏈成集群護城河
+- GEO（AI 搜尋優化）：三新文全部問句標題＋首段直接答案＋可引用 blockquote＋官方數據（食環署 122,878 隻十八區數據）；rat-control 對比表與收費表雙 GEO 答案框；FAQPage 結構化覆蓋「滅鼠公司收費」「食環署捉老鼠」「HACCP 滅鼠」等 AI 常摘錄查詢
+- 維度四（外部信號）：交付 GBP 評論邀請模板（含「滅鼠公司／IoT 鼠盒／捉老鼠」關鍵字引導）＋公關軟文發佈指引（連登／香港討論區／商業平台，埋 exact-match 反向連結）
+- sitemap 164→170（新頁 ZH 0.9／EN 0.8）＋14 個既有 URL lastmod→2026-10-26；XML well-formed 驗證通過
+- 流量保護：既有頁面零 URL 變更、零內容刪減、canonical 不變；地區頁 title（【觀塘滅鼠公司】等地區長尾）刻意保留——地區意圖與主戰場無衝突；共用 CSS/JS 零改動（?v=9.88 引用不變）
+
 
 ## v9.90 《將滅鼠公司搜索推進前3甲》微調方案落地：滅鼠專頁 SEO 三箭齊發（2026-10-26）
 
