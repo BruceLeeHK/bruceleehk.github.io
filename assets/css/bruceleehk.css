@@ -826,3 +826,96 @@ picture img {
 .spirit-share-series a { color: #059669; font-weight: 600; text-decoration: none; }
 .spirit-share-series a:hover { text-decoration: underline; }
 @media (max-width: 480px) { .spirit-share { padding: 16px; } .spirit-share-actions { flex-direction: column; } .spirit-btn { width: 100%; justify-content: center; } }
+
+/* ============================================================
+   v9.87 導航雙軌下拉選單 Nav Dropdown Menus
+   【家居滅蟲】 vs 【商業滅蟲】對稱分流
+   桌機：hover / focus-within 展開（零 JS 依賴）
+   手機：caret 按鈕手風琴展開（JS 切換 .open）
+   ============================================================ */
+.nav-drop { position: relative; }
+.nav-drop-head { display: inline-flex; align-items: center; }
+.nav-drop-head > a { white-space: nowrap; }
+.nav-caret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 28px;
+    margin-left: -8px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.62rem;
+}
+.nav-caret i { transition: transform var(--transition); }
+.nav-caret:hover { color: var(--primary); }
+.nav-caret:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; border-radius: 4px; }
+.nav-drop.open .nav-caret i { transform: rotate(180deg); }
+.nav-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 252px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+    z-index: 120;
+}
+.nav-dropdown li { width: 100%; margin: 0; }
+.nav-dropdown a {
+    display: block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    color: var(--text-main);
+}
+/* 桌機展開（hover + 鍵盤 focus + 已開狀態） */
+@media (min-width: 769px) {
+    .nav-drop:hover .nav-dropdown,
+    .nav-drop.open .nav-dropdown,
+    .nav-drop:focus-within .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+/* 手機手風琴（≤768px 面板內縮排展示） */
+@media (max-width: 768px) {
+    .nav-drop { width: 100%; }
+    /* 與現有置中選單風格一致：父項＋caret 置中成組 */
+    .nav-drop-head { width: 100%; justify-content: center; gap: 2px; }
+    .nav-caret { width: 30px; height: 34px; font-size: 0.85rem; margin-left: 0; }
+    .nav-dropdown {
+        position: static;
+        display: none;
+        min-width: 0;
+        padding: 2px 0 4px 10px;
+        margin: -6px 0 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    .nav-drop.open .nav-dropdown { display: block; }
+    .nav-dropdown a { white-space: normal; padding: 8px 12px; font-size: 0.9rem; }
+}
+/* 平板密度防溢出：769–1120px 收緊導航間距 */
+@media (min-width: 769px) and (max-width: 1120px) {
+    .nav-links { gap: 10px; }
+    .nav-links a { padding: 6px 8px; font-size: 0.92rem; }
+    .nav-dropdown { min-width: 236px; }
+}

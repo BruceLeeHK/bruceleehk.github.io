@@ -1,4 +1,19 @@
-# 修復日誌 (v9.86 — 2026-10-26)
+# 修復日誌 (v9.87 — 2026-10-26)
+
+## v9.87 — 網站導航與 UX 終極優化：B2C/B2B 雙軌分流＋雙下拉選單（2026-10-26）
+
+**依《網站導航與 UX 終極優化方案.docx》全數落地：完美對稱的【家居滅蟲】vs【商業滅蟲】雙軌導航**
+
+- 頂部導航雙軌更名：「蟲類服務」→「家居滅蟲」（ZH 80 頁＋404＋about＋districts 按鈕）；「商業方案」→「商業滅蟲」（前一版本已完成）；EN 版同步 Services→Residential（81 頁）；SC 簡體版同步（家居灭虫／商业灭虫）；URL 結構 100% 不變，零 404 風險
+- 雙向下拉選單（Hover Dropdown）注入全站 163 頁：【家居滅蟲】下拉＝全屋滅曱甴（連環誘殺）/深層滅床蝨（180°C 蒸氣）/白蟻勘察與防治/滅鼠滅蚊（物理封堵）/海外業主遙距代辦（🔥 交吉起租必備）；【商業滅蟲】下拉＝餐飲食肆滅蟲（HACCP 合規）/物業管理滅蟲（屋苑商廈）/酒店及賓館床蝨處理/IoT 智慧鼠盒監測系統（✨ 科技旗艦）/索取企業報價單——全部深鏈至專屬服務頁或頁內錨點（#remote/#tech/#biz-quote）
+- 下拉實現：桌機純 CSS hover＋`:focus-within`（鍵盤可達、零 JS 依賴、不阻內容渲染）；手機 caret 按鈕手風琴（`bruceleehk.js`／`main.js` 新增 `initNavDrop`，aria-expanded 無障礙、外部點擊/ESC 自動收合）；新增平板 769–1120px 密度防溢出媒體查詢
+- 麵包屑同步更名：可見麵包屑「商業滅蟲方案」→「商業滅蟲」（ZH 11 處、EN 7 處）；JSON-LD BreadcrumbList `"name"` 同步（13 處）
+- Landing page SEO 對齊：/services/ title →「專業家居滅蟲及海外遙距代辦服務 | 滅蟲師傅」（H1 同步加「家居」關鍵字、meta description 對齊）；/commercial/ title →「商業滅蟲服務 | 食肆、酒店及物業管理專屬 IoT 方案 | 滅蟲師傅」；EN 版同步（Residential/Commercial Pest Control HK）；四頁 og:title / twitter:title 全部同步
+- 頁尾對齊：「🏢 商業滅蟲方案」欄 →「🏢 商業滅蟲」（80 頁）；頁尾連結「蟲類服務總覽」→「家居滅蟲服務總覽」（80 頁）＋EN「All Services」→「Residential Services」（80 頁）
+- 全站零殘留檢查通過：蟲類服務／商業方案／虫类服务／商业方案 = 0
+- 流量保護：零 URL 變更、零刪頁、零內容刪減；下拉內鏈為純 HTML（無新 HTTP 請求、JS 增量 <2KB）；全站每頁新增 10 條語義內鏈強化 Silo 權重流動（B2C↔B2B 分流更精準）；「家居滅蟲」「商業滅蟲」雙高搜量詞全站 Header 權重鞏固
+- sitemap：/services/、/commercial/ 中英版 lastmod → 2026-10-26
+
 
 ## v9.86 — 屬靈反思分享圖卡傳播渠道（2026-10-26）
 

@@ -18,6 +18,36 @@
           navLinks.classList.remove('active');
         });
       });
+
+      /* --- Nav Dropdown Accordion (v9.87 家居滅蟲／商業滅蟲雙軌下拉) --- */
+      navLinks.querySelectorAll('.nav-caret').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var li = btn.closest('.nav-drop');
+          if (!li) return;
+          var open = li.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+      document.addEventListener('click', function (e) {
+        var t = e.target && e.target.closest ? e.target : null;
+        navLinks.querySelectorAll('.nav-drop.open').forEach(function (li) {
+          if (!t || !li.contains(t)) {
+            li.classList.remove('open');
+            var b = li.querySelector('.nav-caret');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          navLinks.querySelectorAll('.nav-drop.open').forEach(function (li) {
+            li.classList.remove('open');
+            var b = li.querySelector('.nav-caret');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
     }
 
     /* --- Strategy Filter --- */

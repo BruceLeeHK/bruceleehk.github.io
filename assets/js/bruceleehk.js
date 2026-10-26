@@ -13,6 +13,30 @@
 (function () {
     'use strict';
 
+    /* ---------- Nav Dropdown Accordion (v9.87 家居滅蟲／商業滅蟲雙軌下拉) ---------- */
+    function closeAllNavDrops() {
+        document.querySelectorAll('.nav-drop.open').forEach(li => {
+            li.classList.remove('open');
+            const b = li.querySelector('.nav-caret');
+            if (b) b.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    function initNavDrop(scope) {
+        const root = scope || document;
+        root.querySelectorAll('.nav-caret').forEach(btn => {
+            if (btn.dataset.dropBound) return;
+            btn.dataset.dropBound = '1';
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const li = btn.closest('.nav-drop');
+                if (!li) return;
+                const open = li.classList.toggle('open');
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+        });
+    }
+
     /* ---------- Mobile Menu Toggle (手機版選單控制) ---------- */
     function initMenu() {
         const toggle = document.getElementById('menu-toggle');
@@ -24,6 +48,7 @@
             toggle.setAttribute('aria-expanded', 'false');
             const icon = toggle.querySelector('i');
             if (icon) icon.className = 'fa-solid fa-bars';
+            closeAllNavDrops();
         };
         const open = () => {
             nav.classList.add('active');
@@ -38,10 +63,14 @@
         });
         nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 
+        // v9.87：注入下拉選單手風琴行為
+        initNavDrop(nav);
+
         // 點擊選單外區域自動關閉
         document.addEventListener('click', (e) => {
             if (nav.classList.contains('active') &&
                 !nav.contains(e.target) && !toggle.contains(e.target)) close();
+            if (!e.target.closest || !e.target.closest('.nav-drop')) closeAllNavDrops();
         });
 
         // 按 ESC 鍵關閉
