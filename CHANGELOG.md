@@ -1,4 +1,18 @@
-# 修復日誌 (v9.85 — 2026-10-25)
+# 修復日誌 (v9.86 — 2026-10-26)
+
+## v9.86 — 屬靈反思分享圖卡傳播渠道（2026-10-26）
+
+**《加設 Google 帖子》方案四項工程全數落地：一鍵下載/分享、Open Graph 預覽圖、響應式 Lazy Loading、模板化整合**
+
+- 三張《屬靈反思》分享圖卡入庫 `assets/img/spirit-card-{1-bedbug,2-temple,3-insects}.{jpg,webp}`：1024×1024、jpg ≤200KB（WhatsApp og:image 安全线）；圖卡 2（寺廟篇）、3（先有蟲篇）右下角二維碼經 AI 區域修復移除，底部文字統一為「AI 診斷 / WhatsApp 預約」，與圖卡 1 完全一致（插畫其餘部分保留原圖像素）
+- 六頁（blog-15 / blog-11 / christian-temple-pest-control 中英版）文末注入共用分享圖卡區塊 `.spirit-share`：下載按鈕（`<a download>`）＋「一鍵轉發圖卡」按鈕（Web Share API 手機直彈 WhatsApp 分享單並附圖卡檔案；不支援自動降級 WhatsApp 文字分享）；圖片 `<picture>` webp+jpg 雙格式、`loading="lazy"` + `width/height` 防 CLS
+- 新增共用 `/assets/js/spirit-share.js`（defer，事件委派，GTM 自動推送 `share_spirit_card` / `share_spirit_card_success`）＋ `bruceleehk.css` `.spirit-share` 響應式樣式（手機按鈕全寬）
+- 六頁 `og:image` / `twitter:image` / Article JSON-LD `image` 由通用 og-cover.jpg 改為各篇專屬圖卡，並補 `og:image:width/height/alt` —— WhatsApp/FB 貼網址即彈出圖卡預覽
+- 區塊內建「系列其他篇」內鏈，三篇互導循環瀏覽；新增 `SHARE-CARD-TEMPLATE.md` 模板指南（日後新文章填 6 個變數即可複用）
+- Bug 修復：christian-temple-pest-control ZH 延伸閱讀 `href="B15"/"B11"` 佔位符壞鏈 → 正確內鏈（v9.85 遺留）
+- sitemap 六頁 lastmod → 2026-10-26
+- 流量保護：零 URL 變更、零內容刪減、新增資源全 defer/lazy（JS 1.9KB、CSS +1.6KB、圖卡 lazy 載入），對現有 SEO/速度零負面影響；og 預覽圖升級直接提升社交分享 CTR
+- Google Business Profile 帖子文案（3 篇 ZH＋3 篇 EN＋發帖 SOP）見交付包《Google商業檔案帖子-屬靈反思系列文案.txt》
 
 ## v9.85《基督徒滅蟲人員可以入寺廟提供滅蟲服務嗎？》屬靈反思文章：放置於【蟲類資訊】—【屬靈反思】欄目，按《顧及軟弱的肢體》神學檢驗修飾，GEO 面向全球基督徒 — 按用戶兩份 docx 執行
 
