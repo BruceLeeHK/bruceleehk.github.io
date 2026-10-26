@@ -1,4 +1,20 @@
-# 修復日誌 (v9.88 — 2026-10-26)
+# 修復日誌 (v9.89 — 2026-10-26)
+
+## v9.89 — 《重整【家居滅蟲】子頁面》方案落地：海外業主遙距代辦專頁＋導航 6 項＋services Hub 增強＋黃蜂頁安全強化（2026-10-26）
+
+**依《重整【家居滅蟲】子頁面.docx》執行：點擊下拉每一項都去到聚焦嘅專屬頁面，/overseas-landlord/ 獨立建頁終結「點入去都係舊綜合頁」問題**
+
+- 新建 /overseas-landlord/（ZH 57.2KB）＋ /en/overseas-landlord/（EN 56.5KB）：文檔藍圖全數落地——三大痛點卡（租客投訴處理／買賣交吉起租／無法親身視察）、遙距四步流程（WhatsApp 需求→代約勘察書面報價→施工雲端監工→覆檢保固電子收據）、英澳加星時區卡＋FPS／信用卡／Wise／PayPal 支付 chips、真實場景個案節錄（英國業主沙田居屋白蟻交吉／澳洲業主九龍床蝨租務糾紛，細節私隱處理）、防詐提示、FAQ×8（中英同構）；JSON-LD×4（BreadcrumbList＋Service hasOfferCatalog×3＋FAQPage×8＋PestControl）、og 三件套、hreflang 互指、WA 預填連結解碼驗證
+- 全站導航下拉 5 項→6 項（ZH 82 頁＋EN 81 頁）：新順序按文檔 IA——深層滅床蝨→白蟻勘察（微波探測）→全屋滅曱甴→滅鼠防鼠工程→滅黃蜂／摘蜂巢（🚨 緊急處理）→海外業主遙距代辦（🔥 交吉／起租必備）；URL 決策：床蝨沿用 /service/flea/、黃蜂沿用 /service/wasp/（兩頁早有內容與排名積累，換 URL 需 301 有波動風險，與流量保護原則衝突——文檔建議嘅 /bedbug/、/wasp/ 新 URL 不採用，收錄零損失）
+- 頁尾「家居滅蟲服務」欄 162 頁加海外業主專頁連結（ZH＋EN）
+- /services/ Hub 增強（不推倒重來，零內容刪減保護既有收錄）：導覽 pill band 加「滅蜂巢（🚨 緊急）」（補齊 6 服務入口）；#remote 版塊加綠色漸層「海外業主專屬專頁」引流卡；hero 加免費 AI 診斷按鈕（文檔藍圖 AI 入口）；EN 版同時修復 remote 版塊 ZH 路徑鏈接（/info/blog-10/→/en/info/blog-10/、/ai/→/en/ai/，既有 bug）
+- /service/wasp/ 安全強化（ZH/EN）：築巢位列表補窗台／抽氣扇槽（既有村屋／冷氣機基礎上）；「時段選擇」明確化為黃昏／夜間行動策略（歸巢後活動力最低）；新增紅色危險警告盒——切勿自行噴殺蟲水／火燒／射水＋蜂毒過敏性休克（Anaphylaxis）風險解說＋正確做法三步＋緊急 WA 預填連結
+- silo 互鏈：blog-10（遙距攻略 ZH/EN）hero CTA 加專頁按鈕（與 /overseas-landlord/ 正文互鏁成雙向）；/overseas-landlord/ 內鏈 services/flea/termite/wasp/blog-15/blog-24 生態
+- sitemap 162→164（新頁 ZH 0.9／EN 0.8）；/service/wasp/、blog-10 中英版 lastmod→2026-10-26；XML well-formed 驗證
+- 全部既有資源引用 ?v=9.88 保留；導航更新零資源請求變化（純 HTML）；下拉 HTML 增量每頁 <500B
+- 冪等驗證：nav/patch 腳本重跑全部 SKIP；EN wasp 插入時一度出現多餘 </div></section>（div 45/46），精確修復後 45/45 平衡
+
+## v9.88 — 緊急修復：首頁導航下拉爆版（CDN 快取版本錯配）＋全站 Cache-Busting（2026-10-26）
 
 ## v9.88 — 緊急修復：首頁導航下拉爆版（CDN 快取版本錯配）＋全站 Cache-Busting（2026-10-26）
 
