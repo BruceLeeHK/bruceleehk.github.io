@@ -1,4 +1,19 @@
-# 修復日誌 (v9.87 — 2026-10-26)
+# 修復日誌 (v9.88 — 2026-10-26)
+
+## v9.88 — 緊急修復：首頁導航下拉爆版（CDN 快取版本錯配）＋全站 Cache-Busting（2026-10-26）
+
+**根因診斷：非代碼邏輯問題，而是 Cloudflare 把舊版 CSS 快取了 30 天——新 HTML（v9.87 nav-drop 結構）＋舊 CSS（無下拉隱藏規則）＝子選單全部平鋪擠爆導航**
+
+- 症狀：部署 v9.87 後，部分訪客首頁導航的【家居滅蟲】【商業滅蟲】下拉子選單全部展開平鋪、caret 顯示為原生按鈕、「覆蓋十八區」等被擠成豎排
+- 實證取證（bruceleehk.com 線上）：`/assets/css/bruceleehk.css` 無參數請求 → `cf-cache-status: HIT`、`age: 1,914,462`（約 22 天前快取）、`cache-control: max-age=2592000`（30 天）、舊檔 19,100 bytes（2026-09-20 版，零下拉規則）；同一 URL 加隨機參數 → 回源取得新版 25,096 bytes（含 19 處下拉規則）。線上 HTML 與本地 v9.87 逐位元組一致（96,064 bytes）
+- 原理：GitHub Pages 不處理 repo 內 `_headers`，Cloudflare（代理模式）亦不讀取——CDN 邊緣對 CSS/JS 的長 TTL 快取在新部署後不會自動失效；HTML 無快取所以是新的，CSS 有快取所以是舊的 → 版本錯配爆版
+- 修復（Cache-Busting 版本化）：全站 166 個 HTML 的本地資源引用統一加 `?v=9.88`，共 494 處（bruceleehk.css×161、bruceleehk.js×159、i18n.js×163、main.js×2、main.min.js×1、spirit-share.js×6、style.min.css×2）；Cloudflare cache key 含 query string → 帶新參數的請求視為全新資源立即回源，**無需等待 30 天、無需人工 purge 即對所有訪客生效**
+- 覆蓋路徑變體：`/assets/`（155）、`../assets/`、`../../assets/`、`assets/` 相對路徑全部處理；cdnjs／GTM 等外部資源零污染
+- 冪等設計：腳本先剝離舊 `?v=` 再寫入新版本號，重跑位元組不變；未來升級只需改 VERSION 常數（如 `?v=9.89`）
+- 驗證 24/24 通過：494 處版本參數＋零殘留、引用資源 100% 可解析、無殘缺引用（`href="assets/"` 型防護檢查）、GTM/canonical/og/nav-drop×2/spirit-share×6/JSON-LD 抽樣全保留、script/head/body/ul/nav 標籤平衡、冪等往返位元組不變
+- 瀏覽器實測（本地）：桌機 1440px hover 下拉懸浮卡片正常展開（visibility:visible/opacity:1）、手機 375px 漢堡→手風琴展開收合正常（aria-expanded 同步）、EN 首頁與 blog-15 抽樣渲染正常、Console 零錯誤
+- 流量保護：零 URL 變更（頁面位址全部不變）、零內容刪減、HTML 檔案數 166 不變、資源檔案零修改（僅 HTML 引用加參數）、SEO 零影響（query 參數不產生新頁面、canonical 指向無參數位址、sitemap 零變動避免 162 頁全量重抓稀釋抓取預算）
+- 未來部署 SOP：凡修改 `assets/css/*` 或 `assets/js/*`，同步升版全站 `?v=` 參數（跑 `scripts/fix_v988_cachebust.py` 改 VERSION 即可）；可選在 Cloudflare Dashboard「Caching → Purge Everything」立即清空全部邊緣快取（加速 og 圖等無參數資源刷新）
 
 ## v9.87 — 網站導航與 UX 終極優化：B2C/B2B 雙軌分流＋雙下拉選單（2026-10-26）
 
