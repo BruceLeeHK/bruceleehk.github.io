@@ -1,4 +1,15 @@
-# 修復日誌 (v9.89 — 2026-10-26)
+# 修復日誌 (v9.90 — 2026-10-26)
+
+## v9.90 《將滅鼠公司搜索推進前3甲》微調方案落地：滅鼠專頁 SEO 三箭齊發（2026-10-26）
+
+**依《將滅鼠公司搜索推進前3甲.docx》執行：向 Google 證明「點擊我哋個頁最能解決用戶問題」——搶 CTR、搶停留、搶權重，一舉由第 9 位衝前三甲**
+
+- 方案一（Meta Title & Description 搶點擊）：/service/rodent/ ZH title 改為「【專業滅鼠公司】即日上門・單次滅鼠 $1,500 起・IoT 智慧鼠盒與防鼠網封堵｜滅蟲師傅」——滅鼠公司關鍵字前置＋「即日上門」緊迫感＋$1,500 價格錨；description 重寫為「老鼠入屋唔使等！」痛點開場＋真實個案斷尾＋免費 AI 估價 CTA；og:title／twitter:title／og:description／twitter:description 三件套同步；EN 版 title 加 Same-Day。/rat-control/ 標題刻意不動（保留現有排名積累，避免關鍵字頁面波動）
+- 方案二（Dwell Time 首屏視覺衝擊）：/service/rodent/ ZH+EN 首屏 hero 新增「實證雙卡」——📡 IoT 智慧鼠盒實拍（smart-iot-rat.webp，fetchpriority=high）＋🍽️ 真實餐廳個案 WhatsApp 實錄（餐廳廚房防鼠對話截圖），雙卡頁內錨點直達 #iot-title／#ipm-title 深度內容，延長停留；hero AI 按鈕文案改「免費 AI 診斷・即時估價」對齊搜尋意圖；width/height 全標註防 CLS；樣式全走頁內 <style>（共用 CSS 零改動）
+- 方案三（內部連結權重集中）：白皮書 ZH/EN「6mm 原則・斷尾」段＋blog-23 粘鼠板教學 ZH/EN CTA 段補 exact-match「專業滅鼠公司／professional rat control company」錨文本 → /service/rodent/；盤點確認 blog-17、blog-18、首頁、rat-control 既有「滅鼠公司」錨點已就位，全站權重集中灌注滅鼠專頁
+- sitemap 6 URL lastmod→2026-10-26（service/rodent 中英、whitepaper-2026 中英、blog-23 中英）；純 HTML 修改，?v=9.88 資源引用不變（共用 CSS/JS 零改動）
+- 流量保護：零 URL 變更、零內容刪減、canonical 不變、外鏈零污染；修改僅限 6 頁（rodent 中英、白皮書中英、blog-23 中英）＋sitemap＋CHANGELOG
+
 
 ## v9.89 — 《重整【家居滅蟲】子頁面》方案落地：海外業主遙距代辦專頁＋導航 6 項＋services Hub 增強＋黃蜂頁安全強化（2026-10-26）
 
