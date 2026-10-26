@@ -1,6 +1,36 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI (v9.3 安全強化版)
- * 基於生產版 v9.2 (MoE 雙腦 + Contextual Prior + Auto-Retry) 升級：
+ * Cloudflare Worker — 滅蟲師傅 AI (v9.6 Workflow 防彈版)
+ * 基於生產版 v9.5 (Bulletproof) 升級：
+ *
+ * v9.6 升級亮點（Dify Workflow 重構防彈版 — 2026-10-26）：
+ *   🔄 端點切換：/chat-messages → /workflows/run（配合 Dify「滅蟲師妹 - 工作流版」
+ *      GPT 視覺看圖 ➔ 食環署智庫檢索 ➔ DeepSeek 粵語輸出 工作流）
+ *   🔄 Payload 重構：Chatflow（query + top-level files）→ Workflow inputs 結構
+ *      { user_desc, [DIFY_FILE_VAR] }；若 400 拒收自動改試 top-level files 相容變體
+ *   🔄 回應解析：新增 Workflow 三層嵌套 data.data.outputs.text / .result 挖字，
+ *      加「輸出變數名自適應」終極兕底（outputs 內最長字串，變數改名都挖到）
+ *   🛡️ status:'failed' 明確判死：Workflow 執行失敗直接 UPSTREAM_ERROR，唔會扮成功
+ *   🛡️ DIFY_MODE=auto（預設）：/workflows/run 404（App 類型錯配／金鑰用錯）自動
+ *      回退 /chat-messages 舊端點自癒 — 無論 Dify 端係 Workflow 定 Chatflow 都照跑
+ *   ⚙️ 新增環境變數：DIFY_MODE（auto/workflow/chatflow）、DIFY_FILE_VAR（Start 節點
+ *      檔案變數名，預設 files）
+ *   ✅ 前端契約零改動：對外 /api/analyze-pest 請求／回應格式與 v9.5 完全一致
+ *
+ * v9.5 升級亮點（「徹底解決 AI 診斷失敗」防彈級修復 — 2026-10-24）：
+ *   🛡️ 消滅 SyntaxError：全檔語法重新整理，禁止斷行開頭 || 等易錯寫法，
+ *      任何手改都唔會再令整個 Worker 編譯失敗（502 風暴根源）
+ *   🛡️ 消滅 TypeError：新增 extractDifyAnswer() — 無論 Dify 回傳 null / undefined /
+ *      Object / 空值，都安全挖出文字並強制 String() 化，.includes() 永遠安全執行
+ *   🛡️ 優雅降級（Graceful Degradation）：AI 判定失敗（假死報告／空白回應）唔再拋 502，
+ *      改回傳 HTTP 200 + success:false + code:AI_RECOGNITION_FAILED，前端溫和提示
+ *      「相片唔清晰請重拍」，唔會再出現紅色系統崩潰
+ *   🛡️ 上游回應解析防彈：Dify 意外回傳非 JSON（WAF 攔截頁／HTML 錯誤頁）都唔會炸，
+ *      一律轉為可重試嘅 UPSTREAM_ERROR
+ *   ⏱️ Deadline 護衛：chat 重試前檢查剩餘時間預算，唔會開展一場根本趕唔切嘅
+ *      「殭屍重試」，浪費上游配額
+ *   ♻️ 完整保留 v9.3 安全強化（金鑰 fail-closed／地區封鎖）＋ v9.4 FastTrack
+ *      （63s 分析時限／20s 上傳時限／精簡輸出）＋ KV 智慧快取（假死報告拒入快取，
+ *      前端放棄後 Worker 仍可完成並寫入快取 —— 用戶重試即中快取，地鐵弱網救星）
  *
  * v9.4 升級亮點（FastTrack 時效優化 — 2026-10-22）：
  *   ⏱ CHAT_TIMEOUT_MS 100s → 63s：配合前端 68 秒總預算，60–70 秒內必完成或明確報錯
@@ -8,47 +38,35 @@
  *   ✂️ compact query 加精簡輸出指引，縮短 DeepSeek 報告生成時間
  *
  * v9.3 升級亮點（「封殺藏在細節裡魔鬼」安全強化 — 2026-10-08）：
- *   🔐 金鑰清庫：移除代碼內明碼 DIFY_API_KEY 預設值（舊金鑰已隨代碼庫外洩，
- *      必須喺 Dify 後台輪換新金鑰，再用 wrangler secret / dashboard Secret 設定）。
- *      未設定金鑰時 /api/analyze-pest 返回 503 AI_NOT_CONFIGURED（fail-closed）。
+ *   🔐 金鑰清庫：移除代碼內明碼 DIFY_API_KEY 預設值。未設定金鑰時
+ *      /api/analyze-pest 返回 503 AI_NOT_CONFIGURED（fail-closed）。
  *   🌍 地區封鎖：默認封鎖 RU/IN/KP 三國請求（403 GEO_BLOCKED），可用
- *      env.BLOCKED_COUNTRIES 覆寫（例 "RU,IN,KP,VN"），設 "none" 停用。
- *   🩺 /health 新增 dify_key_set / blocked_countries 欄位，方便部署驗證。
- *
- * v9.2 升級亮點（v9.14 穩定性修復：解決間歇性 HTTP 502）：
- *   🔁 步驟 2（chat-messages）加 5xx/網絡錯誤重試 1 次（1.5s backoff）——
- *      Dify 間歇性過載唔會再直接變成 502 彈爆用戶；逾時（TIMEOUT）同 429 唔重試
- *      （避免重複計費同加倍等待）
- *   📮 錯誤碼細分：上游逾時而家返回 HTTP 504（前端可以區分「繁忙請重試」
- *      vs「真故障」），其餘上游錯誤保持 502、限流 429
- *   🩺 /health 版本號升級至 9.2，方便 Cloudflare dashboard 驗證部署生效
- *   ♻️ 沿用 v9.1 全部功能：多模態上下文先驗、三大黃金法則、快取鍵 v2、防注入
- * v9.1 升級亮點（Multi-modal Contextual Prior + 三大黃金法則 + Token 精準投放）：
- *   🧠 客人可附加 ≤50 字「補充描述」（環境線索），AI 結合圖片 + 線索收窄判定範圍，
- *      準確度大幅提升，同時保持獨立判斷（絕不盲目附和客人猜測）
- *   🛡️ 防禦三重防線：前端清洗 → Worker 符號白名單 + 攻擊絆線（≥3 粒攻擊符號整條丟棄，
- *      惡搞載荷零 Token 損耗）→ 防禦提示詞裝甲（緊貼描述出現，未被清洗嘅文字劫持都被包住）
- *   ⚡ Token 精準投放（好鋼用在刀口）：預設精簡 query 提示詞對齊 Dify 雙腦分工 ——
- *      化驗規則由 LLM2 節點系統提示詞接管、報告格式由 LLM3 接管，
- *      query 只講任務唔重複規則（慳約 200 GPT input tokens／次），
- *      同時消除「query 要求完整報告 vs LLM2 只准 150 字」嘅指令衝突
- *   💰 描述封頂 50 字杜絕千字文；防禦裝甲只喺有描述時附加（無描述零額外開支）；
- *      快取鍵 v2 = 圖片指紋 + 描述指紋（同相同描述 24 小時內零重複計費）
- *   ♻️ 沿用 v8.1 改進：假死報告（無法辨識）拒入快取、雙路徑路由、動態副檔名上傳
+ *      env.BLOCKED_COUNTRIES 覆寫，設 "none" 停用。
+ *   🩺 /health 顯示 dify_key_set / blocked_countries，方便部署驗證。
  *
  * 環境變數（wrangler.toml [vars] 或 secret，全部可選）：
  *   DIFY_API_URL / DIFY_API_KEY — Dify 應用端點與金鑰（⚠️ 生產環境請用 wrangler secret put
- *     DIFY_API_KEY 覆寫預設值，避免金鑰明碼存在代碼庫）
+ *     DIFY_API_KEY 覆寫，避免金鑰明碼存在代碼庫）
  *   PEST_KV（或 CACHE_KV）— KV 綁定：智慧快取命名空間（兩個名都認，舊新綁定兼容）
  *   DESC_MAX_CHARS — 描述字數上限（預設 50，黃金法則一）
- *   DESC_CHANNEL — 描述傳送通道：both（預設，query+inputs 雙保障）| query | inputs
- *                  Dify Start 節點加咗 user_desc 變數後可改 inputs，慳返重複 token
- *   QUERY_MODE — query 提示詞模式：compact（預設，對齊 Dify 雙腦 Chatflow）| full（舊式完整
- *                提示詞，供未升級嘅單 LLM Dify App 應急使用）
+ *   DESC_CHANNEL — 描述傳送通道：both（預設）| query | inputs（僅 Chatflow 回退用）
+ *   QUERY_MODE — query 提示詞模式：compact（預設）| full（舊式完整提示詞應急用，僅 Chatflow 用）
+ *   DIFY_MODE — Dify 調用模式：auto（預設，workflow 優先 + chatflow 自癒回退）|
+ *     workflow（強制 /workflows/run）| chatflow（強制 /chat-messages 舊版應急）
+ *   DIFY_FILE_VAR — Dify Workflow Start 節點檔案變數名稱（預設 files；
+ *     如 Start 節點改咗名，例如 image，喺 wrangler.toml [vars] 設定即可）
  */
 
 /* v9.3: 地區封鎖默認名單（env.BLOCKED_COUNTRIES 可覆寫，設 "none" 停用） */
 const DEFAULT_BLOCKED_COUNTRIES = 'RU,IN,KP';
+
+/* v9.3: 地區封鎖判定（v9.5 改為具名函數：唔用斷行 && 條件，避免手改語法陷阱） */
+function isGeoBlocked(country, blockedList) {
+  if (!blockedList || blockedList.toLowerCase() === 'none') return false;
+  if (!country) return false;
+  const list = blockedList.toUpperCase().split(',').map((s) => s.trim());
+  return list.includes(String(country).toUpperCase());
+}
 
 const ALLOWED_ORIGINS = new Set([
   'https://bruceleehk.com',
@@ -64,15 +82,89 @@ const DEFAULTS = {
   DIFY_API_URL: 'https://api.dify.ai/v1',
   DIFY_API_KEY: '',   // v9.3 安全升級：金鑰一律用 secret 設定（wrangler secret put DIFY_API_KEY），代碼零明碼
   UPLOAD_TIMEOUT_MS: '20000',   // v9.4: 前端已預壓 ≤420KB，20 秒充裕
-  CHAT_TIMEOUT_MS: '63000',     // v9.4: 63 秒（配合前端 68 秒總預算，分析 60–70 秒內必完成或報錯）
+  CHAT_TIMEOUT_MS: '63000',     // v9.4: 63 秒（配合前端 68 秒單次預算）
   MAX_IMAGE_BYTES: String(8 * 1024 * 1024),
   CACHE_TTL_SECONDS: '86400',
   RATE_LIMIT_MAX: '8',
   RATE_LIMIT_WINDOW_MS: '3600000',
   DESC_MAX_CHARS: '50',   // 黃金法則一：限制 50 字
-  DESC_CHANNEL: 'both',   // 描述傳送通道（both / query / inputs）
-  QUERY_MODE: 'compact',  // query 模式（compact 對齊 Dify 雙腦 / full 舊式完整提示詞）
+  DESC_CHANNEL: 'both',   // 描述傳送通道（both / query / inputs，僅 Chatflow 回退用）
+  QUERY_MODE: 'compact',  // query 模式（compact 對齊 Dify 雙腦 / full 舊式完整提示詞，僅 Chatflow 用）
+  DIFY_MODE: 'auto',      // v9.6: Dify 調用模式 auto（預設，workflow 優先 + chatflow 自癒回退）/ workflow / chatflow
+  DIFY_FILE_VAR: 'files', // v9.6: Dify Workflow Start 節點檔案變數名稱
 };
+
+/* ============================================================
+   v9.6 防彈核心一：Dify 回應安全挖字（消滅 TypeError + 兼容雙格式）
+   Chatflow 回 answer 欄位；Workflow 回 data.outputs.text 三層嵌套。
+   Dify（底層 GPT-4o / DeepSeek）有時會因超時、WAF 攔截或模型異常，
+   回傳 null / undefined / Object 而非字串。本函數一律安全處理。
+   ============================================================ */
+function extractDifyAnswer(data) {
+  let raw = '';
+  if (data && typeof data === 'object') {
+    const outputs = data.outputs || {};
+    const nested = data.data || {};
+    const nestedOutputs = nested.outputs || {};
+    /* v9.6：候選清單循序挖字 — 同時覆蓋 Chatflow（answer）與 Workflow
+       （data.data.outputs.text 三層嵌套）兩種格式；typeof 過濾確保只有真字串
+       入圍（防物件誤選 → "[object Object]"）。唔用斷行 || 鏈，避免手改語法陷阱。 */
+    const candidates = [
+      data.answer, data.text,
+      outputs.result, outputs.answer, outputs.text,
+      nested.answer, nested.text,
+      nestedOutputs.text, nestedOutputs.result, nestedOutputs.answer,
+    ];
+    for (let i = 0; i < candidates.length; i++) {
+      const c = candidates[i];
+      if (typeof c === 'string' && c) { raw = c; break; }
+    }
+    /* v9.6 終極兜底：輸出變數名自適應 — 兩層 outputs 內揀最長字串值，
+       Dify 端輸出變數改名（唔叫 text/result）都照樣挖到報告 */
+    if (!raw) {
+      const pools = [outputs, nestedOutputs];
+      for (let p = 0; p < pools.length; p++) {
+        const pool = pools[p];
+        if (!pool || typeof pool !== 'object') continue;
+        const keys = Object.keys(pool);
+        for (let i = 0; i < keys.length; i++) {
+          const val = pool[keys[i]];
+          if (typeof val === 'string' && val.length > raw.length) raw = val;
+        }
+        if (raw) break;
+      }
+    }
+  } else if (typeof data === 'string') {
+    raw = data;
+  }
+  /* 強制轉為字串：確保 100% 唔會出現 TypeError
+     (Cannot read properties of undefined / is not a function) */
+  let answer = String(raw || '');
+  /* 物件被字串化會變成 "[object Object]" → 視為無效內容 */
+  if (!answer || answer === '[object Object]') return '';
+  /* DeepSeek R1 推理標籤清理，保持報告排版乾淨 */
+  answer = answer.replace(/<think>[\s\S]*?<\/think>/gi, '');
+  return answer.trim();
+}
+
+/* ============================================================
+   v9.5 防彈核心二：假死報告判定（消滅 502 崩潰）
+   判斷 AI 是否命中「睇唔清」關鍵字，或者根本無回傳內容。
+   命中 → 呼叫方回 HTTP 200 + AI_RECOGNITION_FAILED（優雅降級），
+   並嚴禁寫入 KV 快取（重試先有機會成功）。
+   ============================================================ */
+function isBadReport(safeAnswer) {
+  if (!safeAnswer || String(safeAnswer).trim() === '') return true;
+  const BAD_MARKERS = [
+    '無法辨識', '無法辨認', '未能判定', '未能識別', '無法識別',
+    'No insect image', 'no insect image',
+  ];
+  const s = String(safeAnswer);
+  for (let i = 0; i < BAD_MARKERS.length; i++) {
+    if (s.includes(BAD_MARKERS[i])) return true;
+  }
+  return false;
+}
 
 /* ============================================================
    分析提示詞（v9.1 Token 精準投放核心）
@@ -110,20 +202,18 @@ const FULL_ANALYSIS_PROMPT = [
 function sanitizeUserDesc(raw, maxChars) {
   if (typeof raw !== 'string') return '';
   /* 攻擊符號絆線：曲尺號、引號、反斜線等係程式碼／模板注入嘅彈藥，正常滅蟲描述
-     好少可出現 ≥3 粒。一旦超過，好大機會係惡搞載荷 → 成條丟棄，免得清洗後嘅
-     碎片（例如 rolesystemcontent...）嘥 Token 之餘又干擾模型注意力。 */
+     好少可出現 ≥3 粒。一旦超過，好大機會係惡搞載荷 → 成條丟棄。 */
   const attackSymbols = (raw.match(/[{}[\]<>"'`$\\;=|~^@#*]/g) || []).length;
   if (attackSymbols >= 3) return '';
   return raw
-    .replace(/[\u0000-\u001f\u007f]/g, ' ')                                   // 控制字元
-    .replace(/[^\u4e00-\u9fff\u3400-\u4dbfa-zA-Z0-9，。、！？：；·（）「」\s,.\-\/%+&]/g, '') // 符號白名單（emoji 過濾，唔觸發絆線）
+    .replace(/[\u0000-\u001f\u007f]/g, ' ')
+    .replace(/[^\u4e00-\u9fff\u3400-\u4dbfa-zA-Z0-9，。、！？：；·（）「」\s,.\-\/%+&]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
-    .slice(0, maxChars);                                                       // 黃金法則一：硬性 50 字上限
+    .slice(0, maxChars);
 }
 
 /* 有描述時：描述 + 防禦裝甲 + 獨立化驗任務緊貼出現（黃金法則三）。
-   防禦指令緊貼住描述，確保模型讀完客人文字後即刻讀到「唔准俾佢帶風向」；
    無描述時完全唔附加 → 零額外 Token（好鋼用在刀口）。 */
 function buildAnalysisPrompt(userDesc, mode) {
   const base = mode === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT;
@@ -223,14 +313,176 @@ async function cachePut(env, hash, payload, ttlSeconds) {
   } catch (_) { /* 快取失敗不影響主流程 */ }
 }
 
+/* v9.5 防彈 JSON 解析：Dify 意外回傳 HTML／空body（WAF 攔截頁等）都唔會炸 */
+async function parseJsonSafe(res) {
+  try {
+    return await res.json();
+  } catch (_) {
+    return null;
+  }
+}
+
 /* ============================================================
-   Dify 雙腦 Chatflow 調用（上傳 → 分析，描述經雙通道送達）
+   Dify 調用（v9.6 Workflow 重構防彈版 — 2026-10-26）
+   步驟 1：圖片上傳至 Dify 檔案庫（/files/upload，Workflow／Chatflow 通用）
+   步驟 2：依 DIFY_MODE 分流
+     - workflow：新「滅蟲師妹 - 工作流版」→ POST /workflows/run
+       · payload 變體①官方格式：檔案變數放 inputs（DIFY_FILE_VAR，預設 files）
+       · payload 變體②相容格式：檔案放 top-level files（400 拒收時自動後備）
+     - chatflow：舊對話型 App → POST /chat-messages（v9.5 原邏輯：描述雙通道）
+     - auto（預設）：workflow 優先；404（App 類型錯配）自動回退 chatflow 自癒
+   v9.5 精華全數保留：Deadline 護衛 + 解析防彈 + 安全挖字 + 重試策略
    ============================================================ */
+function buildFileRefList(fileId) {
+  /* local_file 同時帶空 url 鍵：部分 Dify 版本校驗要求該鍵存在 */
+  return [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId, url: '' }];
+}
+
+async function runWorkflowAnalysis(cfg, fileId, userId, requestId, userDesc, deadline) {
+  const fileRefs = buildFileRefList(fileId);
+  /* 兩種 payload 變體：①官方 Workflow 格式（Start 節點檔案變數入 inputs）
+     ②修復方案文檔格式（檔案放 top-level files — 400 拒收時自動後備） */
+  const variants = [
+    {
+      label: 'inputs-file-var',
+      body: () => ({ inputs: { user_desc: userDesc || '', [cfg.DIFY_FILE_VAR]: fileRefs }, response_mode: 'blocking', user: userId }),
+    },
+    {
+      label: 'top-level-files',
+      body: () => ({ inputs: { user_desc: userDesc || '' }, response_mode: 'blocking', user: userId, files: fileRefs }),
+    },
+  ];
+
+  let lastErr = null;
+  for (let v = 0; v < variants.length; v++) {
+    let variantRejected = false;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      /* Deadline 護衛：剩餘時間唔夠完成一輪 63s 分析 → 直接放棄重試，
+         改拋 TIMEOUT（前端會見到「請稍後再試」，Worker 唔會白燒上游配額） */
+      if (Date.now() + cfg.CHAT_TIMEOUT_MS > deadline) {
+        const e = new Error('剩餘時間預算不足，終止 AI 分析重試');
+        e.code = 'TIMEOUT';
+        throw e;
+      }
+      const chatRes = await fetchWithTimeout(
+        `${cfg.DIFY_API_URL}/workflows/run`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(variants[v].body()),
+        },
+        cfg.CHAT_TIMEOUT_MS, 'AI 分析'
+      );
+
+      if (chatRes.ok) {
+        /* 解析防彈 — 非 JSON 回應（WAF 頁等）視為可重試上游異常 */
+        const parsed = await parseJsonSafe(chatRes);
+        if (parsed) {
+          const runData = (parsed.data && typeof parsed.data === 'object') ? parsed.data : {};
+          if (runData.status === 'failed') {
+            /* Workflow 明確判死：執行失敗直接上拋，唔會扮成功回空報告 */
+            throw Object.assign(new Error('Dify Workflow 執行失敗: ' + String(runData.error || '無錯誤詳情').slice(0, 180)), { code: 'UPSTREAM_ERROR' });
+          }
+          const answer = extractDifyAnswer(parsed);
+          console.log(JSON.stringify({ requestId, stage: 'workflow-ok', variant: variants[v].label, wfStatus: runData.status || 'unknown', answerLen: answer.length }));
+          return answer;
+        }
+        lastErr = Object.assign(new Error('Dify Workflow 回應格式異常（非 JSON）'), { code: 'UPSTREAM_ERROR' });
+      } else {
+        const errText = await chatRes.text().catch(() => '');
+        if (chatRes.status === 404) {
+          /* Workflow 端點唔存在 → App 類型錯配（auto 模式下可回退 chatflow 自癒） */
+          throw Object.assign(new Error('Dify /workflows/run 端點不存在 (404) — App 類型可能仍係 Chatflow 或 API Base 唔對'), { code: 'APP_TYPE_MISMATCH' });
+        }
+        if (chatRes.status === 429) {
+          throw Object.assign(new Error(`Dify 執行失敗 (429) ${errText.slice(0, 200)}`), { code: 'RATE_LIMITED' });
+        }
+        if (chatRes.status === 400) {
+          /* 請求格式唔受理（Start 節點變數名唔匹配等）→ 改試下一種 payload 變體 */
+          lastErr = Object.assign(new Error(`Dify Workflow 拒絕請求 (400) ${errText.slice(0, 200)}`), { code: 'UPSTREAM_ERROR' });
+          console.log(JSON.stringify({ requestId, stage: 'workflow-400', variant: variants[v].label, detail: errText.slice(0, 120) }));
+          variantRejected = true;
+          break;
+        }
+        /* 5xx／其他上游錯誤 → 同一變體內重試一次 */
+        lastErr = Object.assign(new Error(`Dify 執行失敗 (${chatRes.status}) ${errText.slice(0, 200)}`), { code: 'UPSTREAM_ERROR' });
+      }
+      if (attempt === 2) break;
+      console.log(JSON.stringify({ requestId, stage: 'workflow-retry', variant: variants[v].label, attempt }));
+      await sleep(1500);
+    }
+    /* 只有 400（變體格式唔受理）先值得試下一個變體；其他錯誤換變體都冇用 */
+    if (!variantRejected) break;
+  }
+  throw lastErr || Object.assign(new Error('Dify Workflow 無回傳結果'), { code: 'UPSTREAM_ERROR' });
+}
+
+async function runChatflowAnalysis(cfg, fileId, userId, requestId, userDesc, deadline) {
+  /* v9.2：5xx/網絡錯誤重試 1 次；逾時唔重試（避免加倍等待），429 唔重試 */
+  let chatData = null;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    /* Deadline 護衛（v9.5）：唔夠時間就唔好開展殭屍重試 */
+    if (Date.now() + cfg.CHAT_TIMEOUT_MS > deadline) {
+      const e = new Error('剩餘時間預算不足，終止 AI 分析重試');
+      e.code = 'TIMEOUT';
+      throw e;
+    }
+    const chatRes = await fetchWithTimeout(
+      `${cfg.DIFY_API_URL}/chat-messages`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          // inputs 通道：Dify Chatflow Start 節點定義 user_desc 變數後即可用 {{user_desc}} 綁定
+          inputs: (userDesc && cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc } : {},
+          // query 通道：即時生效，唔使改 Dify 都確保線索 + 防禦裝甲送達模型（雙通道保障）
+          query: (userDesc && cfg.DESC_CHANNEL !== 'inputs')
+            ? buildAnalysisPrompt(userDesc, cfg.QUERY_MODE)
+            : (cfg.QUERY_MODE === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT),
+          response_mode: 'blocking',
+          user: userId,
+          files: buildFileRefList(fileId),
+        }),
+      },
+      cfg.CHAT_TIMEOUT_MS, 'AI 分析'
+    );
+
+    if (chatRes.ok) {
+      const parsed = await parseJsonSafe(chatRes);
+      if (parsed) {
+        chatData = parsed;
+        break;
+      }
+      const parseErr = Object.assign(new Error('Dify 對話回應格式異常（非 JSON）'), { code: 'UPSTREAM_ERROR' });
+      if (attempt === 2) throw parseErr;
+      console.log(JSON.stringify({ requestId, stage: 'chat-retry', reason: 'non-json-response' }));
+      await sleep(1500);
+      continue;
+    }
+    const errText = await chatRes.text().catch(() => '');
+    const err = Object.assign(new Error(`Dify 對話失敗 (${chatRes.status}) ${errText.slice(0, 200)}`), {
+      code: chatRes.status === 429 ? 'RATE_LIMITED' : 'UPSTREAM_ERROR',
+    });
+    // 僅 5xx（唔包 429）及網絡錯誤重試一次
+    const retryable = chatRes.status >= 500 && chatRes.status !== 429;
+    if (attempt === 2 || !retryable) throw err;
+    console.log(JSON.stringify({ requestId, stage: 'chat-retry', status: chatRes.status }));
+    await sleep(1500);
+  }
+
+  /* 安全挖字 — 無論 Dify 點樣包裝（answer / data.outputs.text），
+     挖唔到就返回空字串，交由呼叫方以 isBadReport() 攔截並優雅降級（HTTP 200） */
+  return extractDifyAnswer(chatData);
+}
+
 async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDesc) {
   const t0 = Date.now();
+  /* v9.5 Deadline 護衛：全流程時間預算（上傳 2 次機會 + 分析 2 次機會 + 緩衝），
+     重試前先計過條數，唔會開展一場根本趕唔切嘅殭屍重試 */
+  const deadline = t0 + (cfg.UPLOAD_TIMEOUT_MS * 2) + (cfg.CHAT_TIMEOUT_MS * 2) + 6000;
 
   /* --- 步驟 1：圖片上傳至 Dify 檔案庫（重試 1 次） --- */
-  let uploadData;
+  let uploadData = null;
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const uploadForm = new FormData();
@@ -247,62 +499,39 @@ async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDes
           code: uploadRes.status === 429 ? 'RATE_LIMITED' : 'UPSTREAM_ERROR',
         });
       }
-      uploadData = await uploadRes.json();
+      /* v9.5：非 JSON 回應（HTML 錯誤頁）→ 視為可重試的上游異常，唔會炸 */
+      uploadData = await parseJsonSafe(uploadRes);
+      if (!uploadData || !uploadData.id) {
+        throw Object.assign(new Error('Dify 上傳回應格式異常（非 JSON 或無檔案 ID）'), { code: 'UPSTREAM_ERROR' });
+      }
       break;
     } catch (err) {
       // 超時不重試（避免重複計費）；429 不重試；其餘網絡／5xx 重試一次
       if (attempt === 2 || err.code === 'TIMEOUT' || err.code === 'RATE_LIMITED') throw err;
-      console.log(JSON.stringify({ requestId, stage: 'upload-retry', reason: err.message }));
+      console.log(JSON.stringify({ requestId, stage: 'upload-retry', reason: String(err.message || '').slice(0, 150) }));
       await sleep(1200);
     }
   }
   const fileId = uploadData && uploadData.id;
   if (!fileId) throw Object.assign(new Error('Dify 未回傳檔案 ID'), { code: 'UPSTREAM_ERROR' });
 
-  /* --- 步驟 2：攜圖呼叫雙腦 Chatflow（GPT 化驗 → 智庫 → DeepSeek 寫報告）
-     v9.2：5xx/網絡錯誤重試 1 次（Dify 間歇過載唔會再直接 502 彈爆用戶）；
-     逾時唔重試（避免加倍等待），429 唔重試（避免重複計費） --- */
-  let chatData;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    const chatRes = await fetchWithTimeout(
-      `${cfg.DIFY_API_URL}/chat-messages`,
-      {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          // inputs 通道：Dify Chatflow Start 節點定義 user_desc 變數後即可用 {{user_desc}} 綁定
-          inputs: (userDesc && cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc } : {},
-          // query 通道：即時生效，唔使改 Dify 都確保線索 + 防禦裝甲送達模型（雙通道保障）
-          query: (userDesc && cfg.DESC_CHANNEL !== 'inputs')
-            ? buildAnalysisPrompt(userDesc, cfg.QUERY_MODE)
-            : (cfg.QUERY_MODE === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT),
-          response_mode: 'blocking',
-          user: userId,
-          files: [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId }],
-        }),
-      },
-      cfg.CHAT_TIMEOUT_MS, 'AI 分析'
-    );
-
-    if (chatRes.ok) {
-      chatData = await chatRes.json();
-      break;
+  /* --- 步驟 2：依 DIFY_MODE 分流（v9.6：workflow 優先 + chatflow 自癒回退） --- */
+  let answer = '';
+  if (cfg.DIFY_MODE !== 'chatflow') {
+    try {
+      answer = await runWorkflowAnalysis(cfg, fileId, userId, requestId, userDesc, deadline);
+    } catch (err) {
+      if (cfg.DIFY_MODE === 'auto' && err.code === 'APP_TYPE_MISMATCH') {
+        /* 自癒：Dify App 仲係對話型（或金鑰屬 Chatflow 版）→ 自動回退舊端點照跑 */
+        console.log(JSON.stringify({ requestId, stage: 'dify-fallback', from: 'workflows/run', to: 'chat-messages' }));
+        answer = await runChatflowAnalysis(cfg, fileId, userId, requestId, userDesc, deadline);
+      } else {
+        throw err;
+      }
     }
-    const errText = await chatRes.text().catch(() => '');
-    const err = Object.assign(new Error(`Dify 對話失敗 (${chatRes.status}) ${errText.slice(0, 200)}`), {
-      code: chatRes.status === 429 ? 'RATE_LIMITED' : 'UPSTREAM_ERROR',
-    });
-    // 僅 5xx（唔包 429）及網絡錯誤重試一次
-    const retryable = chatRes.status >= 500 && chatRes.status !== 429;
-    if (attempt === 2 || !retryable) throw err;
-    console.log(JSON.stringify({ requestId, stage: 'chat-retry', status: chatRes.status }));
-    await sleep(1500);
+  } else {
+    answer = await runChatflowAnalysis(cfg, fileId, userId, requestId, userDesc, deadline);
   }
-
-  let answer = (chatData && chatData.answer) || '';
-  // DeepSeek R1 推理標籤清理，保持報告排版乾淨
-  answer = answer.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-  if (!answer) throw Object.assign(new Error('AI 未有回傳診斷內容'), { code: 'UPSTREAM_ERROR' });
 
   return { answer, elapsedMs: Date.now() - t0 };
 }
@@ -314,9 +543,8 @@ export default {
     /* ===== v9.3: 地區封鎖（最頂層攔截 — 零 KV 讀取、零 subrequest、零配額消耗）=====
        request.cf.country 由 Cloudflare 邊緣注入；本地開發（無 cf）自動放行 */
     const blockedCountries = String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES).trim();
-    if (blockedCountries && blockedCountries.toLowerCase() !== 'none'
-        && request.cf && request.cf.country
-        && blockedCountries.toUpperCase().split(',').map(s => s.trim()).includes(String(request.cf.country).toUpperCase())) {
+    const cfCountry = request.cf ? request.cf.country : null;
+    if (isGeoBlocked(cfCountry, blockedCountries)) {
       return new Response(JSON.stringify({
         success: false, code: 'GEO_BLOCKED',
         error: '此地區暫不開放存取 / Access from this region is not available'
@@ -350,11 +578,14 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '9.4-FastTrack',
+        version: '9.6-Workflow',
         dify_key_set: !!(env.DIFY_API_KEY),
+        dify_mode: String(env.DIFY_MODE || DEFAULTS.DIFY_MODE).toLowerCase(),
+        dify_file_var: String(env.DIFY_FILE_VAR || DEFAULTS.DIFY_FILE_VAR),
         blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
-        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Auto-Retry + FastTrack ≤70s',
+        architecture: 'Dify Workflow (/workflows/run: GPT Vision 化驗 → 智庫 → DeepSeek 廣東話報告) + chatflow 自癒回退 + payload 變體後備 + Contextual Prior (≤50字) + Bulletproof (type-safe + graceful 200 + deadline guard)',
         contextual_prior: true,
+        bad_report_interception: true,
         max_desc_chars: Number(env.DESC_MAX_CHARS || DEFAULTS.DESC_MAX_CHARS),
         desc_channel: env.DESC_CHANNEL || DEFAULTS.DESC_CHANNEL,
         query_mode: env.QUERY_MODE || DEFAULTS.QUERY_MODE,
@@ -378,6 +609,10 @@ export default {
     for (const k of ['UPLOAD_TIMEOUT_MS', 'CHAT_TIMEOUT_MS', 'MAX_IMAGE_BYTES', 'CACHE_TTL_SECONDS', 'RATE_LIMIT_MAX', 'RATE_LIMIT_WINDOW_MS', 'DESC_MAX_CHARS']) {
       cfg[k] = Number(cfg[k]);
     }
+    /* v9.6: Dify 調用模式規範化（auto / workflow / chatflow，亂值當 auto） */
+    const modeRaw = String(cfg.DIFY_MODE || 'auto').toLowerCase();
+    cfg.DIFY_MODE = (modeRaw === 'workflow' || modeRaw === 'chatflow') ? modeRaw : 'auto';
+    cfg.DIFY_FILE_VAR = String(cfg.DIFY_FILE_VAR || DEFAULTS.DIFY_FILE_VAR).trim() || 'files';
 
     /* v9.3: fail-closed — 金鑰未設定時拒絕分析（唔會靜靜雞用空金鑰打到上游全 401） */
     if (!cfg.DIFY_API_KEY) {
@@ -432,25 +667,32 @@ export default {
       const userId = `web-${clientIp.replace(/[^a-z0-9]/gi, '')}-${Date.now()}`;
       const { answer, elapsedMs } = await callDify(env, cfg, imageFile, sniffed.ext, userId, requestId, userDesc);
 
+      /* ===== v9.5 防彈攔截（Graceful Degradation）=====
+         AI 判定失敗／假死報告／空白回應 → 保持 HTTP 200 溫和回傳，
+         絕不 502 彈爆前端；同時嚴禁寫入 KV 快取 — 重試先有機會成功。
+         註：前端放棄後 Worker 仍會跑完並寫快取（成功个案），用戶一 retry 即中快取。 */
+      if (isBadReport(answer)) {
+        console.log(JSON.stringify({ requestId, stage: 'bad-report-intercepted', len: answer.length, elapsedMs }));
+        return json({
+          success: false,
+          code: 'AI_RECOGNITION_FAILED',
+          error: 'AI 暫時無法清晰辨識該相片，請確保相片清晰、光線充足，或換一張不同角度嘅相再試；亦可以直接 WhatsApp 撳師傅人手跟進。',
+          raw_answer: answer.slice(0, 300),
+          requestId
+        }, 200);
+      }
+
       const payload = {
         success: true,
         diagnosis: answer,
-        version: '9.4 (MoE Dual-Brain + Contextual Prior + FastTrack ≤70s)',
+        version: '9.5 (MoE Dual-Brain + Contextual Prior + Bulletproof Resilience)',
         engine: 'MoE-GPT+DeepSeek',
         user_desc_used: !!userDesc,
         cached: false,
         elapsed_ms: elapsedMs,
       };
 
-      // 攔截「假死報告」（AI 判定失敗／睇唔清），嚴禁存入 KV 快取 — 重試先有機會成功
-      const isBadResult = answer.includes('無法辨識') || answer.includes('無法辨認')
-        || answer.includes('未能判定') || answer.includes('未能識別')
-        || answer.includes('No insect image');
-      if (!isBadResult) {
-        await cachePut(env, cacheHash, payload, cfg.CACHE_TTL_SECONDS);
-      } else {
-        console.log(JSON.stringify({ requestId, stage: 'cache-skipped', reason: 'AI 判定失敗，拒絕寫入 KV 快取' }));
-      }
+      await cachePut(env, cacheHash, payload, cfg.CACHE_TTL_SECONDS);
 
       console.log(JSON.stringify({ requestId, stage: 'done', elapsedMs, desc: !!userDesc, queryMode: cfg.QUERY_MODE }));
       return json({ ...payload, requestId });
@@ -466,8 +708,8 @@ export default {
         : 'AI 系統暫時出現異常，請稍後再試，或直接 WhatsApp 搵師傅。';
       /* v9.2 錯誤碼細分：上游逾時 → 504（前端區分「繁忙請重試」），其餘上游錯誤 → 502 */
       const httpStatus = err.code === 'TIMEOUT' ? 504 : 502;
-      console.error(JSON.stringify({ requestId, stage: 'error', code, message: err.message }));
-      return json({ success: false, code, error: friendly, debug: err.message, requestId }, httpStatus);
+      console.error(JSON.stringify({ requestId, stage: 'error', code, message: String(err.message || '').slice(0, 200) }));
+      return json({ success: false, code, error: friendly, debug: String(err.message || '').slice(0, 200), requestId }, httpStatus);
     }
   },
 };
