@@ -621,22 +621,25 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             <div style="margin-top:14px; text-align:left;">
                                 <label for="pestDescInput" style="display:block; font-weight:700; color:var(--dark-bg); font-size:0.9rem; margin-bottom:6px;">
                                     <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> 補充發現位置或情況
-                                    <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">（可選填・填咗 AI 配對三十六計更精準）</span>
+                                    <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">（可選填・建議填寫，滅蟲師妹根據你嘅描述判斷更準）</span>
                                 </label>
                                 <textarea id="pestDescInput" maxlength="50" rows="2" placeholder="例：廚房灶頭底發現，半夜開燈先見到" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1.5px solid #cbd5e1; border-radius:8px; font-size:0.9rem; font-family:inherit; line-height:1.5; resize:vertical; background:#fff; color:var(--text-main);"></textarea>
                                 <div style="text-align:right; font-size:0.72rem; color:var(--text-muted); margin-top:3px;"><span id="pestDescCount">0</span>/50</div>
                             </div>
-                            <!-- v9.92 選相確認框：先補描述、後開始分析（描述線索送達 AI，判定更精準） -->
-                            <div id="ai-confirm-box" style="display:none;margin-top:14px;padding:14px 16px;border:1.5px dashed #10b981;border-radius:10px;background:rgba(16,185,129,0.07);text-align:center;">
-                                <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;">
-                                    <img id="ai-preview-thumb" alt="已選害蟲相片預覽" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #10b981;">
-                                    <span style="font-weight:700;color:var(--primary-dark);font-size:0.92rem;"><i class="fa-solid fa-circle-check" style="color:#10b981;" aria-hidden="true"></i> 相片已就緒</span>
+                            <!-- v9.92 提交機制：相片選好後停留喺上載狀態，補充描述再一齊提交（取代「上載即分析」） -->
+                            <div id="ai-upload-preview" style="display:none; margin-top:14px; text-align:left; background:var(--light-bg); border:1.5px solid #cbd5e1; border-radius:10px; padding:12px 14px;">
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <img id="ai-upload-preview-img" alt="已選擇嘅害蟲相片預覽" style="width:64px; height:64px; object-fit:cover; border-radius:8px; border:1px solid #cbd5e1; flex:0 0 auto;">
+                                    <div style="flex:1 1 auto; min-width:0;">
+                                        <div style="font-weight:700; color:var(--dark-bg); font-size:0.9rem;"><i class="fa-solid fa-circle-check" aria-hidden="true" style="color:var(--primary);"></i> 相片已準備好</div>
+                                        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">可以喺上方補充描述，再撳下面按鈕開始分析；描述唔必填，但填咗診斷更準。</div>
+                                    </div>
                                 </div>
-                                <button type="button" id="ai-start-btn" class="upload-btn" style="margin-top:12px;padding:12px 30px;font-size:1.02rem;">
-                                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> 開始 AI 分析
-                                </button>
-                                <p style="margin:8px 0 0;font-size:0.78rem;color:var(--text-muted);">畀 AI 多啲線索：可先喺上方補充描述，撳「開始 AI 分析」即刻出 60 秒深度報告</p>
                             </div>
+                            <button type="button" id="ai-start-btn" class="btn btn-primary" disabled style="display:block; width:100%; margin-top:14px; padding:13px 20px; font-size:1.02rem; border-radius:10px; cursor:pointer;">
+                                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> 開始 AI 分析
+                            </button>
+                            <div style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:6px;">相片同描述會一齊交畀「滅蟲師妹」分析・免費・約 60 秒出報告</div>
                             <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px 14px;border-radius:6px;font-size:0.82rem;margin-top:14px;line-height:1.6;">
                                         <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                                         <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，上載前系統自動抹除 GPS 定位；為持續改善診斷質量，相片同對話紀錄會以匿名方式留存約 24 個月後自動刪除（詳見下方「數據收集聲明」）。
@@ -856,6 +859,19 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
         <nav class="footer-nav footer-cols" aria-label="頁尾導航 Footer Navigation">
         <div class="footer-col">
+            <h3>🏠 家居滅蟲服務</h3>
+            <a href="/services/">家居滅蟲服務總覽</a>
+            <a href="/overseas-landlord/">海外業主遙距代辦</a>
+            <a href="/service/rodent/">滅老鼠（鼠患）</a>
+            <a href="/service/termite/">滅白蟻（暗巢）</a>
+            <a href="/service/flea/">滅床蝨（木蝨）</a>
+            <a href="/service/cockroach/">滅曱甴（蟑螂）</a>
+            <a href="/service/wasp/">滅黃蜂</a>
+            <a href="/wasp-nest/">滅馬蜂巢專頁</a>
+            <a href="/rat-control/">滅鼠專門站</a>
+            <a href="/quote/">有蟲話我知（免費報價）</a>
+        </div>
+        <div class="footer-col">
             <h3>🏢 商業滅蟲</h3>
             <a href="/commercial/">商業滅蟲主頁</a>
             <a href="/commercial/property/">物業管理滅蟲</a>
@@ -868,19 +884,6 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <a href="/commercial/leisure/">休閒及娛樂場所</a>
             <a href="/commercial/healthcare/">醫療及護理院舍</a>
             <a href="/commercial/school/">學校及教育機構</a>
-        </div>
-        <div class="footer-col">
-            <h3>🏠 家居滅蟲服務</h3>
-            <a href="/services/">家居滅蟲服務總覽</a>
-            <a href="/overseas-landlord/">海外業主遙距代辦</a>
-            <a href="/service/rodent/">滅老鼠（鼠患）</a>
-            <a href="/service/termite/">滅白蟻（暗巢）</a>
-            <a href="/service/flea/">滅床蝨（木蝨）</a>
-            <a href="/service/cockroach/">滅曱甴（蟑螂）</a>
-            <a href="/service/wasp/">滅黃蜂</a>
-            <a href="/wasp-nest/">滅馬蜂巢專頁</a>
-            <a href="/rat-control/">滅鼠專門站</a>
-            <a href="/quote/">有蟲話我知（免費報價）</a>
         </div>
         <div class="footer-col">
             <h3>🗺️ 全港十八區據點</h3>
@@ -1301,11 +1304,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
                 if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
                 pestPhotoInput.value = '';
-                /* v9.92 隱藏確認框＋還原上載區標題 */
-                var confirmBox = document.getElementById('ai-confirm-box');
-                if (confirmBox) confirmBox.style.display = 'none';
-                var upHead = document.querySelector('#ai-upload h3');
-                if (upHead) upHead.textContent = '上載或拍攝害蟲相片';
+                /* v9.92 同步收起相片預覽＋停用提交按鈕 */
+                var prevBox = document.getElementById('ai-upload-preview');
+                var prevImg = document.getElementById('ai-upload-preview-img');
+                if (prevBox) prevBox.style.display = 'none';
+                if (prevImg) prevImg.removeAttribute('src');
+                var startBtn2 = document.getElementById('ai-start-btn');
+                if (startBtn2) startBtn2.disabled = true;
                 resultState.classList.remove('active');
                 analyzingState.classList.remove('active');
                 uploadState.classList.add('active');
@@ -1330,15 +1335,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         selectedFile = cleanFile;
                         resultImg.src = previewUrl;
 
-                        /* v9.92 改為「確認制」：選相後留喺上載狀態，等苦主補完描述
-                           先撳「開始 AI 分析」——描述線索經雙通道送達 AI，判定更精準 */
-                        var confirmBox = document.getElementById('ai-confirm-box');
-                        var thumb = document.getElementById('ai-preview-thumb');
-                        if (thumb) thumb.src = previewUrl;
-                        if (confirmBox) confirmBox.style.display = 'block';
-                        var upHead = document.querySelector('#ai-upload h3');
-                        if (upHead) upHead.textContent = '已選相片 ✓ 可點擊上方重新選擇';
+                        /* v9.92 唔再「上載即分析」——停留喺上載狀態：顯示相片預覽＋啟用提交按鈕，
+                           等苦主可以先補充描述，再將相片＋描述一齊交畀滅蟲師妹（判斷更準） */
+                        var prevBox = document.getElementById('ai-upload-preview');
+                        var prevImg = document.getElementById('ai-upload-preview-img');
+                        if (prevBox && prevImg) { prevImg.src = previewUrl; prevBox.style.display = ''; }
+                        var startBtn = document.getElementById('ai-start-btn');
+                        if (startBtn) startBtn.disabled = false;
+                        if (pestDescInput && pestDescInput.scrollIntoView) {
+                            try { pestDescInput.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                        }
                     });
+                });
+            }
+
+            /* v9.92 「開始 AI 分析」提交按鈕：相片＋描述一齊送出，先切換狀態再開始三級韌性流程 */
+            var aiStartBtn = document.getElementById('ai-start-btn');
+            if (aiStartBtn) {
+                aiStartBtn.addEventListener('click', function () {
+                    if (!selectedFile) { alert('請先選擇一張害蟲相片！'); return; }
+                    uploadState.classList.remove('active');
+                    analyzingState.classList.add('active');
+                    resultState.classList.remove('active');
+                    startFreshRun();
                 });
             }
 
@@ -1346,18 +1365,6 @@ document.addEventListener('DOMContentLoaded', () => {
             var aiRetryBtn = document.getElementById('ai-retry-btn');
             if (aiRetryBtn) {
                 aiRetryBtn.addEventListener('click', startFreshRun);
-            }
-
-            /* v9.92「開始 AI 分析」按鈕：確認制提交——苦主補完描述先開波 */
-            var aiStartBtn = document.getElementById('ai-start-btn');
-            if (aiStartBtn) {
-                aiStartBtn.addEventListener('click', function() {
-                    if (!selectedFile) return;
-                    uploadState.classList.remove('active');
-                    analyzingState.classList.add('active');
-                    resultState.classList.remove('active');
-                    startFreshRun();
-                });
             }
 
             // 「換一張相」按鈕（溫和提示卡）：返回上載狀態重選相片

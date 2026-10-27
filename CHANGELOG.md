@@ -1,31 +1,16 @@
 # 修復日誌 (v9.92 — 2026-10-27)
 
-## v9.92 三項 UX 修正：AI 診斷「確認制」提交＋rat-control 箭頭與營業時間措辭更正＋全站頁腳營業時間（2026-10-27）
+## v9.92 UX 微調綜合修復：AI 提交機制＋rat-control 左上角箭頭與 FAQ 更正＋footer 欄序與營業時間全站統一（2026-10-27）
 
-**依用戶實測回饋執行：①AI 頁描述欄形同虛設（選相即自動提交）②rat-control 左上角小箭頭＋FAQ「周一至周日都可預約」與實際營業時間不符 ③頁腳營業時間缺失周日休息說明**
+**用戶回報三項小問題＋footer 導航順序 UX 分析落地：全站 225 檔，純 HTML/JSON-LD 修改，共用 CSS/JS 零改動（?v=9.88 不變）**
 
-- 問題一（AI 診斷確認制）：ai/index.html 選相流程改造——原版選相即自動提交（描述欄來不及填，描述線索送唔到 AI）；新版改為「確認制」：選相後停留上載狀態＋顯示確認框（預覽縮圖＋「相片已就緒」＋綠色「開始 AI 分析」大按鈕＋引導文案「畀 AI 多啲線索：可先喺上方補充描述」），苦主可先填 50 字描述再手動開始；「換一張相／重新上載」重置時同步還原確認框與標題；上載區標題選相後動態更新「已選相片 ✓ 可點擊上方重新選擇」；三級韌性重試與錯誤卡邏輯原封不動
-- 問題二（rat-control）：刪除左上角 dist-breadcrumb（「首頁 › 滅鼠專門站」小字＋›箭頭，JSON-LD BreadcrumbList 結構化數據保留不影響 SEO）；FAQ【幾快可以上門？周末有冇得約？】ZH「周一至周日都可預約」刪除並句尾加溫馨提示（逢星期日及公眾假期休息・官網表格或電郵查詢下一個工作天首要處理・謝謝體諒），HTML＋FAQPage JSON-LD 同步；EN 版 "Monday to Sunday" 同步更正為 "on working days"＋英文溫馨提示（Kind reminder: closed on Sundays and public holidays…）
-- 問題三（全站頁腳營業時間）：ZH 83 檔「營業時間：9:00 - 18:00」→「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」；EN 83 檔 "Hours: 9:00 - 18:00" → "Hours: Mon-Sat 09:00 - 18:00 | Closed on Sundays & Public Holidays"；SC 2 檔簡體同步
-- GEO 一致性強化：全站 54 檔 LocalBusiness JSON-LD openingHoursSpecification dayOfWeek 移除 "Sunday"（此前聲稱周日 09:00-18:00 營業與新政策矛盾——Google Business Profile／AI 搜索引用 openingHours 前後一致，免生實體資訊衝突）
-- sitemap：168 個實際修改 URL lastmod → 2026-10-27；XML well-formed 驗證通過
-- 驗證：validate_v992.py 19/19 全 PASS（615 個 JSON-LD 區塊合法／Sunday 歸零／新文案到位零舊殘留／AI 確認制元素齊全／sitemap 168 處）；瀏覽器實測（桌機 1280px＋手機 375px）——AI 頁選相不自動提交＋確認框渲染＋點按鈕才進分析＋換相重置正常＋錯誤卡優雅降級，rat-control 無箭頭＋溫馨提示生效，首頁頁腳新文案＋dayOfWeek=["Monday"…"Saturday"]
-- 流量保護：零 URL 變更、零內容刪減、canonical 不變、共用 CSS/JS 零改動（?v=9.88 引用不變，毋須 cache-bust 升版）；AI 頁確認框全 inline style 不新增樣式檔
-- 提醒：部署後建議 Cloudflare Purge Everything 一次（168 檔 HTML 內容變更，加速全站即時生效）
-
-
-## Worker v9.6 《還原 Worker 代碼中的圖片 Payload 格式》落地：滅蟲師妹—AI專員 Chatflow 全面還原（2026-10-27）
-
-**依《還原 Worker 代碼中的圖片 Payload 格式.docx》第三步執行：Dify 後端已切回備份 Chatflow（第一步改名＋第二步換 API Key 由商家完成），Worker 端 payload 同步還原，終結「未提供相片」0% 可靠報告**
-
-- 故障根源確認：線上 Worker 曾依舊「Workflow 重構方案」改為 `/workflows/run` 端點（Workflow 應用專用）；切回 Chatflow 後端點與格式不容 → AI 收不到相 →「未提供相片」→ 0% 可靠度
-- 核心還原（方案第三步）：呼叫端點還原 `${DIFY_API_URL}/chat-messages`；**files 必須與 inputs 平排在 JSON 最外層**（`files: [{ type:'image', transfer_method:'local_file', upload_file_id }]`），絕不包入 inputs；完整保留 `/files/upload` 先取得 upload_file_id 的兩步標準流程；`inputs: { user_desc: userDesc || '' }` 恒常傳送（空描述傳空字串，對齊 Chatflow 開始節點變數綁定）；response_mode 維持 blocking（原設定）；query 必填欄位保留（雙通道保障：線索＋防禦裝甲即時送達模型）
-- 穩定性強化：假死報告黑名單擴充（「未提供相片／沒有提供圖片／未見到相片／冇收到相片／no image provided」等 20+ 變體，lower-case 統一比對），命中即 HTTP 200 + AI_RECOGNITION_FAILED 優雅降級觸發前端溫和重試，杜絕 0% 報告直出前台；KV 快取前綴 pestdiag:v2 → v3 隔離 Workflow 時期舊毒快取
-- 自動化驗證 27/27 全 PASS（scripts/test_pest_vision_worker.mjs，mock Dify 端點）：payload 結構逐欄位斷言（files 頂層平排／upload_file_id 真實 ID／inputs.user_desc 恒常／query／blocking／user）、無描述空字串案例、7 個「收不到相」變體全攔截、正常報告零誤殺、金鑰 fail-closed 回歸
-- 前台零改動：bruceleehk.com/ai/ 前端（FormData: image＋user_desc、AI_RECOGNITION_FAILED 溫和提示卡、68 秒預算三級重試）完全兼容，無需重新部署 GitHub，毋須 cache-bust 升版
-- 部署路徑：Cloudflare Dashboard → Workers → pest-vision-worker → 編輯器全量貼上 v9.6 代碼 → Save and Deploy；/health 應顯示 version「9.6-ChatflowRestore」
-- 完整保留 v9.5 防彈架構（extractDifyAnswer 安全挖字／Deadline 護衛／Graceful Degradation／上傳與分析重試）＋ v9.3 安全強化（金鑰 fail-closed／地區封鎖）＋ v9.4 FastTrack（63s 分析時限／20s 上傳時限）＋ KV 智慧快取
-
+- Fix①（AI 提交機制）：/ai/ 頁終結「上載即分析」舊流程——相片選好後停留喺上載狀態，新增 64px 相片縮圖預覽盒＋全寬「開始 AI 分析」提交按鈕（disabled→選相後啟用）＋「相片同描述一齊交畀滅蟲師妹」說明行；描述欄提示文案升級為「建議填寫，滅蟲師妹根據你嘅描述判斷更準」；選相後自動平滑捲動至描述欄引導填寫；resetToUpload／換相／重新上載全部同步重置新元素。user_desc 喺撳提交先讀取，同相片一齊送達 Worker → 滅蟲師妹可根據苦主描述判斷更準（配合 Worker v9.6 inputs.user_desc 恒常傳送）
+- Fix②（左上角小箭頭真兇）：12 個 rat-control 頁面（ZH/EN 主頁＋觀塘/深水埗/荃灣/油尖旺/元朗 5 地區頁）keywords meta 尾端 stray「>」（v9.91 引入嘅 `">>` 筆誤）——呢個字符令 HTML5 parser 提早結束 head，將 preconnect/icon/OG meta 等 13+ 個 head 節點跌入 body、`>` 渲染喺頁面左上角。移除後 head 結構完整還原（html5lib 驗證），SEO 結構化數據歸位
+- Fix②（FAQ 更正）：rat-control ZH「幾快可以上門？周末有冇得約？」答案由「周一至周日都可預約」更正為「溫馨提示：我們於逢星期日及公眾假期休息。休息期間若您有任何需求，歡迎隨時在官網填寫表格或發送電子郵件，我們將在下一個工作天首要處理您的查詢。謝謝您的體諒！」（保留最快即日勘察＋緊急個案優先排期資訊）；EN 版同步「closed on Sundays and public holidays…next working day」；FAQPage JSON-LD 與 HTML 同步（各 2 處）
+- Fix②（結構化數據同步）：全站 54 頁 OpeningHoursSpecification dayOfWeek 陣列移除 Sunday（inline＋multiline 兩種變體），與新營業政策一致，避免 Google 地圖/本地搜尋顯示錯誤營業時間
+- Fix③（營業時間）：全站 168 頁 footer「營業時間：9:00 - 18:00」改為「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」（EN：Hours • Mon-Sat: 09:00 - 18:00 • Sun & Public Holidays: Closed；SC 簡體同步 2 頁）；/quote/ 頁營業時間卡同步「星期一至六：09:00 - 18:00・星期日及公眾假期休息・WhatsApp 工作時間即時覆」
+- Fix④（footer 欄序）：全站 169 頁 footer「商業滅蟲→家居滅蟲服務」欄序調換為「家居滅蟲服務→商業滅蟲」，與頂部導航完全一致（先家居、後商業），消除訪客空間記憶摩擦、維持全站導航邏輯統一；ZH 84＋EN 84＋SC 1 共 169 頁，404 頁等無雙欄結構頁自動跳過
+- sitemap.xml：170 條 lastmod→2026-10-27；零 URL 變更、零內容刪減、canonical 不變
 
 ## v9.91 《消除「關鍵字自相殘殺」》四維攻堅：滅鼠公司關鍵詞鎖定首頁前三甲（2026-10-26）
 
