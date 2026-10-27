@@ -626,6 +626,17 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                 <textarea id="pestDescInput" maxlength="50" rows="2" placeholder="例：廚房灶頭底發現，半夜開燈先見到" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1.5px solid #cbd5e1; border-radius:8px; font-size:0.9rem; font-family:inherit; line-height:1.5; resize:vertical; background:#fff; color:var(--text-main);"></textarea>
                                 <div style="text-align:right; font-size:0.72rem; color:var(--text-muted); margin-top:3px;"><span id="pestDescCount">0</span>/50</div>
                             </div>
+                            <!-- v9.92 選相確認框：先補描述、後開始分析（描述線索送達 AI，判定更精準） -->
+                            <div id="ai-confirm-box" style="display:none;margin-top:14px;padding:14px 16px;border:1.5px dashed #10b981;border-radius:10px;background:rgba(16,185,129,0.07);text-align:center;">
+                                <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;">
+                                    <img id="ai-preview-thumb" alt="已選害蟲相片預覽" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:2px solid #10b981;">
+                                    <span style="font-weight:700;color:var(--primary-dark);font-size:0.92rem;"><i class="fa-solid fa-circle-check" style="color:#10b981;" aria-hidden="true"></i> 相片已就緒</span>
+                                </div>
+                                <button type="button" id="ai-start-btn" class="upload-btn" style="margin-top:12px;padding:12px 30px;font-size:1.02rem;">
+                                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> 開始 AI 分析
+                                </button>
+                                <p style="margin:8px 0 0;font-size:0.78rem;color:var(--text-muted);">畀 AI 多啲線索：可先喺上方補充描述，撳「開始 AI 分析」即刻出 60 秒深度報告</p>
+                            </div>
                             <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px 14px;border-radius:6px;font-size:0.82rem;margin-top:14px;line-height:1.6;">
                                         <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                                         <strong>安心上傳保證：</strong>相片僅作即時 AI 辨識，上載前系統自動抹除 GPS 定位；為持續改善診斷質量，相片同對話紀錄會以匿名方式留存約 24 個月後自動刪除（詳見下方「數據收集聲明」）。
@@ -842,7 +853,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
     <!-- Footer -->
     <footer>
-        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
+        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
         <nav class="footer-nav footer-cols" aria-label="頁尾導航 Footer Navigation">
         <div class="footer-col">
             <h3>🏢 商業滅蟲</h3>
@@ -1290,6 +1301,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
                 if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
                 pestPhotoInput.value = '';
+                /* v9.92 隱藏確認框＋還原上載區標題 */
+                var confirmBox = document.getElementById('ai-confirm-box');
+                if (confirmBox) confirmBox.style.display = 'none';
+                var upHead = document.querySelector('#ai-upload h3');
+                if (upHead) upHead.textContent = '上載或拍攝害蟲相片';
                 resultState.classList.remove('active');
                 analyzingState.classList.remove('active');
                 uploadState.classList.add('active');
@@ -1314,11 +1330,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         selectedFile = cleanFile;
                         resultImg.src = previewUrl;
 
-                        // 切換至分析中狀態並播放動畫，開始三級韌性分析
-                        uploadState.classList.remove('active');
-                        analyzingState.classList.add('active');
-                        resultState.classList.remove('active');
-                        startFreshRun();
+                        /* v9.92 改為「確認制」：選相後留喺上載狀態，等苦主補完描述
+                           先撳「開始 AI 分析」——描述線索經雙通道送達 AI，判定更精準 */
+                        var confirmBox = document.getElementById('ai-confirm-box');
+                        var thumb = document.getElementById('ai-preview-thumb');
+                        if (thumb) thumb.src = previewUrl;
+                        if (confirmBox) confirmBox.style.display = 'block';
+                        var upHead = document.querySelector('#ai-upload h3');
+                        if (upHead) upHead.textContent = '已選相片 ✓ 可點擊上方重新選擇';
                     });
                 });
             }
@@ -1327,6 +1346,18 @@ document.addEventListener('DOMContentLoaded', () => {
             var aiRetryBtn = document.getElementById('ai-retry-btn');
             if (aiRetryBtn) {
                 aiRetryBtn.addEventListener('click', startFreshRun);
+            }
+
+            /* v9.92「開始 AI 分析」按鈕：確認制提交——苦主補完描述先開波 */
+            var aiStartBtn = document.getElementById('ai-start-btn');
+            if (aiStartBtn) {
+                aiStartBtn.addEventListener('click', function() {
+                    if (!selectedFile) return;
+                    uploadState.classList.remove('active');
+                    analyzingState.classList.add('active');
+                    resultState.classList.remove('active');
+                    startFreshRun();
+                });
             }
 
             // 「換一張相」按鈕（溫和提示卡）：返回上載狀態重選相片

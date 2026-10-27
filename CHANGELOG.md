@@ -1,4 +1,31 @@
-# 修復日誌 (v9.91 — 2026-10-26)
+# 修復日誌 (v9.92 — 2026-10-27)
+
+## v9.92 三項 UX 修正：AI 診斷「確認制」提交＋rat-control 箭頭與營業時間措辭更正＋全站頁腳營業時間（2026-10-27）
+
+**依用戶實測回饋執行：①AI 頁描述欄形同虛設（選相即自動提交）②rat-control 左上角小箭頭＋FAQ「周一至周日都可預約」與實際營業時間不符 ③頁腳營業時間缺失周日休息說明**
+
+- 問題一（AI 診斷確認制）：ai/index.html 選相流程改造——原版選相即自動提交（描述欄來不及填，描述線索送唔到 AI）；新版改為「確認制」：選相後停留上載狀態＋顯示確認框（預覽縮圖＋「相片已就緒」＋綠色「開始 AI 分析」大按鈕＋引導文案「畀 AI 多啲線索：可先喺上方補充描述」），苦主可先填 50 字描述再手動開始；「換一張相／重新上載」重置時同步還原確認框與標題；上載區標題選相後動態更新「已選相片 ✓ 可點擊上方重新選擇」；三級韌性重試與錯誤卡邏輯原封不動
+- 問題二（rat-control）：刪除左上角 dist-breadcrumb（「首頁 › 滅鼠專門站」小字＋›箭頭，JSON-LD BreadcrumbList 結構化數據保留不影響 SEO）；FAQ【幾快可以上門？周末有冇得約？】ZH「周一至周日都可預約」刪除並句尾加溫馨提示（逢星期日及公眾假期休息・官網表格或電郵查詢下一個工作天首要處理・謝謝體諒），HTML＋FAQPage JSON-LD 同步；EN 版 "Monday to Sunday" 同步更正為 "on working days"＋英文溫馨提示（Kind reminder: closed on Sundays and public holidays…）
+- 問題三（全站頁腳營業時間）：ZH 83 檔「營業時間：9:00 - 18:00」→「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」；EN 83 檔 "Hours: 9:00 - 18:00" → "Hours: Mon-Sat 09:00 - 18:00 | Closed on Sundays & Public Holidays"；SC 2 檔簡體同步
+- GEO 一致性強化：全站 54 檔 LocalBusiness JSON-LD openingHoursSpecification dayOfWeek 移除 "Sunday"（此前聲稱周日 09:00-18:00 營業與新政策矛盾——Google Business Profile／AI 搜索引用 openingHours 前後一致，免生實體資訊衝突）
+- sitemap：168 個實際修改 URL lastmod → 2026-10-27；XML well-formed 驗證通過
+- 驗證：validate_v992.py 19/19 全 PASS（615 個 JSON-LD 區塊合法／Sunday 歸零／新文案到位零舊殘留／AI 確認制元素齊全／sitemap 168 處）；瀏覽器實測（桌機 1280px＋手機 375px）——AI 頁選相不自動提交＋確認框渲染＋點按鈕才進分析＋換相重置正常＋錯誤卡優雅降級，rat-control 無箭頭＋溫馨提示生效，首頁頁腳新文案＋dayOfWeek=["Monday"…"Saturday"]
+- 流量保護：零 URL 變更、零內容刪減、canonical 不變、共用 CSS/JS 零改動（?v=9.88 引用不變，毋須 cache-bust 升版）；AI 頁確認框全 inline style 不新增樣式檔
+- 提醒：部署後建議 Cloudflare Purge Everything 一次（168 檔 HTML 內容變更，加速全站即時生效）
+
+
+## Worker v9.6 《還原 Worker 代碼中的圖片 Payload 格式》落地：滅蟲師妹—AI專員 Chatflow 全面還原（2026-10-27）
+
+**依《還原 Worker 代碼中的圖片 Payload 格式.docx》第三步執行：Dify 後端已切回備份 Chatflow（第一步改名＋第二步換 API Key 由商家完成），Worker 端 payload 同步還原，終結「未提供相片」0% 可靠報告**
+
+- 故障根源確認：線上 Worker 曾依舊「Workflow 重構方案」改為 `/workflows/run` 端點（Workflow 應用專用）；切回 Chatflow 後端點與格式不容 → AI 收不到相 →「未提供相片」→ 0% 可靠度
+- 核心還原（方案第三步）：呼叫端點還原 `${DIFY_API_URL}/chat-messages`；**files 必須與 inputs 平排在 JSON 最外層**（`files: [{ type:'image', transfer_method:'local_file', upload_file_id }]`），絕不包入 inputs；完整保留 `/files/upload` 先取得 upload_file_id 的兩步標準流程；`inputs: { user_desc: userDesc || '' }` 恒常傳送（空描述傳空字串，對齊 Chatflow 開始節點變數綁定）；response_mode 維持 blocking（原設定）；query 必填欄位保留（雙通道保障：線索＋防禦裝甲即時送達模型）
+- 穩定性強化：假死報告黑名單擴充（「未提供相片／沒有提供圖片／未見到相片／冇收到相片／no image provided」等 20+ 變體，lower-case 統一比對），命中即 HTTP 200 + AI_RECOGNITION_FAILED 優雅降級觸發前端溫和重試，杜絕 0% 報告直出前台；KV 快取前綴 pestdiag:v2 → v3 隔離 Workflow 時期舊毒快取
+- 自動化驗證 27/27 全 PASS（scripts/test_pest_vision_worker.mjs，mock Dify 端點）：payload 結構逐欄位斷言（files 頂層平排／upload_file_id 真實 ID／inputs.user_desc 恒常／query／blocking／user）、無描述空字串案例、7 個「收不到相」變體全攔截、正常報告零誤殺、金鑰 fail-closed 回歸
+- 前台零改動：bruceleehk.com/ai/ 前端（FormData: image＋user_desc、AI_RECOGNITION_FAILED 溫和提示卡、68 秒預算三級重試）完全兼容，無需重新部署 GitHub，毋須 cache-bust 升版
+- 部署路徑：Cloudflare Dashboard → Workers → pest-vision-worker → 編輯器全量貼上 v9.6 代碼 → Save and Deploy；/health 應顯示 version「9.6-ChatflowRestore」
+- 完整保留 v9.5 防彈架構（extractDifyAnswer 安全挖字／Deadline 護衛／Graceful Degradation／上傳與分析重試）＋ v9.3 安全強化（金鑰 fail-closed／地區封鎖）＋ v9.4 FastTrack（63s 分析時限／20s 上傳時限）＋ KV 智慧快取
+
 
 ## v9.91 《消除「關鍵字自相殘殺」》四維攻堅：滅鼠公司關鍵詞鎖定首頁前三甲（2026-10-26）
 
