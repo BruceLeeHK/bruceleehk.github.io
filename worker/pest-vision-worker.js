@@ -1,23 +1,6 @@
 /**
- * Cloudflare Worker — 滅蟲師傅 AI (v9.6 Chatflow 還原版)
- * 基於生產版 v9.5 (Bulletproof) 升級：
- *
- * v9.6 升級亮點（「滅蟲師妹—AI專員」Chatflow 還原 — 圖片 Payload 修正 — 2026-10-27）：
- *   🔄 端點還原 /chat-messages：Dify 後端已切回備份 Chatflow 應用
- *      （已重命名為「滅蟲師妹—AI專員」），棄用 Workflow 版 /workflows/run
- *      （端點與格式不容 → AI 收唔到相 →「未提供相片」0% 可靠報告嘅根源）
- *   🖼 圖片 Payload 還原（方案第三步核心）：files 必須與 inputs 平排喺 JSON 最外層，
- *      絕不能包入 inputs；完整保留 /files/upload 先取得 upload_file_id 嘅兩步標準流程
- *   📝 inputs.user_desc 恒常傳送：空描述傳空字串（userDesc || ''），
- *      對齊 Chatflow 開始節點變數綁定（DESC_CHANNEL 應急開關保留兼容）
- *   🛡 假死報告黑名單擴充：「未提供相片／沒有提供圖片／未見到相片」等一律攔截
- *      （改為 lower-case 統一比對），命中即優雅降級觸發前端溫和重試，
- *      杜絕 0% 可靠報告直出前台
- *   ♻️ KV 快取前綴 pestdiag:v2 → v3：隔離 Workflow 時期舊毒快取，
- *      部署後所有分析全部走新通道，舊快取自然過期淘汰
- *   ♻️ 完整保留 v9.5 防彈架構（extractDifyAnswer 安全挖字／Deadline 護衛／
- *      Graceful Degradation）＋ v9.3 安全強化（金鑰 fail-closed／地區封鎖）＋
- *      v9.4 FastTrack（63s 分析時限／20s 上傳時限）
+ * Cloudflare Worker — 滅蟲師傅 AI (v9.5 防彈韌性版 Bulletproof)
+ * 基於生產版 v9.4 (FastTrack) 升級：
  *
  * v9.5 升級亮點（「徹底解決 AI 診斷失敗」防彈級修復 — 2026-10-24）：
  *   🛡️ 消滅 SyntaxError：全檔語法重新整理，禁止斷行開頭 || 等易錯寫法，
@@ -124,24 +107,11 @@ function extractDifyAnswer(data) {
    ============================================================ */
 function isBadReport(safeAnswer) {
   if (!safeAnswer || String(safeAnswer).trim() === '') return true;
-  /* v9.6：統一 lower-case 比對（英文標記大小寫不敏感；中文不受影響） */
-  const s = String(safeAnswer).toLowerCase();
   const BAD_MARKERS = [
-    /* 原有：AI 明言睇唔清／辨識失敗 */
     '無法辨識', '無法辨認', '未能判定', '未能識別', '無法識別',
-    'no insect image',
-    /* v9.6 新增：AI 聲稱收唔到相（Workflow 時期毒報告標誌 — 一律攔截，杜絕 0% 報告直出） */
-    '未提供相片', '沒有提供相片', '冇提供相片',
-    '未提供圖片', '沒有提供圖片', '冇提供圖片',
-    '未收到相片', '未收到圖片', '冇收到相片',
-    '未見相片', '未見到相片', '冇見到相片', '未見任何相片',
-    '未上傳相片', '沒有上傳相片', '冇上傳相片',
-    '沒有相片', '冇相片',
-    '無法讀取相片', '無法讀取圖片',
-    '看不到相片', '看不到圖片',
-    'no image provided', 'no photo provided', 'no image was provided',
-    'no photo was provided', 'cannot see any image', 'no image attached',
+    'No insect image', 'no insect image',
   ];
+  const s = String(safeAnswer);
   for (let i = 0; i < BAD_MARKERS.length; i++) {
     if (s.includes(BAD_MARKERS[i])) return true;
   }
@@ -279,8 +249,7 @@ async function cacheGet(env, hash) {
   try {
     const kv = getKV(env);
     if (kv) {
-      /* v9.6：前綴升級 v2 → v3，隔離 Workflow 時期舊毒快取 */
-      const cached = await kv.get(`pestdiag:v3:${hash}`);
+      const cached = await kv.get(`pestdiag:v2:${hash}`);
       return cached ? JSON.parse(cached) : null;
     }
   } catch (_) { /* 快取失敗不影響主流程 */ }
@@ -291,8 +260,7 @@ async function cachePut(env, hash, payload, ttlSeconds) {
   try {
     const kv = getKV(env);
     if (kv) {
-      /* v9.6：前綴升級 v2 → v3（與 cacheGet 同步） */
-      await kv.put(`pestdiag:v3:${hash}`, JSON.stringify(payload), { expirationTtl: ttlSeconds });
+      await kv.put(`pestdiag:v2:${hash}`, JSON.stringify(payload), { expirationTtl: ttlSeconds });
     }
   } catch (_) { /* 快取失敗不影響主流程 */ }
 }
@@ -307,8 +275,7 @@ async function parseJsonSafe(res) {
 }
 
 /* ============================================================
-   Dify Chatflow 調用（上傳 → 分析，描述經雙通道送達）
-   v9.6：端點還原 /chat-messages ＋ 圖片 Payload 還原（files 頂層平排）
+   Dify 雙腦 Chatflow 調用（上傳 → 分析，描述經雙通道送達）
    v9.5：Deadline 護衛 + 解析防彈 + 安全挖字
    ============================================================ */
 async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDesc) {
@@ -368,21 +335,15 @@ async function callDify(env, cfg, imageFile, fileExt, userId, requestId, userDes
         method: 'POST',
         headers: { Authorization: `Bearer ${cfg.DIFY_API_KEY}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          /* ===== v9.6 Chatflow 還原（方案第三步核心）=====
-             inputs 通道：恒常傳送 user_desc（空描述傳空字串 userDesc || ''），
-             對齊 Chatflow 開始節點 user_desc 變數綁定（{{user_desc}}） */
-          inputs: (cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc || '' } : {},
-          // query 通道：Dify /chat-messages 必填欄位；同時令線索＋防禦裝甲
-          // 即時送達模型（雙通道保障，唔使改 Dify 端都有效）
+          // inputs 通道：Dify Chatflow Start 節點定義 user_desc 變數後即可用 {{user_desc}} 綁定
+          inputs: (userDesc && cfg.DESC_CHANNEL !== 'query') ? { user_desc: userDesc } : {},
+          // query 通道：即時生效，唔使改 Dify 都確保線索 + 防禦裝甲送達模型（雙通道保障）
           query: (userDesc && cfg.DESC_CHANNEL !== 'inputs')
             ? buildAnalysisPrompt(userDesc, cfg.QUERY_MODE)
             : (cfg.QUERY_MODE === 'full' ? FULL_ANALYSIS_PROMPT : COMPACT_ANALYSIS_PROMPT),
           response_mode: 'blocking',
           user: userId,
-          /* ★★★ 圖片 Payload 還原（必須與 inputs 平排，絕不能包入 inputs）★★★
-             前置步驟已經 /files/upload 取得 upload_file_id，喺呢度頂層送出，
-             Dify Chatflow 先會將相片注入 sys.files 交俾視覺 LLM 化驗 */
-          files: fileId ? [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId }] : [],
+          files: [{ type: 'image', transfer_method: 'local_file', upload_file_id: fileId }],
         }),
       },
       cfg.CHAT_TIMEOUT_MS, 'AI 分析'
@@ -462,10 +423,10 @@ export default {
     if (url.pathname === '/health') {
       return json({
         status: 'ok',
-        version: '9.6-ChatflowRestore',
+        version: '9.5-Bulletproof',
         dify_key_set: !!(env.DIFY_API_KEY),
         blocked_countries: String(env.BLOCKED_COUNTRIES || DEFAULT_BLOCKED_COUNTRIES),
-        architecture: 'Dify Chatflow「滅蟲師妹—AI專員」(files 頂層平排還原) + GPT Vision (化驗) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Bulletproof (type-safe + graceful 200 + deadline guard)',
+        architecture: 'GPT Vision (化驗) + Knowledge (智庫) + DeepSeek (廣東話報告) + Contextual Prior (≤50字) + Bulletproof (type-safe + graceful 200 + deadline guard)',
         contextual_prior: true,
         bad_report_interception: true,
         max_desc_chars: Number(env.DESC_MAX_CHARS || DEFAULTS.DESC_MAX_CHARS),
@@ -563,7 +524,7 @@ export default {
       const payload = {
         success: true,
         diagnosis: answer,
-        version: '9.6 (Chatflow Restore + MoE Dual-Brain + Contextual Prior + Bulletproof Resilience)',
+        version: '9.5 (MoE Dual-Brain + Contextual Prior + Bulletproof Resilience)',
         engine: 'MoE-GPT+DeepSeek',
         user_desc_used: !!userDesc,
         cached: false,

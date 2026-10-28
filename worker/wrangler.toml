@@ -1,53 +1,75 @@
-# Cloudflare Worker 配置 — 滅蟲師傅 AI 害蟲視覺辨識後端
-# 現行版本：pest-vision-worker.js v9.6-Workflow（Dify 工作流重構防彈版，2026-10-26）
+# Cloudflare Worker 配置 — 滅蟲師傅 自建原生留言系統（直出＋IP 防護版 v5.0）
 #
 # 部署步驟：
-#   1. Cloudflare Dashboard → Workers & Pages → pest-vision-worker → Edit Code
-#   2. 全選貼上 pest-vision-worker.js 最新版 → Save and Deploy
-#   3. Settings → Bindings 確認：
-#      a) KV Namespace → 變數名稱: PEST_KV（智慧快取）
-#   4. Secrets：wrangler secret put DIFY_API_KEY（Dify「滅蟲師妹 - 工作流版」專用金鑰）
-#   5. Worker URL = https://pest-vision-worker.cedars5282.workers.dev
+#   1. 建立 KV Namespace（二選一）：
+#      Dashboard: Workers & Pages → KV → Create namespace → 名稱: COMMENT_KV → 複製 ID
+#      CLI:      npx wrangler kv namespace create COMMENT_KV → 複製 id
+#   2. 將下方 id 替換為你嘅實際 KV Namespace ID
+#   3. 設定管理密鑰：npx wrangler secret put ADMIN_SECRET
+#      （重要：必須使用 wrangler secret 設定，唔好直接寫喺呢個 toml 檔入面）
+#   4. 部署：npx wrangler deploy
 #
-# ===== v9.6 修復亮點（502 根治） =====
-#   🔄 分析端點 /chat-messages → /workflows/run（配合 Dify Workflow 版 App）
-#   🔄 Workflow inputs payload（user_desc + 檔案變數）+ 400 自動變體後備
-#   🔄 三層嵌套 data.data.outputs.text 挖字 + 輸出變數名自適應
-#   🛡️ DIFY_MODE=auto：404 自癒回退 chatflow；status:failed 明確判死
+# ===== v5.0 直出＋IP 防護升級亮點（2026-10-07）=====
+#   🚀 留言直出：通過數學驗證後即時公開（approved: 1），取消人工審核
+#   🛡️ IP 發言配額：同一 IP 每小時限發 1 則 ＋ 每日限 3 則（香港時區日重置）
+#   🚫 IP 封鎖名單：管理員一鍵「刪除並封鎖 IP」；被封鎖 IP 無法發言（前台表單自動隱藏）
+#      黑名單存於 KV key「ipblacklist」（無 TTL，永久生效直至解除）
+#   🔒 繼承 v3.1 全部安全防護（safeCompare / Honeypot / 遞迴刪除 / CORS 白名單）
+# ===== v3.1 安全升級亮點 =====
+#   🔧 修正「密碼錯誤」誤判問題：
+#      - ADMIN_SECRET 未設定時，回傳專屬錯誤碼 ADMIN_SECRET_NOT_SET
+#      - 密鑰比較使用時序安全函數 safeCompare（防 side-channel attack）
+#      - 自動 trim 兩端空白，避免空白差異導致比對失敗
+#   🔧 新增 POST /api/admin/test 端點（測試密鑰是否正確）
+#   🔧 /api/health 加入 admin_secret_set 欄位
+#   🔒 修正 CORS 反射弱點：未知 origin 不再 fall-back 至生產域名
+#   🔒 加入安全標頭：X-Content-Type-Options, X-Frame-Options, Referrer-Policy
+#   🔒 加入請求大小限制（5.5MB）
+#   🔒 加入 5 分鐘視窗速率限制（5 主留言 / 10 回覆 per IP）
+#   🔒 遞迴刪除所有後代回覆（修正原 1 層刪除 Bug）
+#   🔒 強制官方回覆使用「滅使用「滅蟲師傅」暱稱
+#   🔒 嚴格驗證 page_id 字符白名單
+#   🔒 圖片 URL 限制為 data:image/* 或 https://
+#   🔒 公開 API 回應隱藏 client_ip
 #
-# ===== v9.6 可選變數（全部有預設值，需要先 uncomment [vars]） =====
-# [vars]
-# DIFY_MODE = "auto"        # auto（預設：workflow 優先 + chatflow 自癒回退）/ workflow / chatflow
-# DIFY_FILE_VAR = "files"   # Dify Workflow Start 節點檔案變數名（Start 節點叫 image 就改 "image"）
-# DIFY_API_URL = "https://api.dify.ai/v1"
+# ===== API 端點 =====
+#   GET  /api/health                  → 健康檢查（含 admin_secret_set 欄位）
+#   GET  /api/comments?page_id=xxx     → 讀取已公開留言（樹狀結構；封鎖 IP 訪客帶 viewer_banned=true）
+#   POST /api/comments                 → 提交新留言（直出公開；1小時冷卻＋每日3次；honeypot 靜默丟棄）
+#   POST /api/admin/test               → 測試管理密鑰是否正確
+#   POST /api/admin/list              → 列出所有留言（含未公開舊留言）
+#   POST /api/admin/approve           → 審核通過（兼容 v5.0 前嘅舊待審留言）
+#   POST /api/admin/delete            → 遞迴刪除留言（含所有後代回覆）
+#   POST /api/admin/reply             → 管理員官方回覆（強制「滅蟲師傅」暱稱）
+#   POST /api/admin/pin               → 置頂 / 取消置頂
+#   POST /api/admin/banip             → 刪除並封鎖 IP（傳 id）／手動封鎖（傳 ip）／可附 note 備註
+#   POST /api/admin/unbanip           → 解除封鎖 IP
+#   POST /api/admin/banlist           → 列出封鎖名單（含 banned_at / note）
 #
-# ===== 歷史版本亮點（v3.0） =====
-#   🔧 修正 Llama 3.2 Vision 模型需先送出 "agree" 授權 prompt 之問題
-#      （舊版直接送出圖片，會收到 5016 錯誤：需先同意授權）
-#   🔧 新增「首次同意授權」快取機制（KV 儲存 agreed=true），避免每次請求都重送
-#   🔧 加入 25 秒 AbortController 逾時保護（避免 Worker AI 卡死）
-#   🔧 改進 prompt 模板，引導 AI 回傳更穩定嘅 JSON 結構
-#   🔒 加入 CORS 白名單（不再反射任意 origin）
-#   🔒 加入安全標頭
-#   🔒 加入請求大小限制（10MB 上限）
+# ===== 審核密鑰設定（重要！）=====
+#   npx wrangler secret put ADMIN_SECRET
+#   → 輸入一個強壯嘅密鑰（建議 32+ 字元隨機字串）
+#   → 此密鑰用於所有 /api/admin/* 端點
 #
-# ===== 端點 =====
-#   POST /          → 提交圖片進行 AI 辨識
-#   GET  /health    → 健康檢查
+#   ⚠️ 重新部署 Worker 後，secret 變數會保留。如果你刪除並重建 Worker，
+#      必須重新執行 `wrangler secret put ADMIN_SECRET` 設定密鑰。
+#
+#   ⚠️ 唔好將 ADMIN_SECRET 直接寫喺呢個 toml 檔入面！必須用 wrangler secret。
+#
+# ===== 可選：DEBUG 模式 =====
+#   npx wrangler secret put DEBUG
+#   → 設為 "true" 可在錯誤回應中顯示詳細訊息（僅開發環境使用）
 
-name = "pest-vision-worker"
-main = "pest-vision-worker.js"
+name = "comment-handler"
+main = "comment-handler.js"
 compatibility_date = "2024-12-01"
 
-# ── Workers AI 綁定 ──
-# Cloudflare Dashboard → Worker → Settings → Bindings → Add → Workers AI
-# 變數名稱必須為 AI
-[ai]
-binding = "AI"
-
-# ── KV Namespace 綁定（用於快取 Llama 授權同意狀態）──
-# 建立 KV namespace：npx wrangler kv namespace create PEST_VISION_CACHE
-# 然後將下方 id 替換為實際 namespace ID
+# ── KV Namespace 綁定 ──
+# 建立 KV 後，將 id 替換為實際 Namespace ID
 [[kv_namespaces]]
-binding = "PEST_KV"
+binding = "COMMENT_KV"
 id = "a6c1483100b64d5fb29a3996b935883d"   # ← 替換為你嘅 KV Namespace ID
+
+# ── 環境變數（使用 wrangler secret 設定，唔好直接寫喺度）──
+# ADMIN_SECRET: 管理員密鑰，用於所有 /api/admin/* 端點驗證
+# 設定方式：npx wrangler secret put ADMIN_SECRET
