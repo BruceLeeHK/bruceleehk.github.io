@@ -1,28 +1,19 @@
-# 修復日誌 (v9.93 — 2026-10-28)
+# 修復日誌 (v9.92 — 2026-10-28)
 
-## v9.93 《用內容包圍核心商業字，用 AI 工具鎖住潛在客源》三大策略落地（2026-10-28）
+## v9.92 「AI 害蟲圖像診斷器」引流誘餌系統＋三大 UX 修復（2026-10-28）
 
-**依用戶 docx 方案執行三大 SEO 策略：①比較型長尾詞內容戰略 ②資訊型流量＋AI 診斷器引流 ③核心商業詞與十八區內部連結網；新增 3 篇文章（ZH+EN 共 6 頁），全站 footer 智庫欄＋首頁 footer 十八區錨文本＋districts 頁 Schema 十八區補強**
+**前台實測抽查後全站落地：文章 30%–50% 閱讀位置 AI Banner 全覆蓋＋蟲患辨識圖鑑三篇新文章＋AI 診斷器兩步提交＋rat-control 箭頭根因修復＋footer 統一**
 
-- 策略一（blog-28 ZH+EN）：《香港滅鼠公司邊間好？2026 收費標準與防伏指南》——目標關鍵字「滅鼠公司邊間好」「滅蟲公司推介 2026」「滅蟲收費」。按 docx 指定結構：2026 收費大解構（單次 $1,500–$3,800 vs 合約制對比表）、傳統放藥 vs IPM 源頭封堵利弊表、揀選滅蟲公司 5 大防伏指標（除害劑牌照、先勘察後報價、書面透明收費、報告紀錄、保養條款）、為什麼街坊推薦滅蟲師傅（Google 4.9/5.0、10,000+ 戶＋南丫島 blog-17／美孚新邨／荃灣安裕 blog-21 真實案例）；文末 WhatsApp 報價 CTA 強調「先勘察後固定報價，絕無隱藏加項」。與 blog-1（廣義揀蟲公司）及 blog-25（純收費拆解）互補不重疊，延續 v9.91 防自相殘殺佈局
-- 策略二（blog-29/30 ZH+EN）：害蟲圖鑑系列——blog-29《點分老鼠屎同曱甴屎？》（5 大特徵對比表＋漢他病毒風險＋正確處理 3 步）、blog-30《床蝨咬痕有咩特徵？3 招教你自查》（咬痕 4 特徵＋蚊叮跳蚤對比表＋3 招自查＋旅遊防蝨）。兩篇均按 docx 要求喺**開頭（AI 摘要盒後）＋中段**嵌入【AI 害蟲圖像診斷器】視覺化 Banner，文案照用 docx 建議：「唔肯定屋企出沒嘅係咩蟲？即試香港首創【AI 害蟲圖像診斷器】——上載相片，滅蟲師妹 15 秒免費出報告！」，點擊導向 /ai/ 承接恐慌型潛在客源
-- 策略三（內部連結網）：①首頁 footer「🗺️ 全港十八區滅蟲據點」由 6 區補齊至 **18 區關鍵字錨文本**（沙田滅蟲、九龍城滅蟲、屯門滅蟲⋯⋯雙欄 grid 排版，ZH/EN 同步）②SC 簡體首頁 18 個地區 chips 全部連結化 ③全站 footer 智庫欄新增 blog-28《滅鼠公司邊間好？防伏指南》連結（ZH 88 頁＋EN 87 頁）④新文章內鏈矩陣：每篇 ≥2 條指向首頁或核心服務頁（/service/rodent/、/service/cockroach/、/service/flea/、/services/、首頁）⑤districts 頁 18+18 個 #pestcontrol Schema 的 areaServed 補強為**官方十八區全稱**（中西區⋯離島區／Central and Western⋯Islands），向 Google 明示全港十八區服務覆蓋（discovery-bay 屬個案頁無 PestControl 區塊，自動跳過）
-- info hub：/info/ 與 /en/info/ 各新增 3 張文章卡（防伏指南×1＋害蟲圖鑑×2）
-- sitemap.xml：170→176 URLs（blog-28/29/30 ZH+EN 共 6 條新 URL），全站 lastmod→2026-10-28
-- 流量保護：零 URL 變更（全新目錄不動舊頁）、零內容刪減、canonical 全部獨立、共用 CSS/JS 零改動（?v=9.88 不變，毋須 cache-bust 升版）
-- validate_v993.py：72 項全 PASS（6 新頁標籤平衡／JSON-LD 解析／canonical／日期 2026-10-28／AI Banner 開頭中段位置／核心內鏈≥2／首頁十八區錨文本 18+18／footer 智庫欄 ZH88+EN87／districts Schema 36 頁官方區名／hub 卡×6／sitemap 176 well-formed／WA 解碼／docx 要點逐項核對／全站 180 HTML 平衡＋?v=9.88 536 處不變）
+- 前台實測抽查結果：全站 30 個內容頁**零** 30%–50% 閱讀位置視覺 Callout Banner；15 篇網誌零 /ai/ 連結（包括 v9.91 三篇滅鼠叢集文章）；AI 連結僅以正文內文連結或文末按鈕存在——跳出走失風險最高的閱讀中段完全未有引流配置
+- 策略一（AI Banner 引流組件）：bruceleehk.css 新增 .ai-cta-banner 響應式組件（漸變綠框＋機械人圖示＋誘餌文案＋膠囊按鈕，手機自動堆疊全寬）；注入 64 頁——blog-1..30＋rodent-spillover＋whitepaper-2026（ZH+EN，屬靈反思文章按紅線排除），自動定位插入每篇約 40% 閱讀位置（排除 FAQ 標題），文案「唔肯定屋企出沒嘅係咩蟲？即試香港首創【AI 害蟲圖像診斷器】——上載相片，15 秒免費出報告！」，全數連結 /ai/（EN 版 /en/ai/）
+- 策略二（蟲患辨識圖鑑系列）：新建三篇圖文長文 ZH+EN 共 6 頁——/info/blog-28/《老鼠屎 vs 曱甴屎 vs 壁虎屎圖鑑對比》（五欄對比表＋新舊鼠屎判斷＋安全清潔三步）、/info/blog-29/《發現曱甴卵鞘點算？蟲卵與卵鞘圖鑑》（卵鞘／床蝨卵／白蟻泥路對照表＋處理三原則）、/info/blog-30/《香港家居 10 大常見害蟲特徵圖鑑》（10 蟲速查表＋三組場景分類＋拍照辨識貼士）；每篇 AI 摘要直接答案框＋FAQ×6（HTML 與 JSON-LD 程式化同步）＋JSON-LD×3（BreadcrumbList/BlogPosting about 實體/FAQPage）＋AI 診斷器 CTA＋WA 預填；新增 3 幅 AI 示意圖（blog28-droppings-compare／blog29-ootheca-closeup／blog30-pest-id-chart，webp+jpg 雙格式）＋復用真實個案相
+- 策略三（AI 診斷器兩步提交）：/ai/ 上載流程重構——揀相後停喺上載狀態顯示相片預覽＋「開始 AI 診斷（免費）」提交按鈕＋「重新選相」，用戶可先補充描述再統一提交（文字說明欄由形同虛設變成分析前必經確認步驟，AI 可根據苦主描述做更準確判斷）；原有三級重試／離線等候／溫和提示卡引擎不變
+- rat-control 12 頁根因修復：keywords meta 尾「&gt;&gt;」雙箭頭筆誤清除（&quot;&gt;&gt;&quot; → &quot;&gt;&quot;）（12 頁）——同時根治左上角小箭頭顯示與 head 結構被文字節點提早終結（JSON-LD/preconnect 全數跌入 body）問題；FAQ「幾快可以上門？周末有冇得約？」答案更正（ZH JSON-LD＋HTML 同步）為「溫馨提示：我們於逢星期日及公眾假期休息。休息期間若您有任何需求，歡迎隨時在官網填寫表格或發送電子郵件，我們將在下一個工作天首要處理您的查詢。謝謝您的體諒！」＋緊急個案排期說明；EN 版同步英文溫馨提示
+- 首頁及全站 footer 統一（169 頁）：營業時間改為「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」（ZH 83 頁＋EN「Hours • Mon–Sat: 09:00 - 18:00 • Sundays & Public Holidays: Closed」83 頁）；54 頁 JSON-LD openingHoursSpecification dayOfWeek 移除 "Sunday"；footer 欄目順序調整為「先家居滅蟲、後商業滅蟲」——與頂部導航完全一致，符合由左至右閱讀習慣與全站統一專業邏輯
+- 引流生態：info hub（ZH/EN）各加三張「蟲患辨識」新文章卡；blog-25 延伸閱讀互鏈辨識系列；新文章互鏁滅鼠叢集／床蝨／白蟻／服務專頁
+- Cache-Busting：bruceleehk.css 變更，全站資源引用 ?v=9.88 → ?v=9.92（171 檔 518 處，冪等腳本自動升版）
+- 流量保護：零 URL 變更（既有頁面全部保留）、零內容刪減、canonical 不變；sitemap 僅 +6 新 URL（blog-28/29/30 ZH+EN）＋4 URL lastmod 更新，既有 170 URL 不動避免全量重抓
 
-## v9.92 UX 微調綜合修復：AI 提交機制＋rat-control 左上角箭頭與 FAQ 更正＋footer 欄序與營業時間全站統一（2026-10-27）
-
-**用戶回報三項小問題＋footer 導航順序 UX 分析落地：全站 225 檔，純 HTML/JSON-LD 修改，共用 CSS/JS 零改動（?v=9.88 不變）**
-
-- Fix①（AI 提交機制）：/ai/ 頁終結「上載即分析」舊流程——相片選好後停留喺上載狀態，新增 64px 相片縮圖預覽盒＋全寬「開始 AI 分析」提交按鈕（disabled→選相後啟用）＋「相片同描述一齊交畀滅蟲師妹」說明行；描述欄提示文案升級為「建議填寫，滅蟲師妹根據你嘅描述判斷更準」；選相後自動平滑捲動至描述欄引導填寫；resetToUpload／換相／重新上載全部同步重置新元素。user_desc 喺撳提交先讀取，同相片一齊送達 Worker → 滅蟲師妹可根據苦主描述判斷更準（配合 Worker v9.6 inputs.user_desc 恒常傳送）
-- Fix②（左上角小箭頭真兇）：12 個 rat-control 頁面（ZH/EN 主頁＋觀塘/深水埗/荃灣/油尖旺/元朗 5 地區頁）keywords meta 尾端 stray「>」（v9.91 引入嘅 `">>` 筆誤）——呢個字符令 HTML5 parser 提早結束 head，將 preconnect/icon/OG meta 等 13+ 個 head 節點跌入 body、`>` 渲染喺頁面左上角。移除後 head 結構完整還原（html5lib 驗證），SEO 結構化數據歸位
-- Fix②（FAQ 更正）：rat-control ZH「幾快可以上門？周末有冇得約？」答案由「周一至周日都可預約」更正為「溫馨提示：我們於逢星期日及公眾假期休息。休息期間若您有任何需求，歡迎隨時在官網填寫表格或發送電子郵件，我們將在下一個工作天首要處理您的查詢。謝謝您的體諒！」（保留最快即日勘察＋緊急個案優先排期資訊）；EN 版同步「closed on Sundays and public holidays…next working day」；FAQPage JSON-LD 與 HTML 同步（各 2 處）
-- Fix②（結構化數據同步）：全站 54 頁 OpeningHoursSpecification dayOfWeek 陣列移除 Sunday（inline＋multiline 兩種變體），與新營業政策一致，避免 Google 地圖/本地搜尋顯示錯誤營業時間
-- Fix③（營業時間）：全站 168 頁 footer「營業時間：9:00 - 18:00」改為「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」（EN：Hours • Mon-Sat: 09:00 - 18:00 • Sun & Public Holidays: Closed；SC 簡體同步 2 頁）；/quote/ 頁營業時間卡同步「星期一至六：09:00 - 18:00・星期日及公眾假期休息・WhatsApp 工作時間即時覆」
-- Fix④（footer 欄序）：全站 169 頁 footer「商業滅蟲→家居滅蟲服務」欄序調換為「家居滅蟲服務→商業滅蟲」，與頂部導航完全一致（先家居、後商業），消除訪客空間記憶摩擦、維持全站導航邏輯統一；ZH 84＋EN 84＋SC 1 共 169 頁，404 頁等無雙欄結構頁自動跳過
-- sitemap.xml：170 條 lastmod→2026-10-27；零 URL 變更、零內容刪減、canonical 不變
 
 ## v9.91 《消除「關鍵字自相殘殺」》四維攻堅：滅鼠公司關鍵詞鎖定首頁前三甲（2026-10-26）
 
