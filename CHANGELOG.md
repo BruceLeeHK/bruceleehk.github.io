@@ -1,122 +1,18 @@
-# 修復日誌 (v9.92 — 2026-10-28)
+# 修復日誌 (v9.94 — 2026-10-28)
 
-## v9.92 「AI 害蟲圖像診斷器」引流誘餌系統＋三大 UX 修復（2026-10-28）
+## v9.94 《5 大點擊率爆發優化方案》落地：Title/Meta 重構＋星級 Schema＋十八區內鏈網＋AI 鉤子全站部署（2026-10-28）
 
-**前台實測抽查後全站落地：文章 30%–50% 閱讀位置 AI Banner 全覆蓋＋蟲患辨識圖鑑三篇新文章＋AI 診斷器兩步提交＋rat-control 箭頭根因修復＋footer 統一**
+**依用戶 docx《5 大點擊率爆發優化方案.docx》五大策略逐項執行：分流處理（商業大詞／高意圖長尾／資訊型長尾）× Title 與 Meta 爆發式重構 × Rich Snippets × 11-20 名長尾詞拉進前 10 × AI 診斷器 UVP 鉤子；同時重建被 v9.92 部署覆蓋嘅 v9.93 獨有資產（十八區內鏈網）；純 HTML 修改，共用 CSS/JS 零改動（?v=9.92 不變，毋須 cache-bust）**
 
-- 前台實測抽查結果：全站 30 個內容頁**零** 30%–50% 閱讀位置視覺 Callout Banner；15 篇網誌零 /ai/ 連結（包括 v9.91 三篇滅鼠叢集文章）；AI 連結僅以正文內文連結或文末按鈕存在——跳出走失風險最高的閱讀中段完全未有引流配置
-- 策略一（AI Banner 引流組件）：bruceleehk.css 新增 .ai-cta-banner 響應式組件（漸變綠框＋機械人圖示＋誘餌文案＋膠囊按鈕，手機自動堆疊全寬）；注入 64 頁——blog-1..30＋rodent-spillover＋whitepaper-2026（ZH+EN，屬靈反思文章按紅線排除），自動定位插入每篇約 40% 閱讀位置（排除 FAQ 標題），文案「唔肯定屋企出沒嘅係咩蟲？即試香港首創【AI 害蟲圖像診斷器】——上載相片，15 秒免費出報告！」，全數連結 /ai/（EN 版 /en/ai/）
-- 策略二（蟲患辨識圖鑑系列）：新建三篇圖文長文 ZH+EN 共 6 頁——/info/blog-28/《老鼠屎 vs 曱甴屎 vs 壁虎屎圖鑑對比》（五欄對比表＋新舊鼠屎判斷＋安全清潔三步）、/info/blog-29/《發現曱甴卵鞘點算？蟲卵與卵鞘圖鑑》（卵鞘／床蝨卵／白蟻泥路對照表＋處理三原則）、/info/blog-30/《香港家居 10 大常見害蟲特徵圖鑑》（10 蟲速查表＋三組場景分類＋拍照辨識貼士）；每篇 AI 摘要直接答案框＋FAQ×6（HTML 與 JSON-LD 程式化同步）＋JSON-LD×3（BreadcrumbList/BlogPosting about 實體/FAQPage）＋AI 診斷器 CTA＋WA 預填；新增 3 幅 AI 示意圖（blog28-droppings-compare／blog29-ootheca-closeup／blog30-pest-id-chart，webp+jpg 雙格式）＋復用真實個案相
-- 策略三（AI 診斷器兩步提交）：/ai/ 上載流程重構——揀相後停喺上載狀態顯示相片預覽＋「開始 AI 診斷（免費）」提交按鈕＋「重新選相」，用戶可先補充描述再統一提交（文字說明欄由形同虛設變成分析前必經確認步驟，AI 可根據苦主描述做更準確判斷）；原有三級重試／離線等候／溫和提示卡引擎不變
-- rat-control 12 頁根因修復：keywords meta 尾「&gt;&gt;」雙箭頭筆誤清除（&quot;&gt;&gt;&quot; → &quot;&gt;&quot;）（12 頁）——同時根治左上角小箭頭顯示與 head 結構被文字節點提早終結（JSON-LD/preconnect 全數跌入 body）問題；FAQ「幾快可以上門？周末有冇得約？」答案更正（ZH JSON-LD＋HTML 同步）為「溫馨提示：我們於逢星期日及公眾假期休息。休息期間若您有任何需求，歡迎隨時在官網填寫表格或發送電子郵件，我們將在下一個工作天首要處理您的查詢。謝謝您的體諒！」＋緊急個案排期說明；EN 版同步英文溫馨提示
-- 首頁及全站 footer 統一（169 頁）：營業時間改為「營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息」（ZH 83 頁＋EN「Hours • Mon–Sat: 09:00 - 18:00 • Sundays & Public Holidays: Closed」83 頁）；54 頁 JSON-LD openingHoursSpecification dayOfWeek 移除 "Sunday"；footer 欄目順序調整為「先家居滅蟲、後商業滅蟲」——與頂部導航完全一致，符合由左至右閱讀習慣與全站統一專業邏輯
-- 引流生態：info hub（ZH/EN）各加三張「蟲患辨識」新文章卡；blog-25 延伸閱讀互鏈辨識系列；新文章互鏁滅鼠叢集／床蝨／白蟻／服務專頁
-- Cache-Busting：bruceleehk.css 變更，全站資源引用 ?v=9.88 → ?v=9.92（171 檔 518 處，冪等腳本自動升版）
-- 流量保護：零 URL 變更（既有頁面全部保留）、零內容刪減、canonical 不變；sitemap 僅 +6 新 URL（blog-28/29/30 ZH+EN）＋4 URL lastmod 更新，既有 170 URL 不動避免全量重抓
-
-
-## v9.91 《消除「關鍵字自相殘殺」》四維攻堅：滅鼠公司關鍵詞鎖定首頁前三甲（2026-10-26）
-
-**依《消除「關鍵字自相殘殺」.docx》執行：確立 /service/rodent/ 為「滅鼠公司」唯一主戰場，全站權重集中＋主題集群護城河＋GEO 結構化，穩定佔據首頁前三**
-
-- 維度一（消除關鍵字自相殘殺）：rat-control 首頁 ZH/EN 重定位——title 由「【2026 滅鼠公司收費透明公開】」改為「【2026 滅鼠收費】家居滅鼠價錢速查」（讓出「滅鼠公司」精確匹配，轉攻滅鼠收費長尾），meta description／og／twitter 三件套同步；收費區 H2 改「家居滅鼠價錢點計」，表後新增 exact-match 引流行「專業滅鼠公司服務主頁 →」；推薦區 H2 與 FAQ×2（HTML＋JSON-LD 同步）移除「滅鼠公司」措辭；EN 版同步去 "Rat Control Company" 精確匹配改 "Rodent Control Prices"。blog-12 hero 段補 exact-match「滅鼠公司收費」內鏈 → /service/rodent/，並修復 </p></p> 嵌套 bug
-- 維度二（Dwell Time 對比表）：/service/rodent/ ZH/EN 於 #ipm-title 與 #price-title 之間新增「傳統滅鼠 vs 滅蟲師傅 IoT 智慧滅鼠」六維對比表（活動監測／源頭追蹤／源頭封堵／透明度／跟進機制／安全性），頂部 GEO 直接答案框＋底部商業客戶提示，復用頁內 .rat-price-table 樣式（共用 CSS 零改動）
-- 維度三（主題集群）：新建三篇長尾文章 ZH+EN 共 6 頁——/info/blog-25/《2026 香港滅鼠公司收費指南：物管與食肆防伏必睇》、/info/blog-26/《食環署捉老鼠方法 vs 專業滅鼠公司 IoT 科技對比》、/info/blog-27/《餐廳廚房老鼠斷尾攻略：HACCP 合規滅鼠標準》；每篇 AI 摘要直接答案框＋問句 H3＋FAQ×6（HTML 與 JSON-LD 程式化同步）＋JSON-LD×3（BreadcrumbList／BlogPosting about 實體／FAQPage）＋文末「專業滅鼠公司服務主頁」exact-match CTA；info hub（ZH/EN）加三張新文章卡；blog-18/20/23 延伸閱讀互鏈成集群護城河
-- GEO（AI 搜尋優化）：三新文全部問句標題＋首段直接答案＋可引用 blockquote＋官方數據（食環署 122,878 隻十八區數據）；rat-control 對比表與收費表雙 GEO 答案框；FAQPage 結構化覆蓋「滅鼠公司收費」「食環署捉老鼠」「HACCP 滅鼠」等 AI 常摘錄查詢
-- 維度四（外部信號）：交付 GBP 評論邀請模板（含「滅鼠公司／IoT 鼠盒／捉老鼠」關鍵字引導）＋公關軟文發佈指引（連登／香港討論區／商業平台，埋 exact-match 反向連結）
-- sitemap 164→170（新頁 ZH 0.9／EN 0.8）＋14 個既有 URL lastmod→2026-10-26；XML well-formed 驗證通過
-- 流量保護：既有頁面零 URL 變更、零內容刪減、canonical 不變；地區頁 title（【觀塘滅鼠公司】等地區長尾）刻意保留——地區意圖與主戰場無衝突；共用 CSS/JS 零改動（?v=9.88 引用不變）
-
-
-## v9.90 《將滅鼠公司搜索推進前3甲》微調方案落地：滅鼠專頁 SEO 三箭齊發（2026-10-26）
-
-**依《將滅鼠公司搜索推進前3甲.docx》執行：向 Google 證明「點擊我哋個頁最能解決用戶問題」——搶 CTR、搶停留、搶權重，一舉由第 9 位衝前三甲**
-
-- 方案一（Meta Title & Description 搶點擊）：/service/rodent/ ZH title 改為「【專業滅鼠公司】即日上門・單次滅鼠 $1,500 起・IoT 智慧鼠盒與防鼠網封堵｜滅蟲師傅」——滅鼠公司關鍵字前置＋「即日上門」緊迫感＋$1,500 價格錨；description 重寫為「老鼠入屋唔使等！」痛點開場＋真實個案斷尾＋免費 AI 估價 CTA；og:title／twitter:title／og:description／twitter:description 三件套同步；EN 版 title 加 Same-Day。/rat-control/ 標題刻意不動（保留現有排名積累，避免關鍵字頁面波動）
-- 方案二（Dwell Time 首屏視覺衝擊）：/service/rodent/ ZH+EN 首屏 hero 新增「實證雙卡」——📡 IoT 智慧鼠盒實拍（smart-iot-rat.webp，fetchpriority=high）＋🍽️ 真實餐廳個案 WhatsApp 實錄（餐廳廚房防鼠對話截圖），雙卡頁內錨點直達 #iot-title／#ipm-title 深度內容，延長停留；hero AI 按鈕文案改「免費 AI 診斷・即時估價」對齊搜尋意圖；width/height 全標註防 CLS；樣式全走頁內 <style>（共用 CSS 零改動）
-- 方案三（內部連結權重集中）：白皮書 ZH/EN「6mm 原則・斷尾」段＋blog-23 粘鼠板教學 ZH/EN CTA 段補 exact-match「專業滅鼠公司／professional rat control company」錨文本 → /service/rodent/；盤點確認 blog-17、blog-18、首頁、rat-control 既有「滅鼠公司」錨點已就位，全站權重集中灌注滅鼠專頁
-- sitemap 6 URL lastmod→2026-10-26（service/rodent 中英、whitepaper-2026 中英、blog-23 中英）；純 HTML 修改，?v=9.88 資源引用不變（共用 CSS/JS 零改動）
-- 流量保護：零 URL 變更、零內容刪減、canonical 不變、外鏈零污染；修改僅限 6 頁（rodent 中英、白皮書中英、blog-23 中英）＋sitemap＋CHANGELOG
-
-
-## v9.89 — 《重整【家居滅蟲】子頁面》方案落地：海外業主遙距代辦專頁＋導航 6 項＋services Hub 增強＋黃蜂頁安全強化（2026-10-26）
-
-**依《重整【家居滅蟲】子頁面.docx》執行：點擊下拉每一項都去到聚焦嘅專屬頁面，/overseas-landlord/ 獨立建頁終結「點入去都係舊綜合頁」問題**
-
-- 新建 /overseas-landlord/（ZH 57.2KB）＋ /en/overseas-landlord/（EN 56.5KB）：文檔藍圖全數落地——三大痛點卡（租客投訴處理／買賣交吉起租／無法親身視察）、遙距四步流程（WhatsApp 需求→代約勘察書面報價→施工雲端監工→覆檢保固電子收據）、英澳加星時區卡＋FPS／信用卡／Wise／PayPal 支付 chips、真實場景個案節錄（英國業主沙田居屋白蟻交吉／澳洲業主九龍床蝨租務糾紛，細節私隱處理）、防詐提示、FAQ×8（中英同構）；JSON-LD×4（BreadcrumbList＋Service hasOfferCatalog×3＋FAQPage×8＋PestControl）、og 三件套、hreflang 互指、WA 預填連結解碼驗證
-- 全站導航下拉 5 項→6 項（ZH 82 頁＋EN 81 頁）：新順序按文檔 IA——深層滅床蝨→白蟻勘察（微波探測）→全屋滅曱甴→滅鼠防鼠工程→滅黃蜂／摘蜂巢（🚨 緊急處理）→海外業主遙距代辦（🔥 交吉／起租必備）；URL 決策：床蝨沿用 /service/flea/、黃蜂沿用 /service/wasp/（兩頁早有內容與排名積累，換 URL 需 301 有波動風險，與流量保護原則衝突——文檔建議嘅 /bedbug/、/wasp/ 新 URL 不採用，收錄零損失）
-- 頁尾「家居滅蟲服務」欄 162 頁加海外業主專頁連結（ZH＋EN）
-- /services/ Hub 增強（不推倒重來，零內容刪減保護既有收錄）：導覽 pill band 加「滅蜂巢（🚨 緊急）」（補齊 6 服務入口）；#remote 版塊加綠色漸層「海外業主專屬專頁」引流卡；hero 加免費 AI 診斷按鈕（文檔藍圖 AI 入口）；EN 版同時修復 remote 版塊 ZH 路徑鏈接（/info/blog-10/→/en/info/blog-10/、/ai/→/en/ai/，既有 bug）
-- /service/wasp/ 安全強化（ZH/EN）：築巢位列表補窗台／抽氣扇槽（既有村屋／冷氣機基礎上）；「時段選擇」明確化為黃昏／夜間行動策略（歸巢後活動力最低）；新增紅色危險警告盒——切勿自行噴殺蟲水／火燒／射水＋蜂毒過敏性休克（Anaphylaxis）風險解說＋正確做法三步＋緊急 WA 預填連結
-- silo 互鏈：blog-10（遙距攻略 ZH/EN）hero CTA 加專頁按鈕（與 /overseas-landlord/ 正文互鏁成雙向）；/overseas-landlord/ 內鏈 services/flea/termite/wasp/blog-15/blog-24 生態
-- sitemap 162→164（新頁 ZH 0.9／EN 0.8）；/service/wasp/、blog-10 中英版 lastmod→2026-10-26；XML well-formed 驗證
-- 全部既有資源引用 ?v=9.88 保留；導航更新零資源請求變化（純 HTML）；下拉 HTML 增量每頁 <500B
-- 冪等驗證：nav/patch 腳本重跑全部 SKIP；EN wasp 插入時一度出現多餘 </div></section>（div 45/46），精確修復後 45/45 平衡
-
-## v9.88 — 緊急修復：首頁導航下拉爆版（CDN 快取版本錯配）＋全站 Cache-Busting（2026-10-26）
-
-## v9.88 — 緊急修復：首頁導航下拉爆版（CDN 快取版本錯配）＋全站 Cache-Busting（2026-10-26）
-
-**根因診斷：非代碼邏輯問題，而是 Cloudflare 把舊版 CSS 快取了 30 天——新 HTML（v9.87 nav-drop 結構）＋舊 CSS（無下拉隱藏規則）＝子選單全部平鋪擠爆導航**
-
-- 症狀：部署 v9.87 後，部分訪客首頁導航的【家居滅蟲】【商業滅蟲】下拉子選單全部展開平鋪、caret 顯示為原生按鈕、「覆蓋十八區」等被擠成豎排
-- 實證取證（bruceleehk.com 線上）：`/assets/css/bruceleehk.css` 無參數請求 → `cf-cache-status: HIT`、`age: 1,914,462`（約 22 天前快取）、`cache-control: max-age=2592000`（30 天）、舊檔 19,100 bytes（2026-09-20 版，零下拉規則）；同一 URL 加隨機參數 → 回源取得新版 25,096 bytes（含 19 處下拉規則）。線上 HTML 與本地 v9.87 逐位元組一致（96,064 bytes）
-- 原理：GitHub Pages 不處理 repo 內 `_headers`，Cloudflare（代理模式）亦不讀取——CDN 邊緣對 CSS/JS 的長 TTL 快取在新部署後不會自動失效；HTML 無快取所以是新的，CSS 有快取所以是舊的 → 版本錯配爆版
-- 修復（Cache-Busting 版本化）：全站 166 個 HTML 的本地資源引用統一加 `?v=9.88`，共 494 處（bruceleehk.css×161、bruceleehk.js×159、i18n.js×163、main.js×2、main.min.js×1、spirit-share.js×6、style.min.css×2）；Cloudflare cache key 含 query string → 帶新參數的請求視為全新資源立即回源，**無需等待 30 天、無需人工 purge 即對所有訪客生效**
-- 覆蓋路徑變體：`/assets/`（155）、`../assets/`、`../../assets/`、`assets/` 相對路徑全部處理；cdnjs／GTM 等外部資源零污染
-- 冪等設計：腳本先剝離舊 `?v=` 再寫入新版本號，重跑位元組不變；未來升級只需改 VERSION 常數（如 `?v=9.89`）
-- 驗證 24/24 通過：494 處版本參數＋零殘留、引用資源 100% 可解析、無殘缺引用（`href="assets/"` 型防護檢查）、GTM/canonical/og/nav-drop×2/spirit-share×6/JSON-LD 抽樣全保留、script/head/body/ul/nav 標籤平衡、冪等往返位元組不變
-- 瀏覽器實測（本地）：桌機 1440px hover 下拉懸浮卡片正常展開（visibility:visible/opacity:1）、手機 375px 漢堡→手風琴展開收合正常（aria-expanded 同步）、EN 首頁與 blog-15 抽樣渲染正常、Console 零錯誤
-- 流量保護：零 URL 變更（頁面位址全部不變）、零內容刪減、HTML 檔案數 166 不變、資源檔案零修改（僅 HTML 引用加參數）、SEO 零影響（query 參數不產生新頁面、canonical 指向無參數位址、sitemap 零變動避免 162 頁全量重抓稀釋抓取預算）
-- 未來部署 SOP：凡修改 `assets/css/*` 或 `assets/js/*`，同步升版全站 `?v=` 參數（跑 `scripts/fix_v988_cachebust.py` 改 VERSION 即可）；可選在 Cloudflare Dashboard「Caching → Purge Everything」立即清空全部邊緣快取（加速 og 圖等無參數資源刷新）
-
-## v9.87 — 網站導航與 UX 終極優化：B2C/B2B 雙軌分流＋雙下拉選單（2026-10-26）
-
-**依《網站導航與 UX 終極優化方案.docx》全數落地：完美對稱的【家居滅蟲】vs【商業滅蟲】雙軌導航**
-
-- 頂部導航雙軌更名：「蟲類服務」→「家居滅蟲」（ZH 80 頁＋404＋about＋districts 按鈕）；「商業方案」→「商業滅蟲」（前一版本已完成）；EN 版同步 Services→Residential（81 頁）；SC 簡體版同步（家居灭虫／商业灭虫）；URL 結構 100% 不變，零 404 風險
-- 雙向下拉選單（Hover Dropdown）注入全站 163 頁：【家居滅蟲】下拉＝全屋滅曱甴（連環誘殺）/深層滅床蝨（180°C 蒸氣）/白蟻勘察與防治/滅鼠滅蚊（物理封堵）/海外業主遙距代辦（🔥 交吉起租必備）；【商業滅蟲】下拉＝餐飲食肆滅蟲（HACCP 合規）/物業管理滅蟲（屋苑商廈）/酒店及賓館床蝨處理/IoT 智慧鼠盒監測系統（✨ 科技旗艦）/索取企業報價單——全部深鏈至專屬服務頁或頁內錨點（#remote/#tech/#biz-quote）
-- 下拉實現：桌機純 CSS hover＋`:focus-within`（鍵盤可達、零 JS 依賴、不阻內容渲染）；手機 caret 按鈕手風琴（`bruceleehk.js`／`main.js` 新增 `initNavDrop`，aria-expanded 無障礙、外部點擊/ESC 自動收合）；新增平板 769–1120px 密度防溢出媒體查詢
-- 麵包屑同步更名：可見麵包屑「商業滅蟲方案」→「商業滅蟲」（ZH 11 處、EN 7 處）；JSON-LD BreadcrumbList `"name"` 同步（13 處）
-- Landing page SEO 對齊：/services/ title →「專業家居滅蟲及海外遙距代辦服務 | 滅蟲師傅」（H1 同步加「家居」關鍵字、meta description 對齊）；/commercial/ title →「商業滅蟲服務 | 食肆、酒店及物業管理專屬 IoT 方案 | 滅蟲師傅」；EN 版同步（Residential/Commercial Pest Control HK）；四頁 og:title / twitter:title 全部同步
-- 頁尾對齊：「🏢 商業滅蟲方案」欄 →「🏢 商業滅蟲」（80 頁）；頁尾連結「蟲類服務總覽」→「家居滅蟲服務總覽」（80 頁）＋EN「All Services」→「Residential Services」（80 頁）
-- 全站零殘留檢查通過：蟲類服務／商業方案／虫类服务／商业方案 = 0
-- 流量保護：零 URL 變更、零刪頁、零內容刪減；下拉內鏈為純 HTML（無新 HTTP 請求、JS 增量 <2KB）；全站每頁新增 10 條語義內鏈強化 Silo 權重流動（B2C↔B2B 分流更精準）；「家居滅蟲」「商業滅蟲」雙高搜量詞全站 Header 權重鞏固
-- sitemap：/services/、/commercial/ 中英版 lastmod → 2026-10-26
-
-
-## v9.86 — 屬靈反思分享圖卡傳播渠道（2026-10-26）
-
-**《加設 Google 帖子》方案四項工程全數落地：一鍵下載/分享、Open Graph 預覽圖、響應式 Lazy Loading、模板化整合**
-
-- 三張《屬靈反思》分享圖卡入庫 `assets/img/spirit-card-{1-bedbug,2-temple,3-insects}.{jpg,webp}`：1024×1024、jpg ≤200KB（WhatsApp og:image 安全线）；圖卡 2（寺廟篇）、3（先有蟲篇）右下角二維碼經 AI 區域修復移除，底部文字統一為「AI 診斷 / WhatsApp 預約」，與圖卡 1 完全一致（插畫其餘部分保留原圖像素）
-- 六頁（blog-15 / blog-11 / christian-temple-pest-control 中英版）文末注入共用分享圖卡區塊 `.spirit-share`：下載按鈕（`<a download>`）＋「一鍵轉發圖卡」按鈕（Web Share API 手機直彈 WhatsApp 分享單並附圖卡檔案；不支援自動降級 WhatsApp 文字分享）；圖片 `<picture>` webp+jpg 雙格式、`loading="lazy"` + `width/height` 防 CLS
-- 新增共用 `/assets/js/spirit-share.js`（defer，事件委派，GTM 自動推送 `share_spirit_card` / `share_spirit_card_success`）＋ `bruceleehk.css` `.spirit-share` 響應式樣式（手機按鈕全寬）
-- 六頁 `og:image` / `twitter:image` / Article JSON-LD `image` 由通用 og-cover.jpg 改為各篇專屬圖卡，並補 `og:image:width/height/alt` —— WhatsApp/FB 貼網址即彈出圖卡預覽
-- 區塊內建「系列其他篇」內鏈，三篇互導循環瀏覽；新增 `SHARE-CARD-TEMPLATE.md` 模板指南（日後新文章填 6 個變數即可複用）
-- Bug 修復：christian-temple-pest-control ZH 延伸閱讀 `href="B15"/"B11"` 佔位符壞鏈 → 正確內鏈（v9.85 遺留）
-- sitemap 六頁 lastmod → 2026-10-26
-- 流量保護：零 URL 變更、零內容刪減、新增資源全 defer/lazy（JS 1.9KB、CSS +1.6KB、圖卡 lazy 載入），對現有 SEO/速度零負面影響；og 預覽圖升級直接提升社交分享 CTR
-- Google Business Profile 帖子文案（3 篇 ZH＋3 篇 EN＋發帖 SOP）見交付包《Google商業檔案帖子-屬靈反思系列文案.txt》
-
-## v9.85《基督徒滅蟲人員可以入寺廟提供滅蟲服務嗎？》屬靈反思文章：放置於【蟲類資訊】—【屬靈反思】欄目，按《顧及軟弱的肢體》神學檢驗修飾，GEO 面向全球基督徒 — 按用戶兩份 docx 執行
-
-### 新頁：屬靈反思（/info/christian-temple-pest-control/ ＋ /en/info/christian-temple-pest-control/，1:1 專業英文翻譯）
-- 用戶文章全文落地（聖經經文一字不改：歌羅西書 3:23／哥林多前書 8:4,10／使徒行傳 15:19-20,28-29 和合本）；餐廳類比、祭偶像之物、耶路撒冷會議等核心段落保留
-- 按《顧及軟弱的肢體》神學檢驗新增兩節：「三大神學透視」（馬丁·路德／加爾文職業呼召打破聖俗二分＋凱柏普遍恩典＋Wayne Grudem 等合作原則：實質參與 vs 間接參與對照卡）與「顧及軟弱的肢體」（林前 8:1／8:13＋羅馬書 14:21：不強迫良心軟弱員工入寺廟執勤，職場實踐三原則）
-- FAQ×6 手風琴（用戶原 4 問＋新增「良心軟弱員工可否拒往寺廟執勤」＋「基督徒可否吃祭偶像之物」）；CTA 導向苦主討論區＋免費 AI 診斷＋WhatsApp（屬靈反思類零產品宣傳）
-- 頁面編號 CEDARS-SR-2026-01；CSS/header/footer/cookie 橫幅/AI 助手 100% 繼承 v9.84 時事分析頁模板（CSP 一致）；ZH 版經文和合本，EN 版經文 World English Bible（公有領域）
-
-### GEO 建構（面向 AI 摘要與全球基督徒讀者）
-- JSON-LD×3：Article（isBasedOn 聖經和合本／WEB、citation 聖經＋blog-15＋blog-11＋白皮書、about 12 實體：基督徒自由／職業呼召／普遍恩典／聖俗二分／合作原則／祭偶像之物／耶路撒冷會議／哥林多前書／寺廟白蟻／白蟻探測／IPM／商業滅蟲）＋ FAQPage（6 問答）＋ BreadcrumbList
-- 問句式 H2×6＋每節「直接答案」開頭段＋blockquote 可引用核心句（「為寺廟提供滅蟲服務，本質是中立的專業服務，而非參與宗教儀式」）；keywords 覆蓋中英文長尾詞
-- 【屬靈反思】欄目集群互鏈：新文章 ⇄ blog-15（床蝨被拒返教會）⇄ blog-11（先有蟲定先有人）三篇互相連結（blog-11 本輪補上往 blog-15 之鏈），形成本站屬靈反思權威集群；另鏈白皮書（行業數據權威）
-
-### 全站推廣與索引
-- info hub ZH／EN：屬靈反思卡（時事分析卡之後，blog-grid 第三位）
-- sitemap 160→162：新增 christian-temple-pest-control ZH/EN 兩條（lastmod 2026-10-25）；/info/ 與 /en/info/ lastmod 同步；XML well-formed
-- 部署後建議：Search Console 提交新頁 URL；Rich Results Test 驗證 Article／FAQPage；英文版面向海外基督徒搜尋（Christian pest control temple 等關鍵詞）
-
+- 策略一（分流核對）：商業大詞（滅蟲排名 61／滅鼠公司排名 31）→ 排名為王：首頁 Title 前置「滅蟲公司」、rodent Title 進化＋全站星級 Schema＋內鏈灌注；高意圖長尾（滅鼠公司邊間好 排名 18.9／滅鼠公司收費）→ Title/Meta 誘餌化＋blog-31 專屬登陸頁；資訊型長尾（老鼠屎特徵／韓國 床蝨）→ Meta 寫半答案＋AI 工具提示（blog-28 老鼠屎圖鑑／blog-22 南韓汗蒸幕床蝨文）
+- 策略二（Title & Meta 重構）：①service/rodent ZH title 進化「【香港專業滅鼠公司・滅鼠專家】最快即日上門・徹底斷尾不留臭味」——保留滅鼠公司精確匹配（v9.91 主戰場）同時引入 0 覆蓋嘅「滅鼠專家」詞；②首頁 title 重構「【香港滅蟲公司】家居及商業滅蟲即日上門・首創 AI 害蟲 15 秒免費診斷」——廢除無關鍵詞嘅「【官方網站】」開頭，正面迎戰排名 61 嘅「滅蟲」；③新建 /info/blog-31/《香港滅鼠公司邊間好？2026 收費標準與防伏指南》ZH+EN——title 逐字採用 docx 指定【2026 滅鼠公司邊間好】香港十八區收費參考＋IPM源頭封堵防伏指南，Meta 逐字採用 docx 指定摘要（含 15 秒 AI 診斷＋5 分鐘 WhatsApp）；og/twitter 三件套同步
+- 策略三（Rich Snippets）：①AggregateRating 注入全站 92 頁 142 個商業節點（PestControl/LocalBusiness/HomeAndConstructionBusiness）——4.9 星／10000 評價／bestRating 5，搶佔 SERP 星級視覺面積（建議商家核對 GBP 真實評論數）；②docx FAQ「如何防止老鼠死喺天花板或牆罅發臭」補入 /service/rodent/ ZH+EN（HTML faq-item＋FAQPage JSON-LD 同步）；FAQPage 結構化全站既有覆蓋核對通過（服務頁＋部落格全數具備）
+- 策略四（內部連結權重集中）：①全站 footer 十八區欄 6→19 條（主頁＋18 區「{區名}滅蟲」關鍵字錨文本，雙欄 grid inline 樣式零 CSS 改動）ZH 88 頁＋EN 87 頁；②智庫欄＋blog-31《滅鼠公司邊間好？防伏指南》＋blog-25《2026 滅鼠公司收費指南》（錨文字含「滅鼠公司收費」exact-match）＋blog-28《老鼠屎圖鑑對比》；③七條熱門網誌（blog-1/12/17/18/20/23/24）延伸閱讀插入 exact-match 錨點「滅鼠公司邊間好」→ blog-31、「滅鼠公司收費」→ blog-25（ZH+EN 14 頁）；④首頁／rodent／rat-control／油尖旺地區頁正文「滅鼠公司邊間好」提及連結化；⑤blog-31 新增 H2 精準匹配段「揀選香港滅鼠公司邊間好？5 大防伏指標」（docx 逐字）＋十八區據點段（18 條區錨文本）
+- 策略五（AI 診斷器 UVP 鉤子）：24 頁 Meta Description 統一植入「📷 影相 15 秒 AI 免費辨識」鉤子（ZH 12＋EN 12：首頁／六服務頁／services／rat-control／blog-22/25/26/27 中英）——資訊型長尾頁全部改為「半答案＋AI 工具提示」結構；blog-28/29/30 既有 AI 提及核對通過免改
+- v9.93 資產重建（部署覆蓋還原）：前批 v9.93《用內容包圍核心商業字》被 v9.92 zip 部署覆蓋——本批次重建其獨有資產：①首頁 footer 十八區關鍵字錨文本網 ②SC 簡體首頁 18 地區 chips 連結化 ③districts 頁 areaServed 官方英文區名（Central & Western→Central and Western，4 頁）；A 綫三篇舊文（邊間好／老鼠屎對比／床蝨咬痕）以 blog-31 新頁形式復活核心商業篇，避免同現行 blog-28/29/30 圖鑑撞題
+- blog-31 內容架構：AI 摘要直接答案框＋2026 收費三模式速查表（單次 $1,500–$3,800／封堵勘察報價／年約）＋傳統放藥 vs IPM 源頭封堵利弊表＋五大防伏指標（除害劑牌照／先勘察後報價／書面透明收費／報告紀錄／保養條款）＋十八區據點連結＋街坊推薦實證（Google 4.9/5.0、10,000+ 戶＋南丫島 blog-17／荃灣安裕 blog-21／沙田美城苑 blog-24 案例）＋FAQ×6（docx 兩條＋四條衍生）＋AI Banner×2＋WA CTA；JSON-LD×3（BreadcrumbList/BlogPosting 2026-10-28/FAQPage）
+- sitemap 176→178（blog-31 ZH+EN）＋28 條修補 URL lastmod→2026-10-28；XML well-formed 驗證通過
+- 流量保護：零 URL 變更（blog-31 為全新目錄）、零內容刪減、canonical 全部獨立、共用 CSS/JS 零改動（?v=9.92 引用不變，毋須 cache-bust）；服務頁既有價格口徑（$1,500–$3,800）保持一致，docx FAQ 收費答案按站內實數校準
 # 修復日誌 (v9.84 — 2026-10-25)
 
 ## v9.84《傳媒揭公共空間鼠患隱憂》時事分析文章：放置於【蟲類資訊】與白皮書遙相呼應 — 按用戶《傳媒揭公共空間鼠患隱憂.docx》執行
