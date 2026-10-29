@@ -1,4 +1,17 @@
-# 修復日誌 (v9.94 — 2026-10-28)
+# 修復日誌 (v9.95 — 2026-10-28)
+
+## v9.95 《大幅提升 Title和Meta 吸引力與 SERP 點擊率》落地：首頁＋rat-control 招牌重寫＋FAQ Schema 霸版（2026-10-28）
+
+**依用戶 docx《大幅提升 Title和Meta 吸引力與 SERP 點擊率.docx》三大步驟逐項執行：Title/Meta 重構（首頁＋/rat-control/，og/twitter 四件套同步）× FAQPage Schema 植入（JSON-LD＋頁面可見 FAQ 逐字同步）× 快取清除與強制收錄指引（Cloudflare Purge Everything＋GSC Request Indexing，用戶執行）；純 HTML 修改，共用 CSS/JS 零改動（?v=9.92 不變，毋須 cache-bust）**
+
+- 步驟一（Title & Meta 重構——從「被動展示」變「主動勾客」）：①首頁 Title 重寫「【香港專業滅鼠/滅蟲專家】最快即日上門・徹底斷尾不留臭味｜滅蟲師傅」（docx 逐字），Meta 重寫「告別老鼠及害蟲困擾！漁護署註冊藥劑＋IPM源頭封堵，10,000+戶香港家居及食肆實證。📷即試 15 秒 AI 害蟲免費診斷，5分鐘 WhatsApp 專人報價！」（docx 逐字）——數字（10,000+／15 秒／5 分鐘）＋痛點解法＋獨家 AI 賣點三元素齊備；②/rat-control/ Title 重寫「【2026 滅鼠公司邊間好】香港十八區收費參考＋IPM源頭封堵防伏指南｜滅蟲師傅」（docx 逐字），Meta 重寫「老鼠入屋點搞？拆解香港滅鼠公司收費陷阱！提供 IPM 物理封堵與紅外線追蹤，避免老鼠死喺天花板發臭。提供孕婦寵物安全配方，立即 WhatsApp 免費估價！」（docx 逐字）——精準痛點打擊（2026／收費參考／死喺天花板發臭）直擊長尾詞搜尋者核心恐懼；③兩頁 og:title／og:description／twitter:title／twitter:description 四件套同步，WhatsApp／社交分享預覽與 SERP 文案一致
+- 步驟二（FAQPage Schema——物理霸佔 SERP 視覺面積）：①首頁新增 FAQPage JSON-LD（docx 兩條問答）＋頁面可見 FAQ 區塊（插喺滅鼠專門站 Band 之後，#home-faq scoped 樣式零共用 CSS 改動）——Google 規範要求標記內容必須頁面可見先會出 Rich Snippet，兩者逐字同步到位；②/rat-control/ FAQPage JSON-LD mainEntity 由 6 條增至 8 條（docx 兩條問答置頂），可見 FAQ 同步新增兩條同款 faq-item；③收費答案口徑按站內實數校準（單次 $1,500–$3,800，與 v9.94 /service/rodent/ FAQ＋blog-31 收費速查表一致），避免 docx 原稿 $800–$1,500 同全站價格矛盾損害信任；「防發臭」答案融入站內實戰工法（防鼠鋼網＋防火泥填縫＋夜視紅外線追蹤）
+- 附帶修復（v9.94 遺留 HTML 損毀）：4 頁（首頁／rat-control／service/rodent／rat-control/yau-tsim-mong）keywords meta 內被誤插完整 &lt;a&gt; 標籤（href 雙引號截斷 content 屬性，令 head 出現畸形標記），一律還原為純文字「滅鼠公司邊間好」；全站掃描確認其餘 5 個 blog 正文同款 styled 錨點屬合法延伸閱讀 HTML，原封不動；修復後全站 ld+json 區塊 100% 可解析
+- 步驟三（強制更新快取與重新建立索引——用戶執行清單）：①GitHub Pages 部署 v9.95 zip；②Cloudflare → Caching → Configuration → Purge Everything（撕毀全球舊版影印本）；③GSC 頂部搜尋列貼上 https://bruceleehk.com/ 及 https://bruceleehk.com/rat-control/ → 要求重新檢索（Request Indexing）——將 2-4 星期被動等待壓縮至 24-48 小時
+- 預期效果：FAQ Rich Snippets 帶下拉式問答，SERP 視覺面積比對手多近一倍，點擊率一般高出 20-30%；新 Title/Meta 瞄準將現有 1.17 萬曝光嘅點擊率由 3.4% 拉升至 5% 以上，引發「高點擊 → 長停留 → 排名推升」正向骨牌效應
+- 流量保護：零 URL 變更、零內容刪減、canonical／sitemap 不變（兩頁 lastmod 已係 2026-10-28）、共用 CSS/JS 零改動（毋須 cache-bust）
+
+
 
 ## v9.94 《5 大點擊率爆發優化方案》落地：Title/Meta 重構＋星級 Schema＋十八區內鏈網＋AI 鉤子全站部署（2026-10-28）
 
