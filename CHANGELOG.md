@@ -1,4 +1,18 @@
-# 修復日誌 (v9.96 — 2026-10-30)
+# 修復日誌 (v9.97 — 2026-10-30)
+
+## v9.97《十八區正文深化佈局＋blog-12 EN 版同步》落地（2026-10-30）
+
+**依用戶 docx《十八區正文深化佈局》執行：38 個區頁（18 區＋愉景灣 × ZH/EN）每頁插入「{區名}滅蟲公司」H2 精確段＋場景化正文；blog-12 EN 版四大升級同步補齊（Title/Meta 四件套×AI CTA×十八區據點章節×FAQ 對齊）＋ZH blog-12 章節編號修復；純 HTML 修改，共用 CSS/JS 零改動、?v= 不變**
+
+- 十八區正文深化（docx 核心建議，38 頁）：每個區頁喺「實戰案例」之後「服務項目」之前插入新 section（id="local-title"，復用既有 dist-section/dist-card 樣式零新 CSS）——H2 精確匹配「{區名}滅蟲公司首選：{當區場景}」（中西區滅蟲公司／沙田滅蟲公司／觀塘滅蟲公司首選／九龍城滅蟲專家／愉景灣滅蟲公司首選等），下方正文 4–5 句廣東話場景化撰寫：當區屋型特徵（村屋／唐樓／公屋屋苑／渡假式社區）×主蟲患（呼應每頁既有 pain-title 主題唔矛盾）×服務特點（T3i 微波探測／IoT 智慧鼠盒／高溫蒸氣）×CTA；EN 版同步精確匹配 "Pest Control Company of Choice in {District}"＋英文正文，hreflang 中英對稱
+- 地區內鏈佈局：五大老鼠重災區頁（油尖旺／深水埗／觀塘／元朗／荃灣）正文嵌入 /rat-control/{slug}/ 滅鼠公司內鏈；沙田頁嵌入 /info/blog-24/ 美城苑蜂巢案例內鏈；屯門頁嵌入 /ai/ AI 診斷內鏈——同 blog-12 十八區據點章節形成「hub→district→rat-control/blog」三層連結網
+- blog-12 EN 版同步（/en/info/blog-12/，對齊 ZH v9.96 四大升級）：①Title「[2026 Pest Control Prices] Hong Kong Pest Control Company Price List + 5 Anti-Scam Tips | Pest Control Master」＋Meta description 英文化＋keywords 前置 "pest control prices,pest control company price list"（去重）；②og:title／og:description 同步＋twitter:title／twitter:description 補齊（原缺）四件套完整；③H1 同步新標題主體；④價目表備註正下方插入英文化 AI CTA banner（/en/ai/ 轉化入口，.ai-cta-banner scoped CSS 頁內自帶 640px 斷點）；⑤新增「7. Pest Control Company Coverage: All 18 Districts」章節——18 區錨文本（Central & Western pest control company…Sha Tin pest control company…Kowloon City pest control experts）逐區連結 /en/districts/，五大老鼠區另附 /en/rat-control/{slug}/ 內鏈；後續章節 renumber 7→8、8→9；⑥FAQ Q1 答案（HTML＋FAQPage JSON-LD 兩處）補「Pest Control Master offers survey-first fixed quotes with zero hidden fees.」對齊 ZH 口徑；⑦Article JSON-LD headline／description／dateModified 同步（dateModified 2026-10-30）
+- ZH blog-12 章節編號修復（v9.96 遺留順序錯亂）：「全港十八區滅蟲公司據點」段由「八」之後移回「上門服務覆蓋」之前，並重編「七、」；原「七、上門服務覆蓋」→「八、」、「八、即刻攞免費報價」→「九、」；章節順序一~九連續無重複（EN 版編號結構同步對齊），零內容改動、零交叉引用受影響
+- EN info hub（/en/info/）blog-12 文章卡 H3 同步新標題主體「[2026 Pest Control Prices] HK Pest Control Company Price List + 5 Anti-Scam Tips」
+- sitemap：23 條 lastmod→2026-10-30（EN 區頁 ×18＋districts hub ZH/EN＋愉景灣 ZH/EN＋blog-12 EN）；XML well-formed 驗證通過
+- 驗證：全站 639 個 JSON-LD 100% 可解析；38 區頁 local-title 唯一且精確匹配就位；41 個改動頁內鏈 0 死鏈；ZH 章節一~九／EN 章節 1~9 順序核對通過
+- 流量保護：零 URL 變更、零內容刪減、canonical／hreflang 不變、共用 CSS/JS 零改動（?v=9.88 不變，毋須 cache-bust）；區頁新段全復用既有樣式 class
+
 
 ## v9.96《GSC「Review Snippet 物件類型無效」重大問題修復＋blog-12 滅蟲收費點擊率改造＋十八區地區包圍佈局》落地（2026-10-30）
 
