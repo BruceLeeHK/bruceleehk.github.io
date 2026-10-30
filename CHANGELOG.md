@@ -1,3 +1,17 @@
+# 修復日誌 (v9.98 — 2026-10-30)
+
+## v9.98《Footer 十八區選單錨文本「自然語意混合法」》落地（2026-10-30）
+
+**依用戶 docx《優化十八區據點主頁》執行：全站 Footer 十八區據點選單 6 個錨文本由一式一樣「區名」改為場景化語意混合（滅蟲服務／滅白蟻專家／滅鼠及滅蟲／滅蟲公司／防蚊與滅蟲／蟲害防治交替），ZH 86 頁＋EN 85 頁對稱同步；防 Keyword Stuffing 過度優化設計；純錨文本修改，零 URL 變更、零共用資源改動**
+
+- ZH Footer 錨文本語意混合（docx 逐字採用）：「沙田及大圍區」→「沙田及大圍滅蟲服務」（柔和服務字眼）、「九龍城及廣播道」→「九龍城/廣播道滅白蟻專家」（老牌豪宅常見問題）、「觀塘及工廈區」→「觀塘工廈滅鼠及滅蟲」（精準打擊工廈鼠患痛點）、「深水埗及唐樓區」→「深水埗唐樓滅蟲公司」（競爭最大舊區用公司字眼）、「元朗及新界村屋」→「元朗村屋防蚊與滅蟲」（村屋戶外蚊蟲特點）、「港島中西區」→「港島中西區蟲害防治」（專業字眼契合商業區半山）；「十八區據點主頁」按 docx 建議保持不變；/districts/ 主頁與 blog-31 Footer 同步（主頁 hub-card 區卡片不在 docx 範圍不動）
+- EN Footer 對稱同步：Sha Tin & Tai Wai Pest Control／Kowloon City Termite Experts／Kwun Tong Rat & Pest Control／Sham Shui Po Pest Control Company／Yuen Long Mosquito & Pest Control／Central & Western Pest Management——與 ZH 語意角色一一對應，維持 hreflang 中英錨語意對稱
+- 防 Keyword Stuffing 關鍵設計：六個錨文本交替使用「滅蟲服務／滅白蟻／滅鼠／滅蟲公司／防蚊／蟲害防治」六種語意（單一「滅蟲公司」全站僅深水埗一處），避免 Google 過度優化懲罰；建立長尾關鍵字矩陣（觀塘滅鼠／元朗村屋防蚊／九龍城滅白蟻等）
+- 正文地名連結保護（異常攔截）：腳本嚴格計數發現 en/info/blog-5/（"Yau Tsim Mong or Sham Shui Po — the most bed-bug-prone areas"）與 en/info/blog-12/（"in Sha Tin, Yuen Long, Kwun Tong or Discovery Bay"）正文純地名連結被模式誤改，已即時還原為純地名（footer 新錨文本不受影響）；blog-28/29/30 Footer 為完整 18 區列表格式（每區+滅蟲/純區名），不在 docx 範圍，保持原設計零改動
+- 區頁「鄰近服務地區」（nb-title）選單為另一格式，不在 docx 範圍，零改動
+- 驗證：ZH 86 頁＋EN 85 頁各 6 處新錨文本就位、主站格式舊錨文本全站殘留 0、正文保護點複查通過；全站 JSON-LD 639 個 100% 可解析不受影響；v9.97 全部改動（38 區頁 H2 精確段＋blog-12 EN 同步）基底完整性抽查通過
+- 流量保護：零 URL 變更、零內容刪減、canonical／hreflang 不變、共用 CSS/JS 零改動（?v=9.88 不變）、sitemap lastmod 同日不變
+
 # 修復日誌 (v9.97 — 2026-10-30)
 
 ## v9.97《十八區正文深化佈局＋blog-12 EN 版同步》落地（2026-10-30）
