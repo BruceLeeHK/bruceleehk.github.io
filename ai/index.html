@@ -52,7 +52,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="../assets/css/bruceleehk.css?v=9.92">
+    <link rel="stylesheet" href="../assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
@@ -613,7 +613,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                             <label for="pest-photo" class="upload-area" id="upload-area">
                                 <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
                                 <h3>上載或拍攝害蟲相片</h3>
-                                <p>支援 JPG / PNG，最大 5MB。揀相後可補充描述，再撳「開始 AI 診斷」。</p>
+                                <p>支援 JPG / PNG，最大 5MB。可拍照或從相簿選擇。</p>
                                 <span class="upload-btn"><i class="fa-solid fa-image" aria-hidden="true"></i> 選擇相片</span>
                                 <input type="file" id="pest-photo" accept="image/jpeg,image/png,image/webp">
                             </label>
@@ -625,20 +625,6 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
                                 </label>
                                 <textarea id="pestDescInput" maxlength="50" rows="2" placeholder="例：廚房灶頭底發現，半夜開燈先見到" style="width:100%; box-sizing:border-box; padding:10px 12px; border:1.5px solid #cbd5e1; border-radius:8px; font-size:0.9rem; font-family:inherit; line-height:1.5; resize:vertical; background:#fff; color:var(--text-main);"></textarea>
                                 <div style="text-align:right; font-size:0.72rem; color:var(--text-muted); margin-top:3px;"><span id="pestDescCount">0</span>/50</div>
-                            </div>
-                            <!-- v9.92 兩步提交：揀相後先預覽＋確認描述，撳「開始 AI 診斷」先正式分析（唔再自動提交，令 AI 可以根據苦主描述做更準確判斷） -->
-                            <div id="ai-submit-area" style="display:none; margin-top:16px; text-align:center;">
-                                <div style="display:flex; align-items:center; gap:12px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; margin-bottom:12px; text-align:left;">
-                                    <img id="ai-photo-preview" alt="已選擇相片預覽" style="width:64px; height:64px; object-fit:cover; border-radius:8px; flex:0 0 auto;">
-                                    <div style="flex:1; min-width:0;">
-                                        <b style="font-size:0.88rem; color:var(--dark-bg); display:block; margin-bottom:2px;">✅ 相片已就緒</b>
-                                        <span style="font-size:0.78rem; color:var(--text-muted); display:block; line-height:1.5;">想 AI 判得更準？喺上面補充發現位置或情況，再撳下面按鈕開始</span>
-                                    </div>
-                                    <button type="button" id="ai-reselect-btn" style="flex:0 0 auto; background:#fff; border:1.5px solid #cbd5e1; color:var(--text-main); border-radius:8px; padding:7px 12px; font-size:0.8rem; cursor:pointer; font-family:inherit;">重新選相</button>
-                                </div>
-                                <button type="button" id="ai-start-btn" style="width:100%; background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:#fff; border:none; border-radius:10px; padding:14px 20px; font-weight:800; font-size:1rem; cursor:pointer; font-family:inherit; box-shadow:0 4px 12px rgba(16,185,129,0.35); display:inline-flex; align-items:center; justify-content:center; gap:8px;">
-                                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> 開始 AI 診斷（免費）
-                                </button>
                             </div>
                             <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);color:var(--primary-dark);padding:10px 14px;border-radius:6px;font-size:0.82rem;margin-top:14px;line-height:1.6;">
                                         <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
@@ -856,21 +842,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
     <!-- Footer -->
     <footer>
-        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間 • 星期一至六：09:00 - 18:00 • 星期日及公眾假期：休息 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
+        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
         <nav class="footer-nav footer-cols" aria-label="頁尾導航 Footer Navigation">
-        <div class="footer-col">
-            <h3>🏠 家居滅蟲服務</h3>
-            <a href="/services/">家居滅蟲服務總覽</a>
-            <a href="/overseas-landlord/">海外業主遙距代辦</a>
-            <a href="/service/rodent/">滅老鼠（鼠患）</a>
-            <a href="/service/termite/">滅白蟻（暗巢）</a>
-            <a href="/service/flea/">滅床蝨（木蝨）</a>
-            <a href="/service/cockroach/">滅曱甴（蟑螂）</a>
-            <a href="/service/wasp/">滅黃蜂</a>
-            <a href="/wasp-nest/">滅馬蜂巢專頁</a>
-            <a href="/rat-control/">滅鼠專門站</a>
-            <a href="/quote/">有蟲話我知（免費報價）</a>
-        </div>
         <div class="footer-col">
             <h3>🏢 商業滅蟲</h3>
             <a href="/commercial/">商業滅蟲主頁</a>
@@ -885,27 +858,28 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <a href="/commercial/healthcare/">醫療及護理院舍</a>
             <a href="/commercial/school/">學校及教育機構</a>
         </div>
-        <div class="footer-col" style="display:grid;grid-template-columns:1fr 1fr;column-gap:12px;">
-            <h3 style="grid-column:1/-1;">🗺️ 全港十八區據點</h3>
+        <div class="footer-col">
+            <h3>🏠 家居滅蟲服務</h3>
+            <a href="/services/">家居滅蟲服務總覽</a>
+            <a href="/overseas-landlord/">海外業主遙距代辦</a>
+            <a href="/service/rodent/">滅老鼠（鼠患）</a>
+            <a href="/service/termite/">滅白蟻（暗巢）</a>
+            <a href="/service/flea/">滅床蝨（木蝨）</a>
+            <a href="/service/cockroach/">滅曱甴（蟑螂）</a>
+            <a href="/service/wasp/">滅黃蜂</a>
+            <a href="/wasp-nest/">滅馬蜂巢專頁</a>
+            <a href="/rat-control/">滅鼠專門站</a>
+            <a href="/quote/">有蟲話我知（免費報價）</a>
+        </div>
+        <div class="footer-col">
+            <h3>🗺️ 全港十八區據點</h3>
             <a href="/districts/">十八區據點主頁</a>
-            <a href="/districts/central-and-western/">中西區滅蟲</a>
-            <a href="/districts/wan-chai/">灣仔滅蟲</a>
-            <a href="/districts/eastern/">東區滅蟲</a>
-            <a href="/districts/southern/">南區滅蟲</a>
-            <a href="/districts/yau-tsim-mong/">油尖旺滅蟲</a>
-            <a href="/districts/sham-shui-po/">深水埗滅蟲</a>
-            <a href="/districts/kowloon-city/">九龍城滅蟲</a>
-            <a href="/districts/wong-tai-sin/">黃大仙滅蟲</a>
-            <a href="/districts/kwun-tong/">觀塘滅蟲</a>
-            <a href="/districts/kwai-tsing/">葵青滅蟲</a>
-            <a href="/districts/tsuen-wan/">荃灣滅蟲</a>
-            <a href="/districts/tuen-mun/">屯門滅蟲</a>
-            <a href="/districts/yuen-long/">元朗滅蟲</a>
-            <a href="/districts/north/">北區滅蟲</a>
-            <a href="/districts/tai-po/">大埔滅蟲</a>
-            <a href="/districts/sha-tin/">沙田滅蟲</a>
-            <a href="/districts/sai-kung/">西貢滅蟲</a>
-            <a href="/districts/islands/">離島滅蟲</a>
+            <a href="/districts/sha-tin/">沙田及大圍區</a>
+            <a href="/districts/kowloon-city/">九龍城及廣播道</a>
+            <a href="/districts/kwun-tong/">觀塘及工廈區</a>
+            <a href="/districts/sham-shui-po/">深水埗及唐樓區</a>
+            <a href="/districts/yuen-long/">元朗及新界村屋</a>
+            <a href="/districts/central-and-western/">港島中西區</a>
         </div>
         <div class="footer-col">
             <h3>🧠 蟲害知識與 IPM 智庫</h3>
@@ -916,9 +890,6 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             <a href="/info/blog-23/">粘鼠板變鼠餌盒實錄</a>
             <a href="/info/blog-24/">美城苑摘蜂巢實錄</a>
             <a href="/info/blog-12/">2026 滅蟲收費指南</a>
-            <a href="/info/blog-31/">滅鼠公司邊間好？防伏指南</a>
-            <a href="/info/blog-25/">2026 滅鼠公司收費指南</a>
-            <a href="/info/blog-28/">老鼠屎圖鑑對比</a>
             <a href="/info/whitepaper-2026/">2026 十八區防蟲白皮書</a>
         </div>
         <div class="footer-legal"><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></div>
@@ -954,8 +925,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     </div>
 
     <!-- 載入共用 JS (不含舊版 AI 邏輯) -->
-    <script src="../assets/js/i18n.js?v=9.92" defer></script>
-    <script src="../assets/js/bruceleehk.js?v=9.92" defer></script>
+    <script src="../assets/js/i18n.js?v=9.88" defer></script>
+    <script src="../assets/js/bruceleehk.js?v=9.88" defer></script>
     
     <!-- 🚀 v9.81 獨立 AI 診斷引擎前端邏輯（弱網韌性版：三級自動重試＋離線智慧等候＋溫和提示卡） -->
     <script>
@@ -970,11 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // v9.7 補充描述欄位（可選填環境線索）
             const pestDescInput = document.getElementById('pestDescInput');
             const pestDescCount = document.getElementById('pestDescCount');
-            // v9.92 兩步提交：相片預覽＋開始診斷／重新選相按鈕
-            const aiSubmitArea = document.getElementById('ai-submit-area');
-            const aiPhotoPreview = document.getElementById('ai-photo-preview');
-            const aiStartBtn = document.getElementById('ai-start-btn');
-            const aiReselectBtn = document.getElementById('ai-reselect-btn');
 
             // 步驟動畫元素
             const steps = [
@@ -1324,29 +1290,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* v9.7 重新上載 = 全新診斷，清空舊描述避免張冠李戴 */
                 if (pestDescInput) { pestDescInput.value = ''; if (pestDescCount) pestDescCount.textContent = '0'; }
                 pestPhotoInput.value = '';
-                /* v9.92 兩步提交：收起相片預覽同提交區 */
-                if (aiSubmitArea) aiSubmitArea.style.display = 'none';
                 resultState.classList.remove('active');
                 analyzingState.classList.remove('active');
                 uploadState.classList.add('active');
                 hideInlineError();
-            }
-
-            // v9.92 「開始 AI 診斷」：用戶確認相片與描述後手動開始分析
-            if (aiStartBtn) {
-                aiStartBtn.addEventListener('click', function() {
-                    if (!selectedFile) return;
-                    // 切換至分析中狀態並播放動畫，開始三級韌性分析
-                    uploadState.classList.remove('active');
-                    analyzingState.classList.add('active');
-                    resultState.classList.remove('active');
-                    startFreshRun();
-                });
-            }
-
-            // v9.92 「重新選相」：重新打開檔案選擇器（保留已填描述）
-            if (aiReselectBtn) {
-                aiReselectBtn.addEventListener('click', function() { pestPhotoInput.click(); });
             }
 
             // 觸發相片選擇
@@ -1367,11 +1314,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         selectedFile = cleanFile;
                         resultImg.src = previewUrl;
 
-                        // v9.92 兩步提交：相片就緒 → 停喺上載狀態顯示預覽＋「開始 AI 診斷」按鈕，
-                        // 等用戶有時間補充描述先正式分析（唔再揀相即自動提交）
-                        if (aiPhotoPreview) aiPhotoPreview.src = previewUrl;
-                        if (aiSubmitArea) aiSubmitArea.style.display = 'block';
-                        if (aiStartBtn) aiStartBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        // 切換至分析中狀態並播放動畫，開始三級韌性分析
+                        uploadState.classList.remove('active');
+                        analyzingState.classList.add('active');
+                        resultState.classList.remove('active');
+                        startFreshRun();
                     });
                 });
             }
