@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://bruceleehk.com/ai-countdown/">
+    <link rel="alternate" hreflang="zh-HK" href="https://bruceleehk.com/ai-countdown/">
+    <link rel="alternate" hreflang="en" href="https://bruceleehk.com/en/ai-countdown/">
+    <link rel="alternate" hreflang="x-default" href="https://bruceleehk.com/ai-countdown/"><meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="zh-HK, en-HK, zh-CN">
+    <title>【AI 搶飯碗倒數】傳統滅蟲工人距離被 AI 取代仲剩幾耐？｜滅蟲師傅</title>
+    <meta name="description" content="連食環署都用上熱成像同無人機協助偵測鼠患，傳統「盲目放老鼠藥、齋行巡查」嘅舊式滅蟲技術仲可以捱幾耐？睇住 AI 搶飯碗倒數一秒一秒跳，【趁仲沒輪到你】即免費體驗滅蟲師傅首創 15 秒 AI 害蟲診斷。">
+    <meta name="keywords" content="AI搶飯碗,滅蟲工人,AI取代職業,倒數計時器,智慧滅蟲,AI害蟲診斷,IoT智慧鼠盒,Termatrac T3i,滅蟲師傅,香港滅蟲">
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://udify.app" crossorigin>
+    <link rel="icon" type="image/png" href="/assets/img/logo.png">
+    <link rel="preload" as="image" href="/assets/img/golden-alert-bell.webp" fetchpriority="high">
+    <link rel="apple-touch-icon" href="/assets/img/logo-192.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_HK">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_HK">
+    <meta property="og:site_name" content="滅蟲師傅 Pest Control Master">
+    <meta property="og:title" content="【AI 搶飯碗倒數】傳統滅蟲工人距離被 AI 取代仲剩幾耐？">
+    <meta property="og:description" content="金警鐘已敲響：連食環署都用上熱成像同無人機，舊式「盲目放老鼠藥、齋行巡查」仲可以捱幾耐？【趁仲沒輪到你】即免費試 15 秒 AI 害蟲診斷。">
+    <meta property="og:url" content="https://bruceleehk.com/ai-countdown/">
+    <meta property="og:image" content="https://bruceleehk.com/assets/img/ai-countdown-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="【AI 搶飯碗倒數】傳統滅蟲工人距離被 AI 取代仲剩幾耐？">
+    <meta name="twitter:description" content="金警鐘已敲響：連食環署都用上熱成像同無人機，舊式滅蟲技術仲可以捱幾耐？【趁仲沒輪到你】即免費試 15 秒 AI 害蟲診斷。">
+    <meta name="twitter:image" content="https://bruceleehk.com/assets/img/ai-countdown-og.jpg">
+
+    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <style>
+
+:root {
+  --primary: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #ecfdf5;
+  --tech-blue: #0284c7;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #1eb954;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --dark-bg: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --light-bg: #f8fafc;
+  --border: #e2e8f0;
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
+  --shadow-md: 0 8px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.10);
+  --transition: 0.25s ease;
+}
+    /* ===== v9.100 /ai-countdown/ AI 搶飯碗倒數 ===== */
+    .cd-hero{
+      background:
+        radial-gradient(1200px 520px at 85% -10%, rgba(2,132,199,.34), transparent 62%),
+        radial-gradient(900px 460px at -10% 108%, rgba(16,185,129,.20), transparent 60%),
+        linear-gradient(180deg,#0b1222 0%, #0f172a 46%, #111d33 100%);
+      color:#f8fafc; padding:64px 18px 56px; text-align:center; position:relative; overflow:hidden;
+    }
+    .cd-hero .cd-wrap{max-width:960px;margin:0 auto;position:relative;z-index:2;}
+    .cd-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.45);color:#facc15;font-weight:800;font-size:.85rem;padding:7px 16px;border-radius:999px;letter-spacing:.5px;}
+    .cd-badge i{font-size:.8rem;}
+    .cd-hero h1{font-size:clamp(1.7rem,4.6vw,2.9rem);line-height:1.35;margin:20px auto 14px;font-weight:900;color:#fff;}
+    .cd-hero h1 .hl-y{color:#facc15;}
+    .cd-hero h1 .hl-g{color:#34d399;}
+    .cd-sub{max-width:760px;margin:0 auto 30px;color:#cbd5e1;font-size:clamp(.98rem,2.4vw,1.12rem);line-height:1.95;}
+    .cd-sub b{color:#7dd3fc;font-weight:800;}
+    /* 倒數卡 */
+    .cd-card{
+      max-width:880px;margin:0 auto;background:linear-gradient(180deg,rgba(30,41,59,.92),rgba(15,23,42,.96));
+      border:1px solid rgba(148,163,184,.25);border-radius:24px;padding:36px 26px 30px;
+      box-shadow:0 24px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06);
+      position:relative;
+    }
+    .cd-label{color:#facc15;font-weight:900;font-size:clamp(1.05rem,2.8vw,1.4rem);letter-spacing:2px;margin-top:26px;margin-bottom:10px;}
+    .cd-big{font-weight:900;color:#fff;font-size:clamp(2.9rem,10vw,6.4rem);line-height:1.12;letter-spacing:1px;font-variant-numeric:tabular-nums;text-shadow:0 6px 30px rgba(250,204,21,.28);}
+    .cd-big .cd-unit{font-size:clamp(1.2rem,3.6vw,2.1rem);color:#e2e8f0;font-weight:800;margin:0 .12em;}
+    .cd-line2{font-variant-numeric:tabular-nums;font-weight:800;color:#e2e8f0;font-size:clamp(1.3rem,4.4vw,2.2rem);margin-top:8px;}
+    .cd-line2 .cd-ms{color:#facc15;}
+    .cd-target{margin-top:14px;color:#94a3b8;font-size:.95rem;line-height:1.8;}
+    .cd-target b{color:#facc15;font-variant-numeric:tabular-nums;}
+    /* 金警鐘 */
+    .cd-bell-stage{margin:6px auto 4px;display:flex;align-items:flex-end;justify-content:center;gap:18px;flex-wrap:wrap;}
+    .cd-bell-btn{background:none;border:none;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent;position:relative;}
+    .cd-bell-btn img{width:clamp(150px,30vw,220px);height:auto;display:block;filter:drop-shadow(0 14px 34px rgba(250,204,21,.38)) drop-shadow(0 0 18px rgba(250,204,21,.22));transition:transform .2s ease;transform-origin:50% 6%;}
+    .cd-bell-btn:hover img{transform:scale(1.04);}
+    .cd-bell-btn:focus-visible img{outline:3px solid #facc15;outline-offset:6px;border-radius:14px;}
+    .cd-bell-btn.ring img{animation:cdSwing 1.9s cubic-bezier(.36,.07,.19,.97);}
+    @keyframes cdSwing{
+      0%{transform:rotate(0)} 8%{transform:rotate(11deg)} 20%{transform:rotate(-10deg)}
+      32%{transform:rotate(8deg)} 44%{transform:rotate(-6deg)} 56%{transform:rotate(4deg)}
+      68%{transform:rotate(-2.5deg)} 80%{transform:rotate(1.2deg)} 100%{transform:rotate(0)}
+    }
+    .cd-bell-hint{color:#fde68a;font-size:.92rem;font-weight:700;margin-top:2px;}
+    .cd-bell-hint i{margin-right:6px;}
+    .cd-ring-count{color:#94a3b8;font-size:.85rem;margin-top:4px;}
+    .cd-ring-count b{color:#facc15;font-variant-numeric:tabular-nums;}
+    .cd-sound-tip{color:#64748b;font-size:.8rem;margin-top:14px;}
+    /* CTA */
+    .cd-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:26px;}
+    .cd-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:900;font-size:clamp(.98rem,2.6vw,1.12rem);text-decoration:none;transition:opacity .2s ease,transform .2s ease;}
+    .cd-btn:hover{opacity:.92;transform:translateY(-2px);}
+    .cd-btn-main{background:linear-gradient(90deg,#065f46,#10b981);color:#fff;box-shadow:0 10px 28px rgba(16,185,129,.42);}
+    .cd-btn-wa{background:var(--whatsapp);color:#fff;box-shadow:0 10px 28px rgba(37,211,102,.32);}
+    .cd-btn-ghost{background:rgba(148,163,184,.12);color:#e2e8f0;border:1px solid rgba(148,163,184,.4);}
+    .cd-btn-ghost:hover{background:rgba(148,163,184,.2);color:#fff;}
+    .cd-pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:#facc15;margin-right:2px;animation:cdPulse 1.4s infinite;}
+    @keyframes cdPulse{0%{box-shadow:0 0 0 0 rgba(250,204,21,.55)}70%{box-shadow:0 0 0 12px rgba(250,204,21,0)}100%{box-shadow:0 0 0 0 rgba(250,204,21,0)}}
+    /* 免責 */
+    .cd-disclaimer{max-width:820px;margin:22px auto 0;color:#8a93a3;font-size:.8rem;line-height:1.85;text-align:center;}
+    /* Toast */
+    .cd-toast{position:fixed;top:18px;left:50%;transform:translate(-50%,-90px);background:linear-gradient(90deg,#1e293b,#0f172a);color:#fff;border:1px solid rgba(250,204,21,.55);border-radius:999px;padding:12px 22px;font-weight:800;font-size:.95rem;z-index:9999;transition:transform .35s ease;box-shadow:0 14px 40px rgba(0,0,0,.5);}
+    .cd-toast.show{transform:translate(-50%,0);}
+    .cd-toast .y{color:#facc15;}
+    /* 正文區 */
+    .cd-section{max-width:1000px;margin:0 auto;padding:54px 18px 8px;}
+    .cd-section h2{font-size:clamp(1.35rem,3.6vw,1.9rem);font-weight:900;color:var(--text-main);display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+    .cd-section h2 .ic{color:var(--primary);font-size:1em;}
+    .cd-section>.cd-lead{color:var(--text-muted);line-height:1.95;margin-bottom:26px;}
+    /* 對比卡 */
+    .cd-vs{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .cd-era{border-radius:20px;padding:28px 24px;position:relative;overflow:hidden;}
+    .cd-era h3{font-size:1.2rem;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+    .cd-era .tag{font-size:.78rem;font-weight:800;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:14px;}
+    .cd-era-old{background:linear-gradient(180deg,#f1f5f9,#e2e8f0);border:1px solid var(--border);}
+    .cd-era-old h3{color:#64748b;}
+    .cd-era-old .tag{background:#e2e8f0;color:#64748b;}
+    .cd-era-old ul{list-style:none;padding:0;margin:0;filter:grayscale(.65);opacity:.85;}
+    .cd-era-old li{padding:9px 0 9px 26px;position:relative;color:#475569;font-size:.95rem;line-height:1.7;border-bottom:1px dashed #cbd5e1;}
+    .cd-era-old li:last-child{border-bottom:none;}
+    .cd-era-old li i{position:absolute;left:2px;top:11px;color:#94a3b8;}
+    .cd-era-old .crack{position:absolute;inset:0;pointer-events:none;background:
+      linear-gradient(115deg,transparent 42%,rgba(100,116,139,.16) 43%,transparent 45%),
+      linear-gradient(75deg,transparent 60%,rgba(100,116,139,.14) 61%,transparent 63%),
+      linear-gradient(100deg,transparent 75%,rgba(100,116,139,.12) 76%,transparent 78%);}
+    .cd-era-new{background:linear-gradient(180deg,#0b1222,#111d33);border:1px solid rgba(14,165,233,.5);box-shadow:0 0 0 1px rgba(14,165,233,.14), 0 18px 50px rgba(2,132,199,.28);}
+    .cd-era-new h3{color:#7dd3fc;}
+    .cd-era-new .tag{background:rgba(14,165,233,.16);color:#7dd3fc;border:1px solid rgba(14,165,233,.45);}
+    .cd-era-new ul{list-style:none;padding:0;margin:0;}
+    .cd-era-new li{padding:9px 0 9px 26px;position:relative;color:#e2e8f0;font-size:.95rem;line-height:1.7;border-bottom:1px dashed rgba(148,163,184,.25);}
+    .cd-era-new li:last-child{border-bottom:none;}
+    .cd-era-new li i{position:absolute;left:2px;top:11px;color:#38bdf8;}
+    .cd-era-new li b{color:#7dd3fc;}
+    .cd-era-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+    .cd-era-links a{font-size:.88rem;font-weight:800;color:var(--primary-dark);text-decoration:none;background:var(--primary-light);border:1px solid #a7f3d0;border-radius:999px;padding:8px 16px;transition:opacity .2s;}
+    .cd-era-links a:hover{opacity:.85;}
+    /* AI 關聯區 */
+    .cd-ai-box{background:linear-gradient(135deg,#ecfdf5,#f0f9ff);border:1px solid #a7f3d0;border-radius:20px;padding:30px 26px;}
+    .cd-ai-box p{color:var(--text-main);line-height:1.95;}
+    .cd-ai-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+    .cd-ai-steps .st{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;}
+    .cd-ai-steps .st i{font-size:1.5rem;color:var(--primary);margin-bottom:8px;display:block;}
+    .cd-ai-steps .st b{display:block;color:var(--text-main);font-size:.95rem;margin-bottom:4px;}
+    .cd-ai-steps .st span{font-size:.84rem;color:var(--text-muted);line-height:1.6;display:block;}
+    /* FAQ 復用站內樣式 */
+    .faq-accordion{margin:20px 0;}
+    .faq-item{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+    .faq-item[open]{border-color:var(--primary);box-shadow:0 4px 16px rgba(16,185,129,0.12);}
+    .faq-question{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-weight:700;font-size:.98rem;color:var(--text-main);gap:12px;}
+    .faq-question i{color:var(--primary);transition:transform .2s;}
+    .faq-item[open] .faq-question i{transform:rotate(180deg);}
+    .faq-answer{padding:0 20px 18px;color:var(--text-muted);line-height:1.9;font-size:.94rem;}
+    .faq-answer a{color:var(--primary-dark);font-weight:700;}
+    .faq-answer b{color:var(--text-main);}
+    @media (max-width:760px){
+      .cd-vs{grid-template-columns:1fr;}
+      .cd-ai-steps{grid-template-columns:1fr;}
+      .cd-card{padding:28px 16px 26px;}
+      .cd-hero{padding:44px 14px 44px;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .cd-bell-btn.ring img{animation:none;}
+      .cd-pulse{animation:none;}
+    }
+  </style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://www.googletagmanager.com https://static.cloudflareinsights.com;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com;
+      frame-src https://udify.app https://www.youtube-nocookie.com https://www.googletagmanager.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#10b981">
+    <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
+    <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement('script'),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}})();</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主要內容 / Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="/" class="logo" aria-label="滅蟲師傅首頁 Pest Control Master Home">
+                <img src="/assets/img/logo.png" fetchpriority="high" alt="滅蟲師傅 Logo" width="38" height="38" loading="eager" decoding="async">
+                <div class="logo-text">
+                    <span class="logo-title">滅蟲師傅</span>
+                    <span class="logo-subtitle">PEST CONTROL MASTER</span>
+                </div>
+            </a>
+            <nav aria-label="主導航 Main Navigation">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="/">首頁</a></li>
+                    <li class="nav-drop"><div class="nav-drop-head"><a href="/services/">家居滅蟲</a><button class="nav-caret" type="button" aria-expanded="false" aria-controls="dd-home" aria-label="展開家居滅蟲子選單 Toggle submenu"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button></div><ul class="nav-dropdown" id="dd-home"><li><a href="/service/flea/">深層滅床蝨（180°C 蒸氣）</a></li><li><a href="/service/termite/">白蟻勘察與防治（微波探測）</a></li><li><a href="/service/cockroach/">全屋滅曱甴（連環誘殺）</a></li><li><a href="/service/rodent/">滅鼠防鼠工程（物理封堵）</a></li><li><a href="/service/wasp/">滅黃蜂／摘蜂巢（🚨 緊急處理）</a></li><li><a href="/overseas-landlord/">海外業主遙距代辦（🔥 交吉／起租必備）</a></li></ul></li>
+                    <li class="nav-drop"><div class="nav-drop-head"><a href="/commercial/">商業滅蟲</a><button class="nav-caret" type="button" aria-expanded="false" aria-controls="dd-biz" aria-label="展開商業滅蟲子選單 Toggle submenu"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button></div><ul class="nav-dropdown" id="dd-biz"><li><a href="/commercial/fnb/">餐飲食肆滅蟲（HACCP 合規）</a></li><li><a href="/commercial/property/">物業管理滅蟲（屋苑／商廈）</a></li><li><a href="/commercial/hotel/">酒店及賓館床蝨處理</a></li><li><a href="/commercial/#tech">IoT 智慧鼠盒監測系統（✨ 科技旗艦）</a></li><li><a href="/commercial/#biz-quote">索取企業報價單</a></li></ul></li>
+                    <li><a href="/districts/">覆蓋十八區</a></li>
+                    <li><a href="/strategy/">有蟲就有計</a></li>
+                    <li><a href="/info/">蟲類資訊</a></li>
+                    <li><a href="/quote/">有蟲話我知</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="開啟/關閉選單 Toggle Menu" aria-expanded="false" aria-controls="nav-links" type="button">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+        <main id="main-content">
+
+        <!-- ===== HERO：倒數 + 金警鐘 ===== -->
+        <section class="cd-hero" aria-labelledby="cd-title">
+            <div class="cd-wrap">
+                <span class="cd-badge"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> 需持續留意 · AI 職業浪潮</span>
+                <h1 id="cd-title">傳統<span class="hl-y">【滅蟲工人】</span>的<br><span class="hl-g">【AI 搶飯碗倒數】</span></h1>
+                <p class="cd-sub">當連<b>食環署</b>都用上<b>熱成像監測</b>與<b>無人機巡查</b>協助偵測鼠患，仲喺度「盲目放老鼠藥、齋行巡查」嘅舊式滅蟲技術，距離被時代淘汰仲剩幾多時間？金警鐘已經敲響——一秒一秒，數住嚟計。</p>
+
+                <div class="cd-card">
+                    <div class="cd-bell-stage">
+                        <button class="cd-bell-btn" id="cd-bell" type="button" aria-label="敲響金警鐘：聽聽 AI 時代嘅鐘聲">
+                            <img src="/assets/img/golden-alert-bell.webp" alt="金警鐘：中國古代銅鐘，象徵 AI 時代警號已響" width="205" height="250" fetchpriority="high" decoding="async">
+                        </button>
+                    </div>
+                    <p class="cd-bell-hint"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> 撳一下金警鐘，聽下 AI 時代嘅鐘聲</p>
+                    <p class="cd-ring-count">已敲響 <b id="cd-ring-n">0</b> 次 — 鐘聲每多一響，舊技術嘅時間就少一分</p>
+
+                    <p class="cd-label">距離 AI 全面接管舊式滅蟲技術</p>
+                    <div class="cd-big" id="cd-big" role="timer" aria-live="off">--年--個月</div>
+                    <div class="cd-line2"><span id="cd-days">--</span> 日 <span id="cd-hms">--:--:--</span><span class="cd-ms">.<span id="cd-ms">---</span></span></div>
+                    <p class="cd-target">象徵時點：<b>2035年10月2日 00:00</b>（香港時間）｜倒數 <b id="cd-total">----</b> 日</p>
+
+                    <div class="cd-cta">
+                        <a class="cd-btn cd-btn-main" href="/ai/"><span class="cd-pulse" aria-hidden="true"></span>【趁仲沒輪到你】中伏！即試 15 秒免費 AI 診斷 ➔</a>
+                        <a class="cd-btn cd-btn-wa" href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E7%94%B1%E5%82%B3%E7%B5%B1%E6%BB%85%E8%9F%B2%E5%8D%87%E7%B4%9A%E6%99%BA%E6%85%A7%E6%BB%85%E8%9F%B2%EF%BC%8C%E8%AB%8B%E5%A0%B1%E5%83%B9" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp 免費報價</a>
+                    </div>
+                    <p class="cd-sound-tip"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> 鐘聲由瀏覽器即場合成，無需下載任何音檔</p>
+                </div>
+
+                <p class="cd-disclaimer">本頁為「滅蟲師傅 PEST CONTROL MASTER」（CEDARS LTD）原創品牌宣傳頁，旨在以輕鬆幽默嘅方式推廣智慧滅蟲科技。倒數日期（2035-10-02）屬象徵性創意設定，並非任何機構或個人之真實預測，亦不構成投資或就業建議。我哋尊重每一位前線滅蟲從業員——被淘汰嘅從來唔係人，而係唔肯升級嘅舊工具。</p>
+            </div>
+        </section>
+
+        <!-- ===== 對比區 ===== -->
+        <section class="cd-section" aria-labelledby="vs-title">
+            <h2 id="vs-title"><i class="fa-solid fa-scale-unbalanced ic" aria-hidden="true"></i> 同一場鼠患，兩個時代嘅處理方式</h2>
+            <p class="cd-lead">同樣係廚房深夜有老鼠、牆身有白蟻聲——有人仲喺度盲摸摸放藥等結果，有人已經用雷達同 AI 將蟲患睇得一清二楚。分別唔止係效果，仲有你蝕嘅時間同金錢。</p>
+            <div class="cd-vs">
+                <div class="cd-era cd-era-old">
+                    <span class="crack" aria-hidden="true"></span>
+                    <h3><i class="fa-solid fa-hourglass-end" aria-hidden="true"></i> 舊時代 · 傳統滅蟲</h3>
+                    <span class="tag">倒數中 · 逐漸褪色</span>
+                    <ul>
+                        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 齋靠肉眼巡查，睇唔到牆內、天花嘅暗巢</li>
+                        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 盲目放老鼠藥，死喺天花板夾層先至知道出事</li>
+                        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 紙筆紀錄，業主同物管冇即時數據可睇</li>
+                        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 事後補救為主，蟲患重複出現冇源頭追蹤</li>
+                        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> 估價靠估，報價唔透明，逐項加價層層疊</li>
+                    </ul>
+                </div>
+                <div class="cd-era cd-era-new">
+                    <h3><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> 新時代 · 智慧滅蟲</h3>
+                    <span class="tag">AI 時代 · 已經在場</span>
+                    <ul>
+                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> <b>IoT 智慧鼠盒</b>24 小時監測，活動數據即時上雲</li>
+                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> <b>Termatrac T3i</b> 微波雷達透牆探白蟻，免拆牆精準定位</li>
+                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> <b>AI 視覺診斷</b>15 秒辨識蟲害，上門前已有方向</li>
+                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> <b>IPM 源頭封堵</b>：搵巢、斷糧、封路，唔係齋落藥</li>
+                        <li><i class="fa-solid fa-check" aria-hidden="true"></i> <b>勘察先行、明碼實價</b>，書面報價零隱藏收費</li>
+                    </ul>
+                    <div class="cd-era-links">
+                        <a href="/service/rodent/">滅鼠防鼠工程 →</a>
+                        <a href="/service/termite/">白蟻微波探測 →</a>
+                        <a href="/commercial/#tech">IoT 智慧鼠盒 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== AI 診斷關聯區 ===== -->
+        <section class="cd-section" aria-labelledby="ai-title">
+            <h2 id="ai-title"><i class="fa-solid fa-robot ic" aria-hidden="true"></i> AI 搶唔走你嘅飯碗——但識用 AI 嘅人一定贏</h2>
+            <p class="cd-lead">呢個倒數器唔係嚟嚇人，係嚟提你：科技唔等人。對業主、商戶嚟講，AI 已經可以幫你喺 15 秒之內做埋初步診斷；對同行嚟講，早一日升級裝備，就早一日唔使驚倒數。</p>
+            <div class="cd-ai-box">
+                <p style="font-weight:800;font-size:1.05rem;color:var(--primary-dark);">滅蟲師傅首創 · 7×24 AI 害蟲圖像分析系統——就係呢個倒數嘅「答案」</p>
+                <div class="cd-ai-steps">
+                    <div class="st"><i class="fa-solid fa-camera" aria-hidden="true"></i><b>1. 影張相</b><span>床上、牆角、櫃頂、廚房——見到可疑蟲痕即影</span></div>
+                    <div class="st"><i class="fa-solid fa-bolt" aria-hidden="true"></i><b>2. 15 秒出結果</b><span>AI 初步辨識蟲種＋風險提示＋建議方向，全程免費</span></div>
+                    <div class="st"><i class="fa-solid fa-user-check" aria-hidden="true"></i><b>3. 師傅確診</b><span>持牌師傅按需要上門勘察，T3i／IoT 裝備跟進</span></div>
+                </div>
+                <div class="cd-cta" style="margin-top:6px;">
+                    <a class="cd-btn cd-btn-main" href="/ai/">即試 15 秒免費 AI 害蟲診斷 ➔</a>
+                    <a class="cd-btn cd-btn-ghost" href="/service/rodent/">睇下 IoT 智慧滅鼠點做 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="cd-section" aria-labelledby="faq-title" style="padding-bottom:56px;">
+            <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 關於「AI 搶飯碗倒數」常見問題</h2>
+            <div class="faq-accordion">
+                <details class="faq-item">
+                    <summary class="faq-question">呢個倒數計時器嘅日期係點嚟嘅？<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                    <div class="faq-answer">2035年10月2日係我哋揀嘅<b>象徵性創意設定</b>，唔係任何機構或研究嘅官方預測。近年全球都有好多關於「AI 點樣改變職業結構」嘅公開討論，我哋借呢個話題做一個有趣嘅倒數：與其焦慮，不如親身體驗吓智慧滅蟲已經做到啲乜。參考同類公開 AI 職業研究嘅話，服務類、需要現場判斷嘅工種都屬於「AI 輔助」多過「AI 完全取代」——真正會被取代嘅，係唔肯升級嘅舊做法。</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">傳統滅蟲技術真係會被完全淘汰？<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                    <div class="faq-answer">唔會一夜之間。化學防治同物理防治仍然係 <a href="/strategy/">IPM（綜合蟲害管理）</a>入面嘅一環，但「監察」同「診斷」呢兩步已經全面 AI 化——IoT 智慧鼠盒 24 小時監測、Termatrac T3i 微波雷達透牆偵測白蟻、熱成像鏡頭喺公共衛生部門都已經用緊。淘汰嘅係「盲目」同「估估吓」，唔係「人」。</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">我本身就係滅蟲從業員，點算好？<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                    <div class="faq-answer">師傅嘅講法好簡單：<b>搶你飯碗嘅從來唔係 AI，係識用 AI 嘅同行。</b>由巡查工具、監測系統、相片診斷到客戶溝通，每一環都有升級空間。我哋歡迎同行交流智慧滅蟲裝備同做法——呢個行業唔係零和遊戲，客戶體驗升級咗，成個行業先至有得做大。</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">AI 害蟲診斷係乜？準唔準？<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                    <div class="faq-answer">係 <a href="/ai/">滅蟲師傅首創嘅 7×24 AI 害蟲圖像分析系統</a>：上傳相片，約 15 秒得出初步蟲種辨識、風險提示同處理建議方向，<b>完全免費、唔使留電話</b>。AI 負責快速初判，最終由持牌師傅上門勘察確診同報價——AI 負責快，人負責準，兩樣都要有。</div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">點樣免費體驗？<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+                    <div class="faq-answer">兩個方法：<b>①</b> 撳本頁「<a href="/ai/">即試 15 秒免費 AI 診斷</a>」按鈕，上傳相片即時出結果；<b>②</b> 直接 <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E7%94%B1%E5%82%B3%E7%B5%B1%E6%BB%85%E8%9F%B2%E5%8D%87%E7%B4%9A%E6%99%BA%E6%85%A7%E6%BB%85%E8%9F%B2%EF%BC%8C%E8%AB%8B%E5%A0%B1%E5%83%B9" rel="noopener">WhatsApp 我哋</a>，由師傅同你傾由傳統升級智慧滅蟲嘅方案。服務覆蓋全港十八區。</div>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>地址：新界荔景邨工場大廈 | 服務區域：全香港十八區 | 營業時間：9:00 - 18:00 | 電郵：<a href="mailto:master@bruceleehk.com" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">master@bruceleehk.com</a></p>
+        <nav class="footer-nav footer-cols" aria-label="頁尾導航 Footer Navigation">
+        <div class="footer-col">
+            <h3>🏢 商業滅蟲</h3>
+            <a href="/commercial/">商業滅蟲主頁</a>
+            <a href="/commercial/property/">物業管理滅蟲</a>
+            <a href="/commercial/fnb/">餐廳滅蟲</a>
+            <a href="/commercial/supermarket-retail/">超級市場及生鮮零售</a>
+            <a href="/commercial/food-factory/">食品工場及倉庫</a>
+            <a href="/commercial/logistics/">物流及倉儲</a>
+            <a href="/commercial/hotel/">酒店及賓館</a>
+            <a href="/commercial/office/">商務辦公樓</a>
+            <a href="/commercial/leisure/">休閒及娛樂場所</a>
+            <a href="/commercial/healthcare/">醫療及護理院舍</a>
+            <a href="/commercial/school/">學校及教育機構</a>
+        </div>
+        <div class="footer-col">
+            <h3>🏠 家居滅蟲服務</h3>
+            <a href="/services/">家居滅蟲服務總覽</a>
+            <a href="/overseas-landlord/">海外業主遙距代辦</a>
+            <a href="/service/rodent/">滅老鼠（鼠患）</a>
+            <a href="/service/termite/">滅白蟻（暗巢）</a>
+            <a href="/service/flea/">滅床蝨（木蝨）</a>
+            <a href="/service/cockroach/">滅曱甴（蟑螂）</a>
+            <a href="/service/wasp/">滅黃蜂</a>
+            <a href="/wasp-nest/">滅馬蜂巢專頁</a>
+            <a href="/rat-control/">滅鼠專門站</a>
+            <a href="/quote/">有蟲話我知（免費報價）</a>
+        </div>
+        <div class="footer-col">
+            <h3>🗺️ 全港十八區據點</h3>
+            <a href="/districts/">十八區據點主頁</a>
+            <a href="/districts/sha-tin/">沙田及大圍滅蟲服務</a>
+            <a href="/districts/kowloon-city/">九龍城/廣播道滅白蟻專家</a>
+            <a href="/districts/kwun-tong/">觀塘工廈滅鼠及滅蟲</a>
+            <a href="/districts/sham-shui-po/">深水埗唐樓滅蟲公司</a>
+            <a href="/districts/yuen-long/">元朗村屋防蚊與滅蟲</a>
+            <a href="/districts/central-and-western/">港島中西區蟲害防治</a>
+        </div>
+        <div class="footer-col">
+            <h3>🧠 蟲害知識與 IPM 智庫</h3>
+            <a href="/strategy/">三十六計防治策略</a>
+            <a href="/info/">蟲類資訊主頁</a>
+            <a href="/info/blog-14/">黃蜂馬蜂摘巢實錄</a>
+            <a href="/info/blog-19/">商業場所白蟻實錄</a>
+            <a href="/info/blog-23/">粘鼠板變鼠餌盒實錄</a>
+            <a href="/info/blog-24/">美城苑摘蜂巢實錄</a>
+            <a href="/info/blog-12/">2026 滅蟲收費指南</a>
+            <a href="/info/whitepaper-2026/">2026 十八區防蟲白皮書</a>
+        </div>
+        <div class="footer-legal"><a href="/about/">關於滅蟲師傅</a><a href="/sc/" lang="zh-Hans">简体</a><a href="/privacy/">隱私政策</a><a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow">Cookie 設定</a></div>
+    </nav>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="https://x.com/CEDARS_LTD" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" style="display:inline-block; vertical-align:middle;">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+            <a href="mailto:master@bruceleehk.com" aria-label="Email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+            </a>
+        </div>
+        <p>&copy; <span id="current-year">2026</span> CEDARS_LTD. All Rights Reserved. 保留所有權利。</p>
+        <p class="footer-authenticity" style="max-width:900px;margin:10px auto 0;font-size:0.78rem;line-height:1.75;color:var(--text-muted,#8a93a3);text-align:center;">「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店。敬請認清具備 AI 智能診斷及三十六計實戰策略之正宗官網，提防假冒。本品牌是全港領先的高科技專業滅蟲公司，致力提供最優質的害蟲防治服務。</p>
+    </footer>
+
+    <!-- Mobile Sticky Thumb Zone -->
+    <div class="mobile-thumb-zone">
+        <a href="https://wa.me/85252821552?text=你好，我想查詢滅蟲服務"  rel="noopener" class="thumb-btn thumb-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+    </div>
+
+    <script src="/assets/js/i18n.js?v=9.88" defer></script>
+    <script src="/assets/js/bruceleehk.js?v=9.88" defer></script>
+
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "【AI 搶飯碗倒數】傳統滅蟲工人距離被 AI 取代仲剩幾耐？",
+  "url": "https://bruceleehk.com/ai-countdown/",
+  "inLanguage": "zh-HK",
+  "description": "互動倒數專頁：由 2035年10月2日（象徵性創意設定）倒數 AI 全面接管舊式滅蟲技術嘅時間，附金警鐘互動、傳統 vs 智慧滅蟲對比，與滅蟲師傅首創 15 秒免費 AI 害蟲診斷。",
+  "isPartOf": {"@type": "WebSite", "name": "滅蟲師傅 Pest Control Master", "url": "https://bruceleehk.com/"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "滅蟲師傅 PEST CONTROL MASTER",
+    "alternateName": "CEDARS LTD",
+    "url": "https://bruceleehk.com/about/",
+    "logo": {"@type": "ImageObject", "url": "https://bruceleehk.com/assets/img/logo.png"}
+  },
+  "about": [
+    {"@type": "Thing", "name": "AI 搶飯碗倒數"},
+    {"@type": "Service", "name": "AI 害蟲診斷", "url": "https://bruceleehk.com/ai/"},
+    {"@type": "Service", "name": "IoT 智慧鼠盒監測", "url": "https://bruceleehk.com/commercial/#tech"}
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "首頁", "item": "https://bruceleehk.com/"},
+    {"@type": "ListItem", "position": 2, "name": "AI 搶飯碗倒數", "item": "https://bruceleehk.com/ai-countdown/"}
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "呢個倒數計時器嘅日期係點嚟嘅？", "acceptedAnswer": {"@type": "Answer", "text": "2035年10月2日係象徵性創意設定，唔係任何機構或研究嘅官方預測。借「AI 改變職業結構」嘅公開話題做倒數，提醒大家與其焦慮不如親身體驗智慧滅蟲科技。需要現場判斷嘅服務工種屬於 AI 輔助多過完全取代。"}},
+    {"@type": "Question", "name": "傳統滅蟲技術真係會被完全淘汰？", "acceptedAnswer": {"@type": "Answer", "text": "唔會一夜之間。化學與物理防治仍係 IPM（綜合蟲害管理）一環，但監察與診斷已經 AI 化：IoT 智慧鼠盒 24 小時監測、Termatrac T3i 微波雷達透牆偵測白蟻、熱成像鏡頭已於公共衛生範疇應用。淘汰嘅係盲目做法，唔係人。"}},
+    {"@type": "Question", "name": "我本身就係滅蟲從業員，點算好？", "acceptedAnswer": {"@type": "Answer", "text": "搶你飯碗嘅從來唔係 AI，係識用 AI 嘅同行。巡查工具、監測系統、相片診斷到客戶溝通每環都有升級空間。滅蟲師傅歡迎同行交流智慧滅蟲裝備與做法，行業唔係零和遊戲。"}},
+    {"@type": "Question", "name": "AI 害蟲診斷係乜？準唔準？", "acceptedAnswer": {"@type": "Answer", "text": "係滅蟲師傅首創嘅 7×24 AI 害蟲圖像分析系統：上傳相片約 15 秒得出初步蟲種辨識、風險提示同處理建議方向，完全免費、唔使留電話。AI 負責快速初判，最終由持牌師傅上門勘察確診同報價。"}},
+    {"@type": "Question", "name": "點樣免費體驗？", "acceptedAnswer": {"@type": "Answer", "text": "① 撳本頁「即試 15 秒免費 AI 診斷」按鈕（bruceleehk.com/ai/）上傳相片即時出結果；② WhatsApp 直接聯絡師傅，傾由傳統升級智慧滅蟲方案。服務覆蓋全港十八區。"}}
+  ]
+}
+    </script>
+
+    <!-- AI 助手模組 -->
+    <!-- Lazy-load AI 助手 (v5.1 性能優化) -->
+    <div id="lazy-dify-bubble" style="position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.5);z-index:998;border:none;transition:transform 0.2s;" role="button" tabindex="0" aria-label="開啟滅蟲師妹 AI 助手">
+        <i class="fa-solid fa-robot" aria-hidden="true"></i>
+    </div>
+    <script>
+    (function() {
+        var bubble = document.getElementById('lazy-dify-bubble');
+        if (!bubble) return;
+        var difyLoaded = false;
+        function loadDify() {
+            if (difyLoaded) return;
+            difyLoaded = true;
+            window.difyChatbotConfig = window.difyChatbotConfig || {
+                token: 'C3DvioLaCmagSaUc', inputs: {}, systemVariables: {}, userVariables: {}
+            };
+            var s = document.createElement('script');
+            s.src = 'https://udify.app/embed.min.js';
+            s.id = 'C3DvioLaCmagSaUc';
+            s.defer = true;
+            document.head.appendChild(s);
+            // Hide the manual bubble once the assistant widget loads
+            setTimeout(function() {
+                bubble.style.display = 'none';
+            }, 1500);
+        }
+        bubble.addEventListener('click', loadDify);
+        bubble.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadDify(); }
+        });
+    })();
+    </script>
+
+    <!-- ===== v9.100 AI 搶飯碗倒數引擎（原創 Vanilla JS，100% 獨立撰寫）===== -->
+    <script>
+    (function () {
+        'use strict';
+        /* 倒數目標：2035-10-02 00:00:00 香港時間（象徵性創意設定） */
+        var TARGET = new Date('2035-10-02T00:00:00+08:00');
+        var MS_DAY = 86400000, MS_H = 3600000, MS_MIN = 60000, MS_S = 1000;
+
+        var $big = document.getElementById('cd-big');
+        var $days = document.getElementById('cd-days');
+        var $hms = document.getElementById('cd-hms');
+        var $ms = document.getElementById('cd-ms');
+        var $total = document.getElementById('cd-total');
+        var last = {};
+
+        function pad(n, w) { n = String(n); while (n.length < (w || 2)) n = '0' + n; return n; }
+
+        /* 年月拆分：以日曆月為基準逐段錨定，避免「30日=1個月」式誤差 */
+        function splitYM(now, target) {
+            var y = target.getFullYear() - now.getFullYear();
+            var anchor = new Date(now);
+            anchor.setFullYear(now.getFullYear() + y);
+            if (anchor.getTime() > target.getTime()) { y--; anchor.setFullYear(anchor.getFullYear() - 1); }
+            var mo = (target.getFullYear() - anchor.getFullYear()) * 12 + (target.getMonth() - anchor.getMonth());
+            anchor.setMonth(anchor.getMonth() + mo);
+            if (anchor.getTime() > target.getTime()) { mo--; anchor.setMonth(anchor.getMonth() - 1); }
+            return { y: y, mo: mo, anchor: anchor };
+        }
+
+        function tick() {
+            var now = Date.now();
+            var left = TARGET.getTime() - now;
+            if (left <= 0) { finished(); return; }
+            var ym = splitYM(new Date(now), TARGET);
+            var rest = TARGET.getTime() - ym.anchor.getTime();
+            var d = Math.floor(rest / MS_DAY);
+            var h = Math.floor(rest % MS_DAY / MS_H);
+            var mi = Math.floor(rest % MS_H / MS_MIN);
+            var s = Math.floor(rest % MS_MIN / MS_S);
+            var msec = Math.floor(rest % MS_S);
+
+            if (last.y !== ym.y || last.mo !== ym.mo) {
+                $big.innerHTML = ym.y + '<span class="cd-unit">年</span>' + ym.mo + '<span class="cd-unit">個月</span>';
+                last.y = ym.y; last.mo = ym.mo;
+            }
+            $days.textContent = pad(d);
+            $hms.textContent = pad(h) + ':' + pad(mi) + ':' + pad(s);
+            $ms.textContent = pad(msec, 3);
+            $total.textContent = Math.ceil(left / MS_DAY).toLocaleString('en-US');
+        }
+
+        function finished() {
+            clearInterval(timer);
+            $big.textContent = '0年0個月';
+            $days.textContent = '00'; $hms.textContent = '00:00:00'; $ms.textContent = '000';
+            $total.textContent = '0';
+        }
+
+        var timer = setInterval(tick, 10); /* 每 10 毫秒刷新——毫秒跳動係急迫感核心 */
+        tick();
+
+        /* ===== 金警鐘互動：Web Audio 即場合成鐘聲（零音檔、零版權）===== */
+        var btn = document.getElementById('cd-bell');
+        var $n = document.getElementById('cd-ring-n');
+        var toast = null, count = 0, audioCtx = null, ringing = false;
+
+        function getCtx() {
+            if (!audioCtx) {
+                var AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return null;
+                audioCtx = new AC();
+            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        /* 鐘聲 = 基頻 + 非整數倍泛音疊加，指數衰減模擬銅鐘餘韻 */
+        function strike(ctx, when, gainMul) {
+            var partials = [
+                { f: 196.0, g: 1.00, d: 3.6 },   /* 基音 G3 */
+                { f: 392.4, g: 0.50, d: 2.8 },
+                { f: 523.6, g: 0.34, d: 2.2 },
+                { f: 660.8, g: 0.22, d: 1.7 },
+                { f: 987.8, g: 0.12, d: 1.1 }
+            ];
+            partials.forEach(function (p) {
+                var o = ctx.createOscillator();
+                var g = ctx.createGain();
+                o.type = 'sine';
+                o.frequency.value = p.f;
+                var t0 = ctx.currentTime + when;
+                g.gain.setValueAtTime(0, t0);
+                g.gain.linearRampToValueAtTime(0.16 * p.g * gainMul, t0 + 0.012);
+                g.gain.exponentialRampToValueAtTime(0.0001, t0 + p.d);
+                o.connect(g); g.connect(ctx.destination);
+                o.start(t0); o.stop(t0 + p.d + 0.1);
+            });
+        }
+
+        function showToast(msg) {
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'cd-toast';
+                toast.setAttribute('role', 'status');
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = msg;
+            requestAnimationFrame(function () { toast.classList.add('show'); });
+            clearTimeout(showToast._t);
+            showToast._t = setTimeout(function () { toast.classList.remove('show'); }, 2600);
+        }
+
+        function ring() {
+            count++;
+            $n.textContent = count;
+            btn.classList.remove('ring');
+            void btn.offsetWidth; /* reflow 重啟動畫 */
+            btn.classList.add('ring');
+            var ctx = getCtx();
+            if (ctx) {
+                strike(ctx, 0, 1);
+                strike(ctx, 0.42, 0.55); /* 第二響：餘韻疊加 */
+            }
+            if (count === 1) {
+                showToast('<span class="y">噹——！</span>AI 時代警鐘已經敲響，舊技術仲可以瞓幾耐？');
+            } else if (count === 3) {
+                showToast('<span class="y">噹！噹！噹！</span>三次鐘響——倒數仲喺度跳緊，試咗 AI 診斷未？');
+            } else if (count === 5) {
+                showToast('鐘聲攔唔住倒數——<span class="y">【趁仲沒輪到你】</span>即試 15 秒免費 AI 診斷！');
+            } else {
+                showToast('噹——！第 <span class="y">' + count + '</span> 次敲鐘：倒數繼續，升級就趁依家');
+            }
+        }
+
+        if (btn) {
+            btn.addEventListener('click', function () {
+                if (ringing) return;
+                ringing = true;
+                ring();
+                setTimeout(function () { ringing = false; }, 900);
+            });
+        }
+    })();
+    </script>
+
+    <script>(function(){var K='blh_cookie_consent_v1',b=document.getElementById('cc-banner');if(!b)return;
+    function getC(){try{return JSON.parse(localStorage.getItem(K)||'null')}catch(e){return null}}
+    function loadGTM(){if(window.__blhGtmLoaded)return;window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement('script'),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}
+    if(!getC()){b.style.display='block';}else if(getC().v==='granted'){loadGTM();}})();</script>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"9e3b28be05e7400cad966a47adefc87e","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

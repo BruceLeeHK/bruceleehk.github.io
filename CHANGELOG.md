@@ -1,3 +1,33 @@
+# 修復日誌 (v9.100 — 2026-11-02)
+
+## v9.100《AI 搶飯碗倒數》互動引流專頁上線：金警鐘×原創倒數引擎×AI 診斷無縫引流（2026-11-02）
+
+**依用戶 docx《傳統【滅蟲工人】的【AI 搶飯碗倒數】》方案全新製作 /ai-countdown/（ZH）＋ /en/ai-countdown/（EN）雙語專頁：借鑑「AI 職業倒數」話題型站點之功能意境（巨大倒數+急迫感毫秒跳動），但由零開始原創全部代碼與文案——餐桌鈴意象按用戶指示換成【金警鐘】（雙龍紐銅鐘，寓意「警鐘已響」），版式沿用滅蟲師傅暗黑/深藍科技風**
+
+- 原創倒數引擎（第一步曲）：獨立撰寫 Vanilla JS——目標時點 2035-10-02T00:00:00+08:00，setInterval 每 10 毫秒刷新，年月以日曆月錨定拆分（避免 30日=1個月 誤差），渲染「X年X個月＋XX日 HH:MM:SS.mmm（毫秒快速跳動）＋倒數總日數」；對參考站零源碼複製、零素材引用
+- 金警鐘互動（用戶指定意象）：點擊鐘體觸發 CSS 搖晃動畫（transform-origin 鐘頂、9 段衰減擺動）＋ Web Audio API 即場合成銅鐘聲（G3 基音＋非整數倍泛音×指數衰減，雙響餘韻，零音檔零版權）＋Toast 警語（第 1/3/5 次遞進式 CTA）＋敲鐘次數計數（純記憶體，不寫入任何 storage）
+- 對比意象（第二步曲）：「舊時代·傳統滅蟲」卡（灰階褪色＋CSS 裂紋遮罩：肉眼巡查/盲目放藥/紙筆紀錄）vs「新時代·智慧滅蟲」卡（深藍科技光暈：IoT 智慧鼠盒 24h、Termatrac T3i 微波雷達、AI 視覺 15 秒、IPM 源頭封堵），內鏈 /service/rodent/、/service/termite/、/commercial/#tech
+- CTA「攔截式」引流（第三步曲）：「【趁仲沒輪到你】中伏！即試 15 秒免費 AI 診斷 ➔」直連 /ai/（EN 版連 /en/ai/）＋WhatsApp 預填文案按鈕（wa.me/85252821552）＋頁底 AI 三步流程卡（影相→15 秒結果→師傅確診）——與現有 AI 診斷系統無縫關聯；AI 助手 bubble、mobile thumb zone 照常置入
+- 合規設計（香港法規/不侵權）：2035 日期明確標示「象徵性創意設定，非任何機構或個人之真實預測」免責聲明；副題措辭由「食環署已全面採用」修正為「食環署都用上熱成像與無人機協助偵測鼠患」（符合真實、不作絕對化）；正文與 FAQ 均有「淘汰嘅係舊工具唔係人」尊重從業員表述；零虛構數據排名；文案/JS/CSS 全部原創，未使用參考站任何文字、圖像或程式碼；鐘聲由 Web Audio 合成無第三方音檔；GDPR/PDPO consent-gated GTM 與 CSP 政策照搬全站設定
+- SEO：title/meta description/keywords/og/twitter 四件套（og:image 為新製 ai-countdown-og.jpg 1200×630 分享卡）；hreflang 中英互指＋x-default；JSON-LD×3（WebPage＋BreadcrumbList＋FAQPage×5 問答同步頁面內文）；FAQ 內容兼顧 GEO（AI 搜尋可摘錄）
+- 版式一致：全站共用 CSS 零改動（?v=9.88 不變）、nav/footer 為線上 v9.98 現行結構（含 v9.98 十八區錨文本語意混合版）；頁面專屬樣式全部頁內 <style>，prefers-reduced-motion 無障礙處理
+- sitemap 178→180（新頁 ZH/EN priority 0.8）；CHANGELOG 本條目；XML well-formed 驗證通過
+- 部署方式：增量上傳（若 v9.99 尚未部署則 11 檔一併上傳：2 新頁＋og 卡＋金鐘 webp＋sitemap＋CHANGELOG＋v9.99 之 6 頁）
+
+
+# 修復日誌 (v9.99 — 2026-11-01)
+
+## v9.99《品牌句修訂：移除「處理過萬宗」數量聲明》中英雙語統一（2026-11-01）
+
+**依用戶指令：品牌句「全港首創 AI 智慧滅蟲與三十六計精準防治之專業滅蟲團隊」由「多年實戰經驗，處理過萬宗家居及商業蟲害個案」修訂為「多年實戰經驗，專業處理家居及商業蟲害個案」——中英雙語 6 頁 14 處統一，數量聲明全部移除**
+
+- ZH 3 頁 7 處：/about/（meta description、og:description、正文 2 處、JSON-LD description）＋ /info/blog-17/ 與 /info/blog-19/ 作者簡介——「處理過萬宗家居及商業蟲害個案」→「專業處理家居及商業蟲害個案」、「處理過萬宗個案」→「專業處理家居及商業（蟲害）個案」
+- EN 3 頁 7 處：/en/about/（meta description、og:description、正文 2 段、JSON-LD description）＋ /en/info/blog-17/ 與 /en/info/blog-19/ 作者簡介——"thousands of cases / thousands of household and commercial pest cases" 數量表述統一改為 "professional handling / professionally handling … pest cases"；blog-19 "Decades of field experience" 對齊 ZH「多年實戰經驗」改 "Years of hands-on experience"
+- 零結構改動：純文字替換——零 URL 變更、零內容刪減、canonical 不變、共用 CSS/JS 零改動（?v=9.88 引用不變）、6 頁 JSON-LD 全部解析通過
+- sitemap 6 條 URL lastmod→2026-11-01（about 中英、blog-17 中英、blog-19 中英）；XML well-formed 驗證通過
+- 部署方式：增量上傳 8 檔（6 頁 index.html ＋ sitemap.xml ＋ CHANGELOG.md）覆蓋 GitHub repo 對應路徑，其餘檔案不動（基底為線上 v9.98 現行版本，無回滾風險）
+
+
 # 修復日誌 (v9.98 — 2026-10-30)
 
 ## v9.98《Footer 十八區選單錨文本「自然語意混合法」》落地（2026-10-30）
