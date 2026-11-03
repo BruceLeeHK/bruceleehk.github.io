@@ -1,3 +1,18 @@
+# 修復日誌 (v9.103 — 2026-11-03)
+
+## v9.103《首頁深度優化 × 真人好評更新》：紅海大詞搶點擊四策略＋Google 地圖最新好評上牆（2026-11-03）
+
+**依用戶 docx《重塑首頁標題（Meta Title）的視覺衝擊力》四策略落地：①Meta Title 重塑 ②Review & Price Schema ③權重反哺內鏈 ④滅蟲知識站；並依用戶指令將 Google 地圖新客戶評論（Caroline Tsui）與商家回覆更新至【Google 地圖真人好評】區塊**
+
+- Task 1（Meta Title 重塑，針對「滅蟲公司／滅蟲／香港滅蟲公司」三組紅海大詞 7 日 69 曝光 0 點擊破局）：ZH 首頁 title/og:title/twitter:title 改為「【2026】香港滅蟲公司首選｜滅蟲師傅：15秒 AI 診斷＋無損微波探測」（包攬「香港滅蟲公司」大詞＋AI 診斷／無損微波差異化搶點擊；「官方網站」防假冒聲明由 meta description 繼續承擔，零遺漏）；EN 首頁 title/og:title/twitter:title 統一為「Pest Control Hong Kong 2026 | 15-Sec AI Diagnosis & T3i Radar | Pest Control Master」（順帶修復 EN title 與 og/twitter:title 三者不一致問題）
+- Task 2（Review & Price Schema）：ZH/EN 首頁 PestControl JSON-LD 新增 review 陣列（3 條真實 Google 評論：Caroline Tsui／Winnie Ng／Eric CK Lee，與頁面真人好評卡一一對應）＋ makesOffer 兩條真實起始價（單次滅鼠連環境評估 HK$1,500 起；白蟻防治 Termatrac T3i 微波探測 HK$2,800 起——均為 rat-control／termite 頁既有真實收費參考，零虛構）；aggregateRating 待 GBP 實際評論總數確認後補入（備註：Google 對 LocalBusiness 自家網站 self-serving reviews 不觸發星星富摘要，星星以 GBP 商家檔案為準，schema 對 Bing／AI 搜尋仍有語意作用）
+- Task 3（真人好評更新）：ZH/EN 首頁【Google 地圖真人好評】區塊首位新增 Caroline Tsui 五星評論卡（2026-11，原文英文保真＋中文意譯）＋商家回覆摘要（半山區疑似黃蜂窩個案：快速清晰報價＋安全處理方案），回覆內「專業滅蜂窩」內鏈指向 /service/wasp/（EN /en/service/wasp/）；SEO 結合：半山區／滅蜂窩／住宅滅蟲關鍵字自然入卡，評論卡與 Schema review 陣列同步
+- Task 4（滅蟲知識站——知識圖譜誘餌，爭取「滅蟲」featured snippet）：ZH/EN 首頁 IPM 區之後新增「滅蟲知識站」三卡區塊（合成除蟲菊酯鈉離子通道原理／吡蟲啉連鎖效應連巢剷／T3i 微波雷達＋AI 診斷＋IoT 四步閉環）＋同場新增 FAQPage JSON-LD 三問答（精選摘要友好句式）；合規腳註「藥劑一律由註冊除蟲公司按漁護署註冊產品標籤施用，唔建議市民自行購買噴灑」；內鏈 blog-12 收費指南／service/termite／ai 診斷
+- Task 5（權重反哺內鏈——高流量滅鼠／收費文章灌注首頁紅海大詞）：10 頁新增指向首頁內文連結，anchor text「香港滅蟲公司」（EN "Hong Kong pest control company"）語意混合五款變體避免過度優化：blog-18 ZH/EN、blog-25 ZH/EN（收費指南）、blog-31 ZH（滅鼠公司邊間好）、blog-23 EN、rodent-spillover ZH/EN、rat-control ZH/EN
+- SEO：sitemap 3 條 lastmod → 2026-11-03（blog-25／blog-31／en-blog-25；其餘 7 頁 v9.102 已是 2026-11-03，總數維持 180）
+- 部署方式：增量上傳 14 檔（2 首頁＋10 內鏈頁＋sitemap＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.102 — 2026-11-03)
 
 ## v9.102《SEO 與轉化行動》：EN 滅鼠/白蟻登陸頁重定位＋比較表＋內部權重集中滅鼠（2026-11-03）
