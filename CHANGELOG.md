@@ -1,3 +1,20 @@
+# 修復日誌 (v9.104 — 2026-11-03)
+
+## v9.104《GSC 長尾詞 CTR 精準打擊》：四大金礦板塊優化——高曝光 0 點擊長尾詞 title/desc 數字誘餌重寫＋新頁〈2026 滅蟲公司推介〉（2026-11-03）
+
+**基於線上 v9.103（首頁深度優化＋真人好評）之上疊加。依用戶 GSC 前 30 名查詢數據（除品牌「滅蟲師傅」外）與《4 大金礦板塊執行精準打擊》方案：集中優化高曝光 0 點擊長尾詞——收費板塊（滅蟲公司收費 380／滅蟲收費 169／滅蟲價錢 156／滅白蟻價錢 124／白蟻公司價錢 97）、床蝨板塊（滅床蝨 382／床蝨 102）、英文板塊（pest control hong kong 259／mouse control service 201／bug removal service 107／pest control company 101）、口碑板塊（滅蟲公司推介 324／滅蟲公司 168／滅老鼠公司 98）**
+
+- 板塊 1（收費）：收費指南 /info/blog-12/ ZH/EN title 數字誘餌重寫——ZH【2026 滅蟲收費價錢】香港滅蟲公司收費價目表｜單次 HK$800 起｜滅蟲師傅（真實最低價：蚊/跳蚤 300 呎以下 HK$800 起，blog-12 價目表）；EN 加 "From HK$800 per Visit"。meta/og/description/H1/Article JSON-LD headline 六處同步，desc 列四蟲種真實起步價；新增 2 條 FAQ（滅白蟻要幾錢／有冇上門檢查費）——可見 details 區＋FAQPage JSON-LD 同步；附帶修復頁內 HK$750/HK$800 價格口徑不一致（以價目表 HK$800 為準）
+- 板塊 2（床蝨）：/service/flea/ ZH title 改【滅床蝨】木蝨高溫蒸氣＋縫隙注藥雙管齊下・60日兩次覆檢（直取 382 曝光 0 點擊嘅「滅床蝨」；方案原建議「極速」一詞因頁面無此承諾唔採用，合規優先）；EN title 改 Bed Bug Removal Service Hong Kong…（取 bug removal service 107）
+- 板塊 3（英文藍海）：/en/service/rodent/ title 加 Rat & Mouse Control Service（取 mouse control service 201；頁面本有 house mouse 蟲種辨識）；/en/service/termite/ desc 加 from HK$2,800 真實價格鉤；EN 首頁 meta description 重寫——加入 Mid-Levels／Discovery Bay／Sai Kung 外籍區＋transparent pricing（取 pest control hong kong 259／pest control company 101；title 已領先唔動，避免同 EN 首頁蠶食，故方案建議之 /en/pest-control-hong-kong/ 新頁唔開）
+- 板塊 4（口碑）：新頁 /info/blog-32/ ZH＋EN《2026 滅蟲公司推介：揀公司 5 大準則＋服務場景對照》——5 大準則（牌照／先勘察後報價／書面收費／報告紀錄／保養條款）＋傳統 vs 高科技 5 項比較表＋5 服務場景對照表（家居/餐廳/酒店/村屋/物業，全部真實服務組合）＋5 條 FAQ＋BlogPosting/BreadcrumbList/FAQPage JSON-LD；EN 版同時取 pest control company／bug removal service；合規註腳沿用「傳統做法泛指冇科技輔助、唔代表任何特定公司」
+- 首頁：ZH desc 重寫——列家居滅蟲＋滅鼠／滅白蟻／滅床蝨一站式（取 家居滅蟲 238；title 唔動——尊重 v9.103 剛重塑嘅「香港滅蟲公司」紅海大詞 title 策略，家居滅蟲由 desc 承擔）；EN desc 重寫加入 Mid-Levels／Discovery Bay／Sai Kung 外籍區＋transparent pricing（取 pest control hong kong 259／pest control company 101；title 已領先唔動，方案建議之 /en/pest-control-hong-kong/ 新頁唔開避免同 EN 首頁蠶食）；ZH/EN 首頁防伏指南 band 各加 blog-32 內鏈（權重傳遞）
+- 內鏈：首頁→blog-32、blog-32→blog-12/blog-31/blog-30/服務頁/首頁、blog-12 新 FAQ→/service/termite/
+- 合規：全部數字（HK$800/$900/$1,200/$1,900/$2,800/$3,000 起）均取自網站既有真實價目表與服務頁，方案建議之「$750 起」屬未經證實數字唔採用；床蝨頁無「極速」承諾故 title 唔用時效詞；比較表註腳與《商品說明條例》口徑一致
+- SEO：sitemap +2 URL（blog-32 ZH/EN，總數 180→182）；9 條既有 URL lastmod → 2026-11-03；JSON-LD 全部 100% 解析驗證
+- 部署方式：增量上傳 13 檔（首頁 ZH/EN＋blog-12 ZH/EN＋blog-32 ZH/EN 新頁＋termite ZH/EN＋flea ZH/EN＋rodent EN 共 5 服務頁＋sitemap＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.103 — 2026-11-03)
 
 ## v9.103《首頁深度優化 × 真人好評更新》：紅海大詞搶點擊四策略＋Google 地圖最新好評上牆（2026-11-03）
