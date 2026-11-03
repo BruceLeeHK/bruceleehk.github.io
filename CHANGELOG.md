@@ -1,3 +1,17 @@
+# 修復日誌 (v9.102 — 2026-11-03)
+
+## v9.102《SEO 與轉化行動》：EN 滅鼠/白蟻登陸頁重定位＋比較表＋內部權重集中滅鼠（2026-11-03）
+
+**依用戶三大 SEO 建議落地：①高轉換率英文登陸頁（rat removal service／termite treatment services）②內部權重推升「滅鼠」關鍵字 ③「傳統做法 vs 滅蟲師傅」比較表**
+
+- Task 1（EN 登陸頁就地優化，避免新頁關鍵字蠶食）：/en/rat-control/ title 改為「Rat Removal Service Hong Kong | 2026 Rat Control Prices + IoT Smart Rat Boxes」、H1 加入 "Rat Removal Service in Hong Kong"、meta/og description 全部重寫為 rat removal service 針對性文案＋WhatsApp 快速詢價；/en/service/termite/ title/H1/meta/og 同步重定位 "Termite Treatment Services in Hong Kong"。兩頁原有 4 個 wa.me CTA 保留
+- Task 3（比較表）：rat-control ZH/EN、service/termite ZH/EN 四頁「點解推薦/Why Choose」區之後新增「揀滅鼠公司邊間好？傳統做法 vs 滅蟲師傅五項比較」section——五項標準（初步診斷／定位／治理策略／收費透明度／跟進紀錄）三欄表格（滅蟲師傅欄綠底），附「傳統做法泛指冇科技輔助作業、唔代表任何特定公司、淘汰係舊工具唔係人」合規註腳＋WhatsApp CTA；零共用 CSS 改動（inline styles）
+- Task 2（內部權重集中滅鼠，錨文本語意混合）：首頁 ZH/EN 滅鼠區段內文連結（「專業滅鼠公司」/"professional rat removal service"）；38 個分區專頁 svc-grid 新增「🐭 專業滅鼠公司」服務卡（深水埗/油尖旺/觀塘/元朗/荃灣五區直接指向 /rat-control/ 分區子頁，其餘指向樞紐；「專業滅鼠公司」/「滅鼠服務」錨文本輪替＋三款描述語意混合）；網誌 blog-18/23 ZH＋blog-23 EN＋rodent-spillover ZH/EN 內文連結
+- 合規：比較表「傳統做法」為泛指、無點名任何同業；附尊重從業員註腳（與 v9.101 免責聲明口徑一致）；全部數據表述（AI 15 秒／T3i／IoT 鼠盒）均為網站既有真實服務描述，零虛構
+- SEO：48 條 URL lastmod → 2026-11-03（總數維持 180）；EN 兩頁 title/meta/og/H1 四處同步；零 JSON-LD 結構改動（原有 schema 原樣保留）
+- 部署方式：增量上傳 51 檔（2 首頁＋4 服務頁＋38 分區頁＋5 網誌＋sitemap＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.101 — 2026-11-02)
 
 ## v9.101《隱私政策 × AI 搶飯碗倒數》免責聲明「雙管齊下」落地：兩頁雙向關聯，規避《商品說明條例》風險（2026-11-02）
