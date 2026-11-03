@@ -1,3 +1,15 @@
+# 修復日誌 (v9.105 — 2026-11-03)
+
+## v9.105《滅蟲知識站微創手術》：三卡 Trust Badges 上牆＋白蟻錨點長尾詞精準化（2026-11-03）
+
+**基於線上 v9.104 之上疊加。依用戶 docx《滅蟲知識站優化》四項建議盤點：①FAQPage JSON-LD——v9.103 已植入（ZH/EN 首頁各 3 條知識站問答），免動刀；②H2/H3 語意層級——已達標（區塊大題 <h2 id="pest-knowledge-title">＋三卡 <h3>），免動刀；本次落地餘下兩項：**
+
+- Trust Badges（建議 3）：三卡標題上方加極小 Pill Badge——卡 1【AFCD 註冊成分】（teal #ccfbf1/#0f766e）、卡 2【連鎖傳播滅巢】（amber #fef3c7/#b45309）、卡 3【澳洲專利無損】（blue #dbeafe/#1d4ed8）；EN 同步 [AFCD-Registered Active]／[Colony Chain Effect]／[Australian Patented · Non-Destructive]；全部 inline style，共用 CSS bruceleehk.css?v=9.88 零改動、零 cache-bust 風險
+- 錨點文字（建議 4）：ZH「T3i 白蟻探測服務」→「Termatrac T3i 無損滅白蟻服務」（精準帶出「滅白蟻」大詞＋「無損」長尾意圖）；EN「T3i termite detection service」→「Termatrac T3i non-destructive termite service」；href 不變（/service/termite/、/en/service/termite/）
+- SEO：FAQ rich result（搜尋結果下拉問答）基礎已在 v9.103 完成，本次為可見版面加強 EEAT 視覺訊號與「滅白蟻」主題權重傳遞；sitemap 首頁 lastmod 已為 2026-11-03 無需改動
+- 部署方式：增量上傳 3 檔（首頁 ZH/EN＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.104 — 2026-11-03)
 
 ## v9.104《GSC 長尾詞 CTR 精準打擊》：四大金礦板塊優化——高曝光 0 點擊長尾詞 title/desc 數字誘餌重寫＋新頁〈2026 滅蟲公司推介〉（2026-11-03）
