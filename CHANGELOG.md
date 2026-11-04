@@ -1,3 +1,16 @@
+# 修復日誌 (v9.107 — 2026-11-04)
+
+## v9.107《真實 GBP 聚合升級＋全站評分對齊》：aggregateRating reviewCount 3→4（GBP 5.0/4 實證）＋40 頁可見 4.9→5.0（2026-11-04）
+
+**基於線上 v9.106 之上疊加。用戶提供 GBP 商家檔案截圖並經核實——滅蟲師傅：5.0 ★★★★★（4 條評價，全部五星，防治蟲害服務）。此前網站標示嘅「4.9 / 5.0」屬過時快照：4 條全五星評論嘅真實均值係 5.0，唔可能係 4.9：**
+
+- Schema：ZH/EN 首頁 PestControl aggregateRating reviewCount "3"→"4"（ratingValue "5" 不變）——聚合與 GBP 全檔案一致；3 條標記評論（Caroline Tsui／Winnie Ng／Eric CK Lee）全部 5 星，同 5.0/4 完全自洽；第 4 條評論無原文可引用，唔虛構標記
+- 全站對齊（40 頁）：全站 182 URL 掃描「4.9」聲明（SVG path 座標誤中已排除）——首頁評分帶、12 條 ZH 十八區頁、12 條 EN 區頁、blog-31 ZH/EN、rat-control 主頁 ZH/EN、rat-control 五條分區頁 ZH/EN（kwun-tong／sham-shui-po／tsuen-wan／yau-tsim-mong／yuen-long）共 40 頁可見文字 4.9→5.0；六種精確變體替換（4.9 / 5.0→5.0 / 5.0、4.9/5.0→5.0/5.0、4.9 真實評分、4.9 genuine Google rating、4.9 Google 評分、4.9 Google rating）；rat-control/yau-tsim-mong ZH/EN 嘅 JSON-LD description 內 4.9 同步更新
+- 合規：全部數字以用戶提供嘅 GBP 實況截圖（2026-11-04）為準，零虛構；「10,000+ 戶服務」屬服務次數口徑不動
+- sitemap：40 條 URL lastmod → 2026-11-04
+- 部署方式：增量上傳 42 檔（40 頁＋sitemap＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.106 — 2026-11-04)
 
 ## v9.106《GSC 查看摘要重大問題修復》：首頁 PestControl JSON-LD 補 aggregateRating——「多則評論缺少 aggregateRating 物件」（2026-11-04）
