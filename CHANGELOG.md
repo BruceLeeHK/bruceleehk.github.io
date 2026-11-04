@@ -1,3 +1,16 @@
+# 修復日誌 (v9.106 — 2026-11-04)
+
+## v9.106《GSC 查看摘要重大問題修復》：首頁 PestControl JSON-LD 補 aggregateRating——「多則評論缺少 aggregateRating 物件」（2026-11-04）
+
+**基於線上 v9.105 之上疊加。GSC 2026-11-04 通知「查看摘要結構化資料」重大問題：多則評論缺少 aggregateRating 物件——正中 v9.103 刻意留白位（當時註明「aggregateRating 待 GBP 實際評論總數確認後補入」）。批量掃描 12 條線上頁面確認 Review markup 只有 ZH/EN 首頁 PestControl（各 3 條真實評論），修復範圍收窄至兩頁：**
+
+- 修復：ZH/EN 首頁 PestControl JSON-LD 於 review 陣列前插入 aggregateRating 物件——ratingValue "5"、reviewCount "3"、bestRating "5"、worstRating "1"。數據來源：頁面已標記嘅 3 條真實 Google 評論（Caroline Tsui 2026-11-01／Winnie Ng／Eric CK Lee）全部 5 星，聚合 5.0/3 為該組評論嘅真實摘要（3×5★=5.0 自洽），零虛構
+- 合規決策：GBP 實際評論總數（頁面可見「4.9/5.0 · Google 真實評分」）無法由公開渠道核實（Maps 搜尋檢索唔到該商家檔案、Google SERP 有驗證碼），故唔採用未經證實總數；頁面可見 4.9 評分帶不動。待用戶提供 GBP 實際評論總數 N 後，一鍵改 ratingValue "4.9"＋reviewCount "N" 即可（單行替換，錨點不變）
+- SEO：Google 對 LocalBusiness 自家網站 self-serving reviews 唔觸發星星富摘要（星星以 GBP 為準），本次修復主要消除 GSC「重大問題」告警、令查看摘要報告回復綠燈，對 Bing／AI 搜尋保持語意完整
+- sitemap：首頁 ZH/EN lastmod → 2026-11-04
+- 部署方式：增量上傳 4 檔（首頁 ZH/EN＋sitemap＋CHANGELOG），其餘檔案不動
+
+
 # 修復日誌 (v9.105 — 2026-11-03)
 
 ## v9.105《滅蟲知識站微創手術》：三卡 Trust Badges 上牆＋白蟻錨點長尾詞精準化（2026-11-03）
