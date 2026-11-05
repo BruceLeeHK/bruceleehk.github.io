@@ -1,4 +1,23 @@
-# 修復日誌 (v9.110 — 2026-11-05)
+# 修復日誌 (v9.111 — 2026-11-05)
+
+## v9.111 SEO 側翼戰：滅蟲行業 7 篇長尾文 ZH+EN 共 14 頁（5×「公司邊間好」＋2×「報價表2026」）＋集群互鏈＋hreflang/keywords 歷史 bug 修復（2026-11-05）
+
+**承接 v9.91《消除關鍵字自相殘殺》集群策略與 v9.100 系列（blog-31 滅鼠邊間好／blog-32 滅蟲公司推介），以蟲種長尾詞側翼包抄【滅蟲公司】【滅蟲公司報價2026】主戰場，搶佔「滅蟲」行業 Google 排名**
+
+- 新增 7 篇文章 ZH+EN 共 14 頁（沿用 blog-31 母版：native `<details>/<summary>` FAQ 手風琴＋JSON-LD×3＋問句 H1＋AI 摘要直接答案框＋GEO 可引用句）：
+  - /info/blog-34/《滅白蟻公司邊間好》＋/en/info/blog-34/ — 5 大防伏準則＋T3i 免拆牆探測＋治理技術對比（DIY vs 局部灌注 vs 全屋餌站），收費以服務主頁實價 HK$2,800 起／HK$2,800–$8,000 為錨
+  - /info/blog-35/《滅曱甴公司邊間好》＋EN — 德國小蠊抗藥性與膠餌凝膠點注技術、廚房熱點逐點交代，HK$900–$1,800/次
+  - /info/blog-36/《滅蟻公司邊間好》＋EN — 螞蟻 vs 白蟻五維辨識表、群體分裂（budding）原理、餌劑搬巢路線，HK$800–$2,500 綜合參考
+  - /info/blog-37/《滅蚊公司邊間好》＋EN — 誘蚊產卵器指數解讀、幼蟲源頭治理行先 vs ULV 霧化 vs 物理防護三路線、物管月費報告制度
+  - /info/blog-38/《滅床蝨公司邊間好》＋EN — 高溫蒸氣殺卵＋縫隙注藥＋床腳偵測器＋兩次覆檢，局部 HK$1,200 起／全單位 HK$3,000–$5,800
+  - /info/blog-39/《滅白蟻報價表 2026》＋EN — 收費表逐項拆解＋報價 6 變數＋報價單 7 項檢查清單＋三大陷阱＋交吉裝修勘察提示
+  - /info/blog-40/《滅曱甴報價表 2026》＋EN — 家居單次／跟進覆檢／餐廳月費三表＋7 項檢查清單
+- 集群互鏈：info hub（ZH/EN）補 13 張文章卡（blog-28~40，修補 v9.100 起未建卡缺口）；service/termite、cockroach、flea（ZH/EN）各插「延伸閱讀」卡引流至對應邊間好／報價表文章；7 篇新文互鏈成「揀公司防伏＋報價表」雙系列，與 blog-31/32/12/25~30 互鎖
+- 歷史 bug 修復：①en/info/blog-31、en/info/blog-32 的 hreflang zh-HK/x-default 誤指 EN 路徑 → 修正指向 ZH 路徑；②blog-32（ZH/EN）keywords meta 與 BlogPosting keywords 為 blog-31 複製漏改（「滅鼠公司邊間好/rat control」）→ 改為滅蟲公司推介關鍵詞組
+- sitemap 184→198（14 新 URL，ZH 0.9／EN 0.8）＋11 個變更頁 lastmod→2026-11-05
+- 流量保護：零既有 URL 變更、零內容刪減、canonical 不變；共用 CSS/JS 零改動（?v=9.92 引用沿用母版）；新頁全問答文字與 FAQPage JSON-LD 程序化同步
+- 驗證：validate_v9111.py 全項 PASS（14 頁 meta 三件套同步／hreflang 三向正確／JSON-LD×3 可解析／FAQ DOM==JSON-LD 逐字／內鏈目標全存在／WA 預填解碼／sitemap 198／CHANGELOG）；瀏覽器實測桌機＋手機 375px
+
 
 ## v9.110 全站 FAQ 統一可收縮：孤兒 accordion CSS／孤兒 JS 根治＋FAQPage JSON-LD 全站同步修復（2026-11-05）
 
