@@ -1,4 +1,15 @@
-# 修復日誌 (v9.108 — 2026-11-05)
+# 修復日誌 (v9.109 — 2026-11-05)
+
+## v9.109 blog-33 FAQ 修復優化：點擊可收縮（native <details>/<summary> 手風琴）（2026-11-05）
+
+**修復 v9.108 遺留問題：blog-33（中英）頁面已內置 FAQ accordion CSS（按 native <details>/<summary> 設計），但 FAQ HTML 仍是 <div class="faq-item"><h3>…</h3><p>…</p></div> 靜態結構——CSS 與 DOM 不匹配，五條 FAQ 答案全部長開、無收縮互動，行動裝置上 FAQ 佔近三屏拖低閱讀體驗**
+
+- HTML 結構轉換（blog-33 ZH/EN 各 5 條 FAQ）：`<div class="faq-item"><h3>` → `<details class="faq-item"><summary class="faq-question"><h3>`＋右側 `fa-chevron-down faq-arrow` 指示箭頭，答案包入 `<div class="faq-answer">`；外層包 `<div class="faq-accordion">`；首條 FAQ 預設 `open` 展開（訪客第一眼見到答案示範，其餘四條收起）
+- 頁內 CSS 補充三處（共用 CSS 零改動）：①`.faq-question h3` 標題樣式重置——對抗 `.blog-article-content h3` 大標題裝飾（28px margin／底邊框／::before 色條）避免手風琴頂行排版錯亂；②`.faq-question h3::before { display:none }`；③`@supports (interpolate-size: allow-keywords)` 平滑展開動畫（block-size 0↔auto 過渡 0.25s，現代 Chrome/Edge/Safari 平滑收縮，舊瀏覽器原生即開即合，漸進增強零風險）
+- 互動與可達性：原生 `<details>/<summary>` 零 JavaScript——點擊標題行即可收縮／展開、Enter／Space 鍵盤操作原生支援、問答文字零改動（FAQPage JSON-LD 與 DOM 程序化驗證同步）、Google 官方確認摺疊內容仍符合 FAQ 豐富結果資格
+- 驗證：validate_v9109.py 65 項全 PASS（5×details／1×open／標籤平衡／JSON-LD×3 可解析／FAQ 同步／?v=9.92 與 canonical 保留／beacon 零殘留）；全站 diff 確認僅 blog-33 ZH/EN 兩檔被修改；瀏覽器實測（agent-browser）桌機＋手機 375px 點擊收縮／展開、鍵盤 Enter、答案 checkVisibility、Console 零錯誤全過
+- 範圍說明：同款「孤兒 accordion CSS」亦存在於 blog-25～32 及全站約 120 頁 FAQ 區塊（模板複製所致，功能正常只是無收縮互動）——本次按指示僅修 blog-33，其餘頁面如需統一升級可於後續版本批量套用
+- 流量保護：零 URL 變更、零內容刪減、問答文字與 FAQPage JSON-LD 逐字不變、canonical/hreflang 不變、共用 CSS/JS 零改動（?v=9.92 引用不變，毋須 cache-bust 升版）、sitemap lastmod 已是 2026-11-05 無需改動
 
 ## v9.108 《老鼠防治服務工作報告》化師傅出更個案文＋全站「10,000+ 戶」宣稱同步致力於表述（2026-11-05）
 
