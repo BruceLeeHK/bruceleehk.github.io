@@ -1,4 +1,18 @@
-# 修復日誌 (v9.111 — 2026-11-05)
+# 修復日誌 (v9.112 — 2026-11-05)
+
+## v9.112《About 團隊資歷更新》：殘留「處理過萬宗」數量聲明清零＋新增《防治蟲鼠訓練（主管）證書》認證（2026-11-05）
+
+**依用戶指令兩項修改：①「多年實戰經驗，處理過萬宗家居及商業蟲害個案」改為【致力於服務超 10,000+ 戶香港家居及商業客戶】並全面檢查其他頁面同步；②增加「本技術團隊核心成員已獲得《防治蟲鼠訓練（主管）證書》」**
+
+- 殘留宣稱修復（about ZH 正文 1 處）：v9.99 曾全站移除「處理過萬宗」數量聲明，惟 /about/ 正文該處因 `<b>萬宗</b>` 標籤拆字漏網——本次補修，統一為 v9.108 口徑「<b>致力於服務超 10,000+ 戶</b>香港家居及商業客戶：村屋白蟻、唐樓老鼠……」
+- EN /en/about/ 同步 2 處：正文 "With years of hands-on experience in professional household and commercial pest control"→"Committed to serving 10,000+ households and commercial clients across Hong Kong"；E・經驗卡 "Thousands of cases across all 18 districts"→"Professional household and commercial pest cases across all 18 districts"（與 ZH 卡口徑對齊）
+- blog-9 同類「萬宗」數量聲明同步（ZH/EN 各 1 處）：ZH「將過萬宗真實案例……輸入到 AI 的大腦中」→「將致力於服務超 10,000+ 戶香港家居及商業客戶所累積的真實案例……」；EN "over ten thousand real cases"→"real cases accumulated from our commitment to serving 10,000+ households and commercial clients"——全站「萬宗／ten thousand」數量聲明歸零（程序化掃描驗證，僅 CHANGELOG 歷史記錄保留）
+- 新增團隊資歷認證區塊：/about/ 與 /en/about/ 於 E-E-A-T 三卡之後、「核心裝備與技術」之前插入「🎓 團隊資歷・專業認證」（EN: Team Credentials & Certification）——📜 本技術團隊核心成員已獲得《防治蟲鼠訓練（主管）證書》（EN 採官方譯名 Certificate in Pest Control Training (Supervisor)，取自 ERB 同名課程之 HKCAAVQ 評審報告中英對照）
+- JSON-LD 同步：AboutPage Organization description 中英各補入證書資歷一句，令 AI 搜尋與結構化資料同時可引用此認證
+- sitemap：/about/、/en/about/ lastmod 2026-11-01→2026-11-05；blog-9 中英 lastmod 已是 2026-11-05 不變
+- 流量保護：零 URL 變更、零內容刪減、共用 CSS/JS 零改動（?v=9.92 引用不變）、canonical/hreflang 不變
+- 驗證：validate_v9112.py 全 PASS（4 個變更頁 JSON-LD 可解析、舊宣稱零殘留、證書句中英在位、日文漢字「戸」零殘留、標籤平衡、sitemap well-formed 198 URL）；瀏覽器實測 about 中英頁排版正常
+
 
 ## v9.111 SEO 側翼戰：滅蟲行業 7 篇長尾文 ZH+EN 共 14 頁（5×「公司邊間好」＋2×「報價表2026」）＋集群互鏈＋hreflang/keywords 歷史 bug 修復（2026-11-05）
 
