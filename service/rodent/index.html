@@ -203,6 +203,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -512,12 +520,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅鼠公司常見問題 FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅鼠公司一般收費幾多？會唔會中途加價？</h3><p>收費視乎單位面積、鼠患嚴重程度同封堵工程量：單次滅鼠連環境評估過往個案一般 $1,500–$3,800/次；防鼠封堵工程先勘察後出固定報價，合約列明項目同保養期，之後唔會「突然加項」，實際以書面報價為準。全蟲種行情可睇我哋嘅 2026 滅蟲收費指南。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣揀一間可靠嘅滅鼠公司？</h3><p>五個指標：①有冇除害劑牌照 ②係咪做 IPM 源頭封堵（唔係淨係放藥）③有冇可驗證嘅真實個案 ④Google 評分同評論內容 ⑤報價單會唔會列明保養期同跟進次數。詳細避坑教學可睇《2026 滅蟲公司邊間好？5 大指標》。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 會唔會用老鼠藥？屋企有小朋友同寵物安全嗎？</h3><p>我哋主推無毒物理方案：夜視追蹤＋物理捕捉＋源頭封堵。除非嚴重鼠患需要，室內用藥並非首選；如需用藥，會使用漁護署註冊除害劑並放喺鎖式餌盒內，減低兒童寵物接觸風險。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 服務流程係點？幾耐先見到效果？</h3><p>流程：WhatsApp 影相查詢 → 上門勘察評估（鼠種／路徑／入屋位）→ 源頭封堵＋捕捉 → IoT 監測跟進。視乎鼠患程度，一般個案喺封堵完成後活動會逐步減少；再入侵風險視乎環境同有冇新缺口，保養期內免費覆查補封。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋服務邊啲地區？離島同禁區做唔做？</h3><p>全港十八區都服務；深水埗、油尖旺、觀塘、元朗、荃灣五大黑點區設有獨立地區專頁。離島（南丫島、愉景灣等）同禁區個案（沙頭角一帶）均有實戰經驗。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 滅鼠之外仲有咩服務？</h3><p>全蟲種防治：白蟻（Termatrac T3i 微波探測免拆牆）、床蝨／木蝨、曱甴、黃蜂蜂巢、蚊患等；另有海外業主遙距滅蟲代辦。可以喺本頁【服務網絡】一節揀對應入口。</p></div>
+                <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅鼠公司一般收費幾多？會唔會中途加價？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>收費視乎單位面積、鼠患嚴重程度同封堵工程量：單次滅鼠連環境評估過往個案一般 $1,500–$3,800/次；防鼠封堵工程先勘察後出固定報價，合約列明項目同保養期，之後唔會「突然加項」，實際以書面報價為準。全蟲種行情可睇我哋嘅 2026 滅蟲收費指南。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣揀一間可靠嘅滅鼠公司？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>五個指標：①有冇除害劑牌照 ②係咪做 IPM 源頭封堵（唔係淨係放藥）③有冇可驗證嘅真實個案 ④Google 評分同評論內容 ⑤報價單會唔會列明保養期同跟進次數。詳細避坑教學可睇《2026 滅蟲公司邊間好？5 大指標》。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 會唔會用老鼠藥？屋企有小朋友同寵物安全嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>我哋主推無毒物理方案：夜視追蹤＋物理捕捉＋源頭封堵。除非嚴重鼠患需要，室內用藥並非首選；如需用藥，會使用漁護署註冊除害劑並放喺鎖式餌盒內，減低兒童寵物接觸風險。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 服務流程係點？幾耐先見到效果？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>流程：WhatsApp 影相查詢 → 上門勘察評估（鼠種／路徑／入屋位）→ 源頭封堵＋捕捉 → IoT 監測跟進。視乎鼠患程度，一般個案喺封堵完成後活動會逐步減少；再入侵風險視乎環境同有冇新缺口，保養期內免費覆查補封。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋服務邊啲地區？離島同禁區做唔做？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>全港十八區都服務；深水埗、油尖旺、觀塘、元朗、荃灣五大黑點區設有獨立地區專頁。離島（南丫島、愉景灣等）同禁區個案（沙頭角一帶）均有實戰經驗。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 滅鼠之外仲有咩服務？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>全蟲種防治：白蟻（Termatrac T3i 微波探測免拆牆）、床蝨／木蝨、曱甴、黃蜂蜂巢、蚊患等；另有海外業主遙距滅蟲代辦。可以喺本頁【服務網絡】一節揀對應入口。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="qf-title">

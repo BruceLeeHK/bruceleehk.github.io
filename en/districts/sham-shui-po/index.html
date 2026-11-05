@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How long does bed bug treatment take in a Sham Shui Po tong lau?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "About 1.5–2.5 hours for a first visit, plus one recheck two weeks later to guarantee eggs are gone; severe cases may need a third visit. WhatsApp for an indicative price first."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Book lice keep returning after spraying — why?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Book lice live on humidity. Until wall/environment moisture drops, they will always return. We measure first, find the moisture source, dehumidify, then treat crevices — a real cure."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Do we need to move out during treatment?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Bed bug steam treatment needs no move-out — just step out of the room being treated. For book lice, ventilate 1–2 hours after. Pregnant women, infants or pets may extend ventilation."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How do we stop rats re-entering in Mei Foo?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Focus on under-sink drain outlets, refuse-chute doors and external pipe entries. Our masters survey and proof each point, with IoT boxes re-checking path data after two weeks."
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "Found a hornet nest (wasp nest) in Sham Shui Po — what should I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rooftop canopies and window shelters on Sham Shui Po tenements are regular call-outs — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee), then safe removal plus gap-sealing to cut re-nesting; common areas are the corporation/management’s responsibility. Process & cost guide: Hornet & wasp nest topic page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does bed bug treatment take in a Sham Shui Po tong lau?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 1.5–2.5 hours for a first visit, plus one recheck two weeks later to guarantee eggs are gone; severe cases may need a third visit. WhatsApp for an indicative price first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Book lice keep returning after spraying — why?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Book lice live on humidity. Until wall/environment moisture drops, they will always return. We measure first, find the moisture source, dehumidify, then treat crevices — a real cure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do we need to move out during treatment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bed bug steam treatment needs no move-out — just step out of the room being treated. For book lice, ventilate 1–2 hours after. Pregnant women, infants or pets may extend ventilation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do we stop rats re-entering in Mei Foo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Focus on under-sink drain outlets, refuse-chute doors and external pipe entries. Our masters survey and proof each point, with IoT boxes re-checking path data after two weeks."
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -531,8 +547,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Sham Shui Po Pest Control FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Sham Shui Po — what should I do?</h3><p>Rooftop canopies and window shelters on Sham Shui Po tenements are regular call-outs — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee), then safe removal plus gap-sealing to cut re-nesting; common areas are the corporation/management’s responsibility. Process & cost guide: <a href="/en/wasp-nest/">Hornet & wasp nest topic page</a>.</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does bed bug treatment take in a Sham Shui Po tong lau?</h3><p>About 1.5–2.5 hours for a first visit, plus one recheck two weeks later to guarantee eggs are gone; severe cases may need a third visit. WhatsApp for an indicative price first.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Book lice keep returning after spraying — why?</h3><p>Book lice live on humidity. Until wall/environment moisture drops, they will always return. We measure first, find the moisture source, dehumidify, then treat crevices — a real cure.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do we need to move out during treatment?</h3><p>Bed bug steam treatment needs no move-out — just step out of the room being treated. For book lice, ventilate 1–2 hours after. Pregnant women, infants or pets may extend ventilation.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do we stop rats re-entering in Mei Foo?</h3><p>Focus on under-sink drain outlets, refuse-chute doors and external pipe entries. Our masters survey and proof each point, with IoT boxes re-checking path data after two weeks.</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Sham Shui Po Pest Control FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Sham Shui Po — what should I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Rooftop canopies and window shelters on Sham Shui Po tenements are regular call-outs — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee), then safe removal plus gap-sealing to cut re-nesting; common areas are the corporation/management’s responsibility. Process & cost guide: <a href="/en/wasp-nest/">Hornet & wasp nest topic page</a>.</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does bed bug treatment take in a Sham Shui Po tong lau?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>About 1.5–2.5 hours for a first visit, plus one recheck two weeks later to guarantee eggs are gone; severe cases may need a third visit. WhatsApp for an indicative price first.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Book lice keep returning after spraying — why?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Book lice live on humidity. Until wall/environment moisture drops, they will always return. We measure first, find the moisture source, dehumidify, then treat crevices — a real cure.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Do we need to move out during treatment?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Bed bug steam treatment needs no move-out — just step out of the room being treated. For book lice, ventilate 1–2 hours after. Pregnant women, infants or pets may extend ventilation.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do we stop rats re-entering in Mei Foo?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Focus on under-sink drain outlets, refuse-chute doors and external pipe entries. Our masters survey and proof each point, with IoT boxes re-checking path data after two weeks.</p></div></details>
             </div>
         </section>
 

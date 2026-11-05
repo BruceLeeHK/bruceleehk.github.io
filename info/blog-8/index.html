@@ -937,6 +937,103 @@ article.blog-article-card:has(> .container){padding:24px 12px;}
 article.blog-article-card > .container{padding-left:0;padding-right:0;}
 article.blog-article-card > .container > .blog-article-card{padding:0;border:none;box-shadow:none;}
 }
+
+    
+        /* === FAQ Accordion (native <details>/<summary>) === */
+        .faq-accordion {
+            margin: 20px 0;
+        }
+        .faq-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+        .faq-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(16,185,129,0.1);
+        }
+        .faq-item[open] {
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(16,185,129,0.12);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--dark-bg);
+            list-style: none;
+            transition: background var(--transition);
+            user-select: none;
+        }
+        .faq-question:hover {
+            background: var(--primary-light);
+        }
+        .faq-question::-webkit-details-marker {
+            display: none;
+        }
+        .faq-question .faq-arrow {
+            transition: transform var(--transition);
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .faq-item[open] .faq-arrow {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            padding: 0 20px 18px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.85;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+        .faq-answer p {
+            margin: 0 0 10px;
+        }
+        .faq-answer ul {
+            padding-left: 22px;
+            margin: 8px 0;
+        }
+        .faq-answer li {
+            margin-bottom: 6px;
+        }
+        .faq-answer strong {
+            color: var(--primary-dark);
+        }
+
+        /* === v9.110: summary 內 h3 重置＋平滑展開（漸進增強） === */
+        .faq-question h3 {
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+            font-size: 0.98rem;
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .faq-question h3::before { display: none; }
+        .faq-question h3 i { color: var(--primary); font-size: 0.85rem; flex: none; }
+        @supports (interpolate-size: allow-keywords) {
+            :root { interpolate-size: allow-keywords; }
+            .faq-item::details-content {
+                block-size: 0;
+                overflow: hidden;
+                transition: block-size 0.25s ease, content-visibility 0.25s allow-discrete;
+            }
+            .faq-item[open]::details-content { block-size: auto; }
+        }
 </style>
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
@@ -1084,105 +1181,25 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
           <h3>常見問題（FAQ）</h3>
           <div class="faq-accordion">
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>點解殺蟲水噴極都唔死？係咪買錯藥？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>唔一定係買錯藥，更大機會係害蟲已經產生咗<strong>抗藥性</strong>。當同一種殺蟲水被長期反覆使用，存活落嚟嘅害蟲會將抗藥基因遺傳給後代，令整個族群對呢種藥越嚟越「免疫」。正確做法係輪換唔同作用機制嘅藥劑，或者搵專業滅蟲公司採用IPM綜合防治方案。</p>
-              </div>
-            </div>
+            <details class="faq-item" open><summary class="faq-question"><h3>點解殺蟲水噴極都唔死？係咪買錯藥？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>唔一定係買錯藥，更大機會係害蟲已經產生咗<strong>抗藥性</strong>。當同一種殺蟲水被長期反覆使用，存活落嚟嘅害蟲會將抗藥基因遺傳給後代，令整個族群對呢種藥越嚟越「免疫」。正確做法係輪換唔同作用機制嘅藥劑，或者搵專業滅蟲公司採用IPM綜合防治方案。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>害蟲抗藥性幾耐會形成？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>視乎害蟲種類同用藥頻率。繁殖速度快嘅害蟲（如曱甴、床蝨）可能喺幾個月到一兩年內就發展出明顯抗藥性；如果長期濫用同一種藥，速度會更快。研究顯示，德國蟑螂對擬除蟲菊酯類嘅抗性，喺部分城市只需3-5年嘅高頻使用就會達到極高水平。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>害蟲抗藥性幾耐會形成？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>視乎害蟲種類同用藥頻率。繁殖速度快嘅害蟲（如曱甴、床蝨）可能喺幾個月到一兩年內就發展出明顯抗藥性；如果長期濫用同一種藥，速度會更快。研究顯示，德國蟑螂對擬除蟲菊酯類嘅抗性，喺部分城市只需3-5年嘅高頻使用就會達到極高水平。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>交叉抗藥性係咩？點解幾種藥都無效？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p><strong>交叉抗藥性</strong>（Cross-resistance）指害蟲對一種藥產生抗性後，連帶對化學結構或作用機制相似嘅其他藥劑也產生抗性。例如對擬除蟲菊酯類有抗性嘅曱甴，可能同時對有機氯類都有效抗。呢個亦係點解「頻繁換藥」反而會加速所有常用藥失效嘅原因。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>交叉抗藥性係咩？點解幾種藥都無效？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p><strong>交叉抗藥性</strong>（Cross-resistance）指害蟲對一種藥產生抗性後，連帶對化學結構或作用機制相似嘅其他藥劑也產生抗性。例如對擬除蟲菊酯類有抗性嘅曱甴，可能同時對有機氯類都有效抗。呢個亦係點解「頻繁換藥」反而會加速所有常用藥失效嘅原因。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>點解噴完殺蟲水反而越多蟲？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>呢個情況喺<strong>床蝨</strong>同<strong>白蟻</strong>最常見。佢哋極度畏光同敏感，殺蟲水嘅氣味同刺激會逼佢哋由原本嘅巢穴四散逃走，散播到屋企其他更隱蔽嘅縫隙。原本集中喺一個位嘅蟲患，變咗全屋多點爆發，所以你會覺得「越多蟲」。正確做法應該用膠餌（bed bug interceptor）或高溫蒸氣，避免激散蟲群。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>點解噴完殺蟲水反而越多蟲？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>呢個情況喺<strong>床蝨</strong>同<strong>白蟻</strong>最常見。佢哋極度畏光同敏感，殺蟲水嘅氣味同刺激會逼佢哋由原本嘅巢穴四散逃走，散播到屋企其他更隱蔽嘅縫隙。原本集中喺一個位嘅蟲患，變咗全屋多點爆發，所以你會覺得「越多蟲」。正確做法應該用膠餌（bed bug interceptor）或高溫蒸氣，避免激散蟲群。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>IPM綜合蟲害管理係咩？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p><strong>IPM</strong>（Integrated Pest Management）係一套以「預防為主、化學為輔」嘅科學防治框架。核心步驟包括：① 監察同識別害蟲種類 → ② 評估蟲患程度 → ③ 優先採用物理防治同環境管理 → ④ 必要時精準用藥（輪換機制） → ⑤ 持續監測效果。IPM已被世界衛生組織同各國政府認可為最可持續嘅蟲害管理方法。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>IPM綜合蟲害管理係咩？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p><strong>IPM</strong>（Integrated Pest Management）係一套以「預防為主、化學為輔」嘅科學防治框架。核心步驟包括：① 監察同識別害蟲種類 → ② 評估蟲患程度 → ③ 優先採用物理防治同環境管理 → ④ 必要時精準用藥（輪換機制） → ⑤ 持續監測效果。IPM已被世界衛生組織同各國政府認可為最可持續嘅蟲害管理方法。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>高溫蒸氣滅床蝨真係有效？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>有效！床蝨喺<strong>45°C以上</strong>就會死亡，而專業蒸氣機可以產生超過100°C嘅高溫蒸氣，能即時殺死床蝨嘅所有生命周期（成蟲、若蟲同卵）。最大優勢係<strong>唔會產生抗藥性</strong>，因為高溫係物理殺滅而非化學毒殺。但蒸氣處理需要專業設備同技術，確保蒸氣穿透到床蝨匿藏嘅深層縫隙，建議由專業滅蟲公司操作。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>高溫蒸氣滅床蝨真係有效？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>有效！床蝨喺<strong>45°C以上</strong>就會死亡，而專業蒸氣機可以產生超過100°C嘅高溫蒸氣，能即時殺死床蝨嘅所有生命周期（成蟲、若蟲同卵）。最大優勢係<strong>唔會產生抗藥性</strong>，因為高溫係物理殺滅而非化學毒殺。但蒸氣處理需要專業設備同技術，確保蒸氣穿透到床蝨匿藏嘅深層縫隙，建議由專業滅蟲公司操作。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>自己滅蟲定搵專業公司好？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>輕微蟲患（偶爾見到一兩隻曱甴）可以自行處理，用膠餌同封堵縫隙為主。但如果出現以下情況就應該搵專業滅蟲公司：蟲患持續惡化、自己用藥後反而更多、發現白蟻或床蝨跡象、或者商業場所需要合規處理。專業公司有持牌除害劑、正確嘅輪換用藥策略同IPM方案，可以避免因為亂用藥而加速抗藥性發展。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>自己滅蟲定搵專業公司好？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>輕微蟲患（偶爾見到一兩隻曱甴）可以自行處理，用膠餌同封堵縫隙為主。但如果出現以下情況就應該搵專業滅蟲公司：蟲患持續惡化、自己用藥後反而更多、發現白蟻或床蝨跡象、或者商業場所需要合規處理。專業公司有持牌除害劑、正確嘅輪換用藥策略同IPM方案，可以避免因為亂用藥而加速抗藥性發展。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>滅蟲藥對寵物同小朋友安全嗎？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>正確使用下係安全嘅。根據香港《除害劑條例》註冊嘅藥劑，按照標籤指示施用，對人體同寵物嘅影響會減到最低。施藥後需要按指示等待足夠嘅通風時間先至讓人同寵物返入施工區域。但切記唔好自行加大劑量或混合多種藥劑，咁做除咗增加健康風險，仲會加速害蟲抗藥性。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>滅蟲藥對寵物同小朋友安全嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>正確使用下係安全嘅。根據香港《除害劑條例》註冊嘅藥劑，按照標籤指示施用，對人體同寵物嘅影響會減到最低。施藥後需要按指示等待足夠嘅通風時間先至讓人同寵物返入施工區域。但切記唔好自行加大劑量或混合多種藥劑，咁做除咗增加健康風險，仲會加速害蟲抗藥性。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>輪換藥劑應該點樣輪？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>輪換嘅關鍵係交替使用<strong>唔同作用機制</strong>嘅藥劑，而唔係單純換牌子。例如：第一輪用擬除蟲菊酯類（影響神經鈉通道），第二輪用新煙鹼類（影響煙鹼型乙醯膽鹼受體），第三輪用IGR昆蟲生長調節劑（影響蛻皮激素）。每2-3個月輪換一次，確保害蟲無法對單一機制適應。專業滅蟲公司會根據IRAC（殺蟲劑抗藥性行動委員會）嘅分類指引嚟制定輪換方案。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>輪換藥劑應該點樣輪？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>輪換嘅關鍵係交替使用<strong>唔同作用機制</strong>嘅藥劑，而唔係單純換牌子。例如：第一輪用擬除蟲菊酯類（影響神經鈉通道），第二輪用新煙鹼類（影響煙鹼型乙醯膽鹼受體），第三輪用IGR昆蟲生長調節劑（影響蛻皮激素）。每2-3個月輪換一次，確保害蟲無法對單一機制適應。專業滅蟲公司會根據IRAC（殺蟲劑抗藥性行動委員會）嘅分類指引嚟制定輪換方案。</p></div></details>
 
-            <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">
-                <span>白蟻有抗藥性嗎？點處理？</span>
-                <i class="fas fa-chevron-down faq-arrow"></i>
-              </div>
-              <div class="faq-answer">
-                <p>白蟻嘅抗藥性問題相對冇咁突出，因為白蟻防治主要用<strong>餌劑系統</strong>（如氟蟲腈 Fipronil 或除蟲脲 Diflubenzuron），工蟻會將毒餌帶返巢穴餵飼蟻后同幼蟻，達到全巢滅殺。但如果長期只用單一有效成分嘅餌劑，仍有可能出現抗性。建議定期更換唔同成分嘅白蟻餌劑，並由專業人員監察白蟻活動跡象，確保餌劑被取食同效果持續。</p>
-              </div>
-            </div>
+            <details class="faq-item"><summary class="faq-question"><h3>白蟻有抗藥性嗎？點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>白蟻嘅抗藥性問題相對冇咁突出，因為白蟻防治主要用<strong>餌劑系統</strong>（如氟蟲腈 Fipronil 或除蟲脲 Diflubenzuron），工蟻會將毒餌帶返巢穴餵飼蟻后同幼蟻，達到全巢滅殺。但如果長期只用單一有效成分嘅餌劑，仍有可能出現抗性。建議定期更換唔同成分嘅白蟻餌劑，並由專業人員監察白蟻活動跡象，確保餌劑被取食同效果持續。</p></div></details>
 
           </div>
 
@@ -1367,7 +1384,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "點解噴完殺蟲水反而越多蟲？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "呢個情況喺床蝨同白蟻最常見。佢哋極度畏光同敏感，殺蟲水嘅氣味同刺激會逼佢哋由原本嘅巢穴四散逃走，散播到屋企其他更隱蔽嘅縫隙。原本集中喺一個位嘅蟲患變咗全屋多點爆發。正確做法應該用膠餌或高溫蒸氣，避免激散蟲群。"
+        "text": "呢個情況喺床蝨同白蟻最常見。佢哋極度畏光同敏感，殺蟲水嘅氣味同刺激會逼佢哋由原本嘅巢穴四散逃走，散播到屋企其他更隱蔽嘅縫隙。原本集中喺一個位嘅蟲患，變咗全屋多點爆發，所以你會覺得「越多蟲」。正確做法應該用膠餌（bed bug interceptor）或高溫蒸氣，避免激散蟲群。"
       }
     },
     {
@@ -1375,7 +1392,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "IPM綜合蟲害管理係咩？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "IPM（Integrated Pest Management）係一套以「預防為主、化學為輔」嘅科學防治框架。核心步驟包括：監察同識別害蟲種類、評估蟲患程度、優先採用物理防治同環境管理、必要時精準用藥（輪換機制）、持續監測效果。IPM已被世界衛生組織同各國政府認可為最可持續嘅蟲害管理方法。"
+        "text": "IPM（Integrated Pest Management）係一套以「預防為主、化學為輔」嘅科學防治框架。核心步驟包括：① 監察同識別害蟲種類 → ② 評估蟲患程度 → ③ 優先採用物理防治同環境管理 → ④ 必要時精準用藥（輪換機制） → ⑤ 持續監測效果。IPM已被世界衛生組織同各國政府認可為最可持續嘅蟲害管理方法。"
       }
     },
     {
@@ -1383,7 +1400,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "高溫蒸氣滅床蝨真係有效？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "有效！床蝨喺45°C以上就會死亡，而專業蒸氣機可以產生超過100°C嘅高溫蒸氣，能即時殺死床蝨嘅所有生命周期（成蟲、若蟲同卵）。最大優勢係唔會產生抗藥性，因為高溫係物理殺滅而非化學毒殺。但蒸氣處理需要專業設備同技術，建議由專業滅蟲公司操作。"
+        "text": "有效！床蝨喺45°C以上就會死亡，而專業蒸氣機可以產生超過100°C嘅高溫蒸氣，能即時殺死床蝨嘅所有生命周期（成蟲、若蟲同卵）。最大優勢係唔會產生抗藥性，因為高溫係物理殺滅而非化學毒殺。但蒸氣處理需要專業設備同技術，確保蒸氣穿透到床蝨匿藏嘅深層縫隙，建議由專業滅蟲公司操作。"
       }
     },
     {
@@ -1391,7 +1408,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "自己滅蟲定搵專業公司好？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "輕微蟲患可以自行處理，用膠餌同封堵縫隙為主。但如果蟲患持續惡化、自己用藥後反而更多、發現白蟻或床蝨跡象、或者商業場所需要合規處理，就應該搵專業滅蟲公司。專業公司有持牌除害劑、正確嘅輪換用藥策略同IPM方案。"
+        "text": "輕微蟲患（偶爾見到一兩隻曱甴）可以自行處理，用膠餌同封堵縫隙為主。但如果出現以下情況就應該搵專業滅蟲公司：蟲患持續惡化、自己用藥後反而更多、發現白蟻或床蝨跡象、或者商業場所需要合規處理。專業公司有持牌除害劑、正確嘅輪換用藥策略同IPM方案，可以避免因為亂用藥而加速抗藥性發展。"
       }
     },
     {
@@ -1399,7 +1416,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "滅蟲藥對寵物同小朋友安全嗎？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "正確使用下係安全嘅。根據香港《除害劑條例》註冊嘅藥劑，按照標籤指示施用，對人體同寵物嘅影響會減到最低。施藥後需要按指示等待足夠嘅通風時間先至讓人同寵物返入施工區域。切記唔好自行加大劑量或混合多種藥劑。"
+        "text": "正確使用下係安全嘅。根據香港《除害劑條例》註冊嘅藥劑，按照標籤指示施用，對人體同寵物嘅影響會減到最低。施藥後需要按指示等待足夠嘅通風時間先至讓人同寵物返入施工區域。但切記唔好自行加大劑量或混合多種藥劑，咁做除咗增加健康風險，仲會加速害蟲抗藥性。"
       }
     },
     {
@@ -1407,7 +1424,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "輪換藥劑應該點樣輪？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "輪換嘅關鍵係交替使用唔同作用機制嘅藥劑，而唔係單純換牌子。例如：第一輪用擬除蟲菊酯類，第二輪用新煙鹼類，第三輪用IGR昆蟲生長調節劑。每2-3個月輪換一次。專業滅蟲公司會根據IRAC分類指引嚟制定輪換方案。"
+        "text": "輪換嘅關鍵係交替使用唔同作用機制嘅藥劑，而唔係單純換牌子。例如：第一輪用擬除蟲菊酯類（影響神經鈉通道），第二輪用新煙鹼類（影響煙鹼型乙醯膽鹼受體），第三輪用IGR昆蟲生長調節劑（影響蛻皮激素）。每2-3個月輪換一次，確保害蟲無法對單一機制適應。專業滅蟲公司會根據IRAC（殺蟲劑抗藥性行動委員會）嘅分類指引嚟制定輪換方案。"
       }
     },
     {
@@ -1415,7 +1432,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
       "name": "白蟻有抗藥性嗎？點處理？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "白蟻嘅抗藥性問題相對冇咁突出，因為白蟻防治主要用餌劑系統，工蟻會將毒餌帶返巢穴餵飼蟻后同幼蟻，達到全巢滅殺。但如果長期只用單一有效成分嘅餌劑，仍有可能出現抗性。建議定期更換唔同成分嘅白蟻餌劑，並由專業人員監察白蟻活動跡象。"
+        "text": "白蟻嘅抗藥性問題相對冇咁突出，因為白蟻防治主要用餌劑系統（如氟蟲腈 Fipronil 或除蟲脲 Diflubenzuron），工蟻會將毒餌帶返巢穴餵飼蟻后同幼蟻，達到全巢滅殺。但如果長期只用單一有效成分嘅餌劑，仍有可能出現抗性。建議定期更換唔同成分嘅白蟻餌劑，並由專業人員監察白蟻活動跡象，確保餌劑被取食同效果持續。"
       }
     }
   ]

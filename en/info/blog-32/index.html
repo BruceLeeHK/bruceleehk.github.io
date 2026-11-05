@@ -1136,11 +1136,11 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
             </div>
           </div>
           <h3>FAQ: choosing a pest control company in Hong Kong</h3>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Which pest control company in Hong Kong should I choose in 2026?</h3><p>Don't compare ads or headline prices — verify five checks: ① pesticide licence & technician credentials ② survey before quoting ③ written transparent pricing ④ reports & records ⑤ warranty terms. Then match the scenario (home/restaurant/hotel/village). An "all-inclusive" quote far below market rate is usually a monthly-add-on trap.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do I verify a pest control company is licensed?</h3><p>Ask for the pesticide registration numbers and technician licence details — a legitimate company lists them in the written quote. Pest Control Master uses AFCD-registered pesticides applied by licensed technicians; just ask on WhatsApp.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is AI diagnosis different from eyeball inspection?</h3><p>AI pest image recognition returns an initial report in 15 seconds — species, risk level and next step. Eyeball inspection depends on personal experience; eggs, nymphs and hidden nests are easily missed. Combined with Termatrac T3i radar and IoT monitoring, the source is located without demolition or blind spraying.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What counts as transparent pest control pricing?</h3><p>Three markers: a public price list, a written quote itemising scope, and pricing after survey. See our <a href="/en/info/blog-12/">2026 price guide</a>: single visits from HK$800 — cockroaches from HK$900, rats from HK$1,900, termites from HK$2,800, bed bugs from HK$3,000 (under-300-sq-ft reference).</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What should I ask about the warranty?</h3><p>Three things: warranty length, whether follow-up inspections are included, and what happens if pests return. Bed bug treatment should include two follow-ups within 60 days; termite treatment should carry a warranty re-inspection. "One-off" quotes without warranty terms usually recur fast for colonial pests.</p></div>
+          <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Which pest control company in Hong Kong should I choose in 2026?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Don't compare ads or headline prices — verify five checks: ① pesticide licence & technician credentials ② survey before quoting ③ written transparent pricing ④ reports & records ⑤ warranty terms. Then match the scenario (home/restaurant/hotel/village). An "all-inclusive" quote far below market rate is usually a monthly-add-on trap.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How do I verify a pest control company is licensed?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Ask for the pesticide registration numbers and technician licence details — a legitimate company lists them in the written quote. Pest Control Master uses AFCD-registered pesticides applied by licensed technicians; just ask on WhatsApp.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is AI diagnosis different from eyeball inspection?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>AI pest image recognition returns an initial report in 15 seconds — species, risk level and next step. Eyeball inspection depends on personal experience; eggs, nymphs and hidden nests are easily missed. Combined with Termatrac T3i radar and IoT monitoring, the source is located without demolition or blind spraying.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What counts as transparent pest control pricing?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Three markers: a public price list, a written quote itemising scope, and pricing after survey. See our <a href="/en/info/blog-12/">2026 price guide</a>: single visits from HK$800 — cockroaches from HK$900, rats from HK$1,900, termites from HK$2,800, bed bugs from HK$3,000 (under-300-sq-ft reference).</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What should I ask about the warranty?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Three things: warranty length, whether follow-up inspections are included, and what happens if pests return. Bed bug treatment should include two follow-ups within 60 days; termite treatment should carry a warranty re-inspection. "One-off" quotes without warranty terms usually recur fast for colonial pests.</p></div></details>
           <div class="blog17-btn-alt">
             <a href="/en/ai/" class="blog17-btn-primary"><i class="fa-solid fa-robot" aria-hidden="true"></i> Try the AI Pest Image Diagnosis: free report in 15 seconds</a>
             <a href="https://wa.me/85252821552?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E6%BB%85%E8%9F%B2%E6%9C%8D%E5%8B%99%EF%BC%8C%E8%AB%8B%E5%B8%AB%E5%82%85%E6%8F%90%E4%BE%9B%E5%A0%B1%E5%83%B9" target="_blank" rel="noopener" class="blog17-btn-wa"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp Us for a Free Quote</a>
@@ -1462,6 +1462,33 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         }
         .faq-answer strong {
             color: var(--primary-dark);
+        }
+
+        /* === v9.110: summary 內 h3 重置＋平滑展開（漸進增強） === */
+        .faq-question h3 {
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+            font-size: 0.98rem;
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .faq-question h3::before { display: none; }
+        .faq-question h3 i { color: var(--primary); font-size: 0.85rem; flex: none; }
+        @supports (interpolate-size: allow-keywords) {
+            :root { interpolate-size: allow-keywords; }
+            .faq-item::details-content {
+                block-size: 0;
+                overflow: hidden;
+                transition: block-size 0.25s ease, content-visibility 0.25s allow-discrete;
+            }
+            .faq-item[open]::details-content { block-size: auto; }
         }
 
 </style>

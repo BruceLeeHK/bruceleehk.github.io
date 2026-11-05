@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "離島上門要加收費用嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "離島區係我哋正式服務範圍，收費同市區標準一致，唔會因為要搭船加價；行程會預先計劃，WhatsApp可以先攞報價。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "長洲村屋白蟻處理要幾耐？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "一般村屋T3i掃描加灌注約2-4小時，視乎面積同暗巢數量；上門前會講明時數同流程。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "南丫島書蝨不停繁殖，同海邊潮濕有關嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "有直接關係。書蝨靠濕度生存，海島單位濕度長期偏高；先測濕、抽濕降濕，再處理隙縫，先可以斷根。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "東涌屋苑老鼠點防？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "廚房渠口、垃圾槽門同外牆喉管係三大入屋位；IoT鼠盒監測路徑後封堵加誘捕，並跟進公共位置改善建議。"
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "離島區屋企／花園發現馬蜂巢（黃蜂巢）點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "離島村屋、棚屋個案多數要搭船安排——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排，公用範圍先同管理處協調。詳細流程與收費參考：滅馬蜂巢專頁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "離島上門要加收費用嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "離島區係我哋正式服務範圍，收費同市區標準一致，唔會因為要搭船加價；行程會預先計劃，WhatsApp可以先攞報價。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "長洲村屋白蟻處理要幾耐？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "一般村屋T3i掃描加灌注約2-4小時，視乎面積同暗巢數量；上門前會講明時數同流程。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "南丫島書蝨不停繁殖，同海邊潮濕有關嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "有直接關係。書蝨靠濕度生存，海島單位濕度長期偏高；先測濕、抽濕降濕，再處理隙縫，先可以斷根。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "東涌屋苑老鼠點防？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "廚房渠口、垃圾槽門同外牆喉管係三大入屋位；IoT鼠盒監測路徑後封堵加誘捕，並跟進公共位置改善建議。"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -525,8 +541,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 離島區滅蟲常見問題 FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 離島區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><p>離島村屋、棚屋個案多數要搭船安排——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排，公用範圍先同管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 離島上門要加收費用嗎？</h3><p>離島區係我哋正式服務範圍，收費同市區標準一致，唔會因為要搭船加價；行程會預先計劃，WhatsApp可以先攞報價。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 長洲村屋白蟻處理要幾耐？</h3><p>一般村屋T3i掃描加灌注約2-4小時，視乎面積同暗巢數量；上門前會講明時數同流程。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 南丫島書蝨不停繁殖，同海邊潮濕有關嗎？</h3><p>有直接關係。書蝨靠濕度生存，海島單位濕度長期偏高；先測濕、抽濕降濕，再處理隙縫，先可以斷根。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 東涌屋苑老鼠點防？</h3><p>廚房渠口、垃圾槽門同外牆喉管係三大入屋位；IoT鼠盒監測路徑後封堵加誘捕，並跟進公共位置改善建議。</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 離島區滅蟲常見問題 FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 離島區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>離島村屋、棚屋個案多數要搭船安排——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排，公用範圍先同管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 離島上門要加收費用嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>離島區係我哋正式服務範圍，收費同市區標準一致，唔會因為要搭船加價；行程會預先計劃，WhatsApp可以先攞報價。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 長洲村屋白蟻處理要幾耐？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>一般村屋T3i掃描加灌注約2-4小時，視乎面積同暗巢數量；上門前會講明時數同流程。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 南丫島書蝨不停繁殖，同海邊潮濕有關嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>有直接關係。書蝨靠濕度生存，海島單位濕度長期偏高；先測濕、抽濕降濕，再處理隙縫，先可以斷根。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 東涌屋苑老鼠點防？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>廚房渠口、垃圾槽門同外牆喉管係三大入屋位；IoT鼠盒監測路徑後封堵加誘捕，並跟進公共位置改善建議。</p></div></details>
             </div>
         </section>
 

@@ -1120,12 +1120,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
           </ul>
           <p>For DIY methods versus professional work, see our <a href="/en/info/blog-18/" style="color:var(--primary-dark);font-weight:700;">rat control methods guide</a>; for a real case, read the <a href="/en/info/blog-17/" style="color:var(--primary-dark);font-weight:700;">Lamma Island village house case</a>.</p>
           <h3>❓ FAQ</h3>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Does FEHD remove rats from private homes?</h3><p>No. FEHD covers public spaces; pests inside private premises are the owner's or tenant's responsibility.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Rats keep appearing in the lane behind my flat — what can I do?</h3><p>Report the lane via 1823 for public-side follow-up. But the route rats use into your flat — drains, pipe penetrations — is on your side of the wall and needs professional proofing.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Biggest difference between the two systems?</h3><p>Scope (public vs private) and depth (public bait network vs tracking + IoT + structural proofing). They complement each other; neither replaces the other.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What is an IoT smart rat box?</h3><p>A device that automatically logs rat entry and exit times and locations around the clock, unlike manually-checked bait stations. Activity data lets proofing target real routes instead of guesses.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> When should I go straight to a professional?</h3><p>Rats already inside (gnaw marks, droppings, night-time running sounds), commercial premises facing complaints, or home problems persisting after a public report — don't wait.</p></div>
-          <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Is professional rat control expensive?</h3><p>$1,500–$3,800 per one-off visit with assessment, proofing quoted after survey. Compared with repeatedly buying poisons and glue traps, one proper end to the problem is usually cheaper.</p></div>
+          <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Does FEHD remove rats from private homes?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>No. FEHD covers public spaces; pests inside private premises are the owner's or tenant's responsibility.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Rats keep appearing in the lane behind my flat — what can I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Report the lane via 1823 for public-side follow-up. But the route rats use into your flat — drains, pipe penetrations — is on your side of the wall and needs professional proofing.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Biggest difference between the two systems?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Scope (public vs private) and depth (public bait network vs tracking + IoT + structural proofing). They complement each other; neither replaces the other.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> What is an IoT smart rat box?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>A device that automatically logs rat entry and exit times and locations around the clock, unlike manually-checked bait stations. Activity data lets proofing target real routes instead of guesses.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> When should I go straight to a professional?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Rats already inside (gnaw marks, droppings, night-time running sounds), commercial premises facing complaints, or home problems persisting after a public report — don't wait.</p></div></details>
+          <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Is professional rat control expensive?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>$1,500–$3,800 per one-off visit with assessment, proofing quoted after survey. Compared with repeatedly buying poisons and glue traps, one proper end to the problem is usually cheaper.</p></div></details>
 
           <div class="blog17-btn-alt">
             <a href="/en/service/rodent/" class="blog17-btn-primary"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Visit our Rat Control Company hub: transparent pricing · IoT smart monitoring · all in one page</a>
@@ -1440,6 +1440,33 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         }
         .faq-answer strong {
             color: var(--primary-dark);
+        }
+
+        /* === v9.110: summary 內 h3 重置＋平滑展開（漸進增強） === */
+        .faq-question h3 {
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+            font-size: 0.98rem;
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .faq-question h3::before { display: none; }
+        .faq-question h3 i { color: var(--primary); font-size: 0.85rem; flex: none; }
+        @supports (interpolate-size: allow-keywords) {
+            :root { interpolate-size: allow-keywords; }
+            .faq-item::details-content {
+                block-size: 0;
+                overflow: hidden;
+                transition: block-size 0.25s ease, content-visibility 0.25s allow-discrete;
+            }
+            .faq-item[open]::details-content { block-size: auto; }
         }
 
 </style>

@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How is pest control priced in Wan Chai?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "After a site survey based on area, pest type and severity. Send basic details on WhatsApp for an indicative quote within 5 minutes — zero hidden fees, confirmed on site before work starts."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Can you service a Causeway Bay upstairs shop outside business hours?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Most F&B and retail clients choose after-closing or pre-opening slots so business is never disturbed."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Termites found on a Happy Valley door frame — must we drill walls to find the nest?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. The Termatrac T3i radar penetrates walls and timber to pinpoint the nest within about 2 hours, then we inject long-lasting protective agents precisely — no demolition-style damage."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Where do rats in old Wan Chai buildings come from?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Usually refuse chutes, drains and external pipes. Our masters trace every entry point and combine IoT smart-box monitoring with proofing and trapping for a double knockdown."
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "Found a hornet nest (wasp nest) in Wan Chai — what should I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whether it is a dense urban block or a Happy Valley garden house, the rule is the same — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID comes first (hornet/wasp vs bee); private units can be surveyed directly, common areas are coordinated with the corporation/management. Process & cost guide: Wasp nest removal guide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is pest control priced in Wan Chai?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "After a site survey based on area, pest type and severity. Send basic details on WhatsApp for an indicative quote within 5 minutes — zero hidden fees, confirmed on site before work starts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you service a Causeway Bay upstairs shop outside business hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Most F&B and retail clients choose after-closing or pre-opening slots so business is never disturbed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Termites found on a Happy Valley door frame — must we drill walls to find the nest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Termatrac T3i radar penetrates walls and timber to pinpoint the nest within about 2 hours, then we inject long-lasting protective agents precisely — no demolition-style damage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do rats in old Wan Chai buildings come from?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually refuse chutes, drains and external pipes. Our masters trace every entry point and combine IoT smart-box monitoring with proofing and trapping for a double knockdown."
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -522,8 +538,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Wan Chai Pest Control FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Wan Chai — what should I do?</h3><p>Whether it is a dense urban block or a Happy Valley garden house, the rule is the same — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID comes first (hornet/wasp vs bee); private units can be surveyed directly, common areas are coordinated with the corporation/management. Process & cost guide: <a href="/en/wasp-nest/">Wasp nest removal guide</a>.</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is pest control priced in Wan Chai?</h3><p>After a site survey based on area, pest type and severity. Send basic details on WhatsApp for an indicative quote within 5 minutes — zero hidden fees, confirmed on site before work starts.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can you service a Causeway Bay upstairs shop outside business hours?</h3><p>Yes. Most F&B and retail clients choose after-closing or pre-opening slots so business is never disturbed.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Termites found on a Happy Valley door frame — must we drill walls to find the nest?</h3><p>No. The Termatrac T3i radar penetrates walls and timber to pinpoint the nest within about 2 hours, then we inject long-lasting protective agents precisely — no demolition-style damage.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Where do rats in old Wan Chai buildings come from?</h3><p>Usually refuse chutes, drains and external pipes. Our masters trace every entry point and combine IoT smart-box monitoring with proofing and trapping for a double knockdown.</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Wan Chai Pest Control FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Wan Chai — what should I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Whether it is a dense urban block or a Happy Valley garden house, the rule is the same — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID comes first (hornet/wasp vs bee); private units can be surveyed directly, common areas are coordinated with the corporation/management. Process & cost guide: <a href="/en/wasp-nest/">Wasp nest removal guide</a>.</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How is pest control priced in Wan Chai?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>After a site survey based on area, pest type and severity. Send basic details on WhatsApp for an indicative quote within 5 minutes — zero hidden fees, confirmed on site before work starts.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can you service a Causeway Bay upstairs shop outside business hours?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Yes. Most F&B and retail clients choose after-closing or pre-opening slots so business is never disturbed.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Termites found on a Happy Valley door frame — must we drill walls to find the nest?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>No. The Termatrac T3i radar penetrates walls and timber to pinpoint the nest within about 2 hours, then we inject long-lasting protective agents precisely — no demolition-style damage.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Where do rats in old Wan Chai buildings come from?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Usually refuse chutes, drains and external pipes. Our masters trace every entry point and combine IoT smart-box monitoring with proofing and trapping for a double knockdown.</p></div></details>
             </div>
         </section>
 

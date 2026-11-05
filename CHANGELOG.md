@@ -1,3 +1,18 @@
+# 修復日誌 (v9.110 — 2026-11-05)
+
+## v9.110 全站 FAQ 統一可收縮：孤兒 accordion CSS／孤兒 JS 根治＋FAQPage JSON-LD 全站同步修復（2026-11-05）
+
+**承 v9.109（blog-33 試點）全站推廣：135 個含 FAQ 頁面全部轉為 native `<details>/<summary>` 可收縮手風琴，並根治三類歷史遺留問題**
+
+- 標記轉換 84 頁（三種來源模式統一輸出）：①blog-25～32 中英 16 頁——v9.91 模板自帶「孤兒 accordion CSS」（CSS 按 details 設計但 HTML 仍是靜態 div）；②十八區中英 42 頁／rat-control 中英 12 頁／service 五專頁中英 10 頁／wasp-nest 中英 2 頁／districts 索引中英 2 頁——緊湊 card 樣式無收縮互動；③blog-8 中英 2 頁——**孤兒 JS**（onclick="toggleFaq(this)" 但 toggleFaq 函數全站無定義，點擊完全失效＋無樣式）；④overseas-landlord 中英 2 頁——p 式問句結構。全部轉為 `<details class="faq-item"><summary class="faq-question"><h3>問</h3><i chevron-down faq-arrow></i></summary><div class="faq-answer"><p>答</p></div></details>`，每頁首條預設 `open`
+- CSS 分類補充（共用 CSS/JS 仍零改動）：B 類插 v9.109 補充規則（summary 內 h3 標題重置＋@supports interpolate-size 平滑展開）；D/P 類插緊湊版 summary/arrow/[open] 規則（箭頭色跟隨各頁 var(--warning) 識別系統）；E 類（blog-8）插入完整 blog 版 accordion CSS
+- **FAQPage JSON-LD 全站同步修復（49 頁）**：全站掃描發現大量頁面結構化資料與可見 FAQ 長期不同步——中英十八區頁 42 頁 FAQPage 缺首條「馬蜂巢」問題且順序錯位；blog-7 可見 20 條 FAQ 但 JSON-LD 僅部分；blog-12 可見 10 條 vs JSON 4 條等。全部以「可見內容為準」重建 mainEntity（Google 規範：結構化資料必須對應頁面可見內容），FAQ 豐富結果資格更穩
+- 事故與自救：首版同步腳本 DOM 提取器僅覆蓋新模板致 30 頁 JSON-LD 被誤清空——通用提取器（支援站內 4 種 details 變體）＋鏡像還原機制全數復原，零資料損失；驗證器修訂為模式感知（既有 details 頁尊重原設計，僅檢查同步與標籤平衡）
+- 驗證 validate_v9110.py 2413 項全 PASS：135 FAQ 頁全檢——零 div.faq-item 殘留、零 toggleFaq 孤兒、每轉換頁恰 1 項 open、全文件標籤平衡、FAQPage 與 DOM 逐字同步、零空 mainEntity、beacon 零殘留；變更範圍 133 頁（84 標記轉換＋49 JSON-LD 同步）
+- sitemap：133 個變更 URL lastmod→2026-11-05；共用 CSS/JS 零改動（?v=9.92 不變）
+- 流量保護：零 URL 變更、零內容刪減、問答文字逐字不變（僅容器標記與 JSON-LD 同步）
+
+
 # 修復日誌 (v9.109 — 2026-11-05)
 
 ## v9.109 blog-33 FAQ 修復優化：點擊可收縮（native <details>/<summary> 手風琴）（2026-11-05）

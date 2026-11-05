@@ -133,53 +133,61 @@
 }
     </script>
                 <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How long does a termite inspection take for a Discovery Bay village house?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "I found termite mud tubes — can I spray insecticide myself?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Are there any hidden fees for termite treatment in Discovery Bay?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Why do termites in my Discovery Bay villa keep coming back?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "I'm based overseas. Can my Discovery Bay property be handled remotely?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. We run a remote pest control service for overseas owners: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection."
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "Found a hornet nest (wasp nest) in Discovery Bay — what should I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Balcony canopies and woodland-edge gardens drive most Discovery Bay calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: Hornet & Wasp Nest Removal in Hong Kong."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a termite inspection take for a Discovery Bay village house?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I found termite mud tubes — can I spray insecticide myself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there any hidden fees for termite treatment in Discovery Bay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do termites in my Discovery Bay villa keep coming back?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I'm based overseas. Can my Discovery Bay property be handled remotely?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We run a remote pest control service for overseas owners: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection."
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -229,6 +237,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -495,8 +511,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Discovery Bay Pest Control FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Discovery Bay — what should I do?</h3><p>Balcony canopies and woodland-edge gardens drive most Discovery Bay calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: <a href="/en/wasp-nest/">Hornet & Wasp Nest Removal in Hong Kong</a>.</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does a termite inspection take for a Discovery Bay village house?</h3><p>Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I found termite mud tubes — can I spray insecticide myself?</h3><p>Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Are there any hidden fees for termite treatment in Discovery Bay?</h3><p>Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Why do termites in my Discovery Bay villa keep coming back?</h3><p>Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I'm based overseas. Can my Discovery Bay property be handled remotely?</h3><p>Yes. We run a <a href="/en/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">remote pest control service for overseas owners</a>: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection.</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Discovery Bay Pest Control FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Discovery Bay — what should I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Balcony canopies and woodland-edge gardens drive most Discovery Bay calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: <a href="/en/wasp-nest/">Hornet & Wasp Nest Removal in Hong Kong</a>.</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How long does a termite inspection take for a Discovery Bay village house?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Using the Australian Termatrac T3i microwave detector, a typical village house or villa takes only about 30 to 60 minutes for a full hidden-colony scan — no wall demolition and no damage to your finishes.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I found termite mud tubes — can I spray insecticide myself?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Strongly not recommended! Spraying insecticide yourself disturbs the termites and drives them to spread and build nests in other hidden spots of your home. Leave everything untouched and book a professional pest control master for microwave detection immediately.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Are there any hidden fees for termite treatment in Discovery Bay?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Absolutely no hidden fees. After on-site AI image recognition and microwave detection, our master provides a clear diagnostic report and an exact quote on the spot — work only begins after you approve.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Why do termites in my Discovery Bay villa keep coming back?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Discovery Bay sits against wooded hillsides by the sea — subterranean termite colonies live in the hillside soil and travel through underground mud tubes into gardens and walls. Surface spraying only kills visible workers, never the queen's colony. You need Termatrac T3i microwave detection to locate the primary colony, inject residual termiticide to eliminate it, then improve timber conditions for lasting results.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> I'm based overseas. Can my Discovery Bay property be handled remotely?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Yes. We run a <a href="/en/info/blog-10/" style="color:var(--primary-dark);font-weight:700;">remote pest control service for overseas owners</a>: send photos via WhatsApp for AI pre-diagnosis, our master inspects and arranges key collection on your behalf, and you receive transparent photo progress reports. Long-vacant properties can add IoT monitoring with periodic re-inspection.</p></div></details>
             </div>
         </section>
 

@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "Does the village-house termite check include the loft in Tai Po?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Lofts, wooden staircases and floor slabs are the three hidden hotspots — T3i scans prioritise them and the quote covers the whole house."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How fast can you attend a Tai Wo estate for rats?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Tai Po is a resident-service zone with same-day attendance in business hours; IoT boxes are rechecked with path data after two weeks."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Can a Tai Po Market restaurant take scheduled maintenance?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Monthly plans include inspections, bait-station changes and pest reports — useful for FEHB inspection readiness too."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Mosquitoes near the Lam Tsuen River — what to do?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Breeding-source control is key: clear standing water, biological granules at drains, plus timed UV traps — lasting control without frequent spraying."
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "Found a hornet nest (wasp nest) in Tai Po — what should I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Village canopies and villa garden trees account for most Tai Po calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: Hornet & wasp nest topic page."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the village-house termite check include the loft in Tai Po?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Lofts, wooden staircases and floor slabs are the three hidden hotspots — T3i scans prioritise them and the quote covers the whole house."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can you attend a Tai Wo estate for rats?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tai Po is a resident-service zone with same-day attendance in business hours; IoT boxes are rechecked with path data after two weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a Tai Po Market restaurant take scheduled maintenance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Monthly plans include inspections, bait-station changes and pest reports — useful for FEHB inspection readiness too."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mosquitoes near the Lam Tsuen River — what to do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Breeding-source control is key: clear standing water, biological granules at drains, plus timed UV traps — lasting control without frequent spraying."
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -522,8 +538,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Tai Po Pest Control FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Tai Po — what should I do?</h3><p>Village canopies and villa garden trees account for most Tai Po calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: <a href="/en/wasp-nest/">Hornet & wasp nest topic page</a>.</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Does the village-house termite check include the loft in Tai Po?</h3><p>Yes. Lofts, wooden staircases and floor slabs are the three hidden hotspots — T3i scans prioritise them and the quote covers the whole house.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How fast can you attend a Tai Wo estate for rats?</h3><p>Tai Po is a resident-service zone with same-day attendance in business hours; IoT boxes are rechecked with path data after two weeks.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can a Tai Po Market restaurant take scheduled maintenance?</h3><p>Yes. Monthly plans include inspections, bait-station changes and pest reports — useful for FEHB inspection readiness too.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Mosquitoes near the Lam Tsuen River — what to do?</h3><p>Breeding-source control is key: clear standing water, biological granules at drains, plus timed UV traps — lasting control without frequent spraying.</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Tai Po Pest Control FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Tai Po — what should I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Village canopies and villa garden trees account for most Tai Po calls — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself. Species ID first (hornet/wasp vs bee); private grounds can be surveyed directly. Process & cost guide: <a href="/en/wasp-nest/">Hornet & wasp nest topic page</a>.</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Does the village-house termite check include the loft in Tai Po?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Yes. Lofts, wooden staircases and floor slabs are the three hidden hotspots — T3i scans prioritise them and the quote covers the whole house.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How fast can you attend a Tai Wo estate for rats?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Tai Po is a resident-service zone with same-day attendance in business hours; IoT boxes are rechecked with path data after two weeks.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can a Tai Po Market restaurant take scheduled maintenance?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Yes. Monthly plans include inspections, bait-station changes and pest reports — useful for FEHB inspection readiness too.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Mosquitoes near the Lam Tsuen River — what to do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Breeding-source control is key: clear standing water, biological granules at drains, plus timed UV traps — lasting control without frequent spraying.</p></div></details>
             </div>
         </section>
 

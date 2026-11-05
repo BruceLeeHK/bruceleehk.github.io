@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "深水埗唐樓滅床蝨需要幾耐時間？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "一般單位首次處理約1.5-2.5小時，兩星期後再覆檢處理一次確保蝨卵全滅；嚴重個案可能需要三次。上門前WhatsApp可以先報初步價。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "書蝨不斷喺牆邊出現，噺咗藥又返嚟，點解？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "書蝨靠濕度生存。如果牆身或環境濕度唔降，點噴都會返嚟。我哋會先測濕度搵出水源，抽濕配合隙縫處理，先至治本。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "處理期間要搬出去幾耐？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "床蝨蒸氣處理毋須離開，處理中只需要離開處理緊嘅房間；書蝨處理建議處理後通風1-2小時。孕婦、嬰幼兒或寵物可額外延長通風時間。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "美孚新邨老鼠點樣防再入屋？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "重點係廚房鋅盤底渠口、垃圾槽門同外牆喉管位。師傅會逐一勘察封堵，配合IoT鼠盒兩星期覆檢路徑數據。"
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "深水埗區屋企／花園發現馬蜂巢（黃蜂巢）點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "深水埗舊樓天台同窗棚個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除＋封隙減低復巢機會；大廈公用範圍屬法團或管理處職責。詳細流程與收費參考：滅馬蜂巢專頁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "深水埗唐樓滅床蝨需要幾耐時間？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "一般單位首次處理約1.5-2.5小時，兩星期後再覆檢處理一次確保蝨卵全滅；嚴重個案可能需要三次。上門前WhatsApp可以先報初步價。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "書蝨不斷喺牆邊出現，噺咗藥又返嚟，點解？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "書蝨靠濕度生存。如果牆身或環境濕度唔降，點噴都會返嚟。我哋會先測濕度搵出水源，抽濕配合隙縫處理，先至治本。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "處理期間要搬出去幾耐？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "床蝨蒸氣處理毋須離開，處理中只需要離開處理緊嘅房間；書蝨處理建議處理後通風1-2小時。孕婦、嬰幼兒或寵物可額外延長通風時間。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "美孚新邨老鼠點樣防再入屋？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "重點係廚房鋅盤底渠口、垃圾槽門同外牆喉管位。師傅會逐一勘察封堵，配合IoT鼠盒兩星期覆檢路徑數據。"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -532,8 +548,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 深水埗區滅蟲常見問題 FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 深水埗區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><p>深水埗舊樓天台同窗棚個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除＋封隙減低復巢機會；大廈公用範圍屬法團或管理處職責。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 深水埗唐樓滅床蝨需要幾耐時間？</h3><p>一般單位首次處理約1.5-2.5小時，兩星期後再覆檢處理一次確保蝨卵全滅；嚴重個案可能需要三次。上門前WhatsApp可以先報初步價。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 書蝨不斷喺牆邊出現，噺咗藥又返嚟，點解？</h3><p>書蝨靠濕度生存。如果牆身或環境濕度唔降，點噴都會返嚟。我哋會先測濕度搵出水源，抽濕配合隙縫處理，先至治本。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 處理期間要搬出去幾耐？</h3><p>床蝨蒸氣處理毋須離開，處理中只需要離開處理緊嘅房間；書蝨處理建議處理後通風1-2小時。孕婦、嬰幼兒或寵物可額外延長通風時間。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 美孚新邨老鼠點樣防再入屋？</h3><p>重點係廚房鋅盤底渠口、垃圾槽門同外牆喉管位。師傅會逐一勘察封堵，配合IoT鼠盒兩星期覆檢路徑數據。</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 深水埗區滅蟲常見問題 FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 深水埗區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>深水埗舊樓天台同窗棚個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除＋封隙減低復巢機會；大廈公用範圍屬法團或管理處職責。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 深水埗唐樓滅床蝨需要幾耐時間？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>一般單位首次處理約1.5-2.5小時，兩星期後再覆檢處理一次確保蝨卵全滅；嚴重個案可能需要三次。上門前WhatsApp可以先報初步價。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 書蝨不斷喺牆邊出現，噺咗藥又返嚟，點解？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>書蝨靠濕度生存。如果牆身或環境濕度唔降，點噴都會返嚟。我哋會先測濕度搵出水源，抽濕配合隙縫處理，先至治本。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 處理期間要搬出去幾耐？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>床蝨蒸氣處理毋須離開，處理中只需要離開處理緊嘅房間；書蝨處理建議處理後通風1-2小時。孕婦、嬰幼兒或寵物可額外延長通風時間。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 美孚新邨老鼠點樣防再入屋？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>重點係廚房鋅盤底渠口、垃圾槽門同外牆喉管位。師傅會逐一勘察封堵，配合IoT鼠盒兩星期覆檢路徑數據。</p></div></details>
             </div>
         </section>
 

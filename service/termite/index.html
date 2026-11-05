@@ -241,6 +241,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -530,13 +538,13 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅白蟻公司常見問題 FAQ</h2>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅白蟻公司收費幾多？</h3><p>白蟻防治過往個案綜合參考約 HK$2,800–$8,000，視乎蟻患範圍、巢位深度同工程量；局部治理個別個案 HK$2,800 起。一律先勘察後出書面報價，合約列明治理範圍同保養期。全蟲種行情可睇我哋嘅 2026 滅蟲收費指南。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Termatrac T3i 係咩？點解要免拆牆？</h3><p>T3i 係微波雷達探測器，可以穿透牆身偵測白蟻活動訊號。免拆牆嘅意義係：唔使鑿爛裝修先知蟻路喺邊——準確定位後針對性治理，減少不必要拆卸同裝修損失。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣知道屋企有冇白蟻？</h3><p>常見跡象：泥狀蟻路（沿牆身或門框）、木料表面起泡、敲木有空心情況、春夏分飛蟲同脫落蟲翅。一有懷疑即刻影相 WhatsApp 查詢，或先用免費 AI 蟲害診斷初步分辨。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 白蟻治理之後會唔會復發？</h3><p>白蟻活動受環境濕度、木結構同鄰近蟻源影響，個別情況有機會再度出現。我哋以保養期覆查＋T3i 複測跟進：保養期內同一位置再度發現活動，免費覆查處理，並提供防蟻改善建議。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 用咩藥？屋企有小朋友同寵物安全嗎？</h3><p>使用漁護署註冊除害劑，以灌注／餌站等針對性方式落藥喺目標位置，減低兒童寵物接觸風險；治理前會講明用藥位置同注意事項。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 禁區同離島做唔做？</h3><p>做。沙頭角一帶禁區個案（需禁區紙區域）具備實戰經驗，愉景灣等離島照樣上門；全港十八區覆蓋，偏遠位置請喺 WhatsApp 講明地址方便安排。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋有冇處理蛀木蟲／粉蠹？</h3><p>有。蛀木蟲（粉蠹／長蠹幼蟲）喺木材內部蛀蝕，木面留有針孔蛀孔同粉狀蛀屑，同白蟻唔同、唔會築蟻路。我哋按蛀蝕程度以木材藥劑處理，嚴重個案建議更換木料；勘察後會同白蟻治理分開報價。</p></div>
+<details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅白蟻公司收費幾多？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>白蟻防治過往個案綜合參考約 HK$2,800–$8,000，視乎蟻患範圍、巢位深度同工程量；局部治理個別個案 HK$2,800 起。一律先勘察後出書面報價，合約列明治理範圍同保養期。全蟲種行情可睇我哋嘅 2026 滅蟲收費指南。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Termatrac T3i 係咩？點解要免拆牆？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>T3i 係微波雷達探測器，可以穿透牆身偵測白蟻活動訊號。免拆牆嘅意義係：唔使鑿爛裝修先知蟻路喺邊——準確定位後針對性治理，減少不必要拆卸同裝修損失。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣知道屋企有冇白蟻？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>常見跡象：泥狀蟻路（沿牆身或門框）、木料表面起泡、敲木有空心情況、春夏分飛蟲同脫落蟲翅。一有懷疑即刻影相 WhatsApp 查詢，或先用免費 AI 蟲害診斷初步分辨。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 白蟻治理之後會唔會復發？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>白蟻活動受環境濕度、木結構同鄰近蟻源影響，個別情況有機會再度出現。我哋以保養期覆查＋T3i 複測跟進：保養期內同一位置再度發現活動，免費覆查處理，並提供防蟻改善建議。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 用咩藥？屋企有小朋友同寵物安全嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>使用漁護署註冊除害劑，以灌注／餌站等針對性方式落藥喺目標位置，減低兒童寵物接觸風險；治理前會講明用藥位置同注意事項。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 禁區同離島做唔做？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>做。沙頭角一帶禁區個案（需禁區紙區域）具備實戰經驗，愉景灣等離島照樣上門；全港十八區覆蓋，偏遠位置請喺 WhatsApp 講明地址方便安排。</p></div></details>
+            <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋有冇處理蛀木蟲／粉蠹？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>有。蛀木蟲（粉蠹／長蠹幼蟲）喺木材內部蛀蝕，木面留有針孔蛀孔同粉狀蛀屑，同白蟻唔同、唔會築蟻路。我哋按蛀蝕程度以木材藥劑處理，嚴重個案建議更換木料；勘察後會同白蟻治理分開報價。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="qf-title">

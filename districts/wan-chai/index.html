@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "灣仔區滅蟲收費點計？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "按單位面積、蟲患種類同嚴重程度現場勘察後報價，WhatsApp提供基本資料即可5分鐘內收到初步估價，0隱藏收費，師傅上門先確認先開工。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "銅鑼灣樓上舖可以安排非營業時間處理嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "可以。餐飲及零售商戶多數安排收舖後或早上開舖前處理，我哋可配合彈性時段，令業務零影響。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "跑馬地舊樓門框發現白蟻，一定要鑽牆先搵到巢？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "唔使。澳大利亞Termatrac T3i專利微波探測可以穿透牆身同木結構，2小時內無損定位暗巢位置，再針對性灌注持效保護劑，避免大裝修式破壞。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "灣仔舊樓老鼠由邊度入嚟？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "多數沿垃圾槽、渠管同外牆喉管入屋。師傅會做全屋入屋源頭勘察，配合IoT智慧鼠盒監測路徑，封堵加誘捕雙管齊下。"
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "灣仔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "灣仔區鬧市大廈同跑馬地低密度住宅都試過有蜂巢求助——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，千祈唔好自己摘巢或火燒，受擾蜂群會群起攻擊。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排，公用範圍先同法團或管理處協調。詳細流程與收費參考：馬蜂巢（黃蜂巢）處理專頁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "灣仔區滅蟲收費點計？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "按單位面積、蟲患種類同嚴重程度現場勘察後報價，WhatsApp提供基本資料即可5分鐘內收到初步估價，0隱藏收費，師傅上門先確認先開工。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "銅鑼灣樓上舖可以安排非營業時間處理嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。餐飲及零售商戶多數安排收舖後或早上開舖前處理，我哋可配合彈性時段，令業務零影響。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "跑馬地舊樓門框發現白蟻，一定要鑽牆先搵到巢？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "唔使。澳大利亞Termatrac T3i專利微波探測可以穿透牆身同木結構，2小時內無損定位暗巢位置，再針對性灌注持效保護劑，避免大裝修式破壞。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "灣仔舊樓老鼠由邊度入嚟？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多數沿垃圾槽、渠管同外牆喉管入屋。師傅會做全屋入屋源頭勘察，配合IoT智慧鼠盒監測路徑，封堵加誘捕雙管齊下。"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -523,8 +539,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 灣仔區滅蟲常見問題 FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><p>灣仔區鬧市大廈同跑馬地低密度住宅都試過有蜂巢求助——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，千祈唔好自己摘巢或火燒，受擾蜂群會群起攻擊。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排，公用範圍先同法團或管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">馬蜂巢（黃蜂巢）處理專頁</a>。</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔區滅蟲收費點計？</h3><p>按單位面積、蟲患種類同嚴重程度現場勘察後報價，WhatsApp提供基本資料即可5分鐘內收到初步估價，0隱藏收費，師傅上門先確認先開工。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 銅鑼灣樓上舖可以安排非營業時間處理嗎？</h3><p>可以。餐飲及零售商戶多數安排收舖後或早上開舖前處理，我哋可配合彈性時段，令業務零影響。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 跑馬地舊樓門框發現白蟻，一定要鑽牆先搵到巢？</h3><p>唔使。澳大利亞Termatrac T3i專利微波探測可以穿透牆身同木結構，2小時內無損定位暗巢位置，再針對性灌注持效保護劑，避免大裝修式破壞。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔舊樓老鼠由邊度入嚟？</h3><p>多數沿垃圾槽、渠管同外牆喉管入屋。師傅會做全屋入屋源頭勘察，配合IoT智慧鼠盒監測路徑，封堵加誘捕雙管齊下。</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 灣仔區滅蟲常見問題 FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>灣仔區鬧市大廈同跑馬地低密度住宅都試過有蜂巢求助——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，千祈唔好自己摘巢或火燒，受擾蜂群會群起攻擊。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排，公用範圍先同法團或管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">馬蜂巢（黃蜂巢）處理專頁</a>。</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔區滅蟲收費點計？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>按單位面積、蟲患種類同嚴重程度現場勘察後報價，WhatsApp提供基本資料即可5分鐘內收到初步估價，0隱藏收費，師傅上門先確認先開工。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 銅鑼灣樓上舖可以安排非營業時間處理嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>可以。餐飲及零售商戶多數安排收舖後或早上開舖前處理，我哋可配合彈性時段，令業務零影響。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 跑馬地舊樓門框發現白蟻，一定要鑽牆先搵到巢？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>唔使。澳大利亞Termatrac T3i專利微波探測可以穿透牆身同木結構，2小時內無損定位暗巢位置，再針對性灌注持效保護劑，避免大裝修式破壞。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 灣仔舊樓老鼠由邊度入嚟？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>多數沿垃圾槽、渠管同外牆喉管入屋。師傅會做全屋入屋源頭勘察，配合IoT智慧鼠盒監測路徑，封堵加誘捕雙管齊下。</p></div></details>
             </div>
         </section>
 

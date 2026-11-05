@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "大埔村屋滅白蟻檢查閣樓嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "會。村屋閣樓、木樓梯同地台係三大隱藏位，T3i掃描會重點覆蓋，暗巢位置逐一定位後灌注，報價已包含全屋範圍。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "太和屋苑老鼠可以幾快上門？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "大埔屬常駐服務範圍，營業時間內最快即日到場；IoT鼠盒布置後兩星期覆檢路徑數據。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "大埔墟餐廳可以定期保養嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "可以。月費保養包含每月巡視、誘餌站更換同蟲患報告，亦方便應付食環署巡查要求。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "林村河附近蚊患點處理？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "孳生源治理最關鍵：清理積水、生物顆粒處理去水位，加紫外線誘蚊燈定時運作，長效免頻密噴藥。"
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "大埔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大埔村屋同別墅花園樹叢都試過有蜂巢——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排上門勘察。詳細流程與收費參考：滅馬蜂巢專頁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "大埔村屋滅白蟻檢查閣樓嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "會。村屋閣樓、木樓梯同地台係三大隱藏位，T3i掃描會重點覆蓋，暗巢位置逐一定位後灌注，報價已包含全屋範圍。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "太和屋苑老鼠可以幾快上門？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大埔屬常駐服務範圍，營業時間內最快即日到場；IoT鼠盒布置後兩星期覆檢路徑數據。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "大埔墟餐廳可以定期保養嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。月費保養包含每月巡視、誘餌站更換同蟲患報告，亦方便應付食環署巡查要求。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "林村河附近蚊患點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "孳生源治理最關鍵：清理積水、生物顆粒處理去水位，加紫外線誘蚊燈定時運作，長效免頻密噴藥。"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -522,8 +538,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 大埔區滅蟲常見問題 FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><p>大埔村屋同別墅花園樹叢都試過有蜂巢——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排上門勘察。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔村屋滅白蟻檢查閣樓嗎？</h3><p>會。村屋閣樓、木樓梯同地台係三大隱藏位，T3i掃描會重點覆蓋，暗巢位置逐一定位後灌注，報價已包含全屋範圍。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 太和屋苑老鼠可以幾快上門？</h3><p>大埔屬常駐服務範圍，營業時間內最快即日到場；IoT鼠盒布置後兩星期覆檢路徑數據。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔墟餐廳可以定期保養嗎？</h3><p>可以。月費保養包含每月巡視、誘餌站更換同蟲患報告，亦方便應付食環署巡查要求。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 林村河附近蚊患點處理？</h3><p>孳生源治理最關鍵：清理積水、生物顆粒處理去水位，加紫外線誘蚊燈定時運作，長效免頻密噴藥。</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 大埔區滅蟲常見問題 FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>大埔村屋同別墅花園樹叢都試過有蜂巢——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒——蜂群受擾亂時攻擊性大增。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人範圍可直接安排上門勘察。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔村屋滅白蟻檢查閣樓嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>會。村屋閣樓、木樓梯同地台係三大隱藏位，T3i掃描會重點覆蓋，暗巢位置逐一定位後灌注，報價已包含全屋範圍。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 太和屋苑老鼠可以幾快上門？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>大埔屬常駐服務範圍，營業時間內最快即日到場；IoT鼠盒布置後兩星期覆檢路徑數據。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大埔墟餐廳可以定期保養嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>可以。月費保養包含每月巡視、誘餌站更換同蟲患報告，亦方便應付食環署巡查要求。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 林村河附近蚊患點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>孳生源治理最關鍵：清理積水、生物顆粒處理去水位，加紫外線誘蚊燈定時運作，長效免頻密噴藥。</p></div></details>
             </div>
         </section>
 

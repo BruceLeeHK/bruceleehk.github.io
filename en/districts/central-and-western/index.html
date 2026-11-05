@@ -155,53 +155,61 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How much does restaurant cockroach control in Central cost?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Pricing depends on floor area, infestation severity and service frequency. Send us the basics on WhatsApp and receive an indicative quote within 5 minutes — zero hidden fees."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How fast can you treat rodents in a Central office tower?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Central & Western is our home patch — same-day attendance is usually possible during business hours (9:00–18:00). We start with IoT smart-box monitoring to map activity paths before precise trapping and proofing."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Can a bed-bug-infested mattress in Mid-Levels be saved without replacement?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Usually yes. High-temperature steam penetrates seams, slats and wall gaps while residual agents target the eggs — most cases are resolved without discarding the mattress. Inspect first, treat second, save money."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Is the treatment safe for pets and children?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "We use AFCD-registered pesticides applied at directed dosages into cracks and crevices. Ventilate after treatment and it is safe to return — safety of pets and children comes first."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Suspect termites in my Mid-Levels home — can you check without demolishing anything?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. We use the Australian Termatrac T3i microwave locator to see through walls and pinpoint termite nests with zero demolition. Book now to enjoy the limited-time 20% discount — WhatsApp quote in 5 minutes."
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "Found a hornet nest (wasp nest) in Central & Western — what should I do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Window canopies on older blocks and Mid-Levels gardens keep our phones ringing — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself, as disturbed wasps attack in swarms. The technician IDs the species (hornet/wasp vs bee) before safe removal; estate common areas are the corporation/management’s responsibility and we coordinate first. Process & cost guide: Hornet & Wasp Nest Removal in Hong Kong."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does restaurant cockroach control in Central cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pricing depends on floor area, infestation severity and service frequency. Send us the basics on WhatsApp and receive an indicative quote within 5 minutes — zero hidden fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast can you treat rodents in a Central office tower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Central & Western is our home patch — same-day attendance is usually possible during business hours (9:00–18:00). We start with IoT smart-box monitoring to map activity paths before precise trapping and proofing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a bed-bug-infested mattress in Mid-Levels be saved without replacement?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually yes. High-temperature steam penetrates seams, slats and wall gaps while residual agents target the eggs — most cases are resolved without discarding the mattress. Inspect first, treat second, save money."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the treatment safe for pets and children?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use AFCD-registered pesticides applied at directed dosages into cracks and crevices. Ventilate after treatment and it is safe to return — safety of pets and children comes first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Suspect termites in my Mid-Levels home — can you check without demolishing anything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We use the Australian Termatrac T3i microwave locator to see through walls and pinpoint termite nests with zero demolition. Book now to enjoy the limited-time 20% discount — WhatsApp quote in 5 minutes."
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -259,6 +267,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -577,8 +593,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Central & Western Pest Control FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Central & Western — what should I do?</h3><p>Window canopies on older blocks and Mid-Levels gardens keep our phones ringing — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself, as disturbed wasps attack in swarms. The technician IDs the species (hornet/wasp vs bee) before safe removal; estate common areas are the corporation/management’s responsibility and we coordinate first. Process & cost guide: <a href="/en/wasp-nest/">Hornet & Wasp Nest Removal in Hong Kong</a>.</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How much does restaurant cockroach control in Central cost?</h3><p>Pricing depends on floor area, infestation severity and service frequency. Send us the basics on WhatsApp and receive an indicative quote within 5 minutes — zero hidden fees.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How fast can you treat rodents in a Central office tower?</h3><p>Central & Western is our home patch — same-day attendance is usually possible during business hours (9:00–18:00). We start with IoT smart-box monitoring to map activity paths before precise trapping and proofing.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can a bed-bug-infested mattress in Mid-Levels be saved without replacement?</h3><p>Usually yes. High-temperature steam penetrates seams, slats and wall gaps while residual agents target the eggs — most cases are resolved without discarding the mattress. Inspect first, treat second, save money.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Is the treatment safe for pets and children?</h3><p>We use AFCD-registered pesticides applied at directed dosages into cracks and crevices. Ventilate after treatment and it is safe to return — safety of pets and children comes first.</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Suspect termites in my Mid-Levels home — can you check without demolishing anything?</h3><p>Yes. We use the Australian Termatrac T3i microwave locator to see through walls and pinpoint termite nests with zero demolition. Book now to enjoy the limited-time 20% discount — WhatsApp quote in 5 minutes.</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> Central & Western Pest Control FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Found a hornet nest (wasp nest) in Central & Western — what should I do?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Window canopies on older blocks and Mid-Levels gardens keep our phones ringing — keep your distance, take photos (no flash) and WhatsApp us; never remove, burn or hose the nest yourself, as disturbed wasps attack in swarms. The technician IDs the species (hornet/wasp vs bee) before safe removal; estate common areas are the corporation/management’s responsibility and we coordinate first. Process & cost guide: <a href="/en/wasp-nest/">Hornet & Wasp Nest Removal in Hong Kong</a>.</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How much does restaurant cockroach control in Central cost?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Pricing depends on floor area, infestation severity and service frequency. Send us the basics on WhatsApp and receive an indicative quote within 5 minutes — zero hidden fees.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> How fast can you treat rodents in a Central office tower?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Central & Western is our home patch — same-day attendance is usually possible during business hours (9:00–18:00). We start with IoT smart-box monitoring to map activity paths before precise trapping and proofing.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Can a bed-bug-infested mattress in Mid-Levels be saved without replacement?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Usually yes. High-temperature steam penetrates seams, slats and wall gaps while residual agents target the eggs — most cases are resolved without discarding the mattress. Inspect first, treat second, save money.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Is the treatment safe for pets and children?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>We use AFCD-registered pesticides applied at directed dosages into cracks and crevices. Ventilate after treatment and it is safe to return — safety of pets and children comes first.</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Suspect termites in my Mid-Levels home — can you check without demolishing anything?</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>Yes. We use the Australian Termatrac T3i microwave locator to see through walls and pinpoint termite nests with zero demolition. Book now to enjoy the limited-time 20% discount — WhatsApp quote in 5 minutes.</p></div></details>
             </div>
         </section>
 

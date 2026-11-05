@@ -290,6 +290,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -553,12 +561,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅鼠常見問題 FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 家居滅鼠價錢點計？傾好價之後會唔會加價？</h3><p>收費視乎單位面積、鼠患嚴重程度同封堵工程量：單次滅鼠連環境評估一般 $1,500–$3,800/次；防鼠封堵工程先勘察後出固定報價，合約列明項目，之後唔會「突然加項」。想睇埋其他蟲種收費，可以睇我哋嘅 2026 全港滅蟲收費指南。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 揀滅鼠服務點樣先唔會中伏？</h3><p>五個指標：①有冇除害劑牌照 ②係咪做 IPM 源頭封堵（唔係淨係放藥）③有冇可驗證嘅真實個案 ④Google 評分同評論內容 ⑤報價單會唔會列明保養期同跟進次數。詳細避坑教學可睇《2026 滅蟲公司邊間好？5 大指標》。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 老鼠殺極都有，點解？</h3><p>三大原因：①只殺唔封——渠網同入屋位無封，老鼠殺完隔籬又嚟 ②老鼠有「避新反應」，對新擺設嘅老鼠膠/籠會迴避數日 ③食物源無清理（廚餘、寵物糧、雜物堆）。所以我哋做法係：追蹤路徑→源頭封堵→清理環境，三步斷尾。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 一定要用老鼠藥？有冇無毒方法？</h3><p>我哋主推無毒物理方案：夜視追蹤＋物理捕捉＋源頭封堵，對貓狗寵物同小朋友完全安全。老鼠藥最大問題係老鼠死喺天花或牆身暗角，發臭生屍蟲先係噩夢開始；除非嚴重鼠患需要，否則唔建議室內用藥。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾快可以上門？周末有冇得約？</h3><p>WhatsApp 影相報價後，最快即日安排滅鼠師傅上門勘察；周一至周日都可預約。緊急個案（餐廳被舉報、嬰幼兒家居）會優先排期。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 封堵工程有冇保養？老鼠再入到嚟點算？</h3><p>封堵工程包保養期（按工程規模而定），保養期內同一位置老鼠再度入侵，免費覆查補封。長效保養合約客享有定期巡視＋IoT 鼠盒監測報告，鼠患未爆先知。</p></div>
+                <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 家居滅鼠價錢點計？傾好價之後會唔會加價？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>收費視乎單位面積、鼠患嚴重程度同封堵工程量：單次滅鼠連環境評估一般 $1,500–$3,800/次；防鼠封堵工程先勘察後出固定報價，合約列明項目，之後唔會「突然加項」。想睇埋其他蟲種收費，可以睇我哋嘅 2026 全港滅蟲收費指南。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 揀滅鼠服務點樣先唔會中伏？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>五個指標：①有冇除害劑牌照 ②係咪做 IPM 源頭封堵（唔係淨係放藥）③有冇可驗證嘅真實個案 ④Google 評分同評論內容 ⑤報價單會唔會列明保養期同跟進次數。詳細避坑教學可睇《2026 滅蟲公司邊間好？5 大指標》。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 老鼠殺極都有，點解？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>三大原因：①只殺唔封——渠網同入屋位無封，老鼠殺完隔籬又嚟 ②老鼠有「避新反應」，對新擺設嘅老鼠膠/籠會迴避數日 ③食物源無清理（廚餘、寵物糧、雜物堆）。所以我哋做法係：追蹤路徑→源頭封堵→清理環境，三步斷尾。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 一定要用老鼠藥？有冇無毒方法？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>我哋主推無毒物理方案：夜視追蹤＋物理捕捉＋源頭封堵，對貓狗寵物同小朋友完全安全。老鼠藥最大問題係老鼠死喺天花或牆身暗角，發臭生屍蟲先係噩夢開始；除非嚴重鼠患需要，否則唔建議室內用藥。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾快可以上門？周末有冇得約？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>WhatsApp 影相報價後，最快即日安排滅鼠師傅上門勘察；周一至周日都可預約。緊急個案（餐廳被舉報、嬰幼兒家居）會優先排期。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 封堵工程有冇保養？老鼠再入到嚟點算？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>封堵工程包保養期（按工程規模而定），保養期內同一位置老鼠再度入侵，免費覆查補封。長效保養合約客享有定期巡視＋IoT 鼠盒監測報告，鼠患未爆先知。</p></div></details>
             </div>
         </section>
         <section class="dist-section" aria-labelledby="qf-title">

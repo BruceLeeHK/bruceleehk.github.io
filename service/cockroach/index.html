@@ -241,6 +241,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -492,13 +500,13 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅曱甴公司常見問題 FAQ</h2>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 曱甴點解咁難自己滅？</h3><p>德國小蠊繁殖快、抗藥性強，噴劑淨係處理到見到嘅個體，藏喺廚櫃鉸位、電器位嘅巢群照樣繁殖。藥餌凝膠點注令蟲群取食後帶返巢連鎖處理，先係針對巢群嘅方法。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅曱甴公司收費幾多？</h3><p>單次防治過往個案綜合參考約 HK$900–$1,800/次，視乎面積同感染程度；餐廳工商治理實地勘察後報價；長效保養合約按年約 WhatsApp 諮詢。實際以書面報價為準。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 德國曱甴同美洲大蠊有咩分別？</h3><p>德國小蠊細隻（約 1.5cm）、藏廚櫃電器、繁殖極快；美洲大蠊大隻（約 4cm）、多由渠口渠位入屋。兩者藏匿位同打法唔同——勘察先辨種，先至落對藥。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 藥餌安全嗎？屋企有小朋友寵物？</h3><p>使用漁護署註冊除害劑，凝膠點注喺罅隙藏匿位，唔係全屋亂噴，減低兒童寵物接觸風險；落藥位置會講明，方便你避開清潔。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 餐廳廚房可以點做？</h3><p>重點區域治理＋長效保養合約：定期巡視＋補藥＋蟑螂屋監測報告，配合食環署衞生要求，可安排非營業時段處理，減低營運影響。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大廈垃圾房曱甴成災點算？</h3><p>垃圾房屬公用地方，防治屬法團或管理處職責；單位內由業主安排。我哋可以同管理處協調垃圾房／公用範圍處理方案，避免單位治完公用地方再傳入。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 德國小蠊同美國曱甴處理方法有咩唔同？</h3><p>德國小蠊體型細、繁殖快、多喺廚房櫥櫃同電器縫隙築巢，以藥餌凝膠點注為主力；美國曱甴體型大、多由渠位同垃圾房入侵，需要加渠位處理同封堵。兩者勘察後方案同報價唔同。</p></div>
+<details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 曱甴點解咁難自己滅？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>德國小蠊繁殖快、抗藥性強，噴劑淨係處理到見到嘅個體，藏喺廚櫃鉸位、電器位嘅巢群照樣繁殖。藥餌凝膠點注令蟲群取食後帶返巢連鎖處理，先係針對巢群嘅方法。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅曱甴公司收費幾多？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>單次防治過往個案綜合參考約 HK$900–$1,800/次，視乎面積同感染程度；餐廳工商治理實地勘察後報價；長效保養合約按年約 WhatsApp 諮詢。實際以書面報價為準。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 德國曱甴同美洲大蠊有咩分別？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>德國小蠊細隻（約 1.5cm）、藏廚櫃電器、繁殖極快；美洲大蠊大隻（約 4cm）、多由渠口渠位入屋。兩者藏匿位同打法唔同——勘察先辨種，先至落對藥。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 藥餌安全嗎？屋企有小朋友寵物？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>使用漁護署註冊除害劑，凝膠點注喺罅隙藏匿位，唔係全屋亂噴，減低兒童寵物接觸風險；落藥位置會講明，方便你避開清潔。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 餐廳廚房可以點做？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>重點區域治理＋長效保養合約：定期巡視＋補藥＋蟑螂屋監測報告，配合食環署衞生要求，可安排非營業時段處理，減低營運影響。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大廈垃圾房曱甴成災點算？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>垃圾房屬公用地方，防治屬法團或管理處職責；單位內由業主安排。我哋可以同管理處協調垃圾房／公用範圍處理方案，避免單位治完公用地方再傳入。</p></div></details>
+            <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 德國小蠊同美國曱甴處理方法有咩唔同？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>德國小蠊體型細、繁殖快、多喺廚房櫥櫃同電器縫隙築巢，以藥餌凝膠點注為主力；美國曱甴體型大、多由渠位同垃圾房入侵，需要加渠位處理同封堵。兩者勘察後方案同報價唔同。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="qf-title">

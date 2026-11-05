@@ -239,6 +239,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -501,12 +509,12 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅馬蜂巢・黃蜂巢常見問題 FAQ</h2>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 「馬蜂」同「黃蜂」係咪同一樣嘢？</h3><p>香港口語「馬蜂」同「黃蜂」一般都泛指膜翅目胡蜂科嘅蜂種（俗稱仲有「胡蜂」），處理方法一致。佢哋多數起紙巢、攻擊性強；同蜜蜂（蜂窩巢、重要傳粉昆蟲）唔同，確認蜜蜂巢我哋會優先建議聯絡養蜂界接收處理。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屋企發現馬蜂巢（黃蜂巢）點算？</h3><p>唔好自行敲打、噴水或者用火——蜂群受擾亂時攻擊性大增，自行處理風險極高。保持距離、影相（唔好用閃光燈）WhatsApp 查詢，師傅評估蜂種同位置先安排處理。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 滅馬蜂巢收費幾多？</h3><p>視乎蜂巢大小、位置高度同人流風險，唔設劃一價目；一律實地勘察後書面報價，報價後唔會「突然加項」。WhatsApp 影相可以先做免費初步評估。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屋苑平台／外牆蜂巢屬邊個處理？</h3><p>屋苑公用範圍（平台、外牆、走廊）嘅防治一般屬法團或管理處職責；我哋會先同管理處協調安排時段，避開人流處理。私人範圍（村屋、洋房花園）可以直接預約。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 網上教火燒／水射馬蜂巢得唔得？</h3><p>唔好。火燒蜂巢、水槍射巢極度危險——受擾亂嘅蜂群攻擊性大增，更可能令蜂巢轉移到更隱蔽位。專業團隊配防蜂服同伸縮工具，揀合適時段處理先係穩陣做法。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 蜂巢移除後會唔會復巢？</h3><p>舊巢唔會重用，但同一位置環境合適（簷下罅隙、外牆洞位）有機會再筑新巢。處理後我哋會提供復巢預防建議：封隙、移除殘餘、季節檢查，減低復巢機會。</p></div>
+<details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 「馬蜂」同「黃蜂」係咪同一樣嘢？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>香港口語「馬蜂」同「黃蜂」一般都泛指膜翅目胡蜂科嘅蜂種（俗稱仲有「胡蜂」），處理方法一致。佢哋多數起紙巢、攻擊性強；同蜜蜂（蜂窩巢、重要傳粉昆蟲）唔同，確認蜜蜂巢我哋會優先建議聯絡養蜂界接收處理。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屋企發現馬蜂巢（黃蜂巢）點算？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>唔好自行敲打、噴水或者用火——蜂群受擾亂時攻擊性大增，自行處理風險極高。保持距離、影相（唔好用閃光燈）WhatsApp 查詢，師傅評估蜂種同位置先安排處理。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 滅馬蜂巢收費幾多？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>視乎蜂巢大小、位置高度同人流風險，唔設劃一價目；一律實地勘察後書面報價，報價後唔會「突然加項」。WhatsApp 影相可以先做免費初步評估。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屋苑平台／外牆蜂巢屬邊個處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>屋苑公用範圍（平台、外牆、走廊）嘅防治一般屬法團或管理處職責；我哋會先同管理處協調安排時段，避開人流處理。私人範圍（村屋、洋房花園）可以直接預約。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 網上教火燒／水射馬蜂巢得唔得？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>唔好。火燒蜂巢、水槍射巢極度危險——受擾亂嘅蜂群攻擊性大增，更可能令蜂巢轉移到更隱蔽位。專業團隊配防蜂服同伸縮工具，揀合適時段處理先係穩陣做法。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 蜂巢移除後會唔會復巢？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>舊巢唔會重用，但同一位置環境合適（簷下罅隙、外牆洞位）有機會再筑新巢。處理後我哋會提供復巢預防建議：封隙、移除殘餘、季節檢查，減低復巢機會。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="qf-title">

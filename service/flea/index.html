@@ -241,6 +241,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -500,13 +508,13 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 <section class="dist-section" aria-labelledby="faq-title" id="faq">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 滅蝨公司常見問題 FAQ</h2>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨同木蝨係咪同一樣嘢？</h3><p>係，香港俗稱嘅木蝨、床蝨、pochong 都係 bed bug。另有跳蚤（貓蚤等）同埋衣魚書蝨等類似個案，處理方法唔同——影相 WhatsApp 查詢或免費 AI 診斷可以先分清蟲種，先至落對藥。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅蝨公司收費幾多？</h3><p>局部治理過往個案 HK$1,200 起；全單位床蝨治理過往個案約 HK$3,000–$5,800，視乎單位面積、感染範圍同傢俬數量。我哋標準服務包 60 日內兩次免費覆檢，實際以勘察後書面報價為準。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 一定要丟床褥？</h3><p>唔一定。高溫蒸氣＋縫隙處理＋床腳偵測器組合通常可以保留床褥；嚴重感染或床褥破損個案先建議更換。實地評估會俾你一個如實建議，唔會叫你亂使錢。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 要治理幾多次先穩陣？</h3><p>床蝨蟲卵有孵化窗口，通常需要治理後 60 日內兩次覆檢跟進，覆蓋孵化週期。我哋標準服務已包兩次免費覆檢——唔包覆檢嘅服務，翻發風險大增。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣唔喺旅行帶床蝨返屋企？</h3><p>入住先檢查床縫床板（睇黑點排泄物同血漬）、行李離地擺放、返屋企後 60°C 高溫洗烘衣物。詳細步驟可睇我哋嘅旅遊防蝨全攻略。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 隔離單位或者公用地方有床蝨點算？</h3><p>床蝨可以沿牆縫、走廊擴散。公用地方（走廊、垃圾房）防治屬法團或管理處職責；我哋可以配合管理處做公用範圍處理方案，同時處理單位內感染位，內外夾擊。</p></div>
-            <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨怕什麼？自己處理得唔得？</h3><p>床蝨怕高溫——一般喺攝氏 50 度以上持續高溫，已足以殺滅床蝨同蟲卵。但床蝨會匿喺床縫、牆縫、傢俬罅隙，單靠曬被或者換床單好難觸及全部藏匿位。專業治理以高溫蒸氣＋縫隙藥劑處理做組合，再配合 60 日覆檢確認。</p></div>
+<details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨同木蝨係咪同一樣嘢？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>係，香港俗稱嘅木蝨、床蝨、pochong 都係 bed bug。另有跳蚤（貓蚤等）同埋衣魚書蝨等類似個案，處理方法唔同——影相 WhatsApp 查詢或免費 AI 診斷可以先分清蟲種，先至落對藥。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 香港滅蝨公司收費幾多？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>局部治理過往個案 HK$1,200 起；全單位床蝨治理過往個案約 HK$3,000–$5,800，視乎單位面積、感染範圍同傢俬數量。我哋標準服務包 60 日內兩次免費覆檢，實際以勘察後書面報價為準。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 一定要丟床褥？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>唔一定。高溫蒸氣＋縫隙處理＋床腳偵測器組合通常可以保留床褥；嚴重感染或床褥破損個案先建議更換。實地評估會俾你一個如實建議，唔會叫你亂使錢。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 要治理幾多次先穩陣？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>床蝨蟲卵有孵化窗口，通常需要治理後 60 日內兩次覆檢跟進，覆蓋孵化週期。我哋標準服務已包兩次免費覆檢——唔包覆檢嘅服務，翻發風險大增。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 點樣唔喺旅行帶床蝨返屋企？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>入住先檢查床縫床板（睇黑點排泄物同血漬）、行李離地擺放、返屋企後 60°C 高溫洗烘衣物。詳細步驟可睇我哋嘅旅遊防蝨全攻略。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 隔離單位或者公用地方有床蝨點算？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>床蝨可以沿牆縫、走廊擴散。公用地方（走廊、垃圾房）防治屬法團或管理處職責；我哋可以配合管理處做公用範圍處理方案，同時處理單位內感染位，內外夾擊。</p></div></details>
+            <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 床蝨怕什麼？自己處理得唔得？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>床蝨怕高溫——一般喺攝氏 50 度以上持續高溫，已足以殺滅床蝨同蟲卵。但床蝨會匿喺床縫、牆縫、傢俬罅隙，單靠曬被或者換床單好難觸及全部藏匿位。專業治理以高溫蒸氣＋縫隙藥劑處理做組合，再配合 60 日覆檢確認。</p></div></details>
             </div>
         </section>
 <section class="dist-section" aria-labelledby="qf-title">

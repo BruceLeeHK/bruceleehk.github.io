@@ -438,6 +438,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -736,7 +744,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <section class="dist-section" aria-labelledby="hubfaq-title">
             <div class="dist-card">
                 <h2 id="hubfaq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 十八區滅蟲服務 FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋係咪真係十八區都覆蓋到？</h3><p>係。滅蟲師傅服務範圍覆蓋全港十八區——港島、九龍、新界及離島（包括長洲、南丫島），工場大廈常駐荔景，市區個案最快即日到場；每區仲有專頁介紹當區常見蟲患同科技解法。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 地區頁列嘅蟲患係咪啱我屋企？</h3><p>地區頁係按該區建築環境同歷史個案整理嘅常見蟲患，僅供參考。唔確定屋企出現咩蟲？即刻使用 AI 害蟲圖像識別，手機上載相片，15-30 秒出廣東話診斷報告，再由師傅上門確認。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 各區滅蟲收費有唔同嗎？</h3><p>收費按蟲患種類、單位面積同嚴重程度計算，同區址無關，離島亦唔加收船費。任何一區都可以 WhatsApp 5 分鐘出初步報價，0 隱藏收費。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾耐可以上門？偏遠地區都得？</h3><p>營業時間內（9:00-18:00）市區及新市鎮最快即日上門；離島及鄉郊個案會預先計劃行程安排，確保同一趟處理所有跟進事項。</p></div>
+                <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 你哋係咪真係十八區都覆蓋到？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>係。滅蟲師傅服務範圍覆蓋全港十八區——港島、九龍、新界及離島（包括長洲、南丫島），工場大廈常駐荔景，市區個案最快即日到場；每區仲有專頁介紹當區常見蟲患同科技解法。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 地區頁列嘅蟲患係咪啱我屋企？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>地區頁係按該區建築環境同歷史個案整理嘅常見蟲患，僅供參考。唔確定屋企出現咩蟲？即刻使用 AI 害蟲圖像識別，手機上載相片，15-30 秒出廣東話診斷報告，再由師傅上門確認。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 各區滅蟲收費有唔同嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>收費按蟲患種類、單位面積同嚴重程度計算，同區址無關，離島亦唔加收船費。任何一區都可以 WhatsApp 5 分鐘出初步報價，0 隱藏收費。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 幾耐可以上門？偏遠地區都得？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>營業時間內（9:00-18:00）市區及新市鎮最快即日上門；離島及鄉郊個案會預先計劃行程安排，確保同一趟處理所有跟進事項。</p></div></details>
             </div>
         </section>
 

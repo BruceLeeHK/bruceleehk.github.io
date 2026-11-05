@@ -231,6 +231,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -417,10 +425,10 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
                 <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 元朗滅鼠常見問題 FAQ</h2>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 元朗村屋滅鼠收費點計？</h3><p>村屋按層數、實用面積、花園範圍同封堵工程量計算。單次滅鼠一般 $1,500 起；全方位封堵工程由師傅實地勘察後出精準報價（包保養期），WhatsApp 可先攞初步參考。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 村屋花園可以完全防到老鼠入屋？</h3><p>可以做到「入唔到屋」。花園外圍嘅老鼠活動難以完全杜絕（近田近草係環境現實），但只要封堵晒全部入屋位——渠口、喉管、門底、抽氣扇——老鼠就只能留喺室外，屋內零鼠患。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 唔想用老鼠藥，有咩選擇？</h3><p>我哋主推無毒方案：夜視追蹤＋物理捕捉＋源頭封堵，對貓狗寵物同小朋友完全安全。老鼠藥只會令老鼠死喺天花暗角發臭，係最差選擇。</p></div>
-<div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 引擎電線被咬過，點防下一次？</h3><p>除咗封堵車位附近嘅鼠患源頭，我哋會一併檢查車房/花園去水位同圍欄底罅隙；天氣轉凍前做好預防封堵，係元朗車主最抵嘅投資——一次過萬蚊維修費夠做幾多次防鼠工程。</p></div>
+                <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 元朗村屋滅鼠收費點計？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>村屋按層數、實用面積、花園範圍同封堵工程量計算。單次滅鼠一般 $1,500 起；全方位封堵工程由師傅實地勘察後出精準報價（包保養期），WhatsApp 可先攞初步參考。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 村屋花園可以完全防到老鼠入屋？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>可以做到「入唔到屋」。花園外圍嘅老鼠活動難以完全杜絕（近田近草係環境現實），但只要封堵晒全部入屋位——渠口、喉管、門底、抽氣扇——老鼠就只能留喺室外，屋內零鼠患。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 唔想用老鼠藥，有咩選擇？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>我哋主推無毒方案：夜視追蹤＋物理捕捉＋源頭封堵，對貓狗寵物同小朋友完全安全。老鼠藥只會令老鼠死喺天花暗角發臭，係最差選擇。</p></div></details>
+<details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 引擎電線被咬過，點防下一次？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>除咗封堵車位附近嘅鼠患源頭，我哋會一併檢查車房/花園去水位同圍欄底罅隙；天氣轉凍前做好預防封堵，係元朗車主最抵嘅投資——一次過萬蚊維修費夠做幾多次防鼠工程。</p></div></details>
             </div>
         </section>
         <section class="dist-section" aria-labelledby="qf-title">

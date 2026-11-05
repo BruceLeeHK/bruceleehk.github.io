@@ -154,45 +154,53 @@
 }
     </script>
         <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "屯門屋邨蚊患點處理最持久？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "源頭治理加長效誘捕：清理積水、生物顆粒處理去水位、紫外線誘蚊燈定時運作，比噴藥持久而且環保。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "黃金海岸洋房木露台有白蟻，要拆露台嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "通常毋須。T3i微波探測無損定位蟻巢位置，直接灌注持效保護劑，露台保留原狀，成本遠低於重建。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "大興邨老鼠多，大廈可以一齊處理嗎？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "可以。我哋有為業委會提供公共位置方案：垃圾房、渠口IoT鼠盒監測加封堵，配單位內誘捕，雙線並行。"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "屯門滅蟲幾快可以上門？",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "屯門屬常駐服務範圍，營業時間內最快即日到場；WhatsApp傳送情況後5分鐘出初步報價。"
-            }
-        }
-    ]
+      "@type": "Question",
+      "name": "屯門區屋企／花園發現馬蜂巢（黃蜂巢）點處理？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "屯門村屋簷篷同居屋花園個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排上門勘察，公用範圍先同管理處協調。詳細流程與收費參考：滅馬蜂巢專頁。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "屯門屋邨蚊患點處理最持久？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "源頭治理加長效誘捕：清理積水、生物顆粒處理去水位、紫外線誘蚊燈定時運作，比噴藥持久而且環保。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "黃金海岸洋房木露台有白蟻，要拆露台嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "通常毋須。T3i微波探測無損定位蟻巢位置，直接灌注持效保護劑，露台保留原狀，成本遠低於重建。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "大興邨老鼠多，大廈可以一齊處理嗎？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。我哋有為業委會提供公共位置方案：垃圾房、渠口IoT鼠盒監測加封堵，配單位內誘捕，雙線並行。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "屯門滅蟲幾快可以上門？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "屯門屬常駐服務範圍，營業時間內最快即日到場；WhatsApp傳送情況後5分鐘出初步報價。"
+      }
+    }
+  ]
 }
-    </script>
+</script>
     <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.88">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
@@ -250,6 +258,14 @@
 .faq-item h3{font-size:.98rem;color:var(--dark-bg);margin:0 0 8px;display:flex;gap:8px;align-items:flex-start}
 .faq-item h3 .fa-solid{color:var(--warning);margin-top:2px}
 .faq-item p{font-size:.92rem;line-height:1.8;color:var(--text-main);margin:0}
+.faq-item summary{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary h3{margin:0}
+.faq-item[open] summary h3{margin:0 0 8px}
+.faq-item summary .faq-arrow{color:var(--warning);font-size:.8rem;flex:none;margin-top:3px;transition:transform .25s ease}
+.faq-item[open] summary .faq-arrow{transform:rotate(180deg)}
+.faq-item .faq-answer{margin-top:8px}
+@supports (interpolate-size: allow-keywords){:root{interpolate-size:allow-keywords}.faq-item::details-content{block-size:0;overflow:hidden;transition:block-size .25s ease,content-visibility .25s allow-discrete}.faq-item[open]::details-content{block-size:auto}}
 .nb-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 .nb-row a{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:700;color:var(--primary-dark);text-decoration:none;transition:all .2s}
 .nb-row a:hover{border-color:var(--primary);background:var(--primary-light)}
@@ -522,8 +538,8 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
 
         <section class="dist-section" aria-labelledby="faq-title">
             <div class="dist-card">
-                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 屯門區滅蟲常見問題 FAQ</h2><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><p>屯門村屋簷篷同居屋花園個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排上門勘察，公用範圍先同管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div>
-                <div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門屋邨蚊患點處理最持久？</h3><p>源頭治理加長效誘捕：清理積水、生物顆粒處理去水位、紫外線誘蚊燈定時運作，比噴藥持久而且環保。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 黃金海岸洋房木露台有白蟻，要拆露台嗎？</h3><p>通常毋須。T3i微波探測無損定位蟻巢位置，直接灌注持效保護劑，露台保留原狀，成本遠低於重建。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大興邨老鼠多，大廈可以一齊處理嗎？</h3><p>可以。我哋有為業委會提供公共位置方案：垃圾房、渠口IoT鼠盒監測加封堵，配單位內誘捕，雙線並行。</p></div><div class="faq-item"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門滅蟲幾快可以上門？</h3><p>屯門屬常駐服務範圍，營業時間內最快即日到場；WhatsApp傳送情況後5分鐘出初步報價。</p></div>
+                <h2 id="faq-title"><i class="fa-solid fa-circle-question ic" aria-hidden="true"></i> 屯門區滅蟲常見問題 FAQ</h2><details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門區屋企／花園發現馬蜂巢（黃蜂巢）點處理？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>屯門村屋簷篷同居屋花園個案常見——保持距離、影相（唔好用閃光燈）WhatsApp 查詢，唔好自己摘巢或火燒。師傅先辨種（馬蜂／黃蜂定蜜蜂）再安全移除；私人單位可直接安排上門勘察，公用範圍先同管理處協調。詳細流程與收費參考：<a href="/wasp-nest/">滅馬蜂巢專頁</a>。</p></div></details>
+                <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門屋邨蚊患點處理最持久？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>源頭治理加長效誘捕：清理積水、生物顆粒處理去水位、紫外線誘蚊燈定時運作，比噴藥持久而且環保。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 黃金海岸洋房木露台有白蟻，要拆露台嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>通常毋須。T3i微波探測無損定位蟻巢位置，直接灌注持效保護劑，露台保留原狀，成本遠低於重建。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 大興邨老鼠多，大廈可以一齊處理嗎？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>可以。我哋有為業委會提供公共位置方案：垃圾房、渠口IoT鼠盒監測加封堵，配單位內誘捕，雙線並行。</p></div></details><details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 屯門滅蟲幾快可以上門？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>屯門屬常駐服務範圍，營業時間內最快即日到場；WhatsApp傳送情況後5分鐘出初步報價。</p></div></details>
             </div>
         </section>
 
