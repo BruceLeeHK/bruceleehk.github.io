@@ -1,4 +1,15 @@
-# 修復日誌 (v9.113 — 2026-11-09)
+# 修復日誌 (v9.114 — 2026-11-09)
+
+## v9.114 《Meta Description 元標題優化》：Bing 偏好 snippet 重寫——首頁＋7 組專頁（2026-11-09）
+
+**依《Meta Description 元標題優化.docx》執行：以公式【痛點/承諾】＋【權威技術/特點】＋【行動呼籲/聯絡】重寫 SERP 摘要，令行動呼籲完整落入 Bing／Google 顯示寬度，終結「曝光有、點擊零」**
+
+- 文檔逐字套用（ZH）：首頁 desc 改為【香港滅蟲公司首選】開場＋15 秒 AI 蟲害診斷＋T3i 無損微波探測＋絕無隱藏收費＋2026 免費報價 CTA（119 字）；/service/termite/ 改飛蟻／門框空心痛點開場＋T3i 微波雷達免鑽牆＋2026 價錢表 CTA（104 字）；/service/rodent/ 改【西灣河/全港食肆及家居滅鼠】＋食環署標準源頭封堵＋2026 商業及住宅報價 CTA（104 字）
+- 公式補寫（ZH）：/quote/（30 秒報價流程＋先勘察後書面報價＋絕無隱藏費用）、/services/（一站式服務總覽＋B2B 誘餌句完整落於顯示寬度內）、/service/cockroach/（曱甴斷尾痛點＋藥餌凝膠帶返巢＋價格錨點）、/service/flea/（床蝨痛點＋高溫蒸氣＋縫隙注藥＋60 日覆檢）、/service/wasp/（蜂巢痛點＋安全移除＋復巢預防）
+- EN 版 8 頁同步重寫（原 119–332 字元，EN 專頁全數超長被截斷）：en/ 首頁 top choice＋15-sec AI＋FEHD＋2026 quote；en/service/termite|rodent|cockroach|flea|wasp、en/quote、en/services 全數收納於 160 字元內，行動呼籲完整顯示
+- og:description／twitter:description 三件套同步（14 頁），quote／en/quote／services／en/services 補上欠缺的 twitter:description；首頁（中英）og/twitter 刻意保留 v9.113 唯一官方平台聲明與防假冒訊息——SERP 層搶點擊、社交卡片層保防假冒，雙層分工
+- 長度治理：全站 202 頁體檢發現 150 頁 desc 過長（SERP 截斷 CTA），本次先行治理 16 個高流量頁面；長尾頁面（地區頁／網誌）留待 v9.115 批量治理
+- sitemap：16 個變更 URL lastmod→2026-11-09；流量保護：零 URL 變更、零內容刪減、canonical/hreflang/title 不變、共用 CSS/JS 零改動（?v=9.88 引用不變）、JSON-LD 逐頁可解析
 
 ## v9.113 《Bing 數據 B2B 攔截戰略》：商業滅蟲頁 B2B 誘餌 meta＋英文企業專頁升級＋首頁商業引流卡（2026-11-09）
 
