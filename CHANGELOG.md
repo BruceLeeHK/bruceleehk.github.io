@@ -1,4 +1,14 @@
-# 修復日誌 (v9.114 — 2026-11-09)
+# 修復日誌 (v9.115 — 2026-11-10)
+
+## v9.115 《隱藏金礦》GSC 高曝光低點擊詞 snippet 優化：首頁大詞＋EN 白蟻/滅鼠金礦＋滅蟲公司收費頁（2026-11-10）
+
+**依《隱藏金礦.docx》執行：GSC 高曝光低點擊詞（termite treatment services 166 曝光 0 點擊／mouse control service 128 曝光 0 點擊／滅蟲公司收費 150 曝光 4 點擊／滅蟲公司 76 曝光 1 點擊）——排名不變前提下重寫 SERP snippet 即時收割點擊，觸發 CTR 正向排名循環**
+
+- 首頁（滅蟲公司大詞）：title 依文檔逐字改為「【香港滅蟲公司首選】滅蟲師傅｜首創 15 秒 AI 診斷 × 澳洲 T3i 微波探測」（補「首創」權威字眼＋「澳洲」產地信任＋× 視覺分隔）；og/twitter:title 保留【官方網站】防假冒層不變；desc 維持 v9.114 文案（內容已覆蓋文檔建議並含 2026 免費報價 CTA）
+- EN 白蟻頁（en/service/termite/）：title 前綴「Top」增權威感（Top Termite Treatment Services in Hong Kong｜T3i 雷達｜Pest Control Master），og/twitter 三件套同步；desc 依文檔公式重寫為「Professional termite treatment services in Hong Kong — T3i radar…safe for pets & families. Free 2026 quote on WhatsApp!」（查詢詞精確匹配＋寵物家庭安全信任元素＋CTA，151 字元）
+- EN 滅鼠頁（en/service/rodent/）：title 已含 mouse control service 精確匹配不回退；desc 依文檔公式重寫「Professional mouse control service in Hong Kong — source sealing & IoT smart rat boxes, safe for pets & families…」（155 字元），og/twitter 三件套同步
+- 滅蟲公司收費頁（/info/blog-12/）：title 改為「【2026】香港滅蟲公司收費指南｜單次滅蟲 HK$800 起（絕無隱藏收費）｜滅蟲師傅」（採文檔結構，價格依站內真實價 HK$800 而非文檔舊值 $750——文檔寫照為舊年 GSC 截圖，線上頁內文與 title 均已是 HK$800 起）；og:title/twitter:title/JSON-LD Article.headline 四源同步；desc 保留價目梯（曱甴 $900 起、老鼠 $1,900 起、白蟻 $2,800 起、床蝨 $3,000 起）＋文檔痛點開場「想知滅蟲公司收費點計？」＋絕無隱藏收費＋WhatsApp 5 分鐘報價 CTA
+- sitemap：4 個變更 URL lastmod→2026-11-10；流量保護：零 URL 變更、零內容刪減、canonical/hreflang/H1 不變、共用 CSS/JS 零改動（?v=9.88 引用不變）、JSON-LD 全解析
 
 ## v9.114 《Meta Description 元標題優化》：Bing 偏好 snippet 重寫——首頁＋7 組專頁（2026-11-09）
 
