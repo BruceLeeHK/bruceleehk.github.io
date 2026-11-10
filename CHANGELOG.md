@@ -1,4 +1,16 @@
-# 修復日誌 (v9.115 — 2026-11-10)
+# 修復日誌 (v9.116 — 2026-11-11)
+
+## v9.116 《偵測到 4 個無效項目》GSC 結構化資料重大錯誤全站修復：PestControl → ["LocalBusiness","PestControl"]（2026-11-11）
+
+**依《偵測到 4 個無效項目.docx》執行：GSC 報 aggregateRating「<parent_node>」物件類型無效（4 個無效項目），全站 92 個 JSON-LD 實體主類型改為 Google 可識別陣列格式，令評論星級可透過 Rich Results 驗證**
+
+- 根因：JSON-LD 主類型僅寫 `"@type": "PestControl"`，Google 複合式搜尋結果驗證器無法識別此單一母類型，將包裹 aggregateRating 的父節點判定為 unsupported/無效物件類型；F12 只檢查 JS/CSS/網絡錯誤故不會報此語意錯誤
+- 首頁 ZH/EN 由商家先行手動修復（`["@type": ["LocalBusiness", "PestControl"]` ＋ aggregateRating 5/4 ＋ review×3 ＋ makesOffer×2），本地鏡像線上時已同步入庫；本次補丁將其餘 90 頁（服務頁／商業子頁／十八區據點／滅鼠專頁／報價／AI／sc 簡體版等）逐一改為同款陣列格式，共替換 90 處、每檔恰好 1 處、逐檔 json.loads 即時驗證
+- 基線重建：本地工作區滯後多版，以線上為真源全站鏡像 198 URL＋11 張新頁面圖（blog-28/29/30/33 系列）＋404.html／CHANGELOG／robots.txt 同步；共用 CSS/JS 與線上字節級一致（70 檔），?v=9.88 引用不變、毋須 cache-bust
+- 全站體檢（audit_v9116_jsonld.py）：703 個 JSON-LD 區塊 100% 可解析；92 個 PestControl 節點全數陣列格式；10 個 aggregateRating/review 節點父類型全部合規（LocalBusiness＋PestControl）
+- 快取保護：零 URL 變更、零 CSS/JS 改動、title／canonical／hreflang／meta description 不變；僅 head 內 JSON-LD @type 一處替換
+- 部署後三步驗證：Purge Cloudflare Cache → Rich Results Test 綠勾「項目有效」→ GSC 逐頁「驗證修正」
+
 
 ## v9.115 《隱藏金礦》GSC 高曝光低點擊詞 snippet 優化：首頁大詞＋EN 白蟻/滅鼠金礦＋滅蟲公司收費頁（2026-11-10）
 
