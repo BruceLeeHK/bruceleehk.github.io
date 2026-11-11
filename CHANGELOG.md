@@ -1,4 +1,18 @@
-# 修復日誌 (v9.117 — 2026-11-11)
+# 修復日誌 (v9.118 — 2026-11-11)
+
+## v9.118 《4 大精準攻心轉化方案》高曝光長尾詞收割：四類搜尋意圖 title/description 修訂＋全站文案去「斷尾」化＋誠信防伏 FAQ（2026-11-11）
+
+**依《4 大精準攻心轉化方案.docx》執行：GSC 高曝光 0 點擊長尾詞（滅蟲公司推介 324／滅床蝨 624／英文詞 713／滅蟲收費 874）以修訂版 SEO 標題與描述精準攔截搜尋意圖，文案全數去「斷尾」化包裝成誠信賣點**
+
+- 類別 A（評比推介類 324 曝光）：/info/blog-4/ title 改「【2026 滅蟲公司推介】15 秒 AI 害蟲診斷 × 透明價錢表」（刻意不寫「邊間好」，保護 blog-1 既有排名避免自相殘殺），description 改方案版「全港熱門滅蟲公司推介！滅蟲師傅 CEDARS…獨家 15 秒 AI 害蟲診斷，配備澳洲 T3i 微波探測」，title/og/description/JSON-LD 四件套同步
+- 類別 B（急迫痛點類 624 曝光）：/service/flea/ title 改「【2026 滅床蝨／木蝨公司】科學化源頭控蝨方案｜孕婦寵物安全藥劑」，description 改方案版「屋企受木蝨咬困擾？…AFCD 註冊安全藥劑配合高溫蒸氣深層防治…誠信透明、實事求是」；並修復 v9.115 漏改的 twitter:title 舊版殘留
+- 類別 C（外企英文高淨值類 713 曝光）：/en/ title 改「Top Pest Control Hong Kong | Mouse & Rat Removal Service | 滅蟲師傅」（方案原文），description 改方案版「Looking for professional pest control in Hong Kong? We provide eco-friendly mouse control, rat removal & termite treatment…Get a free quote on WhatsApp!」，keywords 前置 mouse control Hong Kong／rat removal service；og:title/og:description/twitter:description 同步
+- 類別 D（價格導向類 874 曝光）：/info/blog-12/ title 改「【2026 家居滅蟲公司收費】透明價錢表・單次 HK$800 起」（價格錨與內文 HK$800 行情一致），description 融入方案版「符合食環署標準，絕無隱藏收費，附 5 大防伏揀選指標」；title/og/twitter/description/JSON-LD 同步；順帶消除與 blog-25「滅鼠公司收費」的關鍵字重疊
+- 全站去「斷尾」化（146 處 → 10 處）：替換詞庫對照落地——自我承諾「徹底斷尾／一次斷尾／斷尾攻略／無毒斷尾」等改為「深層源頭防治／長效防制／滅鼠攻略／無毒滅鼠」等科學化表述，覆蓋 title／meta／og／twitter／JSON-LD name+text／H1/H2／正文／討論區卡片共 58 檔（49 檔 v9.91 基準＋9 檔 v9.92–117 新頁）；保留 10 處引號內防伏引述（「鼠患未斷尾」為由加項、「包斷尾」誠信聲明、「保證斷尾」同行對比）——正是不承諾斷尾的誠信賣點本身
+- 誠信防伏 FAQ（方案「商業逆襲策略」）：/info/blog-12/ 新增「坊間有公司標榜『100% 保證斷尾』，點解滅蟲師傅唔輕易作出呢種承諾？」——可見手風琴＋FAQPage JSON-LD 同步（10→11 問），把「不賣虛假包票」包裝成殺傷力最強的誠信宣傳
+- 金庫頁權重補流：/info/blog-25/ IoT 段落前新增「2026 全港家居滅蟲收費指南」→ /info/blog-12/（金錢詞錨文字），補齊 v9.117 未覆蓋的第 4 條權重水流；延伸閱讀錨文字「餐廳廚房老鼠斷尾攻略」同步去斷尾化
+- sitemap：57 個修改 URL lastmod → 2026-11-11；XML well-formed 驗證通過
+- 流量保護：零 URL 變更、零 CSS/JS 改動（?v=9.88 引用不變毋須 cache-bust）、canonical/hreflang 全部不變；PestControl 陣列格式 92 實體零回歸
 
 ## v9.117 《首屏 Above-the-Fold 轉化率》第 1 名頁面效益擴大 10 倍：blog-25 收費指南 CTA 強化＋SEO 權重反哺內鏈（2026-11-11）
 

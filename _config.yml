@@ -1,19 +1,150 @@
-# 網站基本設定
-title: 滅蟲師傅
-description: 香港專業滅蟲滅鼠服務
-theme: jekyll-theme-minimal
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - 找不到頁面 Page Not Found | 滅蟲師傅 Pest Control Master</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://udify.app" crossorigin>
+  <meta name="description" content="抱歉，你訪問嘅頁面唔存在。返回滅蟲師傅首頁，了解更多蟲害防治服務。Sorry, the page you requested does not exist. Return to Pest Control Master homepage for more pest control services.">
+  <meta name="keywords" content="404,page not found,bruceleehk,香港灭虫,灭虫师傅,滅蟲師傅,page not found HK,找不到页面">
+  <link rel="preload" href="/assets/css/style.min.css?v=9.88" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/assets/css/style.min.css?v=9.88"></noscript>
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" media="all" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="all"></noscript>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#2c5e1a;--primary-hover:#1e4210;--secondary-color:#f4f9f0;--text-dark:#333;--text-light:#666;--white:#fff;--footer-bg:#222;--footer-text:#aaa;--shadow-sm:0 2px 10px rgba(0,0,0,.1);--radius:8px;--transition:.3s ease;--max-width:1200px}a{text-decoration:none;color:inherit;cursor:pointer}img{max-width:100%;display:block}body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;color:var(--text-dark);line-height:1.7;overflow-x:hidden}h1{font-size:2.2rem;line-height:1.3;margin-bottom:1rem}.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}header{background-color:var(--white);box-shadow:var(--shadow-sm);position:fixed;width:100%;top:0;z-index:1000}.nav-container{max-width:var(--max-width);margin:0 auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo-icon{height:45px;width:auto;margin-right:10px;object-fit:contain}.logo-text{display:flex;flex-direction:column;text-align:left;line-height:1.1}.logo-main{font-size:24px;font-weight:bold;color:var(--primary-color)}.logo-sub{font-size:8px;letter-spacing:.5px;color:#888;text-transform:uppercase;margin-left:1px}.logo-whatsapp{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background-color:#25D366;color:#fff!important;border-radius:50%;margin-left:16px;font-size:20px;transition:all var(--transition);box-shadow:0 2px 6px rgba(37,211,102,.35)}.nav-links{display:flex;gap:20px;align-items:center}.nav-links a{color:var(--text-dark);font-weight:500;transition:color var(--transition)}.nav-links a:hover{color:var(--primary-color)}.nav-cta{background-color:var(--primary-color);color:var(--white)!important;padding:8px 16px;border-radius:5px}.menu-toggle{display:none;font-size:24px;cursor:pointer}.hero-split{margin-top:70px;display:flex;min-height:calc(100vh - 70px)}.hero-left{flex:1;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('/assets/img/hero-bg.webp') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;color:var(--white);padding:60px}.hero-left h1{font-size:2.8rem;margin-bottom:20px;color:var(--white)}.hero-left p{font-size:1.1rem;margin-bottom:30px;font-weight:300;max-width:480px;line-height:1.8;color:rgba(255,255,255,.95)}.btn-primary{display:inline-block;background-color:var(--primary-color);color:var(--white)!important;padding:15px 30px;border:none;border-radius:5px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .2s}.hero-left .btn-primary{background-color:var(--white);color:var(--primary-color)!important}.page-hero{margin-top:75px;padding:50px 0 30px;background:linear-gradient(135deg,var(--primary-color) 0%,#3a7a22 100%);color:var(--white);text-align:center}.page-hero h1{color:var(--white);font-size:2.2rem;margin-bottom:12px}.page-hero p{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}@media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow-sm);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.hero-split{flex-direction:column}.hero-left{min-height:300px}.hero-left h1{font-size:1.8rem}h1{font-size:1.6rem}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}}@media(max-width:480px){.hero-left{padding:40px 25px}.hero-left h1{font-size:1.5rem}.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}}</style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://www.googletagmanager.com https://static.cloudflareinsights.com;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com;
+      frame-src https://udify.app https://www.googletagmanager.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
+    <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
+    <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}})();</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript)：依 GDPR 嚴格「事先同意」原則，本站刻意不置入 <noscript> 版 GTM 代碼——JS 停用嘅瀏覽器同樣不得在未經同意下載入追蹤。如日後部署同意管理平台可重新啟用。 -->
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#10b981;color:#fff;padding:8px 16px;z-index:1000;text-decoration:none;border-radius:0 0 6px 0;">跳到主要內容 / Skip to main content</a>
 
-# 網址設定（將 Sitemap 與網站標準網址統一改為不帶 www 的版本）
-url: "https://bruceleehk.com"
-baseurl: ""
 
-# 啟用外掛（GitHub Pages 預設支援，會自動產生正確的 sitemap.xml）
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
+<header id="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async" width="154" height="132">
+      <div class="logo-text">
+        <span class="logo-main">滅蟲師傅</span>
+        <span class="logo-sub">Pest Control Master</span>
+      </div>
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡"  rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="/">首頁</a>
+      <a href="/services/">家居滅蟲</a>
+      <a href="/districts/">覆蓋十八區</a>
+      <a href="/strategy/">有蟲就有計</a>
+      <a href="/info/">蟲類資訊</a>
+      <a href="/quote/" class="nav-cta">有蟲話我知</a>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="開啟/關閉選單 Toggle Menu" type="button"><i class="fas fa-bars"></i></button>
+  </div>
+</header>
 
-# 排除不需要編譯的檔案
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - README.md
+<main id="main-content" class="page-404">
+  <div class="container">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1>哎呀！呢頁搵唔到</h1>
+      <p>抱歉，你訪問嘅頁面可能已經被移除、名稱已更改，或者暫時未能使用。</p>
+      <p></p>
+      <p>或者你可以返回首頁，或者瀏覽我哋嘅服務頁面。</p>
+      <p></p>
+      <div class="error-actions">
+        <a href="/" class="btn btn-primary">返回首頁</a>
+        <a href="/services/" class="btn btn-outline">瀏覽家居滅蟲</a>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+    <a href="mailto:master@bruceleehk.com" target="_blank" title="Email" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+  </div>
+  <p>&copy; <span id="current-year">2026</span> 滅蟲師傅 CEDARS LTD. 版權所有</p>
+  <p class="footer-authenticity" style="max-width:900px;margin:10px auto 0;font-size:0.78rem;line-height:1.75;color:var(--text-muted,#8a93a3);text-align:center;">「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店。敬請認清具備 AI 智能診斷及三十六計實戰策略之正宗官網，提防假冒。本品牌是全港領先的高科技專業滅蟲公司，致力提供最優質的害蟲防治服務。</p>
+  <p style="margin-top:10px;"><a href="/privacy/" style="color:#94a3b8;text-decoration:underline;">隱私政策</a> · <a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow" style="color:#94a3b8;text-decoration:underline;">Cookie 設定</a></p>
+</footer>
+
+<script src="/assets/js/i18n.js?v=9.88" defer></script>
+<script src="/assets/js/main.min.js?v=9.88" defer></script>
+
+<!-- Lazy-load AI 助手 (v5.1 性能優化) -->
+    <div id="lazy-dify-bubble" style="position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.5);z-index:998;border:none;transition:transform 0.2s;" role="button" tabindex="0" aria-label="開啟滅蟲師妹 AI 助手">
+        <i class="fa-solid fa-robot" aria-hidden="true"></i>
+    </div>
+    <script>
+    (function() {
+        var bubble = document.getElementById('lazy-dify-bubble');
+        if (!bubble) return;
+        var difyLoaded = false;
+        function loadDify() {
+            if (difyLoaded) return;
+            difyLoaded = true;
+            window.difyChatbotConfig = window.difyChatbotConfig || {
+                token: 'C3DvioLaCmagSaUc', inputs: {}, systemVariables: {}, userVariables: {}
+            };
+            var s = document.createElement('script');
+            s.src = 'https://udify.app/embed.min.js';
+            s.id = 'C3DvioLaCmagSaUc';
+            s.defer = true;
+            document.head.appendChild(s);
+            // Hide the manual bubble once the assistant widget loads
+            setTimeout(function() {
+                bubble.style.display = 'none';
+            }, 1500);
+        }
+        bubble.addEventListener('click', loadDify);
+        bubble.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadDify(); }
+        });
+    })();
+    </script>
+    <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->
+    <div id="cc-banner" role="dialog" aria-modal="false" aria-label="Cookie 使用同意 Cookie Consent" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0f172a;border-top:2px solid #25d366;box-shadow:0 -6px 24px rgba(0,0,0,.35);">
+        <div style="max-width:1112px;margin:0 auto;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
+            <p style="margin:0;flex:1 1 380px;min-width:0;font-size:.85rem;line-height:1.7;color:#e2e8f0;">本網站使用 Cookie 及相關基礎追蹤技術以優化網站體驗及統計互動（例如查詢點擊量）。繼續瀏覽本網站即表示您同意我們使用 Cookie。詳情請參閱我們的<a href="/privacy/" style="color:#7dd3fc;text-decoration:underline;">隱私政策</a>。</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button id="cc-accept" type="button" style="background:#25d366;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:.88rem;cursor:pointer;">同意並繼續</button>
+                <button id="cc-decline" type="button" style="background:transparent;color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:10px 16px;font-weight:700;font-size:.88rem;cursor:pointer;">僅必要 Cookie</button>
+            </div>
+        </div>
+    </div>
+    <script>(function(){var K='blh_cookie_consent_v1',b=document.getElementById('cc-banner');if(!b)return;
+    function getC(){try{return JSON.parse(localStorage.getItem(K)||'null')}catch(e){return null}}
+    function save(v){try{localStorage.setItem(K,JSON.stringify({v:v,t:new Date().toISOString()}))}catch(e){}}
+    function loadGTM(){if(window.__blhGtmLoaded)return;window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}
+    var a=document.getElementById('cc-accept'),d2=document.getElementById('cc-decline');
+    if(a)a.addEventListener('click',function(){save('granted');b.style.display='none';loadGTM();});
+    if(d2)d2.addEventListener('click',function(){save('denied');b.style.display='none';});
+    window.blhOpenConsent=function(){b.style.display='block';};
+    if(!getC()){b.style.display='block';}else if(getC().v==='granted'){loadGTM();}})();</script>
+    <!-- End v9.60 Cookie Consent Banner -->
+</body>
+</html>

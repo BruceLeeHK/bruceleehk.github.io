@@ -1,239 +1,150 @@
-# 滅蟲師傅官網 — GitHub Pages 獨立 URL 版本（含留言系統優化方案 v2.1）
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - 找不到頁面 Page Not Found | 滅蟲師傅 Pest Control Master</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="preconnect" href="https://udify.app" crossorigin>
+  <meta name="description" content="抱歉，你訪問嘅頁面唔存在。返回滅蟲師傅首頁，了解更多蟲害防治服務。Sorry, the page you requested does not exist. Return to Pest Control Master homepage for more pest control services.">
+  <meta name="keywords" content="404,page not found,bruceleehk,香港灭虫,灭虫师傅,滅蟲師傅,page not found HK,找不到页面">
+  <link rel="preload" href="/assets/css/style.min.css?v=9.88" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/assets/css/style.min.css?v=9.88"></noscript>
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" media="all" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="all"></noscript>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--primary-color:#2c5e1a;--primary-hover:#1e4210;--secondary-color:#f4f9f0;--text-dark:#333;--text-light:#666;--white:#fff;--footer-bg:#222;--footer-text:#aaa;--shadow-sm:0 2px 10px rgba(0,0,0,.1);--radius:8px;--transition:.3s ease;--max-width:1200px}a{text-decoration:none;color:inherit;cursor:pointer}img{max-width:100%;display:block}body{font-family:'Microsoft JhengHei','PingFang TC',sans-serif;color:var(--text-dark);line-height:1.7;overflow-x:hidden}h1{font-size:2.2rem;line-height:1.3;margin-bottom:1rem}.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}header{background-color:var(--white);box-shadow:var(--shadow-sm);position:fixed;width:100%;top:0;z-index:1000}.nav-container{max-width:var(--max-width);margin:0 auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}.logo{display:flex;align-items:center}.logo-icon{height:45px;width:auto;margin-right:10px;object-fit:contain}.logo-text{display:flex;flex-direction:column;text-align:left;line-height:1.1}.logo-main{font-size:24px;font-weight:bold;color:var(--primary-color)}.logo-sub{font-size:8px;letter-spacing:.5px;color:#888;text-transform:uppercase;margin-left:1px}.logo-whatsapp{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background-color:#25D366;color:#fff!important;border-radius:50%;margin-left:16px;font-size:20px;transition:all var(--transition);box-shadow:0 2px 6px rgba(37,211,102,.35)}.nav-links{display:flex;gap:20px;align-items:center}.nav-links a{color:var(--text-dark);font-weight:500;transition:color var(--transition)}.nav-links a:hover{color:var(--primary-color)}.nav-cta{background-color:var(--primary-color);color:var(--white)!important;padding:8px 16px;border-radius:5px}.menu-toggle{display:none;font-size:24px;cursor:pointer}.hero-split{margin-top:70px;display:flex;min-height:calc(100vh - 70px)}.hero-left{flex:1;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url('/assets/img/hero-bg.webp') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;color:var(--white);padding:60px}.hero-left h1{font-size:2.8rem;margin-bottom:20px;color:var(--white)}.hero-left p{font-size:1.1rem;margin-bottom:30px;font-weight:300;max-width:480px;line-height:1.8;color:rgba(255,255,255,.95)}.btn-primary{display:inline-block;background-color:var(--primary-color);color:var(--white)!important;padding:15px 30px;border:none;border-radius:5px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:transform .2s}.hero-left .btn-primary{background-color:var(--white);color:var(--primary-color)!important}.page-hero{margin-top:75px;padding:50px 0 30px;background:linear-gradient(135deg,var(--primary-color) 0%,#3a7a22 100%);color:var(--white);text-align:center}.page-hero h1{color:var(--white);font-size:2.2rem;margin-bottom:12px}.page-hero p{color:rgba(255,255,255,.92);font-size:1.05rem;max-width:700px;margin:0 auto;line-height:1.8}@media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:20px;box-shadow:var(--shadow-sm);gap:15px}.nav-links.active{display:flex}.menu-toggle{display:block}.hero-split{flex-direction:column}.hero-left{min-height:300px}.hero-left h1{font-size:1.8rem}h1{font-size:1.6rem}.page-hero{padding:35px 0 20px;margin-top:70px}.page-hero h1{font-size:1.6rem}}@media(max-width:480px){.hero-left{padding:40px 25px}.hero-left h1{font-size:1.5rem}.page-hero{padding:30px 0 15px;margin-top:65px}.page-hero h1{font-size:1.4rem}}</style>
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://udify.app https://www.googletagmanager.com https://static.cloudflareinsights.com;
+      style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' data: https://cdnjs.cloudflare.com;
+      connect-src 'self' https://comment-handler.cedars5282.workers.dev https://pest-vision-worker.cedars5282.workers.dev https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com;
+      frame-src https://udify.app https://www.googletagmanager.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://formspree.io;
+    ">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#2c5e1a">
+<style>html{-webkit-tap-highlight-color:transparent;}body{-webkit-tap-highlight-color:transparent;}a,button{touch-action:manipulation;}:focus-visible{outline:2px solid #10b981;outline-offset:2px;}@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}</style>
+    <!-- Google Tag Manager (GTM-P5ZC5BLF) — v9.60 GDPR/PDPO consent-gated：訪客喺 Cookie 橫幅撳「同意並繼續」後先會載入追蹤代碼；「僅必要 Cookie」則完全不載入 -->
+    <script>(function(){var K='blh_cookie_consent_v1',c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}})();</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript)：依 GDPR 嚴格「事先同意」原則，本站刻意不置入 <noscript> 版 GTM 代碼——JS 停用嘅瀏覽器同樣不得在未經同意下載入追蹤。如日後部署同意管理平台可重新啟用。 -->
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#10b981;color:#fff;padding:8px 16px;z-index:1000;text-decoration:none;border-radius:0 0 6px 0;">跳到主要內容 / Skip to main content</a>
 
-## 網站結構
 
-```
-bruceleehk-site/
-├── CNAME                    # 自自訂域名指向
-├── _config.yml              # Jekyll 配置
-├── manifest.json            # PWA manifest
-├── robots.txt               # 搜尋引擎爬蟲指引
-├── sitemap.xml              # 網站地圖
-├── 404.html                 # 自訂 404 頁面
-├── index.html               # 首頁
-├── assets/
-│   ├── css/
-│   │   └── style.css        # 主樣式表
-│   ├── js/
-│   │   └── main.js          # 主腳本
-│   └── img/                 # 圖片資源
-├── services/
-│   └── index.html           # 蟲類服務頁
-├── strategy/
-│   └── index.html           # 有蟲就有計頁
-├── info/
-│   ├── index.html           # 蟲類資訊頁
-│   ├── vote/
-│   │   ├── index.html       # 害蟲投票 + 留言區（優化版 v2.1）
-│   │   └── admin.html       # 留言管理後台（一鍵批准 / 刪除 / 官方回覆 / 置頂）
-│   └── blog-1 ~ blog-8/     # 八篇蟲類資訊文章
-├── quote/
-│   └── index.html           # 免費報免費報價頁
-└── worker/
-    ├── comment-handler.js   # Cloudflare Worker 後端（優化版 v2.1 — 修復 Rate Limit Bug）
-    └── wrangler.toml        # Worker 部署設定
-```
+<header id="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <img class="logo-icon" src="/assets/img/logo.png" alt="滅蟲師傅 Logo" fetchpriority="high" decoding="async" width="154" height="132">
+      <div class="logo-text">
+        <span class="logo-main">滅蟲師傅</span>
+        <span class="logo-sub">Pest Control Master</span>
+      </div>
+      <a href="https://wa.me/85252821552" class="logo-whatsapp" aria-label="WhatsApp 聯絡"  rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <nav class="nav-links" id="nav-links">
+      <a href="/">首頁</a>
+      <a href="/services/">家居滅蟲</a>
+      <a href="/districts/">覆蓋十八區</a>
+      <a href="/strategy/">有蟲就有計</a>
+      <a href="/info/">蟲類資訊</a>
+      <a href="/quote/" class="nav-cta">有蟲話我知</a>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="開啟/關閉選單 Toggle Menu" type="button"><i class="fas fa-bars"></i></button>
+  </div>
+</header>
 
-## 獨立 URL 架構
+<main id="main-content" class="page-404">
+  <div class="container">
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1>哎呀！呢頁搵唔到</h1>
+      <p>抱歉，你訪問嘅頁面可能已經被移除、名稱已更改，或者暫時未能使用。</p>
+      <p></p>
+      <p>或者你可以返回首頁，或者瀏覽我哋嘅服務頁面。</p>
+      <p></p>
+      <div class="error-actions">
+        <a href="/" class="btn btn-primary">返回首頁</a>
+        <a href="/services/" class="btn btn-outline">瀏覽家居滅蟲</a>
 
-| 頁面 | 路徑 | 說明 |
-|------|------|------|
-| 首頁 | `/` | 首頁總覽 |
-| 蟲類服務 | `/services/` | 四大服務詳情及收費 |
-| 有蟲就有計 | `/strategy/` | 九大策略完整內容 |
-| 蟲類資訊 | `/info/` | 資訊文章列表 |
-| 害蟲投票 | `/info/vote/` | 全民票選 + 留言區 |
-| **留言管理後台** | `/info/vote/admin.html` | **一鍵批准 / 刪除 / 官方回覆** |
-| 免費報價 | `/quote/` | 線上報價表單 |
+      </div>
+    </div>
+  </div>
+</main>
 
----
+<footer>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/CEDARS_LTD" target="_blank" title="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    <a href="https://x.com/CEDARS_LTD" target="_blank" title="X (Twitter)" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://whatsapp.com/channel/0029VbDNbqw0Qeam1yIagI42"  rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.youtube.com/@CEDARS_LTD" target="_blank" title="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+    <a href="mailto:master@bruceleehk.com" target="_blank" title="Email" rel="noopener noreferrer"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+  </div>
+  <p>&copy; <span id="current-year">2026</span> 滅蟲師傅 CEDARS LTD. 版權所有</p>
+  <p class="footer-authenticity" style="max-width:900px;margin:10px auto 0;font-size:0.78rem;line-height:1.75;color:var(--text-muted,#8a93a3);text-align:center;">「滅蟲師傅 PEST CONTROL MASTER」為本公司（CEDARS_LTD）之專屬品牌，全港僅此一家，絕無任何名為「滅蟲師」之關聯公司、分店或姐妹店。敬請認清具備 AI 智能診斷及三十六計實戰策略之正宗官網，提防假冒。本品牌是全港領先的高科技專業滅蟲公司，致力提供最優質的害蟲防治服務。</p>
+  <p style="margin-top:10px;"><a href="/privacy/" style="color:#94a3b8;text-decoration:underline;">隱私政策</a> · <a href="#cookie-settings" onclick="if(window.blhOpenConsent){window.blhOpenConsent();}return false;" rel="nofollow" style="color:#94a3b8;text-decoration:underline;">Cookie 設定</a></p>
+</footer>
 
-## 🚀 留言系統優化方案 v2（重要更新）
+<script src="/assets/js/i18n.js?v=9.88" defer></script>
+<script src="/assets/js/main.min.js?v=9.88" defer></script>
 
-### 第一部分：解決「審核不便」與「用戶即時預覽」
-
-#### 1. 一鍵批准網頁版管理後台（無需登入 Cloudflare）
-
-- **位置**：`/info/vote/admin.html`
-- **運作方式**：
-  1. 輸入管理員密碼（ADMIN_SECRET）
-  2. 頁面自動向 Worker 要求所有留言列表（含未審核）
-  3. 畫面以卡片列出每條留言，每條旁邊有按鈕：
-     - **【一鍵批准】** — 即時審核通過
-     - **【刪除】** — 永久移除（連帶刪除其所有回覆）
-     - **【官方回覆】** — 以滅蟲師傅身份回應（自動審核 + 綠色徽章）
-     - **【置頂 / 取消置頂】** — 將留言釘喺列表最頂
-  4. 提供篩選器：全部 / 待審核 / 已公開 / 僅主留言 / 僅回覆
-- **好處**：將呢個頁面加入瀏覽器書籤，用手機或電腦打開輸入密碼，即可一鍵點擊審核。
-
-#### 2. 用戶提交後即時自視預覽（localStorage 機制）
-
-- **運作方式**：
-  1. 用戶提交留言後，前端將該筆留言暫存於瀏覽器嘅 localStorage
-  2. 留言區將「後端已審核嘅公開留言」與「用戶自己瀏覽器內嘅暫存留言」混合渲染
-  3. 提交者本人會見到自己嘅留言並帶有 **【審核中…】** 標籤
-  4. **其他訪客完全睇唔到**呢條留言
-  5. 當管理員批准後，公用 API 就會回傳該留言，本地暫存會自動轉為正常公開留言（無重複）
-- **好處**：用戶提交後能即時獲得反饋，唔會覺得系統壞掉而重複提交。
-
----
-
-### 第二部分：管理員回覆與引導用戶互動
-
-#### 1. 樹狀/嵌套回覆（Reply to Comment）
-
-- **資料結構升級**：留言 API 新增 `parent_id` 欄位
-- **介面操作**：
-  - 每條已發布嘅留言下方新增 **【回覆】** 按鈕
-  - 點擊後留言框顯示「正回覆 @Mary：」提示條
-  - 點擊【取消回覆】可退出回覆模式
-- **管理員專屬**：管理員喺後台輸入密碼發送回覆，留言旁邊會自動掛上 **【滅蟲師傅 官方回覆】** 綠色高亮徽章
-
-#### 2. 防廣告與促進用戶互相討論與促進用戶互相討論嘅策略
-
-**🛡️ 防廣告與垃圾訊息機制：**
-
-1. **回覆限制純文字**：主留言可上傳圖片，但回覆欄嚴禁上傳圖片與網址（URL）。偵測到 `http://`、`https://`、`www.`、或常見頂級域名（.com / .net / .org / .hk 等）會被自動遮蔽為 `***`。
-2. **字數與頻率限制**：
-   - 回覆字數限制 10–300 字（主留言 1–2000 字）
-   - 同一 IP 每 30 秒只能回覆一次（主留言 60 秒）
-3. **極簡防刷驗證**：提交時加入簡單數學問答（例：3 + 5 = ?），前後端雙重驗證，有效阻擋 99% 搬運廣告 Robot。
-
-**💬 促使用戶互相交流嘅玩法：**
-
-1. **話題引導（置頂官方留言）**：管理員可喺後台將特定留言設為置頂（同時間僅一條），置頂留言會帶有 📌 黃色徽章並排喺留言區最頂。
-2. **樹狀回覆展開**：用戶可見每條主留言下嘅所有回覆（含官方回覆），方便追蹤討論串。
-3. **投票結果與留言連動**：用戶完成投票後，彈窗提示：
-   > 「你投咗【床蝨】一票！想知道點樣防蝨？睇睇下面其他苦主嘅討論或向師傅發問 👇」
-   點擊【睇下苦主討論】即平滑滾動到留言區。
-
----
-
-## 🚀 留言系統優化方案 v2.1 — 徹底解決「越撳越延遲」Bug
-
-### 問題背景
-
-用戶反映「超過 1 分鐘仍然提示提交太頻繁」，主要有兩個原因：
-
-1. **「越撳越延遲」機制（Timer Reset Bug）**：原版 Worker 喺每次攔截時都會更新寫入時間，60 秒倒數會被重置 — 等於每次點擊都把倒數撥回 60 秒。
-2. **時區解析 Bug（隱藏殺手）**：原版 `created_at` 用 HK 時間字串（`"2026-08-13 14:30:00"`），但 Cloudflare Worker 喺 UTC 環境用 `new Date(...)` 解析時會當佢係 UTC — 結果時間差成 8 小時，rate limit 永遠唔會過期，用戶被永久鎖死。
-3. **管理員未獲豁免**：管理員做官方回覆時，可能撞到 IP 限制。
-
-### 解決方案（已落實）
-
-#### 1. Rate Limit v2 — 改用獨立 KV key + TTL 自動過期
-
-**`worker/comment-handler.js` 核心邏輯：**
-
-```javascript
-// 1. 先檢查是否為管理員（帶正確 secret 嘅請求完全豁免頻率限制）
-const isAdmin = bodySecret && env.ADMIN_SECRET && bodySecret === env.ADMIN_SECRET;
-
-if (!isAdmin) {
-  // 2. 只有一般用戶先做 IP 限制
-  const rateKey = 'rate:' + clientIp + ':' + (isReply ? 'reply' : 'comment');
-  const existing = await kv.get(rateKey);
-  if (existing) {
-    // 【重點】被攔截時直接 return，唔呼叫 .put()，避免刷新 60 秒倒數
-    return jsonResponse({
-      success: false,
-      error: '提交太頻繁，請等 ' + retryAfter + ' 秒後再試',
-      code: 'RATE_LIMITED',
-      retry_after: retryAfter,
-      cooldown: cooldownSec
-    }, 429, corsHeaders);
-  }
-  // 3. 通過檢查後先寫入冷卻紀錄（TTL 自動 60/30 秒後失效）
-  await kv.put(rateKey, Date.now().toString(), { expirationTtl: cooldownSec });
-}
-```
-
-**改進點：**
-- ✅ 用獨立 KV key（`rate:{ip}:comment` / `rate:{ip}:reply`），唔再掃描留言陣列
-- ✅ TTL 自動過期，無需手動計算時間差
-- ✅ 被攔截時唔寫入 KV → 倒數唔會重置
-- ✅ 回傳 `retry_after`（剩餘秒數）+ `cooldown`（總冷卻秒數）
-
-#### 2. 管理員 100% 豁免 Rate Limit
-
-- 任何帶正確 `secret` 嘅 `POST /api/comments` 請求都會跳過 rate limit
-- 所有 `/api/admin/*` 端點（list / approve / delete / reply / pin）本來就唔經 rate limit 邏輯
-
-#### 3. 時區 Bug 根治
-
-- `created_at` 改用 ISO 8601 (UTC)：`new Date().toISOString()` → `"2026-08-13T06:30:00.000Z"`
-- 額外保留 `created_at_hk` 方便管理後台直接顯示
-- 前端 `formatTime()` 自動處理新舊格式（向後兼容舊留言）
-
-#### 4. 前端 UX 全面升級（`info/vote/index.html`）
-
-| 功能 | 說明 |
-|------|------|
-| **按鈕鎖定 + 倒數** | 提交後按鈕即時轉橙色並顯示「請等 58 秒後再試」，每秒更新 |
-| **提示條** | 表單上方顯示「冷卻中：系統已鎖住提交按鈕 XX 秒。避免重複點擊 — 越撳越延遲」 |
-| **前端預檢** | 撳之前先 check localStorage，如果仲喺冷卻就唔發請求（避免無謂網絡往返） |
-| **跨頁面持久化** | 冷卻到期時間存喺 localStorage，重新整理頁面/切換主回覆模式都 keep住倒數 |
-| **Toast 類型** | `success`（綠）/ `warning`（橙，停 4 秒）/ `error`（紅）— 視覺反馈更清晰 |
-| **閃爍動畫** | 按鈕鎖定時有脈衝動畫，吸引用戶注意「唔好再撳」 |
-| **自動解鎖** | 倒數完按鈕自動還原，唔使刷新頁面 |
-
-### 用戶體驗對比
-
-| 場景 | v2.0（舊版） | v2.1（新版） |
-|------|---------|---------|
-| 提交後 30 秒再撳 | 「提交太頻繁」（永久鎖死） | 按鈕顯示「請等 30 秒後再試」 |
-| 連續狂撳 5 次 | 每次都刷新 60 秒倒數 | 倒數唔變（5 次都見到同一個剩餘秒數） |
-| 管理員官方回覆 | 受 IP 限制影響 | 100% 豁免，即刻發佈 |
-| 重新整理頁面 | 倒數 reset，要等足 60 秒 | 倒數延續，剩餘秒數一樣 |
-| 1 分鐘過後 | 仍提示「太頻繁」（時區 Bug） | 自動解鎖，按鈕還原 |
-
----
-
-## 部署方式
-
-### 步驟 1：推送至 GitHub
-
-1. 解壓 `bruceleehk-site.zip` 到本地 repo 目錄
-2. 用 **GitHub Desktop** 選擇對應 repo
-3. 將所有檔案覆蓋（含更新嘅 `info/vote/index.html` 與 `worker/comment-handler.js`）
-4. 寫 commit message（例：「v2.1：修復 Rate Limit 越撳越延遲 Bug + 時區解析問題」）
-5. Push 到 `main` 分支
-
-### 步驟 2：重新部署 Cloudflare Worker（後端）
-
-⚠️ **重要：必須重新部署 Worker，否則前端嘅倒數功能會同後端唔同步！**
-
-```bash
-cd worker/
-npx wrangler deploy                            # 重新部署 Worker（已更新 comment-handler.js）
-```
-
-如果之前未設定過 ADMIN_SECRET：
-```bash
-npx wrangler secret put ADMIN_SECRET           # 設定管理密鑰
-```
-
-### 步驟 3：測試
-
-1. 開啟 `https://bruceleehk.com/info/vote/`，提交一條留言 → 應見到【審核中…】標籤 + 按鈕轉橙色倒數 60 秒
-2. 喺 60 秒內再撳提交 → 應見到按鈕繼續顯示剩餘秒數，倒數唔會重置
-3. **重新整理頁面** → 倒數應延續（唔會 reset），按鈕繼續顯示剩餘秒數
-4. 等 60 秒過後 → 按鈕自動還原為「提交留言」，可以再提交
-5. 開啟 `https://bruceleehk.com/info/vote/admin.html`，輸入密鑰
-6. 喺後台連續撳「官方回覆」多次 → 應該 **完全冇 Rate Limit**，即刻發佈
-
----
-
-## 相比原站嘅改進
-
-1. **多頁獨立 URL**：5 個獨立頁面，每頁獨立 title、description、canonical、OG tags
-2. **SEO 完整**：sitemap.xml、robots.txt、JSON-LD 結構化數據
-3. **CNAME + Jekyll**：自訂域名 + sitemap / SEO 插件
-4. **PWA 支援**：manifest.json
-5. **404 頁面**：自訂錯誤頁
-6. **留言系統 v2.1**：樹狀回覆 + 官方徽章 + 置頂 + 防廣告 + 數學驗證 + 即時預覽 + Rate Limit v2
-7. **網頁管理後台**：一鍵批准 / 刪除 / 官方回覆 / 置頂，無需登入 Cloudflare
-8. **localStorage 即時預覽**：解決「提交後無反應」痛點
-9. **投票→留言彈窗**：引導投票者參與討論
-10. **Rate Limit v2**：徹底解決「越撳越延遲」+ 時區 Bug + 管理員豁免
-11. **按鈕倒數 UX**：橙色脈衝動畫 + 跨頁面持久化 + 自動解鎖
+<!-- Lazy-load AI 助手 (v5.1 性能優化) -->
+    <div id="lazy-dify-bubble" style="position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 6px 20px rgba(16,185,129,0.5);z-index:998;border:none;transition:transform 0.2s;" role="button" tabindex="0" aria-label="開啟滅蟲師妹 AI 助手">
+        <i class="fa-solid fa-robot" aria-hidden="true"></i>
+    </div>
+    <script>
+    (function() {
+        var bubble = document.getElementById('lazy-dify-bubble');
+        if (!bubble) return;
+        var difyLoaded = false;
+        function loadDify() {
+            if (difyLoaded) return;
+            difyLoaded = true;
+            window.difyChatbotConfig = window.difyChatbotConfig || {
+                token: 'C3DvioLaCmagSaUc', inputs: {}, systemVariables: {}, userVariables: {}
+            };
+            var s = document.createElement('script');
+            s.src = 'https://udify.app/embed.min.js';
+            s.id = 'C3DvioLaCmagSaUc';
+            s.defer = true;
+            document.head.appendChild(s);
+            // Hide the manual bubble once the assistant widget loads
+            setTimeout(function() {
+                bubble.style.display = 'none';
+            }, 1500);
+        }
+        bubble.addEventListener('click', loadDify);
+        bubble.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadDify(); }
+        });
+    })();
+    </script>
+    <!-- v9.60 Cookie Consent Banner (EU-GDPR prior opt-in / HK-PDPO notice) -->
+    <div id="cc-banner" role="dialog" aria-modal="false" aria-label="Cookie 使用同意 Cookie Consent" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#0f172a;border-top:2px solid #25d366;box-shadow:0 -6px 24px rgba(0,0,0,.35);">
+        <div style="max-width:1112px;margin:0 auto;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;">
+            <p style="margin:0;flex:1 1 380px;min-width:0;font-size:.85rem;line-height:1.7;color:#e2e8f0;">本網站使用 Cookie 及相關基礎追蹤技術以優化網站體驗及統計互動（例如查詢點擊量）。繼續瀏覽本網站即表示您同意我們使用 Cookie。詳情請參閱我們的<a href="/privacy/" style="color:#7dd3fc;text-decoration:underline;">隱私政策</a>。</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button id="cc-accept" type="button" style="background:#25d366;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:.88rem;cursor:pointer;">同意並繼續</button>
+                <button id="cc-decline" type="button" style="background:transparent;color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:10px 16px;font-weight:700;font-size:.88rem;cursor:pointer;">僅必要 Cookie</button>
+            </div>
+        </div>
+    </div>
+    <script>(function(){var K='blh_cookie_consent_v1',b=document.getElementById('cc-banner');if(!b)return;
+    function getC(){try{return JSON.parse(localStorage.getItem(K)||'null')}catch(e){return null}}
+    function save(v){try{localStorage.setItem(K,JSON.stringify({v:v,t:new Date().toISOString()}))}catch(e){}}
+    function loadGTM(){if(window.__blhGtmLoaded)return;window.__blhGtmLoaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)})(window,document,'script','dataLayer','GTM-P5ZC5BLF');}
+    var a=document.getElementById('cc-accept'),d2=document.getElementById('cc-decline');
+    if(a)a.addEventListener('click',function(){save('granted');b.style.display='none';loadGTM();});
+    if(d2)d2.addEventListener('click',function(){save('denied');b.style.display='none';});
+    window.blhOpenConsent=function(){b.style.display='block';};
+    if(!getC()){b.style.display='block';}else if(getC().v==='granted'){loadGTM();}})();</script>
+    <!-- End v9.60 Cookie Consent Banner -->
+</body>
+</html>
