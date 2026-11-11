@@ -1,4 +1,16 @@
-# 修復日誌 (v9.116 — 2026-11-11)
+# 修復日誌 (v9.117 — 2026-11-11)
+
+## v9.117 《首屏 Above-the-Fold 轉化率》第 1 名頁面效益擴大 10 倍：blog-25 收費指南 CTA 強化＋SEO 權重反哺內鏈（2026-11-11）
+
+**針對 GSC 第 1 名頁面《2026 香港滅鼠公司收費指南》(blog-25)：首屏轉化率拉滿＋把高權重頁面的 SEO 權重水流引導至其他蟲害專頁，帶動全站專頁一起衝榜**
+
+- 首屏 WA 按鈕升級：hero 區主按鈕由 btn-primary 改用 btn-whatsapp（WhatsApp 品牌綠 #25D366，更加顯眼），文案「WhatsApp 查詢滅鼠服務」→「食肆/家居 5 分鐘極速報價」（鎖定物管/食肆/家居三類訪客＋時間承諾）
+- 首屏新增「15 秒 AI 害蟲診斷」入口：/ai/ 專頁按鈕「15 秒 AI 害蟲診斷・免費影相辨識」，引導訪客影相 Upload 即時免費辨識；EN 版同步（/en/ai/「15-Sec AI Pest Diagnosis — Free Photo ID」＋WA 文案「F&B / Home — Quote in 5 Min」）；hero-cta 本身 flex-wrap 支援，三按鈕手機自動換行
+- SEO 權重反哺內鏈（金錢關鍵詞錨文字）：①📏 報價差成倍段落後新增白蟻過渡段——「除咗老鼠之外，如果你屋企亦面對白蟻問題，可以參考我哋嘅【2026 滅白蟻公司收費表】」→ /service/termite/；②結論 CTA 後新增曱甴/床蝨行情段——【滅曱甴服務收費詳情】→ /service/cockroach/、【滅床蝨價錢與 60 日保養】→ /service/flea/；EN 版三錨同步（[2026 Termite Control Price List]／[Cockroach Treatment & Prices]／[Bed Bug Removal Prices & 60-Day Warranty]）
+- 錨文字策略：全部使用「收費/價錢」金錢詞編輯式錨（非導航式），把第 1 名頁面的相關性信號與點擊流量傳導至白蟻/曱甴/床蝨專頁，助攻其「XX公司邊間好」「收費」長尾排名
+- 流量保護：零 URL 變更、FAQ HTML 與 JSON-LD 零改動、title/meta/canonical/hreflang 不變、復用既有 CSS 類（btn-whatsapp/blog17 體系零新增樣式）
+- sitemap：blog-25 ZH/EN lastmod → 2026-11-11
+
 
 ## v9.116 《偵測到 4 個無效項目》GSC 結構化資料重大錯誤全站修復：PestControl → ["LocalBusiness","PestControl"]（2026-11-11）
 
