@@ -1,3 +1,22 @@
+# 修復日誌 (v9.119 — 2026-11-13)
+
+## v9.119 構建失敗 hotfix＋《大詞突圍策略》落地：還原誤貼設定檔＋首頁大詞承載＋長尾權重反哺首頁＋blog-1 防伏 FAQ 強化（2026-11-13）
+
+**Part A 修復 v9.118 構建失敗（_config.yml 已由站長貼上修復）＋Part B 按《大詞突圍策略.docx》執行三大行動（行動三戰術改道防自相殘殺）**
+
+- 根因修復：_config.yml 由站長於 GitHub 網頁貼上還原 19 行標準配置——Jekyll 構建恢復，v9.118 全部內容上線
+- 同批還原：_headers（40 行 CSP／緩存設定）與 README.md（239 行）——v9.118 誤貼 404.html，以 v9.117 版還原
+- robots.txt：Cloudflare Content-Signal 聲明 3 份合併為 1 份（436→176 行），站規條目零變動
+- sitemap：新增 /commercial/restaurant/ 與 /en/commercial/restaurant/ 2 個網址（198→200）＋11 個修改頁 lastmod→2026-11-13
+- 重複段落清理：blog-25 收費指南推薦段 ×5→×1；blog-9／vote 及 EN 版 ×3→×1，共 5 檔
+- 餐廳專頁 SEO 標準化：commercial/restaurant/ ZH+EN PestControl 實體升級 ["LocalBusiness","PestControl"] 陣列＋補 geo/hasMap
+- 歷史殘留清理：en/en/about、en/en/info/blog-17、en/en/info/blog-19 剝離硬編碼 Cloudflare beacon.min.js
+- 【行動一・首頁大詞承載】首頁 title／og:title／twitter:title 加「2026」→【2026 香港滅蟲公司首選】滅蟲師傅｜首創 15 秒 AI 診斷 × 澳洲 T3i 微波探測（文檔建議版之去斷尾優化；description 已含 2026 維持不變）
+- 【行動二・權重反哺首頁】高權重長尾頁以「香港滅蟲公司」錨文字指向首頁：blog-25 ZH 既有（v9.117）→ EN 補鏈；blog-12 ZH/EN hero 段新增；blog-1 ZH/EN 準則四段落新增——權重匯聚效應拉高首頁「滅蟲公司」大詞相關性
+- 【行動三・戰術改道】文檔建議之《滅蟲公司推介防伏指南》專頁經查已三重覆蓋（blog-1「邊間好＋5 大避坑準則」、blog-4「滅蟲公司推介」v9.118、blog-12「收費＋5 大防伏指南」）——開新頁必自相殘殺，故不開新頁，改為升級既有 blog-1：新增「常見問題 FAQ」手風琴 ×6（ZH/EN）＋FAQPage 結構化資料＋頁內 FAQ CSS，直接命中「滅蟲公司推介／邊間好」比較型搜尋意圖，鞏固既有排名再上攻
+- 【行動一外部・Backlinks】商業名錄／食肆客戶背書／在地論壇／GBP 帖子模板另行交付《v9.119 大詞突圍站外行動手冊》（由商家執行）
+- 流量保護：零 URL 變更（僅 sitemap 新增 2 網址）、零 CSS/JS 檔案改動（blog-1 FAQ 樣式為頁內新增）、canonical/hreflang 不變、92 個 PestControl 陣列實體零回歸
+
 # 修復日誌 (v9.118 — 2026-11-11)
 
 ## v9.118 《4 大精準攻心轉化方案》高曝光長尾詞收割：四類搜尋意圖 title/description 修訂＋全站文案去「斷尾」化＋誠信防伏 FAQ（2026-11-11）
