@@ -1,4 +1,29 @@
-# 修復日誌 (v9.122 — 2026-11-15)
+# 修復日誌 (v9.123 — 2026-11-15)
+
+## v9.123「以點帶面全方位輻射」：滅鼠第 1 名權重灌注滅白蟻／滅床蝨／滅曱甴（2026-11-15）
+
+依《以點帶面全方位輻射至其他黃金關鍵詞》四步精準手術，將《2026 香港滅鼠公司收費指南》全港第 1 名戰績安全輻射至白蟻、木虱（床蝨）、曱甴黃金關鍵詞，共 24 檔修改（12 頁 ZH+EN＋sitemap＋CHANGELOG）：
+
+**L1 冠軍頁橫向輸血**
+- blog-25《2026 滅鼠公司收費指南》＋blog-31《滅鼠公司邊間好》（ZH/EN）內文底部新增《2026 香港常見蟲害透明收費及防伏總覽》導覽表：白蟻治理（HK$2,800 起）→blog-34＋blog-39；木虱／床蝨（HK$1,200 起）→blog-38＋/service/flea/；曱甴治理（HK$900 起）→blog-35＋blog-40；螞蟻與屋苑滅蚊→blog-36＋blog-37；全表精準錨文本
+
+**L2 同級專頁關聯互連**
+- blog-36《滅蟻公司邊間好》（ZH/EN）螞蟻白蟻辨識段新增白蟻雙頁連結（飛蟻／白蟻辨識流量→高客單價白蟻訂單）
+- blog-37《滅蚊公司邊間好》（ZH/EN）新增屋苑綜合蟲害管理段落連向 blog-31 物管滅鼠
+
+**L3 底層師傅出更個案向上托舉**
+- blog-19 沙頭角白蟻個案（ZH/EN）→blog-34＋blog-39；blog-33 筲箕灣食肆個案（ZH/EN）→blog-35；blog-17 南丫島滅鼠個案（ZH/EN）→blog-31；blog-24 美城苑蜂巢個案（ZH/EN）→blog-32——全部師傅出更文章現有 1–2 條向上錨文本
+
+**二・單頁差異化加固（blog-34/39/38/35，ZH/EN）**
+- 首屏「2026 速查摘要框」：起步參考價＋核心施工儀器／藥劑＋適用場景＋WhatsApp 5 分鐘傳圖報價按鈕（沿用各頁既有 wa.me 預填）
+- 「防伏對比框」：坊間海鮮價／口頭 100% 承諾 vs 科學化 IPM 治理，置於 FAQ 前
+
+**三・中英雙語長尾補位**
+- blog-39 Meta Title →【滅白蟻報價表 2026】香港白蟻治理收費逐項拆解＋報價單檢查清單｜Termite Treatment Services HK（og 同步）；Meta Description 加 EN 尾
+- blog-39 底部新增 2 條英文 FAQ（How much does termite treatment cost in Hong Kong？／Non-destructive T3i microwave detection）＋FAQPage JSON-LD 6→8 問，承接 termite treatment services 419 次英文曝光
+- blog-38 Meta Description 融入 Bed Bug Control Hong Kong；blog-35 融入 Cockroach Gel Treatment Hong Kong（og 同步）
+- sitemap 24 條 lastmod→2026-11-15
+
 
 ## v9.122「滅鼠公司邊間好」內連灌注＋E-E-A-T 個案增強（2026-11-15）
 

@@ -1,0 +1,76 @@
+================================================================
+v9.123「以點帶面全方位輻射」部署指引（2026-11-15）
+================================================================
+依《以點帶面全方位輻射至其他黃金關鍵詞》四步精準手術，將《2026 香港滅鼠公司收費指南》
+全港第 1 名權重安全輻射至滅白蟻、滅床蝨（木虱）、滅曱甴黃金關鍵詞。
+
+本包共 26 檔（12 頁 ZH + 12 頁 EN + sitemap.xml + CHANGELOG.md），
+全部為既有頁面的「增補式」修改：零 URL 變更、零刪減、零共用 CSS/JS 改動。
+
+【一、上傳清單（26 檔）】── GitHub 網頁 Add file / Drag & drop 即可
+L1＋L2＋L3＋加固（ZH 12 檔）：
+  info/blog-17/index.html   （L3 個案→blog-31 托舉）
+  info/blog-19/index.html   （L3 白蟻個案→blog-34＋blog-39 托舉）
+  info/blog-24/index.html   （L3 蜂巢個案→blog-32 托舉）
+  info/blog-25/index.html   （L1 冠軍頁＋總覽導覽表）
+  info/blog-31/index.html   （L1 邊間好＋總覽導覽表）
+  info/blog-33/index.html   （L3 食肆個案→blog-35 托舉）
+  info/blog-34/index.html   （二・速查摘要框＋防伏對比框）
+  info/blog-35/index.html   （二・兩框＋三・Meta desc 融入 Cockroach Gel Treatment Hong Kong）
+  info/blog-36/index.html   （L2 螞蟻白蟻辨識段→白蟻雙頁）
+  info/blog-37/index.html   （L2 屋苑綜合蟲害管理→blog-31）
+  info/blog-38/index.html   （二・兩框＋三・Meta desc 融入 Bed Bug Control Hong Kong）
+  info/blog-39/index.html   （二・兩框＋三・Title/Desc EN 尾＋底部英文 FAQ×2＋JSON-LD 8 問）
+EN 同步（12 檔，路徑對應）：
+  en/info/blog-17/index.html  en/info/blog-19/index.html  en/info/blog-24/index.html
+  en/info/blog-25/index.html  en/info/blog-31/index.html  en/info/blog-33/index.html
+  en/info/blog-34/index.html  en/info/blog-35/index.html  en/info/blog-36/index.html
+  en/info/blog-37/index.html  en/info/blog-38/index.html  en/info/blog-39/index.html
+網站層（2 檔）：
+  sitemap.xml   （24 條 lastmod → 2026-11-15）
+  CHANGELOG.md  （頂部 H1 → v9.123）
+
+【二、Suggested commit message】
+v9.123 radiate hub weight to termite/bedbug/cockroach guides (overview table + quick-facts box + anti-scam box + EN long-tail + 3-layer internal links)
+
+【三、上傳後驗證（5 分鐘）】
+1. GitHub Actions 綠剔通過（Pages 部署成功）
+2. 抽查 4 條 URL 直接開啟：
+   https://bruceleehk.com/info/blog-39/        ← 標題應變為「…｜Termite Treatment Services HK」
+   https://bruceleehk.com/info/blog-25/        ← 底部有《2026 香港常見蟲害透明收費及防伏總覽》表
+   https://bruceleehk.com/en/info/blog-34/     ← 英文版有 2026 Quick Facts Box
+   https://bruceleehk.com/info/blog-19/        ← 延伸閱讀有【滅白蟻公司邊間好】連結
+3. 手機開 blog-39：速查摘要框＋English FAQ 手風琴可正常展開
+
+【四、GSC 動作（上傳當日）】
+1. 網址審查 → 提交索引（優先 8 條主攻頁）：
+   /info/blog-34/  /info/blog-39/  /info/blog-38/  /info/blog-35/
+   /en/info/blog-34/  /en/info/blog-39/  /en/info/blog-38/  /en/info/blog-35/
+2. 再提交 2 條冠軍頁讓 Google 重抓新內連：
+   /info/blog-25/  /info/blog-31/
+3. Sitemap 頁面點「重新提交」（lastmod 已批次更新，會觸發全站重抓）
+
+【五、第 14 日（2026-11-29）GSC 複檢清單】
+在 GSC「成效」篩選下列查詢，觀察排名躍升（目標：由 4–10 名推上 1–3 名）：
+  滅白蟻公司邊間好／白蟻公司推介／滅白蟻收費／滅白蟻價錢／termite treatment services
+  滅床蝨／木虱公司邊間好／滅木虱收費／bed bug control hong kong
+  滅曱甴公司邊間好／滅蟑螂收費／cockroach gel treatment hong kong
+若個別詞仍停在第 4–10 名：對該頁補一段 200 字長尾段落（真實個案角度），
+並由最新一篇【師傅出更】個案加 1 條精準錨文本指向該頁即可，切勿另開新頁（防自相殘殺）。
+
+【六、持續執行鐵律（文檔第三層要求）】
+日後每篇【師傅出更】個案（例：沙田屋苑白蟻 T3i 個案、深水埗唐樓床蝨高溫蒸氣實錄、
+餐廳德國小蠊凝膠實錄）必須包含 1–2 條精準錨文本，向上指向對應「邊間好」或「報價表」：
+  白蟻個案 → /info/blog-34/ ＋ /info/blog-39/
+  床蝨個案 → /info/blog-38/
+  曱甴個案 → /info/blog-35/ ＋ /info/blog-40/
+  滅鼠個案 → /info/blog-31/ ＋ /info/blog-25/
+形成「長尾實戰個案 → 垂直指南 → 首頁」三層權重金字塔。
+
+【七、流量保護說明】
+- 零 URL 變更、零刪減；blog-39 Meta Title 按文檔要求調整（逐項睇→逐項拆解＋EN 尾），
+  SERP 重新評估屬正常，錨頁面內容無刪減
+- 全部插入塊為 inline style，零共用 CSS/JS 檔案改動，毋須 cache-bust
+- 快取：GitHub Pages 部署後 Cloudflare 如有快取，Purge everything 一次即可
+================================================================
+（v9.123 由 Z.ai 協助整理；如需回滾，請保留本 zip 備份）
