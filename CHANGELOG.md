@@ -1,4 +1,16 @@
-# 修復日誌 (v9.120 — 2026-11-15)
+# 修復日誌 (v9.121 — 2026-11-15)
+
+## v9.121 /info/blog-41/ 英文版上線（2026-11-15）
+
+為 v9.120 新增嘅《【師傅出更】屋企有金毛狗點滅鼠？》文章補齊英文版 /en/info/blog-41/，中英 hreflang 互聯：
+
+- 新建 /en/info/blog-41/index.html：全文英文翻譯（個案檔案 casefile、版權安全聲明 legalbox、5 節正文、5 張個案相＋Shorts 影片 facade、可收縮 FAQ ×6）
+- SEO 配套：EN canonical／hreflang 三連（zh-HK・en・x-default）／EN title・description・keywords（pet safe rat control、sewer rat、overseas landlord pest control 等長尾）／OG en_HK
+- JSON-LD 四件套（EN）：BreadcrumbList＋BlogPosting（inLanguage: en, articleSection: Master on Duty）＋VideoObject（JSLHTlhIJmk）＋FAQPage ×6
+- 術語沿用全站 EN 慣例：師傅出更→Master on Duty、海外業主遙距代辦→Overseas Owner Remote Service、渠鼠→sewer rat（Norway rat）、次生中毒→secondary poisoning
+- zh /info/blog-41/ head 補 hreflang=en alternate；en/info/ 索引頁新增 Master on Duty 文章卡；sitemap.xml 增 en/info/blog-41/（0.8）
+- 全部沿用 v9.120 已上線圖片路徑，零新圖片、零破壞性修改
+
 
 ## v9.120《師傅出更》金毛狗家庭遙距滅鼠實錄新文章＋首頁實戰案例短片更新（2026-11-15）
 
