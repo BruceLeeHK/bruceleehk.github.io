@@ -1,3 +1,19 @@
+# 修復日誌 (v9.120 — 2026-11-15)
+
+## v9.120《師傅出更》金毛狗家庭遙距滅鼠實錄新文章＋首頁實戰案例短片更新（2026-11-15）
+
+**Part A 新增 /info/blog-41/ 師傅出更子欄目新文章（可收縮 FAQ＋關鍵詞長尾佈局＋相片 SEO 重命名）＋Part B 首頁 ZH/EN「實戰案例短片」第 2 卡由《粘鼠板變身鼠餌盒》更換為《九龍塘牛津道遙距滅鼠實錄》官方 Shorts**
+
+- 新文章 /info/blog-41/：九龍塘牛津道海外業主（長居新加坡）遙距委託個案——金毛尋回犬家庭 3 次無毒物理捕捉方案，施工後第 2 日深夜擒獲咬爛雪櫃洗碗機水喉嘅巨型渠鼠；正文 5 節＋authorbox／casefile／legalbox＋5 張個案實錄相＋嵌入官方 Shorts 實錄短片（JSLHTlhIJmk）
+- 可收縮 FAQ 手風琴 ×6（native details/summary，v9.110 樣式）＋FAQPage 結構化資料：寵物安全滅鼠、海外遙距委託、老鼠咬水喉應對、渠鼠特性與普通鼠籠失效原因、跟進週期、陷阱寵物安全佈陣
+- 關鍵詞與長尾詞佈局：meta keywords／JSON-LD keywords／標籤／標題描述——無毒滅鼠、寵物安全滅鼠、金毛狗滅鼠、九龍塘滅鼠、牛津道老鼠、渠鼠／褐家鼠、海外業主滅鼠、遙距滅鼠、老鼠咬水喉、黏鼠板滅鼠、次生中毒、pet safe rat control hong kong
+- JSON-LD 四件套：BreadcrumbList＋BlogPosting（articleSection 師傅出更）＋VideoObject（JSLHTlhIJmk）＋FAQPage，全部解析驗證通過
+- 相片 SEO 重命名 5 檔（docx 來源重壓縮 q80–82）：kowloon-tong-oxford-road-rat-control-case-gate.jpg／whatsapp-remote-rat-control-request-pipe-damage.jpg／whatsapp-golden-retriever-pet-safe-rat-control-plan.jpg／whatsapp-rat-control-quote-kowloon-tong-3-visits.jpg／glue-trap-catch-norway-rat-kowloon-tong-result.jpg＋視頻封面 kowloon-tong-oxford-road-pet-safe-rat-control-video.jpg/.webp（768×1344）
+- 首頁（ZH）實戰案例短片第 2 卡（ratBaitBoxCard，原 7sbS9n_HW8g）更換：封面圖／角標／video-title／video-meta／video-desc／aria-label／attachFacade 七處同步為《【遙距滅鼠實錄】業主身處新加坡！九龍塘牛津道住宅「無毒物理捕鼠」2日極速擒獲巨型渠鼠》；EN 首頁同卡同步英文化；粘鼠板短片仍完整保留於 blog-23 文章與 /service/rodent/ 頁，零刪除
+- /info/ 蟲類資訊列表新增 blog-41 卡片（師傅出更分類，2026年11月15日）
+- sitemap 新增 /info/blog-41/ 網址（200→201；zh-only 單條目，刻意不建不存在嘅 EN alternate——避免重現「無效項目」）
+- 流量保護：零刪除既有 URL、零共用 CSS/JS 檔案改動（blog-41 樣式為頁內新增）、canonical 不變、既有 PestControl 實體零回歸
+
 # 修復日誌 (v9.119 — 2026-11-13)
 
 ## v9.119 構建失敗 hotfix＋《大詞突圍策略》落地：還原誤貼設定檔＋首頁大詞承載＋長尾權重反哺首頁＋blog-1 防伏 FAQ 強化（2026-11-13）
