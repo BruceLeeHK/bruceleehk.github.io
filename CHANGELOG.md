@@ -1,4 +1,34 @@
-# 修復日誌 (v9.123 — 2026-11-15)
+# 修復日誌 (v9.124 — 2026-11-16)
+
+## v9.124「Bing 桌面 CTR 誘因＋繁簡雙語長尾」：價格錨點×合規背書 Meta 改寫＋簡體 FAQ 詞彙對照（2026-11-16）
+
+依 Bing Webmaster 3 個月數據（總點擊 36／展示 653／CTR 5.51%）：「滅蟲」(排名 2.29)、「香港滅蟲」(2.58)、「pest control」(3.90)、「滅蟲公司」(4.72) 已穩居首頁前列但點擊未跟上——優化重點由「沖排名」轉為「提高桌面 CTR」。Bing 香港用戶畫像偏向商業機構／學校／NGO／物管辦公電腦，同步搶攻 B2B 桌面流量與簡體中文長尾（「香港灭虫公司」已現 20% CTR）。
+
+**M0 既有 HTML 缺陷修復（5 頁）**
+- strategy／ai／info／quote／services 五頁 `<meta name="description">` 缺失收尾 `>`，致 keywords meta 被瀏覽器解析吞併——全部補上，確保 Bing 等爬蟲完整讀取雙 meta
+
+**M1 高誘因 Meta Title/Description 改寫（4 頁：具體價格＋合規背書）**
+- index.html（ZH 首頁）：Title 加「明碼實價 HK$800 起・漁護署註冊」；Description 重寫為「【明碼實價 HK$800 起】香港漁護署（AFCD）註冊滅蟲公司 CEDARS LTD.｜澳洲 T3i 免拆牆微波探測白蟻、商業機構及家居滅鼠滅曱甴，首創 15 秒 AI 蟲害診斷，絕無隱藏收費，WhatsApp 5 分鐘報價！」（og:title 同步）
+- en/index.html（pest control 3.90／0 點擊）：Title 前置「Licensed Pest Control Hong Kong (AFCD Registered) - Transparent Pricing」；Description 加 from HK$800＋T3i termite detection＋WhatsApp quote in 5 minutes（meta＋og 全同步）
+- services/index.html（家居滅蟲樞紐）：Title 改「【家居滅蟲】明碼實價 HK$800 起・漁護署註冊｜滅曱甴/滅鼠/滅床蝨/滅白蟻＋海外遙距代辦」；Description 同步（og 同步）
+- commercial/index.html（B2B 機構頁）：Title 改「商業滅蟲及機構滅鼠合約｜先勘察後書面報價・食環署/HACCP 合規｜十大行業 IoT 方案」；Description 加明碼實價＋1 個工作天內提交＋漁護署（AFCD）註冊＋WhatsApp 5 分鐘報價（og 同步）
+
+**M2 簡體中文長尾 FAQ 詞彙對照（5 頁×2 條＝10 條新 FAQ，FAQPage JSON-LD 同步）**
+- blog-25《滅鼠公司收費指南》：香港灭虫公司收费标准＋灭鼠一次多少钱（答案內嵌 灭虫＝滅蟲／灭蟑螂／灭臭虫／白蚁防治／报价 等簡體對照，繁體正文維持品牌形象）
+- blog-34《滅白蟻公司邊間好》：白蚁防治报价一般多少钱＋預防滅治收費差別
+- blog-35《滅曱甴公司邊間好》：灭蟑螂公司收费多少＋胶饵 vs 喷药
+- blog-38《滅床蝨公司邊間好》：床上发现臭虫（木虱）灭杀价钱＋自行买药可行性
+- commercial/index.html（機構服務頁）：香港灭虫公司收费标准（商业合约）＋办公室灭鼠合同收费
+- 全部 10 條同步寫入各頁 FAQPage JSON-LD mainEntity（8 條/頁），繁簡雙語精準匹配
+
+**S sitemap.xml**：12 個受影響 URL lastmod → 2026-11-16（催 Bing IndexNow／Google 重新抓取）
+
+**零風險約束**
+- 零 URL 變更、零內容刪減、四個服務專頁（termite/cockroach/flea/rodent）meta 零改動
+- 全部事實站內可證：HK$800 起（services 頁住宅細單位）、漁護署（AFCD）註冊藥劑、澳洲 T3i 免拆牆微波探測、WhatsApp 5 分鐘報價
+- validate_v9124.py 全項 PASS
+
+
 
 ## v9.123「以點帶面全方位輻射」：滅鼠第 1 名權重灌注滅白蟻／滅床蝨／滅曱甴（2026-11-15）
 

@@ -1,0 +1,114 @@
+================================================================
+ bruceleehk.com  v9.124 部署指引（Bing CTR 誘因＋繁簡雙語長尾）
+================================================================
+版本：v9.124（2026-11-16）
+基線：v9.123（「以點帶面全方位輻射」24 檔版，已上線）
+變更：14 檔（無新增檔案、無刪除、無 URL 變更）
+風險：低——零內容刪減、canonical/hreflang/CSS 版本零改動、四個服務專頁（termite/cockroach/flea/rodent）meta 零改動
+
+────────────────────────────────────────
+一、上傳清單（本 zip 內 14 檔 → repo 對應路徑）
+────────────────────────────────────────
+ 1. index.html                        → 倉庫根目錄 index.html
+ 2. en/index.html                     → en/index.html
+ 3. services/index.html               → services/index.html
+ 4. commercial/index.html             → commercial/index.html
+ 5. info/blog-25/index.html           → info/blog-25/index.html
+ 6. info/blog-34/index.html           → info/blog-34/index.html
+ 7. info/blog-35/index.html           → info/blog-35/index.html
+ 8. info/blog-38/index.html           → info/blog-38/index.html
+ 9. strategy/index.html               → strategy/index.html
+10. ai/index.html                     → ai/index.html
+11. info/index.html                   → info/index.html
+12. quote/index.html                  → quote/index.html
+13. sitemap.xml                       → sitemap.xml
+14. CHANGELOG.md                      → CHANGELOG.md
+
+* zip 內目錄結構與倉庫完全一致，全選直接拖入 repo 根目錄即可。
+
+────────────────────────────────────────
+二、Commit Message（照抄）
+────────────────────────────────────────
+v9.124 bing ctr meta rewrite + simplified chinese faq
+
+────────────────────────────────────────
+三、本次改咗乜（30 秒版）
+────────────────────────────────────────
+M0 修復 5 頁既有 HTML 缺陷：strategy/ai/info/quote/services 嘅
+<meta name="description"> 缺收尾 ">"，令 keywords meta 被爬蟲吞併——
+全部補上（呢個係真 bug，唔係優化）。
+
+M1 四頁高誘因 Meta（價格錨點×合規背書，搶 Bing 桌面 CTR）：
+- 首頁（ZH）：Title＋「明碼實價 HK$800 起・漁護署註冊」；
+  Description＝【明碼實價 HK$800 起】香港漁護署（AFCD）註冊滅蟲公司
+  CEDARS LTD.｜澳洲 T3i 免拆牆微波探測白蟻、商業機構及家居滅鼠滅曱甴，
+  首創 15 秒 AI 蟲害診斷，絕無隱藏收費，WhatsApp 5 分鐘報價！
+- EN 首頁（pest control 排 3.90／0 點擊）：Title 前置 Licensed Pest
+  Control Hong Kong (AFCD Registered) - Transparent Pricing；
+  Description 加 from HK$800＋WhatsApp quote in 5 minutes
+- services 頁：【家居滅蟲】＋HK$800 起＋四大蟲害＋海外遙距代辦
+- commercial 頁：商業滅蟲及機構滅鼠合約｜先勘察後書面報價・
+  食環署/HACCP 合規（B2B 桌面流量主攻）
+- og:title / og:description / twitter:title / twitter:description 全同步
+  （兩個首頁嘅 twitter:description 保留「唯一官方平臺」防假冒文案）
+
+M2 五頁簡體中文長尾 FAQ×2 條共 10 條（Bing 繁簡雙語精準匹配）：
+- blog-25 滅鼠收費指南：香港灭虫公司收费标准／灭鼠一次多少钱
+- blog-34 滅白蟻：白蚁防治报价一般多少钱／预防灭治收费差别
+- blog-35 滅曱甴：灭蟑螂公司收费多少／胶饵vs喷药
+- blog-38 滅床蝨：臭虫（木虱）灭杀价钱／自行买药可行性
+- commercial 機構頁：商业合约收费标准／办公室灭鼠合同
+- 問句簡體、答案繁體＋簡體詞彙對照（灭虫＝滅蟲／白蚁防治＝滅白蟻／
+  报价＝報價），10 條同步寫入 FAQPage JSON-LD（每頁 8 條）
+
+S  sitemap.xml：12 個受影響 URL lastmod → 2026-11-16
+
+────────────────────────────────────────
+四、上線後 5 分鐘驗證（12 個 URL）
+────────────────────────────────────────
+瀏覽器逐一開（應全部 200＋睇到新標題）：
+https://bruceleehk.com/
+https://bruceleehk.com/en/
+https://bruceleehk.com/services/
+https://bruceleehk.com/commercial/
+https://bruceleehk.com/info/blog-25/
+https://bruceleehk.com/info/blog-34/
+https://bruceleehk.com/info/blog-35/
+https://bruceleehk.com/info/blog-38/
+https://bruceleehk.com/strategy/
+https://bruceleehk.com/ai/
+https://bruceleehk.com/info/
+https://bruceleehk.com/quote/
+
+GitHub Actions：repo → Actions 綠剔＝部署成功。
+失敗時：Pages 會保留最後成功版本自保，唔使驚。
+
+────────────────────────────────────────
+五、Bing Webmaster 提交（重點！今次係 Bing 專項）
+────────────────────────────────────────
+1. Bing 站長工具 → URL 檢查（URL Inspection）→ 逐一貼上第四節
+   12 個 URL → 按「要求編製索引」（Request Indexing）。
+2. IndexNow：左側菜單 IndexNow → 提交同一批 12 個 URL
+   （或等 GitHub Pages 自動 ping，手動提交快好多）。
+3. Google Search Console 同步做：網址審查 → 要求建立索引
+   （12 個 URL 都做，Google 端 meta CTR 一樣受惠）。
+4. Sitemap 頁面：sitemap.xml 顯示 202 URL 無錯誤即可
+   （無新增 URL，唔使重新提交，但可以順手按一次提交確認）。
+
+────────────────────────────────────────
+六、驗收指標（2–4 週後睇 Bing 搜索性能）
+────────────────────────────────────────
+- 「滅蟲」「香港滅蟲」「滅蟲公司」CTR：基線 4.17%／3.85%／5.05%
+  → 目標 8%+（桌面 Bing 用戶見到「HK$800 起＋漁護署註冊」誘因）
+- 「pest control」：基線排名 3.90／0 點擊 → 目標首 2 週出現首批點擊
+- 「香港灭虫公司」「白蚁防治报价」「灭鼠公司收费」等簡體詞：
+  目標出現展示紀錄（FAQ 簡體問句＋JSON-LD 雙語匹配）
+- 展示量：基線 653/3 個月 → lastmod 更新後重新抓取，展示應上升
+
+────────────────────────────────────────
+七、回滾方案（萬一唔妥）
+────────────────────────────────────────
+上傳前先 copy 一份現有 14 檔做備份。任何頁面異常，
+將備份檔貼返原位＋commit "revert v9.124" 即可。
+頁面正文零改動、零 URL 變更，回滾無副作用。
+================================================================
