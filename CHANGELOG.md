@@ -1,4 +1,21 @@
-# 修復日誌 (v9.124 — 2026-11-16)
+# 修復日誌 (v9.125 — 2026-11-17)
+
+
+## v9.125《師傅出更》青衣屋苑全屋爆發紅螞蟻實錄新文章＋首頁實戰案例短片第 1 卡更換（2026-11-17）
+
+**Part A 新增 /info/blog-42/（ZH+EN）師傅出更子欄目新文章＋Part B 首頁 ZH/EN「實戰案例短片」第 1 卡由《大圍美城苑摘馬蜂巢》更換為《青衣屋苑紅螞蟻餌劑搬巢實錄》官方 Shorts（ZCMeAFIZCYo，2026-11-17 發佈）**
+
+- 新文章 /info/blog-42/＋/en/info/blog-42/：青衣區屋苑單位「全屋多點爆發」家居滅蟻真實個案——客廳地腳線／廚房鋅盆底櫃／洗手間磁磚縫／露台門框 4 大生活區淪陷；師傅堅持「不盲目全屋噴灑殺蟲水」，改用 IPM 綜合蟲害管理：全屋蟻路追蹤＋AFCD 註冊凝膠餌劑「搬巢」點注，借工蟻活體搬運觸發連鎖傳染效應（Domino Effect）直搗蟻后；附官方 YouTube 實錄短片嵌入（facade 模式）＋真實客戶 Google 地圖 5 星好評（「細心處理屋企有害蟲的地方，價錢合適。」）＋2026 家居滅螞蟻收費 HK$800 起透明行情
+- 【師傅答客問】FAQ×4（native details 手風琴＋FAQPage JSON-LD 同步）：①噴殺蟲水愈噴愈多的「群體分裂原理（Budding）」②落餌後 2–3 日仍見蟻行屬正常活體搬運、3–7 日連鎖斷尾③紅螞蟻 vs 白蟻辨識（細腰曲膝觸角 vs 水桶腰直珠觸角）④收費計法與免清空廚房衣櫃
+- 內鏈佈局（依文章建議）：Q3 兩處加粗文字分別超連結至 /info/blog-36/《【滅蟻公司邊間好】螞蟻 vs 白蟻辨識＋餌劑搬巢治理指南》與 /info/blog-34/《滅白蟻公司邊間好》T3i 免拆牆微波探測；延伸閱讀連 blog-41/blog-24/blog-12；博客群組互鏈——blog-41 ZH/EN 延伸閱讀、blog-36 ZH/EN 延伸閱讀同時補回 blog-42 入口（雙向互鏈）
+- JSON-LD 四件套×2 頁：BreadcrumbList＋BlogPosting（articleSection 師傅出更）＋VideoObject（ZCMeAFIZCYo，uploadDate 2026-11-17）＋FAQPage，全部解析驗證通過；網址沿用站內 /info/blog-42/ 慣例（文檔建議 slug /case-study-tsing-yi-ant-control/ 不採用，保持 IA 與 sitemap 一致）
+- 視頻封面：官方 Shorts 縮圖 oardefault（1080×1920）重製 768×1344 jpg+webp（assets/img/tsing-yi-ant-control-bait-video.*），og:image/twitter:image 同步
+- 首頁 ZH/EN 實戰案例短片第 1 卡（waspNestCard→antBaitCard）七處同步更換：封面圖／角標（📍 青衣屋苑實錄 · 全屋滅紅螞蟻）／video-title／video-meta／video-desc／aria-label／attachFacade（embed ZCMeAFIZCYo）＋視頻區簡介 h3/p＋CTA WhatsApp 改滅蟻預填；ZH 首頁 VideoObject 六欄位同步（name/description/thumbnail/uploadDate/contentUrl/embedUrl）；馬蜂巢短片仍完整保留於 blog-24、/service/wasp/、/wasp-nest/ 頁，零刪除
+- 既有缺陷修復：EN 蟲類資訊 hub blog-41 卡 H3 誤植為 blog-40 曱甴報價表標題 → 修正為金毛狗遙距滅鼠正確標題
+- /info/（ZH）與 /en/info/（EN）hub 各新增 blog-42 卡片（師傅出更分類，2026年11月17日）
+- sitemap 202→204（新增 /info/blog-42/ 0.9 與 /en/info/blog-42/ 0.8）＋首頁 ZH/EN、blog-41 ZH/EN、blog-36 ZH/EN 六 URL lastmod→2026-11-17
+- 流量保護：零既有 URL 變更、零內容刪減、canonical 不變、共用 CSS/JS 零改動（?v=9.88 不變）、既有 PestControl 實體零回歸
+
 
 ## v9.124「Bing 桌面 CTR 誘因＋繁簡雙語長尾」：價格錨點×合規背書 Meta 改寫＋簡體 FAQ 詞彙對照（2026-11-16）
 
