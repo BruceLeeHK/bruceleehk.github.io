@@ -1,4 +1,24 @@
-# 修復日誌 (v9.127 — 2026-11-18)
+# 修復日誌 (v9.128 — 2026-11-18)
+
+
+## v9.128 blog-24 實錄短片整段下架（ZH+EN）（2026-11-18）
+
+承接 v9.127（視頻說明文字已刪除），應用戶要求將 blog-24 頁面內嵌嘅馬蜂巢實錄短片（2q98dIGC_2U）整段移除，ZH／EN 兩版同步：
+
+- 刪除 `<figure class="blog24-video">` 整塊（封面圖、播放按鈕、「🎬 實錄短片」標籤、aria-label）＋延遲載入 facade script（ZH／EN 同步）
+- 刪除 VideoObject JSON-LD（避免 schema 指向頁面已不存在之嵌入）；BlogPosting JSON-LD image 陣列同步移除視頻封面，餘 3 張個案實錄相
+- og:image／twitter:image 由視頻封面 video-wasp-nest.jpg 改為個案首圖 shatin-may-shing-court-hornet-nest-removal-video.jpg（WhatsApp 對話實錄）
+- 刪除頁面專屬 CSS `.blog24-video*` 7 條規則及「短片 facade」註釋行（ZH「v9.68」／EN「v9.49 blog-23 video facade」）；`.blog24-fig` 配圖樣式保留
+- 正文同步清理短片文字引用：hero 摘要段移除「實錄短片、」（EN 移除 the live video）；版權聲明移除「短片發佈於我們嘅官方 YouTube 頻道」及「完整現場畫面可到官方 YouTube 實錄短片〈大圍美城苑直擊〉重溫」兩句（EN 對應兩句同步）
+- 保留範圍：文章標題／H1／「燒賣」故事敘事／3 張個案配圖及說明／延伸閱讀 blog-19「附現場施工影片」連結全部不動
+- 資產處理：assets/img/video-wasp-nest.jpg／.webp 已零頁面引用，本次保留檔案避免歷史搜尋索引 404（日後可自行刪除）
+- sitemap.xml：/info/blog-24/ 與 /en/info/blog-24/ lastmod → 2026-11-18
+- Pagefind 索引重跑（npx pagefind --site .）：blog-24 兩版最新內容已收錄；並刪除重跑時再生嘅 5 個未用 pagefind UI 檔（pagefind-ui／modular-ui／component-ui／highlight 系列，符合 v9.126 慳位政策，-0.4MB）
+- validate_v9128.py 全 PASS：視頻殘留歸零（2q98dIGC_2U／blog24-video／video-wasp-nest／實錄短片字眼）、JSON-LD 全部解析、標籤平衡、og:image 指向存在檔案、sitemap lastmod、與 v9.127 基準逐檔比對僅預期 4 檔＋pagefind 有差異、全站不變量
+
+**零風險約束**
+- 零 URL 變更（blog-24 兩版網址不變）、正文故事內容零刪減、共用 CSS/JS 零改動（?v=9.127 不變）
+- CSP frame-src 之 youtube-nocookie 保留（首頁等其他頁面仍嵌入 YouTube，屬全站安全設定）
 
 
 ## v9.127 懶人方案一鍵索引＋桌面版頁首搜索入口單一化＋blog-24 視頻說明清理（2026-11-18）
