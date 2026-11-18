@@ -5,6 +5,7 @@
 User-agent: *
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 Disallow: /googlecd9c620d39174267.html
 
 # ============ Baidu spider (簡體中文搜尋器) ============
@@ -12,34 +13,40 @@ Disallow: /googlecd9c620d39174267.html
 User-agent: Baiduspider
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 Crawl-delay: 1
 
 # ============ Googlebot ============
 User-agent: Googlebot
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 
 # ============ Bingbot ============
 User-agent: Bingbot
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 
 # ============ Sogou (Chinese SE) ============
 User-agent: Sogou
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 Crawl-delay: 2
 
 # ============ 360Spider (Chinese SE) ============
 User-agent: 360Spider
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 Crawl-delay: 2
 
 # ============ Yandex (Russian SE) ============
 User-agent: Yandex
 Allow: /
 Disallow: /info/vote/admin.html
+Disallow: /pagefind/
 Crawl-delay: 2
 
 # ============ Sitemaps ============
