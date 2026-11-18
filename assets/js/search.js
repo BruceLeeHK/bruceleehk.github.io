@@ -1,5 +1,5 @@
 /*!
- * bruceleehk.com — 站內搜索組件 v9.126（2026-11-18）
+ * bruceleehk.com — 站內搜索組件 v9.127（2026-11-18）
  * 架構（依三份方案文檔落地）：
  *   1. 靜態搜索：Pagefind 瀏覽器本地毫秒級檢索（零資料庫、零 ?s= 網址，SEO 100% 純淨）
  *   2. 手機體驗：100dvh 全螢幕彈窗＋免打字快捷痛點標籤＋滑動自動收起鍵盤
@@ -7,7 +7,9 @@
  *   4. AI 智能解答預留位：CONFIG.aiEndpoint 填入 Cloudflare Worker／Dify API 即啟用正式 AI，
  *      未填時自動以「預覽模式」列出站內依據文章（絕不影響正常搜索）
  *   5. 零結果 WhatsApp 傳圖兜底轉化
- * 索引生成：npx pagefind --site .（本版本已預生成 /pagefind/ 索引，開箱即用）
+ * 索引生成：雙擊根目錄「更新站內搜索.bat」（= npx -y pagefind --site .）即可重跑索引
+ * v9.127 桌面版視覺修正：導航欄不再注入放大鏡按鈕，桌面唯一搜索入口＝右上角獨立放大鏡
+ *   （修復「兩個搜索圖示」重複問題，同時釋放導航寬度令「覆蓋十八區」等單行顯示）
  */
 (function () {
   'use strict';
@@ -207,16 +209,17 @@
     '.pf-wa-text strong{display:block;font-size:14px;color:#166534;margin-bottom:2px}',
     '.pf-wa-text span{font-size:12px;color:#15803d}',
     '.pf-wa-btn{padding:9px 14px;background:#16a34a;color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap;flex-shrink:0}',
-    '.pf-nav-item{display:flex;align-items:center}',
+    '.pf-nav-item{display:none}',
     '.pf-nav-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:999px;background:#f8fafc;color:#1e293b;font-size:13.5px;cursor:pointer;line-height:1;font-family:inherit}',
     '.pf-nav-btn:hover{border-color:#2c5e1a;color:#2c5e1a;background:#f4f9f0}',
     '.pf-nav-btn .pf-t-full{display:none}',
-    '.pf-search-trigger{display:none}',
+    '/* 桌面＋手機共用右上角獨立放大鏡（桌面唯一搜索入口；手機位於漢堡旁） */',
+    '.pf-search-trigger{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;color:#1e293b;cursor:pointer;flex-shrink:0}',
+    '.pf-search-trigger:hover{border-color:#2c5e1a;color:#2c5e1a;background:#f4f9f0}',
     '@media(max-width:768px){',
     '.pf-nav-btn{padding:10px 14px;font-size:14px}',
     '.pf-nav-btn .pf-t-full{display:inline}',
-    '.pf-search-trigger{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;color:#1e293b;cursor:pointer;flex-shrink:0}',
-    '.pf-search-trigger:hover{border-color:#2c5e1a;color:#2c5e1a;background:#f4f9f0}}'
+    '.pf-nav-item{display:flex;align-items:center}}'
   ].join('\n');
 
   var SVG_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
@@ -230,12 +233,19 @@
   function pushDL(ev, d) { try { if (window.dataLayer && d === undefined) window.dataLayer.push({ event: ev }); else if (window.dataLayer) { d.event = ev; window.dataLayer.push(d); } } catch (e) {} }
 
   /* ===================== 彈窗 DOM（首次打開時惰性建立） ===================== */
-  function ensureModal() {
-    if (overlay) return;
+  /* v9.127 關鍵修復：CSS 必須頁面載入即注入（原 v9.126 在首次打開彈窗才注入，
+     導致桌面頁首兩個搜索按鈕以瀏覽器預設裸樣式呈現——即「兩個搜索圖示」問題根因） */
+  function ensureCss() {
+    if (document.getElementById('pf-search-style')) return;
     var st = document.createElement('style');
     st.id = 'pf-search-style';
     st.textContent = CSS;
     document.head.appendChild(st);
+  }
+
+  function ensureModal() {
+    ensureCss();
+    if (overlay) return;
 
     overlay = document.createElement('div');
     overlay.id = 'pf-overlay';
@@ -551,7 +561,8 @@
 
   /* ===================== 導航入口注入 ===================== */
   function injectEntryPoints() {
-    /* 桌面：導航最後一項放大鏡（≤768px 於漢堡菜單內顯示「搜尋案例 / 收費」全文） */
+    /* 導航內搜尋項：桌面版由 CSS 隱藏（v9.127 桌面唯一入口＝右上角獨立放大鏡），
+       ≤768px 於漢堡菜單內顯示「搜尋案例 / 收費」全文 */
     var nav = document.getElementById('nav-links');
     if (nav && !nav.querySelector('.pf-nav-item')) {
       var li = document.createElement('li');
@@ -597,6 +608,7 @@
   }
 
   function boot() {
+    ensureCss();
     injectEntryPoints();
     initFromUrl();
   }
