@@ -1,4 +1,20 @@
-# 修復日誌 (v9.130 — 2026-11-19)
+# 修復日誌 (v9.131 — 2026-11-19)
+
+## v9.131 /info/blog-43/ 英文版上線：商業滅鼠法例長文 EN 對應頁＋雙向內鏈 EN 閉環（2026-11-19）
+
+為 v9.129《一隻老鼠會牽動整盤生意嗎？》補上英文對應頁 /en/info/blog-43/（沿 v9.121 blog-41 英文版範式）：
+
+- 新增 /en/info/blog-43/（76.5KB）：全篇專業英文翻譯五大節（屋苑通告＋第 47(1)/(1A) 條拆解 → 4 大商業骨牌效應 → 「事後救火 vs IPM 保養」四維對比表 → 合規防鼠 4 大實戰標準 → FAQ×4），FAQ HTML 與 FAQPage JSON-LD 程式化同步
+- Meta／OG／JSON-LD×3（BreadcrumbList Home→Pest Info／BlogPosting inLanguage en／FAQPage）全英文；og:image 與 ZH 版共用 v9.130 實黑處理通告圖 private-estate-rodent-notice.jpg（零重複上傳）；WA 預填訊息改英文
+- 雙向內鏈 EN 閉環：blog-43 EN → /en/info/blog-25/ 收費指南＋/en/info/blog-31/ 邊間好＋/en/service/rodent/＋/en/commercial/property/＋/en/commercial/fnb/＋blog-27/20 EN 版；en/info/blog-25/「🏢 Property Management Tenders」段新增回鏈 → /en/info/blog-43/（冠軍頁 EN 版權重灌注）
+- en/info/ hub 新增 blog-43 英文卡（💼 COMMERCIAL RODENT CONTROL · NEW，排在 blog-42 之後）
+- 修正 v9.125 遺留缺陷：en/info/blog-42/ hreflang zh-HK／x-default 誤指 blog-41 → 修正為 blog-42（與 ZH blog-42 對向 en hreflang 一致）
+- ZH blog-43 hreflang 補 en alternate；sitemap 205→206 URL（/en/info/blog-43/ weekly 0.8）；CHANGELOG H1 升版 v9.131
+
+**零風險約束**
+- 零既有 URL 變更、零內容刪減；共用 CSS/JS 零改動（?v=9.127 不變）；ZH 版正文零改動（僅 head hreflang 補一行）
+
+
 
 
 ## v9.130 blog-43 通告配圖遮蔽加固＋去識別改名（2026-11-19）
