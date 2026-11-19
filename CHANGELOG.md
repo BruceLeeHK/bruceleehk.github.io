@@ -1,13 +1,30 @@
-# 修復日誌 (v9.129 — 2026-11-19)
+# 修復日誌 (v9.130 — 2026-11-19)
+
+
+## v9.130 blog-43 通告配圖遮蔽加固＋去識別改名（2026-11-19）
+
+應用戶要求，將 blog-43 配圖（物管通告實錄）上帶半透明嘅黑色塗鴉全部改為實黑，並補上漏遮嘅公司／屋苑識別，令相片不再顯示任何公司或屋苑名稱：
+
+- 半透明改實黑：右側公司署名兩行、英文 To 行屋苑名、底部公司全名行——三組半透明遮蓋全部以純黑實色矩形重鋪；中間大方塊同步純黑加固
+- 補遮漏網識別：底部管理處中英署名整行（原無遮蓋）與左下公司金色 logo 大字（原無遮蓋）新增實黑遮蓋
+- 核實保留屬中性資訊：頂部「致」欄塗黑（5 倍放大核實已實黑）、底部黃帶黑條（3 倍放大核實無內容）、通告編號及 Notice Post Until 日期框不動
+- 檔案改名去識別：通告配圖檔名改為 private-estate-rodent-notice.webp/.jpg（URL 與 og:image 不再含屋苑英文名；舊檔已刪除）
+- blog-43 內 4 處引用同步更新（figure src／og:image／twitter:image／BlogPosting image）；正文 alt／figcaption 維持「大型私人屋苑物業管理處」匿名表述
+- 頁面正文文字零改動（僅圖片路徑）；sitemap lastmod 維持 2026-11-19；Pagefind 索引重跑
+- validate_v9130.py 全 PASS；遮蔽區像素核實目視純黑
+
+**零風險約束**
+- 零 URL 變更、零正文改動、共用 CSS/JS 零改動（?v=9.127 不變）、EN 站零改動
+
 
 
 ## v9.129 新文章《一隻老鼠會牽動整盤生意嗎？》發布至【蟲類資訊】＋商業滅鼠雙向內鏈閉環（2026-11-19）
 
-依用戶文檔《一隻老鼠會牽動整盤生意嗎？.docx》發布商業滅鼠法例投資長文，配珀麗灣《預防及杜絕鼠患事宜》通告實錄圖，與滅鼠收費冠軍頁建立雙向內鏈：
+依用戶文檔《一隻老鼠會牽動整盤生意嗎？.docx》發布商業滅鼠法例投資長文，配香港一個大型私人屋苑《預防及杜絕鼠患事宜》通告實錄圖，與滅鼠收費冠軍頁建立雙向內鏈：
 
 - 新增 /info/blog-43/（以 blog-25 冠軍模板生成，69.9KB）：Meta Title／Description／核心長尾關鍵字全部採用文檔建議文案；slug 沿用站內 /info/blog-43/ 慣例（文檔建議 slug 不採用保 IA 一致）
 - 正文五大節照文檔：①屋苑通告與 2025 新修訂第 47(1)/(1A) 條拆解②4 大商業骨牌效應③「事後救火 vs IPM 保養」四維對比表④商業物管合規防鼠 4 大實戰標準⑤商業滅鼠與法例合規 FAQ×4（HTML5 原生 &lt;details&gt; 摺疊，FAQPage JSON-LD 同步收錄；文檔 FAQ 內文缺失，問答依正文事實補撰）
-- 配圖：assets/img/park-island-rodent-notice.webp（765×1024，figure 用）＋同版 jpg（og:image／BlogPosting 用，社交平台相容）置於第一節通告段落
+- 配圖：assets/img/private-estate-rodent-notice.webp（765×1024，figure 用）＋同版 jpg（og:image／BlogPosting 用，社交平台相容）置於第一節通告段落（v9.130 改名去識別）
 - 雙向內鏈閉環：blog-43 → 《2026 香港滅鼠公司收費指南》(blog-25)＋《滅鼠公司邊間好》(blog-31)（文檔指定）；blog-25「🏢 物管招標滅鼠服務」段落新增回鏈 → blog-43（冠軍頁權重灌注）；另鏈 /service/rodent/、/commercial/property/、/commercial/fnb/、blog-27、blog-20 形成商業滅鼠主題集群
 - info hub 新增 blog-43 卡（分類💼 商業滅鼠）；sitemap 204→205 URL（blog-43 weekly 0.9）＋blog-25 lastmod→2026-11-19；CHANGELOG v9.129 條目
 - JSON-LD×3（BreadcrumbList／BlogPosting articleSection 商業滅鼠／FAQPage）全部解析通過；hreflang 僅 zh-HK＋x-default（EN 版日後按需另發）
