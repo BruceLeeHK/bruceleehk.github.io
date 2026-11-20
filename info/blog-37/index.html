@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/og-cover.jpg">
 
-    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.92">
+    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.132">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
@@ -115,13 +115,11 @@ img { max-width: 100%; display: block; }
   padding: 10px 20px;
   position: relative;
 }
-.logo {
-  display: flex;
+.logo { display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: inherit;
-}
+  color: inherit }
 .logo img {
   height: 38px;
   width: auto;
@@ -539,22 +537,25 @@ footer {
 .thumb-wa { background: var(--whatsapp); color: #fff; }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .menu-toggle { display: flex; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    padding: 15px 20px;
-    box-shadow: var(--shadow-lg);
-    gap: 12px;
-    border-top: 1px solid var(--border);
-  }
-  .nav-links.active { display: flex; }
+@media (max-width: 1150px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-lg);
+      gap: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-links.active { display: flex; }
+}@media (min-width: 1151px) {
+  .logo { flex-shrink: 0; } /* v9.132 鎖定 Logo 寬度 */
+}@media (max-width: 768px) {
   .hero { padding: 60px 20px 50px; }
   .hero h1 { font-size: 1.7rem; }
   .modern-card { padding: 22px; }
@@ -1248,7 +1249,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     </div>
 
     <script src="/assets/js/i18n.js?v=9.92" defer></script>
-    <script src="/assets/js/bruceleehk.js?v=9.92" defer></script>
+    <script src="/assets/js/bruceleehk.js?v=9.132" defer></script>
 
     <!-- v9.91-RODENT-CLUSTER-MARKER -->
     <script type="application/ld+json">

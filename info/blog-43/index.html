@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bruceleehk.com/assets/img/private-estate-rodent-notice.jpg">
 
-    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.127">
+    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.132">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript></noscript>
@@ -115,13 +115,11 @@ img { max-width: 100%; display: block; }
   padding: 10px 20px;
   position: relative;
 }
-.logo {
-  display: flex;
+.logo { display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: inherit;
-}
+  color: inherit }
 .logo img {
   height: 38px;
   width: auto;
@@ -539,22 +537,25 @@ footer {
 .thumb-wa { background: var(--whatsapp); color: #fff; }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .menu-toggle { display: flex; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    padding: 15px 20px;
-    box-shadow: var(--shadow-lg);
-    gap: 12px;
-    border-top: 1px solid var(--border);
-  }
-  .nav-links.active { display: flex; }
+@media (max-width: 1150px) {
+    .menu-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      padding: 15px 20px;
+      box-shadow: var(--shadow-lg);
+      gap: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-links.active { display: flex; }
+}@media (min-width: 1151px) {
+  .logo { flex-shrink: 0; } /* v9.132 鎖定 Logo 寬度 */
+}@media (max-width: 768px) {
   .hero { padding: 60px 20px 50px; }
   .hero h1 { font-size: 1.7rem; }
   .modern-card { padding: 22px; }
@@ -1138,7 +1139,6 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
           </ul>
           <p>想深入了解商業場景嘅落地執行，可參考<a href="/commercial/property/" style="color:var(--primary-dark);font-weight:700;">物業管理滅蟲（B2B）專頁</a>同<a href="/commercial/fnb/" style="color:var(--primary-dark);font-weight:700;">餐廳滅蟲（B2B）專頁</a>；或者直接睇<a href="/service/rodent/" style="color:var(--primary-dark);font-weight:700;">專業滅鼠公司服務主頁</a>嘅服務流程、IoT 智慧鼠盒監測同個案實證。</p>
           <h3>五、【常見問題】商業滅鼠與法例合規問答（Q&A）</h3>
-          <p>以下問答以 HTML5 原生收縮摺疊（&lt;details&gt;）呈現，節省手機版面空間，同時同步收錄於結構化資料（FAQPage），方便 Google 與 AI 助手完整抓取內容。</p>
           <details class="faq-item" open><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 食肆見一隻老鼠，食環署會即時釘牌咩？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>通常唔會即時釘牌。按《公眾衛生及市政條例》第 47 條及《食物業規例》程序，食環署一般先向處所送達「消除蟲鼠通知書」，規定限期內潔淨處所並採取指定滅鼠步驟；違者會被檢控及罰款。持牌食肆同時受食環署違例記分制規管，嚴重或重複違規被扣滿分，牌照可被暫時吊銷（停業 7 至 14 天），期間鋪租人工照計，損失遠超定期滅鼠開支。</p></div></details>
           <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 2025 年新修訂嘅第 47(1A) 條對物業管理公司有咩影響？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>修訂後，主管當局如覺得建築物嘅任何公用部分受蟲鼠侵擾，可直接向負責管理該處所嘅人（物業管理公司／業主立案法團）送達法定通知，勒令限期內潔淨公用部分及執行指定滅鼠步驟。即係話公用部分鼠患直接係物管責任，唔可以再以「個別單位問題」推卸——接法定通知書除咗法律後果，仲會影響下一輪標書續約。</p></div></details>
           <details class="faq-item"><summary class="faq-question"><h3><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> 商業滅鼠保養合約一般包含乜嘢？點計價？</h3><i class="fa-solid fa-chevron-down faq-arrow" aria-hidden="true"></i></summary><div class="faq-answer"><p>正規商業 IPM 保養合約至少應包含：定期巡視次數、鼠餌站分布圖及「一盒一碼」巡檢紀錄、AFCD 註冊藥劑清單、上鎖式防竄改餌站、突發出更安排、鼠患投訴處理時限，以及 IoT 監測報告（如有）。計價按處所面積、巡視頻率同監測配置按月／按季／按年計——透明行情可參考《2026 香港滅鼠公司收費指南》，唔記得寫入合約嘅承諾就當冇講過。</p></div></details>
@@ -1252,7 +1252,7 @@ if(c&&c.v==='granted'&&!window.__blhGtmLoaded){window.__blhGtmLoaded=true;(funct
     </div>
 
     <script src="/assets/js/i18n.js?v=9.88" defer></script>
-    <script src="/assets/js/bruceleehk.js?v=9.88" defer></script>
+    <script src="/assets/js/bruceleehk.js?v=9.132" defer></script>
 
     <!-- v9.91-RODENT-CLUSTER-MARKER -->
     <script type="application/ld+json">

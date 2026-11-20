@@ -103,7 +103,7 @@
 }
     </script>
 
-    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.127">
+    <link rel="stylesheet" href="/assets/css/bruceleehk.css?v=9.132">
     
     <!-- ⚡ 修正：移除 integrity 校驗碼，確保 GLightbox CSS 順利載入 -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -186,13 +186,11 @@ img { max-width: 100%; display: block; }
   padding: 10px 20px;
   position: relative;
 }
-.logo {
-  display: flex;
+.logo { display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: inherit;
-}
+  color: inherit }
 .logo img {
   height: 38px;
   width: auto;
@@ -592,10 +590,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .toast.toast-warning { background: linear-gradient(135deg, var(--warning), #d97706); }
 .toast.toast-error { background: linear-gradient(135deg, var(--danger), #b91c1c); }
 
-@media (max-width: 768px) {
-  .menu-toggle { display: flex; }
-  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; flex-direction: column; padding: 15px 20px; box-shadow: var(--shadow-lg); gap: 12px; }
-  .nav-links.active { display: flex; }
+@media (max-width: 1150px) {
+    .menu-toggle { display: flex; }
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; flex-direction: column; padding: 15px 20px; box-shadow: var(--shadow-lg); gap: 12px; }
+    .nav-links.active { display: flex; }
+}@media (min-width: 1151px) {
+  .logo { flex-shrink: 0; } /* v9.132 鎖定 Logo 寬度 */
 }
 @media (min-width: 769px) { .mobile-thumb-zone { display: none; } body { padding-bottom: 0; } }
     </style>

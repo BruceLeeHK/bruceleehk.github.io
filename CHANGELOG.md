@@ -1,4 +1,16 @@
-# 修復日誌 (v9.131 — 2026-11-19)
+# 修復日誌 (v9.132 — 2026-11-19)
+
+## v9.132 客戶審閱修正：blog-43 FAQ 技術備註下架＋全站導航防擠壓加固（2026-11-19）
+
+按客戶外審文檔《優化一隻老鼠會牽動整盤生意嗎？》意見執行兩項修正：
+
+- blog-43 ZH＋EN 刪除五、【常見問題】標題下嘅技術備註段（「以下問答以 HTML5 原生收縮摺疊（&lt;details&gt;）呈現……同步收錄於結構化資料（FAQPage）……」）——工程術語唔應該展示俾客戶、灰色方框白佔手機兩行版面，而 Google／AI 抓取靠底層 &lt;details&gt; 標籤同 JSON-LD 代碼識別，無需正文文字聲明；刪除後標題直接緊接 4 條摺疊問答，FAQPage JSON-LD 結構不變
+- 全站導航加固①（鎖 Logo）：@media (min-width: 1151px) 下 .logo 容器加 flex-shrink: 0——完整選單模式下「滅蟲師傅」標誌不再被擠壓變形，根絕與「首頁」重疊；≤1150px 收折面板模式維持可壓縮，保 375px 手機零溢出（鎖寬只放桌面是必要約束）
+- 全站導航加固②（斷點放寬）：漢堡選單觸發斷點 768px→1150px——辦公室半屏視窗、Chrome 側邊欄（有效寬約 950–1100px）、13 吋手提電腦、iPad 橫屏等場景一律自動切換整潔收折按鈕；桌面完整選單只在 &gt;1150px 展示
+- 斷點配套：桌機 hover 下拉 min-width 769→1151px、收折面板手風琴 max-width 768→1150px；退役並刪除 769–1120px 收緊間距同 769–940px 藏 logo 文字兩個過渡階層（被新斷點完全取代）；bruceleehk.js resize 自動收起選單閾值 768→1150
+- 內聯樣式鏡像同步（103 檔）：blog 全系列／about／services／strategy／info hub／vote／404 等頁面自帶嘅內聯 <style> 導航快照會覆蓋外部 CSS——漢堡 nav 規則同步抽至內聯 @media(max-width:1150px)（內容規則留 768）、內聯 .logo 同步補 @media(min-width:1151px) 鎖寬；其餘 107 頁無內聯導航快照由外部 CSS 直接生效
+- cache-bust：bruceleehk.css／bruceleehk.js 全站 ?v=9.132（177 頁 9.127＋26 頁 blog-28~40 舊版號 9.92 一併統一＋commercial/restaurant 2 頁補返缺失版本參數）；search.js／i18n.js 零改動維持原版本號
+- Pagefind 重跑＋清理再生未用 UI 檔；sitemap blog-43 ZH／EN lastmod 維持 2026-11-19（內容修改同日）；正文以外零改動
 
 ## v9.131 /info/blog-43/ 英文版上線：商業滅鼠法例長文 EN 對應頁＋雙向內鏈 EN 閉環（2026-11-19）
 

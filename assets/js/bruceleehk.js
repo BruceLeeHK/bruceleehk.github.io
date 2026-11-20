@@ -76,11 +76,11 @@
         // 按 ESC 鍵關閉
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
-        // 視窗放大時自動復原選單狀態
+        // 視窗放大時自動復原選單狀態（v9.132：閾值隨漢堡斷點 768→1150）
         let t;
         window.addEventListener('resize', () => {
             clearTimeout(t);
-            t = setTimeout(() => { if (window.innerWidth > 768) close(); }, 100);
+            t = setTimeout(() => { if (window.innerWidth > 1150) close(); }, 100);
         });
     }
 

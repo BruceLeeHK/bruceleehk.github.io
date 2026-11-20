@@ -93,6 +93,11 @@ img { max-width: 100%; display: block; }
     text-decoration: none;
     color: inherit;
 }
+
+/* v9.132 鎖定 Logo 寬度（僅 >1150px 完整選單需要；≤1150px 收折面板維持可壓縮，保 375px 手機零溢出） */
+@media (min-width: 1151px) {
+    .logo { flex-shrink: 0; }
+}
 .logo img {
     height: 38px;
     width: auto;
@@ -484,7 +489,8 @@ footer {
 .service-badge.new    { background: var(--primary-light); color: var(--primary-dark); border: 1px solid #6ee7b7; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+/* v9.132 漢堡斷點 768→1150px：辦公室半屏視窗、Chrome 側邊欄（有效寬約 950–1100px）、13 吋手提、平板橫向一律切換整潔收折按鈕 */
+@media (max-width: 1150px) {
     .menu-toggle { display: flex; }
     .nav-links {
         display: none;
@@ -882,8 +888,8 @@ picture img {
     white-space: nowrap;
     color: var(--text-main);
 }
-/* 桌機展開（hover + 鍵盤 focus + 已開狀態） */
-@media (min-width: 769px) {
+/* 桌機展開（hover + 鍵盤 focus + 已開狀態）v9.132：隨漢堡斷點對齊（>1150px），避免飛出式下拉漏進收折面板 */
+@media (min-width: 1151px) {
     .nav-drop:hover .nav-dropdown,
     .nav-drop.open .nav-dropdown,
     .nav-drop:focus-within .nav-dropdown {
@@ -892,8 +898,8 @@ picture img {
         transform: translateY(0);
     }
 }
-/* 手機手風琴（≤768px 面板內縮排展示） */
-@media (max-width: 768px) {
+/* 面板手風琴（≤1150px 收折面板內縮排展示；v9.132 隨漢堡斷點放寬） */
+@media (max-width: 1150px) {
     .nav-drop { width: 100%; }
     /* 與現有置中選單風格一致：父項＋caret 置中成組 */
     .nav-drop-head { width: 100%; justify-content: center; gap: 2px; }
@@ -913,17 +919,4 @@ picture img {
     }
     .nav-drop.open .nav-dropdown { display: block; }
     .nav-dropdown a { white-space: normal; padding: 8px 12px; font-size: 0.9rem; }
-}
-/* 平板密度防溢出：769–1120px 收緊導航間距（v9.127：加大壓縮保單行，右上角僅餘一個放大鏡） */
-@media (min-width: 769px) and (max-width: 1120px) {
-    .nav-links { gap: 6px; }
-    .nav-links a { padding: 6px 7px; font-size: 0.85rem; }
-    .nav-dropdown { min-width: 236px; }
-    .lang-switch-wrap { margin-right: 4px; padding: 3px 6px; }
-}
-/* 小桌面／平板橫向（769–940px）：藏 logo 文字保導航單行 */
-@media (min-width: 769px) and (max-width: 940px) {
-    .logo-text { display: none; }
-    .nav-links { gap: 4px; }
-    .nav-links a { padding: 6px 5px; font-size: 0.82rem; }
 }
