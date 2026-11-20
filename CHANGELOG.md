@@ -1,4 +1,21 @@
-# 修復日誌 (v9.132 — 2026-11-19)
+# 修復日誌 (v9.133 — 2026-11-20)
+
+## v9.133 新文章《DIY 亂噴煙霧彈、殺蟲水適得其反？》發布至【蟲類資訊】＋DIY 防治主題內鏈（2026-11-20）
+
+依用戶文檔《DIY 亂噴煙霧彈、殺蟲水適得其反？.docx》發布家居滅蟲防伏長文，與站內 6 篇防治指南＋DIY 工具頁建立內鏈集群：
+
+- 新增 /info/blog-44/（以 blog-43 模板生成）：Meta Title／Description／核心長尾關鍵字全部採用文檔建議文案；slug 沿用站內 /info/blog-44/ 慣例（文檔建議 slug 不採用保 IA 一致）；分類🏠 家居滅蟲
+- 正文四大節照文檔：①4 大 DIY 災難現場（紅螞蟻曱甴「群體分裂 Budding」／床蝨煙霧彈逼入電掣鄰房／白蟻漂白水抹泥路轉移蛀蝕／老鼠拒食反應＋誤傷寵物）②DIY vs 專業 IPM 五維對比表③專業對症治理 3 大標準（AFCD 註冊藥劑＋3 至 7 日科學見效週期）④家居滅蟲與 DIY 善後 FAQ×4（HTML5 原生 &lt;details&gt; 摺疊，FAQPage JSON-LD 同步收錄；文檔 FAQ 內文缺失，問答依正文事實補撰；沿 v9.132 範式無技術備註段）
+- 文檔指定 5 處真實超連結全部到位：blog-36 滅蟻＋blog-35 滅曱甴＋blog-38 滅床蝨＋blog-34 滅白蟻＋blog-25 滅鼠收費指南；另鏈 /info/diy-pest-tools/（DIY 工具選購指南）與延伸閱讀 blog-42 青衣紅螞蟻實錄／blog-30 家居害蟲圖鑑／blog-12 家居滅蟲收費，形成家居滅蟲主題集群
+- diy-pest-tools「延伸閱讀」段落新增回鏈 → blog-44（DIY 主題雙向閉環）
+- info hub 新增 blog-44 卡（分類🏠 家居滅蟲）；sitemap 206→207 URL（blog-44 weekly 0.9）＋/info/ 及 /info/diy-pest-tools/（ZH+EN）lastmod→2026-11-20；CHANGELOG v9.133 條目
+- JSON-LD×3（BreadcrumbList／BlogPosting articleSection 家居滅蟲／FAQPage）全部解析通過；hreflang 僅 zh-HK＋x-default（EN 版日後按需另發）；og:image 沿用全站預設 og-cover.jpg（文檔無配圖，沿 blog-34/35/36/38 無圖範式）
+- Pagefind 索引重跑（npx pagefind --site .）：新文章即時可搜（DIY滅蟲／煙霧彈／群體分裂／拒食反應）
+- validate_v9133.py 全 PASS（JSON-LD 解析／FAQ HTML==JSON-LD 同步／標籤平衡／內鏈目標存在／hub 卡／diy 回鏈／sitemap 207／CHANGELOG／全站不變量）
+
+**零風險約束**
+- 零既有 URL 變更、零內容刪減；共用 CSS/JS 零改動（?v=9.132 不變）；EN 站零改動；文檔無配圖零新增圖片
+
 
 ## v9.132 客戶審閱修正：blog-43 FAQ 技術備註下架＋全站導航防擠壓加固（2026-11-19）
 
