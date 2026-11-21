@@ -1,4 +1,20 @@
-# 修復日誌 (v9.134 — 2026-11-20)
+# 修復日誌 (v9.135 — 2026-11-21)
+
+## v9.135 Bing 優化方案落實：首頁大詞 Meta 原樣改寫＋白蟻／糞便圖鑑內鏈灌注＋BTi 長尾＋hub 缺陷修復（2026-11-21）
+
+依《bing優化方案.docx》（8/21–11/18 三月數據：720 曝光／37 點擊／CTR 5.14%／157 關鍵字）三大「低垂果實」逐項落地：
+
+- 首頁大詞 Meta（方案三.1，針對 香港滅蟲公司 25 曝光 0 點擊／滅蟲服務／滅蟲公司推介 共 47 曝光 0 點擊）：ZH 首頁 meta description 原樣採用指定文案「【明碼實價 HK$800 起】香港 AFCD 註冊滅蟲公司｜澳洲 T3i 免拆牆探測白蟻、商業機構及家居滅鼠，絕無隱藏收費，WhatsApp 5 分鐘報價！」（標題 v9.124 已含明碼實價＋漁護署註冊賣點不變；EN 指定標題文案 v9.124 已套用零改動；og:description 維持防假冒文案不變）
+- 白蟻大詞內鏈（方案二.2，針對 滅白蟻公司 排名 11.67／白蟻滅蟲公司 5.75）：首頁 ZH「白蟻復發救援實錄」卡＋EN Termite Relapse 卡描述各增【滅白蟻公司邊間好】5 大準則內鏈（/info/blog-34/、/en/info/blog-34/）；blog-25《滅鼠收費指南》→ blog-34 內鏈 v9.119 已存在不重複
+- 糞便圖鑑長尾（方案二.3，針對 老鼠屎 6 曝光 0 點擊排名 7.67／鞱甴屎 22.22% CTR）：站內 blog-28《老鼠屎圖鑑》（2026-10-28 上線）已覆蓋「老鼠屎 vs 鞱甴屎 vs 壁虎屎」主題——按方案建議標題升級取代重複寫文避免自我蠐食：ZH/EN title＋meta description＋keywords＋og:title/og:description＋h1/h2＋BlogPosting headline/description/keywords＋dateModified 全同步升級為《家居害蟲糞便圖鑑》句式（EN 版順帶修復 h1 缺字「ound→Found」）
+- 內鏈灌注 blog-28：首頁 ZH/EN 鼠患 band 增「見到疑似鼠屎想自行初步分辨？先睇【家居害蟲糞便圖鑑】」內鏈；blog-25 ZH/EN 延伸閱讀增 blog-28 連結（blog-31→blog-28 已有 2 條不重複）
+- BTi 長尾（方案二.3，針對 bti滅蟲 2 曝光排名 5.00）：blog-37《滅蚊公司邊間好》幼蟲源頭治理段新增「BTi 蘇雲金桿菌（Bacillus thuringiensis subsp. israelensis）」技術說明段＋FAQ 第 7 條「村屋／地盤滅蚊：BTi 有用嗎？」（HTML details 與 FAQPage JSON-LD 逐字同步，6→7 條）；meta＋JSON-LD keywords 增 bti滅蟲／蘇雲金桿菌／滅蚊幼蟲／地盤滅蚊／村屋滅蚊
+- 修復 v9.133 遺留缺陷：info hub blog-44 卡誤插於 blog-43 卡 blog-meta 內（無效 HTML <a> 套 <a>）且同卡重複兩次——現回正確結構（blog-43 卡正常閉合，blog-44 卡僅一張）
+- sitemap 8 個受影響 URL lastmod → 2026-11-21（/、/en/、/info/、blog-28 ZH+EN、blog-37、blog-25 ZH+EN；URL 總數 208 不變）；Pagefind 重跑＋清理再生未用 UI 檔
+- validate_v9135.py 全項 PASS（Meta 原樣／內鏈目標存在／JSON-LD 解析＋FAQ HTML==JSON-LD 逐字/hub 結構/sitemap 208 well-formed/全站不變量）；共用 CSS/JS 零改動（?v=9.132 不變）
+
+**零風險約束**
+- 零 URL 變更、零內容刪減、零新增圖片；EN 指定 Meta 文案（v9.124）與 og:description 防假冒文案零回退
 
 ## v9.134 /info/blog-44/ 英文版上線：DIY 滅蟲反效果長文 EN 對應頁＋DIY 主題 EN 雙向內鏈閉環（2026-11-20）
 
