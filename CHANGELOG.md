@@ -1,4 +1,15 @@
-# 修復日誌 (v9.133 — 2026-11-20)
+# 修復日誌 (v9.134 — 2026-11-20)
+
+## v9.134 /info/blog-44/ 英文版上線：DIY 滅蟲反效果長文 EN 對應頁＋DIY 主題 EN 雙向內鏈閉環（2026-11-20）
+
+為 v9.133《DIY 亂噴煙霧彈、殺蟲水適得其反？》補上英文對應頁 /en/info/blog-44/（沿 v9.131 blog-43 英文版範式）：
+
+- 新增 /en/info/blog-44/：全篇專業英文翻譯四大節（4 大 DIY 災難現場：紅螞蟻曱甴「群體分裂 Budding」／床蝨煙霧彈逼入電掣鄰房／白蟻漂白水抹泥路轉移蛀蝕／老鼠拒食反應＋誤傷寵物 → DIY vs 專業 IPM 五維對比表 → 專業對症治理 3 大標準 → FAQ×4），FAQ HTML 與 FAQPage JSON-LD 程式化同步
+- Meta／OG／JSON-LD×3（BreadcrumbList Home→Pest Info／BlogPosting inLanguage en／FAQPage）全英文；og:image 沿用全站預設 og-cover.jpg（無圖範式，與 ZH 版一致）；WA 預填訊息改英文
+- 雙向內鏈 EN 閉環：blog-44 EN → /en/info/blog-36/ 滅蟻＋blog-35 滅曱甴＋blog-38 滅床蝨＋blog-34 滅白蟻＋blog-25 滅鼠收費指南＋/en/info/diy-pest-tools/（DIY 工具指南）＋延伸閱讀 blog-42 青衣紅螞蟻實錄／blog-30 家居害蟲圖鑑／blog-12 家居滅蟲收費；en/info/diy-pest-tools/ 反射段新增回鏈 → /en/info/blog-44/
+- en/info/ hub 新增 blog-44 英文卡（🏠 RESIDENTIAL PEST CONTROL · NEW，排在 blog-43 之後）
+- ZH blog-44 補 hreflang en（與 ZH blog-43 同構）；sitemap 208 URL（blog-44 EN weekly 0.8）＋/en/info/ lastmod→2026-11-20
+- 共用 CSS/JS 零改動（?v=9.132 不變）；Pagefind 重跑＋清理再生未用 UI 檔
 
 ## v9.133 新文章《DIY 亂噴煙霧彈、殺蟲水適得其反？》發布至【蟲類資訊】＋DIY 防治主題內鏈（2026-11-20）
 
