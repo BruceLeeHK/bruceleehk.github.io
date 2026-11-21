@@ -1,4 +1,22 @@
-# 修復日誌 (v9.135 — 2026-11-21)
+# 修復日誌 (v9.136 — 2026-11-21)
+
+## v9.136 頁尾資訊行加電話：地址前插入「電話：52821552」可撥號連結（ZH/EN/SC 全站 206 頁）（2026-11-21）
+
+依用戶指示「在網站首頁的地址：新界荔景邨工場大廈 前面加上 電話：52821552」——頁尾資訊行為全站共用區塊，沿「頁尾資訊行加電郵」先例三語全站同步（只改首頁會令其餘 204 頁 footer 出現不一致）：
+
+- ZH 102 頁：「地址：新界荔景邨工場大廈 | …」行首插入「電話：52821552」（tel:+85252821552 撥號連結；color:inherit 下劃線樣式與同行電郵 mailto 連結完全一致）
+- EN 102 頁：「Address: Lai King Estate Factory Building, N.T. | …」行首插入「Tel: 52821552」；en/ai-countdown 變體（…, New Territories）一併覆蓋
+- SC 2 頁（/sc/、/sc/privacy/）：行首插入「電話：52821552」
+- 標準營業時間與詳細營業時間（星期一至六／星期日及公眾假期休息）兩種 footer 變體同時覆蓋（錨定地址前綴）；info/vote（ZH/EN）與 404 頁本無地址行，不在範圍
+- 撥號連結 tel:+85252821552 沿站內既有慣例（blog 縮圖「致電」按鈕同號碼）；JSON-LD LocalBusiness telephone 欄位全站早已存在，零改動
+- sitemap 208 URL：受影響 204 URL lastmod → 2026-11-21（/sc/×2、/info/vote/×2 未受影響維持原日期；blog-28 ZH/EN、blog-37 為 v9.135 同日已刷）
+- Pagefind 索引完全重建（清空 pagefind/ 目錄重跑，207 頁／54,628 詞／3 語言）＋刪除 7 個再生未用 UI 檔（423 KB）——順帶清除歷代累積孤兒索引檔，pagefind/ 由 694 檔回到乾淨基準 263 檔（與 v9.135 zip 相同水準）
+- 隱私防護加固：發現 assets/img 遺留 blog-43 通告未去識別原始檔 park-island-rodent-notice.jpg／.webp（全站零引用、歷代 zip 從未交付、檔名含屋苑名）——移出交付樹歸檔 private-archive/，杜絕日後隨 zip 上網風險；去識別實黑版 private-estate-rodent-notice.jpg／.webp 照常交付（blog-43 引用不變）
+- validate_v9136.py 全項 PASS（206 檔電話段恰一次／電話→地址順序＋tel 樣式／HTML 標籤平衡／首頁 JSON-LD 6 段解析／sitemap 208 well-formed／全站不變量）；共用 CSS/JS 零改動（?v=9.132 不變）
+
+**零風險約束**
+- 零 URL 變更、零內容刪減、零新增圖片；正文以外只動 footer 資訊行；head/meta/JSON-LD 零改動
+- 唯一檔案移除：park-island-rodent-notice 原始檔 2 張（從未交付、零引用，純隱私防護，不影響任何頁面顯示）
 
 ## v9.135 Bing 優化方案落實：首頁大詞 Meta 原樣改寫＋白蟻／糞便圖鑑內鏈灌注＋BTi 長尾＋hub 缺陷修復（2026-11-21）
 
