@@ -1,4 +1,17 @@
-# 修復日誌 (v9.138 — 2026-11-22)
+# 修復日誌 (v9.139 — 2026-11-22)
+
+## v9.139 blog-45《30樓窗框邊驚現神秘泥巢》EN 英文版鏡像上線＋hreflang 三向補完＋EN 收錄閉環（2026-11-22）
+
+依用戶指示為 v9.138 新增的 blog-45 泥壺蜂空巢文章建立英文版：
+
+- 新增 /en/info/blog-45/（EN，datePublished 2026-11-22）：以 /en/info/blog-44/ 為底版作 head／OG／hero／article／JSON-LD 四區塊精確錨定替換＋blog45-fig CSS 注入；Meta Title／Description／keywords 全新英文佈局，主攻 "remove mud dauber wasp nest／mud dauber nest removal" 長尾，同步佈局 "unknown nest on window frame／mud nest identification" 識別意圖，承接以英文搜索不明巢穴的苦主
+- 正文英文版四段完整鏡像：①23:13 深夜急診實錄（3 圖同源複用：泥巢實拍＋WhatsApp 對話上下，alt／figcaption 全英文，隱私圖註明 customer name redacted）；②免費 3 步清理教學（no insect spray, no hard sell）；③泥壺蜂 vs 虎頭蜂 4 維對比表（full comparison table）；④6 條 <details> 收縮 FAQ 與 FAQPage JSON-LD 逐字同步（腳本共用同一組 QA 常量生成 visible 與 JSON-LD，結構性保證同步）；標籤終檢 details 6/6、section／article／table／figure 平衡
+- 結構化資料：BreadcrumbList（Home／Pest Info）＋BlogPosting（inLanguage en、articleSection 沿 EN 版慣例保留「師傅出更」、keywords 13 組英文長尾）＋FAQPage 6 條，3 段 JSON-LD 全部 json.loads 解析通過；og:image／twitter:image 沿 ZH 版用泥巢實拍圖
+- hreflang 三向補完：ZH blog-45 由 v9.138 的 zh-HK＋x-default 補上 en alternate（zh-HK／en／x-default 三向互指）；EN 版 hreflang zh-HK（ZH URL）／en（EN URL）／x-default（ZH URL），沿 blog-44 EN 先例
+- 雙向內鏈閉環 EN 側：/en/info/ hub 新增 blog-45 卡（🚨 MASTER ON DUTY · NEW badge，置 blog-44 卡後）；/en/wasp-nest/ web-net 知識卡區新增 "Mud nest by the window? Don't panic" 卡（4→5 卡）；/en/info/blog-24/ 延伸閱讀增 EN 回鏈；文章內鏈全部指向 /en/ 版服務頁與文章（/en/wasp-nest/、/en/info/blog-24/、blog-30、blog-37、blog-36）
+- sitemap 新增 /en/info/blog-45/（priority 0.9），209→210 URL，XML well-formed 校驗通過
+- Pagefind 整目錄清空重建：209 頁／55,323 詞／3 語言（fragment 209／index 49／meta 3），刪除 7 個再生未用 UI 檔（423 KB），最終 266 檔
+- 共用 CSS/JS 零改動（?v=9.132／search.js ?v=9.127 不變）；隱私遮蔽圖直接複用 v9.138 實黑版，零新增圖片；patch_v9139_blog45_en.py／patch_v9139_site.py 冪等重跑全 SKIP
 
 ## v9.138 新增【師傅出更】blog-45《30樓窗框邊驚現神秘泥巢》：泥壺蜂空巢文章深度潤色上線＋「清除泥壺蜂巢」長尾佈局＋泥壺蜂對症內鏈閉環＋客戶名稱實黑遮蔽（2026-11-22）
 
