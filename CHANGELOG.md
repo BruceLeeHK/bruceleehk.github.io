@@ -1,4 +1,19 @@
-# 修復日誌 (v9.137 — 2026-11-22)
+# 修復日誌 (v9.138 — 2026-11-22)
+
+## v9.138 新增【師傅出更】blog-45《30樓窗框邊驚現神秘泥巢》：泥壺蜂空巢文章深度潤色上線＋「清除泥壺蜂巢」長尾佈局＋泥壺蜂對症內鏈閉環＋客戶名稱實黑遮蔽（2026-11-22）
+
+依用戶指示將《30樓窗框邊驚現神秘泥巢》文檔整理潤色後發布至【蟲類資訊】→【師傅出更】欄目，目標提升「清除泥壺蜂巢」搜索排名，承接搜索「不明巢穴」苦主流量：
+
+- 新增 /info/blog-45/（ZH，datePublished 2026-11-22）：Meta Title／Description 原樣採用文檔後台 SEO 設定；核心長尾（窗框泥巢、泥壺蜂巢點處理、拆蜂巢會唔會報復、高層窗邊有蜂巢、泥壺蜂會唔會咬人、香港滅蜂公司、春季滅蚊、家居滅螞蟻）＋目標大詞「清除泥壺蜂巢／泥壺蜂巢清理」佈局於 keywords、AI 摘要、步驟標題、FAQ 及圖片 alt
+- 正文四大段：①深夜 23:13 急診實錄（排查活體→23:21 斷症泥壺蜂→憑羽化空洞斷定空巢拆解「報復」迷思，附泥巢實拍＋WhatsApp 對話實錄上下 2 圖）；②免費傳授清除泥壺蜂巢安全 3 步曲（確認環境→物理刮除→切忌殺蟲水＋防築巢貼士，明確「無需預約上門、不硬銷」）；③泥壺蜂 vs 虎頭蜂 4 維對比表（習性／外觀／攻擊性／處理方式，原表格全文保留）；④6 條收縮 FAQ（<details> 與 FAQPage JSON-LD 逐字同步）＋「📸 影張相 WhatsApp 免費辨識」CTA
+- 結構化資料：BreadcrumbList＋BlogPosting（inLanguage zh-HK、articleSection 師傅出更、keywords 17 組）＋FAQPage 6 條；og:image／twitter:image 用泥巢實拍圖（blog-42 個案圖慣例）；data-pagefind-body 照常
+- 3 張個案圖入 assets/img/：mud-dauber-wasp-empty-nest-window-frame-30f.jpg（泥巢實拍）、whatsapp-mud-dauber-wasp-night-diagnosis-part1／part2.jpg（深夜診斷對話）；【隱私紅線】對話（上）引述區客戶顯示名稱以完全不透明純黑長方形遮蔽（PIL 實黑＋遮蔽區 10,692 像素校驗＋放大人工複核通過，僅餘 JPEG 邊界 2 像素 DCT 噪點值 13 肉眼不可辨），對話（下）無 PII 原樣上線
+- CTA 對症：hero 與文末「影相 WhatsApp 免費辨識蟲巢」（wa.me 85252821552 預填「窗邊／屋企發現不明泥巢（懷疑泥壺蜂巢）」訊息）＋滅馬蜂巢・黃蜂巢專頁按鈕；延伸閱讀連 blog-24 摘馬蜂巢實錄、/wasp-nest/ 專頁、blog-30 害蟲圖鑑、blog-37 春季滅蚊、blog-36 家居滅螞蟻
+- 雙向內鏈閉環：/info/ hub 新增 blog-45 卡（師傅出更 badge，置 blog-44 卡後，47→48 卡）；/wasp-nest/ 專頁 web-net 知識卡區新增「窗邊泥巢唔使慌」卡連向 blog-45（4→5 卡）；blog-24 延伸閱讀增「窗框神秘泥巢」師傅出更系列回鏈；hub 卡插入腳本首輪曾誤插重複 blog-meta 開標籤（瀏覽器 DOM 複核發現 blog-44 卡重複渲染），已即時修正並於 validate 加入「blog-44 卡段 blog-meta 恰 1＋div 標籤平衡」斷言防復發
+- hreflang：blog-45 現階段僅 zh-HK＋x-default（EN 版未建立；後續按需補 en hreflang＋sitemap EN 條目，沿 blog-43／blog-44 EN 版先例）；sitemap 新增 /info/blog-45/（priority 0.9），208→209 URL；/info/、/wasp-nest/、/info/blog-24/ lastmod 已為 2026-11-22 維持不變
+- Pagefind 索引整目錄清空重建（208 頁／55260 詞／3 語言）＋刪除 7 個再生未用 UI 檔（pagefind-ui／modular-ui／component-ui／highlight 系列，423 KB）；pagefind/ 共 265 檔（208 fragment／49 index／3 meta）
+- 共用 CSS/JS 零改動（?v=9.132／search.js ?v=9.127 不變）；validate_v9138.py 全項 PASS；pack_v9138.py 隱私紅線斷言（zip 內客戶顯示名稱字樣零出現、遮蔽實黑版 3 圖必在）
+- 隱私重掃：發現 v9.136 已移出的 blog-43 通告未去識別原始檔 park-island-rodent-notice.jpg/.webp 因舊 zip 解壓還原再次出現在 assets/img/（全站零引用；已核實 v9.136／v9.137 交付 zip 從未包含，無洩漏）——再次移出交付樹歸檔 private-archive/，pack_v9138.py 斷言防復發
 
 ## v9.137 全站服務時間統一：頁尾資訊行改「服務時間」精簡一行版＋報價頁詳細版服務時間＋JSON-LD 星期日休息修正（ZH/EN/SC 207 檔）（2026-11-22）
 
