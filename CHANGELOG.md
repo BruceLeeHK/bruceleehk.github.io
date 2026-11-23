@@ -1,4 +1,22 @@
-# 修復日誌 (v9.142 — 2026-11-23)
+# 修復日誌 (v9.144 — 2026-11-23)
+
+## v9.144 資格宣稱終審核對：about＋床蝨頁通過／services keywords 簡體「持牌灭虫」殘留清零（2026-11-23）
+
+依用戶確認事實（無「食環署承辦商資格」、無「漁護署除害劑牌照」，行業實況＝使用獲批漁護署註冊除害劑＋按食環署標準施工，保留《防治蟲鼠訓練（主管）證書》）對用戶指定兩頁終審＋全站殘留複掃：
+
+- 【用戶指定兩頁終審＝零改動通過】about（ZH/EN）meta description／og／keywords／正文資歷段／JSON-LD 均為《防治蟲鼠訓練（主管）證書》＋漁護署註冊除害劑表述，全檔零「持牌／牌照／licence」；床蝨頁 service/flea（ZH/EN）meta description「高溫蒸氣與漁護署註冊除害劑雙管齊下」、正文「縫隙注藥（漁護署註冊除害劑）」與「📜 專業資歷 — 持證專業團隊，使用漁護署註冊除害劑」、EN「Certified team using AFCD-registered products」，全檔零「持牌／牌照／licensed」
+- 【唯一殘留清零】services/index.html keywords 簡體段「持牌灭虫」→「持证灭虫」（v9.143 只改繁體「持牌滅蟲」，簡體漏網；本批為全站最後一處「持牌」殘留）——屬 meta keywords 輔助訊號，零正文／零 title 變動，sitemap lastmod 已為 2026-11-23 無需再動
+- 【範圍保護】blog-43「持牌食肆／釘牌」教學（客戶端食肆牌照語境）3 處正確保留；商業客戶端（en/commercial、blog-33、whitepaper）牌照表述保留；零 URL 變更、零內容刪減
+- 【全站終審掃描歸零】除害劑牌照／漁護署牌照／持有漁護署牌照／持牌灭虫／持牌滅蟲／持牌師傅／持牌殺蟲／AFCD Licensed／licensed exterminator／licensed pest control／食環署承辦商／Pest Control Operator／持牌人名冊
+
+## v9.143 資格宣稱全站校正：持牌→持證／除害劑牌照→漁護署註冊除害劑／AFCD Licensed→AFCD-Registered（2026-11-23）
+
+依用戶確認事實（無「食環署承辦商資格」、無「漁護署除害劑牌照」，行業實況＝使用獲批漁護署註冊除害劑＋按食環署標準施工，保留《防治蟲鼠訓練（主管）證書》）全站校正資格宣稱：
+
+- 【用戶指定兩頁】about 頁核對通過零改動（meta／正文／JSON-LD 均為證書＋漁護署註冊除害劑表述）；床蝨頁 service/flea 正文「📜 專業資歷」行由「除害劑牌照專業團隊」改「持證專業團隊」，EN 版同歩（Licensed pesticide team→Certified team）
+- 【ZH 宣稱校正】首頁「100%專業持證師傅」、ai-countdown、rat-control（＋油尖旺）、五個 service 專頁「📜 專業資歷」行、info hub 三卡、services keywords；blog-1 準則一（法定牌照與食環署登記→使用漁護署註冊除害劑，移除錯誤「食環署 Pest Control Operator 註冊號碼／持牌人名冊」查證法，FAQ 同步）；blog-3 全頁轉向（title/description/keywords/H1/H2/正文/JSON-LD：除害劑牌照查證→註冊除害劑查證，移除食環署承辦商資格，正文改「全線使用《除害劑條例》下漁護署註冊嘅除害劑」）；blog-7/12/16/20/31/32/34/42 全部「除害劑牌照／持牌」指標改「漁護署註冊除害劑／持證」；blog-43 食肆牌照（客戶端）保留
+- 【EN 宣稱校正】/en/ 與 /en/service/termite/ title 六處「AFCD Licensed」→「AFCD-Registered Pesticides」；en/index「100% certified technicians／Certified &amp; AFCD-registered」；en/ai-countdown、en/service/*（4 頁 Credentials 行）、en/rat-control（＋油尖旺）→ certified；en blog-1（Golden Rule 1＋移除 FEHD Pest Control Operator 查證法）、blog-3 全頁（Licences→Credentials）、blog-7/8/10/12/15/16/20/21/25/31/32/34/42 同步；blog-25「As a fully licensed」→「As a professional」；EN 作者欄 27 檔「Licences→Certificates」
+- 【範圍保護】商業客戶端牌照表述全保留（en/commercial/* FEHD/DH/SWD licence、blog-43 食肆釘牌教學、blog-33 食肆牌照續期、whitepaper JSON-LD license 屬性）；零 URL 變更、零內容刪減、共用 CSS/JS 零改動；sitemap 仍 209 URL，受影響 URL lastmod→2026-11-23
 
 ## v9.142《順勢放大轉化率的 2 個微調機會》Sitelinks 獨立摘要＋品牌入口反哺商業大詞（2026-11-23）
 
