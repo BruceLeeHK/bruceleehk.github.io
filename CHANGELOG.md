@@ -1,4 +1,16 @@
-# 修復日誌 (v9.140 — 2026-11-22)
+# 修復日誌 (v9.141 — 2026-11-23)
+
+## v9.141 頁頂「6 個箭頭」根除＋《解決滅蟲收費與滅蟲公司自相殘殺》P1 精修＋P2 英文就地升級（2026-11-23）
+
+依用戶兩份 GSC 診斷文檔與 blog 頁頂截圖執行三項修復：
+
+- 【任務 1・6 個箭頭根除】v9.140 補丁腳本在 27 檔 87 處 meta 標籤留下殘留「>>」（`content="…"">>`），瀏覽器把多餘 `>` 提升為正文文字節點，在頁頂左上角渲染成 6 個箭頭，並令 description/keywords/og/twitter 等其後的 meta 全部跌入 `<body>`——逐一精確修復為 `">`；另修復 103 檔 Font Awesome `<noscript>` 雙重嵌套（preload 行被誤包進 noscript 導致 JS 用戶載不到 FA preload、no-JS 用戶載不到 FA CSS），還原為首頁同款「preload＋noscript stylesheet」標準兩行式
+- 【任務 2・P1 滅蟲收費／滅蟲公司「保一壓多」精修】blog-4（滅蟲收費皇牌，GSC 15.0）URL 與 H1 嚴禁不動，僅按文檔強化 title 點擊鉤子《2026 香港滅蟲收費總表：各類害蟲價目一覽（HK$800起・0隱藏收費）｜滅蟲師傅》（og:title/headline 六件套同步）；blog-12 降溫為《【2026 家居滅蟲預算指南】按實用面積呎數計價＋5 大防伏指標》、blog-7 降溫為《【2026最新】滅蟲服務點樣計價？拆解影響報價嘅 4 大因素》（標題級「收費對照／行情」精確匹配歸零，og/twitter/description/H2/keywords 同步），兩頁文首第一段插入「2026 香港滅蟲收費總表」精準錨點 → blog-4 輸血；blog-3、blog-1 文首第一段改為「香港專業滅蟲公司」精準錨點 → 首頁灌權（blog-3 保留愉景灣／九龍城實證案例內鏈）
+- 【任務 3・P2 英文一詞一主頁】/en/ 奪回品牌大詞 Pest Control Hong Kong（title《Pest Control Hong Kong | AFCD Licensed Exterminator (From HK$800)》、H1《Professional Pest Control Services in Hong Kong》）；/en/services/ 轉攻《Pest Control Pricing &amp; Treatment Plans Hong Kong (2026)》並文首輸血 /en/；/en/service/termite/（24.1 名）對準《Termite Treatment Services Hong Kong | AFCD Licensed &amp; Free Inspection》；/en/rat-control/（13.9 名，連同深水埗 11.3 等地區子頁）定為 Rat+Mouse 唯一總舵——title/H1 通吃 Rat Removal &amp; Mouse Control，五個地區子頁標題/H1 同步補詞；/en/service/rodent/（32.7 名重複頁）與 v9.140 新建即與 /en/ 撞詞的 /en/pest-control-hong-kong/ 均改為「canonical＋meta refresh＋JS」301 備援跳轉頁（真 301 由 Cloudflare Redirect Rules 執行），全站 30+ 檔內鏈重指 /en/rat-control/，sitemap 移除兩個跳轉 URL（211→209）；blog-34/36/16/39 文首第一段統一輸血 termite 專頁；/en/info/blog-12、/en/districts/、/en/info/ 頂部簡介輸血 /en/；東區（4.0 名）／北區（6.5 名）／南區標題加入 Free Inspection &amp; Same-Day Quote 點擊鉤子
+- 【首頁卡調整】/en/ 專業服務區「NEW · Service Hub」卡由 /en/pest-control-hong-kong/ 改指 /en/services/（徽章改 Service &amp; Pricing Hub）；/en/services/ 白蟻連結錨點改精準「Termite Treatment Services」、滅鼠清單連結改「Rat Removal &amp; Mouse Control Service」→ /en/rat-control/
+- 流量保護：僅 2 個重複／撞詞 URL 轉跳轉（均有 Cloudflare 301＋站內備援雙保險），其餘零 URL 變更、零內容刪減；sitemap 211→209 URL；受影響 33 條 URL lastmod → 2026-11-23
+
+
 
 ## v9.140 《全站並非缺乏權重》大熱詞「自相殘殺」重整：滅蟲收費皇牌頁＋滅蟲公司首頁收割＋英文落地頁補位（2026-11-22）
 
