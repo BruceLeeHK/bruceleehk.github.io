@@ -1,4 +1,18 @@
-# 修復日誌 (v9.139 — 2026-11-22)
+# 修復日誌 (v9.140 — 2026-11-22)
+
+## v9.140 《全站並非缺乏權重》大熱詞「自相殘殺」重整：滅蟲收費皇牌頁＋滅蟲公司首頁收割＋英文落地頁補位（2026-11-22）
+
+依用戶《全站並非缺乏權重.docx》執行「保一壓多」：終結 11 頁瓜分「滅蟲收費」、5 頁爭「滅蟲公司」的權重攤薄，並新建英文服務專頁承接 1,519 次零點擊英文曝光，讓曝光轉化為點擊。
+
+- 滅蟲收費（519 曝光）皇牌頁＝blog-4（GSC 排名 15.0 全站最高）：title/H1/og/twitter/keywords/BlogPosting headline 六件套改為《2026 香港滅蟲收費總表｜各類害蟲收費價目一覽・明碼實價 HK$800 起》，並於首屏（hero 後、正文前）新增「各類害蟲起步價與施工方案對照表」——曱甴 HK$900 起／老鼠 HK$1,500 起／白蟻 HK$2,800 起／床蝨 HK$3,000 起／蚊跳蚤 HK$800 起（全部數字取自站內服務專頁與收費指南既有實價，零杜撰），每行深鏈對應服務專頁，表末註明完整呎數級距連結 blog-12／blog-7；hero 副題同步改寫（移除「滅蟲公司推介」措辭）
+- 降溫與輸血（title／H1／og／twitter／headline 五件套同步，全站「滅蟲收費／滅蟲公司收費」精確匹配由多頁收斂至皇牌頁 1 頁）：blog-12 →《2026 家居滅蟲價錢級距表：按呎數收費對照＋5 大防伏指南》（轉攻呎數級距長尾，內容本以 300／700 呎價目表為主體）；blog-7 →《2026 滅蟲服務點樣計價？影響收費 4 大因素＋全港行情參考》（轉攻計價因素長尾）；blog-32 →《2026 服務場景對照：家居／餐廳／酒店／村屋方案點揀》（轉攻場景對照長尾）；三頁文首插入「2026 香港滅蟲收費價目表」精準錨點 → /info/blog-4/ 灌權
+- 滅蟲公司（305 曝光）唯一主頁＝首頁：Meta Title 改「滅蟲師傅｜香港專業滅蟲公司・AFCD註冊藥劑・明碼實價 HK$800 起」（og/twitter 三處同步；description 不動保留 v9.114/115/135 CTR 優化成果）；blog-1 →《2026 滅蟲報價防伏指南：5 大黃金準則避開報價陷阱與無效服務》、blog-3 →《滅蟲服務資格與保養期教學：除害劑牌照查證＋報價防伏（2026）》，兩頁文首插入「香港專業滅蟲公司」精準錨點 → 首頁；全站 title 級「滅蟲公司」精確匹配由 5 頁收斂至首頁 1 頁
+- 英文落地頁補位（1,519 曝光 0 點擊）：新建 /en/pest-control-hong-kong/ 高轉化英文服務專頁——H2 分段精準覆蓋 Pest Control Hong Kong／Termite Treatment Services／Mouse & Rat Removal Services 四組高曝光詞，列明 AFCD 註冊藥劑、英文溝通支援、HK$800 起價目表、一鍵 WhatsApp 報價；JSON-LD×3（BreadcrumbList＋["LocalBusiness","PestControl"]＋FAQPage×4）＋og 三件套＋canonical 自指；以 /en/service/termite/ 為骨架（head／導航／頁尾／腳本全保留）
+- EN 首頁讓位：Meta Title「Licensed Pest Control Hong Kong」→「Pest Control Company in Hong Kong」（description 同步），消除與新落地頁的英文精確匹配互搶；EN 首頁專業服務區置頂新增「NEW · Service Hub」服務卡 → /en/pest-control-hong-kong/
+- EN 鏡像六頁同步（blog-1/3/4/7/12/32 EN）：標題／H1／og／headline 同步英文化改寫（blog-4 EN 同步新增英文版首屏價目對照表），文首分別插入「2026 Hong Kong pest control price list」→ /en/info/blog-4/ 與「licensed pest control company in Hong Kong」→ /en/pest-control-hong-kong/ 錨點內鏈
+- P0 技術底層：全站 canonical 逐頁核實已統一 https://bruceleehk.com/（非 www）零改動；www→非 www 301 由 Cloudflare Redirect Rules 執行（部署指引附完整規則與 GSC「要求編入索引」點火 SOP）
+- 流量保護：零 URL 變更（僅新增 /en/pest-control-hong-kong/）、零內容刪減（僅標題／描述／文首增鏈）、共用 CSS/JS 零改動（?v=9.132 不變，新增樣式全部頁內 scoped）；地區專頁零改動（良性本地分流不動，下批複製中西區公式優化西貢／南區）；sitemap 210→211
+
 
 ## v9.139 blog-45《30樓窗框邊驚現神秘泥巢》EN 英文版鏡像上線＋hreflang 三向補完＋EN 收錄閉環（2026-11-22）
 
