@@ -1,4 +1,17 @@
-# 修復日誌 (v9.144 — 2026-11-23)
+# 修復日誌 (v9.146 — 2026-11-27)
+
+## v9.146《集中權重衝進前 20 名》鼠控權重合流複核＋長尾中段導覽框＋首頁家居滅蟲區塊＋blog-1 避坑指標速查表（2026-11-27）
+
+基於 v9.144（v9.145 跨境宣傳專區暫時擱置不上線，本版本樹已剔除 /tw/ 與 /gba/ 及其頁尾連結與 hreflang），按用戶《集中權重衝進前 20 名.docx》執行：
+
+- 【複核＝已到位，零回歸】/en/service/rodent/ 自 v9.141 起已為 noindex＋canonical＋meta refresh＋JS 備援跳轉頁指向 /en/rat-control/（真 301 由 Cloudflare Redirect Rules 執行，部署指引重附設定與無痕視窗驗證步驟）；/en/rat-control/ title 與 H1 已通吃 Rat Removal & Mouse Control；/en/services/ 已有 <strong>Rat Removal & Mouse Control Service</strong> 錨點；/en/ 已有 Rat Control Hub 專區 CTA＋5 條 /en/rat-control/ 連結——GSC 顯示 /en/service/rodent/ 28.3 名／68 曝光為合流前歷史數據，部署後 1-2 週應見其曝光逐步歸零並轉移至 /en/rat-control/
+- 【/en/rat-control/ 首段補詞】首段自然融入 mouse control service／rat removal／rodent control in Hong Kong 三組搜尋意圖，並以合規寫法列明 treatments use AFCD-registered pesticides applied in accordance with FEHD standards
+- 【長尾中段導覽框】blog-28《老鼠屎 vs 曱甴屎 vs 壁虎屎圖鑑》、blog-24《摘馬蜂巢實錄》、blog-31《滅鼠公司邊間好》ZH+EN 六頁，於約閱讀 40% 位置新增「🧭 實用服務導覽」醒目框，按 doc 原句連結「2026 香港滅蟲收費總表」→ /info/blog-4/（EN→/en/info/blog-4/）與「香港滅蟲公司」→ 首頁（EN→/en/），把 Top-10 長尾頁每日真實訪客的內部點擊流導向「滅蟲收費」「滅蟲公司」兩大商業詞皇牌頁
+- 【首頁家居滅蟲】ZH hero 副題加「家居滅蟲明碼實價 HK$800 起」＋服務介紹區新增「🏠 家居滅蟲服務（私人屋苑／公屋／居屋／村屋）」獨立區塊（曱甴／老鼠／床蝨／白蟻／蚊／跳蚤／螞蟻／黃蜂蜂巢清單＋先勘察後書面報價 0 隱藏收費＋服務總覽與收費總表連結）；EN hero 副題與 Residential 區塊同步（residential pest control from HK$800）
+- 【blog-1 滅蟲公司推介強化】首屏（黃金準則前）新增「🛡️ 2026 揀選香港滅蟲公司 5 大避坑指標速查表」5 行對照表（避坑指標｜一眼識伏｜我哋點做）＋信譽行——Google 5.0/5.0 星評分、10,000+ 戶、《防治蟲鼠訓練（主管）證書》、漁護署註冊除害劑，全部取自站內既有表述零杜撰；EN 版同步 5-row table。doc 建議之「Google 好評截圖」與「政府供應商名單紀錄」站內無素材出處，按零杜撰原則暫不加入（用戶提供截圖／證明後可補）
+- 【範圍保護】零 URL 變更、零內容刪減、共用 CSS/JS 零改動（?v=9.132 不變，新樣式全部行內 scoped）；/en/ meta description 三件套維持 v9.114/115/135 CTR 調優成果不動；sitemap 11 URL lastmod→2026-11-27
+
+
 
 ## v9.144 資格宣稱終審核對：about＋床蝨頁通過／services keywords 簡體「持牌灭虫」殘留清零（2026-11-23）
 
